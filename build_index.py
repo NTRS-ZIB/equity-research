@@ -32,8 +32,10 @@ WARNINGS = []
 def warn(message):
     """Record a problem and put it on stderr, so a drop is visible in the log.
 
-    Repeats are collapsed: sort_key runs more than once per document, and a
-    warning counted twice would misstate how many files were affected.
+    Identical messages are collapsed, so the closing count reports distinct
+    problems rather than how many times each was noticed. Messages name the
+    document they came from, so two files failing the same way stay two
+    warnings rather than merging into one.
     """
     if message in WARNINGS:
         return
@@ -87,23 +89,30 @@ def read(path):
                 file=path.name)
 
 
-def sort_key(asof):
-    """Newest first; anything unparseable sorts last."""
+def sort_key(asof, source):
+    """Newest first; anything unparseable sorts last.
+
+    source is the filename the date came from, and is required rather than
+    optional: a warning that a date will not parse, without saying which
+    document holds it, reports that something is wrong without saying where.
+    """
     m = re.match(r'(\d{1,2})\s+(\w+)\s+(\d{4})', asof or "")
     if not m:
-        warn("date %r does not parse as 'D Month YYYY', sorting last" % (asof,))
+        warn("%s: date %r does not parse as 'D Month YYYY', sorting last"
+             % (source, asof))
         return datetime.date.min
     day, month_name, year = m.group(1), m.group(2), m.group(3)
     month = MONTH_LOOKUP.get(month_name.lower())
     if month is None:
-        warn("unrecognised month %r in date %r, sorting last" % (month_name, asof))
+        warn("%s: unrecognised month %r in date %r, sorting last"
+             % (source, month_name, asof))
         return datetime.date.min
     try:
         return datetime.date(int(year), month, int(day))
     except ValueError:
         # The regex admits any one or two digit day, so 31 February reaches
         # here. The docstring promises this sorts last rather than raising.
-        warn("impossible date %r, sorting last" % (asof,))
+        warn("%s: impossible date %r, sorting last" % (source, asof))
         return datetime.date.min
 
 
@@ -126,7 +135,8 @@ def collect():
 
 def build(rows):
     def newest(entry):
-        return max((sort_key(v["asof"]) for v in entry.values()), default=datetime.date.min)
+        return max((sort_key(v["asof"], v["file"]) for v in entry.values()),
+                   default=datetime.date.min)
 
     ordered = sorted(rows.items(), key=lambda kv: (-newest(kv[1]).toordinal(), kv[0]))
 
@@ -272,8 +282,9 @@ if __name__ == "__main__":
         print("  %-6s %s" % (ticker, have))
 
     if WARNINGS:
-        print("%d file(s) skipped or warned about:" % len(WARNINGS))
+        print("%d warning(s), each naming the document it came from:"
+              % len(WARNINGS))
         for message in WARNINGS:
             print("  " + message)
     else:
-        print("No files skipped, no warnings.")
+        print("No warnings.")
