@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>SLNH &middot; Soluna Holdings, Inc. &middot; Equity Research Report &middot; as of 2 August 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================================
+   PER-TICKER PALETTE
+   ========================================================================= */
+:root{
+  /* Soluna wordmark blue, the brand colour of record. The mark carries two
+     chromatic colours over a black wordmark: this blue on the triangular "A" and
+     an orange, #CB5828, on the "O". The orange normalises to hue 18 and sits 13.7
+     degrees from the red used for negative figures, so it is not available as an
+     accent. Raw #2B76BC is H209 S63 L45. Saturation is unchanged and lightness is
+     pulled to 42 for paper, giving 5.40:1 on white. The hue is unrotated: 209 sits
+     41 degrees off the nearest semantic hue. */
+  --accent:      #286DAE;
+  --accent-deep: #1E5385;
+  --accent-wash: rgba(40,109,174,0.06);
+  --accent-line: rgba(40,109,174,0.22);
+}
+
+/* ============================================================================
+   SHARED STYLESHEET v1.50 : BEGIN
+   ========================================================================= */
+:root{
+  color-scheme: light only;
+
+  --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
+  --line:#DEE6EC;   --line-hard:#C0CDD7;
+  --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
+
+  --pos:#0B7A50;      --pos-bg:#E7F4EE;
+  --neg:#B02A21;      --neg-bg:#FBECEA;
+  --caution:#90600A;  --caution-bg:#FBF2E0;
+  --assume:#4F3FA3;   --assume-bg:#EFEDFA;
+
+  --display:'Archivo',ui-sans-serif,system-ui,'Helvetica Neue',Arial,sans-serif;
+  --body:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+
+  --measure:78ch;
+  --col:760px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html,body{background:var(--canvas) !important;background-color:var(--canvas) !important}
+body{
+  margin:0;color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 22px 96px;background:var(--paper);
+      border-left:1px solid var(--line);border-right:1px solid var(--line)}
+p{max-width:var(--measure)}
+/* Boxed prose fills its container: the box supplies its own measure, so the
+   78ch cap applies to top-level running prose only. */
+.first li,.assume p,.note p,.cat p,.risk p,.logentry p,.oc p,.case p,
+.cat-meta,.logentry .basis{max-width:none}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:var(--accent-deep)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- masthead ---------- */
+.mast{padding:44px 0 26px;border-bottom:2px solid var(--line-hard);margin-bottom:8px;
+      position:relative;padding-left:20px}
+.mast::before{content:"";position:absolute;left:0;top:44px;bottom:26px;
+      width:4px;background:var(--accent)}
+.ticker{font-family:var(--mono);font-size:44px;font-weight:700;letter-spacing:-1px;
+      line-height:1;color:var(--accent);margin:0}
+.headline{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.22;
+      color:var(--ink);margin:16px 0 0}
+.functional{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--ink-faint);margin:18px 0 0}
+.mast-strip{display:flex;flex-wrap:wrap;gap:26px;margin-top:20px;padding-top:16px;
+      border-top:1px solid var(--line)}
+.mast-strip div{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint)}
+.mast-strip b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-top:3px}
+
+/* ---------- banner: framing ---------- */
+.first{background:var(--canvas);border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:20px 24px;margin:30px 0 12px}
+.first h2{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.04em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 12px}
+.first ol{margin:0;padding-left:20px}
+.first li{margin-bottom:9px}
+.first li:last-child{margin-bottom:0}
+
+/* ---------- sections ---------- */
+section{padding-top:38px}
+h2.sec{font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);
+      margin:0 0 4px;padding-bottom:10px;border-bottom:1px solid var(--line-hard);
+      display:flex;align-items:baseline;gap:12px}
+h2.sec .n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);
+      letter-spacing:.06em;flex:none}
+.sub{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);margin:10px 0 18px;
+      max-width:var(--measure)}
+h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink-dim);
+      margin:26px 0 8px}
+
+/* ---------- provenance tags (signature) ---------- */
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);
+      background:var(--panel-2);border:1px solid var(--line);
+      border-radius:2px;padding:1px 6px;vertical-align:1px;white-space:nowrap}
+
+/* ---------- assumption block ---------- */
+.assume{background:var(--assume-bg);border-left:4px solid var(--assume);
+      padding:16px 20px;margin:20px 0}
+.assume .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--assume);display:block;margin-bottom:7px}
+.assume p{margin:0}
+
+/* ---------- callouts ---------- */
+.note{border:1px solid var(--line);border-left:4px solid var(--ink-faint);
+      background:var(--canvas);padding:16px 20px;margin:20px 0}
+.note.pos{border-left-color:var(--pos);background:var(--pos-bg)}
+.note.neg{border-left-color:var(--neg);background:var(--neg-bg)}
+.note.caution{border-left-color:var(--caution);background:var(--caution-bg)}
+.note p{margin:0}
+.note p + p{margin-top:10px}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+thead th{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--ink-dim);text-align:left;
+      padding:9px 12px;border-bottom:2px solid var(--line-hard);white-space:nowrap}
+tbody td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--canvas)}
+td.num,th.num{font-family:var(--mono);text-align:right;white-space:nowrap}
+/* td.when marks a timing column. An unmarked cell counts as prose. */
+td.when{font-family:var(--mono);white-space:nowrap}
+td.lbl{font-weight:600}
+.pos-t{color:var(--pos);font-weight:600}
+.neg-t{color:var(--neg);font-weight:600}
+.caution-t{color:var(--caution);font-weight:600}
+
+/* ---------- cases ---------- */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.case{border:1px solid var(--line);border-top:3px solid var(--ink-faint);
+      background:var(--paper);padding:18px}
+.case.bull{border-top-color:var(--pos)}
+.case.bear{border-top-color:var(--neg)}
+.case h4{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 10px}
+.case.bull h4{color:var(--pos)} .case.bear h4{color:var(--neg)}
+.case p{font-size:15px;margin:0}
+.case .req{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+
+/* ---------- risks ---------- */
+.risk{border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:16px 20px;margin-bottom:12px}
+.risk.sev-high{border-left-color:var(--neg)}
+.risk.sev-med{border-left-color:var(--caution)}
+.risk.sev-low{border-left-color:var(--ink-faint)}
+.risk h4{font-family:var(--display);font-size:15.5px;font-weight:600;margin:0 0 6px;
+      display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.risk .sev{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase}
+.risk.sev-high .sev{color:var(--neg)}
+.risk.sev-med .sev{color:var(--caution)}
+.risk.sev-low .sev{color:var(--ink-faint)}
+.risk p{margin:0;font-size:15.5px}
+
+/* ---------- null categories ---------- */
+.nulls td.lbl{width:26%}
+.nulls .status{font-family:var(--mono);font-size:12px;white-space:nowrap}
+
+/* ---------- document log ---------- */
+.log{margin-top:14px}
+.logentry{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:12px}
+.logentry.current{border-left:4px solid var(--accent);background:var(--accent-wash)}
+.logentry .when{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);
+      display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.latest{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-line);
+      background:var(--paper);border-radius:2px;padding:1px 6px}
+.logentry .basis{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-bottom:12px}
+.logentry p{font-size:15.5px;margin:0 0 9px}
+.logentry p:last-child{margin-bottom:0}
+.correction{border:1px solid var(--neg);border-left:4px solid var(--neg);
+      background:var(--neg-bg);padding:12px 16px;margin-bottom:14px}
+.correction .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--neg);display:block;margin-bottom:5px}
+
+/* ---------- footer ---------- */
+footer{margin-top:44px;padding-top:22px;border-top:2px solid var(--line-hard)}
+footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width:none}
+.norec{border:1px solid var(--line-hard);background:var(--canvas);padding:16px 20px;
+      margin-top:20px;font-family:var(--mono);font-size:12.5px;color:var(--ink-dim)}
+
+/* ---------- catalyst cards (calendar) ---------- */
+.cat{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:14px;border-left:4px solid var(--line-hard)}
+.cat.up{border-left-color:var(--pos)}
+.cat.down{border-left-color:var(--neg)}
+.cat.two{border-left-color:var(--caution)}
+.cat.neutral{border-left-color:var(--ink-faint)}
+.cat-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.cid{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);flex:none}
+.cat-head h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink);
+      margin:0;flex:1 1 auto;min-width:200px}
+.dir{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;white-space:nowrap}
+.cat.up .dir{color:var(--pos)} .cat.down .dir{color:var(--neg)}
+.cat.two .dir{color:var(--caution)} .cat.neutral .dir{color:var(--ink-faint)}
+.cat-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:10px 0 12px;padding:9px 0;
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+      font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
+.cat-meta b{color:var(--ink);font-weight:600}
+.cat p{margin:0 0 9px;font-size:15.5px}
+.cat p:last-child{margin-bottom:0}
+.cat.resolved{background:var(--canvas);border-left-color:var(--ink-faint)}
+.cat.resolved .dir{color:var(--ink-faint)}
+
+/* ---------- horizon bands (calendar) ---------- */
+.band{display:flex;align-items:center;gap:14px;margin:30px 0 16px}
+.band-t{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--ink-dim);white-space:nowrap}
+.band-r{flex:1;height:1px;background:var(--line-hard)}
+.band-c{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);white-space:nowrap}
+
+/* ---------- upside / downside pair ---------- */
+.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0}
+.oc{border:1px solid var(--line);padding:11px 14px;background:var(--paper)}
+.oc.up-c{border-left:3px solid var(--pos)}
+.oc.down-c{border-left:3px solid var(--neg)}
+.oc .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.09em;
+      text-transform:uppercase;display:block;margin-bottom:5px}
+.oc.up-c .lbl{color:var(--pos)} .oc.down-c .lbl{color:var(--neg)}
+.oc p{margin:0;font-size:14.5px;line-height:1.5}
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  body{font-size:16px}
+  .wrap{padding:0 16px 70px;border-left:none;border-right:none}
+  .ticker{font-size:34px}
+  .headline{font-size:23px}
+  .cases{grid-template-columns:1fr}
+  .outcomes{grid-template-columns:1fr}
+  .mast-strip{gap:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none !important;transition:none !important}
+}
+@media print{
+  body{font-size:11pt}
+  .wrap{max-width:none;border:none}
+  section{page-break-inside:avoid}
+}
+/* ============================================================================
+   SHARED STYLESHEET v1.50 : END
+   ========================================================================= */
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ===================== MASTHEAD ===================== -->
+<header class="mast">
+  <p class="ticker">SLNH</p>
+  <h1 class="headline">159 megawatts earning revenue, and 4.3 gigawatts earning the valuation</h1>
+  <p class="functional">SLNH &middot; Soluna Holdings, Inc. &middot; Equity Research Report &middot; as of 2 August 2026</p>
+  <div class="mast-strip">
+    <div>Price <b>$1.22</b> <span class="tag">Market</span></div>
+    <div>Market cap <b>$192.5M</b> <span class="tag">Market</span></div>
+    <div>Shares out <b>157,747,354</b> <span class="tag">Filed</span></div>
+    <div>Pricing basis <b>31 Jul 2026 close</b> <span class="tag">Market</span></div>
+  </div>
+</header>
+
+<!-- ===================== FRAMING ===================== -->
+<div class="first">
+  <h2>Framing</h2>
+  <ol>
+    <li>This is an operating business, not a shell. Q1 2026 revenue was $9.4 million, up 58% year over year, across five sites. <span class="tag">Filed</span> 10-Q, 15 May 2026</li>
+    <li>All of that revenue comes from Bitcoin: hosting, proprietary mining and grid demand response. High-performance computing revenue in Q1 2026 was zero. The AI business is a plan, not yet a business. <span class="tag">Filed</span> 10-Q, 15 May 2026</li>
+    <li>The balance sheet changed after the last reported quarter. The 31 March 2026 balance sheet, which every screener still quotes, showed $68.6 million of unrestricted cash and about $40.6 million of net cash. Between April and May the company spent roughly $81 million across three acquisitions and issued roughly 46 million shares. <span class="tag">Filed</span> 10-Q and 8-Ks, Apr to Jun 2026</li>
+    <li>A $155 million preferred claim ranks ahead of the common: $123.0 million of Series A liquidation preference plus roughly $32.4 million of dividends in arrears, against a $192.5 million common market capitalisation. <span class="tag">Filed</span> 10-Q, 15 May 2026</li>
+  </ol>
+</div>
+
+<!-- ===================== 1. SNAPSHOT ===================== -->
+<section id="s1">
+  <h2 class="sec"><span class="n">01</span>Snapshot</h2>
+  <p class="sub">Key figures, each tagged by provenance.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Metric</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Share price</td><td class="num">$1.22</td><td><span class="tag">Market</span> 31 Jul 2026 close, down 6.15% on the day</td></tr>
+      <tr><td class="lbl">Market capitalisation</td><td class="num">$192.5M</td><td><span class="tag">Market</span> 31 Jul 2026 close, common only</td></tr>
+      <tr><td class="lbl">Revenue (TTM)</td><td class="num">$33.2M</td><td><span class="tag">Market</span> S&amp;P Global Market Intelligence, cross-checked to filings</td></tr>
+      <tr><td class="lbl">Revenue (Q1 2026)</td><td class="num">$9.39M</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026</td></tr>
+      <tr><td class="lbl">HPC revenue (Q1 2026)</td><td class="num neg-t">$0.0M</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026</td></tr>
+      <tr><td class="lbl">Net loss (Q1 2026)</td><td class="num neg-t">($17.90M)</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026</td></tr>
+      <tr><td class="lbl">Net loss (FY2025)</td><td class="num neg-t">($56.99M)</td><td><span class="tag">Filed</span> 10-K, filed late Mar 2026</td></tr>
+      <tr><td class="lbl">Cash, unrestricted</td><td class="num">$68.57M</td><td><span class="tag">Filed</span> 10-Q, balance sheet at 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Cash, unrestricted, post-acquisition</td><td class="num caution-t">~$5&ndash;10M</td><td><span class="tag">Estimate</span> reconstructed from disclosed deal terms, section 07</td></tr>
+      <tr><td class="lbl">Shares outstanding</td><td class="num">157,747,354</td><td><span class="tag">Filed</span> 10-Q cover page, 12 May 2026</td></tr>
+      <tr><td class="lbl">Series A liquidation preference</td><td class="num">$123.0M</td><td><span class="tag">Filed</span> 4,920,045 shares at $25.00, 10-Q at 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Series A dividends in arrears</td><td class="num">$32.4M</td><td><span class="tag">Filed</span> 10-Q, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Operating capacity, nameplate</td><td class="num">171 MW</td><td><span class="tag">Filed</span> sum of the five operating sites at the monthly update of 14 Jul 2026</td></tr>
+      <tr><td class="lbl">Capacity under management</td><td class="num">147 MW</td><td><span class="tag">Filed</span> Q1 2026 results release, 18 May 2026, stated at 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Stated development pipeline</td><td class="num">4,300+ MW</td><td><span class="tag">Filed</span> FY2025 results release, 30 Mar 2026</td></tr>
+      <tr><td class="lbl">Short interest</td><td class="num">21.8%</td><td><span class="tag">Market</span> 33.8% of float, 1.85 days to cover</td></tr>
+      <tr><td class="lbl">Beta</td><td class="num">5.13</td><td><span class="tag">Market</span> 52-week range $0.41 to $5.14</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>The capacity funnel</h3>
+  <p>The shape matters more than any single figure. All of the operating capacity serves Bitcoin customers. The AI and HPC capacity the equity story rests on, Kati 2 at 350+ MW and Dorothy 3 at 300+ MW, had one signed letter of intent and zero signed leases as of the 14 July 2026 update.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Stage</th><th class="num">Capacity</th><th class="num">Share of pipeline</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Operating, earning revenue</td><td class="num">171 MW</td><td class="num">4.0%</td><td><span class="tag">Filed</span> monthly update, 14 Jul 2026</td></tr>
+      <tr><td class="lbl">Under construction</td><td class="num">35&ndash;47 MW</td><td class="num">1%</td><td><span class="tag">Filed</span> monthly update, 14 Jul 2026</td></tr>
+      <tr><td class="lbl">Advanced development</td><td class="num">900+ MW</td><td class="num">21%</td><td><span class="tag">Filed</span> company IR operating summary</td></tr>
+      <tr class="lbl"><td class="lbl">Stated total pipeline</td><td class="num">4,300+ MW</td><td class="num">100%</td><td><span class="tag">Filed</span> FY2025 results release, 30 Mar 2026</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="note caution">
+    <p><b>The operating figure, reconciled.</b> Two figures circulate and both are correct at their own date. The five operating sites carry a nameplate of <b>171 MW</b>: Dorothy 1A 25, Dorothy 1B 25, Dorothy 2 48, Sophie 25 and Kati 1A 48. The company stated total operational capacity of 123 MW once Dorothy 2 was fully energised, which is the same four sites before Kati 1A, and Kati 1A adds the remaining 48 MW. The <b>147 MW</b> under management cited in the Q1 release is that quantity at 31 March 2026, when Kati 1A was roughly half energised: 123 plus 24. This document uses 171 MW as the operating nameplate at the July update, and cites 147 MW where the reporting date is 31 March. A third figure of roughly 159 MW appearing in an investor relations summary is undated and is corroborated by neither the filings nor the monthly updates; it is not used. <span class="tag">Filed</span> monthly updates of 9 Dec 2025 and 14 Jul 2026; Q1 2026 results release, 18 May 2026</p>
+  </div>
+</section>
+
+<!-- ===================== 2. BUSINESS MODEL ===================== -->
+<section id="s2">
+  <h2 class="sec"><span class="n">02</span>Business model</h2>
+  <p class="sub">What the company sells, to whom, and how it is paid.</p>
+
+  <p>Wind and solar plants periodically produce power nobody can take: the grid is congested, demand is low, or the transmission line is full. Rather than curtail and earn nothing, the generator would rather sell that energy cheaply to a load standing next to the plant.</p>
+
+  <p>Soluna is that load. It builds modular data centres behind the meter, co-located with renewable generation, so the electricity never touches the public grid. The data centre buys power no grid-connected competitor can match on price, and the generator improves its capture rate. Soluna's control software, marketed as MaestroOS, decides when to run and when to stand down.</p>
+
+  <p>The model requires interruptible computing, work that can be paused for hours without breaking. Bitcoin mining is the archetype: when power gets scarce or expensive, the machines switch off and only that period's revenue is lost.</p>
+
+  <div class="note caution">
+    <p><b>The central tension.</b> AI training and inference are not interruptible on the same terms. A tenant renting 100 MW expects roughly 99.9% availability, not operation contingent on wind. The characteristic that makes the Bitcoin business cheap, flexible curtailable behind-the-meter power, is the one AI tenants are least willing to accept.</p>
+    <p>The company's answer is vertical integration and hybrid power: own the generation, add interconnection and firming, and deliver contracted uptime. That is what the April 2026 purchase of the Briscoe Wind Farm is for, and why Soluna announced a collaboration with Siemens on GPU power volatility. Whether the answer is sufficient will be settled by whether a creditworthy tenant signs a lease, not by argument.</p>
+  </div>
+
+  <h3>Corporate structure: capacity under management is not capacity owned</h3>
+
+  <p>Soluna does not own outright most of what it operates. Individual projects are financed through joint ventures with capital partners, principally Spring Lane Capital, and are consolidated as variable interest entities. The balance sheet shows the consequence: of $113.0 million of total equity at 31 March 2026, <b>$65.8 million belonged to non-controlling interests</b>, leaving $47.2 million attributable to Soluna Holdings. <span class="tag">Filed</span> 10-Q, 15 May 2026</p>
+
+  <p>So that capacity is under management, not capacity wholly owned by the common. Revenue consolidates in full while a meaningful share of project-level economics accrues to partners. Through 2026 the company has been buying those partners out, consolidating the Dorothy 1 campus in April and May, which raises the shareholders' share of the economics and consumes cash to do it.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Consolidated revenue and consolidated book value both overstate what reaches SLNH shareholders while non-controlling interests remain at 58% of total equity. No adjusted per-share economics are presented in the filings, so the size of that gap is an inference from the equity split rather than a disclosed figure.</p>
+  </div>
+</section>
+
+<!-- ===================== 3. REVENUE STREAMS ===================== -->
+<section id="s3">
+  <h2 class="sec"><span class="n">03</span>Revenue streams</h2>
+  <p class="sub">Each stream, with its share of the total and its durability.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Revenue line</th><th class="num">Q1 2026</th><th class="num">Q1 2025</th><th class="num">Change</th><th class="num">Share</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Data hosting</td><td class="num">6,688</td><td class="num">2,402</td><td class="num pos-t">+178%</td><td class="num">71.2%</td></tr>
+      <tr><td class="lbl">Cryptocurrency mining, proprietary</td><td class="num">2,169</td><td class="num">2,999</td><td class="num neg-t">&minus;28%</td><td class="num">23.1%</td></tr>
+      <tr><td class="lbl">Demand response services</td><td class="num">537</td><td class="num">507</td><td class="num pos-t">+6%</td><td class="num">5.7%</td></tr>
+      <tr><td class="lbl">High-performance computing</td><td class="num">0</td><td class="num">28</td><td class="num">n/a</td><td class="num neg-t">0.0%</td></tr>
+      <tr><td class="lbl">Total revenue</td><td class="num">9,394</td><td class="num">5,936</td><td class="num pos-t">+58.3%</td><td class="num">100%</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub">Figures in $ thousands as filed. <span class="tag">Filed</span> 10-Q for the quarter ended 31 Mar 2026, filed 15 May 2026.</p>
+
+  <h3>Reading each line</h3>
+
+  <p><b>Data hosting, 71% of revenue.</b> Soluna provides space, power and cooling; the customer owns the machines. Soluna is paid for power and service whether or not the customer's mining is profitable. Contracted, recurring, and not a direct bet on the Bitcoin price. It grew 178% year over year as Dorothy 2 and Kati 1A came online, and customers prepay or post deposits, which is why customer deposits sit as a liability.</p>
+
+  <p><b>Proprietary mining, 23%.</b> Direct Bitcoin exposure, down 28%. Soluna runs its own machines at Dorothy 1B. The line moves with the Bitcoin price and network difficulty and is the lower-quality earnings stream. Management is deliberately shifting away from it.</p>
+
+  <p><b>Demand response, 6%.</b> Small but structurally interesting. ERCOT pays Soluna for its willingness to shut down on command. High-margin revenue that exists precisely because the load is flexible.</p>
+
+  <p><b>HPC and AI: zero.</b> Not small, zero. A prior attempt at an AI cloud business through a Hewlett Packard Enterprise GPU agreement failed in March 2025 and left a <b>$19.3 million contract termination liability</b> on the balance sheet, on which no payments have been made. The company has attempted this once already, at a different scale, and it went badly. <span class="tag">Filed</span> 10-Q, Note 6, 31 Mar 2026</p>
+
+  <div class="note caution">
+    <p><b>Customer concentration.</b> Three customers account for the substantial majority of revenue, with project-level concentration disclosed for Dorothy 1A, Sophie, Dorothy 2 and Kati 1. Blockware and Sazmining are the named counterparties; Blockware has expanded four times, surpassing 17 MW as of April 2026. Losing one hosting customer would be a material revenue event, and hosting customers in this industry are themselves leveraged to Bitcoin. <span class="tag">Filed</span> 10-Q concentration note; press releases 21 and 28 Apr 2026</p>
+  </div>
+</section>
+
+<!-- ===================== 4. INDUSTRY & MARKET BACKDROP ===================== -->
+<section id="s4">
+  <h2 class="sec"><span class="n">04</span>Industry &amp; market backdrop</h2>
+
+  <p>Over roughly eighteen months, listed Bitcoin miners discovered their most valuable asset was never the machines but <b>energised land with grid interconnection</b>. AI demand has made large blocks of deliverable power the binding constraint across the sector.</p>
+
+  <p>The re-rating logic is simple. Bitcoin miners historically traded at roughly 6 to 12 times EV/EBITDA; established data-centre operators trade closer to 20 to 25 times. Convert a mining site into a leased AI campus with an investment-grade tenant and the multiple re-rates. That arbitrage is the largest force acting on this group.</p>
+
+  <h3>What execution has looked like</h3>
+
+  <p>The market moved past announcements to signed, long-dated leases with creditworthy counterparties:</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Operator</th><th>Signed AI/HPC agreement</th><th>Reported contracted value</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">TeraWulf</td><td>Anthropic, roughly 401 MW, 20 years</td><td class="num">~$19bn</td></tr>
+      <tr><td class="lbl">Cipher</td><td>AWS 300 MW; Google-backstopped Fluidstack</td><td class="num">~$9.3bn backlog</td></tr>
+      <tr><td class="lbl">Applied Digital</td><td>CoreWeave, roughly 400 MW, 15 years</td><td class="num">~$11bn</td></tr>
+      <tr><td class="lbl">Hut 8</td><td>Fluidstack, 245 MW, 15 years</td><td class="num">~$7bn</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub">Peer figures are indicative of scale and contracting status as publicly reported between December 2025 and July 2026. <span class="tag">Market</span> Not verified against each peer's own filings.</p>
+
+  <p>By March 2026 the group had reportedly signed more than $70 billion of AI computing contracts in aggregate. Compass Point argued in July 2026 that the market still under-credits these signed leases, while noting that hyperscaler backstops create severe customer concentration.</p>
+
+  <div class="note neg">
+    <p><b>Soluna has no signed AI lease.</b> Its most advanced AI project, Kati 2, reached a signed letter of intent with one potential tenant as of the 14 July 2026 update. A letter of intent is ordinarily non-binding: it establishes intent to negotiate, not an obligation to lease.</p>
+    <p>Soluna is competing for tenants against peers who have already closed, at ten to a hundred times its scale, with completed or near-complete facilities and investment-grade credit support. The sector tailwind is real. Whether it lifts a company at Soluna's stage of the funnel is a separate question.</p>
+  </div>
+
+  <h3>The counterweight: signed contracts stopped protecting the group</h3>
+
+  <p>Through July 2026 the market stopped paying for the re-rating thesis. Over roughly a month <b>Nebius fell about 36%, IREN about 37% and CoreWeave about 28%</b>, with Applied Digital, Core Scientific and TeraWulf also down sharply, a 25% to 38% derating across the group.</p>
+
+  <p>Two observations matter more than the percentages. <b>Applied Digital reported a 61% revenue beat and sold off.</b> <b>IREN announced a five-year, $3.4 billion NVIDIA cloud contract plus up to $2.1 billion of NVIDIA investment, and fell 37% over the month regardless.</b> Reported drivers included competition fears after Meta signalled plans to rent out excess AI capacity, valuation concerns, and unease about the debt funding the buildout.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The bull case at Kati 2 assumes that signing a lease produces a re-rating. On July's evidence, signing may be necessary without being sufficient: a company that has not yet signed is being asked to clear a bar that is not currently paying out for those who have cleared it. This is an inference from peer price action, not a claim about Soluna's own prospects, and it would be falsified by a peer re-rating on a new contract.</p>
+  </div>
+
+  <h3>Financing conditions and siting risk</h3>
+
+  <p><b>Project financing is tightening.</b> On 29 July 2026 Bloomberg reported that CoreWeave was seeking to raise the interest rate on a $2.6 billion loan tied to capacity for Anthropic, and credit-default-swap costs for technology borrowers have been rising. Long rates moved with it: the 30-year Treasury reached about 5.25% in late July, its highest since 2007, with the 10-year above 4.7%. Long rates are the discount rate against which a fifteen or twenty year lease is underwritten. If the best-capitalised operators are repricing debt upward, a first-time sponsor of Soluna's size faces a harder market than the sector narrative implies. <span class="tag">Market</span> as reported 29 to 31 Jul 2026</p>
+
+  <p><b>Siting risk is no longer theoretical.</b> On 14 July 2026 New York's governor imposed a moratorium on new large data centre development statewide, citing utility bills and resource use. Soluna operates in Texas and Kentucky with no direct New York exposure, but the precedent is that a jurisdiction can close to new capacity quickly.</p>
+
+  <h3>Two trends that cut against Soluna specifically</h3>
+
+  <p><b>Speed to power is the currency, and incumbency compounds.</b> Tenants award capacity to developers who can prove a delivery date. Every quarter a peer energises a campus, the pool of uncontracted demand available to a first-time AI developer narrows.</p>
+
+  <p><b>ERCOT summer peak mechanics reduce uptime.</b> Texas sets certain transmission charges by a large customer's load during four coincident summer peak intervals, so flexible loads curtail heavily from June through September. The July update notes increased curtailment across Dorothy 1A and 1B, Dorothy 2 and Kati 1A. This is expected, and seasonally negative for the June and September quarters.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Given the curtailment disclosures across all Texas sites in the June and July updates, and Briscoe repair work still ongoing and delayed by high winds, Q2 2026 is unlikely to show the clean sequential revenue progression the company has highlighted for four straight quarters. This is an inference from disclosed operating conditions, not company guidance, and the 13 August 2026 report settles it.</p>
+  </div>
+</section>
+
+<!-- ===================== 5. COMPETITIVE POSITION ===================== -->
+<section id="s5">
+  <h2 class="sec"><span class="n">05</span>Competitive position</h2>
+  <p class="sub">Named peers on comparable metrics, not a general market description.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Company</th><th>Signed AI/HPC leases</th><th>Indicative scale</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">IREN</td><td>Microsoft AI cloud partnership</td><td>~$16.7bn market cap, 4.5 GW pipeline</td></tr>
+      <tr><td class="lbl">TeraWulf</td><td>Anthropic, ~401 MW, 20 years</td><td>~$19bn contracted revenue</td></tr>
+      <tr><td class="lbl">Applied Digital</td><td>CoreWeave, ~400 MW, 15 years</td><td>~$11bn contracted revenue</td></tr>
+      <tr><td class="lbl">Cipher</td><td>AWS 300 MW; Fluidstack</td><td>~$9.3bn backlog</td></tr>
+      <tr><td class="lbl">Hut 8</td><td>Fluidstack, 245 MW, 15 years</td><td>~$7bn contracted revenue</td></tr>
+      <tr><td class="lbl">Soluna</td><td class="neg-t">None. One letter of intent at Kati 2.</td><td>~$192.5M market cap, 171 MW operating</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub">Peer figures indicate scale and contracting status only. <span class="tag">Market</span> as reported Dec 2025 to Jul 2026, not verified against each peer's filings.</p>
+
+  <h3>Where Soluna is differentiated</h3>
+
+  <ul>
+    <li><b>It owns generation.</b> The Briscoe Wind Farm, approximately 149.85 MW nameplate, acquired 1 April 2026, sits co-located with the Dorothy campus. Most peers buy power; Soluna makes some of its own. That is a structural cost advantage and the foundation of the Dorothy 3 plan.</li>
+    <li><b>Behind-the-meter siting is a deliberate specialism.</b> The company has absorbed curtailed power since before it was fashionable and has built operating software and generator relationships around it.</li>
+    <li><b>The pipeline is large relative to the company.</b> A stated 4.3 GW against a $192.5 million market capitalisation is substantial optionality if even a fraction converts.</li>
+  </ul>
+
+  <h3>Where it is weak</h3>
+
+  <ul>
+    <li><b>Balance sheet scale.</b> Peers finance multi-billion-dollar campuses. Soluna's total assets are $190.4 million. A single 100 MW AI campus typically costs well over $1 billion; Soluna cannot fund Kati 2 Phase I from its own resources and has engaged an investment bank to lead that raise.</li>
+    <li><b>No AI operating track record</b>, and one failed prior attempt carrying an unpaid $19.3 million liability.</li>
+    <li><b>Thin organisation.</b> Roughly 52 employees run five operating sites, a wind farm, two 300 MW-plus developments and a claimed 4.3 GW pipeline, which implies heavy reliance on partners, contractors and joint ventures. <span class="tag">Market</span> S&amp;P Global Market Intelligence</li>
+  </ul>
+</section>
+
+<!-- ===================== 6. FINANCIAL PERFORMANCE ===================== -->
+<section id="s6">
+  <h2 class="sec"><span class="n">06</span>Financial performance</h2>
+
+  <div class="tw"><table>
+    <thead><tr><th>Measure ($m unless stated)</th><th class="num">Q1 2026</th><th class="num">Q1 2025</th><th class="num">FY 2025</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Total revenue</td><td class="num">9.39</td><td class="num">5.94</td><td class="num">29.7</td></tr>
+      <tr><td class="lbl">Total cost of revenue</td><td class="num">7.48</td><td class="num">4.76</td><td class="num">n/a</td></tr>
+      <tr><td class="lbl">Gross profit</td><td class="num">1.92</td><td class="num">1.17</td><td class="num">6.46</td></tr>
+      <tr><td class="lbl">Gross margin</td><td class="num">20.4%</td><td class="num">19.8%</td><td class="num">21.7%</td></tr>
+      <tr><td class="lbl">Total general and administrative</td><td class="num">18.54</td><td class="num">8.35</td><td class="num">n/a</td></tr>
+      <tr><td class="lbl">of which stock compensation</td><td class="num">10.22</td><td class="num">1.85</td><td class="num">n/a</td></tr>
+      <tr><td class="lbl">Operating loss</td><td class="num neg-t">(16.63)</td><td class="num neg-t">(7.18)</td><td class="num neg-t">(33.68)</td></tr>
+      <tr><td class="lbl">Net loss</td><td class="num neg-t">(17.90)</td><td class="num neg-t">(7.35)</td><td class="num neg-t">(56.99)</td></tr>
+      <tr><td class="lbl">Net loss attributable to Soluna</td><td class="num neg-t">(17.47)</td><td class="num neg-t">(7.56)</td><td class="num neg-t">(53.41)</td></tr>
+      <tr><td class="lbl">Adjusted EBITDA, company defined</td><td class="num neg-t">(2.1)</td><td class="num">n/a</td><td class="num neg-t">(13.2)</td></tr>
+      <tr><td class="lbl">Loss per share</td><td class="num neg-t">(0.24)</td><td class="num neg-t">(1.21)</td><td class="num">n/a</td></tr>
+      <tr><td class="lbl">Weighted average shares</td><td class="num">84,101,320</td><td class="num">8,719,351</td><td class="num">n/a</td></tr>
+      <tr><td class="lbl">Operating cash flow</td><td class="num neg-t">(6.37)</td><td class="num neg-t">(0.18)</td><td class="num">n/a</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub"><span class="tag">Filed</span> 10-Q filed 15 May 2026; FY2025 10-K and results release, filed late Mar 2026. TTM revenue per S&amp;P Global Market Intelligence, cross-checked to filings.</p>
+
+  <h3>What the table is telling you</h3>
+
+  <p><b>The headline loss is mostly non-cash, but not costlessly so.</b> Net loss more than doubled to $17.9 million, driven by $10.2 million of stock-based compensation against $1.8 million a year earlier. Strip out stock compensation and depreciation and the company's own adjusted EBITDA was a $2.1 million loss.</p>
+
+  <p>The nuance is that non-cash is not the same as costless. In Q1 2026 stock compensation exceeded total revenue. June 2026 equity grants totalled at least <b>12,631,694 restricted shares</b>, roughly 8% of shares outstanding, across five insiders: Michael Toporek 7,310,534 taking him to 17,132,816; John Belizaire 3,018,802; William Hazelip 726,401 taking him to 1,702,859; Mary Jennifer O'Reilly 726,401 taking her to 1,703,675; and David Marusak 849,556, with director awards vesting on separation. Shareholders pay in dilution rather than cash, and the share count confirms it. <span class="tag">Filed</span> Forms 4, 1 to 3 Jun 2026</p>
+
+  <p><b>The dilution has been extraordinary.</b> Weighted average shares went from 8.7 million to 84.1 million in a year. Shares outstanding rose from 10.6 million at end-2024 to 102.6 million at end-2025 to 157,747,354 by 12 May 2026, an increase of 627% over twelve months. This is why loss per share improved from $(1.21) to $(0.24) while the absolute loss grew: the denominator grew faster than the numerator.</p>
+
+  <div class="note caution">
+    <p><b>Historical per-share figures are not comparable.</b> Soluna executed a 1-for-25 reverse stock split on 16 October 2023. Any price chart predating that is not comparable to today's prices, and the share count has since been rebuilt many times over through at-the-market sales, a standby equity purchase agreement with Yorkville, warrant exercises and restricted stock.</p>
+  </div>
+
+  <p><b>Gross margin is thin and definition-dependent.</b> On the filed statement, 20.4%. Excluding depreciation from cost of revenue, roughly 44%. At least one major data provider displays a trailing gross margin near 66%, which does not reconcile to the filing on any basis. The filed figure governs.</p>
+
+  <p>Cash flow is the plainest read: $6.4 million of operating outflow in the quarter, and on a trailing basis roughly $15.3 million of operating outflow against $34.3 million of capital expenditure, so free cash outflow near $49.7 million. The business is funded by capital markets and project partners, not by itself.</p>
+
+  <div class="note neg">
+    <p><b>Internal controls: material weakness.</b> In the FY2025 Form 10-K the CEO and CFO concluded disclosure controls and procedures were not effective. The identified errors concerned classification of current versus long-term debt, a lease classification and valuation, and an overstatement in deposits on equipment and current liabilities. KPMG was appointed for FY2026, replacing UHY LLP, which audited FY2025 and FY2024. Some of the identified errors touch exactly the balance-sheet lines this analysis depends on. <span class="tag">Filed</span> FY2025 10-K, Item 9A</p>
+    <p><b>Board structure limits shareholder recourse.</b> The board is divided into three classes serving staggered three-year terms, so only one class stands for election at any annual meeting and replacing a majority takes at least two successive years. Directors can be removed only for cause, and only on the affirmative vote of 75% or more of shares entitled to vote. Special meetings can be called only by the chairman, chief executive or president, or on written request of a majority of the board or of voting power. <span class="tag">Filed</span> Form S-3, Apr 2026</p>
+  </div>
+</section>
+
+<!-- ===================== 7. CAPITAL STRUCTURE & DILUTION ===================== -->
+<section id="s7">
+  <h2 class="sec"><span class="n">07</span>Capital structure &amp; dilution</h2>
+  <p class="sub">Shares, preferreds, ATM capacity, shelf, warrants, convertibles.</p>
+
+  <p>Comparing SLNH to peers using any standard data provider means using a balance sheet that no longer exists.</p>
+
+  <h3>The last reported balance sheet</h3>
+
+  <div class="tw"><table>
+    <thead><tr><th>Item ($m)</th><th class="num">31 Mar 2026</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Cash, unrestricted</td><td class="num">68.57</td><td>n/a</td></tr>
+      <tr><td class="lbl">Restricted cash</td><td class="num">17.41</td><td>$9.5m current, $7.9m non-current; covenant and deposit purposes</td></tr>
+      <tr><td class="lbl">Total assets</td><td class="num">190.42</td><td>Includes $79.5m property, plant and equipment</td></tr>
+      <tr><td class="lbl">Total debt, carrying</td><td class="num">25.95</td><td>$28.69m principal less $2.74m unamortised costs</td></tr>
+      <tr><td class="lbl">HPE contract termination liability</td><td class="num">19.35</td><td>Unpaid since Mar 2025</td></tr>
+      <tr><td class="lbl">Total liabilities</td><td class="num">76.06</td><td>n/a</td></tr>
+      <tr><td class="lbl">Equity, Soluna Holdings</td><td class="num">47.25</td><td>Includes Series A preferred</td></tr>
+      <tr><td class="lbl">Equity, non-controlling interests</td><td class="num">65.80</td><td>Outside project partners, 58% of total equity</td></tr>
+      <tr><td class="lbl">Accumulated deficit</td><td class="num neg-t">(385.18)</td><td>Cumulative historical losses</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub"><span class="tag">Filed</span> 10-Q, condensed consolidated balance sheet at 31 Mar 2026, filed 15 May 2026.</p>
+
+  <h3>What happened in April and May, after that snapshot</h3>
+
+  <ul>
+    <li><b>1 April 2026.</b> Acquired 100% of Briscoe Wind Farm, LLC for $53.0 million, funded with cash plus $12.5 million of new Tranche C debt under the amended Generate credit agreement. The Tranche B commitment was cut from $18.5 million to $6.0 million. <span class="tag">Filed</span> 8-K, 2 Apr 2026</li>
+    <li><b>15 April 2026.</b> Acquired Spring Lane Capital's remaining 85.4% Class B interest in Project Dorothy 1A for $16.5 million: $6.0 million at closing and $10.5 million due no later than 1 July 2026, part-funded by a $12 million note issued to YA II PN under a Securities Purchase Agreement, maturing 15 May 2027. <span class="tag">Filed</span> 8-K, 17 Apr 2026</li>
+    <li><b>19 May 2026.</b> Acquired the remaining 49% of Project Dorothy 1B from Navitas West Texas Investments for <b>$8,765,490</b>, stated as funded with balance sheet cash. <span class="tag">Filed</span> 8-K and Exhibit 99.1, 20 May 2026</li>
+    <li><b>Through Q2 2026.</b> Converted all 62,500 Series B preferred shares into 6,510,416 common shares and paid $2.1 million of accrued dividends; the Series B designation was withdrawn on 23 June 2026. <span class="tag">Filed</span> 8-K, 23 to 25 Jun 2026</li>
+  </ul>
+
+  <div class="note caution">
+    <p><b>What the 8-K/A disclosed about Briscoe.</b> The amended filing of 17 June 2026 puts total cash consideration at approximately <b>$55.9 million</b> against the $53.0 million headline, and discloses the asset's 2025 revenue of $8,950,927 against a net loss of $14,773,838. That loss sits against management's projection of $6 million to $11 million of year-one adjusted EBITDA. On the same pro-forma basis, combined 2025 revenue would have been <b>$35,081,000</b> with a net loss attributable to Soluna of <b>$54,129,000</b>. <span class="tag">Filed</span> 8-K/A, 17 Jun 2026</p>
+  </div>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Working from the disclosed transaction terms, the estimated cash impact across the June quarter is:</p>
+    <ul>
+      <li><b>Briscoe.</b> The 8-K/A of 17 June restates total cash consideration at approximately <b>$55.9m</b>, including settlement of pre-existing obligations, above the $53.0m headline price. Less the $12.5m Tranche C draw: roughly <b>$43m</b> of cash, or nearer <b>$48m</b> if the $5.0m of capitalised transaction costs sits outside that figure. The filing is not explicit.</li>
+      <li><b>Dorothy 1A.</b> $16.5m to the seller, $6.0m at the 15 April closing and $10.5m due no later than 1 July 2026, part-funded by a $12m note issued to YA II PN under a Securities Purchase Agreement dated 15 April 2026: roughly <b>$4.5m</b> net.</li>
+      <li><b>Dorothy 1B.</b> $8,765,490 to Navitas Global, closed 19 May 2026, stated in the 8-K as funded with balance sheet cash and offset by no financing: <b>$8.8m</b>.</li>
+    </ul>
+    <div class="note">
+      <p><b>The acquisition total, reconciled.</b> The three acquisitions sum two ways depending on which Briscoe figure is used, and the difference is the whole of the gap. On the restated basis, $55.9m plus $16.5m plus $8.765m is <b>$81.2 million</b>. On the headline purchase price, $53.0m plus the same two is $78.3 million, which is where a rounded $79 million came from. This document states <b>$81 million</b> throughout, on the restated total cash consideration in the amended filing, because that is what left the balance sheet. <span class="tag">Filed</span> 8-K/A, 17 Jun 2026; 8-K, 2 Apr 2026; press release, 16 Apr 2026; 8-K and Exhibit 99.1, 20 May 2026</p>
+    </div>
+    <ul>
+      <li><b>Series B dividends.</b> <b>$2.1m</b> paid on full conversion.</li>
+    </ul>
+    <p>That totals roughly <b>$59 million to $64 million of cash out</b> against $68.6 million of unrestricted cash at the start of the quarter, implying something in the region of <b>$5 million to $10 million</b>, call it $8 million at the midpoint, before any operating burn or Kati 1B construction spending. Debt principal on the same basis moved from $28.7 million to roughly $53 million, so the +$40.6 million net cash position at 31 March plausibly became net debt.</p>
+    <p>On its own that number would describe a company nearly out of money. It almost certainly is not, and the reason is the second half of the picture.</p>
+    <p>These are calculations from disclosed deal terms, not company figures. Soluna has not published a post-acquisition balance sheet. The Q2 10-Q settles it.</p>
+  </div>
+
+  <h3>Where the money came from</h3>
+
+  <p>The acquisitions were funded by selling stock. The share count makes this unambiguous.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Date</th><th class="num">Shares outstanding</th><th class="num">Added</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="when">31 March 2026</td><td class="num">111,717,040</td><td class="num">n/a</td><td><span class="tag">Filed</span> 10-Q balance sheet</td></tr>
+      <tr><td class="when">6 April 2026</td><td class="num">113,181,690</td><td class="num">+1.5m</td><td><span class="tag">Filed</span> prospectus, 6 Apr 2026</td></tr>
+      <tr><td class="when">24 April 2026</td><td class="num">141,347,055</td><td class="num">+28.2m</td><td><span class="tag">Filed</span> Form 424B3, ~12 May 2026</td></tr>
+      <tr><td class="when">12 May 2026</td><td class="num">157,747,354</td><td class="num">+16.4m</td><td><span class="tag">Filed</span> 10-Q cover page</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>Roughly <b>46 million shares, about 41% of the starting count, were issued in six weeks</b>, and 28.2 million of those came in the eighteen days between 6 and 24 April alone. That window brackets the Briscoe and Dorothy 1A closings precisely. It is the funding source for the acquisitions, and it is why the company is not in the distress the cash arithmetic alone would suggest. For scale on price, the same 6 April prospectus reported a last sale price of <b>$0.9259</b>, so a large part of that issuance was done below a dollar.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Liquidity and dilution are not two questions. Q2 2026 demonstrates they are one question seen from two sides: the company had the cash because it sold the shares. A comfortable cash balance on 13 August is reassuring only in combination with a share count that did not move much to produce it, and of the two figures the share count is the one that cannot be reversed.</p>
+  </div>
+
+  <h3>The Series A preferred</h3>
+
+  <p>The 9.0% Series A Cumulative Perpetual Preferred is the quietest large item in the structure. At 31 March 2026 there were 4,920,045 shares outstanding with a $25.00 liquidation preference, <b>$123.0 million</b>, and approximately <b>$32.4 million of cumulative dividends in arrears</b>. Dividends have not been paid since roughly late 2022, and cumulative means the unpaid amounts accrue rather than lapse, at about $11.1 million a year.</p>
+
+  <p>Combined, roughly $155 million of claims rank ahead of the common against a $192.5 million common market capitalisation, about 81% of the equity beneath it. The preferred also carries a protective provision requiring two-thirds holder approval before issuing anything senior to it, and became callable from 23 August 2026, a right the company is in no position to exercise.</p>
+
+  <div class="note caution">
+    <p><b>What the preferred market price implies.</b> Insider filings show a director selling Series A at $10.75 and $11.00 per share on 17, 18 and 22 June 2026, and the chief executive selling small amounts at $7.25 in April and $10.40 in late May under a Rule 10b5-1 plan. At roughly $11 the preferred trades near 44% of its $25 face. The market for the senior security is not pricing full recovery of face plus arrears. <span class="tag">Filed</span> Forms 4, Apr to Jun 2026</p>
+  </div>
+
+  <h3>Debt covenants</h3>
+
+  <p>The Generate credit agreement carries a minimum trailing debt service coverage ratio of 1.60:1.00 and a minimum forward contracted ratio of 1.20:1.00, secured by first-priority liens on substantially all project assets, with a mandatory cash sweep applying a percentage of free cash flow to principal. The 10-Q states compliance as of that filing and separately notes a limited waiver obtained in connection with diligence requests. Coverage covenants tied to project cash flow are the mechanism by which a weak operating quarter becomes a financing problem. <span class="tag">Filed</span> 10-Q, Note 8</p>
+
+  <h3>Standing dilution capacity</h3>
+
+  <p>The machinery is fully loaded: an at-the-market programme with H.C. Wainwright dated 29 April 2025; two standby equity purchase agreements with YA II PN dated 12 August 2024 and 24 March 2026; and a shelf registration filed 9 March 2026 registering up to <b>$1.0 billion</b> of securities, of which <b>$500 million</b> is carved out for an at-the-market sales agreement prospectus. Registered capacity is roughly five times the entire market capitalisation.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Instrument</th><th class="num">Capacity</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Shelf registration, total</td><td class="num">$1.0bn</td><td><span class="tag">Filed</span> Form S-3, 9 Mar 2026, amended 30 Mar 2026</td></tr>
+      <tr><td class="lbl">of which ATM sales agreement prospectus</td><td class="num">$500m</td><td><span class="tag">Filed</span> Form 424B5, 1 Apr 2026</td></tr>
+      <tr><td class="lbl">Resale registrations, April 2026</td><td class="num">31.66m sh</td><td><span class="tag">Filed</span> 26,512,815 issuable to Yorkville under the 2024 standby agreement, of which 3,000,000 issued by 1 Apr; 2,459,400 warrant and Harmattan merger shares; 2,700,000 Generate warrant shares. These are resale registrations and produce no cash for the company</td></tr>
+      <tr><td class="lbl">Warrants outstanding</td><td class="num">27,549,840 sh</td><td><span class="tag">Filed</span> Form 424B3</td></tr>
+      <tr><td class="lbl">Generate warrant package</td><td class="num">2,700,000 sh</td><td><span class="tag">Filed</span> a pre-funded warrant plus common warrants, issued with the $12.5m Tranche C loan</td></tr>
+      <tr><td class="lbl">Company ATM illustration</td><td class="num">760,178,588 sh</td><td><span class="tag">Filed</span> shares issuable were the ATM fully sold at $0.77</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Ownership: a large individual holder has been accumulating</h3>
+
+  <p>Schedule 13G filings show Robert L. Bugbee moving from 9,168,000 shares, 9.3%, to <b>13,336,362 shares, 8.5%</b>. He bought roughly 4.2 million shares while his percentage fell, which is dilution outrunning accumulation by a single holder. Insiders hold roughly 35% of shares outstanding; institutions roughly 8%. <span class="tag">Filed</span> Schedule 13G, Feb and May 2026</p>
+
+  <h3>Insider activity, both directions</h3>
+
+  <p>Selling has concentrated in the Series A preferred rather than the common. Director William Phelan sold 18,000 preferred shares on 17, 18 and 22 June at $10.75 to $11.00, leaving 106,233. Chief People Officer Mary Jennifer O'Reilly sold her entire preferred holding of 6,800 shares on 10 and 11 June at $10.80 and $11.10, ending at zero. Chief Accounting Officer Jessica Thomas sold 2,500 preferred at $10.90 and 4,838 common at $1.70. The chief executive sold 1,000-share lots in April and May under a Rule 10b5-1 plan adopted 16 December 2025. The pattern is consistent: officers exiting the preferred, not the common. On the buying side, chief financial officer Michael Picchi purchased 100,000 common shares at $1.63 on 22 May 2026, an open-market purchase rather than a grant, and the most substantive insider signal of the period. Insiders hold roughly 35% of shares outstanding. <span class="tag">Filed</span> Forms 4 for W. Phelan, J. Belizaire, J. Thomas and M. O'Reilly, Apr to Jun 2026</p>
+
+  <p>The chief executive's 1 June 2026 restricted stock grant of 3,018,802 shares is compensation, not a purchase, and separately the Compensation Committee raised his base salary to $600,000 retroactive to 1 January 2026 with a target bonus of 100% of salary. <span class="tag">Filed</span> 8-K, 24 Jul 2026, Item 5.02(e)</p>
+</section>
+
+<!-- ===================== 8. VALUATION ===================== -->
+<section id="s8">
+  <h2 class="sec"><span class="n">08</span>Valuation</h2>
+  <p class="sub">Multiples shown with their basis and pricing date. No target price.</p>
+
+  <p>There is no usable earnings multiple: the company has never earned money and EBITDA is negative. That leaves revenue multiples, asset-based measures and capacity-based measures, each with a caveat.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Metric</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Share price</td><td class="num">$1.22</td><td><span class="tag">Market</span> 31 Jul 2026 close, below the 50-day $1.51 and 200-day $1.56</td></tr>
+      <tr><td class="lbl">Market capitalisation</td><td class="num">$192.5m</td><td><span class="tag">Market</span> 157.75m shares, common only</td></tr>
+      <tr><td class="lbl">Enterprise value, as screened</td><td class="num">$158.2m</td><td><span class="tag">Market</span> uses the 31 Mar balance sheet, pre-acquisition</td></tr>
+      <tr><td class="lbl">Enterprise value, reconstructed</td><td class="num">~$238m</td><td><span class="tag">Estimate</span> adding ~$53m debt, deducting ~$8m estimated cash</td></tr>
+      <tr><td class="lbl">Price / sales, TTM $33.2m</td><td class="num">5.8&times;</td><td><span class="tag">Market</span> not a cheap multiple for a loss-making business</td></tr>
+      <tr><td class="lbl">EV / sales, screened</td><td class="num">4.8&times;</td><td><span class="tag">Market</span> n/a</td></tr>
+      <tr><td class="lbl">EV / sales, reconstructed</td><td class="num">~7.2&times;</td><td><span class="tag">Estimate</span> the gap between these two rows is the point</td></tr>
+      <tr><td class="lbl">EV per operating MW</td><td class="num">~$1.4m</td><td><span class="tag">Estimate</span> $238m divided by 171 MW operating</td></tr>
+      <tr><td class="lbl">Price / book, reported total equity</td><td class="num">2.8&times;</td><td><span class="tag">Market</span> total equity includes $65.8m of non-controlling interests</td></tr>
+      <tr><td class="lbl">Price / book, attributable equity</td><td class="num">~4.1&times;</td><td><span class="tag">Estimate</span> $192.5m divided by $47.2m attributable equity</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Why the screened numbers flatter the stock</h3>
+
+  <ol>
+    <li><b>Stale cash and debt.</b> Providers net off $68.6 million of cash and $28.0 million of debt from 31 March. Roughly $61 million of that cash has been spent and roughly $24.5 million of debt added since. Correcting this alone raises enterprise value by roughly half.</li>
+    <li><b>Non-controlling interests inflate book value.</b> A 2.8 times price-to-book looks moderate until 58% of reported equity turns out to belong to project partners rather than SLNH shareholders.</li>
+    <li><b>The preferred claim is invisible in equity multiples.</b> None of these ratios reflect $123.0 million of liquidation preference plus $32.4 million of arrears ranking ahead of the common. On a strict liquidation view, residual book value attributable to the common is arguably negative.</li>
+  </ol>
+
+  <h3>Third-party coverage, reported as market data</h3>
+
+  <p>Two ratings exist on the stock. Both are the published views of the firms named and neither is adopted here.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Firm</th><th>Rating</th><th class="num">Target</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">H.C. Wainwright (M. Colonnese)</td><td>Buy</td><td class="num">$4.00</td><td><span class="tag">Market</span> initiated or assumed 20 Jul 2026</td></tr>
+      <tr><td class="lbl">Weiss Ratings</td><td>Sell (D&minus;)</td><td class="num">n/a</td><td><span class="tag">Market</span> upgraded from Sell (E+), 12 Jun 2026</td></tr>
+      <tr><td class="lbl">Wall Street Zen</td><td>Hold</td><td class="num">n/a</td><td><span class="tag">Market</span> upgraded from Sell, 25 Apr 2026</td></tr>
+      <tr><td class="lbl">MarketBeat consensus</td><td>Hold</td><td class="num">$4.00</td><td><span class="tag">Market</span> one Buy and one Sell</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>Wainwright's own published estimates project losses throughout: $(0.11) for Q2 2026, $(0.45) for FY2026 and $(0.27) for FY2027. Its $4.00 target implies a market capitalisation near $631 million on 157.75 million shares, roughly 19 times trailing revenue and about 228% above the 31 July close. The target and the loss estimates are consistent only on the assumption that the pipeline converts, so the target rests on conversion rather than on forecast earnings. That is an observation about the published work, not an adoption of it. <span class="tag">Market</span> as reported 20 to 23 Jul 2026</p>
+
+  <p>The conflict attaching to that coverage is recorded in section 14.</p>
+
+  <h3>Framing the valuation</h3>
+
+  <p>At roughly 6 to 7 times sales the market is not valuing the Bitcoin hosting business. A stable contracted hosting operation of this size with thin margins and no growth would command a low single-digit revenue multiple. The premium is paid for the AI option: Kati 2, Dorothy 3, and the 4.3 GW behind them.</p>
+
+  <p>That option has a strike price, and the strike price is capital. Building 100 MW of AI capacity costs well over a billion dollars. Soluna's equity market value is $192 million and estimated post-acquisition cash is on the order of $8 million. Any conversion of the pipeline will be funded by project debt, third-party project equity and further issuance of SLNH shares. The AI upside is real; existing shareholders will own a materially smaller fraction of it than the pipeline headline implies.</p>
+</section>
+
+<!-- ===================== 9. GROWTH DRIVERS ===================== -->
+<section id="s9">
+  <h2 class="sec"><span class="n">09</span>Growth drivers</h2>
+  <p class="sub">Ranked by how much each would change the investment case.</p>
+
+  <h3>1. A signed AI lease at Kati 2</h3>
+  <p>Everything else is secondary. Kati 2 is planned as a 350+ MW critical-IT campus in Willacy County, Texas, through a joint venture formed 3 June 2026 with Metrobloks: Soluna's subsidiary holds all Class A interests and manages the venture, contributing the Phase I property, a purchase agreement for the Phase II property and roughly $3.5 million of operating expenses, with total commitments reported around $21 million to $22.5 million. Phase I is 100 MW; Phase II adds 250 MW. The distribution waterfall returns capital plus a <b>14% internal rate of return</b> plus $100,000 per Gross PPA MW, then splits 50/50 with Metrobloks. <span class="tag">Filed</span> 8-K, ~9 Jun 2026</p>
+  <p>As of 14 July 2026: general contractor selected and onboarding, detailed design about 50% complete, long-lead electrical equipment letters of intent signed, and formal commercial negotiations with one potential tenant under a signed letter of intent. A binding lease with a named creditworthy tenant would re-rate the equity. Its absence is why the stock trades where it does.</p>
+
+  <h3>2. Dorothy 3</h3>
+  <p>A planned 300+ MW AI and HPC campus near Silverton, Texas, on 300 adjacent acres secured under a definitive purchase agreement, next to Dorothy 1, Dorothy 2 and Briscoe. This is the clearest expression of the vertical-integration thesis: owned generation plus owned land plus adjacent operating experience. It is also early, with environmental due diligence, survey work, fiber studies and schematic design as of July 2026 and a community engagement consultant still being hired. Realistically a 2028 or later revenue contributor.</p>
+
+  <h3>3. Briscoe wind farm economics</h3>
+  <p>Management projected $6 million to $11 million of year-one adjusted EBITDA on $20 million to $24.4 million of annualised revenue. Against a $53.0 million headline price that implies roughly 5 to 9 times EBITDA. The 8-K/A of 17 June 2026 complicates the picture: total cash consideration was approximately $55.9 million, and the asset's 2025 accounts show revenue of $8,950,927 against a net loss of $14,773,838.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The $20 million to $24.4 million annualised revenue projection should be read carefully. Briscoe's primary purpose is to power Soluna's own co-located data centres. Power sold internally is an intercompany transaction that eliminates on consolidation, appearing as lower cost of revenue rather than added revenue. Only third-party power sales and renewable energy credit sales flow through the consolidated top line, so the asset may improve consolidated margin without adding the projected revenue to reported totals. The July update also disclosed repair work still ongoing and delayed roughly two weeks by high winds, requiring an additional crew and crane.</p>
+  </div>
+
+  <h3>4. Kati 1B completion</h3>
+  <p>The nearest-term, highest-certainty driver. Kati 1 is an 83 MW site: K1A Galaxy at 48 MW is operating, and K1B at 35 MW is in phased construction with Phase 2 modular data centres of 9 MW substantially complete and Phase 3 of 14 MW described as ahead of schedule. This is Bitcoin hosting, so it extends the current business rather than transforming it, but it is contracted, incremental and visible.</p>
+
+  <h3>5. Institutional visibility</h3>
+  <p>Soluna was added to the Russell 3000 and Russell 2000 Value indices in the June 2026 reconstitution, and holds its first quarterly earnings conference call on 13 August 2026. That a company of this profile has never held an earnings call is itself notable; starting one is a governance improvement. Institutional ownership is around 8%, so there is room for it to rise. Ryan Carver, previously of Microsoft, was appointed Chief Development Officer in July 2026 to lead the AI and HPC platform, which is relevant credibility for tenant negotiations.</p>
+</section>
+
+<!-- ===================== 10. RISKS ===================== -->
+<section id="s10">
+  <h2 class="sec"><span class="n">10</span>Risks</h2>
+  <p class="sub">Severity-ranked, most severe first.</p>
+
+  <div class="risk sev-high">
+    <h4>Dilution is the base case, not a tail risk <span class="sev">Severe</span></h4>
+    <p>Shares outstanding went from 10.6 million to 157,747,354 in roughly seventeen months, a 627% increase over twelve months, including 46 million shares in the six weeks to 12 May 2026. An ATM programme, two Yorkville standby equity facilities and a $1.0 billion shelf including a $500 million ATM prospectus all remain available. Trailing free cash outflow is near $50 million and estimated post-acquisition cash is on the order of $8 million. Any Kati 2 development capital raised at the parent level dilutes further.</p>
+  </div>
+
+  <div class="risk sev-high">
+    <h4>The AI pivot may not convert <span class="sev">Severe</span></h4>
+    <p>Zero HPC revenue, zero signed AI leases, one non-binding letter of intent, and one failed prior attempt leaving a $19.3 million unpaid liability. Competitors with completed facilities, investment-grade backstops and billion-dollar balance sheets are bidding for the same tenants. If Kati 2 does not secure a binding lease, the company reverts to a sub-scale Bitcoin hosting business priced at 6 to 7 times sales.</p>
+  </div>
+
+  <div class="risk sev-high">
+    <h4>Liquidity after the April and May acquisitions is unverified <span class="sev">Severe</span></h4>
+    <p>On the estimate in section 07 the company spent roughly $61 million of a $68.6 million unrestricted cash balance in a single quarter while adding roughly $24.5 million of debt, with a further $17.4 million of cash restricted and unavailable. Covenants include a 1.60:1.00 trailing debt service coverage ratio and a cash sweep on free cash flow. A seasonally curtailed Q2 combined with a thinner cash balance makes financing terms worse exactly when capital is most needed.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>The Series A preferred overhang <span class="sev">Elevated</span></h4>
+    <p>$123.0 million of liquidation preference plus roughly $32.4 million of accruing arrears rank ahead of the common. Arrears grow at 9% of face annually while unpaid. Any resolution, whether cash payment, exchange into common or renegotiation, is likely to be expensive for common shareholders. The preferred trading near 44% of face suggests that market does not expect full recovery.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Bitcoin price and network difficulty <span class="sev">Elevated</span></h4>
+    <p>Roughly 23% of revenue is direct Bitcoin mining. Hosting revenue is contractually insulated in the short term but not economically insulated: if Bitcoin falls far enough, hosting customers stop paying, stop expanding, or fail. FY2025 revenue fell 21.8% year over year largely on weaker Bitcoin-linked economics. The current backdrop is unhelpful, with Bitcoin near a 21-month low around $58,000 to $64,000 after record spot-ETF outflows of roughly $4.5 billion in June 2026.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Customer concentration <span class="sev">Elevated</span></h4>
+    <p>Three customers account for the substantial majority of revenue. Blockware alone exceeds 17 MW across four expansions. The loss or failure of a single counterparty would be material, and hosting customers in this industry are themselves leveraged to Bitcoin.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Internal control material weakness <span class="sev">Elevated</span></h4>
+    <p>Management concluded disclosure controls were not effective as of 31 December 2025, with identified errors in debt classification, lease classification and valuation, and overstated equipment deposits. The auditor changed to KPMG for FY2026. A new auditor plus an unremediated material weakness plus a complex web of consolidated variable interest entities warrants extra scrutiny of reported figures, particularly since some identified errors concern exactly the balance-sheet lines this analysis depends on.</p>
+  </div>
+
+  <div class="risk sev-low">
+    <h4>ERCOT and grid dependence <span class="sev">Moderate</span></h4>
+    <p>Four of five sites are in Texas. Summer coincident-peak curtailment reduces uptime by design. Interconnection queues gate Projects Annie, Fei, Ellen, Hedy, Rosa and Grace. Texas power market rules, transmission charge design and any data-centre-specific regulation flow directly through to margin.</p>
+  </div>
+
+  <div class="risk sev-low">
+    <h4>Structural complexity and minority leakage <span class="sev">Moderate</span></h4>
+    <p>Multiple consolidated variable interest entities, Class A and Class B membership tiers, priority return waterfalls, a related-party relationship with Harmattan Energy whose President and director Matthew Lipman also sits on Soluna's board, and a $65.8 million non-controlling interest balance. Consolidated revenue overstates what reaches SLNH shareholders, and reported book value does the same.</p>
+  </div>
+
+  <div class="risk sev-low">
+    <h4>Trading mechanics <span class="sev">Moderate</span></h4>
+    <p>Short interest is 34.4 million shares, 21.8% of shares outstanding and 33.8% of float, at 1.85 days to cover. Beta is 5.13 and average daily volume roughly 15.5 million shares. This produces violent moves in both directions on modest news, as the $0.41 to $5.14 twelve-month range demonstrates and as the 6.15% single-day decline on 31 July illustrates in miniature. The stock spent much of 2025 below $1.00 and regained Nasdaq minimum bid compliance only on 1 May 2026; at $1.22 the buffer is roughly 22%.</p>
+  </div>
+</section>
+
+<!-- ===================== 11. BULL / BASE / BEAR ===================== -->
+<section id="s11">
+  <h2 class="sec"><span class="n">11</span>Bull / base / bear</h2>
+  <p class="sub">Each case with its preconditions: what must be true, not what might be.</p>
+
+  <div class="cases">
+    <div class="case bear"><h4>Bear</h4>
+      <p>The letter of intent lapses. Better-capitalised competitors absorb available demand and Kati 2 cannot be financed on acceptable terms, a 350 MW campus being too large for a $192.5 million company to fund without transferring most of the economics. Simultaneously the operating business weakens: summer curtailment compresses revenue, Bitcoin softens, a hosting customer defaults or fails to renew. Cash, already reduced by roughly $61 million of acquisitions, falls toward the level where the 1.60:1.00 coverage covenant and the cash sweep bind. Financing then arrives at whatever price is available, which at $1.22 with 21.8% short interest is punishing. The $19.3 million HPE liability and $155 million of preferred claims remain, senior and unaddressed. In the most adverse version, sustained trading below $1.00 puts the listing back in question.</p>
+      <p class="req">Requires: no AI lease, a weak Bitcoin tape, and a financing need at a depressed price.</p></div>
+
+    <div class="case"><h4>Base</h4>
+      <p>Kati 1B finishes and adds Bitcoin hosting revenue. Briscoe improves consolidated margin. Kati 2 advances through design and negotiation but a binding lease takes longer than the market hopes, a normal outcome for a first-time AI developer competing against completed facilities. Dorothy 3 remains in development. Revenue grows off a small base, adjusted EBITDA moves toward breakeven, and GAAP losses continue, consistent with Wainwright's published estimates of $(0.45) for FY2026 and $(0.27) for FY2027. The company returns to capital markets through the ATM, the Yorkville facilities or a project-level raise. Share count keeps climbing. The stock trades on Kati 2 headlines and Bitcoin beta, and the Series A arrears accrue unresolved in the background.</p>
+      <p class="req">Requires: continued hosting execution while AI conversion slips, funded by further issuance.</p></div>
+
+    <div class="case bull"><h4>Bull</h4>
+      <p>The letter of intent converts into a signed long-dated lease with a named hyperscaler or well-funded neocloud. The engaged investment bank closes project financing at the joint-venture level. Briscoe's owned generation proves to be the differentiator management claims, letting Soluna offer contracted uptime at a cost structure grid-connected developers cannot match. Dorothy 3 follows on the same template with land and power already secured. The sector comparison becomes relevant rather than aspirational, and Soluna re-rates from a Bitcoin hoster at 5.8 times sales toward a contracted infrastructure developer. What must be conceded: this case assumes signing produces a re-rating, and July 2026 supplied evidence against that assumption. If the market now wants delivered cash flow rather than backlog, the bull case needs an energised revenue-producing campus, which is years rather than quarters away.</p>
+      <p class="req">Requires: a binding Kati 2 lease with a creditworthy tenant, plus project financing that does not gut the parent's equity share.</p></div>
+  </div>
+
+  <div class="note caution">
+    <p><b>These paths are not independent draws.</b> The same conditions cluster: a tight financing market makes lease negotiations harder, weak Bitcoin reduces hosting demand and depresses the share price used to raise equity and pressures coverage covenants. Modelling the catalysts as separate probabilities overstates the number of ways this works out. Nearly everything routes through one variable, whether a creditworthy tenant signs.</p>
+  </div>
+</section>
+
+<!-- ===================== 12. RESEARCH SUMMARY ===================== -->
+<section id="s12">
+  <h2 class="sec"><span class="n">12</span>Research summary</h2>
+
+  <p>Soluna Holdings is a genuine if sub-scale renewable-powered data centre operator that has grown revenue for four consecutive quarters to $9.4 million in Q1 2026 and runs 171 MW of nameplate across five sites. Behind-the-meter siting and, since April 2026, ownership of the Briscoe Wind Farm give it a real power cost advantage. Among micro-cap AI-infrastructure stories, having revenue, customers and generating assets places it in a better category than most.</p>
+
+  <p>The valuation is not being set by that business. At roughly 6 to 7 times trailing sales the market is paying for the AI pipeline: Kati 2 at 350+ MW, Dorothy 3 at 300+ MW, and a stated 4.3 GW behind them. As of 14 July 2026 that pipeline had produced one non-binding letter of intent and no signed leases, in a sector where competitors have closed multi-billion-dollar agreements with Anthropic, AWS, CoreWeave and Fluidstack, and where through July 2026 even those signed contracts stopped supporting share prices as the peer group derated 25% to 38% in a month. Converting even Phase I of Kati 2 requires capital exceeding the entire market capitalisation by a wide margin.</p>
+
+  <p>Three things are easily missed. First, the dilution: 10.6 million shares to 157,747,354 in about seventeen months, with the ATM, two Yorkville facilities and a $1.0 billion shelf still live, and 46 million shares issued in the six weeks that funded the acquisitions. Second, the $155 million of Series A claims, $123.0 million of preference plus $32.4 million of accruing arrears, ranking ahead of a $192.5 million common stock, with that preferred trading near 44% of face. Third, that essentially every publicly displayed valuation metric is built on a 31 March balance sheet that roughly $81 million of April and May acquisitions rendered obsolete.</p>
+
+  <p>The FY2025 material weakness, the concurrent auditor change to KPMG, and the still-unpaid $19.3 million liability from the previous failed AI compute attempt all argue for verifying figures at source rather than relying on summaries, including this one.</p>
+
+  <div class="note">
+    <p><b>The question this reduces to.</b> Will a creditworthy tenant sign a binding lease at Kati 2, and on terms that leave today's shareholders with a meaningful share of the economics after the capital required to build it?</p>
+    <p>Everything else is second order. The Bitcoin hosting business roughly funds the lights. Briscoe improves the cost structure. The 4.3 GW pipeline is worth approximately nothing until a tenant with a credit rating signs a document. If that happens, the current valuation will look small. If it does not, this is a sub-scale Bitcoin hoster with a preferred overhang priced at nearly six times sales.</p>
+  </div>
+
+  <h3>Falsification checklist: what to verify, in order</h3>
+
+  <ol>
+    <li><b>The Q2 2026 balance sheet.</b> Unrestricted cash, restricted cash and total debt principal at 30 June. This tests every liquidity estimate in section 07, none of which are company figures. Reported with the 13 August 2026 results.</li>
+    <li><b>Kati 2 tenant status.</b> Has the letter of intent become a binding lease? If so: who is the tenant, what credit quality, what term, what megawatts, what commencement date?</li>
+    <li><b>Kati 2 financing.</b> Has anything closed, at what level of the structure, and what does it do to SLNH's residual share?</li>
+    <li><b>Share count and issuance.</b> Compare the Q2 10-Q cover page with 157,747,354 at 12 May 2026, and read the equity note for ATM and standby facility draws.</li>
+    <li><b>Covenant compliance.</b> Confirm the trailing 1.60:1.00 and forward 1.20:1.00 coverage ratios, whether the cash sweep triggered, and whether further waivers were obtained.</li>
+    <li><b>Series A preferred.</b> Updated arrears figure, any announced plan to address it, and whether the 23 August 2026 call date prompts disclosure.</li>
+    <li><b>Material weakness remediation.</b> Item 4 of the Q2 10-Q: remediated, in progress, or unchanged, and what KPMG's involvement has surfaced.</li>
+    <li><b>Q2 revenue against summer curtailment.</b> Did curtailment break the four-quarter sequential growth streak? Compare the company's framing with the segment numbers.</li>
+    <li><b>Briscoe contribution.</b> Visible in consolidated revenue, in cost of revenue, or both, and how it compares with the $20 million to $24.4 million annualised projection against the disclosed 2025 net loss of $14,773,838. Also whether repairs are complete.</li>
+    <li><b>The HPE liability.</b> Still $19.348 million and unpaid? Any litigation, settlement or reclassification?</li>
+  </ol>
+
+  <p>Primary documents are free at sec.gov/edgar under Soluna Holdings, Central Index Key 0000064463. The company posts monthly operating metrics at solunacomputing.com/investors.</p>
+</section>
+
+<!-- ===================== 13. NULL CATEGORIES ===================== -->
+<section id="s13">
+  <h2 class="sec"><span class="n">13</span>Null categories</h2>
+  <p class="sub">Requested categories with nothing to report, stated explicitly rather than omitted.</p>
+  <div class="tw"><table class="nulls">
+    <thead><tr><th>Category</th><th>Status</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Analyst coverage</td><td class="status">Covered above</td><td>Two ratings exist and are reported in section 08 as market data: H.C. Wainwright Buy with a $4.00 target dated 20 Jul 2026, and Weiss Ratings Sell (D&minus;) dated 12 Jun 2026, with Wall Street Zen at Hold and a MarketBeat consensus of one Buy and one Sell. Coverage is thin but it is not absent.</td></tr>
+      <tr><td class="lbl">Price target derived by this document</td><td class="status">None</td><td>Checked against this document's own fifteen sections and found empty. No target is derived anywhere. Third-party targets are reproduced as market data, attributed and dated, and are not adopted.</td></tr>
+      <tr><td class="lbl">Rating issued by this document</td><td class="status">None</td><td>Checked against this document's own fifteen sections and found empty. No buy, sell or hold recommendation is issued.</td></tr>
+      <tr><td class="lbl">Common dividend</td><td class="status caution-t">Not established</td><td>Never examined. The document records $2.1m of Series B preferred dividends paid on conversion and roughly $32.4m of Series A arrears, but no source was checked for a common dividend. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Share buybacks</td><td class="status caution-t">Not established</td><td>Never examined. The document establishes that the company is a structural net issuer with $1.0bn of registered capacity, but no source was checked for a repurchase programme. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Securities class action</td><td class="status caution-t">Not established</td><td>Never examined. No litigation of any kind is addressed in this document and no docket or legal proceedings disclosure was checked. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Credit rating</td><td class="status caution-t">Not established</td><td>Never examined. No rating agency was checked, so the absence of a rating in this document is a gap rather than a finding. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Going concern opinion, FY2025</td><td class="status caution-t">Not established</td><td>The opinion itself was not read. UHY LLP audited FY2025 and FY2024, and the EXPERTS paragraph incorporated into the April 2026 Form S-3 references that report without going-concern language, which is suggestive but is not the opinion. Also named in what was not checked.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 14. METHODOLOGY & SOURCES ===================== -->
+<section id="s14">
+  <h2 class="sec"><span class="n">14</span>Methodology &amp; sources</h2>
+
+  <p><b>Pricing basis.</b> All price-dependent figures are struck at the 31 July 2026 close of $1.22. The as-of stamp is 2 August 2026, the build date, which is later than the close the figures come from.</p>
+
+  <h3>Provenance tags</h3>
+  <p class="sub">Tags record where a claim came from and nothing else. They are not colour-coded, because colour is reserved for meaning and identity and provenance is neither. A <span class="tag">Filed</span> fact can be terrible news.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Tag</th><th>What it asserts</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl"><span class="tag">Filed</span></td><td>Stated in an SEC filing or company release, cited by form and date. <b>This also covers a dated official publication by a named non-SEC issuer</b>, such as an exchange notice, a central bank statement or a schedule published by its organiser, with the issuer named in the source line. What the tag asserts is unchanged: a specific body published this, on this date, and the reader can go and look. It never covers a third party's characterisation of someone else's facts, which is <span class="tag">Market</span>.</td></tr>
+      <tr><td class="lbl"><span class="tag">Estimate</span></td><td>Derived or inferred here. The arithmetic is shown.</td></tr>
+      <tr><td class="lbl"><span class="tag">Open</span></td><td>Expected but unconfirmed. Nothing filed either way.</td></tr>
+      <tr><td class="lbl"><span class="tag">Market</span></td><td>Price, volume, float, short interest, and published targets and ratings, stamped with the close or publication date. A third party's target or rating is market data, attributed to the firm that issued it and never adopted here.</td></tr>
+    </tbody>
+  </table></div>
+
+  <p><b>Primary sources.</b> The Form 10-Q for the quarter ended 31 March 2026, filed 15 May 2026; the FY2025 Form 10-K; 8-K current reports of 20 January, 31 March, 2 April, 15 April, 17 April, 18 May, 20 May, 9 June, 17 June (8-K/A), 14 July, 24 July and 30 July 2026; Forms 3 and 4 filed April to June 2026; Schedule 13G filings of February and May 2026; the prior-year DEF 14A; the Series A prospectus supplement; the Form S-3 filed 9 March 2026 and amended 30 March 2026, the further Form S-3 of 29 April 2026, and Forms 424B5 of 1 April 2026 and 424B3 of April and May 2026. Company press releases and monthly business updates dated 10 March, 30 March, 2 April, 9 April, 10 April, 16 April, 21 April, 28 April, 1 May, 7 May, 18 May, 20 May, 9 June, 23 June, 14 July, 16 July and 30 July 2026.</p>
+
+  <p><b>Secondary sources.</b> S&amp;P Global Market Intelligence for market data at the 31 July 2026 close. Sector context from publicly reported peer lease disclosures and commentary between December 2025 and July 2026, including the July 2026 peer derating, the reported CoreWeave loan repricing, the New York data centre moratorium and US Treasury yield levels. Sell-side actions as reported 20 to 23 July 2026.</p>
+
+  <h3>Conflict attaching to the sole positive rating</h3>
+
+  <div class="note neg">
+    <p>Per the Q1 2026 10-Q, Soluna's at-the-market offering agreement, the facility through which it sells newly issued shares into the open market, is with <b>H.C. Wainwright &amp; Co., LLC</b>, dated 29 April 2025. On 20 July 2026 H.C. Wainwright published the only Buy rating on the stock, with a $4.00 target.</p>
+    <p>Nothing about this is improper, and research and banking coexist under disclosure rules at every firm. Wainwright's own estimates candidly project losses through 2027. But a bullish note from the firm earning commissions on the company's share issuance is not independent corroboration, and a higher share price directly increases proceeds available under the ATM. Read that firm's own disclosure section before assigning weight.</p>
+  </div>
+
+  <h3>Third-party data that disagrees with the filings</h3>
+
+  <ul>
+    <li><b>Market capitalisation.</b> At the 31 July close one major provider displayed $247.74 million alongside 157.75 million shares at $1.22, figures that do not multiply. The $55.3 million gap across 4,920,045 Series A shares implies <b>$11.24 per preferred share</b>, so the provider appears to be adding the preferred at market value. This corroborates the preferred trading near 45% of face. Use $192.5 million for common market capitalisation.</li>
+    <li><b>Enterprise value.</b> Providers show roughly $158 million using the 31 March balance sheet, which predates roughly $81 million of April and May acquisitions. The reconstruction here is nearer $238 million.</li>
+    <li><b>Trailing net loss, reconciled.</b> The provider shows $(78.97) million TTM against $(63.3) million computed from the filings, FY2025 attributable loss of $53.411 million plus Q1 2026 of $17.466 million less Q1 2025 of $7.556 million. The gap is preferred stock. Adding the Series A cumulative dividend of $11.070 million a year, 4,920,045 shares at $2.25, and the $2.1 million of Series B dividends paid on conversion gives $(76.5) million, leaving $2.48 million. That residual is consistent with a deemed dividend on the Series B conversion. The provider is reporting <b>net loss attributable to common shareholders</b>; this document carries the filed attributable figure. <span class="tag">Filed</span> 10-K for FY2025 filed 27 Mar 2026; 10-Q, 15 May 2026; 8-K, 23 to 25 Jun 2026. <span class="tag">Estimate</span> the $2.48 million residual is derived here, not disclosed. Trailing revenue of $33.18 million reconciles cleanly.</li>
+    <li><b>Gross margin.</b> One provider displays roughly 66% trailing. The filed Q1 2026 statement supports 20.4% including depreciation, or roughly 44% excluding it.</li>
+    <li><b>Price targets.</b> Some aggregators still show a $5.00 target attributed to a different Wainwright analyst. The 20 July 2026 action was $4.00 from Mike Colonnese, described by at least one wire as coverage being assumed, suggesting an analyst handover.</li>
+    <li><b>Sector classification.</b> Several sources classify SLNH under Capital Markets or Finance Services. It is a data centre and power operator, so screens built on sector filters mishandle it.</li>
+  </ul>
+
+  <h3>What was not checked</h3>
+
+  <ul>
+    <li><b>Enterprise value is omitted from the masthead.</b> The only enterprise value derivable today combines a 31 March cash and debt position with April and May transaction terms the company has not yet restated in a filed balance sheet. Cash and debt struck at different dates do not belong in a masthead figure, so the field is absent and the reconstruction appears in section 08 tagged as an estimate.</li>
+    <li><b>No rating agency was checked.</b> The document references no agency rating, and none was sought, so the credit rating row is a gap rather than a finding.</li>
+    <li><b>Litigation was not searched.</b> No docket, no securities class action database and no legal proceedings section was examined for this document. The null table records this as not established rather than as an absence.</li>
+    <li><b>Common dividend and buyback history were not searched.</b> Neither is addressed anywhere in the source material behind this document.</li>
+    <li><b>The FY2025 audit opinion was not read directly.</b> The annual report was located and dated, 27 March 2026, but the opinion text was not retrieved.</li>
+    <li><b>Peer figures were not verified against peer filings.</b> They indicate scale and contracting status only.</li>
+    <li><b>No post-acquisition balance sheet exists.</b> Every liquidity figure after 31 March 2026 is reconstructed from disclosed deal terms.</li>
+  </ul>
+
+  <h3>Coverage of capital structure on this document's own evidence</h3>
+
+  <p>Section 07 was thinned in this revision. It previously carried several figures
+  that this document had never examined and that reached it from the companion
+  catalyst calendar: the placement agent warrants carried in mezzanine equity, the
+  weighted average exercise price of the outstanding warrants, the component share
+  counts inside the Generate warrant package, the Green Cloud conversion shares and
+  price, the authorised common share count, the share warrant attached to the Dorothy
+  1A note, and the commitment fee shares settled under the standby equity facility.
+  Section 09 lost the stated cost of the Kati 2 Phase II property on the same basis, and the pre-funded warrant share count inside the Generate package went the same way, leaving that row at its 2,700,000 total.
+  A document is not entitled to a fact it never examined, in the same way a null row
+  cannot claim an absence nobody checked; both assert evidence the file does not have.
+  The figures have been removed rather than re-sourced, and the gaps are named here
+  rather than backfilled from the companion.</p>
+
+  <p><b>What section 07 still covers on this document's own evidence:</b> the
+  31 March 2026 balance sheet in full; the April and May acquisitions with their
+  consideration, funding and dates; the reconstructed post-acquisition liquidity
+  position and its arithmetic; the share count progression from 31 December 2024 to
+  12 May 2026 with the April issuance window; the Series A preferred, its liquidation
+  preference, its arrears and what the preferred market price implies; the Generate
+  covenants, the cash sweep and the security package; the standing issuance facilities
+  by counterparty and date, the $1.0 billion shelf and the $500 million at-the-market
+  prospectus, the April resale registrations and the total warrants outstanding; the
+  Schedule 13G holder; and insider activity in both directions.</p>
+
+  <p><b>What it does not cover:</b> the exercise prices and component structure of the
+  warrant book beyond its total; the terms of the Green Cloud conversion; the
+  authorised share count and therefore the headroom remaining before a further
+  authorisation would be needed; and the specific consideration for the Kati 2 Phase II
+  property. Each is a real disclosure in the filings and each is carried in the
+  companion calendar on that document's own evidence. Restoring any of them here
+  requires this document to examine the underlying filing, which is new research.</p>
+
+  <h3>Known limitations carried forward</h3>
+
+  <p>One limitation remains open. Three that stood at the previous revision have been closed
+  and the reconciliations are recorded above and in the document log.</p>
+
+  <div class="note caution">
+    <p><b>The FY2025 audit opinion has not been read directly.</b> The annual report was filed
+    on 27 March 2026 and UHY LLP audited FY2025 and FY2024. The going concern paragraph that
+    appeared in the FY2024 report does not recur in the FY2025 filing's discussion of risk, and
+    the EXPERTS paragraph incorporated into the April 2026 Form S-3 references the report
+    without going concern language. Both point the same way, and neither is the opinion. The
+    text itself is what would settle it. <span class="tag">Filed</span> 10-K for FY2025, filed
+    27 Mar 2026; 10-K for FY2024, filed 31 Mar 2025</p>
+  </div>
+
+  <p><b>Facts and assumptions.</b> Figures attributed to filings, releases and market data providers are facts as reported, with dates. Every derived or forward-looking estimate is carried in a violet assumption block and is not company guidance. Where sources conflict, both figures are shown and the discrepancy is recorded above.</p>
+</section>
+
+<!-- ===================== 15. DOCUMENT LOG ===================== -->
+<section id="s15">
+  <h2 class="sec"><span class="n">15</span>Document log</h2>
+  <p class="sub">Newest first. The original build entry is never removed or rewritten.</p>
+  <div class="log">
+
+    <div class="logentry current">
+      <div class="when">2 August 2026 <span class="latest">Latest</span></div>
+      <div class="basis">Priced off 31 Jul 2026 close &middot; $1.22 &middot; $192.5M cap</div>
+      <div class="correction">
+        <span class="lbl">Correction</span>
+        <p>The acquisition total is stated once, as <b>$81 million</b>, on the restated total cash consideration in the amended filing of 17 June 2026. The figure of $79 million carried in the research summary and in the enterprise value note came from the $53.0 million headline purchase price and is withdrawn: $55.9m + $16.5m + $8.765m is $81.2 million, against $78.3 million on the headline basis.</p>
+        <p>Operating capacity is stated as <b>171 MW</b> of nameplate at the 14 July 2026 update, being Dorothy 1A 25, Dorothy 1B 25, Dorothy 2 48, Sophie 25 and Kati 1A 48, with <b>147 MW</b> cited where the reporting date is 31 March 2026 and Kati 1A was roughly half energised. The figure of roughly 159 MW used throughout the previous revision is withdrawn: it comes from an undated investor relations summary and is corroborated by neither the filings nor the monthly updates. Enterprise value per operating megawatt moves from $1.5m to $1.4m as a consequence, and operating capacity from 3.7% to 4.0% of the stated pipeline.</p>
+      </div>
+      <p>Net change since the previous entry. No repricing: 31 July 2026 was a Friday and the as-of date is the following Sunday, so the close the figures come from has not moved and the pricing basis is unchanged at $1.22.</p>
+      <p><b>Three unreconciled figure pairs closed.</b> The acquisition total and the operating capacity are recorded in the correction above. The third was the trailing net loss: a data provider's $(78.97) million against $(63.3) million computed from the filings. The difference is preferred stock. Adding the Series A cumulative dividend of $11.070 million a year and the $2.1 million of Series B dividends paid on conversion accounts for $13.2 million of the $15.6 million gap, and the $2.48 million residual is consistent with a deemed dividend on that conversion. The provider reports net loss attributable to common shareholders; this document carries the filed attributable figure and now says what the provider's number includes.</p>
+      <p><b>Filing sweep.</b> Swept 8-K, 6-K, 10-Q, 10-K, 20-F, 40-F, S-1, S-3, 424, 13D, 13G, the full NT series, Forms 3 and 4 and DEF 14A, most recent first, reaching 2 August 2026. Nothing has been filed since the 8-K of 30 July 2026. No NT filing of any kind exists, which for an issuer that has changed accounting basis and filer status is a finding rather than an absence of one. The FY2025 annual report was located and dated 27 March 2026, which narrows the outstanding audit opinion question to the opinion text itself.</p>
+      <p>The previous entry follows unchanged.</p>
+    </div>
+
+    <div class="logentry">
+      <div class="when">1 August 2026</div>
+      <div class="basis">Priced off 31 Jul 2026 close &middot; $1.22 &middot; $192.5M cap</div>
+      <p>This revision supersedes the 26 July build. Net changes from that version:</p>
+      <p><b>Liquidity, corrected twice.</b> A third acquisition was added: Soluna paid $8,765,490 in cash for the remaining 49% of Project Dorothy 1B on 19 May 2026, referenced qualitatively in the original but absent from the cash arithmetic. Briscoe was restated: the 8-K/A of 17 June 2026 puts total cash consideration at approximately $55.9 million against the $53.0 million headline, and discloses the asset's 2025 revenue of $8,950,927 against a net loss of $14,773,838. Estimated post-acquisition unrestricted cash falls from roughly $16&ndash;19 million to roughly $5&ndash;10 million, $8 million taken as the midpoint. Section 6 now also carries the other half of that picture: roughly 46 million shares were issued between 31 March and 12 May 2026, about 41% of the starting count, which is how the acquisitions were paid for, so liquidity and dilution are one question, and the 13 August cash balance and share count must be read together.</p>
+      <p><b>Dilution capacity and compensation.</b> Registered issuance capacity corrected from the $87.65 million previously cited to a $1.0 billion shelf including a $500 million ATM prospectus, separated into primary issuance versus resale overhang: roughly 31.7 million shares registered for resale across three April registrations, 27,549,840 issuable on warrants, and the company's own illustration of 760,178,588 shares were the ATM fully sold at $0.77. June 2026 equity grants totalled at least 12,631,694 restricted shares, about 8% of shares outstanding, not the 3,018,802 to the CEO alone previously reported; director awards vest on separation. CEO base salary was raised to $600,000 retroactive to 1 January 2026 with a 100% target bonus. Kati 2 economics were quantified: capital returned plus a 14% IRR plus $100,000 per Gross PPA MW, then 50/50 with Metrobloks.</p>
+      <p><b>Market data, sector and macro.</b> All price-dependent figures reset from the 24 July to the 31 July 2026 close of $1.22 (&minus;6.15% on the day): market capitalisation $192.5 million, price/sales 5.8&times;, adjusted enterprise value approximately $238 million, EV/sales approximately 7.2&times;, price/book on attributable equity approximately 4.1&times;. Section 11 adds a market-capitalisation discrepancy resolving to the Series A preferred trading near $11.24, or 45% of face, independently corroborating the June insider sale prices. Section 3 gains the July 2026 derating across the AI infrastructure peer group of 25&ndash;38%, in which Applied Digital beat revenue by 61% and IREN announced a $3.4 billion NVIDIA contract yet both sold off; tightening project-finance conditions including the reported CoreWeave loan repricing and a 30-year Treasury yield near 5.25%, its highest since 2007; and the New York data centre moratorium of 14 July as siting precedent. The bull case in Section 10 is qualified accordingly: signing a lease may be necessary without being sufficient. Bitcoin's 21-month low near $58,000 was added to the risk section.</p>
+      <p><b>Ownership and nulls.</b> Schedule 13G holder Robert L. Bugbee moved from 9,168,000 shares (9.3%) to 13,336,362 shares (8.5%), buying while being diluted. A systematic review across 8-K, 6-K, 10-Q, 10-K, 20-F, 40-F, S-1, S-3, 424, 13D, 13G, Forms 3 and 4 and the full NT series confirmed no NT, 13D, 6-K, 20-F or 40-F filings exist; the last three cannot, as Soluna is a domestic filer. Nothing has been filed since 30 July 2026. That review reconciled two figures used here: the three April resale registrations sum to 31.66 million shares (26.5m SEPA, 2.7m Generate warrants, 2,459,400 YA and HEL), and the June grant cluster sums to 12,631,694 (Toporek 7,310,534, Belizaire 3,018,802, Hazelip 726,401, O'Reilly 726,401, Marusak 849,556). It also added four details: Briscoe's nameplate is approximately 149.85 MW rather than a round 150; the board is classified into three staggered classes with directors removable only for cause on a 75% vote; Soluna director Matthew Lipman is also President and a director of related party Harmattan Energy; and UHY LLP audited FY2025 and FY2024, with the incorporated EXPERTS paragraph carrying no going-concern language.</p>
+    </div>
+
+    <div class="logentry">
+      <div class="when">26 July 2026 (original build)</div>
+      <div class="basis">Priced off 24 Jul 2026 close &middot; $1.26 &middot; $198.8M cap</div>
+      <p>Thirteen sections built from the Form 10-Q for the quarter ended 31 March 2026, the FY2025 Form 10-K, 8-K current reports and Forms 4 filed March to July 2026, and company press releases and monthly business updates through 14 July 2026, with market data at the 24 July 2026 close of $1.26 (market capitalisation $198.8 million, price/sales 6.0&times;). That version established the analytical spine carried forward here: that the screened enterprise value of roughly $158 million rested on a 31 March balance sheet made obsolete by the April acquisitions, and reconstructed it at roughly $235 million; that approximately $155 million of Series A preferred claims, $123.0 million of liquidation preference plus roughly $32.4 million of arrears, rank ahead of the common and appear in no equity multiple; that HPC revenue was zero against a valuation priced on the AI pipeline; that the sole covering broker, H.C. Wainwright, is also the company's at-the-market sales agent; and that the FY2025 material weakness warranted verifying figures at source. It estimated post-acquisition unrestricted cash at roughly $16&ndash;19 million and flagged four discrepancies between third-party data and the filings.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="norec">
+    No buy, sell, or hold recommendation is issued and no price target is derived.
+    Third-party targets and ratings, where shown, are the published views of the
+    firms named and are reported as market data. This document is for research and
+    educational purposes and is not investment advice. Verify all figures against
+    primary filings on sec.gov before acting.
+  </div>
+  <p style="margin-top:16px">SLNH &middot; Soluna Holdings, Inc. &middot; Equity Research Report &middot; as of 2 August 2026</p>
+</footer>
+
+</div>
+</body>
+</html>

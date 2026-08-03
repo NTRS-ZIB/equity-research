@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>ANY &middot; Sphere 3D Corp. &middot; Equity Research Report &middot; as of 2 August 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================================
+   PER-TICKER PALETTE
+   ========================================================================= */
+:root{
+  /* Sphere 3D wordmark blue. The mark carries three chromatic colours: the blue of
+     the sphere and the "3D" lettering, an indigo wordmark, and an orange accent dot.
+     The blue is the brand colour, raw value #0078BE (H202 S100 L37). Normalised for
+     paper it becomes H202 S72 L37, which is #1B71A3 at 5.33:1 on white. No rotation
+     was needed: the hue sits 45 degrees from the positive band, 48 from the
+     assumption band, and further still from the negative and caution bands. */
+  --accent:      #1B71A3;
+  --accent-deep: #135378;
+  --accent-wash: rgba(27,113,163,0.06);
+  --accent-line: rgba(27,113,163,0.22);
+}
+
+/* ============================================================================
+   SHARED STYLESHEET v1.50 : BEGIN
+   ========================================================================= */
+:root{
+  color-scheme: light only;
+
+  --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
+  --line:#DEE6EC;   --line-hard:#C0CDD7;
+  --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
+
+  --pos:#0B7A50;      --pos-bg:#E7F4EE;
+  --neg:#B02A21;      --neg-bg:#FBECEA;
+  --caution:#90600A;  --caution-bg:#FBF2E0;
+  --assume:#4F3FA3;   --assume-bg:#EFEDFA;
+
+  --display:'Archivo',ui-sans-serif,system-ui,'Helvetica Neue',Arial,sans-serif;
+  --body:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+
+  --measure:78ch;
+  --col:760px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html,body{background:var(--canvas) !important;background-color:var(--canvas) !important}
+body{
+  margin:0;color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 22px 96px;background:var(--paper);
+      border-left:1px solid var(--line);border-right:1px solid var(--line)}
+p{max-width:var(--measure)}
+/* Boxed prose fills its container: the box supplies its own measure, so the
+   78ch cap applies to top-level running prose only. */
+.first li,.assume p,.note p,.cat p,.risk p,.logentry p,.oc p,.case p,
+.cat-meta,.logentry .basis{max-width:none}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:var(--accent-deep)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- masthead ---------- */
+.mast{padding:44px 0 26px;border-bottom:2px solid var(--line-hard);margin-bottom:8px;
+      position:relative;padding-left:20px}
+.mast::before{content:"";position:absolute;left:0;top:44px;bottom:26px;
+      width:4px;background:var(--accent)}
+.ticker{font-family:var(--mono);font-size:44px;font-weight:700;letter-spacing:-1px;
+      line-height:1;color:var(--accent);margin:0}
+.headline{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.22;
+      color:var(--ink);margin:16px 0 0}
+.functional{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--ink-faint);margin:18px 0 0}
+.mast-strip{display:flex;flex-wrap:wrap;gap:26px;margin-top:20px;padding-top:16px;
+      border-top:1px solid var(--line)}
+.mast-strip div{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint)}
+.mast-strip b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-top:3px}
+
+/* ---------- banner: framing ---------- */
+.first{background:var(--canvas);border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:20px 24px;margin:30px 0 12px}
+.first h2{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.04em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 12px}
+.first ol{margin:0;padding-left:20px}
+.first li{margin-bottom:9px}
+.first li:last-child{margin-bottom:0}
+
+/* ---------- sections ---------- */
+section{padding-top:38px}
+h2.sec{font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);
+      margin:0 0 4px;padding-bottom:10px;border-bottom:1px solid var(--line-hard);
+      display:flex;align-items:baseline;gap:12px}
+h2.sec .n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);
+      letter-spacing:.06em;flex:none}
+.sub{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);margin:10px 0 18px;
+      max-width:var(--measure)}
+h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink-dim);
+      margin:26px 0 8px}
+
+/* ---------- provenance tags (signature) ---------- */
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);
+      background:var(--panel-2);border:1px solid var(--line);
+      border-radius:2px;padding:1px 6px;vertical-align:1px;white-space:nowrap}
+
+/* ---------- assumption block ---------- */
+.assume{background:var(--assume-bg);border-left:4px solid var(--assume);
+      padding:16px 20px;margin:20px 0}
+.assume .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--assume);display:block;margin-bottom:7px}
+.assume p{margin:0}
+
+/* ---------- callouts ---------- */
+.note{border:1px solid var(--line);border-left:4px solid var(--ink-faint);
+      background:var(--canvas);padding:16px 20px;margin:20px 0}
+.note.pos{border-left-color:var(--pos);background:var(--pos-bg)}
+.note.neg{border-left-color:var(--neg);background:var(--neg-bg)}
+.note.caution{border-left-color:var(--caution);background:var(--caution-bg)}
+.note p{margin:0}
+.note p + p{margin-top:10px}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+thead th{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--ink-dim);text-align:left;
+      padding:9px 12px;border-bottom:2px solid var(--line-hard);white-space:nowrap}
+tbody td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--canvas)}
+td.num,th.num{font-family:var(--mono);text-align:right;white-space:nowrap}
+/* td.when marks a timing column. An unmarked cell counts as prose. */
+td.when{font-family:var(--mono);white-space:nowrap}
+td.lbl{font-weight:600}
+.pos-t{color:var(--pos);font-weight:600}
+.neg-t{color:var(--neg);font-weight:600}
+.caution-t{color:var(--caution);font-weight:600}
+
+/* ---------- cases ---------- */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.case{border:1px solid var(--line);border-top:3px solid var(--ink-faint);
+      background:var(--paper);padding:18px}
+.case.bull{border-top-color:var(--pos)}
+.case.bear{border-top-color:var(--neg)}
+.case h4{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 10px}
+.case.bull h4{color:var(--pos)} .case.bear h4{color:var(--neg)}
+.case p{font-size:15px;margin:0}
+.case .req{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+
+/* ---------- risks ---------- */
+.risk{border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:16px 20px;margin-bottom:12px}
+.risk.sev-high{border-left-color:var(--neg)}
+.risk.sev-med{border-left-color:var(--caution)}
+.risk.sev-low{border-left-color:var(--ink-faint)}
+.risk h4{font-family:var(--display);font-size:15.5px;font-weight:600;margin:0 0 6px;
+      display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.risk .sev{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase}
+.risk.sev-high .sev{color:var(--neg)}
+.risk.sev-med .sev{color:var(--caution)}
+.risk.sev-low .sev{color:var(--ink-faint)}
+.risk p{margin:0;font-size:15.5px}
+
+/* ---------- null categories ---------- */
+.nulls td.lbl{width:26%}
+.nulls .status{font-family:var(--mono);font-size:12px;white-space:nowrap}
+
+/* ---------- document log ---------- */
+.log{margin-top:14px}
+.logentry{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:12px}
+.logentry.current{border-left:4px solid var(--accent);background:var(--accent-wash)}
+.logentry .when{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);
+      display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.latest{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-line);
+      background:var(--paper);border-radius:2px;padding:1px 6px}
+.logentry .basis{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-bottom:12px}
+.logentry p{font-size:15.5px;margin:0 0 9px}
+.logentry p:last-child{margin-bottom:0}
+.correction{border:1px solid var(--neg);border-left:4px solid var(--neg);
+      background:var(--neg-bg);padding:12px 16px;margin-bottom:14px}
+.correction .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--neg);display:block;margin-bottom:5px}
+
+/* ---------- footer ---------- */
+footer{margin-top:44px;padding-top:22px;border-top:2px solid var(--line-hard)}
+footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width:none}
+.norec{border:1px solid var(--line-hard);background:var(--canvas);padding:16px 20px;
+      margin-top:20px;font-family:var(--mono);font-size:12.5px;color:var(--ink-dim)}
+
+/* ---------- catalyst cards (calendar) ---------- */
+.cat{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:14px;border-left:4px solid var(--line-hard)}
+.cat.up{border-left-color:var(--pos)}
+.cat.down{border-left-color:var(--neg)}
+.cat.two{border-left-color:var(--caution)}
+.cat.neutral{border-left-color:var(--ink-faint)}
+.cat-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.cid{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);flex:none}
+.cat-head h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink);
+      margin:0;flex:1 1 auto;min-width:200px}
+.dir{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;white-space:nowrap}
+.cat.up .dir{color:var(--pos)} .cat.down .dir{color:var(--neg)}
+.cat.two .dir{color:var(--caution)} .cat.neutral .dir{color:var(--ink-faint)}
+.cat-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:10px 0 12px;padding:9px 0;
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+      font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
+.cat-meta b{color:var(--ink);font-weight:600}
+.cat p{margin:0 0 9px;font-size:15.5px}
+.cat p:last-child{margin-bottom:0}
+.cat.resolved{background:var(--canvas);border-left-color:var(--ink-faint)}
+.cat.resolved .dir{color:var(--ink-faint)}
+
+/* ---------- horizon bands (calendar) ---------- */
+.band{display:flex;align-items:center;gap:14px;margin:30px 0 16px}
+.band-t{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--ink-dim);white-space:nowrap}
+.band-r{flex:1;height:1px;background:var(--line-hard)}
+.band-c{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);white-space:nowrap}
+
+/* ---------- upside / downside pair ---------- */
+.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0}
+.oc{border:1px solid var(--line);padding:11px 14px;background:var(--paper)}
+.oc.up-c{border-left:3px solid var(--pos)}
+.oc.down-c{border-left:3px solid var(--neg)}
+.oc .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.09em;
+      text-transform:uppercase;display:block;margin-bottom:5px}
+.oc.up-c .lbl{color:var(--pos)} .oc.down-c .lbl{color:var(--neg)}
+.oc p{margin:0;font-size:14.5px;line-height:1.5}
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  body{font-size:16px}
+  .wrap{padding:0 16px 70px;border-left:none;border-right:none}
+  .ticker{font-size:34px}
+  .headline{font-size:23px}
+  .cases{grid-template-columns:1fr}
+  .outcomes{grid-template-columns:1fr}
+  .mast-strip{gap:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none !important;transition:none !important}
+}
+@media print{
+  body{font-size:11pt}
+  .wrap{max-width:none;border:none}
+  section{page-break-inside:avoid}
+}
+/* ============================================================================
+   SHARED STYLESHEET v1.50 : END
+   ========================================================================= */
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ===================== MASTHEAD ===================== -->
+<header class="mast">
+  <p class="ticker">ANY</p>
+  <h1 class="headline">A 53 megawatt platform whose financing capacity rises and falls with the share price it is meant to support</h1>
+  <p class="functional">ANY &middot; Sphere 3D Corp. &middot; Equity Research Report &middot; as of 2 August 2026</p>
+  <div class="mast-strip">
+    <div>Price <b>$2.42</b></div>
+    <div>Market cap <b>$20.9M</b></div>
+    <div>Shares out <b>8,619,150</b></div>
+    <div>Pricing basis <b>31 Jul 2026 close</b></div>
+  </div>
+</header>
+
+<!-- ===================== FRAMING ===================== -->
+<div class="first">
+  <h2>Framing</h2>
+  <ol>
+    <li>Market capitalisation was roughly $13 million at the 1 June 2026 merger close and about <b>$20.9 million</b> at the 31 July close, on 8,619,150 shares. The company reports <b>three employees</b>. <span class="tag">Market</span></li>
+    <li>Three reverse splits stand behind the current share count: 1-for-25 in 2017, 1-for-8 in 2018 and 1-for-10 in February 2026. <span class="tag">Filed</span></li>
+    <li>The <b>going-concern</b> warning is current. At Q1 2026 management flagged substantial doubt about the ability to continue for twelve months, against <b>$3.1M of cash</b> and <b>$3.7M of operating burn in that quarter alone</b>. <span class="tag">Filed</span></li>
+    <li>Financing capacity is capped at one-third of public float and float is measured at prevailing prices, so <b>the amount the company may raise falls as its shares fall</b>. <span class="tag">Filed</span></li>
+  </ol>
+</div>
+
+<!-- ===================== 1. SNAPSHOT ===================== -->
+<section id="s1">
+  <h2 class="sec"><span class="n">01</span>Snapshot</h2>
+  <p class="sub">Key figures, each tagged by provenance.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Metric</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Share price</td><td class="num">$2.42</td><td><span class="tag">Market</span> 31 Jul 2026 close, intraday $2.15 to $2.48; $2.28 after hours</td></tr>
+      <tr><td class="lbl">Market capitalisation</td><td class="num">$20.9M</td><td><span class="tag">Estimate</span> $2.42 &times; 8,619,150 shares</td></tr>
+      <tr><td class="lbl">Shares outstanding</td><td class="num">8,619,150</td><td><span class="tag">Filed</span> Form 424B5, 31 Jul 2026, as at 29 Jul</td></tr>
+      <tr><td class="lbl">Fully diluted shares</td><td class="num">13,666,618</td><td><span class="tag">Filed</span> Form 424B5, 31 Jul 2026, Dilution</td></tr>
+      <tr><td class="lbl">52-week range</td><td class="num">$1.08&ndash;$12.60</td><td><span class="tag">Market</span> 31 Jul 2026 close</td></tr>
+      <tr><td class="lbl">Beta</td><td class="num">3.48</td><td><span class="tag">Market</span> 31 Jul 2026 close</td></tr>
+      <tr><td class="lbl">Earnings per share</td><td class="num neg-t">($5.12)</td><td><span class="tag">Market</span> 31 Jul 2026 close</td></tr>
+      <tr><td class="lbl">Revenue (FY2025)</td><td class="num">$11.2M</td><td><span class="tag">Filed</span> 10-K, 27 Mar 2026</td></tr>
+      <tr><td class="lbl">Net loss (FY2025)</td><td class="num neg-t">($21.5M)</td><td><span class="tag">Filed</span> 10-K, 27 Mar 2026</td></tr>
+      <tr><td class="lbl">Revenue (Q1 2026)</td><td class="num">$1.9M</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026</td></tr>
+      <tr><td class="lbl">Net loss (Q1 2026)</td><td class="num neg-t">($4.1M)</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026</td></tr>
+      <tr><td class="lbl">Cash</td><td class="num">$3.1M</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026, at 31 Mar</td></tr>
+      <tr><td class="lbl">Operating cash burn (Q1 2026)</td><td class="num neg-t">($3.7M)</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026</td></tr>
+      <tr><td class="lbl">Bitcoin held</td><td class="num">26.2 BTC</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026, at 31 Mar</td></tr>
+      <tr><td class="lbl">Power capacity</td><td class="num">53 MW</td><td><span class="tag">Filed</span> Merger release, 1 Jun 2026</td></tr>
+      <tr><td class="lbl">Hashrate, combined</td><td class="num">~1.2 EH/s</td><td><span class="tag">Filed</span> Merger release, 1 Jun 2026</td></tr>
+      <tr><td class="lbl">Fleet efficiency</td><td class="num">17.1 J/TH</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026, at 31 Mar</td></tr>
+    </tbody>
+  </table></div>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Enterprise value is omitted from the masthead deliberately. Cash and Bitcoin are struck at 31 March 2026 on a pre-merger basis while the market capitalisation is post-merger, so any enterprise value combining them would pair figures from different entities at different dates. The approximate figure is shown in section 8 with that limitation stated, rather than in the masthead where it would read as settled.</p>
+  </div>
+</section>
+
+<!-- ===================== 2. BUSINESS MODEL ===================== -->
+<section id="s2">
+  <h2 class="sec"><span class="n">02</span>Business model</h2>
+  <p>Sphere 3D operates Bitcoin mining and data-center infrastructure. Block rewards run at 3.125 BTC following the April 2024 halving, plus transaction fees, and halve again roughly every four years.</p>
+  <p>The company was a virtualization and data-management software business before shifting to pure-play mining. Since the 1 June 2026 Cathedra merger it describes itself as a digital infrastructure company spanning <b>53 MW across five United States data centers</b> in Iowa, Kentucky and Tennessee, targeting AI and high-performance computing alongside mining. Management has proposed renaming the company <b>DarkHorse Technologies Inc.</b>, with the reserved ticker DRK, at a shareholder vote on 24 August 2026.</p>
+  <p>The merger issued 2,405,300 common and 1,387,117 preferred shares with an aggregate fair value of <b>$7.266 million</b>, struck at $1.90 per common share as of 29 May 2026. Former Cathedra security holders held approximately <b>33% of the voting rights</b> against roughly 67% for pre-existing shareholders. Cathedra&rsquo;s information circular states a different figure on a different basis: approximately <b>49% of the issued and outstanding shares on a partially diluted basis</b>, assuming full conversion of the Series H and Series I preferred, exercise of certain options, and vesting of replacement and existing restricted units. <b>Both hold on their own footing.</b> The distance between 33% and 49% is the measure of what the preferred stock and the unvested equity carry, and it is the reason a voting figure and an economic figure should not be used interchangeably here. Holders of subordinate voting shares received <b>0.123014</b> of a common share each and holders of multiple voting shares <b>12.3014</b> common shares each, economically equivalent for both classes. Certain key Cathedra shareholders were subject to a <b>7% post-closing ownership cap</b>, with consideration above the cap taken in the new series of non-voting preferred, which is where the Series I stock originates. The securities were issued unregistered in reliance on the exemption at <b>Securities Act Section 3(a)(10)</b>.</p>
+  <p>The board is Tim Hanley as Chair with Marcus Dent, Kurt Kalbfleisch, Nicholas Gates and Joel Block, three of whom are independent. Mr Dent had served as a Cathedra director since 2021. Joel Block is chief executive, Kurt Kalbfleisch chief financial officer, Tiah Reppas chief accounting officer, and <b>Thomas Masiero Head of Strategy</b>. Cathedra&rsquo;s shares were delisted from the TSX Venture Exchange and the OTCQB at the close on <b>2 June 2026</b>, and Cathedra stated it would apply to cease to be a reporting issuer in Canada.</p>
+  <p><b>The 53 MW reconciles for the first time.</b> Cathedra&rsquo;s circular records 45 MW across data centers in Tennessee and Kentucky, having completed a new <b>15 MW Kentucky data center in late October 2025</b> that raised its capacity by 50%, implying 30 MW before it, with a proprietary fleet producing approximately <b>400 PH/s</b>. Cathedra&rsquo;s 45 MW plus the 8 MW Iowa site accounts for the 53 MW, and 400 PH/s plus 0.84 EH/s accounts for the 1.2 EH/s. Neither reconciliation appears in any SEC filing reviewed.</p>
+  <p>The operating logic is that electrical power capacity is the asset, and that it can be directed to whichever use pays best: proprietary mining, third-party co-mining, or eventually AI compute. The Bitdeer agreements of 25 June 2026 are the first executed instance.</p>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Treating power capacity rather than hashrate as the underlying asset is the framing this report adopts, and it is the framing management uses. It is not a neutral description: it presumes the capacity is transferable to non-mining uses, which requires firm contracted power the company does not yet hold.</p>
+  </div>
+  <p class="sub">Sources: Form 10-Q for Q1 2026, Overview; Form 424B5, 31 July 2026, Recent Developments; company releases of 1 and 25 June and 30 June 2026; definitive proxy statement, 13 July 2026.</p>
+</section>
+
+<!-- ===================== 3. REVENUE STREAMS ===================== -->
+<section id="s3">
+  <h2 class="sec"><span class="n">03</span>Revenue streams</h2>
+  <p>All reported revenue is Bitcoin mining revenue, recognised at the spot price at contract inception. Three streams exist or are in prospect.</p>
+  <p><b>Proprietary mining.</b> Bitcoin mined and periodically sold under a hybrid treasury policy: hold where possible, sell to fund working capital. Q1 2026 production was 25.3 BTC, down 17.0% year on year, with 26.2 BTC held at quarter-end against 37.3 at the start, the difference being sales exceeding production.</p>
+  <p><b>Co-mining.</b> The Bitdeer agreements of 25 June 2026 put 30 MW to work across three Tennessee and Kentucky sites. Bitdeer supplies SEALMINER hardware and the parties share net mining proceeds on one-year renewable terms. Financial terms are undisclosed and have not appeared in a periodic filing.</p>
+  <p><b>Owned Kentucky operations.</b> North Campbell Land Company is a wholly owned subsidiary operating roughly 15 MW inside the Hopkinsville Electric System Holland Substation, participating in a flexible-load programme permitting rapid curtailment when TVA demand spikes.</p>
+  <p><b>AI and HPC.</b> Not a revenue source. The company is evaluating positioning its TVA-region power for AI and HPC deployment. No compute contract has been signed.</p>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The mix is expected to shift toward contracted co-mining and potentially AI or HPC over time. The Bitdeer arrangement is a reported fact; a future AI contract remains an intention rather than a result.</p>
+  </div>
+  <p class="sub">Sources: Form 10-Q for Q1 2026, Overview, Revenue Recognition and Note 4; company release of 25 June 2026; Hoptown Chronicle and Kentucky New Era, 27 to 30 July 2026.</p>
+</section>
+
+<!-- ===================== 4. INDUSTRY & MARKET BACKDROP ===================== -->
+<section id="s4">
+  <h2 class="sec"><span class="n">04</span>Industry &amp; market backdrop</h2>
+  <p><b>Halving pressure.</b> Block rewards halve roughly every four years, so miners must grow efficiency and scale to hold position. The next halving falls around April 2028.</p>
+  <p><b>Rising network difficulty.</b> As more capable hardware is deployed, aggregate network hashrate grows and an existing operator must keep adding hashrate to hold its share of rewards. Difficulty adjusts roughly every two weeks.</p>
+  <p><b>Consolidation and the AI pivot.</b> The dominant theme across 2025 and 2026: lower hashprice and rising competition pressured mining economics, and smaller operators have sought scale while repositioning as AI and data-center landlords.</p>
+  <p><b>Rate and liquidity conditions.</b> The Federal Reserve held at 3.50% to 3.75% on 29 July 2026, a fifth consecutive hold, but on a <b>9 to 3 vote with three dissents favouring an increase</b>. Bitcoin traded near $63,600 to $64,400, roughly 49% below its October 2025 peak, with more than $465M of spot-ETF outflows on 23 and 24 July.</p>
+  <p class="sub">Sources: Bitcoin protocol schedule; Federal Reserve FOMC calendar and the 29 July 2026 decision; market data as at 31 July 2026; Form 10-Q for Q1 2026, Overview.</p>
+</section>
+
+<!-- ===================== 5. COMPETITIVE POSITION ===================== -->
+<section id="s5">
+  <h2 class="sec"><span class="n">05</span>Competitive position</h2>
+  <p class="sub">Named peers on comparable metrics, not a general market description.</p>
+  <p>Sphere 3D is among the smallest listed miners. Larger United States peers include MARA Holdings, Riot Platforms, CleanSpark, Core Scientific, TeraWulf, Cipher Mining and Bitdeer, most of which operate hundreds of megawatts to gigawatts against this company&rsquo;s 53 MW. At roughly 1.2 EH/s the company holds a fraction of a percent of global network hashrate. Its competitive levers are power cost and the optionality of its sites.</p>
+  <h3>The Mawson precedent</h3>
+  <p>Big Digital Energy is the closest comparable, and not only strategically. It was <b>Mawson Infrastructure</b> until April 2026, when, following an Endeavor Investor Group campaign, it appointed five new directors under a cooperation agreement, formed a Strategic Transactions Committee and renamed itself, moving to the BGDE ticker on 30 April. Endeavor participant Phil Stanley became chief executive. The same group filed a Schedule 13D on Sphere 3D on 31 July 2026.</p>
+  <p>The detail that matters for this file is what happened to the activist&rsquo;s own position: it fell from about <b>44.9% to 30.0%</b> between January and May 2026 as that company issued shares. An activist diluted by the financing pattern this company is now accelerating is a specific precedent, not a general analogy.</p>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Scale comparisons above are this analyst&rsquo;s characterisation drawn from peer disclosures, not company statements. The relevance of the Mawson campaign to this company is inference from a shared counterparty and a shared strategic posture, and the two situations differ in one material respect: 5.80% is an opening position, not the 44.9% from which that campaign was run.</p>
+  </div>
+  <p class="sub">Sources: peer filings and disclosures; Mawson Form 8-K and press release, 23 April 2026; Schedule 13D, 31 July 2026.</p>
+</section>
+
+<!-- ===================== 6. FINANCIAL PERFORMANCE ===================== -->
+<section id="s6">
+  <h2 class="sec"><span class="n">06</span>Financial performance</h2>
+  <div class="tw"><table>
+    <thead><tr><th>Metric</th><th class="num">FY2023</th><th class="num">FY2024</th><th class="num">FY2025</th><th class="num">Q1 2026</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Revenue</td><td class="num">$21.9M</td><td class="num">$16.6M</td><td class="num">$11.2M</td><td class="num">$1.9M</td></tr>
+      <tr><td class="lbl">Net loss</td><td class="num">n/a</td><td class="num neg-t">(~$9.5M)</td><td class="num neg-t">($21.5M)</td><td class="num neg-t">($4.1M)</td></tr>
+      <tr><td class="lbl">Bitcoin produced</td><td class="num">n/a</td><td class="num">286.3</td><td class="num">111.6</td><td class="num">25.3</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub">FY2024 net loss is derived: FY2025 losses were reported as 126.8% larger than FY2024, implying roughly $9.5M. <span class="tag">Estimate</span></p>
+  <p>Revenue has fallen in each successive year. Bitcoin production fell 61% in 2025, from 286.3 to 111.6 BTC, driven by the April 2024 halving, a shift to lower-cost hosting and equipment upgrades. The Q1 2026 decline reflected temporary capacity reductions during a fleet refresh that was substantially complete by quarter-end.</p>
+  <p>Revenue of $1.9M compares with $2.8M a year earlier. The Q1 2026 loss <b>narrowed to $4.1M from $8.8M</b>, or $1.18 per share, helped by a 23% reduction in general and administrative expense and the absence of a prior-year investment loss. Against that, <b>cash stood at $3.1M</b> on total assets of $21.7M, with <b>$3.7M of operating cash burn in the quarter</b>,.</p>
+  <p>Operationally the quarter read better than the revenue line. The fleet averaged <b>17.1 J/TH</b> at 31 March 2026 with capacity of <b>0.84 EH/s</b>, the refresh substantially complete.</p>
+  <p>The acquired entity, Cathedra, reported $21.2M of revenue and a $9.7M net loss for 2025, also with a going-concern warning. The combined outcome turns on integration and financing.</p>
+  <h3>The combined basis, retrieved</h3>
+  <p>The figures above are <b>pre-merger standalone</b>. A combined basis does exist and has since 3 June: unaudited pro forma condensed combined financial information was filed as <b>Exhibit 99.4 to the closing Form 8-K</b>, prepared under Article 11 of Regulation S-X, with Cathedra&rsquo;s audited 2025 and 2024 statements at Exhibit 99.2 and its Q1 2026 unaudited statements at Exhibit 99.3. Earlier passes on this file recorded that no combined balance sheet would exist before the Q2 Form 10-Q. That was wrong, and the correction is recorded in the log.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Pro forma combined</th><th class="num">FY2025</th><th class="num">Q1 2026</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Total revenues</td><td class="num">$25.9M</td><td class="num">$3.7M</td><td><span class="tag">Filed</span> Ex. 99.4, 8-K 3 Jun 2026</td></tr>
+      <tr><td class="lbl">Net loss from continuing operations</td><td class="num neg-t">($30.8M)</td><td class="num neg-t">($5.2M)</td><td><span class="tag">Filed</span> Ex. 99.4</td></tr>
+      <tr><td class="lbl">Loss per share</td><td class="num neg-t">($5.35)</td><td class="num neg-t">($0.82)</td><td><span class="tag">Filed</span> Ex. 99.4</td></tr>
+      <tr><td class="lbl">Weighted average shares</td><td class="num">5,755,091</td><td class="num">6,321,147</td><td><span class="tag">Filed</span> Ex. 99.4</td></tr>
+    </tbody>
+  </table></div>
+  <p>Against standalone FY2025 revenue of $11.2M and a $21.5M loss, the combined basis carries <b>$25.9M of revenue and a $30.8M loss</b>. Revenue more than doubles; the loss grows by roughly half.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Pro forma balance sheet, 31 Mar 2026</th><th class="num">Sphere alone</th><th class="num">Combined</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Cash and cash equivalents</td><td class="num">$3.145M</td><td class="num">$3.379M</td><td><span class="tag">Filed</span> Ex. 99.4</td></tr>
+      <tr><td class="lbl">Digital currencies</td><td class="num">$1.785M</td><td class="num">$2.059M</td><td><span class="tag">Filed</span> Ex. 99.4</td></tr>
+      <tr><td class="lbl">Property and equipment, net</td><td class="num">$13.552M</td><td class="num">$18.489M</td><td><span class="tag">Filed</span> Ex. 99.4</td></tr>
+      <tr><td class="lbl">Goodwill</td><td class="num">n/a</td><td class="num">$2.558M</td><td><span class="tag">Filed</span> Ex. 99.4</td></tr>
+      <tr><td class="lbl">Total assets</td><td class="num">$21.739M</td><td class="num">$34.742M</td><td><span class="tag">Filed</span> Ex. 99.4</td></tr>
+      <tr><td class="lbl">Total liabilities</td><td class="num">$1.726M</td><td class="num neg-t">$10.642M</td><td><span class="tag">Filed</span> Ex. 99.4</td></tr>
+      <tr><td class="lbl">Shareholders&rsquo; equity</td><td class="num">$19.995M</td><td class="num">$24.082M</td><td><span class="tag">Filed</span> Ex. 99.4</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>The liability line is the one that matters.</b> Cathedra brought roughly <b>$6.7M of liabilities</b> against $2.6M of current assets, and transaction accounting adds a further $2.2M, taking combined liabilities to <b>$10.6M against Sphere&rsquo;s standalone $1.7M</b>, a little over six times. The composition is payables, accruals, customer and contract liabilities and lease obligations rather than borrowings, which is consistent with management&rsquo;s description of a debt-free balance sheet, but they are claims all the same and section 8 reprices the enterprise value on them.</p>
+  <div class="note caution">
+    <p>The pro forma is <b>preliminary</b>. No external valuation of Cathedra&rsquo;s assets had been completed, so acquired assets and liabilities are carried at historical amounts rather than fair value, and $2.558M of excess consideration sits in goodwill pending allocation. The final purchase price allocation could differ materially. The Q2 2026 Form 10-Q, due 14 August 2026, remains the first <b>actual</b> combined balance sheet.</p>
+  </div>
+  <p class="sub">Sources: Form 10-K for FY2025, 27 March 2026; Form 10-Q for Q1 2026, 15 May 2026, Overview, Note 4 Bitcoin and Liquidity; Cathedra FY2025 results.</p>
+</section>
+
+<!-- ===================== 7. CAPITAL STRUCTURE & DILUTION ===================== -->
+<section id="s7">
+  <h2 class="sec"><span class="n">07</span>Capital structure &amp; dilution</h2>
+  <p class="sub">Shares, preferreds, ATM capacity, shelf, warrants, convertibles.</p>
+  <p>For a company that must keep selling equity to operate, the share count is the central financial fact rather than a footnote. It rose 154% in about seven months.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Date</th><th class="num">Common shares outstanding</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="when">31 Dec 2025</td><td class="num">3,392,541</td><td><span class="tag">Filed</span> 10-K, 27 Mar 2026</td></tr>
+      <tr><td class="when">31 Mar 2026</td><td class="num">3,767,086</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026</td></tr>
+      <tr><td class="when">13 May 2026</td><td class="num">4,243,822</td><td><span class="tag">Filed</span> 10-Q cover, 15 May 2026</td></tr>
+      <tr><td class="when">8 Jul 2026</td><td class="num">7,641,767</td><td><span class="tag">Filed</span> DEF 14A record date, 13 Jul 2026</td></tr>
+      <tr><td class="when">29 Jul 2026</td><td class="num">8,619,150</td><td><span class="tag">Filed</span> Form 424B5, 31 Jul 2026</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>The shelf ceiling, and why it moves</h3>
+  <p>With public float below $75 million the company may sell no more than <b>one-third of public float in any rolling twelve months</b> off its shelf. The 31 July prospectus supplement gives the arithmetic: float of <b>$46,107,198</b> measured at $5.65, the 3 June price, a one-third cap of <b>$15.37M</b>, less <b>$5,018,576</b> already sold, leaving <b>$10,350,490</b>. The facility was sized at <b>$10,300,000</b>, the maximum the rule allowed.</p>
+  <p>Float is re-measured at prevailing prices, so capacity moves with the stock.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Float measured at</th><th class="num">Implied headroom</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="when">$5.65, 3 Jun 2026</td><td class="num">~$10.4M</td><td><span class="tag">Filed</span> Form 424B5, 31 Jul 2026</td></tr>
+      <tr><td class="when">$2.42, 31 Jul 2026</td><td class="num">~$1.6M</td><td><span class="tag">Estimate</span> One-third of float at $2.42, less $5,018,576 sold</td></tr>
+      <tr><td class="when">$1.63, 21 Jul 2026</td><td class="num caution-t">~nil</td><td><span class="tag">Estimate</span> Same method</td></tr>
+    </tbody>
+  </table></div>
+  <p>The headline $10.3M facility may therefore prove far less available than it appears when float is next measured. For this issuer the share price is not only a valuation output but an input to whether financing exists at all.</p>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The $1.6M and nil headroom figures are this analyst&rsquo;s arithmetic, applying the one-third test to float re-measured at the stated prices and subtracting the $5,018,576 already sold. The company has published only the $5.65 measurement. The re-measurement date is at the issuer&rsquo;s election within the rule, so the figures show sensitivity rather than a scheduled outcome.</p>
+  </div>
+
+  <h3>The four dilution channels</h3>
+  <p><b>The at-the-market facility.</b> The 31 July Form 8-K discloses <b>$5,131,036 raised across 2,172,789 shares through 30 July</b> at roughly $2.36 average, equal to about 25% of the current count. Shares issued after Q1 went out at roughly <b>$1.54</b>. The prior $8.0M offering with A.G.P., against which the Q1 10-Q recorded roughly $1.7M drawn and about $6.3M nominally remaining, was terminated and replaced by an Amended and Restated Sales Agreement adding <b>Maxim Group</b> as a second agent at a $10,300,000 ceiling. At $2.42 the full facility implies about 4.26 million further shares, roughly 49% of the current count. Either party may terminate on two days&rsquo; notice.</p>
+  <p><b>Restricted stock.</b> RSUs and restricted stock awards rose from 653,815 at 31 March to <b>1,686,834</b> at 29 July. Within that, 472,222 RSUs were granted in Q1 2026 at a $1.38 grant-date fair value, taking RSUs outstanding from 179,165 to 616,779, with a further 86,871 vested awards granted after quarter-end.</p>
+  <p><b>Series I Preferred.</b> Non-voting, carrying <b>8% payment-in-kind dividends for three years</b> with staged conversion rights, subject to a 7% ownership cap and a Nasdaq exchange cap. Conversion would add 1,387,117 shares.</p>
+  <p><b>Warrants.</b> Three tranches expire deeply out of the money in August and September 2026. What remains afterwards is <b>873,643 warrants at $9.40 running to 15 January 2031</b>, immaterial at $2.42 but a ceiling on any recovery above that $9.40 strike.</p>
+
+  <h3>Executive equity awards</h3>
+  <p><b>Two entitlements recorded in Cathedra&rsquo;s circular appear in neither company&rsquo;s SEC filings as reviewed.</b> Joel Block held <b>1,447,584 Cathedra restricted share units</b> which, alone among Cathedra&rsquo;s units, did <b>not</b> vest on closing; they were exchanged for replacement units on the same economic and vesting terms, about <b>178,073 units</b> at the 0.123014 ratio. <b>Exhibit 99.4 confirms that figure exactly</b>: it records that approximately 2.9 million Cathedra restricted units were outstanding at 29 May 2026 and that replacement units over <b>178,073</b> common shares were issued to a single holder, with the remainder accelerating. Their fair value was about $0.3M, recognised as post-combination expense over 2.4 years. Being issued at closing, they sit inside the 1,686,834 restricted stock figure at 29 July. Separately, under an employment agreement dated 25 September 2025 as amended, Mr Block is entitled to a bonus of <b>US$1,600,000</b> payable on consummation of the arrangement <b>and</b> achievement of certain performance milestones, and not payable until those milestones complete. Against $3.1M of cash at 31 March that is a contingent claim on liquidity, and it is not a share-count item.</p>
+  <p>The chief executive received the larger of the two disclosed awards on appointment. The closing release of 1 June 2026 states that Joel Block is entitled to a <b>one-time inducement equity award of 500,000 restricted stock units</b>, settled in common shares, vesting bi-annually in four equal instalments over two years with the first tranche at the six-month anniversary of the grant date, subject to continued employment and to Compensation Committee and board approval, granted under Nasdaq Rule 5635(c)(4). On a 1 June commencement the first tranche falls due around <b>December 2026</b>.</p>
+  <p>Taken with the chief financial officer&rsquo;s grant below, disclosed executive restricted stock totals <b>750,000 units</b>, roughly <b>8.7%</b> of the 8,619,150 shares outstanding.</p>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Whether the 500,000 inducement units already sit inside the 1,686,834 restricted stock figure disclosed at 29 July cannot be settled from the documents reviewed. The award was stated as subject to committee and board approval and no grant date has been published. The units are therefore described here and <b>not</b> added to the fully diluted total below, which would double count them if they are already included. The fully diluted figure should be read as a floor on that account.</p>
+  </div>
+
+  <h3>Insider grant with change-of-control acceleration</h3>
+  <p>A Form 4 filed 10 June 2026 records that the chief financial officer received <b>250,000 restricted stock units</b> on 8 June, vesting in four instalments from December 2026 to June 2028 but <b>accelerating in full on a Vesting Event</b>, defined as a Change in Control or a dissolution, liquidation or wind-up. The grant predates the activist Schedule 13D by seven weeks. The acceleration clause bears on any campaign ending in a change of control, and on the wind-up branch of a going-concern outcome.</p>
+
+  <p><b>The transaction cost the combined company roughly $3.9M in one-off charges.</b> Exhibit 99.4 records acquisition-related transaction costs of about <b>$3.4M</b>, comprising $2.4M of professional, legal and accounting fees and <b>$1.0M of strategic advisory fees</b>, plus a <b>transaction bonus of $0.49M</b> and $0.735M of accelerated restricted stock. Set against $3.1M of cash at 31 March, these are the charges that accompanied a merger presented as balance-sheet strengthening.</p>
+
+  <h3>Fully diluted</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Component</th><th class="num">Shares</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Common outstanding, 29 Jul 2026</td><td class="num">8,619,150</td></tr>
+      <tr><td>RSUs and restricted stock awards</td><td class="num">1,686,834</td></tr>
+      <tr><td>Series I Preferred conversion</td><td class="num">1,387,117</td></tr>
+      <tr><td>Warrants, weighted average strike $86.40</td><td class="num">1,433,045</td></tr>
+      <tr><td>Options, weighted average strike $21.31</td><td class="num">48,551</td></tr>
+      <tr><td>Series H conversion and plan reserve</td><td class="num">491,921</td></tr>
+      <tr><td class="lbl">Fully diluted</td><td class="num">13,666,618</td></tr>
+      <tr><td>With the facility fully drawn at $2.42</td><td class="num">~17.9M</td></tr>
+    </tbody>
+  </table></div>
+  <p>The warrants are far out of the money and unlikely to convert. The restricted stock and Series I are not.</p>
+
+  <h3>A fourth consolidation is already authorised</h3>
+  <p>The reverse-split risk in this file has been framed as a consequence of the August vote. It is not. At the special meeting of <b>15 May 2026</b> shareholders passed a special resolution, requiring two-thirds of votes cast and carrying <b>1,231,229 to 220,731, or 84.57%</b>, amending the current Ontario articles to permit a consolidation of the common shares on a <b>one-for-up-to-five</b> basis, at an exact ratio and a date to be determined by the Board <b>in its sole discretion</b>. The definitive merger proxy states no expiry for that authority. It remains unexercised, and it sits on top of the 1-for-10 consolidation effected on 9 February 2026.</p>
+  <p>Two consequences. A fourth reverse split, after those of 2017, 2018 and February 2026, requires <b>no further shareholder vote and no continuance</b>: it can be effected at any time by board resolution fixing the ratio. And the authority was granted at the meeting that approved the merger, so it has been in force since before closing while this file dated the risk to a vote three months later.</p>
+  <h3>Governance change pending</h3>
+  <p>The 24 August vote would move the company from Ontario to British Columbia. The new articles at Appendix A, Article 9.1.1.3 would permit directors to <b>consolidate issued shares by directors&rsquo; resolution or ordinary resolution</b>, which lowers the procedural bar further rather than creating it, and Article 9.3 would permit a name change by directors&rsquo; resolution. The Board may also <b>abandon either proposal in its sole discretion after shareholder approval</b>, and registered holders following the Ontario Business Corporations Act section 185 procedure may dissent and demand fair value in cash against a $3.1M balance.</p>
+
+  <h3>Roughly a tenth of the register votes by contract</h3>
+  <p>Cathedra&rsquo;s circular records that the <b>Key Holders</b>, defined as Joel Block, Thomas Masiero and Jialin Qu, delivered voting agreements as a condition of closing. For <b>24 months following the effective date</b>, each agrees to vote all common shares held at any meeting of shareholders <b>in accordance with the recommendations of the board</b>, subject to exceptions where a Key Holder is materially and disproportionately adversely impacted relative to other holders. On a 1 June 2026 effective date the undertaking runs to about <b>1 June 2028</b>.</p>
+  <p>Two consequences. It covers the <b>24 August vote</b> on the continuance and the rebrand, where Masiero and Qu together hold roughly 11.5% of shares outstanding and the chief executive is the third party to the agreement. And it is the governance counterweight to an activist holding 5.80%, with the qualification that it is contractual rather than voluntary and that it expires.</p>
+  <p>The circular also explains why both Key Holder positions sit just below the 5% threshold rather than far above it. Their Cathedra holdings were large: the Togetsu Trust held about 36.15% of Cathedra and the Thy Kingdom Trust about 34.63%, both trustees being Cathedra directors. At the 0.123014 ratio those would have converted to well over a million common shares each. The <b>7% ownership cap</b> capped the common portion and routed the excess into Series I preferred, so the common holdings recorded below understate the economic interest of both holders.</p>
+
+  <h3>Shareholder register</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Holder</th><th class="num">Shares</th><th class="num">Of current count</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Thomas Masiero, three trusts and direct</td><td class="num">513,741</td><td class="num">5.96%</td><td><span class="tag">Filed</span> Schedule 13G, 8 Jul 2026</td></tr>
+      <tr><td class="lbl">Endeavor Blockchain and Joshua Kilgore</td><td class="num">500,000</td><td class="num">5.80%</td><td><span class="tag">Filed</span> Schedule 13D, 31 Jul 2026</td></tr>
+      <tr><td class="lbl">Jialin Qu, Togetsu Trust and direct</td><td class="num">476,490</td><td class="num">5.53%</td><td><span class="tag">Filed</span> Schedule 13G, 20 Jul 2026</td></tr>
+      <tr><td class="lbl">Mike Alfred, Alpine Fox</td><td class="num">199,000</td><td class="num">2.31%</td><td><span class="tag">Social</span> Self-reported by the holder, 24 Jul 2026. Not corroborated by any filing; see below</td></tr>
+      <tr><td class="lbl">Subtotal, holders above 5%</td><td class="num">1,490,231</td><td class="num">17.29%</td><td><span class="tag">Estimate</span> Sum of the three filed positions</td></tr>
+    </tbody>
+  </table></div>
+  <p>Masiero and Qu both received their shares in exchange for Cathedra stock, so the merger created a concentrated former-Cathedra bloc. One correction matters to how the table reads: <b>Thomas Masiero is Head of Strategy of the combined company</b>, so his 5.96% is an insider holding rather than an outside one, and the largest position on the register belongs to an officer. He has also appeared publicly as the representative of North Campbell Land Company in the Hopkinsville zoning proceeding described in section 9. Adding insiders as a group, roughly a quarter of the company is held by identified parties, which reduces effective float and helps explain why modest buying produces outsized price moves.</p>
+  <p><b>One row on this table is not a filed position, and it should be read differently from the other three.</b> The three holdings above 5% are Schedule 13D and 13G filings and can be checked against the documents. The Alpine Fox line cannot: <b>no SEC filing discloses a position in this issuer by Alpine Fox or by Mike Alfred</b>. A 199,000-share holding is 2.31% and sits below the 5% threshold that would compel a Schedule 13, so no such filing is owed. Alpine Fox Capital LLC does file Form 13F-HR quarterly, and its most recent, filed 14 May 2026 for the March quarter, does not name this issuer. The <b>June-quarter 13F, due 14 August 2026</b>, is the first document that could corroborate the position, and it is the item carried on the companion calendar as the institutional 13F disclosure date. The holder&rsquo;s own statement could not be retrieved on 2 August 2026. A self-reported holding is evidence that a claim was made, not that it is accurate, so the row is retained with that provenance rather than removed, and it carries no weight in the subtotal above or anywhere else in this report.</p>
+  <p>The percentages above are restated. The filers computed theirs against earlier counts, 7,639,893 at 19 June for the two 13G filings and 7,641,767 at 8 July for the 13D, so each stake is smaller than filed: 6.72% to 5.96%, 6.54% to 5.80% and 6.24% to 5.53%. Two consequences follow. Dilution is measurable within weeks rather than hypothetical, and <b>all three holders now sit close to the 5% threshold from above</b>, so continued issuance could carry them below it without any of them selling a share.</p>
+  <p class="sub">Sources: Form 424B5, 31 July 2026, cover page, Offering and Dilution; Form 8-K, 31 July 2026, Items 1.01 and 8.01; Schedule 13D, 31 July 2026; Schedules 13G, 8 and 20 July 2026; Form 4, 10 June 2026; Form 10-Q for Q1 2026, Notes 9, 10 and 11; definitive proxy statement, 13 July 2026, Appendix A and Rights of Dissent.</p>
+</section>
+
+<!-- ===================== 8. VALUATION ===================== -->
+<section id="s8">
+  <h2 class="sec"><span class="n">08</span>Valuation</h2>
+  <p class="sub">Multiples shown with their basis and pricing date. No target price.</p>
+  <p>Earnings multiples do not apply: the company is loss-making, so price to earnings is undefined. Miners are ordinarily assessed on infrastructure scale, through enterprise value per megawatt of power and per exahash of capacity, and on net tangible book value.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Metric</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Share price</td><td class="num">$2.42</td><td><span class="tag">Market</span> 31 Jul 2026 close</td></tr>
+      <tr><td class="lbl">Market capitalisation</td><td class="num">$20.9M</td><td><span class="tag">Estimate</span> $2.42 &times; 8,619,150</td></tr>
+      <tr><td class="lbl">Cash and Bitcoin</td><td class="num">$4.93M</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026, at 31 Mar</td></tr>
+      <tr><td class="lbl">Total liabilities, approximate</td><td class="num">$1.71M</td><td><span class="tag">Estimate</span> Total assets less equity, 10-Q at 31 Mar</td></tr>
+      <tr><td class="lbl">Enterprise value, approximate</td><td class="num">$17.6M</td><td><span class="tag">Estimate</span> Market cap less net cash</td></tr>
+      <tr><td class="lbl">Enterprise value per MW</td><td class="num">~$333K</td><td><span class="tag">Estimate</span> $17.6M / 53 MW</td></tr>
+      <tr><td class="lbl">Enterprise value per EH/s</td><td class="num">~$14.7M</td><td><span class="tag">Estimate</span> $17.6M / 1.2 EH/s</td></tr>
+      <tr><td class="lbl">Cash and Bitcoin per share</td><td class="num">$0.57</td><td><span class="tag">Estimate</span> $4.93M / 8,619,150</td></tr>
+      <tr><td class="lbl">Net tangible book value per share</td><td class="num">$4.98</td><td><span class="tag">Filed</span> Form 424B5, at 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Pro forma NTBV per share</td><td class="num">$3.11</td><td><span class="tag">Filed</span> Form 424B5, post-merger and issuance</td></tr>
+      <tr><td class="lbl">Pro forma as adjusted NTBV per share</td><td class="num">$2.82</td><td><span class="tag">Filed</span> Form 424B5, facility fully drawn</td></tr>
+      <tr><td class="lbl">Price to pro forma as adjusted NTBV</td><td class="num">86%</td><td><span class="tag">Estimate</span> $2.42 / $2.82</td></tr>
+      <tr><td class="lbl">Implied runway at Q1 burn</td><td class="num">~1.3 quarters</td><td><span class="tag">Estimate</span> $4.93M / $3.7M per quarter</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>The stock trades below tangible book</h3>
+  <p>The prospectus supplement puts net tangible book value at $4.98 per share at 31 March, falling to a pro forma $3.11 after the merger and issuance, and $2.82 if the facility is fully drawn. At $2.42 the shares change hands at roughly <b>86% of pro forma as adjusted net tangible book value</b>. New money entering through the facility receives an immediate <b>increase of $0.47 per share</b> in net tangible book value while existing holders take a <b>$0.29 decrease</b>, so the transfer runs toward the incoming buyer.</p>
+
+  <h3>The same multiple on a combined basis</h3>
+  <p>Every balance-sheet input above is <b>pre-merger standalone</b>, which pairs a post-merger market capitalisation with a company that no longer exists in that form. The pro forma combined figures give the like-for-like reading, and the difference is not cosmetic.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Metric</th><th class="num">Standalone basis</th><th class="num">Combined basis</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Cash and Bitcoin</td><td class="num">$4.93M</td><td class="num">$5.44M</td><td><span class="tag">Filed</span> 10-Q / Ex. 99.4</td></tr>
+      <tr><td class="lbl">Total liabilities</td><td class="num">$1.71M</td><td class="num">$10.64M</td><td><span class="tag">Filed</span> 10-Q / Ex. 99.4</td></tr>
+      <tr><td class="lbl">Approximate enterprise value</td><td class="num">$17.6M</td><td class="num">$26.1M</td><td><span class="tag">Estimate</span> Market cap less net cash</td></tr>
+      <tr class="lbl"><td class="lbl">Enterprise value per MW</td><td class="num">~$333K</td><td class="num">~$492K</td><td><span class="tag">Estimate</span> EV / 53 MW</td></tr>
+      <tr><td class="lbl">Enterprise value per EH/s</td><td class="num">~$14.7M</td><td class="num">~$21.7M</td><td><span class="tag">Estimate</span> EV / 1.2 EH/s</td></tr>
+      <tr><td class="lbl">Cash and Bitcoin per share</td><td class="num">$0.57</td><td class="num">$0.63</td><td><span class="tag">Estimate</span> Divided by 8,619,150</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>On the combined basis the enterprise value is 48% higher and the per-megawatt multiple close to half as much again.</b> The reason is entirely the liability line: Cathedra brought $6.7M of obligations, and an enterprise value is market capitalisation less cash <em>plus</em> what is owed. The standalone reading understated it because it credited the merger&rsquo;s megawatts while ignoring the merger&rsquo;s liabilities.</p>
+  <p>This report treats <b>~$492K per MW as the better figure</b> for comparison against peers, and retains the standalone column so a reader can see which basis any given number came from. Both are struck at the 31 July close against a 31 March balance sheet.</p>
+
+  <h3>Two readings of the infrastructure multiple</h3>
+  <p>At roughly <b>$492K per megawatt</b> on the combined basis, the capacity is still priced below what data-centre developers ordinarily spend to build, which supports the case if that capacity is genuinely deliverable to AI or HPC tenants. Against that, the market has reasons for the discount: no power purchase agreements, a going-concern qualification, and a runway of roughly one to two quarters on the standalone burn rate.</p>
+  <p>The multiple has also re-rated quickly. At the $1.63 close of 21 July the implied figure was roughly $180K per megawatt on the same share count; at $2.42 it is about $333K, an <b>85% expansion in seven trading sessions</b> with no change in the underlying 53 MW. What changed was the buyer base rather than the asset.</p>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Three limitations govern every figure in this section. The balance-sheet inputs are <b>pre-merger standalone</b> Q1 2026 figures paired with a post-merger market capitalisation, which is not a like-for-like comparison and will not be until the Q2 10-Q. Peer multiples are not shown because current peer enterprise values were not pulled during this pass and any figure quoted would be stale. And the 100 MW+ expansion pipeline, traced to the closing release of 1 June 2026, is characterised by Cathedra&rsquo;s circular in terms that settle the question: it lists "the planned expansion of approximately 100 MW of additional capacity" among its <b>forward-looking statements</b>, not among its asset disclosures. It remains excluded from these metrics, but for a different reason than before. It is potential rather than contracted capacity, no financing for it has been disclosed, and a megawatt figure that cannot be dated to an energisation schedule cannot carry a per-megawatt multiple.</p>
+  </div>
+  <p class="sub">Sources: market data at the 31 July 2026 close; Form 424B5, 31 July 2026, Dilution; Form 10-Q for Q1 2026 balance sheet and cash-flow statement. Multiples and runway calculated from those inputs.</p>
+</section>
+
+<!-- ===================== 9. GROWTH DRIVERS ===================== -->
+<section id="s9">
+  <h2 class="sec"><span class="n">09</span>Growth drivers</h2>
+  <p><b>The Hopkinsville expansion.</b> The most concrete plan disclosed. Through North Campbell Land Company the company has proposed transitioning part of its existing 15 MW beyond mining, developing a <b>new 50 MW data center</b>, and <b>funding construction of a new 65 MW substation</b>, of which about 15 MW would remain available to other Hopkinsville Electric System customers. That last provision offers the utility and the community a direct benefit. No financing has been disclosed and the company held $3.1M of cash at Q1.</p>
+  <p><b>The Bitdeer co-mining agreements.</b> 30 MW under contract since June 2026, adding hashrate without the company funding hardware.</p>
+  <p><b>Activist engagement.</b> Endeavor Blockchain&rsquo;s stated intent to engage the Board on value creation is, on the Mawson precedent, a possible route to asset sales, recapitalisation or a faster AI pivot. Whether it reads as a driver or a disruption depends on execution.</p>
+  <p><b>AI and HPC optionality.</b> Management cites a modular build timeline under a year against three to five years for conventional campuses. Not contracted.</p>
+  <p><b>The proposed rebrand.</b> If approved on 24 August, it formalises the AI and HPC positioning.</p>
+  <p><b>Fleet efficiency, already delivered.</b> At 17.1 J/TH with the refresh substantially complete at March 2026, this lowers cost per Bitcoin today. It is not pending upside unless new hardware is deployed.</p>
+  <p><b>Bitcoin price.</b> The largest external lever on revenue.</p>
+  <p class="sub">Sources: Hoptown Chronicle and Kentucky New Era, 27 to 30 July 2026; company releases of 25 and 30 June and 10 July 2026; Form 10-Q for Q1 2026, Overview and Note 12; Schedule 13D, 31 July 2026.</p>
+</section>
+
+<!-- ===================== 10. RISKS ===================== -->
+<section id="s10">
+  <h2 class="sec"><span class="n">10</span>Risks</h2>
+  <p class="sub">Severity-ranked, most severe first.</p>
+
+  <div class="risk sev-high">
+    <h4>Going concern and liquidity <span class="sev">Severe</span></h4>
+    <p>Reaffirmed at Q1 2026 against ~$3.1M of cash and $3.7M of operating burn in that quarter alone, with reliance on a facility either party may terminate on two days&rsquo; notice. The company sold more Bitcoin than it mined, drawing the treasury from 37.3 to 26.2 BTC. Trigger: cash exhaustion ahead of a completed raise. Cost: recapitalisation on distressed terms, or wind-up, the latter being one of the two events that accelerate the chief financial officer&rsquo;s 250,000 RSUs in full.</p>
+  </div>
+
+  <div class="risk sev-high">
+    <h4>Financing capacity falls with the share price <span class="sev">Severe</span></h4>
+    <p>The shelf caps sales at one-third of public float, and float is re-measured at prevailing prices. At $2.42 the headroom is roughly $1.6M against a headline $10.3M facility; at the $1.63 close of 21 July it would be near nil. A falling price therefore closes the financing window at the moment cash is shortest, which compounds every other item on this list rather than sitting alongside them.</p>
+  </div>
+
+  <div class="risk sev-high">
+    <h4>Dilution <span class="sev">Severe</span></h4>
+    <p>Share count rose 154% in about seven months. The facility has drawn $5,131,036 across 2,172,789 shares, roughly 25% of the current count, and a fresh $10,300,000 ceiling with two sales agents could add about 4.26 million more at $2.42, roughly 49%. Fully diluted stands at 13,666,618, or about 17.9 million with the facility drawn. The mechanism is a standing facility rather than a one-off event.</p>
+  </div>
+
+  <div class="risk sev-high">
+    <h4>No power purchase agreements <span class="sev">Severe</span></h4>
+    <p>The Q1 10-Q states the company does not have any power purchase agreements for the supply of power. Firm contracted power is ordinarily a precondition for AI and HPC counterparties, so the growth thesis lacks the input that would make it credible to a large tenant. Trigger: an AI counterparty requiring firm power the company cannot evidence. Cost: the re-rating case does not convert.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Local zoning and permitting <span class="sev">Moderate</span></h4>
+    <p>Hopkinsville is drafting a data-center zoning ordinance whose 17 July working draft would classify cryptocurrency mining itself as a data-center use, bringing existing operations within the new rules. A 27 July hearing drew nineteen speakers, most urging stricter limits over water, noise and farmland. City Council holds final say. This bears on the proposed 50 MW expansion and potentially on the existing 15 MW. The proceeding&rsquo;s primary documents were located at Community Development Services and are dated 22 June and 17 July 2026, but they are published as scanned images without a text layer and their operative wording is unread, so no threshold from them is carried here. Local reporting describes the draft as capping large-scale facilities below <b>75 MW and 50,000 square feet</b> and barring anything above; if that is the adopted text it constrains a 50 MW build sited beside an existing 15 MW, which is why the ordinance is a capacity question and not only a permitting one. That figure rests on press reporting alone and is not established. <span class="tag">Press</span></p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Activist involvement cuts both ways <span class="sev">Moderate</span></h4>
+    <p>An engaged holder at 5.80% may accelerate strategic action or may produce board conflict and management distraction at a company with three employees and a going-concern qualification. The same group&rsquo;s Mawson campaign ended in a board overhaul and a chief executive change.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Bitcoin price dependence <span class="sev">Moderate</span></h4>
+    <p>All revenue is mining revenue, and because Bitcoin is sold to fund operations, price drives runway as well as the income statement.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Rate and liquidity conditions <span class="sev">Moderate</span></h4>
+    <p>The Federal Reserve held at 3.50% to 3.75% on 29 July on a 9 to 3 vote, with three dissents favouring an increase. Bitcoin sits near $63,600 to $64,400, about 49% below its October 2025 peak, with more than $465M of spot-ETF outflows on 23 and 24 July. A hike would compress mining revenue and raise the cost of the equity this company must keep issuing at the same time.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Nasdaq minimum bid price <span class="sev">Moderate</span></h4>
+    <p>At $2.42 the cushion above $1.00 is wider than at the $1.63 close of 21 July, but the all-time low of $1.08 came in February 2026 and beta is 3.48. The stockholders&rsquo; equity test is not near breach, at $19.995M against a $2.5M requirement. Worth noting that Big Digital Energy received a delisting determination on that equity test. The company also holds a standing shareholder authority, granted 15 May 2026 and unexercised, to consolidate the shares one-for-up-to-five at the Board&rsquo;s discretion, so a bid-price remedy is available without a further vote. That cuts both ways: it lowers the delisting risk and raises the probability of a fourth reverse split.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Counterparty and custody concentration <span class="sev">Moderate</span></h4>
+    <p>All mining revenue runs through a single pool operator, Foundry Digital, and all Bitcoin sits with a single custodian whose accounts are not FDIC-insured. Miner supply depends on a small number of vendors with no purchase agreement in place, and cash is held above insured limits at three banks. Bitdeer is now a single counterparty on 30 MW.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Integration <span class="sev">Moderate</span></h4>
+    <p>Two loss-making companies, each carrying a going-concern warning, combining. Cathedra&rsquo;s contract book is not visible in any filing to date.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Hosting-contract dependency <span class="sev">Moderate</span></h4>
+    <p>The Campbell arrangement cost $0.9M in Q1 2026, more than half of cost of revenue. The Evolution Technology agreement, assigned from Joshi Petroleum in January 2026, reaches the end of its initial term around 18 October 2026 with a 30-day notice window, and the Simple Mining Iowa management agreement renews around March 2027.</p>
+  </div>
+
+  <div class="risk sev-low">
+    <h4>Scale disadvantage <span class="sev">Low</span></h4>
+    <p>A fraction of a percent of global hashrate against peers operating hundreds of megawatts to gigawatts.</p>
+  </div>
+
+  <div class="risk sev-low">
+    <h4>Halving <span class="sev">Low</span></h4>
+    <p>Rewards halve again around April 2028. Structural and outside the twelve-month window.</p>
+  </div>
+
+  <div class="risk sev-low">
+    <h4>Regulatory <span class="sev">Low</span></h4>
+    <p>The company operates in states without material restrictions today and remains exposed to change.</p>
+  </div>
+  <p class="sub">Sources: Form 10-Q for Q1 2026, Going Concern, Note 2 Concentration Risk, Note 12 Commitments and Overview; Form 424B5, 31 July 2026; definitive proxy statement, 13 July 2026; Federal Reserve decision of 29 July 2026; local reporting, 23 to 30 July 2026.</p>
+</section>
+
+<!-- ===================== 11. BULL / BASE / BEAR ===================== -->
+<section id="s11">
+  <h2 class="sec"><span class="n">11</span>Bull / base / bear</h2>
+  <p class="sub">Each case with its preconditions: what must be true, not what might be.</p>
+  <div class="cases">
+    <div class="case bear"><h4>Bear</h4>
+      <p>Thin cash forces issuance at falling prices, and the shelf ceiling contracts as the price falls, so weakness forecloses financing rather than merely making it costly. Going-concern doubt bites, Bitcoin weakens, zoning restricts the Kentucky expansion, the AI pivot stays unsigned, and activist engagement turns adversarial across a three-person management team. Delisting risk returns, and a fourth reverse split needs neither a further vote nor the continuance, the authority for one having been granted on 15 May 2026 and left unexercised.</p>
+      <p class="req">Requires: only that the share price falls. Below roughly $1.60 the shelf headroom approaches nil while burn continues. The reference points are recent: $1.08 in February 2026 and $1.63 on 21 July.</p></div>
+    <div class="case"><h4>Base</h4>
+      <p>The company survives on merger scale and Bitdeer co-mining revenue but remains a small, loss-making miner whose results track the Bitcoin price. The facility is drawn as far as the shelf rule allows, share count climbs past 10 million toward the 13,666,618 fully diluted figure, and holders including the activist are diluted much as the same group was at Mawson, from 44.9% to 30.0% in four months. Losses continue to narrow. No transformative AI contract appears.</p>
+      <p class="req">Requires: only that the facility remains available and Bitcoin does not collapse. The company has just enlarged the facility and added a second agent, which is what an issuer planning to keep selling does.</p></div>
+    <div class="case bull"><h4>Bull</h4>
+      <p>Bitcoin holds, the Bitdeer arrangement proves out and remaining capacity fills, and the AI evaluation converts into a contract with firm power behind it, re-rating the company as a power and data-centre platform. Hopkinsville zoning and financing both land for the 50 MW build. An engaged activist accelerates strategy rather than fighting management. The higher share price both lowers the per-share cost of issuance and widens the shelf headroom, so the facility can fund the build at all.</p>
+      <p class="req">Requires: an AI or HPC contract and the power agreements to support it; favourable zoning; financing without destructive dilution; Bitdeer economics proving out; and the going-concern qualification lifting. Five conditions, with Bitcoin not falling while they resolve.</p></div>
+  </div>
+  <p class="sub">These are conditional scenarios, not forecasts, and no probability is assigned to any of them.</p>
+</section>
+
+<!-- ===================== 12. RESEARCH SUMMARY ===================== -->
+<section id="s12">
+  <h2 class="sec"><span class="n">12</span>Research summary</h2>
+  <p>Sphere 3D is a micro-cap Bitcoin miner mid-transformation into an AI and HPC infrastructure story. The 1 June 2026 all-stock merger with Cathedra roughly doubled its footprint to 53 MW across five United States data centers at about 1.2 EH/s. Since then it has signed 30 MW of co-mining with Bitdeer, proposed renaming itself DarkHorse Technologies with a 24 August vote, and moved to position its TVA-region power for AI and high-performance compute.</p>
+  <p>The filed record is unambiguous. Revenue has fallen across 2023 to 2025, from $21.9M to $16.6M to $11.2M, and stood at $1.9M in Q1 2026. The going-concern warning is live, cash was $3.1M at quarter-end against $3.7M of quarterly burn, and the at-the-market facility has drawn $5,131,036 across 2,172,789 shares, with a fresh $10,300,000 ceiling and a second sales agent added on 31 July. Set against that: losses that narrowed by more than half year on year, a contracted Bitdeer relationship, owned Kentucky infrastructure with a proposed 50 MW expansion, and a register that has attracted three holders above 5% in three weeks.</p>
+  <p>The ten days to 31 July changed the shape of the file. The shares rose 48% from $1.63 to $2.42 while an activist accumulated 400,000 shares for roughly <b>$988,384</b>, at $1.54 to $2.45, and the company issued into the same window. <b>The Endeavor Blockchain filing is the most consequential new fact</b>, not because 5.80% is control but because the same group ran a campaign at Mawson Infrastructure that ended in five new directors, a Strategic Transactions Committee, one of its participants as chief executive, and a rename to Big Digital Energy. This company had already proposed its own rename before they arrived. Whether that convergence produces cooperation or conflict is unresolved.</p>
+  <p>The methodological point worth carrying forward is that infrastructure metrics rather than earnings multiples govern here, and that at this size the register moves the price more than the operations do. On 24 July a $380,000 position added roughly $1.15M of market capitalisation, about three times what was bought.</p>
+  <h3>The question that resolves the file</h3>
+  <p>Can the company fund itself to the point where its 53 MW is contracted to a paying tenant at better-than-mining economics, without diluting existing holders past the point where it matters? The rebrand, the domicile change and the ticker are preamble. The Bitdeer arrangement is a partial, Bitcoin-priced answer. The Hopkinsville plan is the most concrete attempt at a full one, and it is unfunded.</p>
+  <p>The 31 July filings frame the tension precisely. On one day the company enlarged its share-selling facility to $10.3M and added a second agent, and an activist disclosed a 5.80% stake with intent to engage the Board on value creation. One party is solving for survival through issuance; the other has just been diluted from 44.9% to 30.0% doing exactly that elsewhere, and has already seen its own newly filed 6.54% restate to 5.80% on the corrected share count.</p>
+</section>
+
+<!-- ===================== 13. NULL CATEGORIES ===================== -->
+<section id="s13">
+  <h2 class="sec"><span class="n">13</span>Null categories</h2>
+  <p class="sub">Requested categories with nothing to report. Status reads Covered above, None where a named source was checked and found empty, or Not established where the category was not examined. A category nobody looked at is a gap, not an absence.</p>
+  <div class="tw"><table class="nulls">
+    <thead><tr><th>Category</th><th>Status</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Dividends</td><td class="status">None</td><td>No common dividend has been declared or paid. Checked against the Q1 2026 Form 10-Q going-concern disclosure and the proposed articles at Appendix A of the 13 July 2026 proxy, Article 7.2. Series I Preferred carries 8% payment-in-kind dividends, covered in section 7.</td></tr>
+      <tr><td class="lbl">Share buybacks</td><td class="status">None</td><td>Checked against the same sources. Article 7.2 prohibits share purchases where insolvency is a reasonable prospect.</td></tr>
+      <tr><td class="lbl">Analyst coverage</td><td class="status">None</td><td>Searched on 2 August 2026 across aggregator coverage pages. No broker research note or consensus estimate attributable to a named firm was located.</td></tr>
+      <tr><td class="lbl">Securities class action</td><td class="status">None</td><td>Checked against the Q1 2026 Form 10-Q, Note 12 Litigation and Item 1 Legal Proceedings, which report ordinary-course claims only and no reasonable possibility of material loss, and against the CourtListener RECAP federal docket index searched on 2 August 2026. Twelve matters name the company and all are terminated; the most recent was filed 19 March 2024; none at any date carries a securities nature of suit. State-court and Canadian proceedings are outside that index.</td></tr>
+      <tr><td class="lbl">Insider open-market purchases</td><td class="status caution-t">Not established</td><td>The Form 3 and Form 4 record was enumerated on 2 August 2026: 117 Forms 4, the most recent dated 10 June 2026, so nothing has been reported in the seven weeks since. Transaction codes were not read, so whether any reported transaction was an open-market purchase rather than a grant is still not established.</td></tr>
+      <tr><td class="lbl">Promotional activity</td><td class="status">None</td><td>Searched on 2 August 2026 across trade press, aggregator news, social trackers and meme-stock screens for paid campaigns, compensated accounts and coordinated posting. None was found, and the company did not appear on social-momentum or meme-stock screens. Method and limits in section 14.</td></tr>
+      <tr><td class="lbl">Canadian continuous disclosure</td><td class="status caution-t">Not established</td><td>Premise corrected. The company <b>is</b> a reporting issuer not in default in British Columbia, Alberta and Ontario and <b>will continue to be</b> one, per the arrangement-agreement representations in the definitive merger proxy of 16 April 2026: the status predates the merger and was not acquired at closing. One such filing has been read, the 21 May 2026 report of voting results to the three commissions under National Instrument 51-102 Section 11.3, filed as an exhibit on EDGAR. What is still not established is what has been filed <b>since 1 June 2026</b>: SEDAR+ did not answer on 2 August 2026, being redirected to a bot-detection service, and no Canadian document appears as an exhibit to any post-closing filing. This is a gap, not an absence. Routes and limits in section 14.</td></tr>
+      <tr><td class="lbl">Debt facilities</td><td class="status">None</td><td>No credit facility, term loan or revolver appears in the Q1 2026 Form 10-Q. The only debt-like item is the legacy Rainmaker settlement receivable, which is an asset fully reserved rather than a liability.</td></tr>
+      <tr><td class="lbl">Third-party price targets and ratings</td><td class="status">None</td><td>Searched on 2 August 2026. One aggregator, Investing.com, displays a single 12-month target of $30.00 with a Strong Buy label, but names no issuing firm and carries no publication date. A target is market data only when attributed and dated, so nothing reportable was found. The figure is noted in section 14 rather than carried, since against a $2.42 close it implies more than twelve times the current price and predates events that would plainly bear on it.</td></tr>
+      <tr><td class="lbl">Power purchase agreements</td><td class="status">None</td><td>The Q1 2026 Form 10-Q states that the company does not have any power purchase agreements for the supply of power. This is a checked absence at 31 March 2026 on a pre-merger basis, and it is material to section 9.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 14. METHODOLOGY & SOURCES ===================== -->
+<section id="s14">
+  <h2 class="sec"><span class="n">14</span>Methodology &amp; sources</h2>
+  <p><b>Pricing basis.</b> All market figures are struck at the <b>31 July 2026 close</b>: $2.42, a $1.08 to $12.60 fifty-two week range, beta of 3.48 and earnings per share of $5.12 negative. The as-of stamp on this document is 2 August 2026, the build date, which is later than the close the figures come from.</p>
+  <h3>Provenance tags</h3>
+  <p>Every material claim carries its provenance. Two categories are used in this file for the
+  first time, and two extensions are stated here rather than assumed.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Tag</th><th>What it asserts</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl"><span class="tag">Filed</span></td><td>Stated in an SEC filing or company release, cited by form and date. <b>Extended</b> to dated official publications by named non-SEC issuers: the Federal Reserve FOMC calendar and the 29 July 2026 policy decision, published by the Board of Governors, and the Bitcoin halving schedule, which is protocol-defined. What the tag asserts is unchanged: a named body published this on this date and a reader can go and look.</td></tr>
+      <tr><td class="lbl"><span class="tag">Estimate</span></td><td>Derived or modelled here, with the arithmetic shown.</td></tr>
+      <tr><td class="lbl"><span class="tag">Open</span></td><td>Expected but unconfirmed. Nothing filed either way.</td></tr>
+      <tr><td class="lbl"><span class="tag">Market</span></td><td>Price, volume or float data stamped with its close date. <b>Extended</b> to third-party characterisations of others&rsquo; facts, including the local reporting used for the Hopkinsville proceeding.</td></tr>
+      <tr><td class="lbl"><span class="tag">Press</span></td><td>A named publication that is neither the issuer nor an analyst, cited by outlet and date. Asserts only that a statement was made on a stated date, never that it is true. It appears in no Framing item and in no Snapshot figure. Where a press-only figure is repeated, as with the reported zoning capacity threshold in section 10, the report states that it is reported and not established, and builds nothing on it.</td></tr>
+      <tr><td class="lbl"><span class="tag">Social</span></td><td>A named account, cited by handle and date. Asserts only that a statement was made on a stated date, never that it is true. Not the sole basis for any material claim here, it appears in no Framing item and in no Snapshot figure, and the social item names its account.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Primary sources</h3>
+  <p>Form 424B5 prospectus supplement, 31 July 2026, read in full. Form 8-K, 31 July 2026, Items 1.01 and 8.01. Schedule 13D, Endeavor Blockchain LLC and Joshua Kilgore, 31 July 2026. Schedules 13G, Thomas Masiero 8 July 2026 and Jialin Qu 20 July 2026. Definitive proxy statement, 13 July 2026, read in full. Form 4, 10 June 2026. Form 10-Q for the quarter ended 31 March 2026, filed 15 May 2026, read in full. Form 10-K for FY2025, filed 27 March 2026. Merger Form 8-K filings, 11 March 2026. Company releases of 6 February, 5 March, 1, 8, 10 and 25 June, 30 June, 10 July and 29 to 30 July 2026. Mawson Infrastructure Form 8-K and release, 23 April 2026, for the comparable in section 5.</p>
+
+  <h3>Derivations</h3>
+  <p>Market capitalisation is $2.42 multiplied by 8,619,150 shares. Enterprise value is market capitalisation less cash and Bitcoin of $4.93M plus approximate liabilities of $1.71M, the latter taken as total assets less equity from the Q1 balance sheet. Per-megawatt and per-exahash figures divide that enterprise value by 53 MW and 1.2 EH/s. Implied runway divides cash and Bitcoin by the $3.7M quarterly operating burn. Shelf headroom applies the one-third-of-float test to float re-measured at the stated prices, less the $5,018,576 already sold. Ownership percentages divide filed share counts by 8,619,150. The FY2024 net loss is inferred from the reported 126.8% year-on-year increase.</p>
+
+  <h3>What was not checked</h3>
+  <p>A full filing sweep was run on 2 August 2026 against the complete EDGAR submissions index for this issuer, covering <b>804 filings from 18 November 2013 to 31 July 2026</b>, with no supplementary index holding older material back. Exhibit lists were opened rather than form types counted. No filing made after 31 July 2026 was examined, that being the most recent on the index at the sweep date. The close has not moved, so no repricing was required.</p>
+  <p><b>Categories not examined.</b> Analyst coverage, consensus estimates and third-party price targets were not sought. Investor days and industry conferences were not searched.</p>
+  <p><b>Filing families swept, with results.</b> All eighteen form types were checked against the full index. <b>No NT 10-K, NT 10-Q, NT 20-F or NT 40-F has ever been filed.</b> That is now a sourced negative rather than an assumption: the entire index was searched for late-filing notifications and returns none across the company&rsquo;s filing life. The foreign private issuer families are confirmed dormant rather than presumed inapplicable: <b>150 Form 6-K filings ending 21 December 2022</b>, three Form 20-F filings ending 31 March 2022, and two Form 40-F filings ending 30 March 2016, which is consistent with the transition to domestic-filer status and with the historical Canadian material that formerly reached the SEC by that route. Form 3 and Form 4 were enumerated: <b>117 Forms 4, the most recent dated 10 June 2026</b>. Transaction codes were not read, so the insider-purchase row keeps its status.</p>
+  <p><b>Federal court dockets were searched on 2 August 2026</b>, closing a limitation this report previously named. The CourtListener RECAP index returns twelve matters naming the company as a party, <b>all terminated</b>, the most recent filed 19 March 2024 and closed the following month. None carries a securities nature of suit at any date: the nearest is a 2023 employee-benefits claim in the Northern District of Texas, terminated April 2024, and the two actions against Gryphon Digital Mining were brought by this company, the later closing in March 2025. State-court dockets and Canadian proceedings are outside that index and were not searched.</p>
+  <p><b>Counterparty filings were surveyed and disclose nothing on terms.</b> Bitdeer, the counterparty on 30 MW, has not named this company in any SEC filing. Across all filers and forms between 1 May and 2 August 2026 the issuer&rsquo;s name returns 107 documents; the third-party filings among them are institutional holdings reports, from Vanguard, Citadel, Jane Street, UBS, Wells Fargo, BNP Paribas, Danske Bank and StoneX among others, plus the Endeavor Blockchain Schedule 13D already carried. The only 2026 foreign-issuer hit is a past-directorships list in an unrelated mining company&rsquo;s circular. The co-mining economics are therefore undisclosed by <b>both</b> sides, which is a checked result rather than an inference from this company&rsquo;s filings alone.</p>
+  <p><b>The Canadian status is older than this report recorded.</b> This report previously stated that the company <b>becomes</b> a reporting issuer in British Columbia, Alberta and Ontario <b>on completion</b> of the arrangement, and so acquired Canadian obligations at closing on 1 June 2026. That is wrong, and the company&rsquo;s own definitive merger proxy of <b>16 April 2026</b> settles it. Its arrangement-agreement representations state that Sphere <b>&ldquo;is a &lsquo;reporting issuer&rsquo; not in default&hellip; of each of the Provinces of British Columbia, Alberta, and Ontario&rdquo;</b>, and separately that Sphere <b>&ldquo;will continue to be a reporting issuer&rdquo;</b> in those provinces. The status predates the transaction rather than arising from it, and the same representations state that the company has filed all documents required of it under applicable Canadian securities laws since 1 January 2025. What no pass has examined is not a newly created obligation but a long-standing one.</p>
+  <p><b>One of those filings has now been read, and it was on EDGAR throughout.</b> Exhibit 99.2 to the Form 8-K of <b>21 May 2026</b> is the company&rsquo;s report of voting results for the 15 May special meeting, addressed to the <b>Ontario, Alberta and British Columbia Securities Commissions</b> and made under <b>National Instrument 51-102 Section 11.3</b>. It is the company&rsquo;s own Canadian continuous disclosure, obtained by a route the earlier four-route search did not attempt, and being dated ten days before closing it independently corroborates the correction above. It is also where the 15 May consolidation authority in section 7 comes from. An unreachable registry is not the same as an unobtainable document.</p>
+  <p>The circular was obtained from the issuer&rsquo;s own copy at cathedra.com, which the circular itself names alongside SEDAR+ as a posting location under the notice-and-access process. It is the primary document rather than secondary coverage of it, and it is a primary source about Cathedra and corroboration about this company, not a substitute for this company&rsquo;s own disclosure.</p>
+  <p><b>Routes attempted, 2 August 2026.</b> For Cathedra&rsquo;s circular: the SEDAR+ document search and the reporting issuers list <b>remain unqueryable</b>, the search being a session-driven form and the list paginating with client-side script; the <b>issuer copy succeeded</b>. The <b>TSX Venture Exchange bulletins were not retrieved</b>, and the 2 June delisting continues to rest on the company releases of 26 May and 1 June 2026.</p>
+  <p><b>The company&rsquo;s Canadian filings since 1 June 2026 were sought again and not found.</b> SEDAR+ was retried on 2 August 2026 and <b>the failure is now diagnosed</b>: requests to its issuer and document pages are redirected to a bot-detection validation service rather than served, so the registry returns no answer at all. That is a registry not reached, not a registry that answered and held nothing, and it is retried each pass. The remaining routes returned as before: the investor page carries an SEC filings section and no Canadian equivalent, and the Form 6-K route by which Canadian documents formerly reached the SEC closed in December 2022. <b>Nothing establishes what, if anything, has been filed in the three provinces since 1 June 2026</b>, and no Canadian document appears as an exhibit to any post-closing filing. Whether a business acquisition report is owed for the Cathedra acquisition was not established either, and no claim is made in either direction. The null row stays Not established for that period.</p>
+  <p><b>What the retrieval did find, on EDGAR rather than SEDAR+.</b> The substance sought from the circular&rsquo;s unread appendices was already filed with the closing Form 8-K of 3 June 2026: Cathedra&rsquo;s audited 2025 and 2024 consolidated statements with the reports of SRCO Professional Corporation at <b>Exhibit 99.2</b>, its unaudited Q1 2026 statements at <b>Exhibit 99.3</b>, and the unaudited pro forma condensed combined financial information at <b>Exhibit 99.4</b>. Earlier passes swept SEC form types without enumerating that filing&rsquo;s exhibits, which is how a combined balance sheet sat unread on EDGAR for two months while this report described one as unavailable.</p>
+  <p><b>What remains unread.</b> On Cathedra&rsquo;s SEDAR+ profile: any material change reports. Its audited 2025 and 2024 statements are no longer outstanding, having been obtained from Exhibit 99.2. In the circular itself, retrieval truncated at roughly page 30 and the appendices remain unread, including the full fairness opinion and the sections concerning Sphere and the combined company. Appendix I is no longer a gap, since Exhibit 99.4 carries the same substance in the acquirer&rsquo;s own presentation.</p>
+  <p><b>EDGAR full-text search was queried successfully on 2 August 2026</b>, closing a gap this report previously recorded as unreachable. The earlier attempt failed against the public interface, which is a client-side application; the underlying index answers directly. Results are reported under counterparty filings above. The index reaches filing contents from 2001 onward and does not cover the paper era.</p>
+  <p><b>The municipal record was located but not read.</b> The Hopkinsville zoning proceeding&rsquo;s primary documents sit with Community Development Services, the joint city and county planning agency, and comprise a text amendment as introduced on 22 June 2026, a plan review text amendment carrying edits as of 17 July 2026, a separate Hopkinsville Electric System proposed amendment, and Data Centers Memo and Resolution 2026-03, together with video of the 27 July 2026 hearing. They are published as scanned images with no text layer, and no page-rendering tool was available, so their operative wording is unread and no threshold from them is carried in section 10. This is a narrower gap than before, when the documents had not been identified: they are now named and dated, and only the text is outstanding.</p>
+  <p><b>Grid operator data was not pulled.</b> The Kentucky and Tennessee sites sit in the Tennessee Valley Authority footprint, which is not an organised market with a public interconnection queue of the kind ERCOT, PJM, MISO or NYISO publish, and the Iowa site is a managed hosting arrangement rather than a company interconnection. No queue position, capacity auction result or curtailment record was retrieved for any site, so the 53 MW rests on company disclosure and the circular reconciliation rather than on independent confirmation.</p>
+  <p><b>Press and social examined and substantially empty.</b> Searches on 2 August 2026 across trade press, aggregator news lists, social trackers and meme-stock screens found no paid promotion, no disclosed compensation arrangement, no coordinated posting and no appearance on social-momentum screens. Coverage of the Schedule 13D and the proposed rename was located and is ordinary filing-derived reporting rather than promotion. This is the result of those searches on that date, not a general assurance. The 23 and 24 July sessions traded 5.55M and 6.51M shares against a preceding baseline nearer 150,000 to 300,000, and nothing located explains that volume beyond the activist accumulation subsequently disclosed on 31 July; the absence of a promotional finding is not an account of what moved the stock.</p>
+  <p><b>One social source could not be retrieved.</b> The self-reported Alpine Fox position carried in the section 7 register is the only line in this report resting on a statement by its own subject. The originating post was not retrievable on 2 August 2026, and no SEC filing discloses the position. It is retained with Social provenance and is relied on for nothing.</p>
+  <p><b>Market data providers disagree materially</b> and none was reconciled. Against the Google Finance close used here, TradingView showed a market capitalisation near $14.90M and a beta of negative 0.24 where this file carries 3.48; Macrotrends showed a latest close of $1.92 dated 28 May 2026; Investing.com showed a 9 July quote. The capitalisation spread is a share-count lag of the kind described in section 7. The beta conflict is unresolved and the figure should be treated as indicative only.</p>
+  <p><b>Figures not independently verified.</b> The 100 MW+ expansion pipeline cited in merger materials appears in no primary document reviewed and is excluded from the valuation metrics rather than credited. Cathedra&rsquo;s site leases, contract book and any escrow terms are not visible in any filing to date. Peer enterprise values were not pulled, so no peer multiple is shown.</p>
+  <p><b>A dated gap.</b> The Q2 2026 Form 10-Q, due 14 August 2026, had not been filed. It is the first document that would show combined-entity financials, Cathedra&rsquo;s contract book, the Bitdeer terms and the post-merger cash position, and every balance-sheet figure in this report is pre-merger standalone until it arrives.</p>
+
+  <h3>Verification path</h3>
+  <p>The following would independently confirm or overturn the central claims here, in descending order of value. Read the Q2 2026 Form 10-Q on filing, beginning with the going-concern footnote and liquidity section rather than the revenue line, since runway is the governing variable. Check whether any power purchase or interconnection agreement has appeared, without which the AI and HPC language remains positioning. Recompute shelf headroom as one-third of public float less trailing twelve-month sales, which governs whether the facility can be drawn at all. Track the share count on each 10-Q cover and in every prospectus supplement, since these update between quarterly reports and data providers lag them. Watch for Schedule 13D amendments from Endeavor Blockchain, particularly any move toward board nominations or a stake above 10%. Follow the Hopkinsville City Council zoning decision, which governs whether the 50 MW expansion is buildable. And confirm the outcome of the 24 August vote, noting that Board approval to proceed is discretionary even where shareholders approve.</p>
+
+  <h3>Known limitations carried forward</h3>
+  <p>One defect closed this build and one remains open.</p>
+  <div class="note pos">
+    <p><b>Closed.</b> The 100 MW+ expansion pipeline was previously recorded as appearing in no primary document reviewed. It is stated in the closing release of 1 June 2026 as a "pipeline exceeding 100 MW of potential expansion" and is now sourced to a dated company release. It stays out of the valuation metrics, but on the substantive ground that it is potential rather than contracted capacity and carries no disclosed financing, not because it could not be traced.</p>
+  </div>
+  <div class="note caution">
+    <p><b>The masthead omits enterprise value.</b> The strip carries price, market capitalisation, shares outstanding and pricing basis, but no enterprise value, because the only figure available would combine a post-merger market capitalisation with pre-merger cash and liabilities struck at 31 March 2026. A figure assembled from cash and debt struck at different dates is a guess wearing a number. The approximate value appears in section 8 with that limitation stated. Resolving it requires the Q2 2026 Form 10-Q balance sheet, which is new research and outside this pass.</p>
+  </div>
+</section>
+
+<!-- ===================== 15. DOCUMENT LOG ===================== -->
+<section id="s15">
+  <h2 class="sec"><span class="n">15</span>Document log</h2>
+  <p class="sub">Newest first. The original build entry is never removed or rewritten.</p>
+  <div class="log">
+    <div class="logentry current">
+      <div class="when">2 August 2026 <span class="latest">Latest</span></div>
+      <div class="basis">Priced off 31 Jul 2026 close &middot; $2.42 &middot; $20.9M cap</div>
+      <div class="correction">
+        <span class="lbl">Correction</span>
+        <p>The shareholder register misread the largest holding on it. <b>Thomas Masiero is Head of Strategy of the combined company</b>, so his 5.96% is an insider position, not the outside filing this report described. The register table and its commentary are corrected. Separately, the merger consideration was recorded only as share counts and a voting split; it is now recorded with its exchange ratios of 0.123014 and 12.3014, the 7% post-closing ownership cap that produced the Series I preferred, and the unregistered issuance under Securities Act Section 3(a)(10).</p>
+      </div>
+      <p><b>The close has not moved.</b> 31 July 2026 was a Friday and no session has traded since, so the pricing basis stands at $2.42 and no repricing was performed. The as-of stamp advances to the build date of 2 August 2026, which is later than the close it carries.</p>
+      <p>Net change since the previous entry. A larger executive award was found: the chief executive is entitled to a one-time inducement award of <b>500,000 restricted stock units</b> vesting bi-annually over two years under Nasdaq Rule 5635(c)(4), with a first tranche falling around December 2026 on a 1 June commencement. Disclosed executive restricted stock now totals 750,000 units, roughly 8.7% of shares outstanding. Whether the award already sits inside the 1,686,834 restricted stock figure at 29 July cannot be settled from the documents reviewed, so it is described and not added to the fully diluted total, which should now be read as a floor.</p>
+      <p>Board and officer detail added: the board is Tim Hanley as Chair with Marcus Dent, Kurt Kalbfleisch, Nicholas Gates and Joel Block, three independent, Mr Dent a Cathedra director since 2021. Cathedra was delisted from the TSX Venture Exchange and the OTCQB on 2 June 2026 and stated it would apply to cease to be a reporting issuer.</p>
+      <p><b>A carried defect closed.</b> The 100 MW+ expansion pipeline, recorded in the previous entry as appearing in no primary document reviewed, is stated in the closing release of 1 June 2026. It is now sourced, and stays out of the valuation metrics on the substantive ground that it is potential rather than contracted capacity with no disclosed financing.</p>
+      <p><b>Canadian filings.</b> Every prior pass on this file checked EDGAR only. That is now established as correct for the company&rsquo;s own disclosure, since the closing release places the Cathedra circular on SEDAR+ and the Sphere proxy on EDGAR respectively and identifies the SEDAR+ issuer profile as Cathedra&rsquo;s. The real gap is that Cathedra&rsquo;s profile has never been read and is closing. The SEDAR+ search could not be queried on 2 August 2026 and is recorded in what was not checked, with EDGAR full-text search recorded the same way.</p>
+      <p><b>Press and social provenance introduced</b>, with the scheme stated in Methodology. Searches for promotional activity found nothing: no paid campaign, no compensated account, no coordinated posting. No section was written on it, and the searches and their date are recorded rather than a finding manufactured. Two null rows move from Not established to None as a result, and rows for promotional activity and Canadian disclosure are added.</p>
+      <p><b>Later on 2 August, consolidated into this entry.</b> Cathedra&rsquo;s information circular of 2 April 2026 was retrieved from the issuer&rsquo;s own copy, the SEDAR+ search having again proved unqueryable. It supplies material absent from both companies&rsquo; SEC filings as reviewed. The <b>Key Holders</b>, Joel Block, Thomas Masiero and Jialin Qu, gave voting agreements binding them for 24 months from closing to vote with the board, so roughly 11.5% of the register held by Masiero and Qu is committed until about 1 June 2028, covering the 24 August vote. Mr Block held 1,447,584 Cathedra restricted units that did not accelerate and became about 178,073 replacement units, and holds a <b>US$1,600,000</b> milestone bonus entitlement under an employment agreement of 25 September 2025. The <b>7% ownership cap</b> explains why both Key Holder common positions sit just below 5%: their Cathedra trusts held about 36.15% and 34.63% of that company, and the excess above the cap was routed into Series I preferred, so the common holdings understate their economic interest. The 53 MW reconciles for the first time as Cathedra&rsquo;s 45 MW, including a 15 MW Kentucky data center completed in late October 2025, plus the 8 MW Iowa site.</p>
+      <div class="correction">
+        <span class="lbl">Correction</span>
+        <p>Two statements made earlier today require amendment against the circular. First, the correction above records that Cathedra holders received approximately 33% of voting rights "not the 49% carried since the original build". That was too strong. The circular states approximately <b>49% on a partially diluted basis</b>, assuming conversion of the Series H and Series I preferred and the vesting of options and restricted units, while 33% is a voting figure. <b>Both are correct on their own basis</b>; the original 49% was not an error but an unlabelled one. Second, this report recorded that the company&rsquo;s own continuous disclosure runs to EDGAR and that the Canadian gap belonged to Cathedra alone. That was wrong: the company holds Canadian continuous disclosure obligations in British Columbia, Alberta and Ontario which no pass had examined, and the null table row moves from None to Not established accordingly. The further reading that those obligations <b>arose at closing</b> was itself corrected later the same day; the settled position is in the final correction to this entry.</p>
+      </div>
+      <p><b>Later still on 2 August, consolidated into this entry.</b> A combined balance sheet was retrieved. It had been on EDGAR since 3 June as <b>Exhibit 99.4</b> to the closing Form 8-K, with Cathedra&rsquo;s audited statements at 99.2 and its Q1 2026 statements at 99.3. The pro forma combined position at 31 March 2026 shows <b>total assets of $34.742M</b> against Sphere&rsquo;s standalone $21.739M, <b>total liabilities of $10.642M</b> against $1.726M, and shareholders&rsquo; equity of $24.082M against $19.995M. Pro forma FY2025 revenue is <b>$25.9M</b> with a <b>$30.8M</b> loss, and Q1 2026 revenue $3.7M with a $5.2M loss. Consideration was $7.266M, valuing the common at $1.90 as of 29 May 2026, leaving <b>$2.558M of goodwill</b> pending allocation. Acquisition costs of about $3.4M, a $0.49M transaction bonus and $0.735M of accelerated restricted stock were recorded. Exhibit 99.4 confirms the 178,073 replacement units derived earlier from the exchange ratio.</p>
+      <div class="correction">
+        <span class="lbl">Correction</span>
+        <p>This report stated in section 6 that every figure was drawn from pre-merger standalone accounts and that <b>the first combined balance sheet would arrive with the Q2 2026 Form 10-Q</b>. That was wrong. Pro forma combined statements were filed on 3 June 2026 as Exhibit 99.4 to the closing Form 8-K and have been available throughout. Earlier passes swept SEC form types without enumerating that filing&rsquo;s exhibits. Section 6 now carries the combined basis, and section 8 reprices on it: <b>enterprise value rises from about $17.6M to about $26.1M and the per-megawatt multiple from ~$333K to ~$492K</b>, because the standalone reading credited the merger&rsquo;s megawatts while ignoring the $6.7M of liabilities Cathedra brought. The combined figure is now the one this report uses for comparison, with the standalone column retained so the basis of any number is visible.</p>
+      </div>
+      <p><b>Last on 2 August, consolidated into this entry.</b> A sweep run against the complete filing index, opening exhibit lists rather than counting form types, and against the source families this report had left unexamined. One governance fact carried by neither file leads it: at the special meeting of <b>15 May 2026</b> shareholders approved, by special resolution carrying <b>84.57%</b>, an amendment to the current Ontario articles permitting a <b>one-for-up-to-five share consolidation</b> at a ratio and date in the Board&rsquo;s sole discretion, with no expiry stated and still unexercised. Section 7 previously dated the lower procedural bar for a fourth reverse split to the proposed British Columbia articles and the 24 August vote. It is already in force, needs no further vote, and the bear case and the listing risk are corrected to match.</p>
+      <div class="correction">
+        <span class="lbl">Correction</span>
+        <p>Two statements in this entry are superseded. First, the Canadian position: this report recorded that the company <b>became</b> a reporting issuer in British Columbia, Alberta and Ontario <b>on completion</b> and so acquired obligations at closing. The definitive merger proxy of 16 April 2026 states in its arrangement-agreement representations that Sphere <b>is</b> a reporting issuer not in default in those three provinces and <b>will continue to be</b> one. The status predates the transaction. One such filing has now been read, Exhibit 99.2 to the Form 8-K of 21 May 2026, the report of voting results to the three commissions under National Instrument 51-102, which sat on EDGAR throughout. The null row stays Not established because it asks what has been filed <b>since 1 June 2026</b>, and SEDAR+ still does not answer. Second, the shareholder register carried the Alpine Fox holding as <b>Market</b> provenance on a public disclosure. No SEC filing discloses that position, the holding sits below the 5% Schedule 13 threshold, the manager&rsquo;s March-quarter Form 13F does not name this issuer, and the originating statement could not be retrieved. It is re-tagged <b>Social</b>, marked as uncorroborated, and relied on for nothing.</p>
+      </div>
+      <p>Three recorded gaps close with results. <b>Federal court dockets</b> were searched: twelve matters name the company, all terminated, most recent filed 19 March 2024, none with a securities nature of suit, so the securities class action row now rests on a court index rather than on the issuer&rsquo;s own account. <b>EDGAR full-text search</b> was queried successfully, the earlier failure having been the public interface rather than the index; it surfaces no counterparty disclosure, so the Bitdeer terms are undisclosed by both sides rather than merely absent from this company&rsquo;s filings. And <b>no NT filing of any type has ever been made</b>, established across all 804 filings from November 2013 rather than assumed, with the foreign private issuer families confirmed dormant since December 2022 rather than presumed inapplicable. The zoning proceeding&rsquo;s <b>primary documents were located</b> and are named and dated in section 14; they are scanned images and could not be read, and a reported 75 MW and 50,000 square foot cap is carried in section 10 as press reporting that is explicitly not established.</p>
+      <p><b>Known gaps at this build.</b> Sphere&rsquo;s own Canadian filings since 1 June 2026 remain unestablished, SEDAR+ having been redirected to a bot-detection service rather than answering; the null row stays Not established. The pro forma is preliminary, carrying acquired assets at historical rather than fair value with $2.558M unallocated, so the Q2 Form 10-Q remains the first actual combined balance sheet. The circular&rsquo;s pro forma consolidated financial statements, the one document that would show a combined balance sheet before the Q2 Form 10-Q, were not reached. Market data providers disagree materially on capitalisation and beta and were not reconciled. Peer multiples remain unpulled, and the insider record was enumerated but its transaction codes were not read. The zoning documents were located and could not be read, and grid-operator data was not pulled, the sites sitting largely in the Tennessee Valley Authority footprint rather than an organised market with a public queue. All balance-sheet figures remain pre-merger standalone until the Q2 2026 Form 10-Q, due 14 August 2026 and unfiled at this date.</p>
+    </div>
+    <div class="logentry">
+      <div class="when">1 August 2026</div>
+      <div class="basis">Priced off 31 Jul 2026 close &middot; $2.42 &middot; $20.9M cap</div>
+      <div class="correction">
+        <span class="lbl">Correction</span>
+        <p>Shares outstanding are 8,619,150 at 29 July 2026, not the 7,641,767 proxy record-date figure used previously, an understatement of 977,383 shares or 12.8%. Market capitalisation is therefore about $20.9M rather than the $18.5M quoted by data providers, and every ownership percentage is restated downward: Masiero 6.72% to 5.96%, Endeavor 6.54% to 5.80%, Qu 6.24% to 5.53%. Separately, former Cathedra holders received approximately 33% of voting rights, not the 49% carried since the original build.</p>
+      </div>
+      <p>Repriced to the 31 July close of $2.42 from $1.91, following a full SEC form sweep covering 8-K, 424B5, 13D, 13G, Form 3 and Form 4, 10-Q, 10-K, S-3 and S-1. No NT filings are outstanding, and 6-K, 20-F and 40-F are inapplicable since the company files as a United States domestic issuer.</p>
+      <p>New material this build: the at-the-market facility had drawn $5,131,036 across 2,172,789 shares rather than the ~$1.7M previously carried, and was replaced by a $10,300,000 facility adding a second sales agent, sized to the one-third-of-float shelf ceiling whose headroom falls to roughly $1.6M at $2.42 and near nil at $1.63. An activist Schedule 13D from Endeavor Blockchain at 5.80%, with the Mawson Infrastructure precedent. Two Schedule 13G filings. A Form 4 recording a 250,000 RSU grant to the chief financial officer with change-of-control acceleration. Fully diluted of 13,666,618. Pro forma net tangible book value of $2.82 against a $2.42 close. The Hopkinsville 50 MW expansion and draft zoning ordinance, with North Campbell Land Company reclassified as a wholly owned subsidiary rather than a hosting counterparty. And a macro rewrite after the 29 July Federal Reserve hold came on a 9 to 3 vote with three dissents favouring an increase.</p>
+      <p>Known gaps at this build: no peer multiples, no analyst coverage check, no securities-litigation docket search, and no systematic insider-transaction sweep. All balance-sheet figures remain pre-merger standalone until the Q2 2026 Form 10-Q.</p>
+    </div>
+    <div class="logentry">
+      <div class="when">25 July 2026</div>
+      <div class="basis">Priced off 24 Jul 2026 close &middot; $1.91</div>
+      <div class="correction">
+        <span class="lbl">Correction</span>
+        <p>Two figures carried from the FY2025 Form 10-K were superseded. Fleet efficiency was already 17.1 J per terahash at 31 March 2026 with the refresh substantially complete, not improving toward a 19 J per terahash target, so it is a delivered result rather than pending upside. Hashrate was 0.84 exahash per second, not 0.73, which was the December 2025 figure.</p>
+      </div>
+      <p>Repriced to the 24 July close of $1.91 from $1.63 and substantially rebuilt after reading the Q1 2026 Form 10-Q and the 13 July definitive proxy in full. Added a capital structure and dilution section. Computed valuation multiples, per megawatt and per exahash, cash per share and implied runway, rather than describing the method alone. Severity-ranked the risks and added three that were missing: absent power purchase agreements, pool and custody concentration, and hosting-contract dependency. Gave each scenario an explicit precondition. Added a verification path and per-section source lines.</p>
+      <p>Known gaps at that build: the share count in use was the proxy record-date figure and was already stale; the at-the-market drawdown was carried from the Q1 10-Q at ~$1.7M against an actual $5,131,036; and the Cathedra ownership split was carried at 49%.</p>
+    </div>
+    <div class="logentry">
+      <div class="when">21 July 2026</div>
+      <div class="basis">Priced off 21 Jul 2026 close &middot; $1.63</div>
+      <p>Updated for developments through mid-July and repriced from the merger-close level to $1.63. Added the Bitdeer 30 MW co-mining agreements of 25 June, the proposed rebrand to DarkHorse Technologies with the reserved ticker DRK and an August shareholder vote, the Q1 2026 results, and the AI and HPC repositioning with new investor and government relations advisers.</p>
+      <p>Known gaps at that build: no ownership or activist coverage, no financing catalyst despite the going-concern position, and the hosting arrangements were treated as third-party costs rather than examined.</p>
+    </div>
+    <div class="logentry">
+      <div class="when">June 2026 (original build)</div>
+      <div class="basis">Priced off merger close &middot; approximately $3.13 &middot; ~$13M cap</div>
+      <p>Original build, prepared shortly after the Cathedra Bitcoin merger closed on 1 June 2026. Established a ten-section structure covering business model, revenue streams, industry trends, competitors, financial performance, valuation, growth drivers, risks, scenarios and summary, with the standing no-recommendation position. Priced off the merger-close level of approximately $3.13 and a market capitalisation near $13M.</p>
+      <p>Known gaps at that build: the Cathedra ownership split was recorded at 49% and was wrong; fleet efficiency and hashrate were taken from the FY2025 Form 10-K and were already superseded by the Q1 10-Q; no capital structure section existed; and the at-the-market facility was not examined.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="norec">
+    No buy, sell, or hold recommendation is issued and no price target is derived.
+    Third-party targets and ratings, where shown, are the published views of the
+    firms named and are reported as market data. This document is for research and
+    educational purposes and is not investment advice. Verify all figures against
+    primary filings on sec.gov before acting.
+  </div>
+  <p style="margin-top:16px">ANY &middot; Sphere 3D Corp. &middot; Equity Research Report &middot; as of 2 August 2026</p>
+</footer>
+
+</div>
+</body>
+</html>

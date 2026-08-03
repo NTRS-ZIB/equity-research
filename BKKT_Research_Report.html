@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>BKKT &middot; Bakkt, Inc. &middot; Equity Research Report &middot; as of 2 August 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================================
+   PER-TICKER PALETTE
+   ========================================================================= */
+:root{
+  /* Drawn from the Bakkt wordmark, a deep navy inked at #020618, normalised for
+     paper to hue 229, saturation 72%, lightness 28%. The hue is unchanged from
+     the mark and needed no rotation, sitting clear of every semantic band. */
+  --accent:      #14277B;
+  --accent-deep: #0D194F;
+  --accent-wash: rgba(20,39,123,0.06);
+  --accent-line: rgba(20,39,123,0.22);
+}
+
+/* ============================================================================
+   SHARED STYLESHEET v1.50 : BEGIN
+   ========================================================================= */
+:root{
+  color-scheme: light only;
+
+  --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
+  --line:#DEE6EC;   --line-hard:#C0CDD7;
+  --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
+
+  --pos:#0B7A50;      --pos-bg:#E7F4EE;
+  --neg:#B02A21;      --neg-bg:#FBECEA;
+  --caution:#90600A;  --caution-bg:#FBF2E0;
+  --assume:#4F3FA3;   --assume-bg:#EFEDFA;
+
+  --display:'Archivo',ui-sans-serif,system-ui,'Helvetica Neue',Arial,sans-serif;
+  --body:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+
+  --measure:78ch;
+  --col:760px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html,body{background:var(--canvas) !important;background-color:var(--canvas) !important}
+body{
+  margin:0;color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 22px 96px;background:var(--paper);
+      border-left:1px solid var(--line);border-right:1px solid var(--line)}
+p{max-width:var(--measure)}
+/* Boxed prose fills its container: the box supplies its own measure, so the
+   78ch cap applies to top-level running prose only. */
+.first li,.assume p,.note p,.cat p,.risk p,.logentry p,.oc p,.case p,
+.cat-meta,.logentry .basis{max-width:none}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:var(--accent-deep)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- masthead ---------- */
+.mast{padding:44px 0 26px;border-bottom:2px solid var(--line-hard);margin-bottom:8px;
+      position:relative;padding-left:20px}
+.mast::before{content:"";position:absolute;left:0;top:44px;bottom:26px;
+      width:4px;background:var(--accent)}
+.ticker{font-family:var(--mono);font-size:44px;font-weight:700;letter-spacing:-1px;
+      line-height:1;color:var(--accent);margin:0}
+.headline{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.22;
+      color:var(--ink);margin:16px 0 0}
+.functional{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--ink-faint);margin:18px 0 0}
+.mast-strip{display:flex;flex-wrap:wrap;gap:26px;margin-top:20px;padding-top:16px;
+      border-top:1px solid var(--line)}
+.mast-strip div{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint)}
+.mast-strip b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-top:3px}
+
+/* ---------- banner: framing ---------- */
+.first{background:var(--canvas);border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:20px 24px;margin:30px 0 12px}
+.first h2{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.04em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 12px}
+.first ol{margin:0;padding-left:20px}
+.first li{margin-bottom:9px}
+.first li:last-child{margin-bottom:0}
+
+/* ---------- sections ---------- */
+section{padding-top:38px}
+h2.sec{font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);
+      margin:0 0 4px;padding-bottom:10px;border-bottom:1px solid var(--line-hard);
+      display:flex;align-items:baseline;gap:12px}
+h2.sec .n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);
+      letter-spacing:.06em;flex:none}
+.sub{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);margin:10px 0 18px;
+      max-width:var(--measure)}
+h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink-dim);
+      margin:26px 0 8px}
+
+/* ---------- provenance tags (signature) ---------- */
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);
+      background:var(--panel-2);border:1px solid var(--line);
+      border-radius:2px;padding:1px 6px;vertical-align:1px;white-space:nowrap}
+
+/* ---------- assumption block ---------- */
+.assume{background:var(--assume-bg);border-left:4px solid var(--assume);
+      padding:16px 20px;margin:20px 0}
+.assume .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--assume);display:block;margin-bottom:7px}
+.assume p{margin:0}
+
+/* ---------- callouts ---------- */
+.note{border:1px solid var(--line);border-left:4px solid var(--ink-faint);
+      background:var(--canvas);padding:16px 20px;margin:20px 0}
+.note.pos{border-left-color:var(--pos);background:var(--pos-bg)}
+.note.neg{border-left-color:var(--neg);background:var(--neg-bg)}
+.note.caution{border-left-color:var(--caution);background:var(--caution-bg)}
+.note p{margin:0}
+.note p + p{margin-top:10px}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+thead th{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--ink-dim);text-align:left;
+      padding:9px 12px;border-bottom:2px solid var(--line-hard);white-space:nowrap}
+tbody td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--canvas)}
+td.num,th.num{font-family:var(--mono);text-align:right;white-space:nowrap}
+/* td.when marks a timing column. An unmarked cell counts as prose. */
+td.when{font-family:var(--mono);white-space:nowrap}
+td.lbl{font-weight:600}
+.pos-t{color:var(--pos);font-weight:600}
+.neg-t{color:var(--neg);font-weight:600}
+.caution-t{color:var(--caution);font-weight:600}
+
+/* ---------- cases ---------- */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.case{border:1px solid var(--line);border-top:3px solid var(--ink-faint);
+      background:var(--paper);padding:18px}
+.case.bull{border-top-color:var(--pos)}
+.case.bear{border-top-color:var(--neg)}
+.case h4{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 10px}
+.case.bull h4{color:var(--pos)} .case.bear h4{color:var(--neg)}
+.case p{font-size:15px;margin:0}
+.case .req{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+
+/* ---------- risks ---------- */
+.risk{border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:16px 20px;margin-bottom:12px}
+.risk.sev-high{border-left-color:var(--neg)}
+.risk.sev-med{border-left-color:var(--caution)}
+.risk.sev-low{border-left-color:var(--ink-faint)}
+.risk h4{font-family:var(--display);font-size:15.5px;font-weight:600;margin:0 0 6px;
+      display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.risk .sev{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase}
+.risk.sev-high .sev{color:var(--neg)}
+.risk.sev-med .sev{color:var(--caution)}
+.risk.sev-low .sev{color:var(--ink-faint)}
+.risk p{margin:0;font-size:15.5px}
+
+/* ---------- null categories ---------- */
+.nulls td.lbl{width:26%}
+.nulls .status{font-family:var(--mono);font-size:12px;white-space:nowrap}
+
+/* ---------- document log ---------- */
+.log{margin-top:14px}
+.logentry{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:12px}
+.logentry.current{border-left:4px solid var(--accent);background:var(--accent-wash)}
+.logentry .when{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);
+      display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.latest{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-line);
+      background:var(--paper);border-radius:2px;padding:1px 6px}
+.logentry .basis{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-bottom:12px}
+.logentry p{font-size:15.5px;margin:0 0 9px}
+.logentry p:last-child{margin-bottom:0}
+.correction{border:1px solid var(--neg);border-left:4px solid var(--neg);
+      background:var(--neg-bg);padding:12px 16px;margin-bottom:14px}
+.correction .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--neg);display:block;margin-bottom:5px}
+
+/* ---------- footer ---------- */
+footer{margin-top:44px;padding-top:22px;border-top:2px solid var(--line-hard)}
+footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width:none}
+.norec{border:1px solid var(--line-hard);background:var(--canvas);padding:16px 20px;
+      margin-top:20px;font-family:var(--mono);font-size:12.5px;color:var(--ink-dim)}
+
+/* ---------- catalyst cards (calendar) ---------- */
+.cat{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:14px;border-left:4px solid var(--line-hard)}
+.cat.up{border-left-color:var(--pos)}
+.cat.down{border-left-color:var(--neg)}
+.cat.two{border-left-color:var(--caution)}
+.cat.neutral{border-left-color:var(--ink-faint)}
+.cat-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.cid{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);flex:none}
+.cat-head h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink);
+      margin:0;flex:1 1 auto;min-width:200px}
+.dir{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;white-space:nowrap}
+.cat.up .dir{color:var(--pos)} .cat.down .dir{color:var(--neg)}
+.cat.two .dir{color:var(--caution)} .cat.neutral .dir{color:var(--ink-faint)}
+.cat-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:10px 0 12px;padding:9px 0;
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+      font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
+.cat-meta b{color:var(--ink);font-weight:600}
+.cat p{margin:0 0 9px;font-size:15.5px}
+.cat p:last-child{margin-bottom:0}
+.cat.resolved{background:var(--canvas);border-left-color:var(--ink-faint)}
+.cat.resolved .dir{color:var(--ink-faint)}
+
+/* ---------- horizon bands (calendar) ---------- */
+.band{display:flex;align-items:center;gap:14px;margin:30px 0 16px}
+.band-t{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--ink-dim);white-space:nowrap}
+.band-r{flex:1;height:1px;background:var(--line-hard)}
+.band-c{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);white-space:nowrap}
+
+/* ---------- upside / downside pair ---------- */
+.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0}
+.oc{border:1px solid var(--line);padding:11px 14px;background:var(--paper)}
+.oc.up-c{border-left:3px solid var(--pos)}
+.oc.down-c{border-left:3px solid var(--neg)}
+.oc .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.09em;
+      text-transform:uppercase;display:block;margin-bottom:5px}
+.oc.up-c .lbl{color:var(--pos)} .oc.down-c .lbl{color:var(--neg)}
+.oc p{margin:0;font-size:14.5px;line-height:1.5}
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  body{font-size:16px}
+  .wrap{padding:0 16px 70px;border-left:none;border-right:none}
+  .ticker{font-size:34px}
+  .headline{font-size:23px}
+  .cases{grid-template-columns:1fr}
+  .outcomes{grid-template-columns:1fr}
+  .mast-strip{gap:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none !important;transition:none !important}
+}
+@media print{
+  body{font-size:11pt}
+  .wrap{max-width:none;border:none}
+  section{page-break-inside:avoid}
+}
+/* ============================================================================
+   SHARED STYLESHEET v1.50 : END
+   ========================================================================= */
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<!-- ===================== MASTHEAD ===================== -->
+<header class="mast">
+  <p class="ticker">BKKT</p>
+  <h1 class="headline">Licences a competitor cannot buy, and $1.6 million a quarter to show for them</h1>
+  <p class="functional">BKKT &middot; Bakkt, Inc. &middot; Equity Research Report &middot; as of 2 August 2026</p>
+  <div class="mast-strip">
+    <div>Price <b>$7.17</b> <span class="tag">Market</span></div>
+    <div>Market cap <b>$319.9M</b> <span class="tag">Estimate</span></div>
+    <div>Shares out <b>44,612,329</b> <span class="tag">Filed</span></div>
+    <div>Pricing basis <b>31 Jul 2026 close</b> <span class="tag">Market</span></div>
+  </div>
+</header>
+
+<!-- ===================== FRAMING ===================== -->
+<div class="first">
+  <h2>Framing</h2>
+  <ol>
+    <li>Bakkt reported $243.6M of revenue in Q1 2026. After the cost of the crypto bought to fill customer orders and the fees paid to execute them, it kept $1.6M. Valuation ratios quoted on the gross line are built on the wrong number. <span class="tag">Filed</span></li>
+    <li>Since March 2025 the company has lost its largest client, sold its trust company, sold its loyalty division, collapsed its share structure, changed its name, changed its CEO, and bought a business owned by that CEO. <span class="tag">Filed</span></li>
+    <li>The two most recent acquisitions were both from sitting executives: DTR from the CEO on 30 April 2026 for 11,316,775 shares, roughly 31.5% of the company as converted, and Gyzer Inc. from the Chief Commercial Officer in May 2026. <span class="tag">Filed</span></li>
+    <li>Share count is up roughly 226% since December 2024, and a registration statement now covers the resale of up to 21,010,640 shares, about 44% of the company, by holders including the CEO and ICE. <span class="tag">Filed</span></li>
+  </ol>
+</div>
+
+<!-- ===================== 1. SNAPSHOT ===================== -->
+<section id="s1">
+  <h2 class="sec"><span class="n">01</span>Snapshot</h2>
+  <p class="sub">Key figures, each tagged by provenance. Retained revenue is revenue net of crypto costs and execution, clearing and brokerage fees.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Metric</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Share price</td><td class="num">$7.17</td><td><span class="tag">Market</span> 31 Jul 2026 close</td></tr>
+      <tr><td class="lbl">Market capitalisation</td><td class="num">$319.9M</td><td><span class="tag">Estimate</span> 44.61M shares at $7.17</td></tr>
+      <tr><td class="lbl">52-week range</td><td class="num">$6.75&ndash;$49.79</td><td><span class="tag">Market</span> 31 Jul 2026</td></tr>
+      <tr><td class="lbl">Revenue (Q1 2026)</td><td class="num">$243.6M</td><td><span class="tag">Filed</span> 10-Q, Q1 2026</td></tr>
+      <tr><td class="lbl">Retained revenue (Q1 2026)</td><td class="num">$1.6M</td><td><span class="tag">Estimate</span> 0.67% of revenue, being revenue less crypto costs and execution fees, 10-Q Q1 2026</td></tr>
+      <tr><td class="lbl">Net loss (Q1 2026)</td><td class="num neg-t">($11.7M)</td><td><span class="tag">Filed</span> 10-Q, Q1 2026</td></tr>
+      <tr><td class="lbl">Cash and restricted cash</td><td class="num">$82.6M</td><td><span class="tag">Filed</span> 10-Q, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Long-term debt</td><td class="num">None</td><td><span class="tag">Filed</span> 10-Q, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Short interest</td><td class="num">~23.6% of float</td><td><span class="tag">Market</span> ~6.3M shares on a 26.73M float, 31 Jul 2026</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 2. BUSINESS MODEL ===================== -->
+<section id="s2">
+  <h2 class="sec"><span class="n">02</span>Business model</h2>
+  <p>Bakkt sells infrastructure, not consumer products. It does not compete for retail accounts against Coinbase or Robinhood. It supplies the licensed, regulated back end that other firms integrate in order to offer crypto trading or stablecoin payments to their own users under their own brand.</p>
+  <p>The company was founded in 2018 as a subsidiary of Intercontinental Exchange and went public via a SPAC merger in October 2021. That heritage is the source of its principal asset: the licensing stack. Its subsidiary holds a New York BitLicense, money transmitter licences across US states where required, and is registered with FinCEN as a money services business.</p>
+
+  <h3>Three stated growth engines</h3>
+  <p>Since the January 2026 rebrand from Bakkt Holdings, Inc. to Bakkt, Inc., management organises the business around three pillars:</p>
+  <ul>
+    <li><b>Bakkt Markets.</b> The legacy business. APIs and an embedded web experience through which partner firms offer buying, selling and holding of around 45 digital assets. Essentially all current revenue originates here.</li>
+    <li><b>Bakkt Agent.</b> An unlaunched software layer intended to handle onboarding, account creation, funding and cross-border money movement programmatically. Guided to a Q3 2026 launch. It produces no revenue.</li>
+    <li><b>Bakkt Global.</b> Not an operating business but an investment portfolio: roughly 28% of Bitcoin Japan Corporation, Tokyo-listed, and a warrant position in Transchem Limited, BSE-listed, in India.</li>
+  </ul>
+
+  <div class="note">
+    <p>Bakkt Global is a holding company activity rather than a service anyone buys. The Strategic Asset Value KPI reports the mark on an investment portfolio, not operating performance. Two of the three pillars are therefore pre-revenue or non-operating.</p>
+  </div>
+
+  <h3>The digital asset treasury strategy underneath</h3>
+  <p>Recent filings carry extensive language about an updated investment policy and related treasury strategy, including risk factors on digital asset price volatility, fair-value accounting of holdings, exposure to the corporate alternative minimum tax on unrealised gains, and competition by other Bitcoin treasury companies. Board appointments align: Mike Alfred, a director of IREN and Eaglebrook Advisors, and Lyn Alden, a Swan Bitcoin director and general partner at Ego Death Capital, joined in autumn 2025.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Public commentary from one of Bakkt's own directors describes the structure as deliberate: Bitcoin held not on the US parent's balance sheet but on the balance sheets of overseas listed entities that Bakkt indirectly controls or holds stakes in, namely Bitcoin Japan and prospectively Transchem.</p>
+    <p>If accurate, that reframes Bakkt Global from a geographic diversification programme into an indirect offshore vehicle for Bitcoin exposure, which would mean the Strategic Asset Value KPI carries more crypto beta than a portfolio of foreign financial stakes implies. This structure has not been confirmed from the 10-Q, and the source is a secondary account of a director's remarks rather than a company disclosure. It is a hypothesis to verify at the 10 August report, not an established fact.</p>
+  </div>
+
+  <p>Bakkt reports as a single operating segment. The three-engine framing is a management narrative, not a reporting structure with separate audited financials behind it.</p>
+  <p class="sub"><b>Sources:</b> 10-Q Q1 2026, Notes 1, 2 and 6; press releases 12 January 2026, 11 May 2026 and 4 June 2026; Q1 2026 earnings call.</p>
+</section>
+
+<!-- ===================== 3. REVENUE STREAMS ===================== -->
+<section id="s3">
+  <h2 class="sec"><span class="n">03</span>Revenue streams</h2>
+  <p class="sub">Gross revenue is almost entirely pass-through. The retained figure is the one that carries analytical weight.</p>
+
+  <p>When a partner's customer buys $1,000 of Bitcoin through the platform, Bakkt books close to the full $1,000 as revenue and books the cost of acquiring that Bitcoin as crypto costs. It retains the spread. The accounting is conventional; the effect on the top line is not.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Q1 2026, simplified</th><th class="num">Amount</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Crypto services revenue, gross</td><td class="num">$243.6M</td><td><span class="tag">Filed</span> 10-Q Q1 2026</td></tr>
+      <tr><td class="lbl">Less crypto costs</td><td class="num neg-t">($240.0M)</td><td><span class="tag">Filed</span> 10-Q Q1 2026</td></tr>
+      <tr><td class="lbl">Less execution, clearing and brokerage fees</td><td class="num neg-t">($2.0M)</td><td><span class="tag">Filed</span> 10-Q Q1 2026</td></tr>
+      <tr><td class="lbl">Retained revenue</td><td class="num">$1.6M</td><td><span class="tag">Estimate</span> the two lines above subtracted from revenue</td></tr>
+      <tr><td class="lbl">Less controllable operating expenses</td><td class="num neg-t">($18.6M)</td><td><span class="tag">Filed</span> 10-Q Q1 2026</td></tr>
+      <tr><td class="lbl">Operating loss, continuing operations</td><td class="num neg-t">($16.9M)</td><td><span class="tag">Filed</span> 10-Q Q1 2026</td></tr>
+      <tr><td class="lbl">Net loss</td><td class="num neg-t">($11.7M)</td><td><span class="tag">Filed</span> 10-Q Q1 2026</td></tr>
+      <tr><td class="lbl">Adjusted EBITDA, company-defined</td><td class="num neg-t">($13.7M)</td><td><span class="tag">Filed</span> Q1 2026 results release</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>The two deducted lines total $242.0M, which is 99.3% of gross revenue. Retained revenue was $3.4M in Q1 2025 against $1,065.8M of gross revenue, so the retained line fell 52% year over year while the gross line fell 77%.</p>
+
+  <p>Within gross revenue the split is stark: transaction revenue was $243.4M and service revenue, covering subscription and software, was $0.197M. A company describing itself as infrastructure software currently earns almost nothing from recurring software fees. Revenue from outside the United States was $31.5M in the quarter.</p>
+
+  <h3>The KPIs management introduced</h3>
+  <ul>
+    <li><b>Total Transacting Volume for Markets:</b> approximately $241M in Q1 2026, against a stated year-end estimate of approximately $2.5B.</li>
+    <li><b>Monthly Active Users for Agent:</b> reporting to begin only after the product launches.</li>
+    <li><b>Strategic Asset Value for Global:</b> approximately $76M at quarter-end against roughly $21M of capital committed.</li>
+  </ul>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Bakkt retained $1.6M on $241M of Total Transacting Volume, an implied take rate of about 0.68%. Holding that take rate, breakeven against the current annualised controllable cost base of roughly $74M would require about $10.9B of annual volume, roughly eleven times the current annualised run rate.</p>
+    <p>Reading the $2.5B year-end figure generously as an annualised run rate implies roughly $17M of retained revenue against a $74M cost base. The company has published no path to profitability, and none is asserted here. The arithmetic states the size of the gap.</p>
+  </div>
+  <p class="sub"><b>Sources:</b> 10-Q Q1 2026, consolidated statements of operations and Note 4; Q1 2026 results release and earnings call, 11 May 2026. Take rate and breakeven figures are analyst calculations from those disclosures.</p>
+</section>
+
+<!-- ===================== 4. INDUSTRY & MARKET BACKDROP ===================== -->
+<section id="s4">
+  <h2 class="sec"><span class="n">04</span>Industry &amp; market backdrop</h2>
+
+  <h3>Stablecoin float and stablecoin throughput have diverged</h3>
+  <p>As of mid-2026 the sector has split, and the split governs how the backdrop reads for a transaction-fee business.</p>
+
+  <div class="note caution">
+    <p><b>Float is contracting.</b> Total stablecoin market capitalisation fell to roughly $310B by late July 2026, down more than $10B from its May peak, the largest monthly decline since the Terra collapse in May 2022. One contributing mechanism is the GENIUS Act prohibition on issuers paying interest on payment stablecoins, which has moved capital toward yield-bearing alternatives.</p>
+    <p><b>Throughput is rising.</b> Over the same period, adjusted stablecoin transaction volume reached a record $1.79 trillion in June 2026, up 63% month over month.</p>
+    <p><b>The second figure is the one that bears on Bakkt,</b> which earns a spread on transactions rather than a yield on float. A contracting float with rising throughput is a more favourable configuration for a transaction-fee business than the reverse, though it also describes a sector losing capital even as its rails are used harder.</p>
+  </div>
+
+  <p>Estimates of real-economy stablecoin payment volume put 2025 between $350B and $550B, growing around 60% year over year, with business-to-business settlement roughly 60% of the total.</p>
+
+  <h3>Regulation cuts both ways</h3>
+  <p>The GENIUS Act established a federal framework for payment stablecoins, and the European MiCA regime is in hard enforcement. For a licensed operator this is a tailwind: regulated counterparties can transact without legal ambiguity. The same clarity invites banks in. Commentary through 2026 has flagged that large depository institutions are the best-positioned stablecoin issuers and that non-bank fintechs face consolidation pressure.</p>
+
+  <h3>Cross-border payments is the stated target</h3>
+  <p>Management cites a $44 trillion global payments market. Independent sizing of the stablecoin cross-border opportunity is smaller: one estimate puts the base addressable market at $17.9 trillion.</p>
+
+  <div class="note">
+    <p>Addressable market size does not indicate capture. Retained revenue last quarter was $1.6M. The distance between a $44 trillion market and $1.6M retained is where the risk sits, and market-size figures in company materials are context rather than evidence.</p>
+  </div>
+  <p class="sub"><b>Sources:</b> Deluair, April 2026; Tazapay 2026 stablecoin guide citing BCG and Allium Labs; Forbes and FXC Intelligence, 30 March 2026; ABA Banking Journal, July 2026; Wolters Kluwer, July 2026; Bakkt press release, 30 April 2026.</p>
+</section>
+
+<!-- ===================== 5. COMPETITIVE POSITION ===================== -->
+<section id="s5">
+  <h2 class="sec"><span class="n">05</span>Competitive position</h2>
+  <p class="sub">Named peers on comparable metrics. The category is regulated crypto and stablecoin infrastructure sold business to business.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Competitor</th><th>Position</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Zero Hash</td><td>Closest direct analogue: white-label trading, payments and custody via API. Reported 50+ US state licences and clients including Interactive Brokers and the Morgan Stanley E*TRADE platform.</td><td>Private</td></tr>
+      <tr><td class="lbl">Bridge</td><td>Branded stablecoin issuance with reserve-yield sharing, distributed through Stripe. Acquired for $1.1B in 2024.</td><td>Stripe-owned</td></tr>
+      <tr><td class="lbl">Paxos</td><td>Deepest multi-jurisdiction regulatory stack for white-label issuance.</td><td>Private</td></tr>
+      <tr><td class="lbl">Circle</td><td>Issuer of USDC; broadest distribution in stablecoins.</td><td>Public</td></tr>
+      <tr><td class="lbl">Fireblocks, Anchorage, BitGo</td><td>Institutional custody and settlement credentials.</td><td>Private / public</td></tr>
+      <tr><td class="lbl">Coinbase</td><td>Prime and infrastructure offerings, with a far larger balance sheet.</td><td>Public</td></tr>
+      <tr><td class="lbl">BVNK, Mural Pay, Ripple</td><td>Cross-border payment corridors and B2B settlement.</td><td>Private / private</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Where Bakkt sits</h3>
+  <ul>
+    <li><b>Advantage:</b> a US licensing stack inherited from its ICE origins that competitors would need years to replicate, plus the DTR technology it now owns outright rather than licenses.</li>
+    <li><b>Disadvantage of scale:</b> Zero Hash alone reports over $65B in settled volume against quarterly Total Transacting Volume of $241M at Bakkt. Bakkt reports roughly 48 employees, and its shares carry a beta of about 5.9.</li>
+    <li><b>Structural dependency:</b> custody is outsourced to BitGo, Coinbase Custody and Fireblocks Trust. Some custodians are also competitors, or competitors' infrastructure.</li>
+  </ul>
+  <p class="sub"><b>Sources:</b> Stablecoin Insider competitive reviews, June to July 2026; 10-Q Q1 2026, Note 1; Q1 2026 earnings call; Google Finance company profile, July 2026.</p>
+</section>
+
+<!-- ===================== 6. FINANCIAL PERFORMANCE ===================== -->
+<section id="s6">
+  <h2 class="sec"><span class="n">06</span>Financial performance</h2>
+  <p class="sub">The reported history requires adjustment, because the business has been repeatedly reshaped. The sequence, with dates, comes first.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th class="when">Date</th><th>Event</th><th>Consequence</th></tr></thead>
+    <tbody>
+      <tr><td class="when">17 Mar 2025</td><td>Webull and Bank of America both decline to renew</td><td>Webull was 74% of crypto services revenue; the stock fell 27% in a day</td></tr>
+      <tr><td class="when">21 Mar 2025</td><td>Akshay Naheta appointed co-CEO</td><td>Strategy pivots toward stablecoin payments</td></tr>
+      <tr><td class="when">15 May 2025</td><td>Bakkt Trust sold to ICE</td><td>$1.5M cash; $2.3M loss recognised</td></tr>
+      <tr><td class="when">Jun 2025</td><td>$25M convertible debenture issued to Yorkville</td><td>$17.5M later converted to shares; $7.5M redeemed</td></tr>
+      <tr><td class="when">1 Oct 2025</td><td>Loyalty business sold</td><td>Reported as discontinued operations; Bakkt later sued the buyer</td></tr>
+      <tr><td class="when">3 Nov 2025</td><td>Up-C structure collapsed</td><td>Single share class; $26.9M tax receivable settlement expense</td></tr>
+      <tr><td class="when">22 Jan 2026</td><td>Renamed Bakkt, Inc.</td><td>n/a</td></tr>
+      <tr><td class="when">30 Apr 2026</td><td>DTR acquisition closes</td><td>11.3M shares issued to the CEO and other holders</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>The numbers</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Metric</th><th class="num">FY 2025</th><th class="num">Q1 2025</th><th class="num">Q1 2026</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">GAAP revenue</td><td class="num">$2,335.2M</td><td class="num">$1,065.8M</td><td class="num">$243.6M</td></tr>
+      <tr><td class="lbl">Change year over year</td><td class="num neg-t">&minus;32.1%</td><td class="num">n/a</td><td class="num neg-t">&minus;77.1%</td></tr>
+      <tr><td class="lbl">Retained revenue</td><td class="num">n/d</td><td class="num">$3.4M</td><td class="num">$1.6M</td></tr>
+      <tr><td class="lbl">Net loss, continuing operations</td><td class="num neg-t">($97.7M)</td><td class="num pos-t">+$19.4M</td><td class="num neg-t">($11.7M)</td></tr>
+      <tr><td class="lbl">EPS, basic and diluted</td><td class="num">n/d</td><td class="num pos-t">+$1.18</td><td class="num neg-t">($0.41)</td></tr>
+      <tr><td class="lbl">Operating cash flow</td><td class="num">n/d</td><td class="num neg-t">($101.3M)</td><td class="num neg-t">($12.1M)</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="note caution">
+    <p>Two cautions on that table. Q1 2025 positive net income was not operating profit: it was driven by a $32.2M non-cash gain on revaluation of warrant liabilities. The FY2025 net loss was inflated by one-off items, principally the $26.9M tax receivable settlement and share-based compensation booked in Q4.</p>
+  </div>
+
+  <h3>Balance sheet at 31 March 2026</h3>
+  <ul>
+    <li>Cash and cash equivalents $80.0M, plus $2.6M restricted, giving the $82.6M management quotes.</li>
+    <li>Customer funds of $17.4M sit on both sides of the balance sheet. This is client money, not the company's.</li>
+    <li>No long-term debt. The ICE credit facility was terminated in July 2025 and the convertible debenture is fully retired.</li>
+    <li>Goodwill $64.7M, against accumulated goodwill impairments of $1,511.3M, so roughly $1.5 billion of prior acquisition value has already been written off.</li>
+    <li>Accumulated deficit $916.8M.</li>
+    <li>Loyalty-sale receivables of roughly $19.4M, comprising a $5.0M receivable, a $5.1M promissory note, $6.8M of advances and $2.5M in escrow, all owed by a counterparty Bakkt is litigating against.</li>
+  </ul>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The Q1 2026 10-Q carries a full going concern discussion, and management concluded that cash will be sufficient to fund operations for twelve months from the filing date. That is not a substantial doubt statement.</p>
+    <p>The operative caveat is that management's analysis excludes activation of new clients or products not yet live on the platform. The twelve-month conclusion therefore rests on the existing business plus the cash raised in early 2026, not on the growth plan.</p>
+  </div>
+  <p class="sub"><b>Sources:</b> 10-Q Q1 2026, balance sheet, statements of operations and cash flows, Notes 2, 3, 5, 6, 7, 8 and 9; FY2025 results release, 16 March 2026; Form 8-K, 17 March 2025.</p>
+</section>
+
+<!-- ===================== 7. CAPITAL STRUCTURE & DILUTION ===================== -->
+<section id="s7">
+  <h2 class="sec"><span class="n">07</span>Capital structure &amp; dilution</h2>
+  <p class="sub">Shares, warrants, the ATM, the shelf, the resale registration, and the ownership register.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th class="when">Date</th><th class="num">Shares outstanding</th><th>Driver</th></tr></thead>
+    <tbody>
+      <tr><td class="when">31 Dec 2024</td><td class="num">13.69M</td><td>Class A and Class V combined</td></tr>
+      <tr><td class="when">31 Dec 2025</td><td class="num">25.52M</td><td>Debenture conversions, Up-C collapse, tax receivable settlement shares</td></tr>
+      <tr><td class="when">31 Mar 2026</td><td class="num">30.71M</td><td>$21.5M ATM plus $48.1M registered direct</td></tr>
+      <tr><td class="when">Apr 2026</td><td class="num">+2.48M</td><td>February pre-funded warrants exercised in full, 2,475,201 shares issued</td></tr>
+      <tr><td class="when">5 May 2026</td><td class="num">44.61M</td><td>11.32M shares issued for DTR</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>That is roughly 226% growth in share count over about seventeen months. A 1-for-25 reverse split in April 2024 accounts for the shape of the historical price series.</p>
+
+  <h3>Channels that could dilute further</h3>
+  <ul>
+    <li>Roughly 9.2 million listed warrants: 7.14M public, 1.15M Class 1, 0.86M Class 2.</li>
+    <li>Up to 725,592 additional DTR consideration shares if those warrants are exercised, under an anti-dilution ratchet held by the DTR sellers.</li>
+    <li>An at-the-market equity programme established under a Sales Agreement dated 16 January 2026 with seven sales agents, carrying authorised capacity of up to $300M, of which $21.5M gross and $20.8M net had been drawn on 1,990,434 shares by 31 March 2026. The authorised capacity is close to the whole market capitalisation.</li>
+    <li>ICE Series A non-voting convertible preferred, convertible one for one into common on antitrust clearance.</li>
+    <li>Gyzer warrants over 250,000 shares held by the Chief Commercial Officer, exercisable for roughly $2.5M in aggregate.</li>
+  </ul>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The ICE Class 1 and Class 2 Warrants, 230,680 of each, carry an exercise price of $25.50 and expire in September 2029. Against a share price near $7 they are far out of the money.</p>
+    <p>Because the DTR anti-dilution ratchet is triggered by warrant exercise, a ratchet that depends on those exercises is correspondingly unlikely to operate. Treating warrant-driven dilution and the ratchet it would trigger as probable near-term events overstates both.</p>
+  </div>
+
+  <h3>The resale registration</h3>
+  <p>On 12 May 2026 Bakkt filed a registration statement covering the resale of up to 21,010,640 shares of Class A common stock. The company's own risk factors state that, measured against shares outstanding at 30 April 2026, this represents approximately 43.9% of total outstanding voting securities.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Selling stockholder</th><th class="num">Maximum shares registered</th><th>Relationship</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Akshay Naheta</td><td class="num">8,926,320</td><td>CEO, President, director</td></tr>
+      <tr><td class="lbl">Intercontinental Exchange Holdings</td><td class="num">8,380,362</td><td>Former majority owner</td></tr>
+      <tr><td class="lbl">Clear Haven STAR Trust</td><td class="num">1,498,750</td><td>DTR holder</td></tr>
+      <tr><td class="lbl">Lotus Grove Trust</td><td class="num">782,780</td><td>Trust for Naheta family members</td></tr>
+      <tr><td class="lbl">Others: DTR holders, Cohen, Loeffler, Ishag</td><td class="num">1,422,428</td><td>Various</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>The registration was declared effective on 28 May 2026, with its prospectus filed the previous day, so the shares have been freely saleable for nine weeks rather than merely registered. There is no lock-up on the DTR consideration shares. The Registration Rights Agreement obligated Bakkt to file a resale registration within five business days of the DTR closing. Registration is permission rather than prediction: the selling stockholders may sell all, some or none, and the CEO's sales are further constrained by blackout periods given his access to material non-public information. The legal impediment is removed, and the filing itself describes the result as a public market overhang.</p>
+
+  <h3>Ownership register</h3>
+  <p>ICE, once the majority owner, held 7,919,002 shares, or 16.5% of Class A, as of 30 April 2026, a stake diluted by issuance rather than by selling. On 27 July 2026 BlackRock filed a Schedule 13G reporting beneficial ownership of 2,452,659 shares, or 5.5% of Class A, as of 30 June 2026, with sole voting power over 2,419,374 and sole dispositive power over the full position. The filing is made under Exchange Act Rule 13d-1(b) and certifies the stake is held passively, in the ordinary course, and not to influence control.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The BlackRock position of 2,452,659 shares equates to 5.5% only against a denominator of roughly 44.6 million shares. That corroborates the 10-Q cover figure of 44,612,329 over the resale prospectus figure of 47,866,956, and is why this report uses the lower number. The discrepancy is not fully explained.</p>
+  </div>
+
+  <h3>The $7.0M insider purchase</h3>
+  <p>Director Michael Alfred acquired 865,000 shares of Class A common stock in open-market purchases through Alpine Fox LP, a limited partnership he controls: 365,000 shares on 15 May 2026 at a weighted-average $8.34, 220,000 on 18 May at $8.20, 180,000 on 9 June at $7.71 and 100,000 on 10 June at $7.83. That is roughly $7.0M committed at prices between $7.52 and $8.93, leaving Alpine Fox holding 905,000 shares. He holds a further 28,476 shares directly, subject to unvested restricted stock units.</p>
+  <p>Set against it, every other disclosed insider transaction in the period is a withholding-scale sale: 3,789, 4,684 and 2,352 shares by the General Counsel, CFO and COO on 29 April 2026; 1,562, 1,907 and 1,562 shares by the same three on 29 June; and 539, 657 and 94 shares on 15 July.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>This is a single director rather than a board, and Alfred is the director most closely associated with the digital asset treasury posture described in business model above, so his purchase is partly a view on that strategy rather than on the operating business alone. He also served on the Special Committee that approved the DTR acquisition. The purchases are nonetheless the only open-market buying above withholding scale in the record, made after the Q1 results and after the resale registration was filed, and at prices above the current $7.17.</p>
+  </div>
+
+  <h3>Float and short interest</h3>
+  <p>Because ICE, the CEO, DTR holders and other affiliates hold most of the register, the tradable float is only about 26.73 million shares, roughly 60% of shares outstanding.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Supply and demand structure</th><th class="num">Figure</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Shares outstanding</td><td class="num">44.61M</td><td><span class="tag">Filed</span> 10-Q cover, Q1 2026</td></tr>
+      <tr><td class="lbl">Public float</td><td class="num">~26.73M</td><td><span class="tag">Market</span> 31 Jul 2026</td></tr>
+      <tr><td class="lbl">Shares sold short</td><td class="num">~6.3M</td><td><span class="tag">Market</span> 31 Jul 2026</td></tr>
+      <tr><td class="lbl">Short interest as share of float</td><td class="num">~23.6%</td><td><span class="tag">Market</span> 31 Jul 2026</td></tr>
+      <tr><td class="lbl">Change in short interest since Jul 2025</td><td class="num">+216.8%</td><td><span class="tag">Market</span> 31 Jul 2026</td></tr>
+      <tr><td class="lbl">Days to cover</td><td class="num">~6.5</td><td><span class="tag">Market</span> 31 Jul 2026</td></tr>
+      <tr><td class="lbl">Shares registered for insider resale</td><td class="num">21.01M</td><td><span class="tag">Filed</span> Form S-3, 12 May 2026</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>Roughly a quarter of the tradable float is sold short and the position has more than tripled in a year. Two consequences follow and both are real. A thin float with heavy short interest and 6.5 days to cover means favourable news can force covering into limited supply, and unfavourable news meets few natural buyers, which is consistent with a beta near 5.9 and a 52-week range from $6.75 to $49.79. It is also a large standing position against the company: a 216.8% increase over twelve months describes how a body of capital reads the same filings. The 10 August results land into this structure.</p>
+
+  <h3>The second related-party acquisition</h3>
+  <p>In May 2026, three weeks after closing DTR, Bakkt acquired Gyzer Inc., a digital asset payments business, from Daniel Ishag, its own Chief Commercial Officer and Gyzer's sole stockholder. Consideration was 94,595 shares plus warrants over 250,000 shares, exercisable for roughly $2.5M in aggregate.</p>
+  <p>The transaction is small in dollar terms. It matters as a pattern: within roughly six weeks Bakkt acquired companies from two of its own senior executives. Unlike DTR, no independent special committee process is described in the filings reviewed for Gyzer.</p>
+
+  <div class="note">
+    <p>On DTR itself: a Special Committee of independent directors reviewed and approved the transaction, the CEO recused himself, and shareholders voted. Per the Form 8-K/A filed 16 July 2026, DTR reported no revenue for FY2025, a net loss of &euro;8.4M, total assets of &euro;5.1M and equity of &euro;2.7M, and generated &euro;41,909 of revenue in Q1 2026. At the $8.65 VWAP used in the deal, the 11.3 million shares were worth roughly $98M. Whether that price is defensible turns on the value of unproven technology, which cannot be verified externally.</p>
+  </div>
+
+  <h3>Management incentives</h3>
+  <p>The March 2025 inducement grant to Naheta, made outside the shareholder-approved plan under NYSE Listed Company Manual Rule 303A.08, comprised 1,607,717 performance stock units and 11,426 RSUs with a grant-date value of roughly $15M. Vesting is tied to share price hurdles, the first of which was $18.66. The stock closed at $7.17 on 31 July 2026, about 62% below that hurdle, and the performance period runs to 21 March 2028. Two readings hold simultaneously: the alignment is real, since the award pays only if the shares regain the $18.66 hurdle; and the same fact removes near-term incentive to sell into the resale registration. The 2026 proxy also discloses $1.5M of severance to former Co-CEO Andrew Main and $250,000 of special committee compensation for the 2025 strategic review.</p>
+  <p class="sub"><b>Sources:</b> 10-Q Q1 2026, cover page, Note 9 and Note 11; Form 8-K/A, 16 July 2026; Form S-3, 12 May 2026; press releases 20 January 2026, 27 February 2026 and 30 April 2026; ICE Schedule 13D/A, May 2026; BlackRock Schedule 13G, 27 July 2026; 2026 proxy statement.</p>
+</section>
+
+<!-- ===================== 8. VALUATION ===================== -->
+<section id="s8">
+  <h2 class="sec"><span class="n">08</span>Valuation</h2>
+  <p class="sub">Multiples with their basis and pricing date. No target price is derived here.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Approach</th><th class="num">Result</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Price / sales on GAAP revenue</td><td class="num">~0.33&times;</td><td>Uninformative. Revenue is 99% pass-through.</td></tr>
+      <tr><td class="lbl">Price / earnings</td><td class="num">n/m</td><td>Loss-making.</td></tr>
+      <tr><td class="lbl">EV / retained revenue, annualised</td><td class="num">~37&times;</td><td>The multiple that carries information.</td></tr>
+      <tr><td class="lbl">Price / book, pre-DTR equity $170.9M</td><td class="num">~2.0&times;</td><td>Approximate; book includes $64.7M goodwill.</td></tr>
+      <tr><td class="lbl">Cash per share</td><td class="num">~$1.85</td><td>$82.6M over 44.61M shares, 26% of the share price.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Enterprise value: $319.9M market capitalisation, being 44.61M shares at the $7.17 close of 31 July 2026, less $82.6M cash and no debt, approximately $237M. Against annualised retained revenue of about $6.4M, being Q1 multiplied by four, that is roughly 37 times retained revenue. Three caveats attach: a 31 March balance sheet is paired with a 31 July market capitalisation; the $12.0M warrant liability is excluded as non-cash; and annualising a single quarter of a volatile business is crude.</p>
+    <p>The share count is disputed. The Q1 10-Q cover page reports 44,612,329 shares outstanding as of early May 2026. The resale prospectus states 47,866,956 shares outstanding as of 30 April 2026, 3.25 million higher on an earlier date. The February pre-funded warrants over 2,475,201 shares were previously offered here as the likely explanation. The Q1 10-Q discloses that they were exercised in full in April 2026 and the shares issued, so they sit inside both counts and account for none of the gap. The 3.25 million difference is unreconciled, and the earlier explanation is withdrawn rather than reduced. Market data providers use the 10-Q figure and so does this report. On the prospectus figure, market capitalisation would instead be about $343M.</p>
+  </div>
+
+  <h3>Strategic Asset Value against the audited carrying values</h3>
+  <p>Management reported roughly $76M of Strategic Asset Value at Q1-end. It does not reconcile straightforwardly to the balance sheet:</p>
+  <ul>
+    <li>The 10-Q carries the Bitcoin Japan stake as an equity method investment of $10.9M, and separately discloses that its value at the public trading price was approximately $16.5M at 31 March 2026.</li>
+    <li>On the earnings call, management described the same position as having moved to roughly $31.7M, and cited an illustrative $44.3M mark for the India position.</li>
+    <li>The India warrants were allotted only in June 2026, after regulatory approval, which is after the quarter being reported on.</li>
+  </ul>
+  <p>These figures are not necessarily inconsistent: they measure different things at different dates on different bases. Strategic Asset Value is a company-defined, non-GAAP construct and is materially larger than the GAAP carrying values, in the sense that $76M exceeds the $10.9M equity method figure by roughly seven times. A sum-of-the-parts valuation should use the audited numbers and treat the KPI as management commentary.</p>
+
+  <p>On India, Bakkt paid roughly $9.4M for 25% of the Transchem subscription. The remaining 75%, roughly $28M, is payable only if it exercises within an 18-month window, and does not appear as a liability today.</p>
+
+  <h3>Third-party coverage</h3>
+  <p>Benchmark maintained a Buy rating while cutting its price target from $22 to $19 on 13 May 2026. <span class="tag">Market</span> Coverage is thin, at one to two analysts, so consensus figures carry little information. That target and rating are the published view of the firm named and are reported here as market data. This report issues no rating and derives no target of its own, and the Benchmark target is not used to anchor any conclusion above.</p>
+
+  <h3>What that target rests on</h3>
+  <p>Two things about it are worth stating, because a target is a claim about a moment and this one is now eleven weeks old.</p>
+  <p><b>The firm publishing it is also a distribution agent for the issuer.</b> The Benchmark Company, LLC is one of seven sales agents named in the Sales Agreement dated 16 January 2026 through which Bakkt may sell up to $300M of common stock at the market. <span class="tag">Filed</span> A firm that earns fees placing an issuer's stock is not a disinterested source of a target on that stock. This is disclosed in the quarterly report rather than hidden, and it does not make the target wrong; it does mean the target is not independent research, and this report treats it accordingly.</p>
+  <p><b>It predates the events most likely to bear on it.</b> The target was struck on 13 May 2026, one day after the resale registration was filed and fifteen days before it was declared effective, so it precedes the 44% overhang becoming live. It also predates the June director purchases, the further build in short interest to about 23.6% of float, and the fall in the shares from roughly $8.7 to $7.17. At the current price a $19 target implies about 165% upside, which is a larger gap than when it was set.</p>
+  <p>Analysing what a target assumes is in scope here; adopting it is not. No part of the valuation above rests on it.</p>
+  <p class="sub"><b>Sources:</b> 10-Q Q1 2026, balance sheet and Note 6; Q1 2026 earnings call, 11 May 2026; press release 4 June 2026; Morningstar and Robinhood quote data, 23 to 25 July 2026; Investing.com, May 2026. Multiples are analyst calculations.</p>
+</section>
+
+<!-- ===================== 9. GROWTH DRIVERS ===================== -->
+<section id="s9">
+  <h2 class="sec"><span class="n">09</span>Growth drivers</h2>
+  <p class="sub">Separating what is contracted from what is stated.</p>
+
+  <h3>Disclosed</h3>
+  <ul>
+    <li>DTR owned outright, previously licensed under a July 2025 commercial agreement, so no third party is paid for the settlement engine.</li>
+    <li>Nexo partnership announced 17 February 2026, under Bakkt Markets.</li>
+    <li>A debt-free balance sheet with $82.6M of cash.</li>
+    <li>Regulatory licences that competitors would need years to replicate.</li>
+    <li>Daniel Ishag appointed Chief Commercial Officer to rebuild the sales organisation. Bakkt also acquired his company, Gyzer Inc., in May 2026, covered in capital structure above.</li>
+    <li>India regulatory approval received 4 June 2026, unlocking the Transchem structure.</li>
+  </ul>
+
+  <h3>Stated intentions, not yet revenue</h3>
+  <ul>
+    <li>Bakkt Agent launch, guided for Q3 2026.</li>
+    <li>The Zoth memorandum of understanding, with a stated partnership target of roughly $1B annualised volume by year-end 2026 against roughly $300M today.</li>
+    <li>Expansion from 60+ to 90+ jurisdictions by year-end.</li>
+    <li>A platform upgrade supporting 200+ assets in H2 2026.</li>
+    <li>Transchem's potential acquisition of a SEBI-regulated broking business, subject to approvals that have not been obtained.</li>
+  </ul>
+
+  <div class="note caution">
+    <p>Every item in the second list is a partnership announcement, a memorandum, or a launch date. None is a signed revenue contract of disclosed size.</p>
+  </div>
+  <p class="sub"><b>Sources:</b> press releases 17 February 2026, 30 April 2026, 11 May 2026 and 4 June 2026; Q1 2026 earnings call; 10-Q Q1 2026, Note 9.</p>
+</section>
+
+<!-- ===================== 10. RISKS ===================== -->
+<section id="s10">
+  <h2 class="sec"><span class="n">10</span>Risks</h2>
+  <p class="sub">Severity-ranked, most severe first.</p>
+
+  <div class="risk sev-high"><h4>The unit economics do not currently work <span class="sev">Severe</span></h4>
+    <p>$1.6M retained per quarter against $18.6M of controllable costs. Closing that gap requires roughly an order-of-magnitude increase in volume at the current take rate.</p></div>
+
+  <div class="risk sev-high"><h4>Customer concentration, demonstrated <span class="sev">Severe</span></h4>
+    <p>Webull was 74% of crypto services revenue and did not renew. No disclosure shows that today's revenue is more diversified.</p></div>
+
+  <div class="risk sev-high"><h4>Continuing dilution and a 44% resale overhang <span class="sev">Severe</span></h4>
+    <p>Share count up 226% in seventeen months, an active ATM programme, and a registration statement covering the resale of 21,010,640 shares, roughly 44% of the company, by holders including the CEO and ICE. Operating progress can be real while per-share value erodes.</p></div>
+
+  <div class="risk sev-high"><h4>Trading near the 52-week low, with a live impairment trigger <span class="sev">Severe</span></h4>
+    <p>At $7.17 the shares sit 6% above the 52-week low of $6.75, 18% below the $8.75 February placement price and 17% below the $8.65 VWAP used to value DTR. The company's own disclosure names a decline in market capitalisation as a goodwill impairment trigger, so that condition is live rather than hypothetical, and ATM usage at these levels is more dilutive per dollar raised.</p></div>
+
+  <div class="risk sev-high"><h4>Execution dependency on unlaunched products <span class="sev">Severe</span></h4>
+    <p>Two of three growth engines produce no revenue. Bakkt Agent has never shipped.</p></div>
+
+  <div class="risk sev-med"><h4>Related-party governance, a pattern rather than an event <span class="sev">Moderate</span></h4>
+    <p>The CEO sold his own company to the company he runs for roughly 31.5% of it. Three weeks later Bakkt acquired Gyzer from its Chief Commercial Officer. An independent committee process was followed for DTR; no equivalent process is described for Gyzer in the filings reviewed.</p></div>
+
+  <div class="risk sev-med"><h4>Thin float, heavy short interest, thin coverage <span class="sev">Moderate</span></h4>
+    <p>Only about 26.73M of 44.61M shares are freely tradable, and roughly 23.6% of that float is sold short, up 216.8% in a year at about 6.5 days to cover. With one to two analysts, a beta near 5.9 and a 52-week range of $6.75 to $49.79, price can detach from fundamentals in both directions.</p></div>
+
+  <div class="risk sev-med"><h4>Auditor turnover <span class="sev">Moderate</span></h4>
+    <p>Three independent registered public accounting firms in three years: Ernst &amp; Young for FY2023, KPMG for FY2024 and Grant Thornton for FY2025, alongside late-filing notices for two consecutive annual reports.</p></div>
+
+  <div class="risk sev-med"><h4>Digital asset treasury exposure of undisclosed magnitude <span class="sev">Moderate</span></h4>
+    <p>Filings reference an updated investment policy and treasury strategy with risk factors covering digital asset price volatility, fair-value accounting and corporate alternative minimum tax on unrealised gains. The size and location of any holdings are not clear from the filings reviewed.</p></div>
+
+  <div class="risk sev-med"><h4>Securities class action <span class="sev">Moderate</span></h4>
+    <p>Filed April 2025 over disclosure of the Webull and Bank of America dependencies. Such cases typically take years and settle more often than not.</p></div>
+
+  <div class="risk sev-med"><h4>Litigation against the loyalty buyer <span class="sev">Moderate</span></h4>
+    <p>Roughly $19.4M of receivables, notes, advances and escrow is tied to that counterparty.</p></div>
+
+  <div class="risk sev-med"><h4>Competition from larger balance sheets <span class="sev">Moderate</span></h4>
+    <p>Zero Hash, Bridge and Stripe, Paxos, Circle and Coinbase are all better capitalised, and post-GENIUS Act banks are entering.</p></div>
+
+  <div class="risk sev-med"><h4>Undrawn capital commitment <span class="sev">Moderate</span></h4>
+    <p>Roughly $28M may be required to exercise the Transchem warrants within 18 months, over a third of current cash.</p></div>
+
+  <div class="risk sev-med"><h4>Custody outsourcing <span class="sev">Moderate</span></h4>
+    <p>Digital assets are held via BitGo, Coinbase Custody and Fireblocks Trust. Bakkt bears counterparty risk it does not control.</p></div>
+
+  <div class="risk sev-low"><h4>Reporting and control history <span class="sev">Lower</span></h4>
+    <p>Late-filing notices were filed for both the 2024 and 2025 annual reports.</p></div>
+
+  <div class="risk sev-low"><h4>Crypto price beta <span class="sev">Lower</span></h4>
+    <p>Transaction volumes rise and fall with crypto market activity, which Bakkt does not control.</p></div>
+  <p class="sub"><b>Sources:</b> 10-Q Q1 2026, forward-looking statements and Notes 5, 6, 9 and 16; class action reporting, April 2025; Simply Wall St filing calendar, March 2026; press release 4 June 2026.</p>
+</section>
+
+<!-- ===================== 11. BULL / BASE / BEAR ===================== -->
+<section id="s11">
+  <h2 class="sec"><span class="n">11</span>Bull / base / bear</h2>
+  <p class="sub">Each case with its preconditions. These are illustrative reasoning, not forecasts, and carry no probabilities.</p>
+  <div class="cases">
+    <div class="case bear"><h4>Bear</h4>
+      <p>Partner integrations slip, the Agent launch is delayed past 2026, and banks and better-capitalised infrastructure providers take the institutional mandates. Retained revenue stagnates while costs stay elevated by integration and professional fees. Cash falls toward the point where the $28M India commitment and the ATM become forced rather than opportunistic. DTR goodwill is tested and written down. Dilution accelerates at lower prices and the class action settles for a sum that matters against $82.6M of cash.</p>
+      <p class="req">Requires: only that the pipeline converts more slowly than management expects.</p></div>
+    <div class="case"><h4>Base</h4>
+      <p>Agent ships late or lands quietly. Total Transacting Volume grows off a small base but retained revenue stays in the single-digit millions per quarter. The company burns $10M to $15M a quarter, returns to the equity market within twelve to eighteen months, and share count keeps climbing. The equity trades as a volatile option on the stablecoin theme rather than on its own results, and the strategic investments supply mark-to-market noise.</p>
+      <p class="req">Requires: only that current trends continue.</p></div>
+    <div class="case bull"><h4>Bull</h4>
+      <p>Agent launches on schedule in Q3 2026 and converts the institutional pipeline. Volume compounds past the $2.5B marker as partner integrations activate, and the owned DTR stack lifts the take rate above 0.68% by capturing payment economics rather than brokerage spread alone. The Japan and India positions appreciate and are monetised. A licensed, debt-free operator below a $350M capitalisation becomes an acquisition target for a bank or payments incumbent.</p>
+      <p class="req">Requires: four things, being a successful launch, a step change in volume, an improved take rate, and no destructive dilution meanwhile.</p></div>
+  </div>
+  <p>The asymmetry is deliberate. The bull case requires several independent things to go right in sequence. The base and bear cases require nothing unusual to happen.</p>
+</section>
+
+<!-- ===================== 12. RESEARCH SUMMARY ===================== -->
+<section id="s12">
+  <h2 class="sec"><span class="n">12</span>Research summary</h2>
+
+  <h3>The question that resolves the name</h3>
+  <p>Can Bakkt grow transacting volume roughly tenfold, or materially raise the 0.68% take rate, before dilution and cash burn consume the equity value that exists today?</p>
+  <p>Every other debate is downstream of that. The licences, the CEO, the stablecoin market size, the Japan stake and the rebrand matter insofar as they move that ratio. If retained revenue is still near $1.6M a quarter when the Q4 2026 results land, the strategy has not yet worked, whatever partnerships were announced meanwhile.</p>
+
+  <h3>Where the company stands</h3>
+  <p>Bakkt is an early-stage business inside a formerly larger company's shell. Stripped of the loyalty division, the trust company and its dominant client, what remains is a licensed crypto and stablecoin infrastructure provider that retained $1.6M of revenue last quarter against $18.6M of controllable costs, holding $82.6M of cash with no long-term debt.</p>
+  <p><b>Improved over twelve months:</b> the balance sheet is clean, the capital structure is simplified to a single share class, the strategy is coherent, and the chosen market is heavily used, with stablecoin transaction volume at record levels even as float contracts.</p>
+  <p><b>Worse or unresolved:</b> the operating business is a fraction of its former size, retained revenue fell 52% year over year, holders have been diluted 226% in seventeen months, the two most recent acquisitions were both from sitting executives, a resale registration covering roughly 44% of the company is on file, the shares trade 6% above their 52-week low with a live goodwill impairment trigger, roughly a quarter of a thin float is sold short, and the growth case rests on products that have not launched and agreements that are memoranda.</p>
+  <p>The headline figure at every data provider, being roughly $975M of annualised revenue at a price to sales ratio under 0.35 times, points in the opposite direction from the underlying economics. The pass-through cost line is what reconciles them.</p>
+
+  <h3>Verification path</h3>
+  <ol>
+    <li>Q1 2026 10-Q, consolidated statement of operations: subtract crypto costs and execution fees from revenue before reading further.</li>
+    <li>The liquidity and going concern note, specifically the exclusion of not-yet-live clients and products from the forecast.</li>
+    <li>Note 9, related parties, for the DTR transaction terms, and the Form 8-K/A filed 16 July 2026 for DTR's own financial statements.</li>
+    <li>The 10-Q cover page share count against the prior year, which is the fastest dilution check available.</li>
+    <li>The Form S-3 resale prospectus filed 12 May 2026: the selling stockholders table shows who may sell how much, and the risk factors quantify the overhang at 43.9%.</li>
+    <li>At the Q2 2026 results on 10 August 2026: Total Transacting Volume and retained revenue before GAAP revenue, whether Agent launched, and any disclosure sizing the digital asset treasury holdings.</li>
+    <li>Forms 4 and 144 and any new 424B5 prospectus supplements for ATM usage since March. Recent insider dispositions have been withholding-scale, in the hundreds to low thousands of shares under a Rule 10b5-1 plan, so the signal is a change in magnitude rather than the existence of sales.</li>
+    <li>Schedule 13G and 13D filings for changes in institutional and ICE ownership, and short interest through the exchange's semi-monthly reports.</li>
+  </ol>
+</section>
+
+<!-- ===================== 13. NULL CATEGORIES ===================== -->
+<section id="s13">
+  <h2 class="sec"><span class="n">13</span>Null categories</h2>
+  <p class="sub">Categories with nothing to report. Status reads Covered above, None where a named source was checked and found empty, or Not established where the category was not examined. A category nobody looked at is a gap, not an absence.</p>
+  <div class="tw"><table class="nulls">
+    <thead><tr><th>Category</th><th>Status</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Signed contracts of disclosed value</td><td class="status">None</td><td>Press releases through 4 June 2026 reviewed. The Nexo partnership and the Zoth memorandum carry no disclosed contract value, terms or take rate.</td></tr>
+      <tr><td class="lbl">Long-term debt and refinancing</td><td class="status">None</td><td>10-Q Q1 2026 balance sheet. The ICE facility was terminated in July 2025 and the convertible debenture is retired.</td></tr>
+      <tr><td class="lbl">Analyst coverage</td><td class="status">Covered above</td><td>Valuation, section 08: Benchmark, one to two analysts total.</td></tr>
+      <tr><td class="lbl">Price target derived by this report</td><td class="status">None</td><td>No target is derived. The Benchmark target is reported as market data only.</td></tr>
+      <tr><td class="lbl">Dividends</td><td class="status">None</td><td>Q1 2026 10-Q, Note 11, stockholders' equity: no dividend is declared or paid, and the company carries an accumulated deficit of $916.8M. Market data at the 31 July 2026 close shows a trailing and forward dividend yield of zero.</td></tr>
+      <tr><td class="lbl">Share buybacks</td><td class="status">None</td><td>Q1 2026 10-Q, Note 11: no repurchase programme is authorised or disclosed. Every equity action described is an issuance, and share count rose about 226% over seventeen months.</td></tr>
+      <tr><td class="lbl">FY2025 retained revenue, EPS and operating cash flow</td><td class="status caution-t">Not established</td><td>Shown as n/d in financial performance, section 06. Not derived in this pass.</td></tr>
+      <tr><td class="lbl">Segment reporting below the consolidated level</td><td class="status">None</td><td>10-Q Q1 2026: the company reports as a single operating segment, so no segment split exists to report.</td></tr>
+      <tr><td class="lbl">Gyzer special committee process</td><td class="status caution-t">Not established</td><td>No such process is described in the filings reviewed. Absence of description is not evidence of absence.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 14. METHODOLOGY & SOURCES ===================== -->
+<section id="s14">
+  <h2 class="sec"><span class="n">14</span>Methodology &amp; sources</h2>
+
+  <h3>Pricing basis and tagging</h3>
+  <p>Figures are priced off the 31 July 2026 close of $7.17. The as-of stamp is 2 August 2026, the build date, which is later than the close the figures come from. Every figure in a table Basis column and in the masthead strip carries a provenance tag, defined below.</p>
+  <p>All figures are drawn from Bakkt SEC filings and press releases, supplemented by third-party market data where named. Calculations described as analyst calculations are arithmetic performed on disclosed figures.</p>
+
+  <h3>Provenance tags</h3>
+  <p class="sub">The four tags used throughout this document, and what each asserts.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Tag</th><th>What it asserts</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl"><span class="tag">Filed</span></td><td>Stated in an SEC filing or company release, cited by form and date. Also covers a dated official publication by a named non-SEC issuer, with the issuer named in the source line: a court docket, a central bank statement, a conference schedule published by its organiser.</td></tr>
+      <tr><td class="lbl"><span class="tag">Estimate</span></td><td>Derived or inferred here. The arithmetic is shown.</td></tr>
+      <tr><td class="lbl"><span class="tag">Open</span></td><td>Expected but unconfirmed. Nothing filed either way.</td></tr>
+      <tr><td class="lbl"><span class="tag">Market</span></td><td>Price, volume, float, short interest, and published targets and ratings, stamped with the close or publication date. A third party's characterisation of someone else's facts is market data and is tagged here rather than as filed, however authoritative the third party. A third party's target or rating is attributed to the firm that issued it and is never adopted here.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Enterprise value is omitted from the masthead</h3>
+  <p>Enterprise value appears in valuation, section 08, and not in the masthead strip. It pairs a 31 March 2026 cash balance with a 31 July 2026 market capitalisation, so it is struck across two dates. It is shown where its caveat can travel with it.</p>
+
+  <h3>Known limitations carried forward</h3>
+  <p>Defects identified but not resolved, with the text at issue quoted and the reason each remains open.</p>
+
+  <div class="note caution">
+    <p><b>Share count unreconciled, and the previous explanation withdrawn.</b> The report states: <i>"The 3.25 million difference is unreconciled, and the earlier explanation is withdrawn rather than reduced."</i> The pre-funded warrants no longer account for the gap, because the quarterly report discloses they were exercised in full in April 2026. Reconciling it needs the transfer agent record or a later cover page, neither of which is public.</p>
+    <p><b>Treasury structure unconfirmed.</b> The report states: <i>"This structure has not been confirmed from the 10-Q, and the source is a secondary account of a director's remarks rather than a company disclosure."</i> Confirming it needs the Q2 filing, due 10 August 2026.</p>
+    <p>The carry-forward on the third-party target is closed: what the Benchmark target rests on is now analysed in valuation above, including the firm's role as a sales agent on the at-the-market programme and the events the target predates. The carry-forward on dividends and buybacks is also closed, both now checked against a named source and recorded in null categories.</p>
+  </div>
+
+  <h3>What was not checked</h3>
+  <p>A filing sweep was performed for this revision across the current, periodic, registration, ownership and late-notification families, and reached 2 August 2026. No filing is evident after the Forms 4 of 17 July 2026 and the company release of 27 July 2026. The following were not reached:</p>
+  <ul>
+    <li>FY2025 retained revenue, EPS and operating cash flow, which appear as n/d.</li>
+    <li>The full text of the Benchmark note. What the target rests on is analysed above from the firm's disclosed role and the target's date; the note's own model and assumptions were not obtained.</li>
+    <li>Any Gyzer special committee process, which is not described in the filings reviewed.</li>
+    <li>The transfer agent record that would reconcile the two share counts.</li>
+    <li>Enterprise value struck on a single date, which would require a cash balance dated to the pricing close.</li>
+    <li>The SEC full-text search interface, which was unavailable. The sweep ran against the company's own filing and news pages and against filing aggregators, so a filing indexed nowhere but EDGAR would not have been seen.</li>
+    <li>The 52-week low, where providers diverge. This report carries $6.75 as stamped at the 31 July close; others show $6.81 and $6.87 on nearby dates, and the difference was not resolved to an exchange record.</li>
+  </ul>
+</section>
+
+<!-- ===================== 15. DOCUMENT LOG ===================== -->
+<section id="s15">
+  <h2 class="sec"><span class="n">15</span>Document log</h2>
+  <p class="sub">Newest first. The original build entry is never removed or rewritten.</p>
+  <div class="log">
+    <div class="logentry current">
+      <div class="when">2 August 2026 <span class="latest">Latest</span></div>
+      <div class="basis">Priced off 31 Jul 2026 close &middot; $7.17 &middot; $319.9M cap</div>
+      <div class="correction">
+        <span class="lbl">Correction</span>
+        <p><b>The share-count explanation is withdrawn.</b> Valuation previously offered the February pre-funded warrants over 2,475,201 shares as the likely reconciliation of the gap between the 10-Q cover count and the resale prospectus. The Q1 10-Q discloses that those warrants were exercised in full in April 2026 and the shares issued, so they sit inside both counts and account for none of the difference. The 3.25 million gap is now recorded as unreconciled rather than mostly explained.</p>
+        <p><b>An NT 10-Q does exist.</b> The previous entry stated that none had ever been filed. Bakkt filed one on 10 November 2025 for the quarter ended 30 September 2025, citing technical problems with the EDGAR submission process rather than any difficulty preparing the statements. The reporting and control history risk is unchanged in severity: two annual notifications stand, and this quarterly one is benign on its face.</p>
+      </div>
+      <p><b>Filing sweep.</b> Run across the current, periodic, registration, ownership and late-notification families and reaching today. Nothing has been filed since the Forms 4 of 17 July 2026 and the company release of 27 July 2026. The 10-K notification of 17 March 2026 is now sourced to the notification itself, which cites the time needed to finalise the consolidated statements and for a first-year audit of those statements and of internal control over financial reporting.</p>
+      <p><b>Pricing unchanged.</b> 31 July 2026 was a Friday and today is a Sunday, so no session has occurred since the previous entry. The $7.17 close, the $319.9M capitalisation and every multiple derived from them carry forward unrepriced. Only the as-of stamp moves.</p>
+      <p><b>A $7.0M insider purchase, now on the record.</b> Capital structure gains a subsection: director Michael Alfred bought 865,000 shares in open-market transactions through Alpine Fox LP across 15 and 18 May and 9 and 10 June 2026, roughly $7.0M at $7.52 to $8.93, leaving the partnership holding 905,000 shares. Every other disclosed insider transaction in the period is a withholding-scale sale, and those for 29 April and 29 June are added.</p>
+      <p><b>The Benchmark target is now analysed rather than only reported.</b> Valuation gains a subsection establishing two things about it. The Benchmark Company is one of seven sales agents on the $300M at-the-market programme under the Sales Agreement of 16 January 2026, so the firm publishing the target also earns fees placing the issuer's stock. And the target was struck on 13 May 2026, one day after the resale registration was filed and fifteen before it was declared effective, so it predates the overhang going live, the June purchases and the fall to $7.17. The rating and target remain reported as market data and are adopted nowhere.</p>
+      <p><b>Dividends and buybacks settled on this document's own evidence.</b> Both null rows moved from Not established to None, each against Note 11 of the Q1 2026 10-Q and market data at the close, rather than by importing the companion calendar's finding.</p>
+      <p><b>Newly tracked.</b> The at-the-market programme's authorised capacity of up to $300M against a market capitalisation near $320M, with $21.5M gross and $20.8M net drawn on 1,990,434 shares to 31 March 2026. The April exercise of the pre-funded warrants is added to the dilution table. The resale registration was declared effective 28 May 2026, so the overhang has been live for nine weeks.</p>
+      <p><b>Next scheduled update:</b> Q2 2026 results, confirmed for 10 August 2026 after market close.</p>
+    </div>
+    <div class="logentry">
+      <div class="when">1 August 2026</div>
+      <div class="basis">Priced off 31 Jul 2026 close &middot; $7.17 &middot; $319.9M cap</div>
+      <p><b>Scope of review.</b> Full filing-type audit across 8-K, 10-Q, 10-K, S-1, S-3, 424, 13D, 13G, NT 10-K, NT 10-Q and Forms 3, 4 and 144, plus the proxy statement. Not applicable to this issuer: 6-K, 20-F, 40-F, NT 20-F and NT 40-F are foreign private issuer forms, and Bakkt is a Delaware-incorporated domestic filer. No S-1 exists, since Bakkt is S-3 eligible. No NT 10-Q has ever been filed.</p>
+      <p><b>Corrections to the 26 July build.</b> ICE ownership restated from 19.8% to 16.5% (7,919,002 shares at 30 April 2026). ICE Class 1 and Class 2 Warrants strike at $25.50 and expire September 2029, far out of the money, so the DTR anti-dilution ratchet they would trigger is far less likely to fire than the capital structure section previously implied. The lock-up question, previously flagged as unverified, is resolved in reverse: there is no lock-up, and registration rights instead obligated Bakkt to file a resale registration within five business days of the DTR closing.</p>
+      <p><b>Newly tracked.</b> The Gyzer Inc. acquisition (May 2026) from Chief Commercial Officer Daniel Ishag, a second executive-vendor transaction within six weeks. The Form S-3 resale registration filed 12 May 2026 covering 21,010,640 shares (~43.9% of outstanding), with a selling-stockholder table. BlackRock's Schedule 13G filed 27 July 2026 disclosing 2,452,659 shares (5.5%) held passively. A new float and short-interest subsection: a tradable float of only ~26.73M of 44.61M shares with roughly 23.6% sold short (~6.3M shares, up 216.8% year over year, ~6.5 days to cover). The CEO's inducement-grant terms: 1,607,717 PSUs, ~$15M grant-date value, first price hurdle $18.66 against a $7.17 share price, performance period to 21 March 2028. Three auditors in three years (EY, KPMG, Grant Thornton). A hedged reframe of Bakkt Global around the digital asset treasury strategy, flagged Low confidence pending verification against the 10-Q.</p>
+      <p><b>Industry section rewritten.</b> The industry section previously framed stablecoins as straightforwardly growing. It now leads with the divergence: total stablecoin market capitalisation fell to ~$310B by late July, the largest monthly decline since the Terra collapse in May 2022, while adjusted transaction volume hit a record $1.79 trillion in June, up 63% month over month. Since Bakkt earns on transactions rather than float, the second figure is the one that bears on its economics.</p>
+      <p><b>Valuation repriced</b> to the 31 July 2026 close: $7.49 &rarr; $7.17, market cap ~$335M &rarr; $319.9M, enterprise value $252M &rarr; $237M, EV/retained revenue 38&times; &rarr; 37&times;, and the 52-week low corrected from $6.87 to $6.75. The share-count discrepancy between the 10-Q cover (44,612,329) and the resale prospectus (47,866,956) is disclosed rather than silently reconciled; BlackRock's 5.5% implies a ~44.6M denominator, which favours the 10-Q figure.</p>
+      <p><b>Risks expanded.</b> Added: the 44% resale overhang; a live goodwill impairment trigger, since the shares now sit 6% above their 52-week low and Bakkt's own disclosure names a market-cap decline as a trigger; auditor turnover; and undisclosed-magnitude treasury exposure. The related-party risk was rewritten from an event to a pattern. The volatility risk was upgraded from Low to Medium and rebuilt around the thin float. Verification steps now cover the resale prospectus, Forms 4 and 144, 13D and 13G filings and short-interest reports.</p>
+      <p><b>Next scheduled update:</b> Q2 2026 results, confirmed for 10 August 2026 after market close.</p>
+    </div>
+    <div class="logentry">
+      <div class="when">26 July 2026 (original build)</div>
+      <div class="basis">Priced off 25 Jul 2026 close &middot; $7.49</div>
+      <p>Initial research note published across twelve sections: business model, revenue streams, industry trends, competitors, financial performance, capital structure and dilution, valuation, growth drivers, risks, bull/base/bear cases, the single resolving question, and a final summary, with facts separated from labelled assumptions throughout and no buy, sell or hold recommendation. Built around the pass-through revenue problem: $243.6M of reported Q1 2026 revenue against $1.6M retained after crypto costs and execution fees, which makes the price-to-sales ratio quoted by every data provider actively misleading. Sources: Bakkt's Q1 2026 10-Q read directly on sec.gov, Forms 8-K and 8-K/A including the 16 July 2026 DTR financials, company press releases through 4 June 2026, FY2025 results, ICE's Schedule 13D/A, CourtListener docket 1:25-cv-02520, and third-party stablecoin market data, all as available on 26 July 2026. Pricing as of the 25 July 2026 close of $7.49.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="norec">
+    No buy, sell, or hold recommendation is issued and no price target is derived.
+    Third-party targets and ratings, where shown, are the published views of the
+    firms named and are reported as market data. This document is for research and
+    educational purposes and is not investment advice. Verify all figures against
+    primary filings on sec.gov before acting.
+  </div>
+  <p style="margin-top:16px">BKKT &middot; Bakkt, Inc. &middot; Equity Research Report &middot; as of 2 August 2026</p>
+</footer>
+
+</div>
+
+
+</body>
+</html>

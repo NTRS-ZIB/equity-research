@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>NUAI &middot; New Era Energy &amp; Digital, Inc. &middot; Equity Research Report &middot; as of 2 August 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================================
+   PER-TICKER PALETTE
+   ========================================================================= */
+:root{
+  /* Sampled from the New Era Energy & Digital wordmark, whose lettering is white
+     on a deep navy field; the navy is the mark's only chromatic colour.
+     Raw #162A35 (H201 S41 L15) is too dark and too weak to hold
+     at small sizes on white, so saturation lifts to 45% and lightness to 28%,
+     giving #275168 at 8.5:1 against paper. Hue is unchanged from the mark: at 201
+     it clears every semantic hue by more than 40 degrees, so no rotation applies. */
+  --accent:      #275168;
+  --accent-deep: #193443;
+  --accent-wash: rgba(39,81,104,0.06);
+  --accent-line: rgba(39,81,104,0.22);
+}
+
+/* ============================================================================
+   SHARED STYLESHEET v1.50 : BEGIN
+   ========================================================================= */
+:root{
+  color-scheme: light only;
+
+  --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
+  --line:#DEE6EC;   --line-hard:#C0CDD7;
+  --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
+
+  --pos:#0B7A50;      --pos-bg:#E7F4EE;
+  --neg:#B02A21;      --neg-bg:#FBECEA;
+  --caution:#90600A;  --caution-bg:#FBF2E0;
+  --assume:#4F3FA3;   --assume-bg:#EFEDFA;
+
+  --display:'Archivo',ui-sans-serif,system-ui,'Helvetica Neue',Arial,sans-serif;
+  --body:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+
+  --measure:78ch;
+  --col:760px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html,body{background:var(--canvas) !important;background-color:var(--canvas) !important}
+body{
+  margin:0;color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 22px 96px;background:var(--paper);
+      border-left:1px solid var(--line);border-right:1px solid var(--line)}
+p{max-width:var(--measure)}
+/* Boxed prose fills its container: the box supplies its own measure, so the
+   78ch cap applies to top-level running prose only. */
+.first li,.assume p,.note p,.cat p,.risk p,.logentry p,.oc p,.case p,
+.cat-meta,.logentry .basis{max-width:none}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:var(--accent-deep)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- masthead ---------- */
+.mast{padding:44px 0 26px;border-bottom:2px solid var(--line-hard);margin-bottom:8px;
+      position:relative;padding-left:20px}
+.mast::before{content:"";position:absolute;left:0;top:44px;bottom:26px;
+      width:4px;background:var(--accent)}
+.ticker{font-family:var(--mono);font-size:44px;font-weight:700;letter-spacing:-1px;
+      line-height:1;color:var(--accent);margin:0}
+.headline{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.22;
+      color:var(--ink);margin:16px 0 0}
+.functional{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--ink-faint);margin:18px 0 0}
+.mast-strip{display:flex;flex-wrap:wrap;gap:26px;margin-top:20px;padding-top:16px;
+      border-top:1px solid var(--line)}
+.mast-strip div{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint)}
+.mast-strip b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-top:3px}
+
+/* ---------- banner: framing ---------- */
+.first{background:var(--canvas);border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:20px 24px;margin:30px 0 12px}
+.first h2{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.04em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 12px}
+.first ol{margin:0;padding-left:20px}
+.first li{margin-bottom:9px}
+.first li:last-child{margin-bottom:0}
+
+/* ---------- sections ---------- */
+section{padding-top:38px}
+h2.sec{font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);
+      margin:0 0 4px;padding-bottom:10px;border-bottom:1px solid var(--line-hard);
+      display:flex;align-items:baseline;gap:12px}
+h2.sec .n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);
+      letter-spacing:.06em;flex:none}
+.sub{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);margin:10px 0 18px;
+      max-width:var(--measure)}
+h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink-dim);
+      margin:26px 0 8px}
+
+/* ---------- provenance tags (signature) ---------- */
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);
+      background:var(--panel-2);border:1px solid var(--line);
+      border-radius:2px;padding:1px 6px;vertical-align:1px;white-space:nowrap}
+
+/* ---------- assumption block ---------- */
+.assume{background:var(--assume-bg);border-left:4px solid var(--assume);
+      padding:16px 20px;margin:20px 0}
+.assume .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--assume);display:block;margin-bottom:7px}
+.assume p{margin:0}
+
+/* ---------- callouts ---------- */
+.note{border:1px solid var(--line);border-left:4px solid var(--ink-faint);
+      background:var(--canvas);padding:16px 20px;margin:20px 0}
+.note.pos{border-left-color:var(--pos);background:var(--pos-bg)}
+.note.neg{border-left-color:var(--neg);background:var(--neg-bg)}
+.note.caution{border-left-color:var(--caution);background:var(--caution-bg)}
+.note p{margin:0}
+.note p + p{margin-top:10px}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+thead th{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--ink-dim);text-align:left;
+      padding:9px 12px;border-bottom:2px solid var(--line-hard);white-space:nowrap}
+tbody td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--canvas)}
+td.num,th.num{font-family:var(--mono);text-align:right;white-space:nowrap}
+/* td.when marks a timing column. An unmarked cell counts as prose. */
+td.when{font-family:var(--mono);white-space:nowrap}
+td.lbl{font-weight:600}
+.pos-t{color:var(--pos);font-weight:600}
+.neg-t{color:var(--neg);font-weight:600}
+.caution-t{color:var(--caution);font-weight:600}
+
+/* ---------- cases ---------- */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.case{border:1px solid var(--line);border-top:3px solid var(--ink-faint);
+      background:var(--paper);padding:18px}
+.case.bull{border-top-color:var(--pos)}
+.case.bear{border-top-color:var(--neg)}
+.case h4{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 10px}
+.case.bull h4{color:var(--pos)} .case.bear h4{color:var(--neg)}
+.case p{font-size:15px;margin:0}
+.case .req{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+
+/* ---------- risks ---------- */
+.risk{border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:16px 20px;margin-bottom:12px}
+.risk.sev-high{border-left-color:var(--neg)}
+.risk.sev-med{border-left-color:var(--caution)}
+.risk.sev-low{border-left-color:var(--ink-faint)}
+.risk h4{font-family:var(--display);font-size:15.5px;font-weight:600;margin:0 0 6px;
+      display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.risk .sev{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase}
+.risk.sev-high .sev{color:var(--neg)}
+.risk.sev-med .sev{color:var(--caution)}
+.risk.sev-low .sev{color:var(--ink-faint)}
+.risk p{margin:0;font-size:15.5px}
+
+/* ---------- null categories ---------- */
+.nulls td.lbl{width:26%}
+.nulls .status{font-family:var(--mono);font-size:12px;white-space:nowrap}
+
+/* ---------- document log ---------- */
+.log{margin-top:14px}
+.logentry{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:12px}
+.logentry.current{border-left:4px solid var(--accent);background:var(--accent-wash)}
+.logentry .when{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);
+      display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.latest{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-line);
+      background:var(--paper);border-radius:2px;padding:1px 6px}
+.logentry .basis{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-bottom:12px}
+.logentry p{font-size:15.5px;margin:0 0 9px}
+.logentry p:last-child{margin-bottom:0}
+.correction{border:1px solid var(--neg);border-left:4px solid var(--neg);
+      background:var(--neg-bg);padding:12px 16px;margin-bottom:14px}
+.correction .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--neg);display:block;margin-bottom:5px}
+
+/* ---------- footer ---------- */
+footer{margin-top:44px;padding-top:22px;border-top:2px solid var(--line-hard)}
+footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width:none}
+.norec{border:1px solid var(--line-hard);background:var(--canvas);padding:16px 20px;
+      margin-top:20px;font-family:var(--mono);font-size:12.5px;color:var(--ink-dim)}
+
+/* ---------- catalyst cards (calendar) ---------- */
+.cat{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:14px;border-left:4px solid var(--line-hard)}
+.cat.up{border-left-color:var(--pos)}
+.cat.down{border-left-color:var(--neg)}
+.cat.two{border-left-color:var(--caution)}
+.cat.neutral{border-left-color:var(--ink-faint)}
+.cat-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.cid{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);flex:none}
+.cat-head h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink);
+      margin:0;flex:1 1 auto;min-width:200px}
+.dir{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;white-space:nowrap}
+.cat.up .dir{color:var(--pos)} .cat.down .dir{color:var(--neg)}
+.cat.two .dir{color:var(--caution)} .cat.neutral .dir{color:var(--ink-faint)}
+.cat-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:10px 0 12px;padding:9px 0;
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+      font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
+.cat-meta b{color:var(--ink);font-weight:600}
+.cat p{margin:0 0 9px;font-size:15.5px}
+.cat p:last-child{margin-bottom:0}
+.cat.resolved{background:var(--canvas);border-left-color:var(--ink-faint)}
+.cat.resolved .dir{color:var(--ink-faint)}
+
+/* ---------- horizon bands (calendar) ---------- */
+.band{display:flex;align-items:center;gap:14px;margin:30px 0 16px}
+.band-t{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--ink-dim);white-space:nowrap}
+.band-r{flex:1;height:1px;background:var(--line-hard)}
+.band-c{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);white-space:nowrap}
+
+/* ---------- upside / downside pair ---------- */
+.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0}
+.oc{border:1px solid var(--line);padding:11px 14px;background:var(--paper)}
+.oc.up-c{border-left:3px solid var(--pos)}
+.oc.down-c{border-left:3px solid var(--neg)}
+.oc .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.09em;
+      text-transform:uppercase;display:block;margin-bottom:5px}
+.oc.up-c .lbl{color:var(--pos)} .oc.down-c .lbl{color:var(--neg)}
+.oc p{margin:0;font-size:14.5px;line-height:1.5}
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  body{font-size:16px}
+  .wrap{padding:0 16px 70px;border-left:none;border-right:none}
+  .ticker{font-size:34px}
+  .headline{font-size:23px}
+  .cases{grid-template-columns:1fr}
+  .outcomes{grid-template-columns:1fr}
+  .mast-strip{gap:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none !important;transition:none !important}
+}
+@media print{
+  body{font-size:11pt}
+  .wrap{max-width:none;border:none}
+  section{page-break-inside:avoid}
+}
+/* ============================================================================
+   SHARED STYLESHEET v1.50 : END
+   ========================================================================= */
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ===================== MASTHEAD ===================== -->
+<header class="mast">
+  <p class="ticker">NUAI</p>
+  <h1 class="headline">Two operating power plants at the fence line, and no signed tenant behind them</h1>
+  <p class="functional">NUAI &middot; New Era Energy &amp; Digital, Inc. &middot; Equity Research Report &middot; as of 2 August 2026</p>
+  <div class="mast-strip">
+    <div>Price <b>$4.66</b> <span class="tag">Market</span></div>
+    <div>Market cap <b>$471.44M</b> <span class="tag">Market</span></div>
+    <div>Shares outstanding <b>101,290,928</b> <span class="tag">Filed</span></div>
+    <div>Fully diluted <b>119.6M</b> <span class="tag">Filed</span></div>
+    <div>FY2025 revenue <b>$885K</b> <span class="tag">Filed</span></div>
+    <div>Pricing basis <b>31 Jul 2026 close</b></div>
+  </div>
+</header>
+
+<!-- ===================== FRAMING ===================== -->
+<div class="first">
+  <h2>Framing</h2>
+  <ol>
+    <li><b>The site borders operating power plants.</b> Vistra's approximately 1.4 GW Permian Basin facility and Calpine's 700+ MW plant sit at the property line, which is why a first-time developer can credibly promise power by late 2027 when the grid interconnection queue runs three to five years. <span class="tag">Open</span></li>
+    <li><b>A lender has imposed a deadline.</b> The April 2026 Macquarie facility requires a binding hyperscaler lease by approximately 8 October 2026, converting an open-ended intention into a dated obligation with consequences. <span class="tag">Filed</span></li>
+    <li><b>Nothing has been signed.</b> Not the lease, not the power purchase agreements, not the joint venture. All three are described by management as being drafted simultaneously and converging on a single signing day. <span class="tag">Open</span></li>
+    <li><b>The most recent quarterly financial statements have been withdrawn.</b> On 24 July 2026 the Audit Committee determined that the Q1 2026 report should no longer be relied upon and will be restated. The errors are non-cash and were self-identified at the second-quarter close, but the company cannot yet size them and one of the three concerns the valuation of its only material asset. <span class="tag">Filed</span></li>
+  </ol>
+</div>
+
+<!-- ===================== 1. SNAPSHOT ===================== -->
+<section id="s1">
+  <h2 class="sec"><span class="n">01</span>Snapshot</h2>
+  <p class="sub">Key figures, each tagged by provenance. Figures drawn from the Q1 2026 quarterly report are provisional pending restatement.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Metric</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Share price</td><td class="num">$4.66</td><td><span class="tag">Market</span> 31 Jul 2026 close</td></tr>
+      <tr><td class="lbl">Market capitalisation</td><td class="num">$471.44M</td><td><span class="tag">Market</span> 31 Jul 2026 close</td></tr>
+      <tr><td class="lbl">52-week range</td><td class="num">$0.32&ndash;$9.45</td><td><span class="tag">Market</span> 31 Jul 2026</td></tr>
+      <tr><td class="lbl">Short interest</td><td class="num">12.5M sh</td><td><span class="tag">Market</span> 31 Jul 2026</td></tr>
+      <tr><td class="lbl">Shares outstanding</td><td class="num">101,290,928</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026, as of 12 May</td></tr>
+      <tr><td class="lbl">Fully diluted shares</td><td class="num">119.6M</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026</td></tr>
+      <tr><td class="lbl">Revenue, FY2025</td><td class="num">$885K</td><td><span class="tag">Filed</span> 10-K, 12 Mar 2026</td></tr>
+      <tr><td class="lbl">Net loss, FY2025</td><td class="num neg-t">($29.6M)</td><td><span class="tag">Filed</span> 10-K, 12 Mar 2026</td></tr>
+      <tr><td class="lbl">Net loss, 1Q26</td><td class="num neg-t">($9.0M)</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026, provisional</td></tr>
+      <tr><td class="lbl">Cash</td><td class="num">$80M+</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026, at 30 Apr</td></tr>
+      <tr><td class="lbl">Undrawn credit facility</td><td class="num">~$270M</td><td><span class="tag">Filed</span> 8-K, 14 Apr 2026</td></tr>
+      <tr><td class="lbl">Land cost capitalised</td><td class="num">$76.0M</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026, at 31 Mar</td></tr>
+      <tr><td class="lbl">Accumulated deficit</td><td class="num neg-t">($52.3M)</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026, at 31 Mar</td></tr>
+      <tr><td class="lbl">Site, controlled acreage</td><td class="num">492 acres</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026</td></tr>
+      <tr><td class="lbl">Designed capacity, gross</td><td class="num">1,407 MW</td><td><span class="tag">Estimate</span> Phased design, three phases</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 2. BUSINESS MODEL ===================== -->
+<section id="s2">
+  <h2 class="sec"><span class="n">02</span>Business model</h2>
+  <p class="sub">What the company sells, to whom, and how it is paid.</p>
+
+  <p>New Era assembles powered land: large parcels where electricity, fibre, water and permits are secured in advance, so a tenant can begin building compute infrastructure without waiting years for a utility connection. It then leases that capacity under long-term contracts. The company does not yet operate a data centre and has not yet signed a customer.</p>
+
+  <p>The flagship asset is Texas Critical Data Centers, a contiguous campus in Ector County roughly ten miles north of Odessa, in Odessa's extraterritorial jurisdiction. Total controlled acreage is 492 acres with $76.0M of land cost capitalised at 31 March 2026, assembled in stages from an original parcel, then 203 contiguous acres closed in December 2025, then a 54-acre corridor. Approximately 13,000 feet of legacy oilfield flowline has been remediated and pipeline reclamation is materially complete. The site is designed for three phases totalling approximately 1,407 MW of gross capacity and 938 MW of critical IT load at an assumed power usage effectiveness of 1.5.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Phase</th><th class="num">Gross MW</th><th class="num">IT MW</th><th>Power source</th><th class="when">Target</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Phase 1</td><td class="num">207</td><td class="num">138</td><td>Vistra and Calpine, grid-tied and adjacent</td><td class="when">2H 2027</td></tr>
+      <tr><td class="lbl">Phase 2</td><td class="num">450</td><td class="num">300</td><td>Behind-the-meter, Siemens turbines</td><td class="when">2H 2028</td></tr>
+      <tr><td class="lbl">Phase 3</td><td class="num">750</td><td class="num">500</td><td>Grid and behind-the-meter hybrid</td><td class="when">2028+</td></tr>
+      <tr><td class="lbl">Total</td><td class="num">1,407</td><td class="num">938</td><td>Diversified</td><td class="when">through 2030</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>Three capacity figures circulate and they are not in conflict: 207 MW is Phase 1 gross, 650 MW is Phases 1 and 2 combined and is the amount management expects the first tenant to take, and 1,407 MW is the full three-phase design.</p>
+
+  <h3>Two independent routes to power</h3>
+  <p>The competitive claim is geographic rather than technological. Connecting a new campus to the Texas grid can take three to five years, and the ERCOT West Zone covering the Permian faces both queue saturation and load-pocket constraints. This parcel offers two ways around that, and it is the combination rather than either route alone that constitutes the advantage. Front-of-meter delivery buys grid-tied power from the two generation complexes at the property line through an existing point of interconnection, without traversing long-distance transmission corridors. Behind-the-meter generation burns gas from three pipelines that cross or terminate nearby, Enterprise, ONEOK and White Water, in on-site turbines that never touch the public grid.</p>
+
+  <p>The mix between the two is currently moving. At an investor conference on 23 June 2026 management said the parties are actively exploring a fully islanded behind-the-meter configuration, under which 650 MW of gross behind-the-meter capacity becomes the primary focus and total site capacity could support high-800 MW+ of critical IT load. Five days later a covering firm still modelled Phase 1 as front-of-meter. No company announcement has resolved the proportions.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>This is a rebalancing rather than a reversal, and the turbine count is the readable signal. Thunderhead holds 460 MW of Siemens turbines under contract, sized against 450 MW of Phase 2. A genuinely islanded 650 MW campus needs more than 650 MW of generation, because without a grid backstop it carries its own spare capacity for maintenance and failures. So either more turbines are ordered, the grid connection stays as backup, or the first islanded block is smaller than 650 MW. Islanding also carries a regulatory logic: management's stated rationale included avoiding ratepayer concerns, which is the objection driving moratoriums nationally, and a campus off the public grid largely removes that argument while trading grid curtailment exposure for gas supply and generation reliability risk.</p>
+  </div>
+
+  <h3>Intended economics and financing structure</h3>
+  <p>Recent comparable leases in this industry price at $140 to $190 per kW per month on fifteen-year terms; both firms modelling the company use a conservative $120. At that rate Phase 1's 138 MW of critical IT load implies approximately $87.6M of annual revenue at a net operating income margin near 95%. Leases are expected to be triple-net, with the tenant paying operating costs, taxes, insurance and power, which insulates the landlord from commodity exposure.</p>
+
+  <p>Construction is not intended to be funded from the parent balance sheet. Each project is structured as a standalone special purpose vehicle with New Era as sponsor, developer and general partner, while institutional investors provide the majority of capital as limited partners and roughly 80% of cost comes from project debt sized to contracted cash flows. Ring-fencing each project isolates development and operational risk and avoids cross-collateralisation. This is why a company valued near $471M can contemplate a Phase 1 build costing approximately $1,794M.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The structure cuts both ways. Project finance limits how much of the buildout the company must fund itself, which is the only reason the plan is arithmetically possible, but it also means the company owns a minority slice of what it developed. Covering firms model 45% to 49% of the venture and one assumes the operating partner takes control at approximately 51%. That percentage has not been negotiated or disclosed, and it moves the valuation more than any other single input.</p>
+  </div>
+
+  <h3>A second, smaller-format line</h3>
+  <p>At the same June conference management described an underserved 20 MW to 50 MW segment and said it is evaluating modular solutions deployable and operational within roughly nine months of acquiring a site, aimed at customers needing capacity quickly but not at hyperscale size. The corporate website followed in July with three named product lines, turnkey solutions, hybrid colocation, and enterprise solutions for AI inference and latency-sensitive workloads, offered in blocks from 2 MW to 25 MW. Both covering firms had anticipated tenant diversification into GPU cloud providers and enterprise buyers as a later-phase strategy, and that it was discussed with analysts a month before appearing in marketing materials supports reading it as ordinary commercial development rather than a change of plan.</p>
+</section>
+
+<!-- ===================== 3. REVENUE STREAMS ===================== -->
+<section id="s3">
+  <h2 class="sec"><span class="n">03</span>Revenue streams</h2>
+  <p class="sub">Each stream, with its share of the total and its durability.</p>
+
+  <p>The company has one revenue stream today and expects a different one tomorrow. They share almost nothing.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th class="when">Period</th><th class="num">Revenue</th><th>Source and basis</th></tr></thead>
+    <tbody>
+      <tr><td class="when">FY2024</td><td class="num">$0.5M</td><td>Natural gas and natural gas liquids, legacy <span class="tag">Filed</span></td></tr>
+      <tr><td class="when">FY2025</td><td class="num">$0.9M</td><td>Natural gas and natural gas liquids, legacy <span class="tag">Filed</span></td></tr>
+      <tr><td class="when">1Q2026</td><td class="num">$0.8M</td><td>Legacy operations, provisional pending restatement <span class="tag">Filed</span></td></tr>
+      <tr><td class="when">FY2026E</td><td class="num">$2.0M</td><td>Entirely legacy <span class="tag">Estimate</span></td></tr>
+      <tr><td class="when">FY2027E</td><td class="num">$15.4M</td><td>First lease revenue in the fourth quarter <span class="tag">Estimate</span></td></tr>
+      <tr><td class="when">FY2028E</td><td class="num">$166.7M</td><td>Phase 1 full year plus Phase 2 ramp <span class="tag">Estimate</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <p><b>Current, legacy exploration and production.</b> Held through Solis Partners: roughly 137,000 acres in Chaves County, New Mexico, the Pecos Slope, with approximately 15.1 Bcfe of proved reserves, plus overriding royalty interests in Howard County, Texas. Operations run through third-party processors under a month-to-month arrangement, with gas and liquids sold at index-based pricing. Following divestiture of the oil assets in 2024 the revenue base is concentrated in natural gas and natural gas liquids. FY2025 net revenue of approximately $0.9M was driven by improved realised gas pricing rather than volume growth, with net gas revenue of approximately $0.6M representing about 73% of the total and liquids revenue of approximately $0.24M. Helium, once the company's name and purpose, generates no revenue at all under existing processing agreements. The package carries approximately $3.3M of net book value, against which published valuations of $19M to $84M imply most of the value sits in acreage optionality the balance sheet does not reflect. <span class="tag">Filed</span></p>
+
+  <p><b>Future, data centre leases.</b> Long-term triple-net agreements with power costs passed to the tenant. Under the venture structure the company receives its ownership percentage of the property's net operating income rather than gross rent. One covering firm additionally models a royalty stream on gross capacity operated by the power partner, 450 MW in Phase 2 and 350 MW in Phase 3, which is a modelling construct rather than a disclosed contract term.</p>
+
+  <div class="note caution">
+    <p>The step from $2.0M to $166.7M across two years is not a forecast in the ordinary sense. It is what happens if a lease is signed, financing closes, construction completes on schedule and the tenant takes occupancy. Every dollar beyond FY2026 is conditional on a contract that does not exist, and the covering firms' own 2027 estimates diverge by 42%, at $15.4M against $21.9M, purely on assumptions about when revenue begins.</p>
+  </div>
+</section>
+
+<!-- ===================== 4. INDUSTRY & MARKET BACKDROP ===================== -->
+<section id="s4">
+  <h2 class="sec"><span class="n">04</span>Industry &amp; market backdrop</h2>
+
+  <p>The demand side is the least disputed part of this story. AI workloads consume enormous electricity, and the binding constraint is no longer chips or capital but power and the physical delivery of campuses. A hyperscaler can build a data centre in 18 to 24 months; a utility takes seven to ten years to upgrade the grid and construct the high-voltage transmission needed to serve it.</p>
+
+  <p>All four companies identified as candidate anchor tenants reported within nine days of each other, and all four confirmed rising spending.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Company</th><th class="when">Reported</th><th>FY2026 capital expenditure</th><th>Cloud growth</th><th>Market reaction</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Alphabet</td><td class="when">22 Jul 2026</td><td>$195B to $205B, raised <span class="tag">Market</span></td><td>Cloud +82%</td><td class="neg-t">Fell</td></tr>
+      <tr><td class="lbl">Microsoft</td><td class="when">29 Jul 2026</td><td>~$175B, reclassified <span class="tag">Market</span></td><td>Azure +43%</td><td class="pos-t">Rose</td></tr>
+      <tr><td class="lbl">Meta</td><td class="when">29 Jul 2026</td><td>$130B to $145B, low end raised <span class="tag">Market</span></td><td>n/a</td><td class="neg-t">Fell ~9.6%</td></tr>
+      <tr><td class="lbl">Amazon</td><td class="when">30 Jul 2026</td><td>~$220B, raised from $200B <span class="tag">Market</span></td><td>AWS +36.7%</td><td class="pos-t">Rose ~10%</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>Microsoft's apparent reduction is not one. It reclassified future data centre leases from finance leases to operating leases and extended assumed useful life from 15 to 25 years, which moves spending off the capital expenditure line while leaving total outlay unchanged. Combined 2026 spending across the four is tracking to roughly $725B, up about 77%.</p>
+
+  <div class="note pos">
+    <p>Two statements bear directly on demand for third-party capacity. Alphabet's management said the company plans to expand the use of third-party capacity in the third quarter as a bridging strategy while it builds internal capacity. Amazon's management expects capacity constraints to persist through 2027, with demand already strong for 2028, and Amazon Web Services growth accelerated for a fifth consecutive quarter against a backlog of $496B. Two named candidate tenants have now stated publicly that they need more capacity than they can build themselves, on the timeline this campus targets.</p>
+  </div>
+
+  <p>Lease economics have repriced upward on that scarcity. Disclosed hyperscale colocation leases of the past eighteen months sit in the $140 to $190 per kW per month range, and tenors have lengthened from a historical seven to ten years to a current standard of fifteen-year triple-net structures. Capital intensity has climbed in parallel, from $9M to $11M per megawatt of IT load two years ago to $12M to $14M now, reflecting higher rack densities of 140 to 200 kW against 30 to 100 kW historically, direct-to-chip liquid cooling becoming standard, and supply-chain inflation in switchgear, transformers and turbines. The company's assumed $13M per critical IT megawatt sits at the low end of that range.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Everything above is true of the industry and would be equally true if this company did not exist. One covering firm counts five to ten tier-one hyperscalers against more than 40 potential landlords. A rising tide raises the sector's multiple; it does not sign anyone's lease. There is also a countervailing signal: the market has begun punishing this spending rather than rewarding it, with Meta's capital expenditure of $31.1B against $31.9B of operating cash flow collapsing free cash flow to $784M from $8.5B. Hyperscalers under pressure to protect free cash flow have more reason to lease third-party capacity, since leasing shifts capital onto someone else's balance sheet, but a broad repricing of AI infrastructure would compress the multiples used to value developers. The demand case and the valuation case can move in opposite directions at the same time.</p>
+  </div>
+
+  <h3>The regulatory counter-current</h3>
+  <p>Local resistance is growing and has stopped being merely local. United States municipal data centre moratoriums grew from approximately five to 79 over the past year. On 14 July 2026 the State of New York enacted the first statewide moratorium on new hyperscale data centres, a pause of up to one year while the state studies energy demand, utility rates, water and environmental impact, and the State of Arizona separately enacted a three-year moratorium on new sales tax breaks.</p>
+
+  <div class="note pos">
+    <p>The first project caught was the development partner's own. The New York moratorium paused Stream Data Centers' proposed campus at STAMP in Genesee County, a roughly $19.4B, 2.2 million square foot project requiring approximately 500 to 600 MW, which is a like-for-like substitute for this campus at 650 MW. The delay pushed the prospective tenant toward sites that can realistically deliver by 2027, with this campus moving higher on its priority list and discussions increasingly centred on delivering capacity as quickly as possible. That is a specific causal explanation for the urgency both firms describe.</p>
+  </div>
+
+  <p>Texas legislation has been broadly favourable and Ector County officials have supported the project, travelling with the company to meet the prospective tenant. The asymmetry holds only while that remains true, and leadership turnover at the county commissioners' court is a named risk.</p>
+</section>
+
+<!-- ===================== 5. COMPETITIVE POSITION ===================== -->
+<section id="s5">
+  <h2 class="sec"><span class="n">05</span>Competitive position</h2>
+  <p class="sub">Named peers on comparable metrics, not a general market description.</p>
+
+  <p>The competitive field did not exist in its current form three years ago. Most listed peers are former bitcoin miners that already controlled power-connected industrial sites and redirected them toward AI colocation when the economics turned.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Group</th><th>Named peers</th><th>Position relative to this company</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Miners turned colocation</td><td>Applied Digital, TeraWulf, Cipher, Hut 8, IREN, Core Scientific, Riot, Galaxy Digital, Bitdeer, CleanSpark, WhiteFiber</td><td>Ahead; most have signed leases and operating capacity</td></tr>
+      <tr><td class="lbl">Data centre trusts</td><td>Equinix, Digital Realty, Iron Mountain</td><td>Far larger and profitable, trading at 17x to 20x earnings before interest, tax, depreciation and amortisation</td></tr>
+      <tr><td class="lbl">Private platforms</td><td>Stream Data Centers, Prime Data Centers, Apollo-backed vehicles</td><td>Better capitalised, and Stream is this company's development partner</td></tr>
+      <tr><td class="lbl">New Era Energy &amp; Digital</td><td>n/a</td><td>Pre-lease, pre-revenue, pre-construction</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>On the metric the sector uses, enterprise value per megawatt of contracted capacity, the company trades at approximately $15.9M against a peer average near $17.6M. The discount reflects pre-lease status, and the highest multiples in the group belong to operators with binding leases in place.</p>
+
+  <h3>What the company has</h3>
+  <ul>
+    <li><b>Power adjacency.</b> Two operating plants at the property line, which is not replicable by competitors who did not buy this parcel.</li>
+    <li><b>An inverted origination.</b> Rather than winning a competitive process, the prospective tenant approached the company directly and specified the partner consortium it required, naming Stream, Macquarie and Thunderhead.</li>
+    <li><b>A partner stack it could not have assembled alone.</b> Apollo-owned Stream as operator, Macquarie as project lender, Ramboll and EYP for engineering, RK Mission Critical for modular fabrication, Thunderhead for on-site power, GlobeLink for fibre, Last Energy for the New Mexico nuclear component.</li>
+  </ul>
+
+  <h3>What it lacks</h3>
+  <ul>
+    <li><b>Any operating history in data centres.</b> This campus would be its first.</li>
+    <li><b>Scale.</b> Eight named executive officers and a small supporting staff against peers with hundreds of employees. Third-party data providers still carry a headcount of 5, a figure drawn from the FY2025 annual report that pre-dates the 2026 hiring.</li>
+    <li><b>A signed customer,</b> which every meaningful competitor already has.</li>
+  </ul>
+
+  <h3>The development partner is the strongest credential in the file</h3>
+  <p>Because the company has no operating history of its own, the quality of its development partner carries unusual weight.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Measure</th><th>Detail</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Founded</td><td>1999, headquartered in Dallas</td><td><span class="tag">Open</span></td></tr>
+      <tr><td class="lbl">Delivered</td><td>27+ data centre developments across the United States</td><td><span class="tag">Open</span></td></tr>
+      <tr><td class="lbl">Customer quality</td><td>Over 90% of capacity leased to Fortune 100 customers</td><td><span class="tag">Open</span></td></tr>
+      <tr><td class="lbl">Retention</td><td>Zero early customer terminations</td><td><span class="tag">Open</span></td></tr>
+      <tr><td class="lbl">Pipeline</td><td>~3.6 GW: 1.45 GW Dallas-Fort Worth, 1.08 GW Atlanta, 500 MW Columbus, 350 MW Phoenix, 260 MW Chicago</td><td><span class="tag">Open</span></td></tr>
+      <tr><td class="lbl">Footprint</td><td>Actively evaluating sites in more than 20 states</td><td><span class="tag">Open</span></td></tr>
+      <tr><td class="lbl">Operating model</td><td>100% of engineering and site operations performed in-house</td><td><span class="tag">Open</span></td></tr>
+      <tr><td class="lbl">Uptime target</td><td>99.9999%</td><td><span class="tag">Open</span></td></tr>
+      <tr><td class="lbl">Ownership</td><td>Majority-owned by Apollo Global Management since November 2025</td><td><span class="tag">Open</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Three uptime figures are now in circulation and are worth reconciling. The development partner targets 99.9999%, roughly 32 seconds of annual downtime. One covering firm cites 99.999%, roughly 5 minutes, as the contractual standard investment-grade hyperscalers require. The company's own website advertises 99.99%, roughly 52 minutes. The most likely explanation is that the website figure describes the smaller enterprise product rather than the hyperscale campus, but for assessing whether the platform can meet an investment-grade tenant's service levels the operative number is the partner's, because the partner would be operating it.</p>
+  </div>
+</section>
+
+<!-- ===================== 6. FINANCIAL PERFORMANCE ===================== -->
+<section id="s6">
+  <h2 class="sec"><span class="n">06</span>Financial performance</h2>
+  <p class="sub">Read for burn rate and balance sheet capacity rather than for growth. Figures from the Q1 2026 quarterly report are provisional.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Line, $M except per share</th><th class="num">FY2024A</th><th class="num">FY2025A</th><th class="num">1Q26A</th><th class="num">FY2026E</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Total revenue</td><td class="num">0.5</td><td class="num">0.9</td><td class="num">0.8</td><td class="num">2.0</td></tr>
+      <tr><td class="lbl">Operating expenses</td><td class="num">12.1</td><td class="num">25.4</td><td class="num">8.4</td><td class="num">30.9</td></tr>
+      <tr><td class="lbl">Operating loss</td><td class="num neg-t">(11.6)</td><td class="num neg-t">(24.5)</td><td class="num neg-t">(7.6)</td><td class="num neg-t">(28.9)</td></tr>
+      <tr><td class="lbl">Net loss</td><td class="num neg-t">(13.8)</td><td class="num neg-t">(29.6)</td><td class="num neg-t">(9.0)</td><td class="num neg-t">(35.2)</td></tr>
+      <tr><td class="lbl">Loss per share</td><td class="num neg-t">(1.06)</td><td class="num neg-t">(1.04)</td><td class="num neg-t">(0.16)</td><td class="num neg-t">(0.35)</td></tr>
+      <tr><td class="lbl">Adjusted EBITDA</td><td class="num neg-t">(11.6)</td><td class="num neg-t">(23.9)</td><td class="num neg-t">(4.8)</td><td class="num neg-t">(21.6)</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub">Actuals <span class="tag">Filed</span> from the FY2025 annual report and Q1 2026 quarterly report. Estimates <span class="tag">Estimate</span> from covering firm models; a second firm carries FY2026 adjusted EBITDA at negative $27.7M.</p>
+
+  <p>The FY2025 loss includes a $12.0M impairment taken in the fourth quarter against the partially built Pecos Slope gas processing plant, reflecting the strategic exit from helium midstream. The accumulated deficit stood at $52.3M at 31 March 2026. Operating cash burn ran roughly $9M in the first quarter and is projected to accelerate as development spending increases, with 2026 capital expenditure modelled at $250M to $300M.</p>
+
+  <h3>The withdrawn quarter</h3>
+  <div class="note neg">
+    <p>The 1Q26 column above comes from the filing the company has withdrawn. The known corrections point in opposite directions. Reclassifying approximately $1.4M of fees out of general and administrative expense would reduce the reported operating loss, while the performance share correction, an understated $23.5M grant-date fair value, would likely increase reported non-cash compensation expense and therefore the net loss. The company has not quantified the net effect and states it may be material. Neither correction touches cash.</p>
+    <p>What makes this serious is what it says about the control environment. The same filing repeats a disclosure from the original quarterly report: management concluded that disclosure controls were not effective as of 31 March 2026 and identified a material weakness in internal control over financial reporting. That is a deficiency significant enough that a material misstatement could occur without being caught, and the restatement is that weakness becoming visible. The material weakness therefore pre-dates the restatement rather than resulting from it.</p>
+  </div>
+
+  <h3>The balance sheet was rebuilt in April</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Measure</th><th>31 December 2025</th><th>After the April 2026 financings</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Cash</td><td>$1.2M <span class="tag">Filed</span></td><td>$80M+ at 30 April <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Near-term obligations</td><td>~$73.9M <span class="tag">Filed</span></td><td>Sharon AI note repaid in cash <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Committed credit</td><td>None <span class="tag">Filed</span></td><td>$290M facility, ~$270M undrawn <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Going concern language</td><td>Present <span class="tag">Filed</span></td><td>Resolved <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Shares outstanding</td><td>53.4M <span class="tag">Filed</span></td><td>101.3M at 12 May <span class="tag">Filed</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="note caution">
+    <p>The cost of that rescue was ownership. Shares outstanding roughly doubled in under five months, and the registered offering priced at $3.35 while the stock traded near $5.00. A holder of 1% of the company at 31 December 2025 who did not participate held about 0.53% by 12 May, before counting a further 18M shares of warrants, options and restricted stock that bring the fully diluted count to 119.6M.</p>
+  </div>
+</section>
+
+<!-- ===================== 7. CAPITAL STRUCTURE & DILUTION ===================== -->
+<section id="s7">
+  <h2 class="sec"><span class="n">07</span>Capital structure &amp; dilution</h2>
+  <p class="sub">Shares, preferreds, at-the-market capacity, shelf, warrants, convertibles.</p>
+
+  <p>The most consequential feature of this capital structure is a term buried in a credit agreement rather than anything the company chose to advertise. On 8 April 2026 New Era closed a senior secured term loan facility of up to $290M with Macquarie, structured at the TCDC subsidiary level so the debt is secured against project assets rather than the parent.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Tranche</th><th class="num">Amount</th><th>Rate</th><th>Purpose and gate</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Term Loan A-1</td><td class="num">$20M</td><td>SOFR + 5.50%</td><td>Pre-lease development, funded <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Term Loan A-2</td><td class="num">$30M</td><td>SOFR + 5.50%</td><td>Pre-lease development <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Term Loan A-3</td><td class="num">$40M</td><td>SOFR + 7.75%</td><td>Post-lease development <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Delayed draw</td><td class="num">$200M</td><td>SOFR + 7.75%</td><td>Construction, milestone-gated <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Total commitment</td><td class="num">$290M</td><td>Matures April 2029</td><td>First-priority lien on project assets <span class="tag">Filed</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <p>Two features deserve attention. The facility carries a repayment premium of roughly 1.10x to 1.35x of capital deployed, fully earned at signing, which is owed on repayment regardless of how the project turns out. And it embeds an execution-linked covenant.</p>
+
+  <div class="note neg">
+    <p>The agreement requires the company to <b>execute a binding hyperscaler lease within six months of the 8 April close</b>, approximately <b>8 October 2026</b>, which is <b>67 days</b> from this report. Failure to meet that gate allows the lender to accelerate repayment or enforce structured amortisation. A separate covenant requiring a $30M equity raise within 60 days has been satisfied. Because acceleration lets a lender declare the whole balance due at once, and because Macquarie holds a first-priority lien on substantially all project assets, the practical leverage is considerable: repayment can be demanded at the moment the company is least able to pay, with a claim on the land and development rights if it cannot.</p>
+  </div>
+
+  <p>Reasonable analysts read this term in opposite directions and both readings hold. One covering firm argues the covenant is an asset rather than a constraint, because it forces management to compress its commercial timeline into a window investors can underwrite, and a lender does not impose a six-month lease deadline on a project it expects to fail. The symmetric view is that a sophisticated lender built itself an exit ramp and pre-earned its premium.</p>
+
+  <div class="note">
+    <p>One price signal is worth isolating. Alongside the loan, Macquarie purchased 1.0M shares at $5.00 while the concurrent public offering priced at $3.35, a 49% premium. Both covering firms read a project lender voluntarily paying above the marketed price as underwriting conviction uncommon at this development stage. It is one of the few informative data points available before a lease exists, because it involved the lender's own capital.</p>
+  </div>
+
+  <h3>The facility also requires a $100M equity programme</h3>
+  <p>The 8 April agreement obliges the company to establish an at-the-market equity programme with an aggregate offering price of at least $100 million. On 17 July 2026 Macquarie signed a Waiver and Consent Letter extending the deadline, now within 60 days of written notice or within five business days after the next quarterly or annual report, but the obligation itself remains. Such a programme sells new shares gradually into the open market at prevailing prices rather than in one discounted block, which is flexible for the issuer and means a continuous, price-insensitive supply of stock for existing holders. Against a market capitalisation of $471.44M, a $100M programme is authority to issue roughly 21% of the company.</p>
+
+  <p>The registration groundwork appears already laid. Four Form S-3 shelf registrations and two amendments were filed during 2026: 23 January, being the $350M shelf effective 30 January, then 4 February, 10 April, and 8 May with an amendment on 18 May. An effective shelf is the precondition for the programme, so the gap between notice and live share sales could be short.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Two readings hold at once. That Macquarie granted a waiver eleven days before the restatement filing is meaningful, because a lender preparing to accelerate does not extend deadlines, and it indicates continued engagement. But the same document confirms that further dilution is contractually required rather than merely likely, and the alternate trigger ties it to the next quarterly filing, which could put the programme in place well before the October covenant resolves.</p>
+  </div>
+
+  <p>Remaining items: approximately 8.2M warrants at a $2.00 strike remain unexercised and deep in the money, representing roughly $16.4M if exercised; a further 6.0M public and private warrants struck at $11.50 are far out of the money but would deliver approximately $66M. A $5.0M related-party note maturing 30 September 2026 converts to stock at maturity. Pre-change net operating losses are subject to limitation under Internal Revenue Code Section 382 following the December 2024 reverse recapitalisation.</p>
+</section>
+
+<!-- ===================== 8. VALUATION ===================== -->
+<section id="s8">
+  <h2 class="sec"><span class="n">08</span>Valuation</h2>
+  <p class="sub">Multiples shown with their basis and pricing date. No target price is issued in this document.</p>
+
+  <p>Conventional multiples do not work here. There are no earnings, so a price to earnings ratio is undefined. Revenue is under $1M against a market capitalisation of $471.44M, so a price to sales ratio produces a number without meaning. Book value is distorted by land carried at cost and a business in transition. All three covering firms therefore value the project rather than the company: they estimate what the completed campus would earn, apply a multiple, subtract debt and take the company's ownership share.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Firm</th><th class="when">Date</th><th class="num">Published figure</th><th>Method and basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Northland Securities</td><td class="when">16 Apr 2026</td><td class="num">$11.00</td><td><span class="tag">Market</span> 283 MW credited at 19.0x; 45% venture ownership; 11% discount rate; 125M diluted shares</td></tr>
+      <tr><td class="lbl">Texas Capital Securities</td><td class="when">16 Apr 2026</td><td class="num">$8.60</td><td><span class="tag">Market</span> 10% discount to net asset value of $9.57; 1.0 GW modelled of 1.4 GW potential</td></tr>
+      <tr><td class="lbl">Northland Securities</td><td class="when">1 Jul 2026</td><td class="num">$11.00</td><td><span class="tag">Market</span> Reiterated, basis unchanged, struck at $6.38, an implied upside of approximately 72% at that price</td></tr>
+      <tr><td class="lbl">B. Riley Securities</td><td class="when">6 Jul 2026</td><td class="num">$10.00</td><td><span class="tag">Market</span> Sum of parts, Phase 1 at 14x and Phase 2 at 12x; 49% ownership; 101.5M shares; $50M net debt</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>These are the opinions of the issuing firms, reproduced as market data rather than adopted. The clustering is less reassuring than it appears: three firms reaching $8.60 to $11.00 by different routes suggests convergence, but each runs the same two unverified assumptions, that a lease signs and that the company retains roughly half the venture. The 1 July reiteration was struck at a $6.38 share price against a $4.66 close on 31 July, and published targets are updated infrequently while the price moves daily.</p>
+
+  <h3>What the sensitivities reveal</h3>
+  <p>One firm published the sensitivity analysis behind its figure, and it is the most useful disclosure in any of the three. Holding capacity constant at 283 MW and varying only the ownership percentage:</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Venture ownership</th><th class="num">10%</th><th class="num">20%</th><th class="num">30%</th><th class="num">45%</th><th class="num">50%</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Implied value per share</td><td class="num">$2.46</td><td class="num">$4.92</td><td class="num">$7.38</td><td class="num">$11.07</td><td class="num">$12.30</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub">Basis: <span class="tag">Estimate</span> 283 MW credited, 19.0x multiple, 11% discount rate. Holding ownership at 45% instead and varying capacity gives $5.20 at 133 MW and $36.50 at 933 MW.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The single input that matters most has not been negotiated. That table spans $2.46 to $12.30 on identical capacity, identical multiples and an identical discount rate, and the only variable is a percentage in a joint venture agreement that remains a non-binding letter of intent. One firm assumes the operating partner takes control at approximately 51%, implying the company holds less than half. The 45% figure should be read as a third-party placeholder rather than a disclosed term.</p>
+  </div>
+
+  <h3>The published floor sits below the current price</h3>
+  <p>The same firm published a deliberately conservative floor: Phase 1 only, a 15x multiple rather than 19x, discounted one year.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Scenario</th><th class="num">$/kW/month</th><th class="num">Equity value</th><th class="num">Per share</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Bear</td><td class="num">$100</td><td class="num">$492M</td><td class="num">$3.55</td></tr>
+      <tr><td class="lbl">Base</td><td class="num">$120</td><td class="num">$705M</td><td class="num">$5.08</td></tr>
+      <tr><td class="lbl">Bull</td><td class="num">$140</td><td class="num">$919M</td><td class="num">$6.62</td></tr>
+      <tr><td class="lbl">Upper</td><td class="num">$160</td><td class="num">$1.13B</td><td class="num">$8.16</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub">Basis: <span class="tag">Estimate</span> Phase 1 stabilised net operating income, 15x, 45% ownership, 125M diluted shares, one-year discount at 11%.</p>
+
+  <p>Note what this assumes: that Phase 1 exists, is leased and is generating stabilised income. Even granting all of that, the bear case sits below where the security traded on 31 July. The floor is not a floor if the lease never signs.</p>
+
+  <div class="note neg">
+    <p>All three frameworks were built on the Q1 2026 quarterly report that the company said on 30 July should no longer be relied upon, and none has been revised. The corrections are non-cash and may prove immaterial to a project-based valuation, since these frameworks value future campus earnings rather than the current income statement, but the inputs have not been re-verified and the acquisition fair value review touches the carrying value of the asset all three are valuing.</p>
+  </div>
+</section>
+
+<!-- ===================== 9. GROWTH DRIVERS ===================== -->
+<section id="s9">
+  <h2 class="sec"><span class="n">09</span>Growth drivers</h2>
+  <ul>
+    <li><b>The anchor lease.</b> It unlocks the A-3 tranche and the $200M delayed draw, validates the venture, triggers construction, and would reset the trading multiple from approximately $15.9M enterprise value per contracted megawatt toward the peer average near $17.6M. One firm sizes the de-risking at roughly $3.50 per share.</li>
+    <li><b>Power supply agreements with the adjacent operators.</b> Expected to execute first, and the document that anchors the tenant's own underwriting on power availability.</li>
+    <li><b>The joint venture definitive.</b> Brings institutional capital at scale and fixes the ownership percentage that drives the valuation.</li>
+    <li><b>Phase 2 behind-the-meter capacity.</b> 450 MW gross using 460 MW of Siemens turbines already under contract, bypassing the interconnection queue entirely.</li>
+    <li><b>Lea County, New Mexico.</b> A land option on approximately 3,500 acres with 7+ GW of potential, including a planned nuclear component through a small modular reactor partnership. No covering firm includes it in a base case; one sizes every 100 MW of gas generation there at roughly $0.90 per share.</li>
+    <li><b>Legacy asset sale.</b> $19M to $84M of potential non-dilutive liquidity, though likely gated on resolving the New Mexico litigation.</li>
+    <li><b>Trust conversion.</b> Management has mentioned it without announcing a plan. One firm estimates a $1B net operating income run rate at peer multiples could imply roughly five times its published figure, a scenario resting on conditions that do not yet exist.</li>
+  </ul>
+</section>
+
+<!-- ===================== 10. RISKS ===================== -->
+<section id="s10">
+  <h2 class="sec"><span class="n">10</span>Risks</h2>
+  <p class="sub">Severity-ranked, most severe first.</p>
+
+  <div class="risk sev-high">
+    <h4>Covenant failure by 8 October 2026 <span class="sev">Severe</span></h4>
+    <p>Failure to execute a binding lease gives Macquarie acceleration rights. The most recent covering firm states plainly that a delay beyond that window would create complex restructuring dynamics. Possible consequences include facility acceleration, enforced amortisation, emergency equity issuance at a distressed price, or restructuring of partner economics. The repayment premium of 1.10x to 1.35x is earned at signing and payable on repayment either way.</p>
+  </div>
+
+  <div class="risk sev-high">
+    <h4>An unquantified restatement and an acknowledged control weakness <span class="sev">Severe</span></h4>
+    <p>Management concluded disclosure controls were not effective as of 31 March 2026 and identified a material weakness in internal control over financial reporting. Three restatement items remain open: expense classification, executive share award accounting, and the fair value assigned to the January buyout of the venture partner. The third is the one to watch, because it concerns the carrying value of the company's only material asset and an outside valuation expert has been engaged. An unquantified restatement sitting alongside an active class action alleging misstatements is harder to underwrite than either alone.</p>
+  </div>
+
+  <div class="risk sev-high">
+    <h4>Counterparty and asset concentration <span class="sev">Severe</span></h4>
+    <p>Phase 1 economics depend on a single anchor tenant, so withdrawal, material renegotiation or credit deterioration would impair the project, the financing and the venture simultaneously. The campus is essentially the whole company, with no second operating business to absorb a setback. The partner group is small and named, and because the consortium was assembled at the tenant's request, one partner departing would signal more than one relationship failing.</p>
+  </div>
+
+  <div class="risk sev-high">
+    <h4>Capital intensity and mandated dilution <span class="sev">Severe</span></h4>
+    <p>Total capital expenditure is projected to exceed $15B over the full buildout, requiring continuous access to project debt. Share count doubled in five months, one firm expects drawing the full facility will require additional equity raises, and the credit agreement contractually requires a $100M at-the-market programme representing roughly 21% of current market capitalisation. Dilution here is the base case rather than a tail risk.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Neither power purchase agreement is executed <span class="sev">Moderate</span></h4>
+    <p>Final terms covering capacity, tenor, pricing and curtailment during scarcity events could deviate from expectations. A power contract that fails during peak demand does not support a lease promising investment-grade uptime. Phase 2 additionally assumes an air permit from the state environmental regulator that has not been granted.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Undisclosed physical prerequisites <span class="sev">Moderate</span></h4>
+    <p>A 1.4 GW campus needs substantial cooling water, and no water rights or supply agreement has been disclosed. The fibre arrangement remains a memorandum of understanding rather than a definitive agreement. Neither appears in any covering firm's risk framework, which reflects analyst focus rather than confirmed resolution.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>First-time developer execution <span class="sev">Moderate</span></h4>
+    <p>This campus would be the company's first. Cost overruns, permit delays and schedule slippage are the norm rather than the exception in first megaprojects, and the three covering firms already disagree by two quarters on first power.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Statewide regulatory moratoriums <span class="sev">Moderate</span></h4>
+    <p>New York's 14 July pause is the first of its kind and caught a project belonging to the company's own development partner. So far the effect has favoured this campus by removing a competing site, but the same policy logic, that hyperscale campuses raise household electricity bills, could reach Texas. A behind-the-meter configuration is the structural defence, which is part of why islanding is being explored.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Litigation <span class="sev">Moderate</span></h4>
+    <p>A securities class action covers purchasers from 6 November 2024 to 29 December 2025, following a December 2025 short-seller report. An independent internal investigation found no supporting evidence and institutional partners diligenced and proceeded, but the case is live and the restatement is the kind of event around which complaints are amended. Three claims against the founder personally remain pending in New Mexico; the company's own five claims settled for $1.0M with court approval final on 9 July 2026, without admission of liability.</p>
+  </div>
+
+  <div class="risk sev-low">
+    <h4>No insider has bought on the open market <span class="sev">Low</span></h4>
+    <p>The insider filings made since the leadership transition report compensation awards, including 325,000 restricted stock units to the Chief Accounting Officer on 23 June, rather than purchases. That is normal for newly seated executives, but it means the team has not put personal capital behind the story. A promotional layer also surrounds the security: an investor awareness firm discloses the company as a paid client.</p>
+  </div>
+
+  <div class="note pos">
+    <p>Three escalations that the filing record does <b>not</b> show, each of which would be worse than what it does show. No Schedule 13D has ever been filed: every holder above 5%, including the entity that disclosed 5.3% on 20 July, has filed on the passive schedule, and no holder has declared an intent to influence control. No late-filing notification has been filed, which is the form a company files when it expects to miss a reporting deadline and would appear before a late filing. And no auditor change: the auditor was consulted on and concurred with the restatement determination rather than resigning. None of this makes the restatement less serious, but the specific escalations that usually accompany a deteriorating filing record have not occurred.</p>
+  </div>
+</section>
+
+<!-- ===================== 11. BULL / BASE / BEAR ===================== -->
+<section id="s11">
+  <h2 class="sec"><span class="n">11</span>Bull / base / bear</h2>
+  <p class="sub">Each case with its preconditions: what must be true, not what might be.</p>
+
+  <div class="cases">
+    <div class="case bear"><h4>Bear</h4><p>The tenant walks, or negotiations extend past the point where the lender is willing to wait. Acceleration rights are exercised or renegotiated on punitive terms. Equity is raised at a distressed price, or partner economics are restructured. The class action survives dismissal and discovery begins, and the restatement quantifies larger than expected. What supports the price is $76.0M of capitalised land, a legacy portfolio valued at $19M to $84M, and 492 entitled acres beside two power plants, which retain strategic value to someone though likely realised through a sale rather than a lease. That is on the order of $95M to $160M of tangible anchor against a $471.44M market capitalisation, and the security traded at $0.32 within the past 52 weeks.</p>
+      <p class="req">Requires: no lease by the covenant date, or a lease on terms that do not satisfy the lender.</p></div>
+    <div class="case"><h4>Base</h4><p>The signing day slips past 8 October. The lender grants a waiver or extension rather than accelerating, which is plausible because a lender holding a first lien on a half-built project generally prefers the project finished, but the terms cost something in fees, spread or ownership. The venture settles below 45%. Phase 1 energisation moves toward the more conservative first-quarter 2028 estimate. Additional equity is issued along the way, including under the mandated programme. The published Phase 1 floor of approximately $5.08 per share at a $120 lease rate is a reasonable anchor for a delayed but real outcome.</p>
+      <p class="req">Requires only: that a complex first-time megaproject takes longer than planned.</p></div>
+    <div class="case bull"><h4>Bull</h4><p>A binding lease with an investment-grade counterparty executes at or before 8 October at a rate at or above the $120 per kW per month both firms model conservatively. The venture goes definitive with the company retaining 45% to 49%. The A-3 tranche and $200M delayed draw unlock sequentially. The trading multiple re-rates from approximately $15.9M toward the $17.6M peer average, and the market begins pricing Phase 2 rather than doubting Phase 1. The published figures of $8.60 to $11.00 describe roughly this outcome.</p>
+      <p class="req">Requires: lease signed on time, venture percentage at the high end, financing conditions holding, construction beginning on schedule.</p></div>
+  </div>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Averaging these produces a number that describes no possible future. The covenant makes this closer to a binary than a distribution: either a creditworthy tenant signs a fifteen-year lease, or the capital structure has to be renegotiated. Position sizing rather than price targeting is the honest response to that shape.</p>
+  </div>
+</section>
+
+<!-- ===================== 12. RESEARCH SUMMARY ===================== -->
+<section id="s12">
+  <h2 class="sec"><span class="n">12</span>Research summary</h2>
+
+  <p>New Era Energy &amp; Digital is a genuine asset attached to an unproven business. The 492 acres are real, the adjacency to two operating generation complexes is real and not replicable, the cash of more than $80M and the $290M facility are real, the Siemens turbines are contracted, and the executives hired between April and July 2026 bring operating experience from Microsoft, Amazon Web Services, TikTok, EdgeConneX, CoreWeave and Switch. The demand backdrop, roughly $725B of counterparty capital expenditure in 2026 with two named candidates stating publicly that they intend to rent third-party capacity, is as favourable as it has been.</p>
+
+  <p>One development since has cut in the company's favour by accident: the New York moratorium of 14 July paused a $19.4B project belonging to its own development partner, pushing the prospective tenant toward sites deliverable by 2027.</p>
+
+  <p>Against that: no signed lease, no executed power purchase agreements, no definitive joint venture, no disclosed ownership percentage, $885K of annual revenue, a share count that doubled in five months, a contractual obligation to establish a further $100M equity programme, withdrawn quarterly financial statements with an unquantified restatement pending, an acknowledged material weakness in internal control, and a credit agreement that comes due for its first real test on approximately 8 October 2026.</p>
+
+  <p>The single question that resolves this security is whether a creditworthy counterparty signs a binding lease at this campus by approximately 8 October 2026. Everything else, the partner stack, the land, the turbines, the published figures and the product range, is preamble to that one signature.</p>
+
+  <div class="note">
+    <p>Five points carry most of the weight. The going concern qualification was resolved by the April 2026 financings, so commentary still citing it describes a superseded position. The October covenant is contractual rather than aspirational and organises the near-term calendar. The venture ownership percentage swings published fair value from $2.46 to $12.30 and has not been negotiated. The campus is a hybrid by design and the front-of-meter to behind-the-meter mix is being rebalanced, so turbine orders read more reliably than adjectives. And every published figure comes from a firm disclosing an investment banking relationship with the company, all were built on the withdrawn quarterly report, and none of the three carries a sell-equivalent rating anywhere in its coverage.</p>
+  </div>
+</section>
+
+<!-- ===================== 13. NULL CATEGORIES ===================== -->
+<section id="s13">
+  <h2 class="sec"><span class="n">13</span>Null categories</h2>
+  <p class="sub">Requested categories with nothing to report, stated explicitly rather than omitted.</p>
+  <div class="tw"><table class="nulls">
+    <thead><tr><th>Category</th><th>Status</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Dividends</td><td class="status">None</td><td>No dividend has been paid or declared; all three covering firms model a 0.00% yield through 2029.</td></tr>
+      <tr><td class="lbl">Share buybacks</td><td class="status">None</td><td>No programme exists or is plausible while the company funds a capital programme projected to exceed $15B and is contractually required to establish a $100M equity programme.</td></tr>
+      <tr><td class="lbl">Data centre revenue</td><td class="status">None</td><td>Checked against the filing record: no lease has been signed and all revenue through FY2026 is legacy oil and gas. First lease revenue is modelled in 4Q 2027.</td></tr>
+      <tr><td class="lbl">Helium revenue</td><td class="status">None</td><td>Helium is produced as a byproduct but generates no revenue under existing processing agreements, despite having been the company's original name and purpose.</td></tr>
+      <tr><td class="lbl">Preferred stock</td><td class="status">None</td><td>No preferred shares are outstanding in the capital structure disclosed.</td></tr>
+      <tr><td class="lbl">Independent analyst coverage</td><td class="status caution-t">Not established</td><td>Not examined. The three covering firms named in this file each disclose an investment banking relationship, but no search for unconflicted coverage beyond them was performed. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Insider open-market purchases</td><td class="status">None</td><td>Insider filings since the leadership transition report compensation awards rather than purchases.</td></tr>
+      <tr><td class="lbl">Activist ownership</td><td class="status">None</td><td>Checked against the beneficial ownership filing record: no Schedule 13D has ever been filed, and every holder above 5% has filed on the passive schedule with no conversions.</td></tr>
+      <tr><td class="lbl">Late-filing notifications</td><td class="status">None</td><td>Checked against the filing record: no Form NT has been filed, notwithstanding the pending restatement.</td></tr>
+      <tr><td class="lbl">Auditor change</td><td class="status">None</td><td>The auditor was consulted on and concurred with the restatement determination rather than resigning.</td></tr>
+      <tr><td class="lbl">Foreign private issuer filings</td><td class="status">None</td><td>Checked against the filing record and found empty because the category does not apply: the company is a Nevada corporation reporting as a United States domestic registrant, so foreign private issuer forms are not available to it.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 14. METHODOLOGY & SOURCES ===================== -->
+<section id="s14">
+  <h2 class="sec"><span class="n">14</span>Methodology &amp; sources</h2>
+
+  <p><b>Pricing basis.</b> Price and market capitalisation are struck to the same session, the 31 July 2026 close, and reconcile at 101,290,928 shares outstanding. Shares fell 3.52% that session and a further 1.72% after hours to $4.58. Quote sources have disagreed materially in this security, publishing market capitalisations between $412.8M and $588.5M within a single week on a stable share count.</p>
+
+  <h3>Provenance tags</h3>
+  <p class="sub">The four tags used throughout this file and what each asserts. Tags are not colour-coded: provenance is neither meaning nor identity, and a filed fact can be bad news.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Tag</th><th>What it asserts</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl"><span class="tag">Filed</span></td><td>Stated in an SEC filing or company release, cited by form and date. Also covers a dated official publication by a named non-SEC issuer, with the issuer named in the source line.</td></tr>
+      <tr><td class="lbl"><span class="tag">Estimate</span></td><td>Derived or inferred here, or modelled by a named third party. The arithmetic or the basis is shown.</td></tr>
+      <tr><td class="lbl"><span class="tag">Open</span></td><td>Expected but unconfirmed. Nothing filed either way.</td></tr>
+      <tr><td class="lbl"><span class="tag">Market</span></td><td>Price, volume, float, short interest, and published targets and ratings, stamped with the close or publication date. A third party's target or rating is market data, attributed to the firm that issued it and never adopted here.</td></tr>
+    </tbody>
+  </table></div>
+
+
+  <p><b>Fact against assumption.</b> Body text and table figures are sourced. Blocks marked as analyst assumption are interpretation, as is the scenario framing in the bull, base and bear section. Where covering firms disagree, the divergence is shown rather than averaged.</p>
+
+  <p><b>Estimates.</b> Figures for FY2026 through FY2028 are third-party projections rather than company guidance. Published figures reproduced in the valuation section are the opinions of the issuing firms and are presented as market data rather than adopted; this document issues no target price and no recommendation.</p>
+
+  <h3>Primary sources</h3>
+  <p>Filings: FY2025 Form 10-K, 12 March 2026, with amendment; Q1 2026 Form 10-Q, 15 May 2026, now subject to restatement; Forms 8-K dated 16 January, 25 March, 31 March, 6 April, 8 April, 14 April, 28 May with Exhibit 99.1, 6 July, 22 July and 30 July 2026; Form S-3 registration statements of 23 January, 4 February, 10 April and 8 May 2026 with amendments of 12 March and 18 May, with prospectus supplements filed under Rule 424 against those registrations; preliminary and definitive proxy statements of 5 and 16 March 2026 with supplements of 10 April; Schedule 13G filings including that of 20 July 2026; Forms 3 and 4 to 8 July 2026.</p>
+  <p>Company communications: business update calls of 17 March and 18 May 2026; an investor conference appearance of 23 June 2026; releases via GlobeNewswire and BusinessWire of 27 February, 1 April, 8 April and 9 July 2026; the corporate website and investor relations platform accessed July 2026.</p>
+  <p>Third-party research: Northland Securities initiation of 16 April 2026 and company update of 1 July 2026; Texas Capital Securities initiation of 16 April 2026; B. Riley Securities initiation of 6 July 2026.</p>
+  <p>Counterparty and market data: quarterly results and earnings calls of Alphabet, Microsoft, Meta and Amazon between 22 and 30 July 2026; quote data for the 31 July 2026 close; a short-seller report of 12 December 2025; law firm releases of April and May 2026.</p>
+
+  <h3>How to read the coverage</h3>
+  <p>Three firms initiated within twelve weeks, all with buy-equivalent ratings and figures of $8.60, $10.00 and $11.00. Their research is detailed and in places the best publicly available work on the company. It should still be read with the incentives visible.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Firm</th><th>Disclosed relationship</th><th class="num">Buy-equivalent</th><th class="num">Sell-equivalent</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Northland Securities</td><td>Makes a market; received banking compensation in the past twelve months; managed a public offering and a financing; intends to seek further banking compensation within three months <span class="tag">Filed</span></td><td class="num">79.4%</td><td class="num">0.00%</td></tr>
+      <tr><td class="lbl">Texas Capital Securities</td><td>Received banking compensation in the last twelve months; expects to seek more within three months; received non-banking compensation <span class="tag">Filed</span></td><td class="num">92.0%</td><td class="num">0.00%</td></tr>
+      <tr><td class="lbl">B. Riley Securities</td><td>Acts as market maker or liquidity provider <span class="tag">Filed</span></td><td class="num">79.1%</td><td class="num">0.00%</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>Two further points of provenance, neither improper. The company's Chief Financial Officer led the energy, power and digital infrastructure investment banking practice at one of the three firms from 2020 through early 2026, where that firm structured and sole-managed more than $7B in data centre financings, and joined the company as Chief Financial Officer in March 2026; that firm initiated coverage roughly one month later with the highest published figure of the three, having also disclosed managing an offering for the company in the prior twelve months. Separately, the research set reached this analysis through the company's own investor relations agency, whose distribution watermark appears on one of the reports, so the available sample is curated and uniformly positive rather than a survey of all views.</p>
+
+  <p>Risk sections in these documents should be read as boilerplate rather than current assessment. The 1 July update still lists among its risks that as of 31 December 2025 the company did not have sufficient liquidity to fund operations, raising substantial doubt about its ability to continue as a going concern. That text was carried forward unchanged from the April initiation, whose own body text stated the April financings removed key funding uncertainties that had raised going concern risk. On the same page a data block shows cash per share of $0.02, roughly $2M, which is the 31 March balance sheet struck before the April raise closed. Where a document contradicts itself, the filing is the authority. All three initiations were built on the Q1 2026 report the company has since withdrawn, and none has been revised for the restatement.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>None of this makes the analysis wrong, and small-capitalisation companies are routinely covered only by banks that have done business with them, because that is how coverage gets paid for. But the absence of a bearish published view is not evidence that no bearish view exists. It may reflect who writes research on a company of this size and why.</p>
+  </div>
+
+  <h3>Verification points and what was not checked</h3>
+  <p>The Form 10-Q/A, when filed, should be compared against the original Q1 2026 report; the Form 8-K of 30 July 2026 is the clearest statement of what remains unresolved; the FY2025 annual report carries the risk factors and the facility terms. Insider and ownership filings, current reports and any late-filing notification appear on the public filing system before they appear anywhere else, and a conversion from the passive to the control ownership schedule would signal a change in intent among large holders.</p>
+  <p>This revision changes presentation and wording only. It performs no new filing sweep, no repricing and no fresh source verification, so nothing filed or published after the sources listed above has been examined. Whether unconflicted published coverage of this company exists beyond the three firms named above was not examined. Within the material carried, the following are undisclosed rather than unchecked: the final venture ownership percentage, the lease rate, the terms of both power purchase agreements including curtailment provisions, water rights or supply agreements, a definitive fibre agreement, the quantified effect of the restatement, the execution date of the 54-acre corridor agreement, and the court schedule in the securities class action. An unexamined area is a gap rather than a clean bill.</p>
+
+  <h3>Known limitations carried forward</h3>
+  <p>Defects identified but not yet resolved, with the text at issue quoted and the reason it remains open.</p>
+  <div class="note neg">
+    <p><b>Figures drawn from a withdrawn filing.</b> The snapshot, financial performance and capital structure sections reproduce figures from a report the company states <b>&ldquo;should no longer be relied upon&rdquo;</b>, including net loss of <b>&ldquo;($9.0M)&rdquo;</b> for the first quarter and the fully diluted count of <b>&ldquo;119.6M&rdquo;</b>. Restating them requires the amended filing, which has not been published, so they are carried with the qualification stated rather than removed. A figure whose basis is withdrawn is provisional until the corrected filing lands.</p>
+  </div>
+</section>
+
+<!-- ===================== 15. DOCUMENT LOG ===================== -->
+<section id="s15">
+  <h2 class="sec"><span class="n">15</span>Document log</h2>
+  <p class="sub">Newest first. The original build entry is never removed or rewritten.</p>
+  <div class="log">
+    <div class="logentry current">
+      <div class="when">2 August 2026 <span class="latest">Latest</span></div>
+      <div class="basis">Priced off 31 Jul 2026 close &middot; $4.66 &middot; $471.44M cap</div>
+      <div class="correction">
+        <span class="lbl">Correction</span>
+        <p>The legacy portfolio valuation of $19M to $84M was stated without the <strong>$3.3M of net book value</strong> it was set against, leaving a range with nothing to contrast it to. The book value is restored, and with it the point the comparison existed to make.</p>
+      </div>
+      <p>Filing sweep run to 2 August 2026 across current reports, quarterly and annual reports, registration statements, prospectus supplements, beneficial ownership schedules, insider ownership forms, proxy statements and late-filing notifications. <strong>Nothing has been filed since the Form 8-K of 30 July 2026</strong>, and no late-filing notification has been made, so no analysis moved on new filings. The Form 10-Q/A remains unfiled, and figures drawn from the withdrawn quarterly report stay provisional.</p>
+      <p>No repricing was possible or needed: the latest close remains <strong>31 July 2026</strong>, this report being assembled on a Sunday. The as-of stamp moves <strong>1 August &rarr; 2 August 2026</strong>, and the covenant window is restated as <strong>67 days</strong>.</p>
+      <p><strong>Seven figures restored to the body</strong>, closing the backlog recorded in Methodology: the staged purchase of 203 contiguous acres and the 13,000 feet of remediated flowline in the site description, the $3.3M net book value noted above, the implied upside of approximately 72% beside the reiterated third-party figure, the prospectus rule under which supplements are filed, and the countdown to the covenant date. The market capitalisation of $484 million previously carried in the executive summary is <strong>superseded rather than restored</strong>: it was struck to an earlier close than the masthead beside it, and reinstating it would reintroduce two prices for one company.</p>
+      <p><strong>Ten figures previously carried from the companion document are now sourced here directly</strong>, each cited to the filing or published research that supports it, rather than to the calendar. None is an import any longer.</p>
+    </div>
+    <div class="logentry">
+      <div class="when">1 August 2026</div>
+      <p><strong>Q1 2026 financial statements withdrawn pending restatement.</strong> On July 24 the Audit Committee determined that the Q1 2026 Form 10-Q <strong>should no longer be relied upon</strong> (Form 8-K Item 4.02, filed July 30): approximately $1.4M of professional fees misclassified as G&amp;A rather than deferred as issuance costs; ASC 718 errors on executive performance share units whose $23.5M grant-date fair value "was inappropriately calculated and understated"; and an ongoing re-evaluation of the fair value of the January TCDC acquisition, with a valuation expert engaged. The company cannot quantify the effect and says it may be material; there is no cash impact. Added as a header banner and worked through Sections 01, 07, 09, 11, 12, 13 and 14, including a note that all three sell-side frameworks were built on the withdrawn filing.
+
+<p style="margin-top:10px"><strong>Material weakness surfaced.</strong> The filing repeats a disclosure from the original 10-Q that disclosure controls were <strong>not effective as of March 31, 2026</strong>, with an identified material weakness in internal control over financial reporting. This was present in the source filing and absent from earlier versions of this report; it is now a named governance risk in Section 11, alongside a Plain English explanation in Section 07 of what a restatement is and is not.</p>
+
+<p style="margin-top:10px"><strong>$100M ATM obligation added (Section 08).</strong> A July 17 Macquarie Waiver and Consent Letter extended but did not remove a Term Loan requirement to establish an at-the-market equity program of at least $100M, roughly 21% of market capitalisation, triggerable within five business days of the next periodic report. A filing sweep also found <strong>four Form S-3 shelf registrations and two amendments</strong> during 2026, including a May 8 filing amended May 18, so the registration vehicle for the ATM appears already in place.</p>
+
+<p style="margin-top:10px"><strong>Hyperscaler capex completed (Section 05).</strong> All four candidate tenants reported: Alphabet $195–205B; <strong>Amazon raised to ~$220B</strong> with AWS +36.7% and capacity constraints expected through 2027 and demand strong for 2028; Meta $130–145B with free cash flow collapsing to $784M from $8.5B and shares −9.6%; and Microsoft's move to ~$175B identified as an <strong>accounting reclassification rather than a spending cut</strong>. A comparison table was added, with a note that the demand case and the valuation case can move in opposite directions.</p>
+
+<p style="margin-top:10px"><strong>Filing record characterised (Section 11).</strong> A new note records three escalations that have <i>not</i> occurred: <strong>no Schedule 13D has ever been filed</strong> (every 5%+ holder is passive on 13G, including Conversant at 5.3%); <strong>no Form NT 10-Q has been filed</strong>, the statutory notification that would precede a missed deadline; and <strong>no auditor change</strong>, with Weaver and Tidwell having concurred with the restatement rather than resigning. Forms 4 since the leadership transition report compensation awards, 325,000 RSUs to the Chief Accounting Officer on June 23, not open-market purchases. Verification guidance now names NT 10-Q and Schedule 13D as specific forms to monitor, and Section 15 documents which form types are swept, recording that 6-K, 20-F, 40-F, NT 20-F and NT 40-F do not apply to a Nevada corporation filing as a US domestic registrant.</p>
+
+<p style="margin-top:10px"><strong>Market data.</strong> Struck to the Friday, July 31 close: <strong>$4.66, market cap $471.44M</strong>, day range $4.44–$5.15, TTM EPS −$0.89. Covenant countdown restated as <strong>68 days</strong>.</p></p>
+    </div>
+    <div class="logentry">
+      <div class="when">25 July 2026 (second update)</div>
+      <p>Incorporates the Northland Securities company update of July 1, 2026 and verification of its regulatory references. <strong>Power architecture reframed.</strong> The site schematic and Section 03 previously presented Phase 1 as grid-purchased power from the adjacent Vistra and Calpine plants. TCDC is a <strong>hybrid by design</strong> and all three covering firms describe it that way; what is moving is the <strong>mix</strong>. Management is "actively exploring a fully islanded behind-the-meter configuration" under which 650 MW of gross BTM capacity becomes the primary focus and total capacity could reach high-800 MW+ of critical IT load. The schematic now shows <strong>two independent paths to power</strong> rather than emphasising the neighbours alone, and Section 03 explains that turbine order size, 460 MW contracted against a 650 MW islanded requirement carrying its own N+1 redundancy, is the cleaner signal than analyst language. <strong>New York moratorium added.</strong> The nation's first statewide hyperscale moratorium was enacted July 14, 2026, pausing Stream's own ~$19.4B Genesee County campus; Arizona enacted a three-year data center tax-break moratorium. Added to Sections 05 and 11 as a two-sided event, and to the research summary. <strong>Stream credentials upgraded.</strong> Section 06 now carries the full operating record: 27+ developments since 1999, over 90% of capacity leased to Fortune 100 customers, <strong>zero early customer terminations</strong>, a ~3.6 GW pipeline with market breakdown, 20+ states, 100% in-house engineering and operations, and a 99.9999% uptime target, with a note reconciling the three different uptime figures now in circulation. <strong>Also added.</strong> The 20–50 MW modular business line disclosed at the June 23 conference, a month before the website relaunch, strengthening the read that the small-block offering is strategy rather than marketing (Section 02); Northland's July 1 reiteration of $11.00 at $6.38 against a $4.78 close (Section 09); and a worked example of stale sell-side boilerplate: Northland's July 1 risk section still citing the going-concern doubt its own body text described as resolved, alongside a cash-per-share figure struck before the April raise (Section 14).</p>
+    </div>
+    <div class="logentry">
+      <div class="when">25 July 2026 (first update)</div>
+      <p>Report rebuilt against three sell-side initiations and current company communications. Material corrections to the July 22 draft: the <strong>FY2025 going-concern qualification was resolved</strong> by the April 2026 financings and no longer describes the company; <strong>Phase 1 power is front-of-meter</strong> via power purchase agreements with adjacent Vistra and Calpine generation, not behind-the-meter only; the <strong>October 8, 2026 Macquarie lease covenant</strong> was previously absent and is now the organizing fact of the report; capacity figures reflect a <strong>phased design</strong> (207 / 650 / 1,407 MW) rather than escalating claims; the 54-acre corridor <strong>definitive agreement is executed</strong>; 460 MW of <strong>Siemens turbines are contracted</strong>, not merely in procurement; headcount reflects <strong>six senior appointments</strong> between April and July 2026. Added: three-framework valuation comparison with published sensitivities, the Alphabet capex and third-party-capacity disclosure, coverage-conflict and provenance analysis, and corrected market data.</p>
+    </div>
+    <div class="logentry">
+      <div class="when">22 July 2026 (original build)</div>
+      <p>Initial research report covering business model, revenue streams, industry trends, competitors, financial performance, valuation, growth drivers, risks, scenario analysis, and research summary. Built on public filings and press coverage available as of July 21–22, 2026, prior to review of sell-side initiations.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="norec">
+    No buy, sell, or hold recommendation is issued. This document is for research
+    and educational purposes and is not investment advice. Verify all figures
+    against primary filings on sec.gov before acting.
+  </div>
+  <p style="margin-top:16px">NUAI &middot; New Era Energy &amp; Digital, Inc. &middot; Equity Research Report &middot; as of 2 August 2026</p>
+</footer>
+
+</div>
+</body>
+</html>

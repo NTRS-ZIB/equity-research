@@ -1,0 +1,48 @@
+# Working notes stay private. These carry the reasoning, the defects found,
+# the checksums and the open items, and are not written for a reader.
+*_Findings.md
+*_findings.md
+*Findings*.md
+*_Conformance*.md
+*_Retrieval*.md
+*_Update*.md
+*Notes.md
+
+# Preserved sources and pass baselines. Never published, never overwritten.
+RECEIVED_*
+RECEIVED__*
+PRESPEC_*
+PRE_UPDATE__*
+SOURCE_*
+SOURCE__*
+INBOUND_*
+*.frozen
+*.keep
+sources/
+SOURCE_ARCHIVE/
+_source_snapshots/
+
+# The .received-<date>. infix convention, caught by name rather than by
+# location, so a snapshot dropped outside _source_snapshots/ is still excluded.
+*.received-*
+*.received-*.md
+
+# Scripts a pass writes for itself, and their output.
+check_*.py
+diff_*.py
+probe_*.py
+apply_*.py
+*.log
+CHECKSUMS.txt
+
+# The governing document and its templates are the working reference,
+# not part of the published set. Remove these two lines if you want them public.
+HOUSE_STYLE.md
+TEMPLATE_*.html
+
+# Local tooling config, not project content.
+.claude/
+
+# OS noise
+.DS_Store
+Thumbs.db

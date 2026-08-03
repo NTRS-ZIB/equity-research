@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>VIP &middot; Vulcan Infrastructure and Power Inc. &middot; Equity Research Report &middot; as of 2 August 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================================
+   PER-TICKER PALETTE
+   ========================================================================= */
+:root{
+  /* Identity colour, derived from the Vulcan mark. The raw brand red is
+     #F00024, the chevron, which is the only chromatic colour in the mark.
+     Normalised for legibility on white, then rotated 8 degrees to hue 343 so
+     it cannot be mistaken for the red that marks negative figures. 6.32:1
+     against the page. */
+  --accent:      #B81E4A;
+  --accent-deep: #8C1738;
+  --accent-wash: rgba(184,30,74,0.06);
+  --accent-line: rgba(184,30,74,0.22);
+}
+
+/* ============================================================================
+   SHARED STYLESHEET v1.50 : BEGIN
+   ========================================================================= */
+:root{
+  color-scheme: light only;
+
+  --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
+  --line:#DEE6EC;   --line-hard:#C0CDD7;
+  --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
+
+  --pos:#0B7A50;      --pos-bg:#E7F4EE;
+  --neg:#B02A21;      --neg-bg:#FBECEA;
+  --caution:#90600A;  --caution-bg:#FBF2E0;
+  --assume:#4F3FA3;   --assume-bg:#EFEDFA;
+
+  --display:'Archivo',ui-sans-serif,system-ui,'Helvetica Neue',Arial,sans-serif;
+  --body:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+
+  --measure:78ch;
+  --col:760px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html,body{background:var(--canvas) !important;background-color:var(--canvas) !important}
+body{
+  margin:0;color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 22px 96px;background:var(--paper);
+      border-left:1px solid var(--line);border-right:1px solid var(--line)}
+p{max-width:var(--measure)}
+/* Boxed prose fills its container: the box supplies its own measure, so the
+   78ch cap applies to top-level running prose only. */
+.first li,.assume p,.note p,.cat p,.risk p,.logentry p,.oc p,.case p,
+.cat-meta,.logentry .basis{max-width:none}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:var(--accent-deep)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- masthead ---------- */
+.mast{padding:44px 0 26px;border-bottom:2px solid var(--line-hard);margin-bottom:8px;
+      position:relative;padding-left:20px}
+.mast::before{content:"";position:absolute;left:0;top:44px;bottom:26px;
+      width:4px;background:var(--accent)}
+.ticker{font-family:var(--mono);font-size:44px;font-weight:700;letter-spacing:-1px;
+      line-height:1;color:var(--accent);margin:0}
+.headline{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.22;
+      color:var(--ink);margin:16px 0 0}
+.functional{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--ink-faint);margin:18px 0 0}
+.mast-strip{display:flex;flex-wrap:wrap;gap:26px;margin-top:20px;padding-top:16px;
+      border-top:1px solid var(--line)}
+.mast-strip div{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint)}
+.mast-strip b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-top:3px}
+
+/* ---------- banner: framing ---------- */
+.first{background:var(--canvas);border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:20px 24px;margin:30px 0 12px}
+.first h2{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.04em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 12px}
+.first ol{margin:0;padding-left:20px}
+.first li{margin-bottom:9px}
+.first li:last-child{margin-bottom:0}
+
+/* ---------- sections ---------- */
+section{padding-top:38px}
+h2.sec{font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);
+      margin:0 0 4px;padding-bottom:10px;border-bottom:1px solid var(--line-hard);
+      display:flex;align-items:baseline;gap:12px}
+h2.sec .n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);
+      letter-spacing:.06em;flex:none}
+.sub{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);margin:10px 0 18px;
+      max-width:var(--measure)}
+h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink-dim);
+      margin:26px 0 8px}
+
+/* ---------- provenance tags (signature) ---------- */
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);
+      background:var(--panel-2);border:1px solid var(--line);
+      border-radius:2px;padding:1px 6px;vertical-align:1px;white-space:nowrap}
+
+/* ---------- assumption block ---------- */
+.assume{background:var(--assume-bg);border-left:4px solid var(--assume);
+      padding:16px 20px;margin:20px 0}
+.assume .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--assume);display:block;margin-bottom:7px}
+.assume p{margin:0}
+
+/* ---------- callouts ---------- */
+.note{border:1px solid var(--line);border-left:4px solid var(--ink-faint);
+      background:var(--canvas);padding:16px 20px;margin:20px 0}
+.note.pos{border-left-color:var(--pos);background:var(--pos-bg)}
+.note.neg{border-left-color:var(--neg);background:var(--neg-bg)}
+.note.caution{border-left-color:var(--caution);background:var(--caution-bg)}
+.note p{margin:0}
+.note p + p{margin-top:10px}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+thead th{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--ink-dim);text-align:left;
+      padding:9px 12px;border-bottom:2px solid var(--line-hard);white-space:nowrap}
+tbody td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--canvas)}
+td.num,th.num{font-family:var(--mono);text-align:right;white-space:nowrap}
+/* td.when marks a timing column. An unmarked cell counts as prose. */
+td.when{font-family:var(--mono);white-space:nowrap}
+td.lbl{font-weight:600}
+.pos-t{color:var(--pos);font-weight:600}
+.neg-t{color:var(--neg);font-weight:600}
+.caution-t{color:var(--caution);font-weight:600}
+
+/* ---------- cases ---------- */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.case{border:1px solid var(--line);border-top:3px solid var(--ink-faint);
+      background:var(--paper);padding:18px}
+.case.bull{border-top-color:var(--pos)}
+.case.bear{border-top-color:var(--neg)}
+.case h4{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 10px}
+.case.bull h4{color:var(--pos)} .case.bear h4{color:var(--neg)}
+.case p{font-size:15px;margin:0}
+.case .req{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+
+/* ---------- risks ---------- */
+.risk{border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:16px 20px;margin-bottom:12px}
+.risk.sev-high{border-left-color:var(--neg)}
+.risk.sev-med{border-left-color:var(--caution)}
+.risk.sev-low{border-left-color:var(--ink-faint)}
+.risk h4{font-family:var(--display);font-size:15.5px;font-weight:600;margin:0 0 6px;
+      display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.risk .sev{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase}
+.risk.sev-high .sev{color:var(--neg)}
+.risk.sev-med .sev{color:var(--caution)}
+.risk.sev-low .sev{color:var(--ink-faint)}
+.risk p{margin:0;font-size:15.5px}
+
+/* ---------- null categories ---------- */
+.nulls td.lbl{width:26%}
+.nulls .status{font-family:var(--mono);font-size:12px;white-space:nowrap}
+
+/* ---------- document log ---------- */
+.log{margin-top:14px}
+.logentry{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:12px}
+.logentry.current{border-left:4px solid var(--accent);background:var(--accent-wash)}
+.logentry .when{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);
+      display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.latest{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-line);
+      background:var(--paper);border-radius:2px;padding:1px 6px}
+.logentry .basis{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-bottom:12px}
+.logentry p{font-size:15.5px;margin:0 0 9px}
+.logentry p:last-child{margin-bottom:0}
+.correction{border:1px solid var(--neg);border-left:4px solid var(--neg);
+      background:var(--neg-bg);padding:12px 16px;margin-bottom:14px}
+.correction .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--neg);display:block;margin-bottom:5px}
+
+/* ---------- footer ---------- */
+footer{margin-top:44px;padding-top:22px;border-top:2px solid var(--line-hard)}
+footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width:none}
+.norec{border:1px solid var(--line-hard);background:var(--canvas);padding:16px 20px;
+      margin-top:20px;font-family:var(--mono);font-size:12.5px;color:var(--ink-dim)}
+
+/* ---------- catalyst cards (calendar) ---------- */
+.cat{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:14px;border-left:4px solid var(--line-hard)}
+.cat.up{border-left-color:var(--pos)}
+.cat.down{border-left-color:var(--neg)}
+.cat.two{border-left-color:var(--caution)}
+.cat.neutral{border-left-color:var(--ink-faint)}
+.cat-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.cid{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);flex:none}
+.cat-head h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink);
+      margin:0;flex:1 1 auto;min-width:200px}
+.dir{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;white-space:nowrap}
+.cat.up .dir{color:var(--pos)} .cat.down .dir{color:var(--neg)}
+.cat.two .dir{color:var(--caution)} .cat.neutral .dir{color:var(--ink-faint)}
+.cat-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:10px 0 12px;padding:9px 0;
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+      font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
+.cat-meta b{color:var(--ink);font-weight:600}
+.cat p{margin:0 0 9px;font-size:15.5px}
+.cat p:last-child{margin-bottom:0}
+.cat.resolved{background:var(--canvas);border-left-color:var(--ink-faint)}
+.cat.resolved .dir{color:var(--ink-faint)}
+
+/* ---------- horizon bands (calendar) ---------- */
+.band{display:flex;align-items:center;gap:14px;margin:30px 0 16px}
+.band-t{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--ink-dim);white-space:nowrap}
+.band-r{flex:1;height:1px;background:var(--line-hard)}
+.band-c{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);white-space:nowrap}
+
+/* ---------- upside / downside pair ---------- */
+.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0}
+.oc{border:1px solid var(--line);padding:11px 14px;background:var(--paper)}
+.oc.up-c{border-left:3px solid var(--pos)}
+.oc.down-c{border-left:3px solid var(--neg)}
+.oc .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.09em;
+      text-transform:uppercase;display:block;margin-bottom:5px}
+.oc.up-c .lbl{color:var(--pos)} .oc.down-c .lbl{color:var(--neg)}
+.oc p{margin:0;font-size:14.5px;line-height:1.5}
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  body{font-size:16px}
+  .wrap{padding:0 16px 70px;border-left:none;border-right:none}
+  .ticker{font-size:34px}
+  .headline{font-size:23px}
+  .cases{grid-template-columns:1fr}
+  .outcomes{grid-template-columns:1fr}
+  .mast-strip{gap:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none !important;transition:none !important}
+}
+@media print{
+  body{font-size:11pt}
+  .wrap{max-width:none;border:none}
+  section{page-break-inside:avoid}
+}
+/* ============================================================================
+   SHARED STYLESHEET v1.50 : END
+   ========================================================================= */
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ===================== MASTHEAD ===================== -->
+<header class="mast">
+  <p class="ticker">VIP</p>
+  <h1 class="headline">A $74 million enterprise value on 104 energized megawatts and no signed tenant</h1>
+  <p class="functional">VIP &middot; Vulcan Infrastructure and Power Inc. &middot; Equity Research Report &middot; as of 2 August 2026</p>
+  <div class="mast-strip">
+    <div>Price <b>$2.10</b> <span class="tag">Market</span></div>
+    <div>Market cap <b>$74.2M</b> <span class="tag">Estimate</span></div>
+    <div>Enterprise value <b>~$74M</b> <span class="tag">Estimate</span></div>
+    <div>Shares out <b>17,966,380</b> <span class="tag">Filed</span></div>
+    <div>Pricing basis <b>31 Jul 2026 close</b> <span class="tag">Market</span></div>
+  </div>
+</header>
+
+<!-- ===================== FRAMING ===================== -->
+<div class="first">
+  <h2>Framing</h2>
+  <ol>
+    <li>Substantial doubt about the ability to continue as a going concern was disclosed in both the FY2025 10-K and the Q1 2026 10-Q. Management stated cash flow projections support liquidity only through the third quarter of 2026. <span class="tag">Filed</span></li>
+    <li>The $39.4M PIPE announced 20 July 2026 is signed but not closed. The outside termination date is 10 October 2026, three weeks before $33.1M of senior notes mature on 31 October. <span class="tag">Filed</span></li>
+    <li>There is no AI/HPC revenue and no AI/HPC customer. Power and capacity sales into the New York grid were 90% of Q1 2026 revenue. <span class="tag">Filed</span></li>
+    <li>The share price fell 48% in six sessions, from $4.05 on 23 July to $2.10 on 31 July, and now sits 22.8% above the $1.71 the PIPE investors paid, down from 43% at the 24 July close. <span class="tag">Market</span></li>
+  </ol>
+</div>
+
+<!-- ===================== 1. SNAPSHOT ===================== -->
+<section id="s1">
+  <h2 class="sec"><span class="n">01</span>Snapshot</h2>
+  <p class="sub">Key figures, each tagged by provenance. Balance sheet items are as of 31 March 2026 unless stated.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Metric</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Share price</td><td class="num">$2.10</td><td><span class="tag">Market</span> 31 Jul 2026 close</td></tr>
+      <tr><td class="lbl">Market capitalization, current</td><td class="num">$37.7M</td><td><span class="tag">Estimate</span> 17,966,380 as-converted at $2.10</td></tr>
+      <tr><td class="lbl">Market capitalization, pro forma</td><td class="num">$74.2M</td><td><span class="tag">Estimate</span> 35,322,570 post-PIPE at $2.10</td></tr>
+      <tr><td class="lbl">Class A shares outstanding</td><td class="num">15,286,349</td><td><span class="tag">Filed</span> Schedule 13D/A, 30 Jun 2026</td></tr>
+      <tr><td class="lbl">Class B shares outstanding</td><td class="num">2,680,031</td><td><span class="tag">Filed</span> Schedule 13D/A, 30 Jun 2026</td></tr>
+      <tr><td class="lbl">Revenue, Q1 2026</td><td class="num">$20.8M</td><td><span class="tag">Filed</span> 10-Q, May 2026</td></tr>
+      <tr><td class="lbl">Revenue, FY2025</td><td class="num">$58.8M</td><td><span class="tag">Filed</span> 10-K, Mar 2026</td></tr>
+      <tr><td class="lbl">Net loss, Q1 2026</td><td class="num neg-t">($4.6M)</td><td><span class="tag">Filed</span> 10-Q, May 2026</td></tr>
+      <tr><td class="lbl">Adjusted EBITDA, Q1 2026</td><td class="num neg-t">($1.0M)</td><td><span class="tag">Filed</span> 10-Q, May 2026</td></tr>
+      <tr><td class="lbl">Operating cash flow, Q1 2026</td><td class="num neg-t">($11.4M)</td><td><span class="tag">Filed</span> 10-Q, May 2026</td></tr>
+      <tr><td class="lbl">Cash and equivalents</td><td class="num">$7.1M</td><td><span class="tag">Filed</span> 10-Q, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Bitcoin held</td><td class="num">$6.7M</td><td><span class="tag">Filed</span> 98 BTC, 10-Q, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Total debt, principal</td><td class="num neg-t">$39.0M</td><td><span class="tag">Filed</span> 10-Q, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Net debt</td><td class="num neg-t">$27.7M</td><td><span class="tag">Filed</span> 30 Jun 2026, per 20 Jul release</td></tr>
+      <tr><td class="lbl">Total stockholders' equity</td><td class="num neg-t">($50.2M)</td><td><span class="tag">Filed</span> 10-Q, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Energized capacity</td><td class="num">104 MW</td><td><span class="tag">Filed</span> Press release, 20 Jul 2026</td></tr>
+      <tr><td class="lbl">Development pipeline</td><td class="num">654 MW</td><td><span class="tag">Filed</span> Press release, 20 Jul 2026</td></tr>
+      <tr><td class="lbl">Capacity under AI/HPC contract</td><td class="num neg-t">0 MW</td><td><span class="tag">Open</span> No agreement announced in any filing or release</td></tr>
+      <tr><td class="lbl">Beta</td><td class="num">3.02</td><td><span class="tag">Market</span> 31 Jul 2026</td></tr>
+    </tbody>
+  </table></div>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Zero contracted megawatts is not a company disclosure but the absence of one. The company's own valuation comparison defines its peer group as issuers with no currently active high performance computing colocation customer contract, which places it in that cohort by its own construction.</p>
+  </div>
+</section>
+
+<!-- ===================== 2. BUSINESS MODEL ===================== -->
+<section id="s2">
+  <h2 class="sec"><span class="n">02</span>Business model</h2>
+  <p>Vulcan operates a 106 MW natural gas fired plant at Dresden, New York, on Seneca Lake in Yates County, converted from coal in 2016 and 2017. It sells power into the NYISO grid and runs bitcoin miners behind the meter. A hosting and self-mining site operates at Underwood, North Dakota. Columbus, Mississippi is greenfield powered land, with 40 MW expected to energize in Q1 2027 and a request lodged with the Tennessee Valley Authority to study a further 250 MW.</p>
+  <p>Across New York and North Dakota the company reported 111.5 MW of active self-mining, hosting and power generation as of Q1 2026, running roughly 2.7 exahash per second of combined mining capacity. <span class="tag">Filed</span> Q1 2026 release, 18 May 2026.</p>
+  <h3>The intended model</h3>
+  <p>The 20 July 2026 release reframes the company as a power and infrastructure platform focused on acquiring, developing and operating energized sites that support artificial intelligence and high performance computing data centers, as well as local electricity grids.</p>
+  <p>The underlying logic is sound and drives the whole sector. AI data centers are bottlenecked by electricity already connected to the grid rather than by chips or buildings, and interconnecting a new large load can take three to seven years. A company holding permitted, energized capacity holds the scarce input. Bitcoin miners assembled exactly that asset between 2018 and 2024.</p>
+  <div class="note caution">
+    <p><b>Correction to a widely repeated claim.</b> Several aggregators covering the 24 July ticker change stated that Vulcan has exited historical bitcoin mining operations. That is not accurate as of the last primary disclosure. The 20 July release describes an ongoing strategic transition away from mining, not a completed exit. Q1 2026 recorded $1.8M of mining revenue and $0.4M of hosting revenue, and the new convertible note is secured by a first priority lien on approximately 6,258 miners the company still owns at Dresden and Underwood. Mining is shrinking, not gone.</p>
+  </div>
+</section>
+
+<!-- ===================== 3. REVENUE STREAMS ===================== -->
+<section id="s3">
+  <h2 class="sec"><span class="n">03</span>Revenue streams</h2>
+  <p class="sub">The mix inverted over eighteen months. Each stream shown with its share of the Q1 2026 total.</p>
+  <div class="tw"><table>
+    <thead>
+      <tr><th>Revenue line</th><th class="num">Q1 2025</th><th class="num">Q1 2026</th><th class="num">Change</th><th class="num">% of Q1 2026</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="lbl">Power and capacity, grid sales</td><td class="num">$9.2M</td><td class="num">$18.7M</td><td class="num pos-t">+103%</td><td class="num">90%</td></tr>
+      <tr><td class="lbl">Cryptocurrency self-mining</td><td class="num">$4.2M</td><td class="num">$1.8M</td><td class="num neg-t">(57%)</td><td class="num">9%</td></tr>
+      <tr><td class="lbl">Datacenter hosting</td><td class="num">$5.8M</td><td class="num">$0.4M</td><td class="num neg-t">(93%)</td><td class="num">2%</td></tr>
+      <tr><td class="lbl">Total revenue</td><td class="num">$19.2M</td><td class="num">$20.8M</td><td class="num pos-t">+8%</td><td class="num">100%</td></tr>
+      <tr><td class="lbl">AI and HPC</td><td class="num">$0</td><td class="num">$0</td><td class="num">n/a</td><td class="num">0%</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub"><span class="tag">Filed</span> Q1 2026 results release and Form 10-Q, May 2026. Q1 2025 power figure derived from the disclosed $9.5M year over year increase. <span class="tag">Estimate</span></p>
+  <p>The company has already become a merchant power producer. Nine dollars in ten come from selling electricity into the New York grid. That is a real, cash-generating business, but it is commodity-linked, seasonal, and not the business the market is currently valuing.</p>
+  <p>The bitcoin businesses are being wound down. Self-mining produced 28 bitcoin in Q1 2026 against 112 a year earlier. Hosting has all but disappeared.</p>
+</section>
+
+<!-- ===================== 4. INDUSTRY & MARKET BACKDROP ===================== -->
+<section id="s4">
+  <h2 class="sec"><span class="n">04</span>Industry &amp; market backdrop</h2>
+  <p>Vulcan is entering the late middle of a sector-wide migration rather than the start of one. Through 2025 and 2026 miners converted power assets into long duration AI leases at scale, and the pattern is consistent: a miner with permitted capacity signs a ten to twenty year lease, the contracted revenue dwarfs the market capitalization, and the equity re-rates sharply.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Company</th><th>Counterparty</th><th class="num">Scale</th><th>Reported contract value</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">TeraWulf (WULF)</td><td>Anthropic, 20 year lease, Hawesville KY</td><td class="num">~401 MW</td><td>~$19B over initial term</td></tr>
+      <tr><td class="lbl">Cipher (CIFR)</td><td>Amazon Web Services (15 yr) and Fluidstack</td><td class="num">~300 MW</td><td>~$5.5B and ~$7B</td></tr>
+      <tr><td class="lbl">Applied Digital (APLD)</td><td>CoreWeave, 15 year leases, North Dakota</td><td class="num">~400 MW</td><td>~$11B</td></tr>
+      <tr><td class="lbl">IREN</td><td>Microsoft AI cloud partnership</td><td class="num">4.5 GW pipeline</td><td>Multi-billion</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub"><span class="tag">Market</span> Compiled from sector reporting, February to July 2026. Values are as reported by the companies. Contracted revenue over 15 to 20 year terms is not comparable to annual revenue and is not risk-adjusted.</p>
+  <h3>What the market pays for</h3>
+  <p>Sector price discovery through 2026 converged on a clear conclusion: raw capacity alone no longer re-rates a stock. The market prices contracted backlog, meaning signed megawatts, delivery timelines, and the credit quality of the tenant. Companies that closed hyperscaler deals first captured the multiple; companies still marketing capacity did not.</p>
+  <p>Vulcan sits in the second group, with energized capacity and a pipeline but no signed tenant, no delivery timeline, and no counterparty credit to point at. The company benchmarks itself against peers explicitly defined as having no active HPC colocation customer contract, which is the cohort it belongs to.</p>
+  <div class="note caution">
+    <p><b>Late July 2026: spending and sentiment separated.</b> Hyperscaler capex guidance rose rather than fell, with aggregate 2026 spending across the top five tracked near $700B to $750B and Alphabet lifting the top end of its forecast to roughly $205B. The market reaction was the opposite of what the number implied: Alphabet fell about 7%, with Amazon, Meta and Microsoft declining alongside it amid scrutiny of infrastructure investment producing uncertain returns. More money is chasing powered capacity while the market pays less for exposure to the companies supplying it.</p>
+  </div>
+  <h3>Structural constraints on the asset</h3>
+  <p>New York is a difficult jurisdiction in which to grow gas generation. The Climate Leadership and Community Protection Act constrains fossil generation, and the renewed air permit locks in declining emissions. Grid interconnection queues bind everywhere, including at Mississippi, where a 250 MW load study request is a request rather than an allocation. Hyperscaler uptime standards are also operationally distinct from mining: downtime costs hash in one and breaches a contract in the other, so converting a mining site to tier 3 or tier 4 service levels is a capital and engineering undertaking rather than a relabeling.</p>
+</section>
+
+<!-- ===================== 5. COMPETITIVE POSITION ===================== -->
+<section id="s5">
+  <h2 class="sec"><span class="n">05</span>Competitive position</h2>
+  <p class="sub">Named peers on comparable metrics. Vulcan is among the smallest and least contracted names in its cohort.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Axis</th><th>Position</th><th>Assessment</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Scale</td><td>104 MW energized; 654 MW pipeline; ~32 employees</td><td class="neg-t">Weak. IREN alone has a 4.5 GW pipeline. Vulcan's entire pipeline is smaller than a single peer contract.</td></tr>
+      <tr><td class="lbl">Contracted backlog</td><td>None</td><td class="neg-t">Weak. This is the metric the sector is priced on.</td></tr>
+      <tr><td class="lbl">Ownership and permitting</td><td>Owns its sites outright; settled New York Title V air permit; behind-the-meter power source</td><td class="pos-t">Differentiated. Owned, energized, permitted land is the scarce asset, and being a generator rather than only a consumer is unusual.</td></tr>
+      <tr><td class="lbl">Sponsorship</td><td>Machine (~700 MW under development), Atlas (~$18.1B AUM, ~5 GW merchant generation), Conversant (~$2.8B AUM)</td><td class="pos-t">Materially upgraded as of July 2026, and arguably the largest single change to the investment case.</td></tr>
+    </tbody>
+  </table></div>
+  <p>The company's chosen peer set for valuation is MARA, Bitdeer (BTDR), Fermi (FRMI), KEEL, HIVE and New Era Energy &amp; Digital (NUAI), the un-contracted cohort. The contracted cohort of WULF, CIFR, APLD, IREN and CORZ trades on a different basis and is not a fair comparison today, though it is the group Vulcan would need to join for the bull case to work.</p>
+  <p>One structural advantage is genuine. Vulcan generates its own power rather than only consuming purchased power, earning grid revenue while retaining the ability to serve behind-the-meter load. Where interconnection is the binding constraint, owning the generator rather than queuing for someone else's matters, at 106 MW of scale.</p>
+</section>
+
+<!-- ===================== 6. FINANCIAL PERFORMANCE ===================== -->
+<section id="s6">
+  <h2 class="sec"><span class="n">06</span>Financial performance</h2>
+  <div class="tw"><table>
+    <thead><tr><th>Metric</th><th class="num">FY2023</th><th class="num">FY2025</th><th class="num">Q1 2026</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Total revenue</td><td class="num">$70.4M</td><td class="num">$58.8M</td><td class="num">$20.8M</td></tr>
+      <tr><td class="lbl">GAAP net income (loss)</td><td class="num neg-t">($29.0M)</td><td class="num pos-t">$5.3M</td><td class="num neg-t">($4.6M)</td></tr>
+      <tr><td class="lbl">EBITDA</td><td class="num">n/a</td><td class="num">n/a</td><td class="num neg-t">($1.8M)</td></tr>
+      <tr><td class="lbl">Adjusted EBITDA</td><td class="num">$0.2M</td><td class="num">n/a</td><td class="num neg-t">($1.0M)</td></tr>
+      <tr><td class="lbl">Operating cash flow</td><td class="num">n/a</td><td class="num">n/a</td><td class="num neg-t">($11.4M)</td></tr>
+      <tr><td class="lbl">Adjusted free cash flow</td><td class="num">n/a</td><td class="num">n/a</td><td class="num neg-t">($9.8M)</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub"><span class="tag">Filed</span> FY2023 and FY2025 results releases; Q1 2026 release and Form 10-Q, May 2026.</p>
+  <p>FY2025's positive net income was not earned from operations. It was substantially produced by one-time gains, including a $10.5M gain on the December 2025 sale of South Carolina land and 60 MW of power rights for $18.0M cash plus up to $18.0M contingent, a $4.2M sale of most Mississippi assets, and gains from debt restructuring. <span class="tag">Filed</span> FY2025 10-K, March 2026.</p>
+  <p>Q1 2026 shows the underlying business without those gains: an adjusted EBITDA loss of $1.0M and $11.4M of cash consumed in operations, nearly double the $5.7M consumed in Q1 2025 even as revenue grew. The company was liquidating assets to fund an operating deficit.</p>
+  <div class="note neg">
+    <p><b>Going concern.</b> In the Q1 2026 Form 10-Q management stated that cash flow projections support liquidity only through the third quarter of 2026, that the company will not be able to meet its October 2026 debt payments without restructuring, refinancing or other strategic actions, and concluded that this raises substantial doubt as to the ability to continue as a going concern. The disclosure has not been withdrawn. The PIPE is designed to cure it; the PIPE has not closed.</p>
+  </div>
+</section>
+
+<!-- ===================== 7. CAPITAL STRUCTURE & DILUTION ===================== -->
+<section id="s7">
+  <h2 class="sec"><span class="n">07</span>Capital structure &amp; dilution</h2>
+  <p class="sub">Shares, notes, the July PIPE, warrants and convertibles. Balance sheet as of 31 March 2026 unless stated.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Item</th><th class="num">Amount</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Cash and equivalents</td><td class="num">$7.1M</td><td>Against $11.4M quarterly operating burn</td></tr>
+      <tr><td class="lbl">Bitcoin held</td><td class="num">$6.7M</td><td>98 BTC</td></tr>
+      <tr><td class="lbl">Total assets</td><td class="num">$46.1M</td><td>n/a</td></tr>
+      <tr><td class="lbl">8.50% senior notes due Oct 2026</td><td class="num neg-t">$36.7M</td><td>Reduced to $33.1M by 1 June 2026 via debt for equity swaps</td></tr>
+      <tr><td class="lbl">10.00% senior notes due Jun 2030</td><td class="num">$2.3M</td><td>~$3.8M pro forma after the Q2 exchange offer</td></tr>
+      <tr><td class="lbl">Total debt, principal</td><td class="num neg-t">$39.0M</td><td>$42.3M carrying value including capitalized interest</td></tr>
+      <tr><td class="lbl">Net debt</td><td class="num neg-t">$25.2M</td><td>$27.7M as of 30 June 2026</td></tr>
+      <tr><td class="lbl">Total stockholders' equity</td><td class="num neg-t">($50.2M)</td><td>Accumulated deficit $389.0M</td></tr>
+      <tr><td class="lbl">Coal ash pond remediation liability</td><td class="num neg-t">$17.3M</td><td>Work required to be completed by November 2028</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>The July 2026 PIPE</h3>
+  <p>The transaction is closer to a negotiated change of control than a simple capital raise.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Investor</th><th class="num">Shares at $1.71</th><th class="num">Cash</th><th>Other consideration</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">MIG, Machine Investment Group affiliate</td><td class="num">2,923,976</td><td class="num">$15.0M</td><td>$10M 10% PIK convertible note plus warrant for 1,754,386 shares at $1.71</td></tr>
+      <tr><td class="lbl">Atlas GREE Investment Holdco</td><td class="num">2,923,976</td><td class="num">$5.0M</td><td>Existing large shareholder</td></tr>
+      <tr><td class="lbl">Conversant PIF Aggregator A LP</td><td class="num">3,479,532</td><td class="num">$5.95M</td><td>n/a</td></tr>
+      <tr><td class="lbl">Other investors, including CEO, CFO, President, a director</td><td class="num">7,818,706</td><td class="num">$13.37M</td><td>n/a</td></tr>
+      <tr><td class="lbl">Total</td><td class="num">17,146,190</td><td class="num">~$39.4M</td><td>n/a</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub"><span class="tag">Filed</span> Form 8-K filed 20 July 2026, event date 19 July 2026.</p>
+
+  <h3>Dilution</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Channel</th><th class="num">Shares</th><th>Timing</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Baseline, as-converted 30 Jun 2026</td><td class="num">17,966,380</td><td class="when">Confirmed</td><td>15,286,349 Class A plus 2,680,031 Class B <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Pre-PIPE total, as-converted plus vested RSUs</td><td class="num">18,176,380</td><td class="when">At 23 Jul 2026</td><td>17,966,380 plus the 210,000 RSU shares, roughly 18.18 million <span class="tag">Estimate</span></td></tr>
+      <tr><td class="lbl">Executive RSUs</td><td class="num neg-t">+210,000</td><td class="when">Vested 23 Jul 2026</td><td>Already issued <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">PIPE shares at $1.71</td><td class="num neg-t">+17,146,190</td><td class="when">At closing</td><td>~48.5% of pro forma <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">MIG convertible note at $2.1375</td><td class="num neg-t">~+4,680,000</td><td class="when">Post approvals</td><td>Grows monthly as 10% PIK compounds into principal <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">MIG warrant at $1.71</td><td class="num neg-t">+1,754,386</td><td class="when">3 year term</td><td>9.99% beneficial ownership cap until approvals <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Equity incentive plan increase</td><td class="num neg-t">+2,500,000</td><td class="when">20 days post 14C</td><td>Pool rises from 2,583,111 to 5,083,111 <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Sponsor incentive shares</td><td class="num">Undefined</td><td class="when">Ongoing</td><td>Fees and promote payable in cash or stock; quantum not disclosed <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Atlas Equity Interest Payment Agreement</td><td class="num">Ongoing</td><td class="when">Quarterly</td><td>Most recent 114,199 shares on 6 Jul 2026 at $1.42 to settle $161,820 <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Pro forma outstanding</td><td class="num">35,322,570</td><td class="when">At closing</td><td>Before conversion, warrant, plan or shelf <span class="tag">Estimate</span></td></tr>
+      <tr><td class="lbl">Fully diluted, identified</td><td class="num">~41,800,000</td><td class="when">Post approvals</td><td>Excludes shelf, sponsor incentive and PIK accretion <span class="tag">Estimate</span></td></tr>
+    </tbody>
+  </table></div>
+  <p>An existing holder's economic stake is roughly halved. In exchange the company eliminates the debt that was about to force a restructuring and acquires sponsors with infrastructure capability. Whether that is a good trade is the central judgement in this name.</p>
+
+  <h3>Terms attached to the financing</h3>
+  <p>Board control transfers at closing: the board is reconstituted to ten directors with Atlas nominating four, then shrinks to eight after regulatory approvals with MIG and Atlas jointly controlling nominations and a two member Capital Committee. Two current directors resign at closing. The transaction was approved by written consent of a majority of voting power on 19 July rather than by shareholder vote, so other shareholders receive a Schedule 14C information statement after the fact. The convertible note is secured by a first priority lien on approximately 6,258 miners plus a pledge of the entity owning the Mississippi land and a deed of trust over it. If regulatory approvals are not obtained by 31 March 2027 the note must be redeemed at 130% of principal plus interest. A $10M minimum liquidity covenant applies until approvals are obtained, and the company cannot issue equity without MIG's consent over the same period. Sponsor incentive arrangements entitle MIG and Atlas to project level acquisition fees and promote incentives, payable in cash or stock, subject to independent director approval.</p>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The 8-K does not specify what the Regulatory Approvals are. Given a change of control of a FERC-jurisdictional generating facility, the most likely reading is Federal Power Act Section 203 approval, possibly with New York elements. This is an inference from deal structure rather than a company disclosure, and should be verified in the Schedule 14C when filed.</p>
+  </div>
+
+  <h3>Executive equity awards, July 2026</h3>
+  <p>On 19 July 2026, the same day the PIPE agreements were signed and the stockholder consent obtained, the Compensation Committee approved one-time RSU awards citing contributions to the strategic transformation. The awards were granted 20 July and vested in full on 23 July.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Executive</th><th class="num">RSUs</th><th class="num">Value at 23 Jul, $4.05</th><th class="num">Value at 31 Jul, $2.10</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Jordan Kovler, CEO</td><td class="num">125,000</td><td class="num">$506,250</td><td class="num">$262,500</td></tr>
+      <tr><td class="lbl">Dale Irwin, President</td><td class="num">50,000</td><td class="num">$202,500</td><td class="num">$105,000</td></tr>
+      <tr><td class="lbl">Christian Mulvihill, CFO</td><td class="num">35,000</td><td class="num">$141,750</td><td class="num">$73,500</td></tr>
+      <tr><td class="lbl">Total</td><td class="num">210,000</td><td class="num">$850,500</td><td class="num">$441,000</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub"><span class="tag">Filed</span> Form 8-K, 23 July 2026, Item 5.02.</p>
+  <p>The awards carry no performance or continued service condition, so a three day vest is effectively an immediate grant. They were issued under the Third Amended and Restated 2021 Equity Incentive Plan, existing authorized capacity rather than the expanded Fourth plan awaiting the consent. This is the second such award in 2026: in March, following the South Carolina sale, the same three executives received $100,000 Special Bonuses, roughly half in RSUs vesting within seven days. The same three executives were also buyers in the PIPE at $1.71.</p>
+  <p>Forms 4 filed 24 July show sell-to-cover transactions at $2.45, with Kovler disposing of 35,721 shares leaving 325,406 held directly, and Irwin 21,154 leaving 202,476. Both state these satisfied tax withholding on vesting and were not discretionary sales, and that characterization appears accurate. The vesting schedule is the more notable feature: the grants were worth $850,500 on the day they vested and $441,000 six sessions later.</p>
+</section>
+
+<!-- ===================== 8. VALUATION ===================== -->
+<section id="s8">
+  <h2 class="sec"><span class="n">08</span>Valuation</h2>
+  <p class="sub">Multiples shown with their basis and pricing date. No target price is issued.</p>
+  <p>Conventional tools do not apply. There are no earnings to capitalize, since the reported figures are asset sale gains; no free cash flow to discount; and no contracted revenue to model. The sector convention, and the company's own framework, is enterprise value per megawatt.</p>
+  <p>In the 20 July release Vulcan presented itself at approximately $415k of enterprise value per megawatt on 144 MW of immediate and near term powered capacity, and $91k per megawatt on the 654 MW pipeline, against a peer median near $993k. The footnotes state the calculation used market capitalization as of the 17 July close of $1.71 and net debt of $27.7M, and it used the pre-PIPE share count. Both inputs have since changed.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Basis</th><th class="num">As presented, 17 Jul</th><th class="num">Pro forma at $2.10, 31 Jul</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Share price</td><td class="num">$1.71</td><td class="num">$2.10</td></tr>
+      <tr><td class="lbl">Shares, as-converted</td><td class="num">~18.0M</td><td class="num">35.3M</td></tr>
+      <tr><td class="lbl">Market capitalization</td><td class="num">~$30.9M</td><td class="num">~$74.2M</td></tr>
+      <tr><td class="lbl">Net debt</td><td class="num">$27.7M</td><td class="num">~$0M</td></tr>
+      <tr><td class="lbl">Enterprise value</td><td class="num">~$58.6M</td><td class="num">~$74M</td></tr>
+      <tr><td class="lbl">TEV per MW on 144 MW</td><td class="num">~$415k</td><td class="num">~$515k</td></tr>
+      <tr><td class="lbl">TEV per MW on 654 MW pipeline</td><td class="num">~$91k</td><td class="num">~$113k</td></tr>
+    </tbody>
+  </table></div>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Pro forma net debt is estimated near zero: roughly $13.8M of remaining debt, being the 10% 2030 notes plus the $10M MIG note, against cash plus bitcoin of roughly $15M to $18M once the PIPE closes and the senior notes are redeemed. Actual pro forma capitalization will be disclosed in the Schedule 14C and the Q3 10-Q. These figures are directional.</p>
+  </div>
+  <p>The discount to the peer median is therefore 48% on the near term basis rather than the 58% advertised, a narrowing of roughly 10 percentage points against the figure the company published, and the gap has been reopening as the share price falls: at the 24 July close of $2.45 the figure was roughly $600k per megawatt, and at $2.10 it is roughly $515k. <b>A multiple that improves because the equity is being sold is not the same signal as a multiple that is low because the market has overlooked something.</b></p>
+  <p>Two caveats apply to the peer comparison. In the company's favour, the peer set is a like-for-like group of un-contracted developers, which is defensible. Against it, a peer median is not a target price: it reflects what the market currently pays for speculative megawatts, which is a function of AI capex sentiment and can compress sharply. Several of those peers are larger and better capitalized, and at least one carries its own going concern disclosure and securities litigation. A discount to a speculative peer group is not a margin of safety.</p>
+  <div class="note caution">
+    <p><b>Screen data for this issuer is unreliable.</b> A public quote page at the 31 July close displayed a P/E of 5.50 and EPS of $0.38, implying trailing net income near $6 million. Both are derived from FY2025 net income that was substantially one-time asset sale gains, the reported figure being $5.3M. It displayed shares outstanding of 13.22M, which conflicts with the 15,286,349 Class A plus 2,680,031 Class B in the July Schedule 13D/A and excludes the PIPE entirely; the figure appears closer to float, reported elsewhere near 12.1M. It displayed a 52 week range of $1.95 to $2.79, which cannot be a 52 week range given GREE closed at $4.05 on 23 July, so the series appears to have reset at the ticker change. Beta of 3.02 is the one figure usable as shown.</p>
+  </div>
+  <h3>Analyst coverage</h3>
+  <p>Coverage is effectively a single published target, $4.00 from Lucas Pipes at B. Riley Securities, issued 12 July 2024 when the firm lowered it from $5.00 and maintained a Buy rating <span class="tag">Market</span>. That date precedes the going concern disclosure, the exchange offer, the PIPE and the rebrand, so it is not a view formed on the current capital structure and is reported here as market data rather than as a current opinion. B. Riley Securities acted as advisor to the company on the PIPE, disclosed in the 20 July release. This is normal practice, but research from a transaction advisor is not independent validation.</p>
+</section>
+
+<!-- ===================== 9. GROWTH DRIVERS ===================== -->
+<section id="s9">
+  <h2 class="sec"><span class="n">09</span>Growth drivers</h2>
+  <ol>
+    <li><b>The Dresden 60 MW interconnection.</b> A proposed interconnection agreement was received from NYSEG for 60 MW of non-curtailable power. Non-curtailable matters, because AI tenants require firm supply. Converting this from proposed to executed is the nearest term concrete milestone. <span class="tag">Filed</span> Q1 2026 release, 18 May 2026.</li>
+    <li><b>Mississippi.</b> 40 MW anticipated to energize in Q1 2027, with a 250 MW TVA load study requested. The company has disclosed discussions with multiple parties regarding joint ventures, partnerships or an outright sale. The site is now pledged as collateral to MIG, which constrains a unilateral sale. <span class="tag">Filed</span></li>
+    <li><b>Sponsor-led acquisitions.</b> Machine has roughly 700 MW under development and a pipeline above 1 GW; Atlas manages roughly 5 GW of merchant generation and has repositioned industrial properties into AI infrastructure before. The stated plan is to use Vulcan as a public acquisition vehicle for powered land. <span class="tag">Filed</span></li>
+    <li><b>A first AI/HPC tenant.</b> The step change event. Nothing else re-rates the equity the way one signed lease would. <span class="tag">Open</span></li>
+    <li><b>Grid revenue growth.</b> Power and capacity revenue doubled year over year and is the only line currently producing cash. <span class="tag">Filed</span></li>
+  </ol>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The acquisition vehicle thesis assumes Vulcan can raise further capital on reasonable terms. Buying powered land at scale costs hundreds of millions. At a $74M market capitalization that implies large equity issuance, project level debt, or asset level partnerships. The MIG note's forced conversion trigger explicitly contemplates the company raising more than $75M in equity capital, which indicates the sponsors are planning for exactly this.</p>
+  </div>
+</section>
+
+<!-- ===================== 10. RISKS ===================== -->
+<section id="s10">
+  <h2 class="sec"><span class="n">10</span>Risks</h2>
+  <p class="sub">Severity-ranked, most severe first.</p>
+  <div class="risk sev-high">
+    <h4>PIPE closing risk <span class="sev">Severe</span></h4>
+    <p>Signed is not closed. Conditions include Nasdaq listing approval, execution of security documents, delivery of Mississippi collateral, and effectiveness of the stockholder consent. The outside date is 10 October 2026; the senior notes mature 31 October 2026, a 21 day buffer. If the PIPE fails the going concern scenario returns immediately, and the company has stated it cannot meet the maturity without restructuring.</p>
+  </div>
+  <div class="risk sev-high">
+    <h4>Liquidity <span class="sev">Severe</span></h4>
+    <p>$7.1M of cash against $11.4M of quarterly operating burn as of the last reported quarter. Net debt rose from $25.2M at 31 March to $27.7M at 30 June.</p>
+  </div>
+  <div class="risk sev-high">
+    <h4>Ongoing dilution <span class="sev">Severe</span></h4>
+    <p>Beyond the PIPE: the MIG convertible accrues 10% PIK interest compounding into principal, so the conversion share count grows over time; a 1,754,386 share warrant is outstanding; the equity plan expands by 2,500,000 shares; and the company has repeatedly settled debt and interest obligations in stock. The $200M shelf is currently throttled near $9.2M by the baby shelf rule, but that constraint lifts if non-affiliate float rises above $75M, so dilution capacity expands precisely when the stock performs well.</p>
+  </div>
+  <div class="risk sev-med">
+    <h4>Control has shifted <span class="sev">Moderate</span></h4>
+    <p>Minority public shareholders now sit alongside sponsors holding board nomination rights, rights of first offer on future financings, a security interest in the assets, and consent rights over equity issuance. Interests are broadly aligned but not identically aligned.</p>
+  </div>
+  <div class="risk sev-med">
+    <h4>Compensation practice <span class="sev">Moderate</span></h4>
+    <p>Twice in 2026 the Compensation Committee approved transaction-linked equity awards to the same three executives with vesting periods of three and seven days, structures that transfer value on grant rather than incentivizing future performance. Both were disclosed and approved. With the board about to be reconstituted under sponsor control, and sponsor incentive fees payable in cash or stock, how executive and sponsor compensation is set going forward warrants attention.</p>
+  </div>
+  <div class="risk sev-med">
+    <h4>Environmental and permitting <span class="sev">Moderate</span></h4>
+    <p>The Title V permit was settled in November 2025 after a four year dispute, with the appeal discontinued February 2026. The settlement is genuine de-risking but requires a 44% reduction in permitted greenhouse gas emissions and a 25% reduction in actual emissions by 2030. Coal ash remediation of $17.3M must be completed by November 2028. Seneca Lake Guardian, the Committee to Preserve the Finger Lakes and the Sierra Club have opposed persistently.</p>
+  </div>
+  <div class="risk sev-med">
+    <h4>Sector sentiment decoupled from sector spending <span class="sev">Moderate</span></h4>
+    <p>Aggregate 2026 hyperscaler capex is tracked near $700B to $750B and rising, yet the market punished the raise, with Alphabet falling about 7% and the complex selling off alongside. Demand for powered land is strengthening while willingness to pay for AI infrastructure exposure weakens. For a holder of un-contracted megawatts those forces point in opposite directions.</p>
+  </div>
+  <div class="risk sev-med">
+    <h4>Rates are no longer a symmetric risk <span class="sev">Moderate</span></h4>
+    <p>On 29 July the Fed held at 3.50% to 3.75% on a 9 to 3 vote with all three dissenters wanting a hike, the first time since September 2016 that three officials dissented in the same direction. Markets price two 25bp increases in 2026. For a negative cash flow micro cap with a beta of 3.02, and for a strategy requiring project level debt, the rate path has turned one-directional against the story.</p>
+  </div>
+  <div class="risk sev-med">
+    <h4>Execution gap <span class="sev">Moderate</span></h4>
+    <p>A company of roughly 32 employees with no AI/HPC operating history proposes to deliver hyperscaler grade colocation. The skills required are not the skills it has.</p>
+  </div>
+  <div class="risk sev-low">
+    <h4>Volatility and liquidity <span class="sev">Low</span></h4>
+    <p>The stock moved from $1.71 to $4.05 and back to $2.10 within nine trading days, a 48% drawdown from the 23 July close. Reported beta is 3.02. The 31 July session itself closed 1.9% lower. Volume on 31 July of 266,810 shares ran at roughly 3.7x the 71,320 share average, so the decline is occurring on meaningful turnover rather than a thin tape. Small float, thin coverage.</p>
+  </div>
+</section>
+
+<!-- ===================== 11. BULL / BASE / BEAR ===================== -->
+<section id="s11">
+  <h2 class="sec"><span class="n">11</span>Bull / base / bear</h2>
+  <p class="sub">Each case with its preconditions: what must be true, not what might be. No price targets are attached, because with no contracted revenue and a capital structure in flux any figure would imply false precision.</p>
+  <div class="cases">
+    <div class="case bear"><h4>Bear</h4>
+      <p>The PIPE fails to close by 10 October, whether through collateral delivery, listing approval or a party walking. The 31 October maturity arrives with $7M of cash and the company's own disclosure that it cannot pay, and restructuring follows with equity largely or entirely impaired. Alternatively the PIPE closes but regulatory approvals are not obtained by 31 March 2027, triggering redemption of the MIG note at 130% of principal, a cash call near $14M. Or AI capex sentiment turns and un-contracted megawatts reprice downward across the sector, with VIP compressing hardest. Or no tenant signs at all: emissions caps limit behind-the-meter expansion, the TVA study returns unfavourably, and the company remains a 106 MW merchant gas plant carrying an AI valuation that deflates toward its generation worth.</p>
+      <p class="req">Requires: any one of financing failure, approval delay, sector derating, or continued absence of a tenant.</p></div>
+    <div class="case"><h4>Base</h4>
+      <p>The PIPE closes, the balance sheet is repaired and the existential question is answered, which is itself a material change from the position in May 2026. No AI/HPC contract is signed within twelve months. Development continues through studies, interconnection work and site plans, while revenue stays roughly $75M to $85M annualized and almost entirely from power sales. Adjusted EBITDA hovers near breakeven and development spending is funded by further equity issuance. The equity trades as an option on the sponsors' ability to source deals, with high volatility around each announcement and little fundamental anchor. Mississippi is monetized through a joint venture or partial sale rather than developed alone, providing capital but ceding upside.</p>
+      <p class="req">Requires: PIPE closes; no tenant; power revenue holds; further equity issuance absorbed.</p></div>
+    <div class="case bull"><h4>Bull</h4>
+      <p>The PIPE closes cleanly before October, the $33M maturity is redeemed, and going concern doubt is formally removed at the Q3 10-Q. The NYSEG 60 MW interconnection agreement is executed, giving Dresden firm non-curtailable power an AI tenant can underwrite. A first colocation or lease agreement is signed, even a modest 30 to 60 MW deal, moving Vulcan from the un-contracted peer group toward the contracted one where TEV/MW multiples are several times higher. Machine and Atlas use Vulcan as intended, as a public roll-up vehicle acquiring powered land with sponsor-sourced deal flow. Grid revenue continues to grow and covers corporate overhead so the company is not burning cash while it develops.</p>
+      <p class="req">Requires: PIPE closes; interconnection executed; a creditworthy tenant signs; sponsors deploy capital accretively.</p></div>
+  </div>
+</section>
+
+<!-- ===================== 12. RESEARCH SUMMARY ===================== -->
+<section id="s12">
+  <h2 class="sec"><span class="n">12</span>Research summary</h2>
+  <p>Two weeks ago this was a company with negative book equity, a going concern warning, and a debt maturity it had publicly stated it could not meet. It now has a signed $39.4M financing from credible infrastructure sponsors, a new name, and a strategy aimed at the most in-demand asset class in the market. That is a material improvement and should not be dismissed as a rebrand.</p>
+  <p>Three constraints remain in view. First, the fix is signed rather than done: the outside date sits three weeks before the maturity it is meant to retire, and until closing is confirmed the going concern disclosure stands as written. As of 1 August the Schedule 14C that must precede closing had not been filed.</p>
+  <p>Second, the speculative move has fully unwound. Sophisticated buyers, including the CEO, CFO and President, paid $1.71 on 17 July. The stock ran to $4.05, fell 39.5% on 24 July and drifted to $2.10 by 31 July, a 48% drawdown on volume near 3.7x average. It now sits 22.8% above the insider price against 137% at the peak. No adverse disclosure accompanied the decline, so the most plausible reading is that a rebrand-driven move round-tripped. <span class="tag">Estimate</span></p>
+  <p>Third, there is still no customer. Sector price discovery through 2026 has been unambiguous: the market pays for contracted backlog, not capacity. Vulcan has 104 energized megawatts, a 654 MW pipeline, and zero signed AI/HPC megawatts, and its own peer group is defined by that absence. Everything the bull case requires runs through a lease that does not yet exist.</p>
+  <p>The position being underwritten here is a management and sponsor team rather than an operating business. A permitted 106 MW generator with owned land is clearly worth something. The open question is whether Machine, Atlas and Conversant can convert a small upstate New York power plant into a scaled infrastructure platform faster than dilution erodes what existing shareholders own of it. That question will stay open for several quarters.</p>
+
+  <h3>What would change the analysis</h3>
+  <div class="tw"><table>
+    <thead><tr><th>When</th><th>Event</th></tr></thead>
+    <tbody>
+      <tr><td class="when">Overdue</td><td>Schedule 14C information statement. Not filed as of 1 August, twelve days after the 8-K. The consent cannot go effective until 20 days after furnishing, and the PIPE cannot close until the consent is effective.</td></tr>
+      <tr><td class="when">~12 Aug 2026</td><td>Q2 2026 results and Form 10-Q. Watch whether the going concern disclosure repeats, the operating burn trend, and any interconnection update.</td></tr>
+      <tr><td class="when">15 Sep 2026</td><td>Class B automatic conversion. Atlas's supervote expires by charter, and controlled company status lapses.</td></tr>
+      <tr><td class="when">By 10 Oct 2026</td><td>PIPE closing outside date. An 8-K confirming closing removes the solvency question; silence approaching this date is the loudest available warning.</td></tr>
+      <tr><td class="when">31 Oct 2026</td><td>8.50% senior notes mature, $33.1M. The notes trade separately as GREEL, so their price is a live public opinion on whether the company pays.</td></tr>
+      <tr><td class="when">Q1 2027</td><td>Mississippi 40 MW energization target. First test of whether development guidance is reliable.</td></tr>
+      <tr><td class="when">By 31 Mar 2027</td><td>Regulatory approvals deadline. Missing it triggers redemption of the MIG note at 130% of principal.</td></tr>
+      <tr><td class="when">Any time</td><td>A signed AI/HPC lease or colocation agreement. Judge any announcement on megawatts, term length, counterparty credit quality and delivery date, in that order.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 13. NULL CATEGORIES ===================== -->
+<section id="s13">
+  <h2 class="sec"><span class="n">13</span>Null categories</h2>
+  <p class="sub">Requested categories with nothing to report, stated explicitly rather than omitted.</p>
+  <div class="tw"><table class="nulls">
+    <thead><tr><th>Category</th><th>Status</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Dividends</td><td class="status">None</td><td>None paid or declared. Negative stockholders' equity of $50.2M and unresolved going concern doubt make one implausible.</td></tr>
+      <tr><td class="lbl">Share buybacks</td><td class="status">None</td><td>No programme authorized. The MIG note's negative covenants and the $10M liquidity covenant make repurchases impractical.</td></tr>
+      <tr><td class="lbl">Securities class action</td><td class="status">None</td><td>No class action has been filed. Pomerantz, Glancy Prongay and Rosen announced investigations in 2022 and 2023 relating to the Support.com goodwill impairment period. No filed consolidated class action identified and none appears in current disclosures. Investigation announcements are not litigation.</td></tr>
+      <tr><td class="lbl">AI and HPC revenue</td><td class="status">None</td><td>Revenue from AI and HPC is $0. No customer contract announced in any filing or release.</td></tr>
+      <tr><td class="lbl">Index inclusion</td><td class="status">None</td><td>The issuer is not eligible for inclusion: market capitalization, negative equity and profitability screens exclude it from major indices.</td></tr>
+      <tr><td class="lbl">Product pipeline</td><td class="status">None</td><td>The category does not apply to this business: infrastructure and merchant power with no product roadmap. Capacity milestones are the functional equivalent.</td></tr>
+      <tr><td class="lbl">NT filings</td><td class="status">None</td><td>No NT 10-K or NT 10-Q has ever been filed. Despite the going concern issue, periodic reports have been filed on time. This is a finding, not an omission.</td></tr>
+      <tr><td class="lbl">Foreign private issuer forms</td><td class="status">None</td><td>The category does not apply: the issuer is a Delaware domestic filer, File No. 001-40808. Forms 6-K, 20-F, 40-F and the corresponding NT series cannot exist, so their absence carries no signal.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 14. METHODOLOGY & SOURCES ===================== -->
+<section id="s14">
+  <h2 class="sec"><span class="n">14</span>Methodology &amp; sources</h2>
+  <p>Pricing basis is the 31 July 2026 close of $2.10. Balance sheet figures are as of 31 March 2026 unless stated; net debt is as of 30 June 2026 per the 20 July release.</p>
+
+  <h3>Provenance tags</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Tag</th><th>What it asserts</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl"><span class="tag">Filed</span></td><td>Stated in an SEC filing or company press release, cited by form and date. Also covers a dated official publication by a named non-SEC issuer, with the issuer named in the Source line: the FOMC statement and implementation note, the Federal Reserve calendar, NYSDEC permit records, and the New York Appellate Division order are carried on that basis.</td></tr>
+      <tr><td class="lbl"><span class="tag">Estimate</span></td><td>Derived or inferred here. The arithmetic is shown.</td></tr>
+      <tr><td class="lbl"><span class="tag">Open</span></td><td>Expected but unconfirmed. Nothing filed either way.</td></tr>
+      <tr><td class="lbl"><span class="tag">Market</span></td><td>Price, volume, float and trading data, stamped with the close date. Also a third party&rsquo;s published target or rating, attributed to the firm that issued it.</td></tr>
+    </tbody>
+  </table></div>
+
+
+
+  <h3>Facts and assumptions</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Claim</th><th>Status</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td>Name change effective 20 Jul 2026; ticker VIP from 24 Jul</td><td><span class="tag">Filed</span></td><td>Form 8-K, 20 Jul 2026; release 24 Jul 2026</td></tr>
+      <tr><td>Going concern doubt disclosed; liquidity through Q3 2026 only</td><td><span class="tag">Filed</span></td><td>FY2025 10-K; Q1 2026 10-Q</td></tr>
+      <tr><td>$39.4M PIPE signed 19 Jul 2026, not yet closed</td><td><span class="tag">Filed</span></td><td>Form 8-K, 20 Jul 2026</td></tr>
+      <tr><td>17,146,190 PIPE shares at $1.71; outside date 10 Oct 2026</td><td><span class="tag">Filed</span></td><td>Form 8-K, 20 Jul 2026</td></tr>
+      <tr><td>210,000 RSUs granted 20 Jul, vested 23 Jul, to CEO, President, CFO</td><td><span class="tag">Filed</span></td><td>Form 8-K, 23 Jul 2026, Item 5.02</td></tr>
+      <tr><td>Class A 15,286,349 and Class B 2,680,031 outstanding at 30 Jun 2026</td><td><span class="tag">Filed</span></td><td>Schedule 13D/A, July 2026</td></tr>
+      <tr><td>Insider sell-to-cover at $2.45 on 24 Jul: Kovler 35,721, Irwin 21,154</td><td><span class="tag">Filed</span></td><td>Forms 4, 24 Jul 2026</td></tr>
+      <tr><td>104 MW energized, 654 MW pipeline</td><td><span class="tag">Filed</span></td><td>Release, 20 Jul 2026. Company-defined, not independently verified.</td></tr>
+      <tr><td>Q1 2026 revenue $20.8M, net loss $4.6M, operating cash flow ($11.4M)</td><td><span class="tag">Filed</span></td><td>Q1 2026 release and 10-Q, May 2026</td></tr>
+      <tr><td>Closed $2.10 on 31 Jul 2026; volume 266,810 against 71,320 average</td><td><span class="tag">Market</span></td><td>Market data, 31 Jul 2026 close</td></tr>
+      <tr><td>Title V permit settled Nov 2025 with 44% and 25% emissions reductions</td><td><span class="tag">Filed</span></td><td>Release 7 Nov 2025; appeal dismissed 11 Feb 2026</td></tr>
+      <tr><td>Fed held 3.50% to 3.75% on 29 Jul 2026, 9 to 3, all dissents favouring a hike</td><td><span class="tag">Market</span></td><td>FOMC statement, 29 Jul 2026</td></tr>
+      <tr><td>Schedule 14C not filed as of 1 Aug 2026</td><td><span class="tag">Open</span></td><td>Absence of filing on EDGAR at the as-of date</td></tr>
+      <tr><td>Pro forma 35,322,570 shares and ~$74M enterprise value at $2.10</td><td><span class="tag">Estimate</span></td><td>Assumes the PIPE closes as signed and net debt near zero. Not company-disclosed.</td></tr>
+      <tr><td>Regulatory Approvals means Federal Power Act Section 203 approval</td><td><span class="tag">Estimate</span></td><td>Inference from deal structure. The 8-K does not specify.</td></tr>
+      <tr><td>The 48% drawdown reflects an unwinding speculative move, not new information</td><td><span class="tag">Estimate</span></td><td>No adverse disclosure accompanied it. Interpretation only.</td></tr>
+      <tr><td>Screener share count of 13.22M</td><td><span class="tag">Market</span></td><td>Contradicted by filings. Conflicts with 17,966,380 as-converted and excludes the PIPE.</td></tr>
+      <tr><td>Claim that the company has exited bitcoin mining</td><td><span class="tag">Market</span></td><td>Contradicted by Q1 2026 mining revenue and the miner collateral pledge.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Sources</h3>
+  <p>Primary. Form 8-K, 20 July 2026 (PIPE, name change, board, equity plan, stockholder consent); Form 8-K, 23 July 2026 (Item 5.02, executive RSU awards); Form 8-K, June 2026 (debt for equity exchanges); Form 8-K, 11 March 2026 (prior special bonus); Forms 4, 22 and 24 July 2026; Schedule 13D/A, 8 July 2026 and July 2026; Form 10-Q for the quarter ended 31 March 2026; Form 10-K for the year ended 31 December 2025; Forms S-3 (15 May 2026), S-3/A (12 June 2026) and 424B3 (July 2026), File No. 333-295953; DEF 14A (~30 April 2026); company press releases dated 24 July, 20 July, 18 May, 9 April, 25 March, 11 March and 5 March 2026, and 7 November 2025.</p>
+  <p>Secondary. NYSDEC permit records; New York Appellate Division, Fourth Department, order of 11 February 2026; FOMC statement and implementation note of 29 July 2026 and the June 2026 dot plot; hyperscaler Q2 2026 earnings coverage; sector reporting on AI/HPC contracting, February to July 2026. Market data as of the 31 July 2026 close.</p>
+
+  <h3>Not checked</h3>
+  <p>The following were not examined and are gaps rather than clean findings: the indenture governing the 8.50% notes beyond the summary in the 10-Q; NYISO capacity auction results and forward power curves; intervenor filings in the NYSDEC docket beyond the settlement record; the specific statutory basis of the Regulatory Approvals condition; peer company filings underlying the contracted transactions cited in section 4; and any state-level approvals bearing on the change of control.</p>
+</section>
+
+<!-- ===================== 15. DOCUMENT LOG ===================== -->
+<section id="s15">
+  <h2 class="sec"><span class="n">15</span>Document log</h2>
+  <p class="sub">Newest first. The original build entry is never removed or rewritten.</p>
+  <div class="log">
+    <div class="logentry current">
+      <div class="when">2 August 2026 <span class="latest">Latest</span></div>
+      <div class="basis">Priced off 31 Jul 2026 close &middot; $2.10 &middot; $74.2M pro forma cap</div>
+      <div class="correction">
+        <span class="lbl">Correction</span>
+        <p>The $4.00 B. Riley Securities target was carried without its date. It was issued on 12 July 2024, when the firm lowered it from $5.00 and maintained a Buy rating. The target predates the going concern disclosure, the March exchange offer, the July financing and the rebrand, and is now reported with that date and that qualification.</p>
+      </div>
+      <p>A filing sweep across Forms 8-K, 6-K, 10-Q, 10-K, 20-F, 40-F, S-1, S-3, 424, 13D, 13G, the NT series, Forms 3 and 4 and DEF 14A returned nothing after 24 July 2026. The Schedule 14C remains unfiled and the financing remains unclosed. No NT filing of any kind has ever been made. The 31 July close stands unchanged, 1 August and 2 August being a weekend, so no repricing was required.</p>
+      <p>Seven figures owed from an earlier rebuild are restored to the body. The pro forma share count is restated here as a pair, ~35.2M estimated then 35,322,570 filed, the estimate having survived only inside a quotation that is now removed. The pre-PIPE total of 18,176,380, roughly 18.18 million, is stated again as the sum of 17,966,380 as-converted and the 210,000 vested RSU shares. Trailing net income near $6 million is restored beside the P/E and EPS the screens derive from it, with the reported $5.3M alongside. The narrowing of the discount to the peer median is restored as roughly 10 percentage points rather than the earlier 24%, recomputed against the current $515k per megawatt rather than the $600k it was first written against. The premium to the financing price is restored with its date, 43% at the 24 July close. The 1.9% single-session decline on 31 July returns to the body rather than to the masthead strip.</p>
+      <p>One figure is superseded rather than restored. The characterisation of a sub-$100 million company is not reinstated: the file now states a current market capitalisation of $37.7M and a pro forma figure of $74.2M, and a third, vaguer value for the same quantity would put two answers to one question back into the document.</p>
+      <p>Known gaps at this version: the nature of the Regulatory Approvals condition remains undisclosed, so the Federal Power Act Section 203 reading is still an inference; pro forma net debt near zero remains an estimate; and the Q2 and Q3 reporting dates remain cadence estimates, the company having confirmed neither.</p>
+    </div>
+    <div class="logentry">
+      <div class="when">1 August 2026</div>
+      <div class="basis">Priced off 31 Jul 2026 close &middot; $2.10 &middot; $74.2M pro forma cap</div>
+      <div class="correction">
+        <span class="lbl">Correction</span>
+        <p>The Form 8-K of 23 July 2026 was not captured at the original build. It discloses 210,000 restricted stock units granted to the CEO, President and CFO on 20 July, vesting 23 July. The award is now recorded in the capital structure section and in the dilution table, and a compensation practice risk has been added.</p>
+      </div>
+      <p>Price basis moved from the 24 July close of $2.45 to the 31 July close of $2.10. Enterprise value $86M &rarr; $74M; near-term TEV/MW $600k &rarr; $515k; pro forma share count refined from an estimate to 35,322,570 using exact figures from the Atlas Schedule 13D/A, which reports 15,286,349 Class A and 2,680,031 Class B outstanding at 30 June 2026.</p>
+      <p>A sweep across 8-K, 10-Q, 10-K, S-1, S-3, 424, 13D, Forms 3 and 4 and the NT series established that no NT filing has ever been made and that no company filing of any type has been made since 24 July. The Schedule 14C required before the PIPE can close remained unfiled at this date.</p>
+      <p>Valuation now notes that the discount to the peer median widens mechanically as the share price falls. Industry backdrop records that hyperscaler capex guidance rose while the sector sold off. Risks were extended to cover the hawkish 29 July FOMC hold and the compensation practice above. A caveat was added on unreliable screen data for this issuer.</p>
+      <p>Known gaps at this version: the nature of the Regulatory Approvals condition is undisclosed, so the Federal Power Act Section 203 reading remains an inference; pro forma net debt is estimated rather than filed; and two forward reporting dates are cadence estimates.</p>
+    </div>
+    <div class="logentry">
+      <div class="when">26 July 2026 (original build)</div>
+      <div class="basis">Priced off 24 Jul 2026 close &middot; $2.45 &middot; $86M pro forma cap</div>
+      <p>Initial research report. Structure established at construction: business model, revenue streams, industry backdrop, competitive position, financial performance, the July financing, valuation, growth drivers, risks, bull, base and bear cases, and a summary, with a facts and assumptions ledger carried alongside.</p>
+      <p>Positions fixed at this version and still held: the dominant fact is the absence of a contracted AI/HPC tenant, at 104 MW energized against zero contracted; trailing price to earnings is an artifact of one-time asset sale gains and should not be used; the company's $415k per megawatt valuation comparison used a pre-PIPE share count and a stale price; and the widely syndicated claim that the company exited bitcoin mining is contradicted by its own filings.</p>
+      <p>Known gaps at this version: the Form 8-K of 23 July 2026 was not captured, so 210,000 executive restricted stock units were absent from the share count and from the governance discussion. Pro forma share count was an estimate rather than a filed figure.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="norec">
+    No buy, sell, or hold recommendation is issued. This document is for research
+    and educational purposes and is not investment advice. Verify all figures
+    against primary filings on sec.gov before acting.
+  </div>
+  <p style="margin-top:16px">VIP &middot; Vulcan Infrastructure and Power Inc. &middot; Equity Research Report &middot; as of 2 August 2026</p>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+name: Rebuild index
+
+# Runs whenever a ticker file changes on the main branch, rebuilds index.html
+# from whatever is in the folder, and commits it back if it changed.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "*_Research_Report.html"
+      - "*_Catalyst_Calendar.html"
+      - "build_index.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Rebuild index.html
+        run: python build_index.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "index-bot"
+          git config user.email "index-bot@users.noreply.github.com"
+          if git diff --quiet index.html; then
+            echo "Index unchanged, nothing to commit."
+          else
+            git add index.html
+            git commit -m "Rebuild index"
+            git push
+          fi

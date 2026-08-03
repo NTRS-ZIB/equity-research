@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>WYFI &middot; WhiteFiber, Inc. &middot; Equity Research Report &middot; as of 1 August 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================================
+   PER-TICKER PALETTE
+   ========================================================================= */
+:root{
+  /* Violet, hue 280, saturation 58%, lightness 34%. The WhiteFiber wordmark is
+     achromatic, carrying no usable hue, and the only other colour in the mark is a
+     grey at 93% lightness.
+     This accent is an interim identity, pending a published chromatic brand
+     colour. It reaches 9.59:1 against paper and clears the green, red, amber and
+     violet that carry meaning in this document by at least 30 degrees of hue. */
+  --accent:      #672489;
+  --accent-deep: #491A61;
+  --accent-wash: rgba(103,36,137,0.06);
+  --accent-line: rgba(103,36,137,0.22);
+}
+
+/* ============================================================================
+   SHARED STYLESHEET v1.50 : BEGIN
+   ========================================================================= */
+:root{
+  color-scheme: light only;
+
+  --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
+  --line:#DEE6EC;   --line-hard:#C0CDD7;
+  --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
+
+  --pos:#0B7A50;      --pos-bg:#E7F4EE;
+  --neg:#B02A21;      --neg-bg:#FBECEA;
+  --caution:#90600A;  --caution-bg:#FBF2E0;
+  --assume:#4F3FA3;   --assume-bg:#EFEDFA;
+
+  --display:'Archivo',ui-sans-serif,system-ui,'Helvetica Neue',Arial,sans-serif;
+  --body:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+
+  --measure:78ch;
+  --col:760px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html,body{background:var(--canvas) !important;background-color:var(--canvas) !important}
+body{
+  margin:0;color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 22px 96px;background:var(--paper);
+      border-left:1px solid var(--line);border-right:1px solid var(--line)}
+p{max-width:var(--measure)}
+/* Boxed prose fills its container: the box supplies its own measure, so the
+   78ch cap applies to top-level running prose only. */
+.first li,.assume p,.note p,.cat p,.risk p,.logentry p,.oc p,.case p,
+.cat-meta,.logentry .basis{max-width:none}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:var(--accent-deep)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- masthead ---------- */
+.mast{padding:44px 0 26px;border-bottom:2px solid var(--line-hard);margin-bottom:8px;
+      position:relative;padding-left:20px}
+.mast::before{content:"";position:absolute;left:0;top:44px;bottom:26px;
+      width:4px;background:var(--accent)}
+.ticker{font-family:var(--mono);font-size:44px;font-weight:700;letter-spacing:-1px;
+      line-height:1;color:var(--accent);margin:0}
+.headline{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.22;
+      color:var(--ink);margin:16px 0 0}
+.functional{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--ink-faint);margin:18px 0 0}
+.mast-strip{display:flex;flex-wrap:wrap;gap:26px;margin-top:20px;padding-top:16px;
+      border-top:1px solid var(--line)}
+.mast-strip div{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint)}
+.mast-strip b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-top:3px}
+
+/* ---------- banner: framing ---------- */
+.first{background:var(--canvas);border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:20px 24px;margin:30px 0 12px}
+.first h2{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.04em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 12px}
+.first ol{margin:0;padding-left:20px}
+.first li{margin-bottom:9px}
+.first li:last-child{margin-bottom:0}
+
+/* ---------- sections ---------- */
+section{padding-top:38px}
+h2.sec{font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);
+      margin:0 0 4px;padding-bottom:10px;border-bottom:1px solid var(--line-hard);
+      display:flex;align-items:baseline;gap:12px}
+h2.sec .n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);
+      letter-spacing:.06em;flex:none}
+.sub{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);margin:10px 0 18px;
+      max-width:var(--measure)}
+h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink-dim);
+      margin:26px 0 8px}
+
+/* ---------- provenance tags (signature) ---------- */
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);
+      background:var(--panel-2);border:1px solid var(--line);
+      border-radius:2px;padding:1px 6px;vertical-align:1px;white-space:nowrap}
+
+/* ---------- assumption block ---------- */
+.assume{background:var(--assume-bg);border-left:4px solid var(--assume);
+      padding:16px 20px;margin:20px 0}
+.assume .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--assume);display:block;margin-bottom:7px}
+.assume p{margin:0}
+
+/* ---------- callouts ---------- */
+.note{border:1px solid var(--line);border-left:4px solid var(--ink-faint);
+      background:var(--canvas);padding:16px 20px;margin:20px 0}
+.note.pos{border-left-color:var(--pos);background:var(--pos-bg)}
+.note.neg{border-left-color:var(--neg);background:var(--neg-bg)}
+.note.caution{border-left-color:var(--caution);background:var(--caution-bg)}
+.note p{margin:0}
+.note p + p{margin-top:10px}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+thead th{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--ink-dim);text-align:left;
+      padding:9px 12px;border-bottom:2px solid var(--line-hard);white-space:nowrap}
+tbody td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--canvas)}
+td.num,th.num{font-family:var(--mono);text-align:right;white-space:nowrap}
+/* td.when marks a timing column. An unmarked cell counts as prose. */
+td.when{font-family:var(--mono);white-space:nowrap}
+td.lbl{font-weight:600}
+.pos-t{color:var(--pos);font-weight:600}
+.neg-t{color:var(--neg);font-weight:600}
+.caution-t{color:var(--caution);font-weight:600}
+
+/* ---------- cases ---------- */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.case{border:1px solid var(--line);border-top:3px solid var(--ink-faint);
+      background:var(--paper);padding:18px}
+.case.bull{border-top-color:var(--pos)}
+.case.bear{border-top-color:var(--neg)}
+.case h4{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 10px}
+.case.bull h4{color:var(--pos)} .case.bear h4{color:var(--neg)}
+.case p{font-size:15px;margin:0}
+.case .req{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+
+/* ---------- risks ---------- */
+.risk{border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:16px 20px;margin-bottom:12px}
+.risk.sev-high{border-left-color:var(--neg)}
+.risk.sev-med{border-left-color:var(--caution)}
+.risk.sev-low{border-left-color:var(--ink-faint)}
+.risk h4{font-family:var(--display);font-size:15.5px;font-weight:600;margin:0 0 6px;
+      display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.risk .sev{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase}
+.risk.sev-high .sev{color:var(--neg)}
+.risk.sev-med .sev{color:var(--caution)}
+.risk.sev-low .sev{color:var(--ink-faint)}
+.risk p{margin:0;font-size:15.5px}
+
+/* ---------- null categories ---------- */
+.nulls td.lbl{width:26%}
+.nulls .status{font-family:var(--mono);font-size:12px;white-space:nowrap}
+
+/* ---------- document log ---------- */
+.log{margin-top:14px}
+.logentry{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:12px}
+.logentry.current{border-left:4px solid var(--accent);background:var(--accent-wash)}
+.logentry .when{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);
+      display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.latest{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-line);
+      background:var(--paper);border-radius:2px;padding:1px 6px}
+.logentry .basis{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-bottom:12px}
+.logentry p{font-size:15.5px;margin:0 0 9px}
+.logentry p:last-child{margin-bottom:0}
+.correction{border:1px solid var(--neg);border-left:4px solid var(--neg);
+      background:var(--neg-bg);padding:12px 16px;margin-bottom:14px}
+.correction .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--neg);display:block;margin-bottom:5px}
+
+/* ---------- footer ---------- */
+footer{margin-top:44px;padding-top:22px;border-top:2px solid var(--line-hard)}
+footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width:none}
+.norec{border:1px solid var(--line-hard);background:var(--canvas);padding:16px 20px;
+      margin-top:20px;font-family:var(--mono);font-size:12.5px;color:var(--ink-dim)}
+
+/* ---------- catalyst cards (calendar) ---------- */
+.cat{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:14px;border-left:4px solid var(--line-hard)}
+.cat.up{border-left-color:var(--pos)}
+.cat.down{border-left-color:var(--neg)}
+.cat.two{border-left-color:var(--caution)}
+.cat.neutral{border-left-color:var(--ink-faint)}
+.cat-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.cid{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);flex:none}
+.cat-head h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink);
+      margin:0;flex:1 1 auto;min-width:200px}
+.dir{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;white-space:nowrap}
+.cat.up .dir{color:var(--pos)} .cat.down .dir{color:var(--neg)}
+.cat.two .dir{color:var(--caution)} .cat.neutral .dir{color:var(--ink-faint)}
+.cat-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:10px 0 12px;padding:9px 0;
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+      font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
+.cat-meta b{color:var(--ink);font-weight:600}
+.cat p{margin:0 0 9px;font-size:15.5px}
+.cat p:last-child{margin-bottom:0}
+.cat.resolved{background:var(--canvas);border-left-color:var(--ink-faint)}
+.cat.resolved .dir{color:var(--ink-faint)}
+
+/* ---------- horizon bands (calendar) ---------- */
+.band{display:flex;align-items:center;gap:14px;margin:30px 0 16px}
+.band-t{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--ink-dim);white-space:nowrap}
+.band-r{flex:1;height:1px;background:var(--line-hard)}
+.band-c{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);white-space:nowrap}
+
+/* ---------- upside / downside pair ---------- */
+.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0}
+.oc{border:1px solid var(--line);padding:11px 14px;background:var(--paper)}
+.oc.up-c{border-left:3px solid var(--pos)}
+.oc.down-c{border-left:3px solid var(--neg)}
+.oc .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.09em;
+      text-transform:uppercase;display:block;margin-bottom:5px}
+.oc.up-c .lbl{color:var(--pos)} .oc.down-c .lbl{color:var(--neg)}
+.oc p{margin:0;font-size:14.5px;line-height:1.5}
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  body{font-size:16px}
+  .wrap{padding:0 16px 70px;border-left:none;border-right:none}
+  .ticker{font-size:34px}
+  .headline{font-size:23px}
+  .cases{grid-template-columns:1fr}
+  .outcomes{grid-template-columns:1fr}
+  .mast-strip{gap:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none !important;transition:none !important}
+}
+@media print{
+  body{font-size:11pt}
+  .wrap{max-width:none;border:none}
+  section{page-break-inside:avoid}
+}
+/* ============================================================================
+   SHARED STYLESHEET v1.50 : END
+   ========================================================================= */
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ===================== MASTHEAD ===================== -->
+<header class="mast">
+  <p class="ticker">WYFI</p>
+  <h1 class="headline">A $923.7 million backlog resting on one site whose billing start remains unconfirmed</h1>
+  <p class="functional">WYFI &middot; WhiteFiber, Inc. &middot; Equity Research Report &middot; as of 1 August 2026</p>
+  <div class="mast-strip">
+    <div>Price <b>$23.70</b></div>
+    <div>Market cap <b>$915M</b></div>
+    <div>Enterprise value <b>$1.09B</b></div>
+    <div>Shares out <b>38,614,216</b></div>
+    <div>Pricing basis <b>31 Jul 2026 close</b></div>
+  </div>
+</header>
+
+<!-- ===================== FRAMING ===================== -->
+<div class="first">
+  <h2>Framing</h2>
+  <ol>
+    <li>At 31 March 2026 remaining performance obligations were $923.7M, of which $921.0M is colocation
+      traced to a single ten-year agreement with one privately held counterparty, Nscale, at one site.
+      <span class="tag">Filed</span></li>
+    <li>That site was not earning revenue at the last confirmed disclosure. Billing was originally targeted
+      for 30 April 2026; the 14 May 2026 quarterly report cited a switchgear supply problem and revised this
+      to delivery beginning during Q2 2026 with full revenue contribution in Q3 2026. <span class="tag">Filed</span></li>
+    <li>Q1 2026 capital expenditure was $169.2M against total cash and restricted cash of $80.1M at quarter
+      end. The gap is bridged with convertible notes, project debt, and a facility from the majority
+      shareholder. <span class="tag">Filed</span></li>
+  </ol>
+</div>
+
+<!-- ===================== 1. SNAPSHOT ===================== -->
+<section id="s1">
+  <h2 class="sec"><span class="n">01</span>Snapshot</h2>
+  <p class="sub">Key figures, each tagged by provenance.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Metric</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Revenue (FY2025)</td><td class="num">$79.2M</td><td><span class="tag">Filed</span> 10-K, 26 Mar 2026</td></tr>
+      <tr><td class="lbl">Revenue (Q1 2026)</td><td class="num">$21.9M</td><td><span class="tag">Filed</span> 10-Q, 14 May 2026</td></tr>
+      <tr><td class="lbl">Revenue (TTM)</td><td class="num">$84.3M</td><td><span class="tag">Estimate</span> FY2025 less Q1 2025 plus Q1 2026</td></tr>
+      <tr><td class="lbl">Net loss (FY2025)</td><td class="num neg-t">($24.68M)</td><td><span class="tag">Filed</span> 10-K, 26 Mar 2026</td></tr>
+      <tr><td class="lbl">Net loss (Q1 2026)</td><td class="num neg-t">($12.04M)</td><td><span class="tag">Filed</span> 10-Q, 14 May 2026</td></tr>
+      <tr><td class="lbl">Adjusted EBITDA (FY2025)</td><td class="num">$17.3M</td><td><span class="tag">Filed</span> 10-K, 26 Mar 2026</td></tr>
+      <tr><td class="lbl">Cash and restricted cash</td><td class="num">$80.1M</td><td><span class="tag">Filed</span> 10-Q, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Remaining performance obligations</td><td class="num">$923.7M</td><td><span class="tag">Filed</span> 10-Q, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Construction in progress</td><td class="num">$294.3M</td><td><span class="tag">Filed</span> 10-Q, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Shares outstanding</td><td class="num">38,614,216</td><td><span class="tag">Filed</span> 10-Q, as of 12 May 2026</td></tr>
+      <tr><td class="lbl">Free float</td><td class="num">11.1M</td><td><span class="tag">Market</span> 31 Jul 2026</td></tr>
+      <tr><td class="lbl">Price</td><td class="num">$23.70</td><td><span class="tag">Market</span> 31 Jul 2026 close</td></tr>
+      <tr><td class="lbl">52-week range</td><td class="num">$10.51&ndash;46.87</td><td><span class="tag">Market</span> 31 Jul 2026</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>The equity is priced between two figures rather than on either. FY2025 revenue of $79.2M came from
+  roughly 11 MW of energised capacity. Against that sits $923.7M of contracted future revenue dependent on
+  capacity still being commissioned at the last confirmed disclosure. A market capitalisation near $915M
+  sits between the two, closer to the second.</p>
+
+  <p>Price behaviour follows from the float. On 31 July 2026 the stock opened at $27.06, reached $27.63, and
+  closed at $23.70, down 9.71% on the day, with no company announcement. Bit Digital's majority holding
+  leaves a free float near 11.1M shares against 38.6M outstanding, so roughly $260M of stock is available to
+  trade against a $915M capitalisation. <span class="tag">Market</span></p>
+</section>
+
+<!-- ===================== 2. BUSINESS MODEL ===================== -->
+<section id="s2">
+  <h2 class="sec"><span class="n">02</span>Business model</h2>
+  <p class="sub">What the company sells, to whom, and how it is paid.</p>
+
+  <p>WhiteFiber provides high-performance computing data centres and cloud-based GPU services for AI and
+  machine-learning developers. Two distinct businesses sit in one company. <span class="tag">Filed</span>
+  10-Q, 14 May 2026, Note 1.</p>
+
+  <h3>Colocation</h3>
+  <p>WhiteFiber owns or leases buildings, provisions power, cooling and network, and lets the space to
+  customers who bring their own hardware. Customers pay a recurring monthly fee for space and power.
+  Electricity and property taxes are largely passed through, so the contracts do not carry a power-price
+  position.</p>
+  <p>The distinguishing tactic is retrofit: acquiring industrial buildings with existing grid connections
+  and converting them rather than building greenfield. The company puts this at roughly $8&ndash;10M per gross
+  megawatt and up to 40% cheaper than greenfield. MTL-3 in Quebec was converted from a factory to an
+  operating Tier 3-equivalent facility in about six months.</p>
+
+  <h3>Cloud</h3>
+  <p>WhiteFiber also owns NVIDIA GPUs and rents capacity by the day. The GPUs are depreciated over five
+  years. During Q1 2026 the company sold 126 H200 GPUs for $26.1M against a $24.3M book value.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Management frames the pairing as vertical integration: owned buildings lower the cloud cost base, and
+    cloud workloads absorb space not yet let to third parties. The trade is that one small balance sheet
+    underwrites two risk profiles, long contracted cashflows and short-cycle hardware rental.</p>
+  </div>
+
+  <h3>Carve-out and the continuing parent relationship</h3>
+  <p>WhiteFiber was carved out of Bit Digital, Inc. (Nasdaq: BTBT), formerly a bitcoin miner and now an
+  Ethereum-focused holding company. Bit Digital contributed its HPC business for 27,043,749 shares
+  immediately before the IPO. WhiteFiber listed on 7 August 2025 at $17.00, raising about $183M gross
+  including the over-allotment exercised on 2 September 2025. <span class="tag">Filed</span> Form 8-K
+  exhibit, 8 August 2025.</p>
+  <p>Bit Digital held approximately 70.1% as of the May 2026 10-Q, and since 27 May 2026 is also a lender.
+  The relationship is analytically load-bearing rather than historical: it sets the terms of the bridge
+  financing described in section 7, the governance position described in section 10, and the shared
+  corporate functions provided under the Transition Services Agreement.</p>
+  <p>The company is incorporated in the Cayman Islands, headquartered in New York, and files as a smaller
+  reporting company and emerging growth company, which permits reduced disclosure relative to a larger
+  filer. Financial statements for periods before 6 August 2025 are carve-out combined statements carrying
+  allocated Bit Digital expenses that, in the company's words, may not reflect standalone spending.</p>
+</section>
+
+<!-- ===================== 3. REVENUE STREAMS ===================== -->
+<section id="s3">
+  <h2 class="sec"><span class="n">03</span>Revenue streams</h2>
+  <p class="sub">Two reported segments, moving in opposite directions.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Revenue line</th><th class="num">Q1 2026</th><th class="num">Q1 2025</th><th class="num">Change</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Cloud services</td><td class="num">$16.77M</td><td class="num">$14.84M</td><td class="num pos-t">+13%</td><td><span class="tag">Filed</span> 10-Q, 14 May 2026</td></tr>
+      <tr><td class="lbl">Colocation services</td><td class="num">$4.77M</td><td class="num">$1.64M</td><td class="num pos-t">+190%</td><td><span class="tag">Filed</span> 10-Q, 14 May 2026</td></tr>
+      <tr><td class="lbl">Other (lease interest)</td><td class="num">$0.38M</td><td class="num">$0.28M</td><td class="num pos-t">+37%</td><td><span class="tag">Filed</span> 10-Q, 14 May 2026</td></tr>
+      <tr><td class="lbl">Total</td><td class="num">$21.92M</td><td class="num">$16.77M</td><td class="num pos-t">+31%</td><td><span class="tag">Filed</span> 10-Q, 14 May 2026</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>Cloud is the larger line and the weaker one. It fell sequentially from $19.3M in Q4 2025 to $16.8M in
+  Q1 2026. Management attributed the decline to repositioning capacity toward longer-duration enterprise
+  deployments rather than short-term rentals.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>That explanation is plausible and would represent a quality improvement if correct. It remains a
+    sequential decline in the segment producing three quarters of revenue, and the file has no independent
+    confirmation either way.</p>
+  </div>
+
+  <p>Colocation is the smaller line and the one being built. It nearly tripled year over year on the MTL-3
+  ramp, which began serving Cerebras in Q4 2025 under a 5 MW contract. Colocation also carries the
+  contracted backlog.</p>
+
+  <h3>Backlog and what it excludes</h3>
+  <p>At 31 March 2026 remaining performance obligations were $923.7M, scheduled for recognition as $51.3M in
+  2026, $90.7M in 2027, $91.8M in 2028, $93.5M in 2029, $93.5M in 2030 and $502.8M thereafter.
+  <span class="tag">Filed</span> 10-Q, 14 May 2026.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Two cautions. First, $921.0M of the $923.7M is colocation, so the cloud business contributes almost
+    nothing to contracted backlog because its variable pricing falls outside the disclosure requirement.
+    Second, backlog is a customer commitment rather than cash: it converts only if the building is finished
+    and the counterparty pays across ten years.</p>
+  </div>
+
+  <p>Deferred revenue and contract liabilities rose to $144.5M from $79.6M at year end as customers prepaid.
+  That funding is why operating cash flow was positive in a quarter carrying a $12.0M net loss.
+  <span class="tag">Filed</span> 10-Q, 14 May 2026.</p>
+</section>
+
+<!-- ===================== 4. INDUSTRY & MARKET BACKDROP ===================== -->
+<section id="s4">
+  <h2 class="sec"><span class="n">04</span>Industry &amp; market backdrop</h2>
+  <p class="sub">The neocloud category, and the two cracks that opened in it this year.</p>
+
+  <p>WhiteFiber sits in the category the market calls neoclouds: companies renting AI compute and the
+  buildings housing it as an alternative to Amazon, Microsoft and Google. The category barely existed before
+  2024. Synergy Research has forecast the neocloud market approaching $400bn by 2031, naming CoreWeave,
+  Crusoe, Core Scientific, Lambda, Nebius and Nscale as leaders.</p>
+
+  <p>Structural demand is real. AI training and inference need power density and cooling that conventional
+  data centres were not built for, and grid connections have become the binding constraint. Control of 54
+  delivered megawatts is a scarce position.</p>
+
+  <h3>Crack one: the largest owners are becoming sellers</h3>
+  <p>On 1 July 2026, reporting that Meta was exploring sales of its own surplus GPU capacity under a Meta
+  Compute initiative removed roughly 13&ndash;15% of the market value of CoreWeave and Nebius in a single
+  session. Hyperscalers build for peak training demand, hold idle capacity between runs, and carry none of
+  the GPU-collateralised debt the neoclouds rely on. <span class="tag">Market</span></p>
+  <p>Meta is no longer the only entrant. SpaceX has moved into the market and has reportedly taken capacity
+  deals from Google, Reflection AI and Anthropic. Two well-capitalised entrants in one year moves the
+  question from whether neoclouds can take share from hyperscalers to what happens when the largest
+  infrastructure owners sell capacity directly. <span class="tag">Market</span></p>
+
+  <h3>Crack two: credit for AI infrastructure has repriced</h3>
+  <p>Sector analysts had flagged tens of billions of dollars of predominantly GPU-collateralised debt across
+  CoreWeave, Nebius, Lambda, Crusoe and Applied Digital maturing between 2026 and 2028, concentrated among a
+  small and correlated lender group. In late July that concern appeared in prices. On 29 July 2026 CoreWeave
+  was reported to be seeking to raise the interest rate on a $2.6bn loan tied to capacity expansion for
+  Anthropic. Its 2032 bond has been yielding around 10.32% at a B rating from S&amp;P. Credit default swap
+  costs for technology borrowers have widened. From their peaks, CoreWeave is down roughly 61%, IREN roughly
+  47% and Nebius roughly 37%. <span class="tag">Market</span></p>
+
+  <div class="note caution">
+    <p>WhiteFiber's own debt does not mature in the 2026&ndash;2028 window, since the convertible runs to 2031.
+    The exposure is immediate anyway: the company is still trying to place permanent project financing for
+    NC-1 into a market that is actively repricing this risk. That is a worse environment than the one in
+    which the facility was originally expected to close. <span class="tag">Estimate</span></p>
+  </div>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>A useful frame for the sector: the market is pricing contracted capacity, but little of it is switched
+    on. Across the larger names, published activation rates, meaning live capacity as a share of contracted
+    power, have been reported between roughly 4% and 29%. The gap between a signed megawatt and a billing
+    megawatt is where these companies succeed or fail.</p>
+  </div>
+</section>
+
+<!-- ===================== 5. COMPETITIVE POSITION ===================== -->
+<section id="s5">
+  <h2 class="sec"><span class="n">05</span>Competitive position</h2>
+  <p class="sub">Named peers on comparable metrics, not a general market description.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Peer</th><th>Comparable metric</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">CoreWeave (CRWV)</td><td>Q1 2026 revenue $2.08bn; revenue backlog $99.4bn; more than 1 GW active power</td><td><span class="tag">Market</span> Q1&ndash;Q3 2026</td></tr>
+      <tr><td class="lbl">Nebius (NBIS)</td><td>Contracted power above 3.5 GW in Q1 2026; owned power and in-house software layer</td><td><span class="tag">Market</span> Q1 2026</td></tr>
+      <tr><td class="lbl">WhiteFiber (WYFI)</td><td>Q1 2026 revenue $21.9M; backlog $923.7M; 54 gross MW delivered at NC-1</td><td><span class="tag">Filed</span> 10-Q, 14 May 2026</td></tr>
+      <tr><td class="lbl">IREN, TeraWulf, Cipher, Applied Digital, Digi Power X, Soluna</td><td>Power-site converters, several former bitcoin miners; the direct retrofit peer set</td><td><span class="tag">Market</span> Q1&ndash;Q3 2026</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>CoreWeave is the reference point for the category and WhiteFiber's quarterly revenue is roughly 1% of
+  it. They do not compete for the same contracts. The retrofit peer set is where WhiteFiber competes
+  directly.</p>
+
+  <p>Nscale is a particular case: a European AI infrastructure company that is simultaneously WhiteFiber's
+  largest customer and a named leader in the same category. WhiteFiber lets building space to a competitor's
+  compute business.</p>
+
+  <p>Meta and SpaceX are the newest entrants. Neither needs to win colocation contracts to affect the
+  sector; both can sell surplus capacity they already own at whatever price clears.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Colocation is partly insulated from that, since a signed ten-year lease on a physical building is
+    harder to displace than a GPU-hour rental. The cloud segment, still roughly three quarters of revenue,
+    competes directly on price for the same workloads.</p>
+  </div>
+
+  <h3>Where WhiteFiber is differentiated</h3>
+  <p>Retrofit speed is the most credible operational claim: six months from industrial building to operating
+  Tier 3-equivalent facility at MTL-3. Most peers operate buildings or compute; WhiteFiber does both, which
+  is an integration advantage or a focus problem depending on execution. On 9 July 2026 the company reported
+  R&amp;D results for linking two separated data centres into one logical GPU cluster: 111.2 Tbps across 83 km
+  of dark fibre at 0.9 ms guaranteed round-trip latency, with commercial launch targeted for Q3 2026.
+  <span class="tag">Filed</span> press release, 9 July 2026. No customer, pricing or contract has been
+  announced. <span class="tag">Open</span></p>
+
+  <h3>Where it is disadvantaged</h3>
+  <p>Scale and cost of capital. Equity is under $1bn, the convertible carries a 4.50% coupon, and bridge
+  financing from the parent carries 9.5% plus fees. Competitors an order of magnitude larger fund the same
+  megawatts more cheaply, and megawatts are a commodity once energised.</p>
+</section>
+
+<!-- ===================== 6. FINANCIAL PERFORMANCE ===================== -->
+<section id="s6">
+  <h2 class="sec"><span class="n">06</span>Financial performance</h2>
+  <p class="sub">Multi-period, with the trend stated.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Measure</th><th class="num">FY2024</th><th class="num">FY2025</th><th class="num">Q1 2025</th><th class="num">Q1 2026</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Revenue</td><td class="num">~$48M</td><td class="num">$79.2M</td><td class="num">$16.77M</td><td class="num">$21.92M</td><td><span class="tag">Filed</span> 10-K 26 Mar 2026; 10-Q 14 May 2026</td></tr>
+      <tr><td class="lbl">Operating profit</td><td class="num pos-t">+$0.6M</td><td class="num neg-t">&minus;$26.8M</td><td class="num pos-t">+$2.04M</td><td class="num neg-t">&minus;$11.02M</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+      <tr><td class="lbl">Net profit</td><td class="num pos-t">+$1.37M</td><td class="num neg-t">&minus;$24.68M</td><td class="num pos-t">+$1.43M</td><td class="num neg-t">&minus;$12.04M</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+      <tr><td class="lbl">EPS (basic)</td><td class="num pos-t">+$0.05</td><td class="num neg-t">&minus;$0.78</td><td class="num pos-t">+$0.05</td><td class="num neg-t">&minus;$0.31</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+      <tr><td class="lbl">Adjusted EBITDA</td><td class="num">n/a</td><td class="num">$17.3M</td><td class="num">$6.0M</td><td class="num">$3.0M</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>FY2024 revenue is derived from the disclosed 65% year-on-year growth rate rather than stated directly
+    in the sources reviewed, and is approximate.</p>
+  </div>
+
+  <p>The trend is revenue growth against a widening loss. Revenue grew 31% year over year in Q1 2026 while
+  total operating expenses more than doubled to $32.9M. Depreciation rose to $6.4M from $3.8M as assets came
+  into service, and general and administrative expense rose to $17.8M from $4.2M.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The G&amp;A step is the most striking figure in the quarter. It includes $7.3M of share-based
+    compensation, and the company was a carve-out subsidiary a year earlier without public-company equity
+    plans, so the comparison is not like-for-like. Excluding that item, G&amp;A still roughly doubled. Whether
+    this is the fixed cost of public-company operation or weaker cost control is not settleable from the
+    filings to hand.</p>
+  </div>
+
+  <p>Gross margin excluding depreciation held at roughly 60.2% against 60.5% a year earlier. Unit economics
+  on the underlying services are not the issue. <span class="tag">Filed</span> 10-Q, 14 May 2026.</p>
+
+  <h3>Cash</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Q1 2026 cash flow</th><th class="num">Amount</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Operating activities</td><td class="num pos-t">+$3.2M</td><td><span class="tag">Filed</span> 10-Q, 14 May 2026</td></tr>
+      <tr><td class="lbl">Capital expenditure and deposits</td><td class="num neg-t">&minus;$169.2M</td><td><span class="tag">Filed</span> 10-Q, 14 May 2026</td></tr>
+      <tr><td class="lbl">Proceeds from GPU disposals</td><td class="num pos-t">+$26.1M</td><td><span class="tag">Filed</span> 10-Q, 14 May 2026</td></tr>
+      <tr><td class="lbl">Net convertible note proceeds</td><td class="num pos-t">+$222.1M</td><td><span class="tag">Filed</span> 10-Q, 14 May 2026</td></tr>
+      <tr><td class="lbl">Zero-strike call purchase</td><td class="num neg-t">&minus;$120.0M</td><td><span class="tag">Filed</span> 10-Q, 14 May 2026</td></tr>
+      <tr><td class="lbl">Net change in cash</td><td class="num neg-t">&minus;$38.0M</td><td><span class="tag">Filed</span> 10-Q, 14 May 2026</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>Cash and restricted cash fell to $80.1M from $118.3M despite raising $230M of convertible notes in the
+  same quarter. Third-party data services have put trailing-twelve-month free cash flow between negative
+  $220M and negative $245M. <span class="tag">Market</span></p>
+
+  <div class="note caution">
+    <p>The operating cash flow figure repays scrutiny. The $3.2M inflow was produced by $65.0M of customer
+    prepayments offset by a $67.8M build in accounts receivable. Receivables rose from $23.9M to $91.7M,
+    roughly four times a full quarter of revenue. <span class="tag">Filed</span> 10-Q, 14 May 2026.</p>
+    <p>The likeliest explanation is milestone and installation billing on NC-1 rather than a collection
+    problem, but it is a large working-capital swing on a small balance sheet.
+    <span class="tag">Estimate</span></p>
+  </div>
+
+  <h3>Balance sheet at 31 March 2026</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Line</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Total assets</td><td class="num">$796.3M</td><td><span class="tag">Filed</span> 10-Q; $651.4M at year end</td></tr>
+      <tr><td class="lbl">Property, plant and equipment, net</td><td class="num">$432.0M</td><td><span class="tag">Filed</span> 10-Q, 14 May 2026</td></tr>
+      <tr><td class="lbl">Of which construction in progress</td><td class="num">$294.3M</td><td><span class="tag">Filed</span> Not in service, not earning</td></tr>
+      <tr><td class="lbl">Total liabilities</td><td class="num">$443.7M</td><td><span class="tag">Filed</span> 10-Q, 14 May 2026</td></tr>
+      <tr><td class="lbl">Convertible notes, net of issuance costs</td><td class="num">$222.3M</td><td><span class="tag">Filed</span> 10-Q, 14 May 2026</td></tr>
+      <tr><td class="lbl">Shareholders' equity</td><td class="num">$352.6M</td><td><span class="tag">Filed</span> 10-Q, 14 May 2026</td></tr>
+      <tr><td class="lbl">Additional paid-in capital</td><td class="num">$388.9M</td><td><span class="tag">Filed</span> Fell from $504.7M</td></tr>
+    </tbody>
+  </table></div>
+  <p>The fall in additional paid-in capital is the accounting effect of the $120.0M zero-strike call
+  purchase rather than an operating loss.</p>
+</section>
+
+<!-- ===================== 7. CAPITAL STRUCTURE & DILUTION ===================== -->
+<section id="s7">
+  <h2 class="sec"><span class="n">07</span>Capital structure &amp; dilution</h2>
+  <p class="sub">Shares, convertibles, the equity plan, and the controlling holding.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Instrument</th><th class="num">Size</th><th>Terms and basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Ordinary shares outstanding</td><td class="num">38,614,216</td><td><span class="tag">Filed</span> 10-Q, as of 12 May 2026</td></tr>
+      <tr><td class="lbl">Bit Digital holding</td><td class="num">~70.1%</td><td><span class="tag">Filed</span> 10-Q, 14 May 2026. 27,043,749 shares issued at carve-out</td></tr>
+      <tr><td class="lbl">Free float</td><td class="num">11.1M</td><td><span class="tag">Market</span> 31 Jul 2026</td></tr>
+      <tr><td class="lbl">Convertible notes due 2031</td><td class="num">$230.0M</td><td><span class="tag">Filed</span> 4.50%, priced 26 Jan 2026, conversion price $25.91</td></tr>
+      <tr><td class="lbl">Implied conversion shares</td><td class="num">~8.9M</td><td><span class="tag">Estimate</span> Roughly 23% of the current count</td></tr>
+      <tr><td class="lbl">Zero-strike call option</td><td class="num">n/a</td><td><span class="tag">Filed</span> Purchased for ~$120.0M; lifts the effective conversion price to approximately $37</td></tr>
+      <tr><td class="lbl">Iceland term loan</td><td class="num">$20M</td><td><span class="tag">Filed</span> Secured, March 2026</td></tr>
+      <tr><td class="lbl">Bit Digital delayed-draw facility</td><td class="num">$100M</td><td><span class="tag">Filed</span> 8-K, 27 May 2026. Expandable to $150M</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>The convertible sits above the current price, so it is not near-term dilutive. That also means it
+  currently functions as straight debt with a 2031 maturity rather than as equity in waiting.</p>
+
+  <p>Terms on the parent facility are set out in section 10, since their significance is a governance and
+  cost-of-capital question rather than a share-count one. The facility is debt and does not dilute the share
+  count, but a 9.5% coupon with a minimum 1.1x multiple-on-invested-capital repayment is a drag on equity
+  value whenever drawn.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The dilution that matters most is not yet on the table. Because the stock has roughly halved since late
+    June, the number of shares required to raise any given sum has roughly doubled. Dilution risk is
+    inversely related to how well the near-term operational milestones resolve. Separately, a 70.1% holding
+    is a standing overhang: a registered secondary is a distinct event from a primary raise, and no such
+    transaction has been announced. <span class="tag">Open</span></p>
+  </div>
+</section>
+
+<!-- ===================== 8. VALUATION ===================== -->
+<section id="s8">
+  <h2 class="sec"><span class="n">08</span>Valuation</h2>
+  <p class="sub">Multiples shown with their basis and pricing date. No target price is derived here.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Measure</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Market capitalisation</td><td class="num">$915M</td><td><span class="tag">Market</span> 31 Jul 2026 close, $23.70 &times; 38.61M shares</td></tr>
+      <tr><td class="lbl">Plus convertible notes, face</td><td class="num">+$230M</td><td><span class="tag">Filed</span> 4.50% due 2031</td></tr>
+      <tr><td class="lbl">Plus Iceland term loan</td><td class="num">+$20M</td><td><span class="tag">Filed</span> Secured, Mar 2026</td></tr>
+      <tr><td class="lbl">Less cash and restricted cash</td><td class="num">&minus;$80M</td><td><span class="tag">Filed</span> At 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Approximate enterprise value</td><td class="num">$1.09B</td><td><span class="tag">Estimate</span> Before Q2 drawdowns</td></tr>
+      <tr><td class="lbl">EV / TTM revenue ($84.3M)</td><td class="num">12.9x</td><td><span class="tag">Estimate</span> Trailing</td></tr>
+      <tr><td class="lbl">EV / FY2025 adj. EBITDA ($17.3M)</td><td class="num">63x</td><td><span class="tag">Estimate</span> Trailing</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>Two warnings attach to that table. The cash figure is four months old and the company was consuming
+  cash heavily, so any Q2 draw on the RBC, Iceland or Bit Digital facilities raises enterprise value
+  further. A trailing EBITDA multiple of 63x on a company mid-construction is not a signal in either
+  direction.</p>
+
+  <h3>The forward case</h3>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The forward argument runs through the backlog schedule, which implies roughly $90&ndash;93M per year of
+    colocation revenue from 2027 through 2030. Adding the Q1 cloud run-rate of about $67M annualised, and
+    the Paris contract at roughly $32M a year if the $160M five-year value is spread evenly, gives 2027
+    revenue in the region of $170&ndash;195M, around 2.2x trailing. On that revenue the enterprise value is
+    roughly 5.6&ndash;6.4x sales.</p>
+  </div>
+
+  <div class="note caution">
+    <p>Every forward case assumes NC-1 permanent financing closes at a workable cost. With AI-infrastructure
+    credit repricing, the spread eventually paid is a live variable rather than a rounding error. Interest
+    expense passes straight to the equity, so a wide spread compresses the same forward figures the case
+    depends on. <span class="tag">Estimate</span></p>
+  </div>
+
+  <p>Sell-side estimates published this year have been more aggressive. One March 2026 note argued for
+  roughly 5.3x FY2026 EV/EBITDA against peers above 20x, forecasting $139M annualised revenue and $105M
+  EBITDA by end-2026. <span class="tag">Market</span></p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>That forecast implies an EBITDA margin near 75%, above anything the company has reported, and assumes
+    NC-1 reaches full contractual capacity on schedule. It is a scenario rather than a base case.</p>
+  </div>
+
+  <h3>Third-party price targets</h3>
+  <p>The following are the published views of the firms named and are reported here as market data. This
+  document adopts none of them and derives no target of its own.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Firm</th><th>Rating</th><th class="num">Target</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Barclays</td><td>Equal Weight</td><td class="num">$29</td><td><span class="tag">Market</span> Raised 21 Jul 2026</td></tr>
+      <tr><td class="lbl">BTIG</td><td>Buy</td><td class="num">$50</td><td><span class="tag">Market</span> Raised 24 Jun 2026</td></tr>
+      <tr><td class="lbl">Needham</td><td>Buy</td><td class="num">$38</td><td><span class="tag">Market</span> 15 May 2026</td></tr>
+      <tr><td class="lbl">Cantor Fitzgerald</td><td>Neutral</td><td class="num">$27</td><td><span class="tag">Market</span> 15 May 2026</td></tr>
+      <tr><td class="lbl">H.C. Wainwright</td><td>n/a</td><td class="num">$20</td><td><span class="tag">Market</span> Cut from $34 on 27 Mar 2026</td></tr>
+      <tr><td class="lbl">Aggregator consensus</td><td>n/a</td><td class="num">$33&ndash;36</td><td><span class="tag">Market</span> As reported</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="note">
+    <p>B. Riley Securities was a joint bookrunner on the IPO, publishes research on the stock, and in May
+    2026 acquired a $20M portion of the related-party term loan to WhiteFiber's subsidiary. Published
+    research on a company of this size is not necessarily independent of its financing relationships.
+    <span class="tag">Filed</span> 8-K, 27 May 2026.</p>
+  </div>
+</section>
+
+<!-- ===================== 9. GROWTH DRIVERS ===================== -->
+<section id="s9">
+  <h2 class="sec"><span class="n">09</span>Growth drivers</h2>
+  <p class="sub">What would have to happen, and what is already contracted.</p>
+
+  <h3>The capacity ladder</h3>
+  <p>Megawatts are the operative unit. Three figures set the frame, and they are not equivalent in
+  standing.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Rung</th><th class="num">Capacity</th><th>Standing</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Energised and earning, end 2025</td><td class="num">~11 MW</td><td>Produced the $79.2M of FY2025 revenue</td><td><span class="tag">Filed</span> 10-K, 26 Mar 2026</td></tr>
+      <tr><td class="lbl">Company target, gross, end 2026</td><td class="num">~76 MW</td><td>A stated target, not a commitment</td><td><span class="tag">Filed</span> 10-K, 26 Mar 2026</td></tr>
+      <tr><td class="lbl">Pipeline under review</td><td class="num">~1,500 MW</td><td>Sites being evaluated. No contracts, financing or power agreements attached</td><td><span class="tag">Open</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The distance from the first rung to the second is the investment case. The distance from the second to
+    the third is the story supporting the multiple. Conflating the three is the most common error in reading
+    this company.</p>
+  </div>
+
+  <h3>Contracted and announced drivers</h3>
+  <p><b>NC-1 reaching full contracted capacity.</b> The 40 MW Nscale deployment at Madison, North Carolina is
+  the dominant driver: approximately $865M over ten years with 3% annual escalators, structured as a
+  modified gross lease with electricity passed through. Duke Energy has delivered the initial 54 gross MW.
+  This item drives essentially all of the backlog. <span class="tag">Filed</span> 8-K, 18 December 2025.</p>
+
+  <p><b>NC-1 expansion beyond 40 MW.</b> The site carries a 99 MW capacity agreement with Duke Energy,
+  about one million leasable square feet, and management believes it could eventually support up to 200 MW.
+  Nscale holds priority notification rights on new capacity, and the December 2025 announcement referenced
+  potential expansion toward roughly double the initial deployment by end-2027.
+  <span class="tag">Filed</span> 8-K, 18 December 2025.</p>
+
+  <p><b>The Paris contract.</b> A five-year agreement announced 21 May 2026 with an investment-grade
+  technology customer, over $160M total value, using NVIDIA systems in third-party French capacity, with
+  service expected to commence July 2026 and supported by twelve months of customer prepayments.
+  <span class="tag">Filed</span> 8-K, 21 May 2026. No confirmation that service has commenced or that the
+  associated project financing closed as expected in June 2026. <span class="tag">Open</span></p>
+
+  <p><b>MTL-3 ownership.</b> The purchase option was exercised on 14 January 2026 and completed on 8 May
+  2026, converting a leased revenue-generating asset into an owned one with expansion optionality.
+  <span class="tag">Filed</span> 10-Q, 14 May 2026, Note 6.</p>
+
+  <p><b>Cerebras.</b> MTL-3 supports Cerebras wafer-scale systems under a 5 MW contract and completed its
+  first full quarter of operations in Q1 2026. <span class="tag">Filed</span> 10-Q, 14 May 2026.</p>
+
+  <p><b>Project Redwood.</b> The cross-data-centre networking architecture, if commercialised in Q3 2026 as
+  targeted, would be a differentiated product. Commercially unproven.
+  <span class="tag">Open</span></p>
+</section>
+
+<!-- ===================== 10. RISKS ===================== -->
+<section id="s10">
+  <h2 class="sec"><span class="n">10</span>Risks</h2>
+  <p class="sub">Severity-ranked, most severe first.</p>
+
+  <div class="risk sev-high">
+    <h4>Customer concentration is close to total <span class="sev">Severe</span></h4>
+    <p>Roughly $921M of $923.7M in backlog rests on one agreement with Nscale, a privately held company whose
+    balance sheet investors cannot examine. WhiteFiber describes the arrangement as backed by an
+    investment-grade hyperscaler offtake, but that end customer is not named in the disclosures reviewed. The
+    credit chain runs through a party investors cannot see to another they are not told the identity of. A
+    default, delay or renegotiation changes the character of the backlog figure entirely.
+    <span class="tag">Filed</span> 10-Q, 14 May 2026.</p>
+  </div>
+
+  <div class="risk sev-high">
+    <h4>The majority owner is also the lender <span class="sev">Severe</span></h4>
+    <p>On 27 May 2026 WhiteFiber announced a $100M delayed-draw term loan facility, expandable to $150M, from
+    Bit Digital Capital, a subsidiary of the 70.1% shareholder. Per Bit Digital's own 8-K the terms are 9.5%
+    annual interest, stepping to 8.0% only once NC-1 Phase I is substantially complete and at least 80%
+    leased at market rates; a 3% original issue discount; a 0.50% commitment fee on undrawn capacity; and a
+    minimum 1.1x multiple-on-invested-capital repayment per advance at maturity. It is guaranteed by White
+    Fiber Operating Partnership LP and secured by equity in the NC-1 holding company.
+    <span class="tag">Filed</span> Bit Digital 8-K, 20 May 2026.</p>
+  </div>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Those are bridge terms negotiated between affiliated parties rather than arm's-length bank pricing.
+    Bit Digital funded its side by drawing $50M from Galaxy Digital on 20 May 2026 under a
+    crypto-collateralised loan, so WhiteFiber's bridge liquidity sits one step from digital-asset collateral
+    values. A minority holder has limited ability to influence any of it.</p>
+  </div>
+
+  <div class="risk sev-high">
+    <h4>Permanent NC-1 financing has not closed <span class="sev">Severe</span></h4>
+    <p>The December 2025 Nscale announcement said the company was in advanced discussions with lenders and
+    expected to formalise a construction credit facility in early Q1 2026. By late May 2026 it described
+    itself as still advancing non-dilutive permanent financing solutions while using a related-party bridge.
+    No announcement of a closed permanent facility was found as of 1 August 2026, a slipped milestone of
+    roughly two quarters on the most important financing in the company. <span class="tag">Open</span></p>
+  </div>
+
+  <div class="risk sev-high">
+    <h4>Schedule slippage at NC-1 <span class="sev">Severe</span></h4>
+    <p>Billing on the first 20 MW was targeted for 30 April 2026 and the second for 30 May 2026. The 14 May
+    2026 report disclosed a medium-voltage switchgear supply issue and revised this to delivery beginning
+    during Q2 with full revenue contribution in Q3. No public confirmation that billing has commenced was
+    found. The Q2 report, expected around 9&ndash;13 August 2026, is where this settles.
+    <span class="tag">Open</span></p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Cash consumption against available liquidity <span class="sev">Moderate</span></h4>
+    <p>$169.2M of quarterly capital expenditure against $80.1M of cash. The company depends on continued
+    access to capital markets to finish what it has started. There is no going-concern warning in the
+    filings, and contracted backlog and prepayments genuinely help, but the margin for error is thin.
+    <span class="tag">Filed</span> 10-Q, 14 May 2026.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Financing-market conditions have tightened <span class="sev">Moderate</span></h4>
+    <p>The credit market for AI infrastructure repriced in late July 2026, as set out in section 4. This is
+    the market into which the company must sell NC-1 project debt. The risk is no longer only that the
+    facility is late: the terms available now may be worse than those contemplated when the deal was
+    announced, and continued delay accrues 9.5% plus a 1.1x repayment multiple on the related-party bridge.
+    <span class="tag">Estimate</span></p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Dilution <span class="sev">Moderate</span></h4>
+    <p>The $230M convertible notes carry an initial conversion price of $25.91, above the current price but
+    implying roughly 8.9M shares, about 23% of the current count, if converted. The zero-strike call
+    structure lifts the effective conversion price to approximately $37, which reduces without eliminating
+    the exposure. <span class="tag">Filed</span> 10-Q, 14 May 2026.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>The cloud fleet is a depreciating asset <span class="sev">Moderate</span></h4>
+    <p>GPUs are depreciated over five years while the hardware generation cycle is shorter. The segment's
+    revenue declined sequentially in Q1 2026. Selling 126 H200 GPUs mid-quarter at a small gain is prudent
+    asset management and also a reminder that this half of the business is a fleet requiring continual
+    capital refresh. <span class="tag">Filed</span> 10-Q, 14 May 2026.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Insider reporting was delinquent <span class="sev">Moderate</span></h4>
+    <p>On 28 July 2026 WhiteFiber filed four Form 4 insider reports. Two of them, for CEO Samir Tabar (41,982
+    RSUs) and CFO and director Erke Huang (41,982 RSUs), report transactions dated 31 March 2026. Exchange
+    Act Section 16(a) requires a Form 4 within two business days. These were filed roughly four months late.
+    <span class="tag">Filed</span> Forms 4, 28 July 2026.</p>
+  </div>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Nothing here indicates wrongdoing: these were non-discretionary RSU vestings under an equity plan
+    rather than open-market trades, and the economic event was unchanged by the reporting date. A four-month
+    delay at a company less than a year into public life is nonetheless an internal-controls signal.
+    Delinquent filings of this kind must be disclosed under Regulation S-K Item 405 in the annual report or
+    proxy, so the matter should surface again in the FY2026 10-K. It sits against an otherwise clean record:
+    both periodic reports were filed on time, with no NT 10-K or NT 10-Q notifications.</p>
+    <p>The parent filed a comparable batch the same evening. Sam Tabar is CEO of both companies and Erke
+    Huang is CFO of both. A shared compliance function is the likeliest explanation, consistent with the
+    Transition Services Agreement under which Bit Digital still provides certain corporate functions, and it
+    means a lapse at the parent propagates directly into WhiteFiber's filing record.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Sector and market risk <span class="sev">Moderate</span></h4>
+    <p>Neocloud multiples moved violently on the Meta Compute reports of 1 July 2026 and have not settled.
+    WhiteFiber shares fell from roughly $46 in late June to $23.70 on 31 July 2026, a decline of roughly half
+    in five weeks, with no company-specific announcement identified. Short interest was reported at a record
+    high in May 2026, and the stock appeared on lists of the largest borrow-rate increases.
+    <span class="tag">Market</span> A heavily shorted stock with an 11.1M share float and binary near-term
+    catalysts will move more than the underlying business changes, in both directions.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Energy prices, inflation and the rate path <span class="sev">Moderate</span></h4>
+    <p>US electricity prices rose about 6.3% in the twelve months to January 2026, more than double headline
+    inflation at the time. Colocation contracts pass electricity through, so that segment is largely
+    insulated; the cloud segment is not, since electricity is a direct cost of revenue there and cloud
+    remains roughly three quarters of revenue. <span class="tag">Market</span></p>
+    <p>At the 29 July 2026 meeting the Federal Reserve held its target range at 3.50&ndash;3.75% on a 9&ndash;3 vote,
+    with three members dissenting in favour of a hike. Market pricing has moved to rate increases rather than
+    cuts in 2026, driven by energy-led inflation associated with the US&ndash;Iran conflict.
+    <span class="tag">Market</span></p>
+  </div>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>For a company whose value rests on contracted cashflows starting in 2027 and which must raise project
+    debt now, a rising-rate path is a double charge: a higher discount rate on future revenue and a higher
+    coupon on the financing required to deliver it. Published estimates of current crude prices conflict,
+    some placing Brent below $75 and others above $100, so the energy input is genuinely uncertain rather
+    than settled.</p>
+  </div>
+
+  <div class="risk sev-low">
+    <h4>Other disclosed risks <span class="sev">Lower</span></h4>
+    <p>The company's forward-looking risk list flags GPU supply timing, integration of Enovum, executive-team
+    dependence, power price volatility, tariffs and export restrictions particularly concerning Canada,
+    AI-specific regulation, and its limited history as an independent public company.
+    <span class="tag">Filed</span> 10-Q, 14 May 2026.</p>
+  </div>
+</section>
+
+<!-- ===================== 11. BULL / BASE / BEAR ===================== -->
+<section id="s11">
+  <h2 class="sec"><span class="n">11</span>Bull / base / bear</h2>
+  <p class="sub">Each case with its preconditions: what must be true, not what might be.</p>
+  <div class="cases">
+    <div class="case bear"><h4>Bear</h4>
+      <p>Commissioning problems push billing into late 2026. The permanent facility either does not close or
+      closes on terms transferring most of the project economics to lenders, a path that became more
+      plausible in late July when AI-infrastructure credit repriced and a much larger peer was reported to be
+      raising the rate on its own loan. The related-party bridge is drawn heavily at 9.5% plus a 1.1x
+      repayment multiple, and the company returns to equity markets at a depressed price. Cloud revenue keeps
+      declining sequentially, so the segment funding overhead shrinks while G&amp;A holds at its new level. In
+      the worst version something goes wrong at Nscale and the $921M backlog stops anchoring the valuation.
+      There is no earnings floor beneath the stock; the 52-week low of $10.51 indicates how far it has
+      traded down before.</p>
+      <p class="req">Requires: further NC-1 slippage, or a financing close on punitive terms, or a
+      counterparty failure at Nscale.</p></div>
+    <div class="case"><h4>Base</h4>
+      <p>NC-1 begins billing during Q2 to Q3 2026 with a modest delay against the original target. Colocation
+      revenue steps toward the roughly $90M annual run-rate the backlog schedule implies for 2027. Cloud
+      stabilises near current levels rather than growing. The Paris contract commences and contributes.
+      Permanent project financing closes at a workable spread, replacing the bridge. 2027 revenue lands
+      around $170&ndash;195M with adjusted EBITDA margins in the 40&ndash;55% range as the colocation mix rises:
+      profitable at the EBITDA line, still loss-making at the net line while depreciation and interest run
+      heavy. The company becomes a small contracted infrastructure business and the equity trades on
+      execution.</p>
+      <p class="req">Requires: NC-1 billing by Q3 2026, permanent financing closed, cloud flat rather than
+      declining.</p></div>
+    <div class="case bull"><h4>Bull</h4>
+      <p>The 40 MW deployment comes online cleanly and Nscale exercises its priority rights toward roughly
+      double the initial size by end-2027, taking NC-1 toward its 99 MW Duke Energy agreement and
+      potentially beyond. The retrofit model, six months from factory to Tier 3 at $8&ndash;10M per MW against
+      greenfield costs, proves repeatable at two or three further pipeline sites, funded increasingly by
+      project-level debt and customer prepayments rather than equity. Project Redwood commercialises in Q3
+      2026 and gives the cloud business a product no one else sells. The company compounds contracted
+      megawatts at a falling cost of capital, and the current enterprise value of roughly $1.06 billion is
+      applied to a materially larger contracted base.</p>
+      <p class="req">Requires: clean NC-1 commissioning, a Nscale expansion order, repeatable site
+      acquisition, and Redwood reaching commercial launch with a customer.</p></div>
+  </div>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>All three cases are constructions from the disclosed facts rather than forecasts, and no probabilities
+    are assigned. With a single dominant contract and an unresolved financing, the outcome distribution is
+    closer to binary than to a smooth curve, and a weighted average would misrepresent it.</p>
+  </div>
+</section>
+
+<!-- ===================== 12. RESEARCH SUMMARY ===================== -->
+<section id="s12">
+  <h2 class="sec"><span class="n">12</span>Research summary</h2>
+
+  <p>WhiteFiber is a company under a year into public life, built from a carve-out, still 70% owned by its
+  former parent, that has signed an $865M ten-year contract and converted industrial buildings into AI-grade
+  capacity faster than most peers, and has not yet been paid for the part that matters.</p>
+
+  <p>The comparison that frames everything: $79.2M of FY2025 revenue from roughly 11 MW, against $923.7M of
+  contracted future revenue dependent on capacity still being commissioned at the last confirmed disclosure.
+  A market capitalisation near $915M sits between the two, closer to the second.</p>
+
+  <p>Three questions determine which figure the valuation comes to resemble, and all are answerable within
+  months rather than years: whether NC-1 started billing and when; whether permanent project financing
+  closed and at what cost; and whether the cloud segment stopped shrinking.</p>
+
+  <p>The strongest positives are a contracted backlog with disclosed year-by-year recognition, roughly 60%
+  gross margins on services, customer prepayments funding part of the build, an owned flagship site with 99
+  MW of utility capacity secured, and a retrofit cost structure cheaper and faster than greenfield. The most
+  serious concerns are near-total dependence on one contract with one private counterparty whose own end
+  customer is undisclosed, a permanent financing that was due two quarters ago and has not closed, bridge
+  debt from the controlling shareholder on terms a minority holder had no say in, and a cash burn requiring
+  continuous capital-market access at the moment those markets are repricing AI infrastructure risk upward.</p>
+
+  <p>No buy, sell or hold recommendation is issued here, and none should be inferred. What the file supports
+  is a view of which facts are settled, which are targets, and which remain unproven.</p>
+
+  <h3>What to watch next</h3>
+  <div class="tw"><table>
+    <thead><tr><th>When</th><th>What</th></tr></thead>
+    <tbody>
+      <tr><td class="when">~9&ndash;13 Aug</td><td>Q2 2026 results. Colocation revenue, whether NC-1 billing commenced, and whether the $91.7M receivable converted to cash.</td></tr>
+      <tr><td class="when">Q3 2026</td><td>Project Redwood commercial launch, targeted. A named customer would be the first validation.</td></tr>
+      <tr><td class="when">Any 8-K</td><td>Closing of permanent NC-1 project financing, and the spread at which it prices.</td></tr>
+      <tr><td class="when">Any 8-K</td><td>Drawdowns on the Bit Digital facility. Heavy usage would signal permanent financing is still unavailable.</td></tr>
+      <tr><td class="when">Ongoing</td><td>Paris service commencement, and whether the June 2026 project financing closed.</td></tr>
+      <tr><td class="when">Ongoing</td><td>Nscale expansion toward double the initial 40 MW, referenced for end-2027.</td></tr>
+      <tr><td class="when">27&ndash;29 Aug</td><td>Jackson Hole symposium. Chair Warsh speaks, watched for signals on the rate path.</td></tr>
+      <tr><td class="when">15&ndash;16 Sep</td><td>FOMC, described as the first meaningful test of whether the hold continues.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 13. NULL CATEGORIES ===================== -->
+<section id="s13">
+  <h2 class="sec"><span class="n">13</span>Null categories</h2>
+  <p class="sub">Requested categories with nothing to report. Status reads Covered above, None where a
+  named source was checked and found empty, or Not established where the category was not examined.
+  A category nobody looked at is a gap, not an absence.</p>
+  <div class="tw"><table class="nulls">
+    <thead><tr><th>Category</th><th>Status</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Analyst coverage</td><td class="status">Covered above</td><td>Section 8 carries published targets from Barclays, BTIG, Needham, Cantor Fitzgerald and H.C. Wainwright, with dates, plus aggregator consensus.</td></tr>
+      <tr><td class="lbl">Dividends</td><td class="status caution-t">Not established</td><td>Not examined in this document. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Share buybacks</td><td class="status caution-t">Not established</td><td>Not examined in this document. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Securities class action</td><td class="status caution-t">Not established</td><td>Not examined in this document. Also named in what was not checked.</td></tr>
+    </tbody>
+  </table></div>
+  <p>Each of these three is a gap in this document's evidence rather than a finding that the category is
+  empty. Absence of evidence is not evidence of absence.</p>
+</section>
+
+<!-- ===================== 14. METHODOLOGY & SOURCES ===================== -->
+<section id="s14">
+  <h2 class="sec"><span class="n">14</span>Methodology &amp; sources</h2>
+
+  <h3>Pricing basis</h3>
+  <p>Market figures are struck at the 31 July 2026 close. Balance-sheet figures are as of 31 March 2026 and
+  are four months old; the company was consuming cash rapidly and has facilities available, so the
+  enterprise value shown understates rather than overstates. The as-of stamp is the build date and differs
+  from the pricing basis.</p>
+
+  <h3>Provenance tags</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Tag</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl"><span class="tag">Filed</span></td><td>Stated in an SEC filing or company press release, with form and date cited.</td></tr>
+      <tr><td class="lbl"><span class="tag">Estimate</span></td><td>Derived, modelled or inferred here rather than reported by the company.</td></tr>
+      <tr><td class="lbl"><span class="tag">Open</span></td><td>Expected or targeted but unconfirmed, with nothing filed either way.</td></tr>
+      <tr><td class="lbl"><span class="tag">Market</span></td><td>Price, float, third-party targets and peer market data, stamped with the close date.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Sources</h3>
+  <p>WhiteFiber Form 10-Q for the quarter ended 31 March 2026 (filed 14 May 2026); Form 10-K for the year
+  ended 31 December 2025 (filed 26 March 2026); Forms 8-K dated 8 August 2025, 18 December 2025, 26 March
+  2026, 14 May 2026, 21 May 2026, 27 May 2026 and 10 June 2026; four Forms 4 filed 28 July 2026 (Tabar,
+  Huang); company press releases dated 8 August 2025, 18 December 2025, 26 March 2026, 14 May 2026, 21 May
+  2026, 27 May 2026 and 9 July 2026; Bit Digital Form 8-K dated 20 May 2026 and press release dated 27 May
+  2026; Q1 2026 earnings call transcript, 14 May 2026; market data as of the 31 July 2026 close; Federal
+  Reserve FOMC statement and implementation note, 29 July 2026; sector and credit-market reporting from
+  Synergy Research and trade press, Q2 to Q3 2026.</p>
+
+  <h3>What was not checked</h3>
+  <p>Dividends, share buybacks and securities litigation were not examined in the preparation of this
+  document. Their rows in section 13 read Not established for that reason, and nothing here should be read
+  as a finding that those categories are empty.</p>
+  <p>Peer credit data, including CoreWeave bond yields and the reported loan repricing, comes from secondary
+  market reporting rather than from primary filings reviewed here. Energy-price sources conflict on where
+  crude currently sits. Items tagged Open are targets or expectations for which no confirming public source
+  was found as of 1 August 2026; absence of confirmation is not evidence of failure.</p>
+  <p>The Nscale end customer is not named in the disclosures reviewed, so the credit quality behind the
+  largest contract cannot be independently assessed here.</p>
+  <p>Section 7 is thinner than the heading suggests. The equity incentive plan's authorised pool, the share
+  count referenced by the zero-strike call, and the premium at which the convertible priced are not
+  disclosed anywhere in this document's own evidence, so no figure is given for them. The section carries
+  the instruments themselves, their terms where stated, and the resulting exposure, and stops there rather
+  than presenting figures this document did not establish.</p>
+
+  <h3>Known limitations carried forward</h3>
+  <div class="note neg">
+    <p><b>A qualification was dropped from the valuation caveat.</b> The caveat below the forward case
+    originally carried a supporting parenthetical, quoted here as evidence of the omission:
+    <i>"a peer openly raising the rate on its own loan, junk-rated bonds near 10.3%"</i>. It was lost when
+    the surrounding sentence was recast, and the section now states that credit has repriced without the
+    two specifics that showed it. The governing requirement is that no figure or qualification attached to
+    a figure may be dropped when prose is rewritten; restoring it changes a figure, which is outside the
+    scope of this pass. The related figure at a different precision, the 2032 bond yield of 10.32%, does
+    survive in the industry section, where it supports a different claim.</p>
+  </div>
+
+  <p>Two internal inconsistencies were identified in the source material and are not resolved in this pass,
+  because settling either requires a repricing that this pass did not perform.</p>
+  <div class="note neg">
+    <p><b>Enterprise value in the bull case.</b> Section 11 reads: <i>"the current enterprise value of
+    roughly $1.06 billion is applied to a materially larger contracted base."</i> Section 8 gives an
+    enterprise value of approximately $1.09B at the 31 July 2026 close. The $1.06B figure was struck at the
+    27 July 2026 close and was not updated when the file was repriced. The text is preserved as written
+    rather than altered, since changing a figure is outside the scope of this pass. The governing
+    requirement is that every figure carry the pricing date it was struck at, and that a document use one
+    pricing basis throughout.</p>
+    <p><b>Valuation source label.</b> The source carried a sourcing label reading <i>"Market data 27 Jul 2026
+    close"</i> against a valuation section whose text prices off the 31 July 2026 close of $23.70. The
+    masthead, the body and the document log all establish 31 July as the pricing basis, so the label was the
+    stale element and section 8 now names 31 July. The discrepancy is recorded rather than passed over.</p>
+  </div>
+</section>
+
+<!-- ===================== 15. DOCUMENT LOG ===================== -->
+<section id="s15">
+  <h2 class="sec"><span class="n">15</span>Document log</h2>
+  <p class="sub">Newest first. The original build entry is never removed or rewritten.</p>
+  <div class="log">
+
+    <div class="logentry current">
+      <div class="when">1 August 2026 <span class="latest">Latest</span></div>
+      <div class="basis">Priced off 31 Jul 2026 close &middot; $23.70 &middot; $915M cap</div>
+      <p>Revised against the 28 July publication.</p>
+      <p><b>Pricing.</b> Repriced to the 31 July close of $23.70 (down 9.71% on the day, from a $27.06 open,
+      $27.63 high). Market cap approximately $915M; enterprise value approximately $1.09B; EV/TTM revenue
+      12.6x &rarr; 12.9x; EV/2025 adj. EBITDA 61x &rarr; 63x; forward EV/2027e sales 5.5&ndash;6.2x &rarr; 5.6&ndash;6.4x.
+      52-week range corrected to $10.51&ndash;46.87. Free float of approximately 11.1M shares against 38.6M
+      outstanding added to Section 0.</p>
+      <p><b>Filings.</b> Form-by-form EDGAR review across 8-K, 6-K, 10-Q, 10-K, 20-F, 40-F, S-1, S-3, 424,
+      13D, NT 10-K, NT 10-Q, NT 20-F, NT 40-F, Form 3 and Form 4. Correction: the 28 July version stated
+      that the most recent SEC filing was the 10 June 8-K. That was wrong; it relied on a third-party
+      aggregator that was stale. Four Form 4s were filed on 28 July 2026, two of them delinquent by roughly
+      four months against the Section 16(a) two-business-day deadline. Added to Section 9 as a governance
+      risk and noted in Section 11. A performance milestone met on 30 June 2026 is disclosed in those
+      filings; the milestone itself is unspecified and no inference is drawn from it. The periodic-report
+      position (8-K, 10-Q, 10-K) was correct as originally stated and is unchanged; no NT filing exists
+      anywhere in the company's history.</p>
+      <p><b>Industry and competitors (Sections 4&ndash;5).</b> "Crack one" retitled and expanded for SpaceX's
+      entry alongside Meta. "Crack two" rewritten from a forecast refinancing wall into observed credit
+      repricing: a peer reported on 29 July as raising the rate on a $2.6bn loan, its 2032 bond near 10.32%
+      at a B rating, widening technology CDS. Peer drawdowns added. Meta and SpaceX added to the competitor
+      set.</p>
+      <p><b>Risks (Section 9).</b> Two new subsections: insider reporting delinquency, and energy prices,
+      inflation and the rate path. The 29 July FOMC held at 3.50&ndash;3.75% on a 9&ndash;3 vote with three dissents
+      favouring a hike, with market pricing having moved from cuts to increases. Financing-market risk
+      separated out as its own subsection. Sector risk updated for the current drawdown and float.</p>
+      <p><b>Elsewhere.</b> Bear case sharpened for the credit environment (Section 10). Valuation caveat
+      added on financing cost (Section 7). Jackson Hole 27&ndash;29 August and the 15&ndash;16 September FOMC added to
+      the watch list (Section 11).</p>
+      <p><b>Unchanged.</b> No new 8-K, 10-Q or press release since 10 June and 9 July respectively. NC-1
+      billing commencement, the Paris go-live and the NC-1 permanent financing all remain unconfirmed and
+      stay tagged Open. All balance-sheet figures remain as of 31 March 2026.</p>
+    </div>
+
+    <div class="logentry">
+      <div class="when">28 July 2026 (original build)</div>
+      <div class="basis">Priced off 27 Jul 2026 close &middot; $23.15 &middot; $894M cap</div>
+      <p>First published. Research report covering business model, revenue streams, industry backdrop,
+      competitors, financial performance, valuation, growth drivers, risks, bull/base/bear cases and
+      research summary. Built from SEC filings and company press releases through 27 July 2026, priced off
+      that day's close of $23.15 (market cap approximately $894M, EV approximately $1.06B). Evidence tagged
+      Filed / Estimate / Open throughout. No buy, sell or hold recommendation.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="norec">
+    No buy, sell, or hold recommendation is issued and no price target is derived.
+    Third-party targets and ratings, where shown, are the published views of the
+    firms named and are reported as market data. This document is for research and
+    educational purposes and is not investment advice. Verify all figures against
+    primary filings on sec.gov before acting.
+  </div>
+  <p style="margin-top:16px">WYFI &middot; WhiteFiber, Inc. &middot; Equity Research Report &middot; as of 1 August 2026</p>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>VIP &middot; Vulcan Infrastructure and Power Inc. &middot; Catalyst Calendar &middot; as of 2 August 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================================
+   PER-TICKER PALETTE
+   ========================================================================= */
+:root{
+  /* Identity colour, derived from the Vulcan mark. The raw brand red is
+     #F00024, the chevron, which is the only chromatic colour in the mark.
+     Normalised for legibility on white, then rotated 8 degrees to hue 343 so
+     it cannot be mistaken for the red that marks negative figures. 6.32:1
+     against the page. */
+  --accent:      #B81E4A;
+  --accent-deep: #8C1738;
+  --accent-wash: rgba(184,30,74,0.06);
+  --accent-line: rgba(184,30,74,0.22);
+}
+
+/* ============================================================================
+   SHARED STYLESHEET v1.50 : BEGIN
+   ========================================================================= */
+:root{
+  color-scheme: light only;
+
+  --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
+  --line:#DEE6EC;   --line-hard:#C0CDD7;
+  --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
+
+  --pos:#0B7A50;      --pos-bg:#E7F4EE;
+  --neg:#B02A21;      --neg-bg:#FBECEA;
+  --caution:#90600A;  --caution-bg:#FBF2E0;
+  --assume:#4F3FA3;   --assume-bg:#EFEDFA;
+
+  --display:'Archivo',ui-sans-serif,system-ui,'Helvetica Neue',Arial,sans-serif;
+  --body:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+
+  --measure:78ch;
+  --col:760px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html,body{background:var(--canvas) !important;background-color:var(--canvas) !important}
+body{
+  margin:0;color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 22px 96px;background:var(--paper);
+      border-left:1px solid var(--line);border-right:1px solid var(--line)}
+p{max-width:var(--measure)}
+/* Boxed prose fills its container: the box supplies its own measure, so the
+   78ch cap applies to top-level running prose only. */
+.first li,.assume p,.note p,.cat p,.risk p,.logentry p,.oc p,.case p,
+.cat-meta,.logentry .basis{max-width:none}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:var(--accent-deep)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- masthead ---------- */
+.mast{padding:44px 0 26px;border-bottom:2px solid var(--line-hard);margin-bottom:8px;
+      position:relative;padding-left:20px}
+.mast::before{content:"";position:absolute;left:0;top:44px;bottom:26px;
+      width:4px;background:var(--accent)}
+.ticker{font-family:var(--mono);font-size:44px;font-weight:700;letter-spacing:-1px;
+      line-height:1;color:var(--accent);margin:0}
+.headline{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.22;
+      color:var(--ink);margin:16px 0 0}
+.functional{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--ink-faint);margin:18px 0 0}
+.mast-strip{display:flex;flex-wrap:wrap;gap:26px;margin-top:20px;padding-top:16px;
+      border-top:1px solid var(--line)}
+.mast-strip div{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint)}
+.mast-strip b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-top:3px}
+
+/* ---------- banner: framing ---------- */
+.first{background:var(--canvas);border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:20px 24px;margin:30px 0 12px}
+.first h2{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.04em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 12px}
+.first ol{margin:0;padding-left:20px}
+.first li{margin-bottom:9px}
+.first li:last-child{margin-bottom:0}
+
+/* ---------- sections ---------- */
+section{padding-top:38px}
+h2.sec{font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);
+      margin:0 0 4px;padding-bottom:10px;border-bottom:1px solid var(--line-hard);
+      display:flex;align-items:baseline;gap:12px}
+h2.sec .n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);
+      letter-spacing:.06em;flex:none}
+.sub{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);margin:10px 0 18px;
+      max-width:var(--measure)}
+h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink-dim);
+      margin:26px 0 8px}
+
+/* ---------- provenance tags (signature) ---------- */
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);
+      background:var(--panel-2);border:1px solid var(--line);
+      border-radius:2px;padding:1px 6px;vertical-align:1px;white-space:nowrap}
+
+/* ---------- assumption block ---------- */
+.assume{background:var(--assume-bg);border-left:4px solid var(--assume);
+      padding:16px 20px;margin:20px 0}
+.assume .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--assume);display:block;margin-bottom:7px}
+.assume p{margin:0}
+
+/* ---------- callouts ---------- */
+.note{border:1px solid var(--line);border-left:4px solid var(--ink-faint);
+      background:var(--canvas);padding:16px 20px;margin:20px 0}
+.note.pos{border-left-color:var(--pos);background:var(--pos-bg)}
+.note.neg{border-left-color:var(--neg);background:var(--neg-bg)}
+.note.caution{border-left-color:var(--caution);background:var(--caution-bg)}
+.note p{margin:0}
+.note p + p{margin-top:10px}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+thead th{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--ink-dim);text-align:left;
+      padding:9px 12px;border-bottom:2px solid var(--line-hard);white-space:nowrap}
+tbody td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--canvas)}
+td.num,th.num{font-family:var(--mono);text-align:right;white-space:nowrap}
+/* td.when marks a timing column. An unmarked cell counts as prose. */
+td.when{font-family:var(--mono);white-space:nowrap}
+td.lbl{font-weight:600}
+.pos-t{color:var(--pos);font-weight:600}
+.neg-t{color:var(--neg);font-weight:600}
+.caution-t{color:var(--caution);font-weight:600}
+
+/* ---------- cases ---------- */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.case{border:1px solid var(--line);border-top:3px solid var(--ink-faint);
+      background:var(--paper);padding:18px}
+.case.bull{border-top-color:var(--pos)}
+.case.bear{border-top-color:var(--neg)}
+.case h4{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 10px}
+.case.bull h4{color:var(--pos)} .case.bear h4{color:var(--neg)}
+.case p{font-size:15px;margin:0}
+.case .req{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+
+/* ---------- risks ---------- */
+.risk{border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:16px 20px;margin-bottom:12px}
+.risk.sev-high{border-left-color:var(--neg)}
+.risk.sev-med{border-left-color:var(--caution)}
+.risk.sev-low{border-left-color:var(--ink-faint)}
+.risk h4{font-family:var(--display);font-size:15.5px;font-weight:600;margin:0 0 6px;
+      display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.risk .sev{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase}
+.risk.sev-high .sev{color:var(--neg)}
+.risk.sev-med .sev{color:var(--caution)}
+.risk.sev-low .sev{color:var(--ink-faint)}
+.risk p{margin:0;font-size:15.5px}
+
+/* ---------- null categories ---------- */
+.nulls td.lbl{width:26%}
+.nulls .status{font-family:var(--mono);font-size:12px;white-space:nowrap}
+
+/* ---------- document log ---------- */
+.log{margin-top:14px}
+.logentry{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:12px}
+.logentry.current{border-left:4px solid var(--accent);background:var(--accent-wash)}
+.logentry .when{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);
+      display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.latest{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-line);
+      background:var(--paper);border-radius:2px;padding:1px 6px}
+.logentry .basis{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-bottom:12px}
+.logentry p{font-size:15.5px;margin:0 0 9px}
+.logentry p:last-child{margin-bottom:0}
+.correction{border:1px solid var(--neg);border-left:4px solid var(--neg);
+      background:var(--neg-bg);padding:12px 16px;margin-bottom:14px}
+.correction .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--neg);display:block;margin-bottom:5px}
+
+/* ---------- footer ---------- */
+footer{margin-top:44px;padding-top:22px;border-top:2px solid var(--line-hard)}
+footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width:none}
+.norec{border:1px solid var(--line-hard);background:var(--canvas);padding:16px 20px;
+      margin-top:20px;font-family:var(--mono);font-size:12.5px;color:var(--ink-dim)}
+
+/* ---------- catalyst cards (calendar) ---------- */
+.cat{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:14px;border-left:4px solid var(--line-hard)}
+.cat.up{border-left-color:var(--pos)}
+.cat.down{border-left-color:var(--neg)}
+.cat.two{border-left-color:var(--caution)}
+.cat.neutral{border-left-color:var(--ink-faint)}
+.cat-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.cid{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);flex:none}
+.cat-head h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink);
+      margin:0;flex:1 1 auto;min-width:200px}
+.dir{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;white-space:nowrap}
+.cat.up .dir{color:var(--pos)} .cat.down .dir{color:var(--neg)}
+.cat.two .dir{color:var(--caution)} .cat.neutral .dir{color:var(--ink-faint)}
+.cat-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:10px 0 12px;padding:9px 0;
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+      font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
+.cat-meta b{color:var(--ink);font-weight:600}
+.cat p{margin:0 0 9px;font-size:15.5px}
+.cat p:last-child{margin-bottom:0}
+.cat.resolved{background:var(--canvas);border-left-color:var(--ink-faint)}
+.cat.resolved .dir{color:var(--ink-faint)}
+
+/* ---------- horizon bands (calendar) ---------- */
+.band{display:flex;align-items:center;gap:14px;margin:30px 0 16px}
+.band-t{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--ink-dim);white-space:nowrap}
+.band-r{flex:1;height:1px;background:var(--line-hard)}
+.band-c{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);white-space:nowrap}
+
+/* ---------- upside / downside pair ---------- */
+.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0}
+.oc{border:1px solid var(--line);padding:11px 14px;background:var(--paper)}
+.oc.up-c{border-left:3px solid var(--pos)}
+.oc.down-c{border-left:3px solid var(--neg)}
+.oc .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.09em;
+      text-transform:uppercase;display:block;margin-bottom:5px}
+.oc.up-c .lbl{color:var(--pos)} .oc.down-c .lbl{color:var(--neg)}
+.oc p{margin:0;font-size:14.5px;line-height:1.5}
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  body{font-size:16px}
+  .wrap{padding:0 16px 70px;border-left:none;border-right:none}
+  .ticker{font-size:34px}
+  .headline{font-size:23px}
+  .cases{grid-template-columns:1fr}
+  .outcomes{grid-template-columns:1fr}
+  .mast-strip{gap:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none !important;transition:none !important}
+}
+@media print{
+  body{font-size:11pt}
+  .wrap{max-width:none;border:none}
+  section{page-break-inside:avoid}
+}
+/* ============================================================================
+   SHARED STYLESHEET v1.50 : END
+   ========================================================================= */
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ===================== MASTHEAD ===================== -->
+<header class="mast">
+  <p class="ticker">VIP</p>
+  <h1 class="headline">104 megawatts energized, 654 in the pipeline, and a rescue financing that has not closed</h1>
+  <p class="functional">VIP &middot; Vulcan Infrastructure and Power Inc. &middot; Catalyst Calendar &middot; as of 2 August 2026</p>
+  <div class="mast-strip">
+    <div>Dated catalysts <b>19</b></div>
+    <div>Standing conditions <b>15</b></div>
+    <div>Resolved <b>9</b></div>
+    <div>Horizon <b>12 months</b></div>
+    <div>Pricing basis <b>31 Jul 2026 close</b> <span class="tag">Market</span></div>
+  </div>
+</header>
+
+<!-- ===================== BASIS ===================== -->
+<div class="first">
+  <h2>Basis</h2>
+  <ol>
+    <li>Two gating events sit upstream of most of this calendar. The Schedule 14C (D1) must be furnished before the stockholder consent can go effective; the PIPE (D7) must close before the notes redemption, the going concern cure and the board change can occur; and the Regulatory Approvals (D15) gate five further items plus a contingent cash call. Items are sequential, not independent.</li>
+    <li>Timing confidence rates the <em>date</em>, never the outcome. A contractual deadline rates High whether it produces a rescue or a redemption.</li>
+    <li>Estimated dates are cadence-based until the company announces. Q2 and Q3 reporting dates are inferred; the IR events page listed none at the as-of date.</li>
+  </ol>
+</div>
+
+<!-- ===================== 1. DATED CATALYSTS ===================== -->
+<section id="s1">
+  <h2 class="sec"><span class="n">01</span>Dated catalysts</h2>
+  <p class="sub">Banded 0&ndash;3 / 3&ndash;6 / 6&ndash;12 months, earliest first. Numbering is gapless and runs straight through the bands. The ID is a position, not a name; catalysts are referred to by title.</p>
+
+  <div class="band"><span class="band-t">0&ndash;3 months</span><span class="band-r"></span><span class="band-c">D1&ndash;D9</span></div>
+
+  <div class="cat two" id="cat-schedule-14c-information-statement">
+    <div class="cat-head">
+      <span class="cid">D1</span>
+      <h3>Schedule 14C information statement</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Overdue as of 1 Aug 2026</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Open</span></div>
+    </div>
+    <p>Not filed twelve days after the 8-K. The consent becomes effective 20 calendar days after the statement is first furnished to shareholders, and the PIPE cannot close until it is effective. Filed on the as-of date, effectiveness falls near 21 August, leaving roughly seven weeks to the 10 October outside date. Filed at the end of August, that buffer halves. The statement will also disclose pro forma capitalization, definitive share counts, and the nature of the Regulatory Approvals, which the 8-K does not specify.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Prompt filing compresses the path to closing. Disclosure of a routine approval pathway would de-risk the second gate.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Each day of delay compresses the buffer in front of a hard maturity. This is a filing the company controls, which makes silence more informative than for an event depending on third parties.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K, 20 July 2026, Items 5.07 and Additional Information. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-q2-2026-results">
+    <div class="cat-head">
+      <span class="cid">D2</span>
+      <h3>Q2 2026 results and Form 10-Q</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>~12 Aug 2026</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>The last quarter reported before the PIPE closes. Three items carry more weight than the revenue line: whether the going concern language is repeated, the operating cash burn trend against Q1's $11.4M outflow, and any update on the Dresden interconnection.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Power and capacity revenue continuing to grow, burn moderating from Q1, or a subsequent-events note confirming PIPE progress.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Burn at or above $11.4M against the 30 June cash balance tightens the runway before closing. Net debt rose from $25.2M at 31 March to $27.7M at 30 June, so Q2 was not a deleveraging quarter operationally.</p></div>
+    </div>
+    <div class="assume">
+      <span class="lbl">Analyst assumption</span>
+      <p>The date is a consensus cadence estimate. The company has not confirmed it and its IR events page listed no upcoming events at the as-of date. Q1 was reported 18 May 2026.</p>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Q1 2026 release, 18 May 2026, for the comparative figures; July 2026 press release footnote for 30 June net debt. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat neutral" id="cat-jackson-hole-symposium">
+    <div class="cat-head">
+      <span class="cid">D3</span>
+      <h3>Jackson Hole economic policy symposium</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Mid to late Aug 2026</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Open</span></div>
+    </div>
+    <p>Fed Chair Kevin Warsh is expected to speak, his first in the role following his first FOMC in July. This is the main scheduled opportunity to reset rate expectations between the July and September meetings. Warsh has signalled a preference for shorter statements and less forward guidance, which raises the information value of his speeches relative to his predecessors.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>A signal that the three hawkish dissents do not represent the committee's direction would relieve pressure on high-beta small caps.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Confirmation of a tightening bias ahead of September compresses the cohort VIP sits in, independent of anything the company does.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Reporting following the 29 July 2026 FOMC decision. <span class="tag">Open</span></p>
+  </div>
+
+  <div class="cat two" id="cat-class-b-automatic-conversion">
+    <div class="cat-head">
+      <span class="cid">D4</span>
+      <h3>Class B automatic conversion</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>15 Sep 2026</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>High</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Fixed and automatic. The certificate of incorporation converts every Class B share into Class A five years after the Class A was first registered under Exchange Act Section 12. Atlas and affiliates hold roughly 66% of voting power from 2,680,031 supervoting Class B shares against about 23% economic ownership. That supervote disappears on this date.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>One share one vote removes the discount some investors apply to controlled companies.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Post-conversion and post-PIPE, no single holder controls the vote, which makes future consents slower and removes a takeover defence.</p></div>
+    </div>
+    <div class="assume">
+      <span class="lbl">Analyst assumption</span>
+      <p>The PIPE was approved by written consent of majority voting power on 19 July, eight weeks before this supervote expires. A reasonable reading is that the transaction was timed to use that control while it existed. This is an inference from the sequence of dates; the company has offered no explanation of timing.</p>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form S-3 (15 May 2026) and S-3/A (12 June 2026), Other Dual-Class Provisions; 424B3 (July 2026) for the voting figure. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat neutral" id="cat-controlled-company-exemption-lapse">
+    <div class="cat-head">
+      <span class="cid">D5</span>
+      <h3>Nasdaq controlled company exemption lapses</h3>
+      <span class="dir">Up</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>15 Sep 2026</b></div>
+      <div>Impact <b>Low</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Triggered by the Class B conversion and reinforced by PIPE dilution. Requires a majority independent board and fully independent compensation and nominating committees. Nasdaq permits a transition period after status is lost. The reconstituted board appears designed to accommodate this: six of the ten seats carry explicit independence requirements.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Removes a screening exclusion applied by some governance-sensitive funds.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Compliance friction if the sponsor-nominated slate does not satisfy independence tests on the expected timetable.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> 424B3 (July 2026) disclosing controlled company status; Form 8-K, 20 July 2026, board composition terms. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-fomc-decisions">
+    <div class="cat-head">
+      <span class="cid">D6</span>
+      <h3>FOMC decisions, September and October</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>15&ndash;16 Sep, 27&ndash;28 Oct 2026</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Confidence <b>High</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The 28&ndash;29 July meeting has resolved: held at 3.50% to 3.75% on a 9&ndash;3 vote, with all three dissenters preferring a quarter-point increase. First time since September 2016 that three officials dissented in the same direction. September carries a Summary of Economic Projections. Reported beta is 3.02, and rates set the cost of the project-level debt the acquisition strategy requires.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Limited on this axis. The June dot plot puts year-end 2026 between 3.6% and 4.1% and markets price two increases rather than cuts, so a dovish surprise would help disproportionately but is not the base case.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A hike compresses this cohort hardest. Long rates already backed up on the July decision, with the 30-year above 5.19%. The September meeting coincides with the Class B conversion, concentrating two independent sources of volatility on one day.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> FOMC statement and implementation note, 29 July 2026; June 2026 dot plot; Federal Reserve 2026 calendar. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-pipe-transaction-closing">
+    <div class="cat-head">
+      <span class="cid">D7</span>
+      <h3>PIPE transaction closing</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>By 10 Oct 2026, outside date</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>High</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The most consequential item on this calendar. Conditions include effectiveness of the stockholder consent (D1), Nasdaq listing approval of the new shares, execution of security documents, and delivery of Mississippi collateral including a pledge of the owning entity's equity and a deed of trust. Proceeds of $39.4M; roughly $33M redeems the 8.50% notes; going concern doubt becomes curable; board control transfers; 17,146,190 new shares issued.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Early closing removes the solvency question and lets attention return to the development story. Sponsors on the register also change who is buying the stock.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Termination or slippage past 10 October returns the company to its pre-July position with three weeks to a $33.1M maturity and roughly $7M of cash. MIG may walk on uncured material breach, and the Mississippi collateral condition is a genuine execution item.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K, 20 July 2026, Item 1.01. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-board-reconstitution-ten-directors">
+    <div class="cat-head">
+      <span class="cid">D8</span>
+      <h3>Board reconstituted to ten directors</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>At PIPE closing</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Four Atlas nominees, the CEO, two independents identified by MIG, one independent identified by Atlas, and two identified by the company, one of which is Conversant's nominee. Directors Timothy Lowe and Charles Zeynel have tendered resignations effective at closing, null and void if the PIPE fails, which makes them a useful tell.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Named appointees with data centre development or power M&amp;A pedigree would validate the platform thesis faster than any press release.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Sponsors hold board seats, a right of first offer on future financings, a security interest in the assets, and incentive fees payable in cash or stock. Interests are broadly aligned with common holders but not identically aligned.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K, 20 July 2026, Items 1.01 and 5.02. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-senior-notes-maturity">
+    <div class="cat-head">
+      <span class="cid">D9</span>
+      <h3>8.50% senior notes maturity, $33.1M</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>31 Oct 2026</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>High</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Principal outstanding was $33,138,350 after the May and June debt-for-equity exchanges. A redemption notice is required in advance under the indenture. Either redeemed from PIPE proceeds, or the company faces an event it has stated it cannot fund. No intermediate path has been disclosed. The 21-day gap between the PIPE outside date and this maturity is the tightest point on the calendar.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Redemption eliminates the highest-cost debt and removes the going concern trigger, leaving roughly $3.8M of 2030 notes plus the $10M MIG note.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Default and acceleration. The FY2025 10-K risk language contemplates bankruptcy or liquidation, in which case equity would likely be substantially or entirely impaired.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K, June 2026 (exchange agreements); Q1 2026 10-Q, Note 5, Debt; FY2025 10-K risk factors. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="band"><span class="band-t">3&ndash;6 months</span><span class="band-r"></span><span class="band-c">D10&ndash;D12</span></div>
+
+  <div class="cat two" id="cat-q3-2026-results">
+    <div class="cat-head">
+      <span class="cid">D10</span>
+      <h3>Q3 2026 results and Form 10-Q</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>~Mid Nov 2026</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>The first balance sheet reflecting the PIPE and the notes redemption, and the first quarter under the new board.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Clean pro forma capitalization, positive cash position, and commentary on the acquisition pipeline from the new sponsors.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Continued operating losses, now visible without the debt overhang as a distraction. Q3 is a seasonally weaker power quarter in the Northeast than Q1, so the power and capacity line may not repeat its Q1 strength.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Historical reporting cadence. No company confirmation. <span class="tag">Estimate</span></p>
+  </div>
+
+  <div class="cat two" id="cat-going-concern-removal">
+    <div class="cat-head">
+      <span class="cid">D11</span>
+      <h3>Removal of the going concern qualification</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>At Q3 2026 10-Q, ~Nov 2026</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>Earliest realistic test, since the Q2 10-Q will likely be filed before the PIPE closes. Requires management to conclude that conditions no longer raise substantial doubt. A going concern qualification excludes a stock from many institutional mandates and index products, so removal can widen the buyer base independently of any operating improvement.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Clean removal alongside a repaired balance sheet is the clearest signal that the existential phase has ended.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Repetition of the language after the PIPE closes would imply that auditors view the remaining burn or the March 2027 redemption trigger as still threatening. Closing does not automatically cure it.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Q1 2026 10-Q going concern note; FY2025 10-K. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-winter-nyiso-pricing">
+    <div class="cat-head">
+      <span class="cid">D12</span>
+      <h3>Winter NYISO power and capacity pricing</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Q4 2026 to Q1 2027</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Confidence <b>High</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Power and capacity is 90% of current revenue. Q1 2026's $18.7M, more than double the prior year, was a winter quarter. This line is seasonal and commodity-linked, not a growth annuity, and it is the only line currently producing cash.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>A cold winter with tight New York capacity pricing improves cash generation while the AI story develops.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A mild winter or softer gas spreads removes the only cash-generating line and makes the Q1 2027 year-over-year comparison look sharply negative for reasons unrelated to strategy.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Q1 2026 results; revenue composition per Form 10-Q. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="band"><span class="band-t">6&ndash;12 months</span><span class="band-r"></span><span class="band-c">D13&ndash;D19</span></div>
+
+  <div class="cat up" id="cat-mississippi-40mw-energization">
+    <div class="cat-head">
+      <span class="cid">D13</span>
+      <h3>Mississippi 40 MW energization</h3>
+      <span class="dir">Up</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Q1 2027 target</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The first hard, dated, company-guided operational milestone against which development guidance can be scored.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>On-time energization is evidence that the pipeline converts to real capacity, which is the point bears doubt most.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Slippage undermines the credibility of every other pipeline number, including the 654 MW figure the valuation argument rests on.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Q1 2026 press release, 18 May 2026; Form S-3 prospectus, May 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-fy2026-results-10k">
+    <div class="cat-head">
+      <span class="cid">D14</span>
+      <h3>FY2026 results and Form 10-K</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Mar 2027</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>High</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>First full audited year under the new structure, and the first without one-off asset sale gains. FY2025's $5.3M of net income was substantially produced by a $10.5M gain on the South Carolina sale, which will not repeat.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Clean audit opinion with no going concern paragraph, plus first disclosure of AI/HPC development capex and any contracted backlog.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Without the gains, FY2026 GAAP results will look materially worse than FY2025 even if the operating business improved. Expect headline framing that misreads the prior-year comparison.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> FY2025 filing cadence; FY2025 10-K gain disclosures. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-regulatory-approvals">
+    <div class="cat-head">
+      <span class="cid">D15</span>
+      <h3>Regulatory Approvals</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>By 31 Mar 2027</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>Low</b></div>
+      <div>Provenance <span class="tag">Open</span></div>
+    </div>
+    <p>Begins after PIPE closing. Unlocks the second board reconstitution (D16), MIG's conversion rights (S15), the equity issuance freeze, and the $10M minimum liquidity covenant, and avoids the 130% redemption (D17). Interim progress may or may not be publicly disclosed.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Early approval removes a cliff-edge risk that will otherwise sit over the stock for two quarters.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Approval processes for changes of control at power generators can extend well beyond initial estimates, particularly where intervenors participate. Vulcan has a documented history of intervenor opposition in New York.</p></div>
+    </div>
+    <div class="assume">
+      <span class="lbl">Analyst assumption</span>
+      <p>The 8-K does not specify what the Regulatory Approvals are. Given a change of control of a FERC-jurisdictional generator, the most likely reading is Federal Power Act Section 203 approval, possibly with New York elements. This is an inference from deal structure, not a company disclosure, and should be verified in the Schedule 14C (D1).</p>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K, 20 July 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-board-reconstitution-eight-directors">
+    <div class="cat-head">
+      <span class="cid">D16</span>
+      <h3>Board reconstituted to eight directors</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>On the Regulatory Approvals Date</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Confidence <b>Low</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Atlas's four nominees drop to one; MIG gains one nominee. A two-member Capital Committee forms with one MIG and one Atlas designee, the body that will drive acquisition decisions.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>A tighter board with a dedicated capital allocation committee is a sensible structure for an acquisition vehicle.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Concentrates capital allocation authority in two sponsor designees who also receive project-level acquisition fees and promote incentives, a structure requiring genuine independent oversight.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K, 20 July 2026, Investor Rights Agreements. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-mig-note-special-mandatory-redemption">
+    <div class="cat-head">
+      <span class="cid">D17</span>
+      <h3>MIG note special mandatory redemption at 130%</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>31 Mar 2027</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>High</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>If Regulatory Approvals are not obtained by that date, the company must redeem the MIG convertible note at 130% of then-outstanding principal, including capitalized PIK interest, plus accrued interest. On a $10M note accreting at 10% PIK, principal by March 2027 would be roughly $10.7M, implying a cash call near $14M against a company that burned $11.4M in a single quarter in early 2026.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Approvals obtained well before the date make this a non-event and it leaves the risk picture entirely.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A forced outlay near $14M would likely require an emergency equity raise at whatever price prevails, which is the scenario the PIPE was meant to end.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K, 20 July 2026, Special Mandatory Redemption. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-q1-2027-results">
+    <div class="cat-head">
+      <span class="cid">D18</span>
+      <h3>Q1 2027 results</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>May 2027</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>Key comparison quarter: Q1 2026 delivered $20.8M of revenue on winter power pricing. Also the first quarter that could include a Mississippi contribution.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Any AI/HPC revenue line appearing for the first time, however small, is a genuine inflection.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A year-over-year revenue decline against that comparison, with still no AI/HPC line, makes the case that the story has run eighteen months without execution difficult to rebut.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Historical cadence. <span class="tag">Estimate</span></p>
+  </div>
+
+  <div class="cat two" id="cat-2027-annual-meeting">
+    <div class="cat-head">
+      <span class="cid">D19</span>
+      <h3>2027 annual meeting and sponsor nomination step-up</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>~Jun 2027</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Following the 2027 annual meeting, MIG and Atlas each gain the right to nominate two directors rather than one, so long as each holds at least 7.5% of Class A on a fully diluted basis. The 2026 meeting was held 24 June 2026 with materials mailed on or about 12 May.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Continued sponsor holdings above the 7.5% threshold signal conviction, since the rights lapse if they sell down.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>First meeting with one share one vote, a much larger share count and increasing sponsor representation. Also the likely venue for any request to increase authorized shares.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> DEF 14A filed ~30 April 2026; Form 8-K, 20 July 2026, Investor Rights Agreements. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="band"><span class="band-t">Beyond 12 months, context only</span><span class="band-r"></span><span class="band-c">n/a</span></div>
+  <p class="sub">No dated catalyst falls beyond the 12 month window. The MIG note forced conversion window (S15) may open in this period but is conditional on price and financing rather than dated, so it sits in standing conditions. The next Bitcoin halving is expected in 2028 and is immaterial at 9% of revenue and falling.</p>
+</section>
+
+<!-- ===================== 2. STANDING CONDITIONS ===================== -->
+<section id="s2">
+  <h2 class="sec"><span class="n">02</span>Standing conditions</h2>
+  <p class="sub">Ongoing and undated, most material first. These take &ldquo;Why undated&rdquo; in place of timing confidence. The first AI/HPC tenant (S1) is the item that would change what kind of company this is; nothing else on the calendar does that.</p>
+
+  <div class="cat up" id="cat-first-ai-hpc-tenant">
+    <div class="cat-head">
+      <span class="cid">S1</span>
+      <h3>First AI/HPC tenant, lease or colocation agreement</h3>
+      <span class="dir">Up</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Undated</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>No company guidance on timing exists</b></div>
+      <div>Provenance <span class="tag">Open</span></div>
+    </div>
+    <p>The step change event. Moves VIP from the un-contracted peer cohort, which is the group the company itself benchmarks against, toward the contracted cohort where TEV/MW multiples have been several times higher. The company describes only a path toward commercializing more than 100 MW of AI/HPC-ready capacity in the near term.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Judge any announcement on four things in this order: megawatts of critical IT load, term length, counterparty credit quality, and delivery date. A 30 to 60 MW deal with an investment grade or hyperscaler-backstopped counterparty would be transformative at this market capitalization.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Letters of intent, memoranda of understanding and exclusivity arrangements are not contracts and should not be priced as such. Watch also for deals contingent on financing the company has not raised.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Press release, 20 July 2026. No guidance on timing. <span class="tag">Open</span></p>
+  </div>
+
+  <div class="cat up" id="cat-ai-capex-demand">
+    <div class="cat-head">
+      <span class="cid">S2</span>
+      <h3>AI capital expenditure, the demand leg</h3>
+      <span class="dir">Up</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>Continuous sector variable</b></div>
+      <div>Provenance <span class="tag">Market</span></div>
+    </div>
+    <p>Currently favourable. Late July guidance came in higher, not lower: aggregate 2026 capex across the top five hyperscalers is tracked near $700B to $750B, with Alphabet lifting the top end of its forecast to roughly $205B and Amazon guiding to about $200B. Next checkpoint is the late October reports, which land in the same window as the PIPE outside date and the notes maturity.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Continued mega-deals keep bidding up scarce energized capacity, and as the largest sites are absorbed, demand eventually reaches smaller ones such as Dresden.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A genuine capex deceleration would reprice un-contracted megawatts first and hardest. No sign of that in current guidance.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Hyperscaler Q2 2026 earnings coverage, late July 2026. <span class="tag">Market</span></p>
+  </div>
+
+  <div class="cat down" id="cat-ai-infrastructure-sentiment">
+    <div class="cat-head">
+      <span class="cid">S3</span>
+      <h3>Willingness to pay for AI infrastructure exposure</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>Continuous sector variable</b></div>
+      <div>Provenance <span class="tag">Market</span></div>
+    </div>
+    <p>Currently unfavourable, and the variable that changed in late July. Alphabet's capex raise met roughly a 7% share price decline, with Amazon, Meta and Microsoft falling alongside it amid scrutiny of infrastructure investment producing uncertain returns. The demand and multiple signals have separated: more money is chasing powered land while investors pay less for the companies supplying it.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>If the market re-accepts high capex as value-creating, multiple compression reverses quickly and small un-contracted names are high-beta beneficiaries.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Multiple compression can proceed even while demand strengthens. VIP is among the smallest and least contracted names in the cohort, so it sits at the sharp end of the sentiment leg regardless of how healthy demand looks. Watch peer trading multiples rather than peer announcements; a contract announcement that fails to move a peer's stock is the clearest warning.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Hyperscaler Q2 2026 earnings coverage and sector reporting, late July 2026. <span class="tag">Market</span></p>
+  </div>
+
+  <div class="cat up" id="cat-nyseg-interconnection-agreement">
+    <div class="cat-head">
+      <span class="cid">S4</span>
+      <h3>NYSEG interconnection agreement execution, Dresden 60 MW</h3>
+      <span class="dir">Up</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Undated</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>Proposed agreement received; execution not announced</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Independent of both gates. Sixty megawatts of non-curtailable grid-supplied power at Dresden is what an AI tenant needs in order to underwrite a lease. It also sidesteps the plant's emissions cap, because the power comes from the grid rather than from burning more gas on site.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Execution converts Dresden from a site with power into a site a tenant can contract against, and is the most likely precursor to any tenant announcement (S1).</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A proposed agreement is not an executed one. Terms, cost allocation and upgrade obligations remain undisclosed. Silence through year end would suggest friction.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Q1 2026 results press release, 18 May 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-nyiso-power-capacity-prices">
+    <div class="cat-head">
+      <span class="cid">S5</span>
+      <h3>NYISO power and capacity prices, natural gas spreads</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>Continuous commodity exposure</b></div>
+      <div>Provenance <span class="tag">Market</span></div>
+    </div>
+    <p>Drives 90% of current revenue and is the only line generating cash today. The seasonal expression of this exposure is dated as winter NYISO power and capacity pricing (D12).</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Tight New York capacity markets and wide spark spreads improve cash flow directly while the development story runs.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Compressed spreads eliminate the cushion. This is a commodity merchant power business carrying an AI infrastructure label.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Q1 2026 Form 10-Q revenue composition. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat up" id="cat-sponsor-sourced-acquisition">
+    <div class="cat-head">
+      <span class="cid">S6</span>
+      <h3>First sponsor-sourced powered land acquisition</h3>
+      <span class="dir">Up</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Undated</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>Requires Gate 2 to clear the equity issuance freeze</b></div>
+      <div>Provenance <span class="tag">Open</span></div>
+    </div>
+    <p>The stated strategy. MIG's partner described looking for the right public platform rather than a passive investment. Machine has roughly 700 MW under development and a pipeline above 1 GW; Atlas manages roughly 5 GW of merchant generation.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>An acquisition at a lower TEV/MW than VIP's own trading multiple would be immediately value-creating and would prove the roll-up thesis.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Acquisitions at this scale require capital far beyond the PIPE. Expect equity issuance, project debt, or asset-level partnerships, all dilutive or encumbering. Sponsor incentive fees attach to these transactions.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Press release, 20 July 2026; Form 8-K sponsor incentive terms. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat neutral" id="cat-greel-note-price-signal">
+    <div class="cat-head">
+      <span class="cid">S7</span>
+      <h3>GREEL note price as a solvency indicator</h3>
+      <span class="dir">Neutral</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Continuous to 31 Oct 2026</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>Observable daily rather than event-driven</b></div>
+      <div>Provenance <span class="tag">Market</span></div>
+    </div>
+    <p>Not a catalyst but the most useful freely available signal. The 8.50% notes continue trading on Nasdaq under GREEL, unchanged by the rebrand and with the same CUSIP. The credit market prices the probability of repayment daily, and bondholders typically assess restructuring risk more accurately than equity holders.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Notes at or near par imply the market expects redemption, which is a cross-check on PIPE closing odds.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A material discount to par ahead of the maturity would signal doubt the equity market may not yet have priced.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K, 20 July 2026, Item 5.03. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-tva-load-study-result">
+    <div class="cat-head">
+      <span class="cid">S8</span>
+      <h3>TVA 250 MW load study result, Mississippi</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Undated</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>Utility study timelines are not disclosed</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Request submitted before 18 May 2026. Studies of this scale typically run several quarters to over a year. Two hundred fifty megawatts would be more than double the entire current energized footprint and represents a large share of the 654 MW pipeline figure.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>A favourable study with a credible delivery timeline substantiates the pipeline number and supports the low TEV/MW argument.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>An unfavourable result, a long delivery horizon, or large network upgrade cost allocations would quietly shrink the pipeline. A study is not an allocation and an allocation is not an energized megawatt.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Q1 2026 press release, 18 May 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-mississippi-jv-or-sale">
+    <div class="cat-head">
+      <span class="cid">S9</span>
+      <h3>Mississippi joint venture, partnership or sale</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Undated</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>Discussions disclosed without a timetable</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Management disclosed continued discussions with multiple parties, including a possible sale, as of 18 May 2026. Mississippi is the larger long-run opportunity, 40 MW near term plus the 250 MW study request, but requires capital Vulcan does not have standalone.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>A joint venture with a funded partner de-risks development and provides third-party validation of the site's value.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>The site is now pledged to MIG via an equity pledge and deed of trust, so a unilateral sale is constrained by the note's negative covenants on disposing of collateral. Selling also cedes the pipeline underpinning the $91k/MW valuation argument.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Q1 2026 press release, 18 May 2026; Form 8-K, 20 July 2026, collateral and negative covenants. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-title-v-compliance-coal-ash">
+    <div class="cat-head">
+      <span class="cid">S10</span>
+      <h3>Title V compliance and coal ash remediation</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing to 2028 and 2030</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>Staged obligations rather than a single event</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The November 2025 settlement resolved a four-year dispute and secured a final Title V permit, which is real de-risking. It requires a 44% reduction in permitted greenhouse gas emissions and a 25% reduction in actual emissions by 2030, which structurally caps how much additional behind-the-meter load Dresden can serve from its own generation. Coal ash pond remediation of $17.3M must be completed by November 2028.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Compliance is achievable if growth comes via grid-supplied non-curtailable power (S4) rather than by burning more gas. The permit and the interconnection are complementary, not competing.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>The $17.3M remediation liability is a cash claim on a company with limited liquidity. Seneca Lake Guardian, the Committee to Preserve the Finger Lakes and the Sierra Club remain active and have participated in prior proceedings.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Company release 7 November 2025; NYSDEC settlement terms; Q1 2026 10-Q environmental liability note; NY Appellate Division, Fourth Department, 11 February 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat down" id="cat-interest-rates-financing-cost">
+    <div class="cat-head">
+      <span class="cid">S11</span>
+      <h3>Interest rates and infrastructure financing cost</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>Continuous macro variable; dated at the Jackson Hole symposium (D3) and the FOMC decisions (D6)</b></div>
+      <div>Provenance <span class="tag">Market</span></div>
+    </div>
+    <p>Currently tightening. Beyond the equity duration effect, the acquisition strategy requires project-level debt priced off the rate environment. Long rates rose on the 29 July decision, with the 30-year above 5.19% and the 10-year near 4.66%.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Peers have accessed attractive senior secured financing where hyperscaler credit backstopped the lease, one deal near 7.125%. A contract would unlock similar markets for VIP.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Without a contracted tenant, VIP borrows on its own credit, which is that of a company that has just avoided a default.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> FOMC statement, 29 July 2026; sector financing reporting, 2026. <span class="tag">Market</span></p>
+  </div>
+
+  <div class="cat two" id="cat-new-york-clcpa-trajectory">
+    <div class="cat-head">
+      <span class="cid">S12</span>
+      <h3>New York CLCPA trajectory</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>Policy evolution has no fixed decision point</b></div>
+      <div>Provenance <span class="tag">Open</span></div>
+    </div>
+    <p>Structural constraint on the New York asset. The Climate Leadership and Community Protection Act was the legal basis for the 2022 permit denial, and the settled permit embeds declining emissions caps to 2030.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>The settlement is durable and was framed by the company as the first of its kind in New York, so near-term legal risk is genuinely resolved.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Future state policy tightening, or a change in how the act is applied to data centre load, could reopen questions the settlement appeared to close.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> NYSDEC rulemaking record; company release, 7 November 2025. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-bitcoin-price">
+    <div class="cat-head">
+      <span class="cid">S13</span>
+      <h3>Bitcoin price</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>Low</b></div>
+      <div>Why undated <b>Continuous commodity exposure</b></div>
+      <div>Provenance <span class="tag">Market</span></div>
+    </div>
+    <p>Declining relevance but not zero. Mining is roughly 9% of revenue and falling, but the company holds 98 BTC, about $6.7M, which is counted in its own net debt calculation, and roughly 6,258 miners are pledged as first-priority collateral to MIG. Bitcoin therefore affects both liquidity and collateral coverage.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Higher prices improve the value of retained BTC and the pledged fleet, and make a residual mining business worth keeping.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A sharp decline reduces headroom against the $10M minimum liquidity covenant, which explicitly counts Bitcoin.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Q1 2026 10-Q; Form 8-K, 20 July 2026, collateral terms. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-float-volatility-market-structure">
+    <div class="cat-head">
+      <span class="cid">S14</span>
+      <h3>Float, volatility and market structure</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>Structural market characteristic</b></div>
+      <div>Provenance <span class="tag">Market</span></div>
+    </div>
+    <p>Reported beta is 3.02. The stock went from $1.71 (PIPE price, 17 July) to $4.05 (23 July) to $2.45 (24 July) to $2.10 (31 July), a 48% drawdown in six sessions, with volume on 31 July at roughly 3.7x the 71,320 share average. The speculative move has round-tripped, leaving the price 22.8% above what insiders paid.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Post-PIPE the share count roughly doubles, which over time should improve liquidity and reduce gap risk.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Most PIPE shares carry registration rights beginning only after the first anniversary, so tradeable float expands less than share count does. Screener data is unreliable: one major quote page shows a 52 week range of $1.95 to $2.79, which cannot be correct given GREE closed at $4.05 on 23 July, and its share count field conflicts with the filings. Note also that VIP is easily confused with Vulcan Materials (NYSE: VMC).</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Market data, 31 July 2026 close; Form 8-K, 20 July 2026, registration rights. <span class="tag">Market</span></p>
+  </div>
+
+  <div class="cat two" id="cat-mig-note-forced-conversion-window">
+    <div class="cat-head">
+      <span class="cid">S15</span>
+      <h3>MIG note forced conversion window</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Conditional</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>Trigger depends on share price and financing, not a date</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Opens at the earlier of 18 months after issuance, roughly Q2 2028 on a Q4 2026 closing, or the date the company raises more than $75M of equity capital, which could occur sooner. The company may force conversion if VWAP exceeds 215% of the conversion price, about $4.60, for 20 of any 30 consecutive trading days, subject to conditions.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Forced conversion eliminates the note as a cash obligation and removes the 130% redemption risk entirely.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Conversion issues shares. The trigger price is roughly 119% above the 31 July close, so this is a good-outcome scenario, but the $75M equity raise condition implies dilution on that scale as its precondition.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K, 20 July 2026, Forced Conversion. <span class="tag">Filed</span></p>
+  </div>
+</section>
+
+<!-- ===================== 3. RESOLVED ===================== -->
+<section id="s3">
+  <h2 class="sec"><span class="n">03</span>Resolved</h2>
+  <p class="sub">Closed items kept for the record, ordered by resolution date, earliest first. A resolved catalyst takes the next free R number and does not carry a prior ID. Note the character of this list: these are predominantly risk resolutions and liability reductions rather than a record of compounding, which is a real but narrower competence than the forward strategy requires.</p>
+
+  <div class="cat resolved" id="cat-south-carolina-land-sale">
+    <div class="cat-head">
+      <span class="cid">R1</span>
+      <h3>South Carolina land and 60 MW power rights sale</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>Dec 2025</b></div>
+      <div>Outcome <b>$18.0M cash plus up to $18.0M contingent</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Produced a $10.5M book gain. Most Mississippi assets were also sold for $4.2M. Funded the operating deficit through 2026. This gain is what produced FY2025's positive net income and will not repeat; the contingent $18.0M remains a live receivable worth tracking.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-title-v-permit-settlement">
+    <div class="cat-head">
+      <span class="cid">R2</span>
+      <h3>Title V air permit settlement with New York State</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>11 Feb 2026</b></div>
+      <div>Outcome <b>Settlement 7 Nov 2025; final permit issued; appeal dismissed</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>NYSDEC agreed to issue a final Title V permit modification and renewal, ending a four-year dispute that began with the 2022 denial and ran through a November 2024 Yates County Supreme Court ruling in the company's favour. Requires 44% reduction in permitted greenhouse gas emissions and 25% in actual emissions by 2030. This is the reason the Dresden asset is investable: without an air permit there is no power plant and no behind-the-meter load.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-exchange-offer-senior-notes">
+    <div class="cat-head">
+      <span class="cid">R3</span>
+      <h3>Exchange offer for 8.50% senior notes</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>9 Apr 2026</b></div>
+      <div>Outcome <b>2026 notes exchanged for 10.00% notes due 2030 plus equity</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Commenced 11 March 2026, amended 25 March, final results 9 April. Early consideration was pitched at a 45% premium to the 60-day VWAP of the 2026 notes, with a minimum tender condition of $11M or 30%. Pushed a slice of the maturity from October 2026 to 2030, reducing but not solving the wall: the 8.50% notes still stood at $36.7M at 31 March.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-debt-for-equity-exchanges">
+    <div class="cat-head">
+      <span class="cid">R4</span>
+      <h3>Privately negotiated debt for equity exchanges</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>1 Jun 2026</b></div>
+      <div>Outcome <b>$2,089,400 principal for 1,162,221 Class A shares</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Executed 29 May and 1 June 2026 under Securities Act Section 3(a)(9), leaving $33,138,350 outstanding. The company stated it continued seeking further non-cash satisfaction of the balance. Demonstrates willingness to issue equity to retire debt, which is relevant to assessing future dilution if the PIPE were to fail.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-2026-annual-meeting">
+    <div class="cat-head">
+      <span class="cid">R5</span>
+      <h3>2026 annual meeting of stockholders</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>24 Jun 2026</b></div>
+      <div>Outcome <b>Nine directors elected; auditor ratified</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Proxy materials mailed on or about 12 May 2026. No contested outcome reported. Removes the annual meeting from the near-term calendar; the 2027 meeting (D19) will be materially different, following Class B conversion and the PIPE, with sponsor nomination rights stepping up.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-shelf-registration-effective">
+    <div class="cat-head">
+      <span class="cid">R6</span>
+      <h3>$200M mixed securities shelf declared effective</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>8 Jul 2026</b></div>
+      <div>Outcome <b>Effective; 424B3 filed 9 Jul 2026</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Form S-3 filed 15 May 2026, amended 12 June, File No. 333-295953. Registers up to $200M of Class A stock, preferred, debt, warrants, rights and units. Constrained by General Instruction I.B.6, the baby shelf rule, limiting sales to one-third of non-affiliate market value in any twelve month period. See section 5 for why the constraint matters and when it lifts.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-pipe-agreements-signed">
+    <div class="cat-head">
+      <span class="cid">R7</span>
+      <h3>PIPE subscription agreements signed and stockholder consent obtained</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>19 Jul 2026</b></div>
+      <div>Outcome <b>Four agreements totalling ~$39.4M; consent executed same day</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Written consent of majority voting power approved the issuances under Nasdaq Rule 5635(b) and the Fourth Amended and Restated 2021 Equity Incentive Plan. Signed is not closed: this event is complete, the transaction it authorises is not, and that distinction is the premise of the PIPE transaction closing (D7).</p>
+  </div>
+
+  <div class="cat resolved" id="cat-executive-rsu-awards">
+    <div class="cat-head">
+      <span class="cid">R8</span>
+      <h3>One-time executive RSU awards, 210,000 shares</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>23 Jul 2026, vested</b></div>
+      <div>Outcome <b>125,000 CEO / 50,000 President / 35,000 CFO</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Approved by the Compensation Committee on 19 July 2026, the same day the PIPE agreements were signed and the consent obtained; granted 20 July; vested in full 23 July. Issued under the Third Amended and Restated 2021 Equity Incentive Plan, existing authorized capacity rather than the expanded Fourth plan awaiting the consent. Worth $850,500 at the 23 July close of $4.05 and $441,000 at the 31 July close of $2.10.</p>
+    <p>The awards carry no performance or continued service condition. This is the second such award in 2026: in March, following the South Carolina sale, the same three executives received $100,000 Special Bonuses, roughly half in RSUs vesting within seven days. Forms 4 filed 24 July show sell-to-cover at $2.45, Kovler 35,721 shares and Irwin 21,154, described as non-discretionary tax withholding, which appears accurate.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-name-change-ticker-migration">
+    <div class="cat-head">
+      <span class="cid">R9</span>
+      <h3>Name change and ticker migration to VIP</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>24 Jul 2026</b></div>
+      <div>Outcome <b>VIP trading began; GREE ceased 23 Jul</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Certificate of Amendment filed in Delaware 20 July 2026, effective immediately. No change to share counts, CUSIPs or shareholder positions; senior notes continue as GREEL. Useful as a research caution: historical data, filings and coverage are split across two names and two tickers, and some aggregators still carry the old business description. The stock fell 39.5% on its first day under the new symbol.</p>
+  </div>
+</section>
+
+<!-- ===================== 4. NULL CATEGORIES ===================== -->
+<section id="s4">
+  <h2 class="sec"><span class="n">04</span>Null categories</h2>
+  <p class="sub">All eleven categories appear as rows, including those that produced catalysts, which read across by title and ID. Listing all eleven is what makes this a proof of work rather than a reading exercise. Rows beyond the eleven are additional disclosure.</p>
+  <div class="tw"><table class="nulls">
+    <thead><tr><th>Category</th><th>Status</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Earnings</td><td class="status">Covered above</td><td>Q2 2026 results and Form 10-Q (D2), Q3 2026 results and Form 10-Q (D10), FY2026 results and Form 10-K (D14), Q1 2027 results (D18).</td></tr>
+      <tr><td class="lbl">Regulatory decisions</td><td class="status">Covered above</td><td>Regulatory Approvals (D15), Title V compliance and coal ash remediation (S10), New York CLCPA trajectory (S12).</td></tr>
+      <tr><td class="lbl">Macro events</td><td class="status">Covered above</td><td>Jackson Hole economic policy symposium (D3), FOMC decisions for September and October (D6), interest rates and infrastructure financing cost (S11).</td></tr>
+      <tr><td class="lbl">Management changes</td><td class="status">Covered above</td><td>Board reconstituted to ten directors (D8), board reconstituted to eight directors (D16).</td></tr>
+      <tr><td class="lbl">Major contracts</td><td class="status">Covered above</td><td>First AI/HPC tenant (S1), first sponsor-sourced powered land acquisition (S6), Mississippi joint venture, partnership or sale (S9).</td></tr>
+      <tr><td class="lbl">Dividends</td><td class="status">None</td><td>No common dividend has been paid or declared. With negative stockholders' equity of $50.2M and unresolved going concern doubt, none is plausible in this horizon.</td></tr>
+      <tr><td class="lbl">Share buybacks</td><td class="status">None</td><td>No programme authorized. The MIG note's negative covenants and the $10M minimum liquidity covenant make repurchases impractical regardless.</td></tr>
+      <tr><td class="lbl">Product launches</td><td class="status">Covered above</td><td>The category does not apply to this business directly: infrastructure and merchant power with no product roadmap. The functional equivalents are capacity milestones, tracked as the NYSEG interconnection agreement execution (S4) and the Mississippi 40 MW energization (D13).</td></tr>
+      <tr><td class="lbl">Investor days</td><td class="status">None</td><td>None is scheduled. The IR events page stated no upcoming events at the as-of date. Plausible that new sponsors host one post-closing, but nothing is announced.</td></tr>
+      <tr><td class="lbl">Industry conferences</td><td class="status caution-t">Not established</td><td>Not examined against a conference organiser schedule or the company&rsquo;s event listings, so no participation finding is made either way. Sector events matter mainly as venues where peers announce contracts that reset sector multiples, an indirect channel captured as willingness to pay for AI infrastructure exposure (S3).</td></tr>
+      <tr><td class="lbl">Lawsuits</td><td class="status">None</td><td>No class action has been filed. Pomerantz, Glancy Prongay and Rosen announced <em>investigations</em> in 2022 and 2023 relating to the Support.com goodwill impairment period. No filed consolidated class action has been identified and none appears in current disclosures. Investigation announcements are not litigation. Checked against current filings and docket coverage; absence of evidence is not evidence of absence.</td></tr>
+      <tr><td class="lbl">Index inclusion</td><td class="status">None</td><td>The issuer is not eligible for inclusion: market capitalization, negative equity and profitability screens exclude VIP from major indices.</td></tr>
+      <tr><td class="lbl">Analyst coverage</td><td class="status">None</td><td>No catalyst arises. Coverage is minimal and conflicted: effectively one published target, $4.00 from Lucas Pipes at B. Riley Securities, issued 12 July 2024 when the firm lowered it from $5.00 and maintained a Buy rating. The target predates the going concern disclosure, the exchange offer, the financing and the rebrand. B. Riley acted as advisor to the company on the PIPE, disclosed in the 20 July release. Normal practice, but not independent validation.</td></tr>
+      <tr><td class="lbl">Bitcoin halving</td><td class="status">None</td><td>Outside the twelve-month horizon: next expected 2028. Mining is roughly 9% of revenue and declining, so relevance is diminishing regardless. Exposure tracked as the bitcoin price (S13).</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 5. DILUTION & CAPITAL OVERLAY ===================== -->
+<section id="s5">
+  <h2 class="sec"><span class="n">05</span>Dilution &amp; capital overlay</h2>
+  <p class="sub">Sits across every other catalyst rather than beside them. Dilution here is a continuous process with at least seven identified channels, not a single event. The per-share effect of a successful strategy can still be negative.</p>
+  <div class="tw"><table>
+    <thead>
+      <tr><th>Channel</th><th class="num">Shares or capacity</th><th>Timing</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="lbl">Baseline, as-converted 30 Jun 2026</td><td class="num">17,966,380</td><td class="when">Confirmed</td><td>15,286,349 Class A plus 2,680,031 Class B, per Schedule 13D/A <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Executive RSUs (R8)</td><td class="num neg-t">+210,000</td><td class="when">Vested 23 Jul 2026</td><td>Already issued <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">PIPE shares at $1.71</td><td class="num neg-t">+17,146,190</td><td class="when">At closing (D7)</td><td>Roughly 48.5% of pro forma. New investors approach half the company. <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">MIG convertible note at $2.1375</td><td class="num neg-t">~+4,680,000</td><td class="when">Post D15</td><td>Grows over time: 10% PIK interest compounds into principal, so the conversion share count rises every month the note is outstanding <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">MIG warrant at $1.71</td><td class="num neg-t">+1,754,386</td><td class="when">3 year term</td><td>Exercisable at issuance, subject to a 9.99% beneficial ownership cap until the Regulatory Approvals (D15). Cashless exercise available absent effective registration. <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Equity incentive plan increase</td><td class="num neg-t">+2,500,000</td><td class="when">20 days post D1</td><td>Authorized pool rises from 2,583,111 to 5,083,111 <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Sponsor incentive shares</td><td class="num">Undefined</td><td class="when">Ongoing</td><td>Project-level acquisition fees and promote, payable in cash or stock. Quantum not disclosed. Subject to independent director approval. <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Equity Interest Payment Agreement, Atlas</td><td class="num">Ongoing</td><td class="when">Quarterly</td><td>Interest owed to Atlas settled in Class A shares rather than cash. Most recent 114,199 shares issued 6 July 2026 at $1.42 to settle $161,820. <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">$200M shelf (R6)</td><td class="num">Capacity</td><td class="when">Available</td><td>Throttled by the baby shelf rule; see below <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Pro forma outstanding</td><td class="num">35,322,570</td><td class="when">At closing</td><td>Before conversion, warrant, plan or shelf issuance <span class="tag">Estimate</span></td></tr>
+      <tr><td class="lbl">Fully diluted, identified</td><td class="num">~41,800,000</td><td class="when">Post D15</td><td>Excludes shelf, sponsor incentive and future PIK accretion <span class="tag">Estimate</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Two mechanics govern how quickly this table can be drawn down. Until Regulatory Approvals are obtained, Vulcan is prohibited from issuing equity or equity-linked securities without MIG's prior written consent, subject to limited exceptions: a genuine near-term brake on dilution, but also a constraint on raising equity to solve a problem without the new lender's permission. Separately, under General Instruction I.B.6 a company with non-affiliate public float below $75M may sell no more than one-third of that float in any twelve month period. At the 8 July measurement of $27.5M of non-affiliate value, that capped shelf sales near $9.2M rather than $200M. If price and float rise above $75M the full shelf unlocks, so dilution capacity expands precisely when the stock performs well.</p>
+  </div>
+</section>
+
+<!-- ===================== 6. FALSIFICATION TESTS ===================== -->
+<section id="s6">
+  <h2 class="sec"><span class="n">06</span>Falsification tests</h2>
+  <p class="sub">What would prove this read wrong, stated in advance. Each test is derived from a claim made elsewhere in this file, so a triggered test invalidates a specific position rather than a general mood.</p>
+  <div class="tw"><table>
+    <thead><tr><th>#</th><th>If this happens&hellip;</th><th>&hellip;this was wrong</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>A lease or colocation agreement is announced in an 8-K or press release, naming the counterparty, with a stated initial term of 10 years or more, before the PIPE closes. <span class="tag">Estimate</span> The 10 year floor is an analyst threshold, not a filed figure.</td><td>The premise that solvency gates the story, and that the first AI/HPC tenant (S1) sits downstream of the financing rather than beside it.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">2</td><td>The PIPE closes and the going concern language still appears in the Q3 2026 10-Q.</td><td>The claim at removal of the going concern qualification (D11) that closing makes it curable. It would imply auditors view remaining burn or the MIG note redemption trigger (D17) as still threatening.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">3</td><td>The Schedule 14C identifies the Regulatory Approvals as Federal Power Act Section 203 alone, with no state-level approval named.</td><td>The Low confidence rating on the Regulatory Approvals (D15) and the weight placed on the MIG note special mandatory redemption (D17) as an under-appreciated cliff edge.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">4</td><td>GREEL trades at or above par through September and October.</td><td>The framing that solvency is genuinely in doubt. The credit market would be signalling that repayment is expected.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">5</td><td>Mississippi energizes 40 MW on schedule in Q1 2027.</td><td>The scepticism at the Mississippi 40 MW energization (D13) and the TVA 250 MW load study (S8) about whether pipeline megawatts convert, and by extension the discount applied to the 654 MW figure.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">6</td><td>Aggregate FY2027 capex guidance from the four largest hyperscalers is revised down by 5% or more against the midpoint of prior guidance at the October reports. <span class="tag">Estimate</span> The 5% threshold is an analyst judgement, not a filed figure.</td><td>The demand leg, AI capital expenditure (S2), which currently reads as favourable and separable from the sentiment leg, willingness to pay for AI infrastructure exposure (S3).</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">7</td><td>The company completes a powered land acquisition without issuing equity or project debt.</td><td>The assumption that the roll-up strategy necessarily implies further dilution.</td><td class="status">Untriggered</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 7. CATALYST SUMMARY ===================== -->
+<section id="s7">
+  <h2 class="sec"><span class="n">07</span>Catalyst summary</h2>
+  <p class="sub">Every ID in one table, gapless within each class, in the section order above. Links point at title slugs so they survive renumbering.</p>
+  <div class="tw"><table>
+    <thead><tr><th>ID</th><th>Catalyst</th><th>Timing</th><th>Impact</th><th>Confidence</th><th>Direction</th></tr></thead>
+    <tbody>
+      <tr><td class="num">D1</td><td><a href="#cat-schedule-14c-information-statement">Schedule 14C information statement</a></td><td class="when">Overdue</td><td>Medium</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D2</td><td><a href="#cat-q2-2026-results">Q2 2026 results and Form 10-Q</a></td><td class="when">~12 Aug 2026</td><td>High</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D3</td><td><a href="#cat-jackson-hole-symposium">Jackson Hole symposium</a></td><td class="when">Mid to late Aug 2026</td><td>Medium</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D4</td><td><a href="#cat-class-b-automatic-conversion">Class B automatic conversion</a></td><td class="when">15 Sep 2026</td><td>High</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D5</td><td><a href="#cat-controlled-company-exemption-lapse">Controlled company exemption lapses</a></td><td class="when">15 Sep 2026</td><td>Low</td><td>Medium</td><td class="pos-t">Up</td></tr>
+      <tr><td class="num">D6</td><td><a href="#cat-fomc-decisions">FOMC decisions, Sep and Oct</a></td><td class="when">15 Sep, 27 Oct 2026</td><td>Medium</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D7</td><td><a href="#cat-pipe-transaction-closing">PIPE transaction closing</a></td><td class="when">By 10 Oct 2026</td><td>High</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D8</td><td><a href="#cat-board-reconstitution-ten-directors">Board reconstituted to ten</a></td><td class="when">At closing</td><td>High</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D9</td><td><a href="#cat-senior-notes-maturity">8.50% senior notes maturity</a></td><td class="when">31 Oct 2026</td><td>High</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D10</td><td><a href="#cat-q3-2026-results">Q3 2026 results and Form 10-Q</a></td><td class="when">~Mid Nov 2026</td><td>High</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D11</td><td><a href="#cat-going-concern-removal">Going concern qualification removal</a></td><td class="when">~Nov 2026</td><td>High</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D12</td><td><a href="#cat-winter-nyiso-pricing">Winter NYISO pricing</a></td><td class="when">Q4 2026 to Q1 2027</td><td>Medium</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D13</td><td><a href="#cat-mississippi-40mw-energization">Mississippi 40 MW energization</a></td><td class="when">Q1 2027</td><td>Medium</td><td>Medium</td><td class="pos-t">Up</td></tr>
+      <tr><td class="num">D14</td><td><a href="#cat-fy2026-results-10k">FY2026 results and Form 10-K</a></td><td class="when">Mar 2027</td><td>High</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D15</td><td><a href="#cat-regulatory-approvals">Regulatory Approvals</a></td><td class="when">By 31 Mar 2027</td><td>High</td><td>Low</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D16</td><td><a href="#cat-board-reconstitution-eight-directors">Board reconstituted to eight</a></td><td class="when">On approvals date</td><td>Medium</td><td>Low</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D17</td><td><a href="#cat-mig-note-special-mandatory-redemption">MIG note redemption at 130%</a></td><td class="when">31 Mar 2027</td><td>High</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D18</td><td><a href="#cat-q1-2027-results">Q1 2027 results</a></td><td class="when">May 2027</td><td>Medium</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D19</td><td><a href="#cat-2027-annual-meeting">2027 annual meeting</a></td><td class="when">~Jun 2027</td><td>Medium</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S1</td><td><a href="#cat-first-ai-hpc-tenant">First AI/HPC tenant</a></td><td class="when">Undated</td><td>High</td><td>n/a</td><td class="pos-t">Up</td></tr>
+      <tr><td class="num">S2</td><td><a href="#cat-ai-capex-demand">AI capital expenditure, demand</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="pos-t">Up</td></tr>
+      <tr><td class="num">S3</td><td><a href="#cat-ai-infrastructure-sentiment">Willingness to pay for exposure</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">S4</td><td><a href="#cat-nyseg-interconnection-agreement">NYSEG interconnection execution</a></td><td class="when">Undated</td><td>High</td><td>n/a</td><td class="pos-t">Up</td></tr>
+      <tr><td class="num">S5</td><td><a href="#cat-nyiso-power-capacity-prices">NYISO power and capacity prices</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S6</td><td><a href="#cat-sponsor-sourced-acquisition">First sponsor-sourced acquisition</a></td><td class="when">Undated</td><td>High</td><td>n/a</td><td class="pos-t">Up</td></tr>
+      <tr><td class="num">S7</td><td><a href="#cat-greel-note-price-signal">GREEL note price signal</a></td><td class="when">Continuous</td><td>Medium</td><td>n/a</td><td class="caution-t">Neutral</td></tr>
+      <tr><td class="num">S8</td><td><a href="#cat-tva-load-study-result">TVA 250 MW load study</a></td><td class="when">Undated</td><td>High</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S9</td><td><a href="#cat-mississippi-jv-or-sale">Mississippi JV, partnership or sale</a></td><td class="when">Undated</td><td>Medium</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S10</td><td><a href="#cat-title-v-compliance-coal-ash">Title V compliance and coal ash</a></td><td class="when">Ongoing</td><td>Medium</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S11</td><td><a href="#cat-interest-rates-financing-cost">Interest rates and financing cost</a></td><td class="when">Ongoing</td><td>Medium</td><td>n/a</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">S12</td><td><a href="#cat-new-york-clcpa-trajectory">New York CLCPA trajectory</a></td><td class="when">Ongoing</td><td>Medium</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S13</td><td><a href="#cat-bitcoin-price">Bitcoin price</a></td><td class="when">Ongoing</td><td>Low</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S14</td><td><a href="#cat-float-volatility-market-structure">Float, volatility, market structure</a></td><td class="when">Ongoing</td><td>Medium</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S15</td><td><a href="#cat-mig-note-forced-conversion-window">MIG note forced conversion window</a></td><td class="when">Conditional</td><td>Medium</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">R1</td><td><a href="#cat-south-carolina-land-sale">South Carolina land and power rights sale</a></td><td class="when">Dec 2025</td><td>n/a</td><td>n/a</td><td class="pos-t">Resolved</td></tr>
+      <tr><td class="num">R2</td><td><a href="#cat-title-v-permit-settlement">Title V air permit settlement</a></td><td class="when">11 Feb 2026</td><td>n/a</td><td>n/a</td><td class="pos-t">Resolved</td></tr>
+      <tr><td class="num">R3</td><td><a href="#cat-exchange-offer-senior-notes">Exchange offer for senior notes</a></td><td class="when">9 Apr 2026</td><td>n/a</td><td>n/a</td><td class="pos-t">Resolved</td></tr>
+      <tr><td class="num">R4</td><td><a href="#cat-debt-for-equity-exchanges">Debt for equity exchanges</a></td><td class="when">1 Jun 2026</td><td>n/a</td><td>n/a</td><td class="pos-t">Resolved</td></tr>
+      <tr><td class="num">R5</td><td><a href="#cat-2026-annual-meeting">2026 annual meeting</a></td><td class="when">24 Jun 2026</td><td>n/a</td><td>n/a</td><td class="pos-t">Resolved</td></tr>
+      <tr><td class="num">R6</td><td><a href="#cat-shelf-registration-effective">$200M shelf declared effective</a></td><td class="when">8 Jul 2026</td><td>n/a</td><td>n/a</td><td class="pos-t">Resolved</td></tr>
+      <tr><td class="num">R7</td><td><a href="#cat-pipe-agreements-signed">PIPE agreements signed and consent obtained</a></td><td class="when">19 Jul 2026</td><td>n/a</td><td>n/a</td><td class="pos-t">Resolved</td></tr>
+      <tr><td class="num">R8</td><td><a href="#cat-executive-rsu-awards">Executive RSU awards</a></td><td class="when">23 Jul 2026</td><td>n/a</td><td>n/a</td><td class="pos-t">Resolved</td></tr>
+      <tr><td class="num">R9</td><td><a href="#cat-name-change-ticker-migration">Name change and ticker migration</a></td><td class="when">24 Jul 2026</td><td>n/a</td><td>n/a</td><td class="pos-t">Resolved</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 8. METHODOLOGY & CONFIDENCE SCALE ===================== -->
+<section id="s8">
+  <h2 class="sec"><span class="n">08</span>Methodology &amp; confidence scale</h2>
+  <h3>ID concordance: earlier numbering</h3>
+  <p class="sub">Maps the numbering used before this revision to the current IDs, so earlier log entries remain resolvable. The earlier scheme ran a single <code>#1&hellip;#30</code> sequence for forward items, <code>S1a/S1b/S2&hellip;S6</code> for structural items, and a <code>C</code> prefix for completed ones. Every ID moved when the current scheme was adopted.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Was</th><th>Now</th><th>Catalyst</th></tr></thead>
+    <tbody>
+      <tr><td class="num">#2</td><td class="num">D1</td><td>Schedule 14C information statement</td></tr>
+      <tr><td class="num">#3</td><td class="num">D2</td><td>Q2 2026 results and Form 10-Q</td></tr>
+      <tr><td class="num">#30</td><td class="num">D3</td><td>Jackson Hole symposium</td></tr>
+      <tr><td class="num">#4</td><td class="num">D4</td><td>Class B automatic conversion</td></tr>
+      <tr><td class="num">#11</td><td class="num">D5</td><td>Controlled company exemption lapses</td></tr>
+      <tr><td class="num">#10</td><td class="num">D6</td><td>FOMC decisions, September and October</td></tr>
+      <tr><td class="num">#1</td><td class="num">D7</td><td>PIPE transaction closing</td></tr>
+      <tr><td class="num">#7</td><td class="num">D8</td><td>Board reconstituted to ten directors</td></tr>
+      <tr><td class="num">#5</td><td class="num">D9</td><td>8.50% senior notes maturity</td></tr>
+      <tr><td class="num">#12</td><td class="num">D10</td><td>Q3 2026 results and Form 10-Q</td></tr>
+      <tr><td class="num">#6</td><td class="num">D11</td><td>Removal of the going concern qualification</td></tr>
+      <tr><td class="num">#23</td><td class="num">D12</td><td>Winter NYISO power and capacity pricing</td></tr>
+      <tr><td class="num">#20</td><td class="num">D13</td><td>Mississippi 40 MW energization</td></tr>
+      <tr><td class="num">#24</td><td class="num">D14</td><td>FY2026 results and Form 10-K</td></tr>
+      <tr><td class="num">#13</td><td class="num">D15</td><td>Regulatory Approvals</td></tr>
+      <tr><td class="num">#14</td><td class="num">D16</td><td>Board reconstituted to eight directors</td></tr>
+      <tr><td class="num">#18</td><td class="num">D17</td><td>MIG note special mandatory redemption at 130%</td></tr>
+      <tr><td class="num">#26</td><td class="num">D18</td><td>Q1 2027 results</td></tr>
+      <tr><td class="num">#27</td><td class="num">D19</td><td>2027 annual meeting</td></tr>
+      <tr><td class="num">#19</td><td class="num">S1</td><td>First AI/HPC tenant</td></tr>
+      <tr><td class="num">S1a</td><td class="num">S2</td><td>AI capital expenditure, demand leg</td></tr>
+      <tr><td class="num">S1b</td><td class="num">S3</td><td>Willingness to pay for AI infrastructure exposure</td></tr>
+      <tr><td class="num">#8</td><td class="num">S4</td><td>NYSEG interconnection agreement execution</td></tr>
+      <tr><td class="num">S3</td><td class="num">S5</td><td>NYISO power and capacity prices</td></tr>
+      <tr><td class="num">#22</td><td class="num">S6</td><td>First sponsor-sourced powered land acquisition</td></tr>
+      <tr><td class="num">#9</td><td class="num">S7</td><td>GREEL note price as a solvency indicator</td></tr>
+      <tr><td class="num">#25</td><td class="num">S8</td><td>TVA 250 MW load study result</td></tr>
+      <tr><td class="num">#21</td><td class="num">S9</td><td>Mississippi joint venture, partnership or sale</td></tr>
+      <tr><td class="num">#28</td><td class="num">S10</td><td>Title V compliance and coal ash remediation</td></tr>
+      <tr><td class="num">S5</td><td class="num">S11</td><td>Interest rates and infrastructure financing cost</td></tr>
+      <tr><td class="num">S4</td><td class="num">S12</td><td>New York CLCPA trajectory</td></tr>
+      <tr><td class="num">S2</td><td class="num">S13</td><td>Bitcoin price</td></tr>
+      <tr><td class="num">S6</td><td class="num">S14</td><td>Float, volatility and market structure</td></tr>
+      <tr><td class="num">#29</td><td class="num">S15</td><td>MIG note forced conversion window</td></tr>
+      <tr><td class="num">C1</td><td class="num">R2</td><td>Title V air permit settlement</td></tr>
+      <tr><td class="num">C2</td><td class="num">R1</td><td>South Carolina land and 60 MW power rights sale</td></tr>
+      <tr><td class="num">C3</td><td class="num">R3</td><td>Exchange offer for 8.50% senior notes</td></tr>
+      <tr><td class="num">C4</td><td class="num">R4</td><td>Privately negotiated debt for equity exchanges</td></tr>
+      <tr><td class="num">C6</td><td class="num">R5</td><td>2026 annual meeting of stockholders</td></tr>
+      <tr><td class="num">C5</td><td class="num">R6</td><td>$200M mixed securities shelf declared effective</td></tr>
+      <tr><td class="num">C7</td><td class="num">R7</td><td>PIPE subscription agreements signed and consent obtained</td></tr>
+      <tr><td class="num">C9</td><td class="num">R8</td><td>One-time executive RSU awards</td></tr>
+      <tr><td class="num">C8</td><td class="num">R9</td><td>Name change and ticker migration to VIP</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="tw"><table>
+    <thead><tr><th>Level</th><th>Means</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">High</td><td>Date is company-announced, protocol-defined, or statutorily fixed.</td></tr>
+      <tr><td class="lbl">Medium</td><td>Date inferred from filing cadence or a stated deadline window.</td></tr>
+      <tr><td class="lbl">Low</td><td>Date is a judgement call. Could move by a quarter or more.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note caution">
+    <p>Confidence rates <b>timing</b>, never outcome. A High-confidence catalyst can be a coin flip; a Low-confidence one can be near-certain in direction. The senior notes maturity (D9) and the MIG note special mandatory redemption (D17) rate High because the dates are contractual, not because the outcomes are known.</p>
+    <p><b>Impact is independent of confidence.</b> A High-impact, Low-confidence item is the most important kind here: the Regulatory Approvals (D15) matter enormously and could land any time within the window.</p>
+  </div>
+
+  <h3>Known limitations carried forward</h3>
+  <p class="sub">Defects identified but not resolved in this revision, with the element at issue named and the reason each remains open. A third party&rsquo;s target must carry the date it was issued.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Defect</th><th>What is absent</th><th>Reason it remains open</th></tr></thead>
+    <tbody>
+          <tr><td class="lbl">The earlier version of this calendar is unrecoverable</td><td>The earlier markup and figure set of this document. Only the current file exists under that filename.</td><td>The version this one was built from carried the same filename and has been overwritten by a later copy. No comparison against it can be run in either direction, so any figure dropped or added before this revision cannot be detected here. The companion report&rsquo;s earlier version survived only because its filename changed at the same point. This limitation does not expire.</td></tr>
+</tbody>
+  </table></div>
+
+  <h3>Provenance tags</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Tag</th><th>What it asserts</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl"><span class="tag">Filed</span></td><td>Stated in an SEC filing or company press release, cited by form and date. Also covers a dated official publication by a named non-SEC issuer, with the issuer named in the Source line: the FOMC statement and implementation note, the Federal Reserve calendar, NYSDEC permit records, and the New York Appellate Division order are carried on that basis.</td></tr>
+      <tr><td class="lbl"><span class="tag">Estimate</span></td><td>Derived or inferred here. The arithmetic is shown.</td></tr>
+      <tr><td class="lbl"><span class="tag">Open</span></td><td>Expected but unconfirmed. Nothing filed either way.</td></tr>
+      <tr><td class="lbl"><span class="tag">Market</span></td><td>Price, volume, float and trading data, stamped with the close date. Also a third party&rsquo;s published target or rating, attributed to the firm that issued it.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Limitations</h3>
+  <p>The most important variable is undated. A first AI/HPC contract (S1) drives more of the outcome distribution than any scheduled item, and there is no basis for predicting its timing. The nature of the Regulatory Approvals is not disclosed, yet that gate governs five separate items and a contingent cash call near $14M; the Federal Power Act Section 203 reading is an inference. Pro forma figures assume the PIPE closes exactly as signed. Two reporting dates are inferred from cadence rather than confirmed. Data is split across two identities: filings before 20 July 2026 are under Greenidge Generation Holdings and GREE, after under Vulcan Infrastructure and Power and VIP, with notes remaining GREEL throughout; several data providers still carry stale business descriptions, and the widely syndicated claim that the company has exited bitcoin mining is contradicted by its own filings.</p>
+</section>
+
+<!-- ===================== 9. SOURCES ===================== -->
+<section id="s9">
+  <h2 class="sec"><span class="n">09</span>Sources</h2>
+  <p>Primary. Form 8-K, 20 July 2026 (PIPE, name change, board, equity plan, stockholder consent); Form 8-K, 23 July 2026 (Item 5.02, executive RSU awards); Form 8-K, June 2026 (debt for equity exchanges); Form 8-K, 11 March 2026 (prior special bonus); Forms 4, 22 and 24 July 2026; Schedule 13D/A, 8 July 2026 and July 2026 (Atlas); Form 10-Q for the quarter ended 31 March 2026; Form 10-K for the year ended 31 December 2025; Forms S-3 (15 May 2026), S-3/A (12 June 2026) and 424B3 (July 2026), File No. 333-295953; DEF 14A (~30 April 2026); company press releases dated 24 July, 20 July, 18 May, 9 April, 25 March, 11 March and 5 March 2026, and 7 November 2025.</p>
+  <p>Secondary. NYSDEC Greenidge Generation Station permit records; New York Appellate Division, Fourth Department, order of 11 February 2026; FOMC statement and implementation note of 29 July 2026, and the June 2026 dot plot; hyperscaler Q2 2026 earnings coverage; sector reporting on AI/HPC contracting, February to July 2026. Market data as of the 31 July 2026 close.</p>
+  <p>Not checked. Intervenor filings in the NYSDEC docket beyond the settlement record; NYISO capacity auction results; the indenture governing the 8.50% notes beyond the summary in the 10-Q; any state-level approval requirements bearing on the Regulatory Approvals condition; and conference organiser schedules or company event listings, which is why industry conferences reads Not established rather than None.</p>
+</section>
+
+<!-- ===================== 10. DOCUMENT LOG ===================== -->
+<section id="s10">
+  <h2 class="sec"><span class="n">10</span>Document log</h2>
+  <p class="sub">Newest first. The original build entry is never removed or rewritten.</p>
+  <div class="log">
+    <div class="logentry current">
+      <div class="when">2 August 2026 <span class="latest">Latest</span></div>
+      <div class="basis">19 dated &middot; 15 standing &middot; 9 resolved &middot; priced off 31 Jul 2026 close</div>
+      <div class="correction">
+        <span class="lbl">Correction</span>
+        <p>The $4.00 B. Riley Securities target was carried without its date. It was issued on 12 July 2024, when the firm lowered it from $5.00 and maintained a Buy rating, and it predates the going concern disclosure, the exchange offer, the financing and the rebrand. It is now dated and qualified where it appears.</p>
+      </div>
+      <p>A filing sweep across Forms 8-K, 6-K, 10-Q, 10-K, 20-F, 40-F, S-1, S-3, 424, 13D, 13G, the NT series, Forms 3 and 4 and DEF 14A returned nothing after 24 July 2026. No NT filing of any kind has ever been made, which for an issuer that has carried a going concern disclosure through two reporting periods is a finding rather than an absence of one.</p>
+      <p>Two open items are unchanged by the sweep and remain open. The Schedule 14C information statement (D1) is still unfiled, so the twenty day consent period has not begun and the buffer in front of the 10 October outside date continues to compress. The PIPE transaction closing (D7) has not occurred. Neither the senior notes maturity (D9) nor the Regulatory Approvals deadline (D15) has moved.</p>
+      <p>No catalyst changed class and no identifier moved, so no renumbering map is published for this entry. The 31 July close stands unchanged, 1 August and 2 August being a weekend, so no repricing was required and the pricing basis is carried forward.</p>
+      <p>Known gaps at this version: the nature of the Regulatory Approvals condition remains undisclosed, so the Federal Power Act Section 203 reading is still an inference, and the Q2 and Q3 reporting dates remain cadence estimates.</p>
+    </div>
+    <div class="logentry">
+      <div class="when">1 August 2026</div>
+      <div class="basis">19 dated &middot; 15 standing &middot; 9 resolved &middot; priced off 31 Jul 2026 close</div>
+      <p>Price basis moved from the 24 July close of $2.45 to the 31 July close of $2.10. Enterprise value $86M &rarr; $74M; near-term TEV/MW $600k &rarr; $515k; pro forma shares refined from an estimate to 35,322,570 on exact filing figures from the Atlas Schedule 13D/A.</p>
+      <p>A systematic sweep across 8-K, 10-Q, 10-K, S-1, S-3, 424, 13D, Forms 3 and 4 and the NT series surfaced one previously missed filing: the Form 8-K of 23 July 2026 disclosing 210,000 rapid-vesting executive RSUs, added as a resolved item (the executive RSU awards) and carried into the dilution overlay. No NT filing of any kind has ever been made. No company filing of any type has been made since 24 July.</p>
+      <p>The Schedule 14C information statement remained unfiled at this date, twelve days after the 8-K, so its confidence was cut to Medium and it now leads the dated list. The 28&ndash;29 July FOMC resolved as a hold at 3.50% to 3.75% on a 9&ndash;3 vote with all three dissents favouring a hike, so the rate item was rewritten and the Jackson Hole symposium added. The AI sector item was split into a demand leg and a sentiment leg after hyperscaler capex guidance rose while hyperscaler equities fell.</p>
+      <p>The three falsification tests whose triggers could not be settled from a document were rewritten so that each names an observable event. The tenant test now requires a named counterparty and a stated initial term of 10 years or more, in place of a &ldquo;creditworthy&rdquo; counterparty. The approvals test now turns on whether the Schedule 14C names Federal Power Act Section 203 alone with no state-level approval, in place of a &ldquo;routine ministerial&rdquo; step on a &ldquo;short&rdquo; clock. The capex test now states a threshold, aggregate FY2027 guidance from the four largest hyperscalers revised down by 5% or more against the midpoint at the October reports, in place of guidance cut &ldquo;materially&rdquo;. Both thresholds are analyst judgements rather than filed figures and are tagged as such. All seven tests are now settleable from a filing, a date, a disclosed figure or a price.</p>
+      <p>Known gap at this version: the nature of the Regulatory Approvals condition remains undisclosed, so the timing confidence on that item and on the 130% redemption trigger rests on an inference rather than a filing.</p>
+    </div>
+    <div class="logentry">
+      <div class="when">26 July 2026 (original build)</div>
+      <div class="basis">26 forward &middot; 6 structural &middot; 8 completed &middot; priced off 24 Jul 2026 close</div>
+      <p>Initial 3/6/12 month catalyst calendar. Structural choices fixed at construction: a gating chain placed ahead of the catalyst list, because the items are sequential rather than independent and most do not occur if either gate fails; confidence defined as timing certainty rather than desirability of outcome; and null categories stated explicitly rather than omitted.</p>
+      <p>Known gaps at this version: the Form 8-K of 23 July 2026 was not captured, so 210,000 executive RSUs were absent from the dilution overlay and no resolved entry existed for them. Two reporting dates were inferred from cadence rather than confirmed, and remain so.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="norec">
+    No buy, sell, or hold recommendation is issued. This document is for research
+    and educational purposes and is not investment advice. Estimated dates are not
+    company announcements. Verify against primary filings on sec.gov before acting.
+  </div>
+  <p style="margin-top:16px">VIP &middot; Vulcan Infrastructure and Power Inc. &middot; Catalyst Calendar &middot; as of 2 August 2026</p>
+</footer>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>DGXX &middot; Digi Power X Inc. &middot; Equity Research Report &middot; as of 2 August 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================================
+   PER-TICKER PALETTE
+   ----------------------------------------------------------------------------
+   Accent derived from the company wordmark. Raw brand gold #FFD700 at hue 51,
+   the dominant chromatic colour in the mark. Normalised for paper to #72711D:
+   hue 59, saturation 60%, lightness 28%, 5.13:1 on white, which reads as a dark
+   olive. Rotated 8.4 degrees up from the raw hue because gold at hue 51 sits
+   inside the caution band, and an identity colour there would read as a warning.
+   ========================================================================= */
+:root{
+  --accent:      #72711D;
+  --accent-deep: #494912;
+  --accent-wash: rgba(114,113,29,0.06);
+  --accent-line: rgba(114,113,29,0.22);
+}
+
+/* ============================================================================
+   SHARED STYLESHEET v1.50 : BEGIN
+   ========================================================================= */
+:root{
+  color-scheme: light only;
+
+  --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
+  --line:#DEE6EC;   --line-hard:#C0CDD7;
+  --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
+
+  --pos:#0B7A50;      --pos-bg:#E7F4EE;
+  --neg:#B02A21;      --neg-bg:#FBECEA;
+  --caution:#90600A;  --caution-bg:#FBF2E0;
+  --assume:#4F3FA3;   --assume-bg:#EFEDFA;
+
+  --display:'Archivo',ui-sans-serif,system-ui,'Helvetica Neue',Arial,sans-serif;
+  --body:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+
+  --measure:78ch;
+  --col:760px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html,body{background:var(--canvas) !important;background-color:var(--canvas) !important}
+body{
+  margin:0;color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 22px 96px;background:var(--paper);
+      border-left:1px solid var(--line);border-right:1px solid var(--line)}
+p{max-width:var(--measure)}
+/* Boxed prose fills its container: the box supplies its own measure, so the
+   78ch cap applies to top-level running prose only. */
+.first li,.assume p,.note p,.cat p,.risk p,.logentry p,.oc p,.case p,
+.cat-meta,.logentry .basis{max-width:none}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:var(--accent-deep)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- masthead ---------- */
+.mast{padding:44px 0 26px;border-bottom:2px solid var(--line-hard);margin-bottom:8px;
+      position:relative;padding-left:20px}
+.mast::before{content:"";position:absolute;left:0;top:44px;bottom:26px;
+      width:4px;background:var(--accent)}
+.ticker{font-family:var(--mono);font-size:44px;font-weight:700;letter-spacing:-1px;
+      line-height:1;color:var(--accent);margin:0}
+.headline{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.22;
+      color:var(--ink);margin:16px 0 0}
+.functional{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--ink-faint);margin:18px 0 0}
+.mast-strip{display:flex;flex-wrap:wrap;gap:26px;margin-top:20px;padding-top:16px;
+      border-top:1px solid var(--line)}
+.mast-strip div{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint)}
+.mast-strip b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-top:3px}
+
+/* ---------- banner: framing ---------- */
+.first{background:var(--canvas);border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:20px 24px;margin:30px 0 12px}
+.first h2{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.04em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 12px}
+.first ol{margin:0;padding-left:20px}
+.first li{margin-bottom:9px}
+.first li:last-child{margin-bottom:0}
+
+/* ---------- sections ---------- */
+section{padding-top:38px}
+h2.sec{font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);
+      margin:0 0 4px;padding-bottom:10px;border-bottom:1px solid var(--line-hard);
+      display:flex;align-items:baseline;gap:12px}
+h2.sec .n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);
+      letter-spacing:.06em;flex:none}
+.sub{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);margin:10px 0 18px;
+      max-width:var(--measure)}
+h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink-dim);
+      margin:26px 0 8px}
+
+/* ---------- provenance tags (signature) ---------- */
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);
+      background:var(--panel-2);border:1px solid var(--line);
+      border-radius:2px;padding:1px 6px;vertical-align:1px;white-space:nowrap}
+
+/* ---------- assumption block ---------- */
+.assume{background:var(--assume-bg);border-left:4px solid var(--assume);
+      padding:16px 20px;margin:20px 0}
+.assume .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--assume);display:block;margin-bottom:7px}
+.assume p{margin:0}
+
+/* ---------- callouts ---------- */
+.note{border:1px solid var(--line);border-left:4px solid var(--ink-faint);
+      background:var(--canvas);padding:16px 20px;margin:20px 0}
+.note.pos{border-left-color:var(--pos);background:var(--pos-bg)}
+.note.neg{border-left-color:var(--neg);background:var(--neg-bg)}
+.note.caution{border-left-color:var(--caution);background:var(--caution-bg)}
+.note p{margin:0}
+.note p + p{margin-top:10px}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+thead th{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--ink-dim);text-align:left;
+      padding:9px 12px;border-bottom:2px solid var(--line-hard);white-space:nowrap}
+tbody td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--canvas)}
+td.num,th.num{font-family:var(--mono);text-align:right;white-space:nowrap}
+/* td.when marks a timing column. An unmarked cell counts as prose. */
+td.when{font-family:var(--mono);white-space:nowrap}
+td.lbl{font-weight:600}
+.pos-t{color:var(--pos);font-weight:600}
+.neg-t{color:var(--neg);font-weight:600}
+.caution-t{color:var(--caution);font-weight:600}
+
+/* ---------- cases ---------- */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.case{border:1px solid var(--line);border-top:3px solid var(--ink-faint);
+      background:var(--paper);padding:18px}
+.case.bull{border-top-color:var(--pos)}
+.case.bear{border-top-color:var(--neg)}
+.case h4{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 10px}
+.case.bull h4{color:var(--pos)} .case.bear h4{color:var(--neg)}
+.case p{font-size:15px;margin:0}
+.case .req{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+
+/* ---------- risks ---------- */
+.risk{border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:16px 20px;margin-bottom:12px}
+.risk.sev-high{border-left-color:var(--neg)}
+.risk.sev-med{border-left-color:var(--caution)}
+.risk.sev-low{border-left-color:var(--ink-faint)}
+.risk h4{font-family:var(--display);font-size:15.5px;font-weight:600;margin:0 0 6px;
+      display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.risk .sev{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase}
+.risk.sev-high .sev{color:var(--neg)}
+.risk.sev-med .sev{color:var(--caution)}
+.risk.sev-low .sev{color:var(--ink-faint)}
+.risk p{margin:0;font-size:15.5px}
+
+/* ---------- null categories ---------- */
+.nulls td.lbl{width:26%}
+.nulls .status{font-family:var(--mono);font-size:12px;white-space:nowrap}
+
+/* ---------- document log ---------- */
+.log{margin-top:14px}
+.logentry{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:12px}
+.logentry.current{border-left:4px solid var(--accent);background:var(--accent-wash)}
+.logentry .when{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);
+      display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.latest{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-line);
+      background:var(--paper);border-radius:2px;padding:1px 6px}
+.logentry .basis{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-bottom:12px}
+.logentry p{font-size:15.5px;margin:0 0 9px}
+.logentry p:last-child{margin-bottom:0}
+.correction{border:1px solid var(--neg);border-left:4px solid var(--neg);
+      background:var(--neg-bg);padding:12px 16px;margin-bottom:14px}
+.correction .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--neg);display:block;margin-bottom:5px}
+
+/* ---------- footer ---------- */
+footer{margin-top:44px;padding-top:22px;border-top:2px solid var(--line-hard)}
+footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width:none}
+.norec{border:1px solid var(--line-hard);background:var(--canvas);padding:16px 20px;
+      margin-top:20px;font-family:var(--mono);font-size:12.5px;color:var(--ink-dim)}
+
+/* ---------- catalyst cards (calendar) ---------- */
+.cat{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:14px;border-left:4px solid var(--line-hard)}
+.cat.up{border-left-color:var(--pos)}
+.cat.down{border-left-color:var(--neg)}
+.cat.two{border-left-color:var(--caution)}
+.cat.neutral{border-left-color:var(--ink-faint)}
+.cat-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.cid{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);flex:none}
+.cat-head h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink);
+      margin:0;flex:1 1 auto;min-width:200px}
+.dir{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;white-space:nowrap}
+.cat.up .dir{color:var(--pos)} .cat.down .dir{color:var(--neg)}
+.cat.two .dir{color:var(--caution)} .cat.neutral .dir{color:var(--ink-faint)}
+.cat-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:10px 0 12px;padding:9px 0;
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+      font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
+.cat-meta b{color:var(--ink);font-weight:600}
+.cat p{margin:0 0 9px;font-size:15.5px}
+.cat p:last-child{margin-bottom:0}
+.cat.resolved{background:var(--canvas);border-left-color:var(--ink-faint)}
+.cat.resolved .dir{color:var(--ink-faint)}
+
+/* ---------- horizon bands (calendar) ---------- */
+.band{display:flex;align-items:center;gap:14px;margin:30px 0 16px}
+.band-t{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--ink-dim);white-space:nowrap}
+.band-r{flex:1;height:1px;background:var(--line-hard)}
+.band-c{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);white-space:nowrap}
+
+/* ---------- upside / downside pair ---------- */
+.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0}
+.oc{border:1px solid var(--line);padding:11px 14px;background:var(--paper)}
+.oc.up-c{border-left:3px solid var(--pos)}
+.oc.down-c{border-left:3px solid var(--neg)}
+.oc .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.09em;
+      text-transform:uppercase;display:block;margin-bottom:5px}
+.oc.up-c .lbl{color:var(--pos)} .oc.down-c .lbl{color:var(--neg)}
+.oc p{margin:0;font-size:14.5px;line-height:1.5}
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  body{font-size:16px}
+  .wrap{padding:0 16px 70px;border-left:none;border-right:none}
+  .ticker{font-size:34px}
+  .headline{font-size:23px}
+  .cases{grid-template-columns:1fr}
+  .outcomes{grid-template-columns:1fr}
+  .mast-strip{gap:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none !important;transition:none !important}
+}
+@media print{
+  body{font-size:11pt}
+  .wrap{max-width:none;border:none}
+  section{page-break-inside:avoid}
+}
+/* ============================================================================
+   SHARED STYLESHEET v1.50 : END
+   ========================================================================= */
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ===================== MASTHEAD ===================== -->
+<header class="mast">
+  <p class="ticker">DGXX</p>
+  <h1 class="headline">$1.1 billion contracted, none of it earned, and a share count up 199% in nineteen months</h1>
+  <p class="functional">DGXX &middot; Digi Power X Inc. &middot; Equity Research Report &middot; as of 2 August 2026</p>
+  <div class="mast-strip">
+    <div>Price <b>$3.68</b> <span class="tag">Market</span></div>
+    <div>Market cap <b>~$365M</b> <span class="tag">Estimate</span></div>
+    <div>Enterprise value <b>~$196M</b> <span class="tag">Estimate</span></div>
+    <div>Shares out <b>98,543,355</b> <span class="tag">Filed</span></div>
+    <div>Pricing basis <b>31 Jul 2026 close</b> <span class="tag">Market</span></div>
+  </div>
+</header>
+
+<!-- ===================== FRAMING ===================== -->
+<div class="first">
+  <h2>Framing</h2>
+  <ol>
+    <li>The AI data centre segment produced <b>$0</b> of revenue in Q1 2026. All $6.79M came from energy sales, crypto colocation and mining. <span class="tag">Filed</span> 10-Q, 15 May 2026</li>
+    <li>One contract carries the equity story: a ten-year colocation agreement with Cerebras Systems worth roughly <b>$1.1B</b> for 40 MW at Columbiana, Alabama, with Phase 1 targeted for 15 December 2026. <span class="tag">Filed</span> 8-K, 8 May 2026</li>
+    <li><b>~$155M cash and no long-term debt</b> at 3 July 2026, bought with equity: the share count rose <b>199%</b> from December 2024 to 98,543,355 at 2 July 2026. <span class="tag">Filed</span> PR 7 Jul 2026; S-3 17 Jul 2026</li>
+    <li>Management targets a <b>$250&ndash;300M</b> annualised run-rate in fiscal 2027 against trailing twelve month revenue of <b>$31.7M</b>. <span class="tag">Filed</span> PR, 7 Jul 2026</li>
+  </ol>
+</div>
+
+<!-- ===================== 1. SNAPSHOT ===================== -->
+<section id="s1">
+  <h2 class="sec"><span class="n">01</span>Snapshot</h2>
+  <p class="sub">Key figures, each tagged by provenance. Market data is struck on the 31 July 2026 close.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Metric</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Share price</td><td class="num">$3.68</td><td><span class="tag">Market</span> 31 Jul 2026 close</td></tr>
+      <tr><td class="lbl">Shares outstanding, subordinate voting</td><td class="num">98,543,355</td><td><span class="tag">Filed</span> S-3, 17 Jul 2026 (2 Jul figure)</td></tr>
+      <tr><td class="lbl">Proportionate voting shares</td><td class="num">3,333</td><td><span class="tag">Filed</span> S-3, 17 Jul 2026 (2 Jul figure)</td></tr>
+      <tr><td class="lbl">Subordinate shares issuable on their conversion</td><td class="num">666,600</td><td><span class="tag">Filed</span> S-3, 17 Jul 2026, at 200 for 1</td></tr>
+      <tr><td class="lbl">Shares, subordinate plus proportionate as converted</td><td class="num">99,209,955</td><td><span class="tag">Estimate</span> 98,543,355 + 666,600</td></tr>
+      <tr><td class="lbl">Fully diluted shares</td><td class="num">108,446,376</td><td><span class="tag">Filed</span> S-3, 17 Jul 2026</td></tr>
+      <tr><td class="lbl">Market capitalisation</td><td class="num">~$365M</td><td><span class="tag">Estimate</span> $3.68 &times; 99,209,955</td></tr>
+      <tr><td class="lbl">Enterprise value</td><td class="num">~$196M</td><td><span class="tag">Estimate</span> see section 08</td></tr>
+      <tr><td class="lbl">Revenue, trailing twelve months</td><td class="num">$31.7M</td><td><span class="tag">Market</span> as of 31 Jul 2026</td></tr>
+      <tr><td class="lbl">Revenue, FY2025</td><td class="num">$34.19M</td><td><span class="tag">Filed</span> 10-K, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Net loss, FY2025</td><td class="num neg-t">($28.36M)</td><td><span class="tag">Filed</span> 10-K, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">AI data centre segment revenue, Q1 2026</td><td class="num neg-t">$0</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026</td></tr>
+      <tr><td class="lbl">Cash</td><td class="num">~$155M</td><td><span class="tag">Filed</span> PR, 7 Jul 2026 (3 Jul figure)</td></tr>
+      <tr><td class="lbl">Long-term debt</td><td class="num">$0</td><td><span class="tag">Filed</span> PR, 7 Jul 2026</td></tr>
+      <tr><td class="lbl">Digital assets</td><td class="num">$13.56M</td><td><span class="tag">Filed</span> 10-Q, 31 Mar 2026 figure</td></tr>
+      <tr><td class="lbl">Secured power across all sites</td><td class="num">~400 MW</td><td><span class="tag">Filed</span> company disclosure</td></tr>
+      <tr><td class="lbl">Prior close, 30 Jul 2026</td><td class="num">$3.80</td><td><span class="tag">Market</span> 30 Jul 2026</td></tr>
+      <tr><td class="lbl">Session change, 31 Jul 2026</td><td class="num neg-t">&minus;3.16%</td><td><span class="tag">Market</span> $3.68 against a $3.80 prior close</td></tr>
+      <tr><td class="lbl">After-hours, 31 Jul 2026</td><td class="num">$3.61</td><td><span class="tag">Market</span> 31 Jul 2026</td></tr>
+      <tr><td class="lbl">Session volume, 31 Jul 2026</td><td class="num">1.90M</td><td><span class="tag">Market</span> against a 4.75M average</td></tr>
+      <tr><td class="lbl">Average volume</td><td class="num">4.75M</td><td><span class="tag">Market</span> 31 Jul 2026</td></tr>
+      <tr><td class="lbl">Employees</td><td class="num">17</td><td><span class="tag">Market</span> 31 Jul 2026</td></tr>
+      <tr><td class="lbl">Beta, five year</td><td class="num">6.10</td><td><span class="tag">Market</span> 31 Jul 2026</td></tr>
+      <tr><td class="lbl">52 week range</td><td class="num">$1.86&ndash;$9.20</td><td><span class="tag">Market</span> 31 Jul 2026</td></tr>
+    </tbody>
+  </table></div>
+  <p>The figures describe a business being dismantled and a business being built, at the same time. Current financials measure the first; the valuation prices the second. That gap is the subject of this report.</p>
+</section>
+
+<!-- ===================== 2. BUSINESS MODEL ===================== -->
+<section id="s2">
+  <h2 class="sec"><span class="n">02</span>Business model</h2>
+
+  <p>Digi Power X owns electrical power capacity and the buildings on top of it, and rents that capacity to operators of compute. It has done so in three successive forms: as Digihost Technology, a self-mining Bitcoin operator from 2017; then as a host for third party miners; and now as a landlord to AI tenants at higher rents per megawatt. <span class="tag">Filed</span></p>
+
+  <p>The company renamed to Digi Power X in March 2025 and moved its Nasdaq ticker from DGHI to DGXX on 18 March 2025. It is incorporated in British Columbia, headquartered in Miami, and became a U.S. domestic filer effective 1 January 2026, converting its accounts from IFRS to U.S. GAAP. <span class="tag">Filed</span> 10-Q, 15 May 2026</p>
+
+  <h3>Why power is the asset</h3>
+  <p>The binding constraint on AI capacity is not land or shell but interconnection: a signed agreement with a utility, which takes years to obtain. Operators holding power from the mining era hold the scarce input, which is why the cohort is converting rather than building from nothing.</p>
+
+  <p>DGXX holds power assets in Alabama, New York and North Carolina, including a combined cycle plant at North Tonawanda, New York. Across all sites it reports roughly <b>400 MW of secured power</b>, the strategic asset base even though only a fraction is contracted. At the Columbiana, Alabama campus it reports a dedicated on-site substation complete and a power delivery agreement with Alabama Power secured. <span class="tag">Filed</span></p>
+
+  <div class="note caution">
+    <p>The July 2026 shelf registration describes Columbiana as a <b>55 MW</b> Tier 3 build, while the Cerebras agreement covers roughly <b>40 MW</b>. <span class="tag">Filed</span> S-3, 17 Jul 2026. That leaves as much as 15 MW at the flagship site under construction and uncommitted: capacity that could host a second tenant without a new site, or sit idle. The company has not addressed the gap.</p>
+  </div>
+
+  <h3>Two routes to revenue</h3>
+  <ul>
+    <li><b>Colocation.</b> The tenant supplies its own accelerators; DGXX supplies shell, power, cooling and racks against a monthly fee per megawatt delivered. Long contracts, lower margin, lower risk.</li>
+    <li><b>GPU-as-a-Service, branded NeoCloudz.</b> DGXX owns the NVIDIA hardware and sells compute time. Higher margin potential, but the company carries obsolescence risk and must re-win demand continuously.</li>
+  </ul>
+
+  <p>DGXX also holds a stake in US Data Centers Inc., which manufactures ARMS, a factory-built modular pod deployable in months rather than years, and houses a URP-1 robotics line. An ARMS 200 unit has run at Tier 3 standards at the Alabama site since 15 May 2026. <span class="tag">Filed</span></p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Ownership of US Data Centers reads inconsistently across documents: 2025 releases described a wholly owned subsidiary, the Q1 10-Q states <b>51%</b> at 31 March 2026 after a 49% sale for $1.905M, and later material says <b>~55%</b>. A Form 8-K of 16 March 2026 sets out the structure: a 55% majority stake for DGXX; roughly 35% founder equity held by the co-founding management team including Hans Vestberg, former chief executive of Verizon; a scope limited to manufacturing and distributing ARMS with no site-level revenue participation; all pods, GPUs and site revenue belonging entirely to DGXX; and any equipment sold to DGXX at cost. <span class="tag">Filed</span> 8-K, 16 Mar 2026</p>
+    <p>My reading is that the structure is disclosed and shareholder-protective, and that the residual objection is to the messaging rather than the substance. Describing an entity as wholly owned and later as a diluted majority is drift that costs trust, and the 7 July release reverting to "major shareholder" did not help.</p>
+  </div>
+</section>
+
+<!-- ===================== 3. REVENUE STREAMS ===================== -->
+<section id="s3">
+  <h2 class="sec"><span class="n">03</span>Revenue streams</h2>
+  <p class="sub">Four reported segments. Three earn today; the fourth, which carries the valuation, earns nothing yet.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Segment</th><th class="num">Q1 2026</th><th class="num">Q1 2025</th><th class="num">Change</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Sale of energy</td><td class="num">$3,716,711</td><td class="num">$3,427,916</td><td class="num pos-t">+8%</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026</td></tr>
+      <tr><td class="lbl">Colocation services</td><td class="num">$3,026,908</td><td class="num">$5,082,795</td><td class="num neg-t">&minus;40%</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026</td></tr>
+      <tr><td class="lbl">Digital currency mining and staking</td><td class="num">$47,727</td><td class="num">$765,876</td><td class="num neg-t">&minus;94%</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026</td></tr>
+      <tr><td class="lbl">Tier III AI data centres</td><td class="num">$0</td><td class="num">n/a</td><td class="num">n/a</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026</td></tr>
+      <tr><td class="lbl">Total revenue</td><td class="num">$6,791,346</td><td class="num">$9,276,587</td><td class="num neg-t">&minus;27%</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026</td></tr>
+    </tbody>
+  </table></div>
+
+  <p><b>Energy</b> is now the largest line and the steadiest, but it lost money at segment level in Q1 2026: segment EBITDA of &minus;$1.68M on cost of revenue of $5.39M against $3.72M of revenue. <span class="tag">Filed</span> Selling power below cost is not durable, and management frames it as transitional use of capacity.</p>
+
+  <p><b>Colocation</b> fell 40% because DGXX is emptying a hosting site to rebuild it for AI. <span class="tag">Filed</span> This is planned demolition rather than customer loss, but reported revenue deteriorates before it recovers.</p>
+
+  <p><b>Mining</b> is effectively switched off, from $765,876 to $47,727 in a year. The company holds <b>166 Bitcoin and 1,013 Ethereum</b>, carried at $13.56M against a $17.33M cost basis at 31 March 2026. <span class="tag">Filed</span> Holdings revalue through the income statement, so a $3.76M revaluation loss flowed through Q1 2026 results.</p>
+
+  <h3>Contracted revenue not yet earning</h3>
+  <ul>
+    <li><b>Cerebras colocation.</b> Roughly $1.1B over ten years, up to ~$2.5B with a seven year extension, for 40 MW at Columbiana. Announced 5 May 2026, filed 8 May 2026. <span class="tag">Filed</span> 8-K, 8 May 2026</li>
+    <li><b>SubQ AI GPU rental.</b> Roughly $19.6M over 24 months, announced 20 April 2026; the first AI revenue contract. <span class="tag">Filed</span> PR, 20 Apr 2026</li>
+    <li><b>NeoCloudz.</b> Live on NVIDIA B200 and B300 hardware and generating what the company calls its first AI related revenues in Q2 2026. No figure has been disclosed; Q2 results are due 13 August 2026. <span class="tag">Open</span></li>
+  </ul>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Contract unit economics: $1.1B over ten years across 40 MW is roughly <b>$2.75M per MW per year</b>, or about <b>$229,000 per MW per month</b>. <span class="tag">Estimate</span> That sits inside the band observed in recent large high density colocation deals, broadly $150k to $250k per MW per month, which is a mild check in the contract's favour rather than proof of it. Revenue is not evenly spread: Phase 1 is 15 MW, so the first full year earns well below the $110M ten year average.</p>
+  </div>
+</section>
+
+<!-- ===================== 4. INDUSTRY & MARKET BACKDROP ===================== -->
+<section id="s4">
+  <h2 class="sec"><span class="n">04</span>Industry &amp; market backdrop</h2>
+
+  <p>Demand for AI compute has outrun the capacity to house it, and the constraint has moved from accelerators to electricity and interconnection queues. Grid operators in several U.S. regions have warned publicly that data centre load forecasts are straining planning assumptions. <span class="tag">Filed</span> Scarcity of that kind is what gives existing power capacity option value.</p>
+
+  <p>Committed capital is large. CoreWeave reported roughly $2.08B of revenue in its May 2026 quarter against a stated backlog near $99.4B. <span class="tag">Market</span> Hyperscalers have signed multi-billion dollar capacity contracts with third party providers partly because leasing is expensed over time rather than capitalised on their own balance sheets.</p>
+
+  <h3>Three currents running against DGXX</h3>
+  <p><b>Scale consolidation.</b> Contracts are increasingly awarded in gigawatts. Applied Digital said on 20 May 2026 that it had passed 1 GW of contracted capacity. <span class="tag">Market</span> The DGXX flagship is 40 MW, roughly 4% of that, and sub-scale operators can be excluded from the largest tenders irrespective of execution quality.</p>
+
+  <p><b>Buyers becoming sellers.</b> On 1 July 2026, reporting that Meta was exploring sales of excess AI capacity under a "Meta Compute" banner took roughly 15% off Nebius and CoreWeave in a single session. <span class="tag">Market</span> If the largest buyers of capacity become sellers, landlord pricing power erodes.</p>
+
+  <p><b>Financing as the moat.</b> The differentiator is increasingly the ability to raise project debt cheaply against signed leases. Larger operators can; microcaps often fund with equity, diluting the holders the capital is meant to serve.</p>
+
+  <p>That constraint tightened in July 2026. Reporting on 29 July flagged rising credit default swap costs across AI infrastructure, with CoreWeave 2032 bonds yielding <b>10.32%</b> at a B rating from S&amp;P. <span class="tag">Market</span> CoreWeave carries over $25B of debt, Nebius $8.5B, IREN $4B. If lenders are repricing the sector's largest and most established borrowers, a microcap with no debt track record faces a harder market still. <span class="tag">Estimate</span></p>
+
+  <p>Cohort equity performance reflects it: neocloud names fell <b>25&ndash;38%</b> in the month to mid July 2026. <span class="tag">Market</span> IREN fell 37% despite a five year, $3.4B NVIDIA contract; Applied Digital slid despite a 61% revenue beat. Good news ceasing to be rewarded is the clearest available signal that the sector is being repriced on financing risk rather than on execution.</p>
+</section>
+
+<!-- ===================== 5. COMPETITIVE POSITION ===================== -->
+<section id="s5">
+  <h2 class="sec"><span class="n">05</span>Competitive position</h2>
+  <p class="sub">Named peers on contracted capacity and anchor tenant, as reported through mid 2026.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Company</th><th>Anchor tenant</th><th>Relative scale</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Applied Digital (APLD)</td><td>CoreWeave</td><td>Over 1 GW contracted</td><td><span class="tag">Market</span> 20 May 2026</td></tr>
+      <tr><td class="lbl">IREN</td><td>Microsoft</td><td>Multi-GW power portfolio</td><td><span class="tag">Market</span> mid 2026</td></tr>
+      <tr><td class="lbl">Cipher Mining (CIFR)</td><td>AWS, Fluidstack</td><td>Multi-site, GW scale</td><td><span class="tag">Market</span> mid 2026</td></tr>
+      <tr><td class="lbl">TeraWulf (WULF)</td><td>Fluidstack, Core42</td><td>Several hundred MW</td><td><span class="tag">Market</span> mid 2026</td></tr>
+      <tr><td class="lbl">Hut 8 (HUT)</td><td>Anthropic, Fluidstack</td><td>Several hundred MW</td><td><span class="tag">Market</span> mid 2026</td></tr>
+      <tr><td class="lbl">Core Scientific (CORZ)</td><td>CoreWeave</td><td>GW scale</td><td><span class="tag">Market</span> mid 2026</td></tr>
+      <tr><td class="lbl">Digi Power X (DGXX)</td><td>Cerebras</td><td>40 MW contracted</td><td><span class="tag">Filed</span> 8-K, 8 May 2026</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>DGXX is roughly an order of magnitude smaller than most comparables on contracted capacity. <span class="tag">Estimate</span> Two readings follow and both hold. The bear reading is that it is sub-scale in a business where scale determines who is invited to bid. The bull reading is that it is small enough for a single 40 MW contract to be transformational, where the same contract at IREN would round to nothing.</p>
+
+  <p>The nearest comparables by size are Soluna Holdings (SLNH), WhiteFiber (WYFI) and New Era Energy &amp; Digital (NUAI): the tier where execution risk dominates and valuation moves on contract announcements rather than earnings.</p>
+
+  <h3>Counterparty quality</h3>
+  <p>Counterparty quality matters more than contract size, and here it is better than the market capitalisation would suggest. Cerebras Systems listed on Nasdaq as CBRS on 14 May 2026, raising roughly $5.5B, priced at $185 after an upsized offering, opening at $385 and closing its first session near $311. <span class="tag">Market</span> It reported 2025 revenue of about $510M and net income near $237.8M, and holds a large multi-year compute agreement with OpenAI. <span class="tag">Market</span></p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>A newly capitalised, profitable, listed counterparty is more creditworthy than a private startup, which removes one common microcap failure mode. <span class="tag">Estimate</span> Two qualifications. The DGXX contract was signed on 5 May, nine days before the Cerebras listing. And Cerebras carries its own concentration: a large share of revenue traces to few customers, with OpenAI dominant, so DGXX revenue is exposed to OpenAI spending decisions two steps removed.</p>
+  </div>
+</section>
+
+<!-- ===================== 6. FINANCIAL PERFORMANCE ===================== -->
+<section id="s6">
+  <h2 class="sec"><span class="n">06</span>Financial performance</h2>
+  <p class="sub">U.S. GAAP. FY2025 from the annual report; quarterly figures from the Q1 filing.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Metric</th><th class="num">Q1 2026</th><th class="num">Q1 2025</th><th class="num">FY2025</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Revenue</td><td class="num">$6.79M</td><td class="num">$9.28M</td><td class="num">$34.19M</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026; 10-K, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Gross profit / (loss)</td><td class="num neg-t">($0.80M)</td><td class="num neg-t">($1.52M)</td><td class="num">n/a</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026</td></tr>
+      <tr><td class="lbl">G&amp;A expense</td><td class="num">$4.33M</td><td class="num">$2.71M</td><td class="num">n/a</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026</td></tr>
+      <tr><td class="lbl">Net loss</td><td class="num neg-t">($4.65M)</td><td class="num neg-t">($1.63M)</td><td class="num neg-t">($28.36M)</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026; 10-K, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Loss per share</td><td class="num neg-t">($0.07)</td><td class="num neg-t">($0.05)</td><td class="num neg-t">($0.64)</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026; 10-K, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Operating cash flow</td><td class="num neg-t">($6.40M)</td><td class="num neg-t">($10.11M)</td><td class="num">n/a</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026</td></tr>
+      <tr><td class="lbl">Capital expenditure</td><td class="num">$15.17M</td><td class="num">$0.78M</td><td class="num">n/a</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026</td></tr>
+      <tr><td class="lbl">Cash</td><td class="num">$57.81M</td><td class="num">$0.80M</td><td class="num">$78.48M</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026; 10-K, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Digital assets</td><td class="num">$13.56M</td><td class="num">n/a</td><td class="num">$14.81M</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026; 10-K, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Long-term debt</td><td class="num">$0</td><td class="num">n/a</td><td class="num">$0</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026; 10-K, 31 Mar 2026</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>What the figures show</h3>
+  <p><b>The operating business does not cover its own cost of revenue.</b> Gross profit is negative in both quarters shown, before any overhead. That is not unusual mid-conversion, but the operating business currently destroys value at the gross margin line.</p>
+
+  <p><b>Overhead is outgrowing revenue.</b> G&amp;A rose 60% year on year while revenue fell 27%. Share-based compensation was $1.35M and key management remuneration $2.42M for the quarter, against $6.79M of total revenue. <span class="tag">Filed</span> Roughly 36 cents of every revenue dollar went to management compensation in Q1 2026. <span class="tag">Estimate</span></p>
+
+  <div class="note neg">
+    <p>Amendment No. 1 to the FY2025 annual report, filed <b>27 April 2026</b>, supplies the Part III disclosure omitted from the original filing. It states chief executive Michel Amar received <b>total 2025 compensation of $12,025,227</b>, roughly 8% of it salary and the remainder bonus, share-based and option-based awards. <span class="tag">Filed</span> 10-K/A, 27 Apr 2026</p>
+    <p>The same amendment discloses <b>president Alec Amar's 2025 total compensation of $7,425,695</b>, so the two together drew <b>$19,450,922</b>. <span class="tag">Filed</span> 10-K/A, 27 Apr 2026 It also records directors and executive officers as a group holding 8,879,464 subordinate voting shares, being 11.77% of that class, plus all 3,333 proportionate voting shares, together about <b>12.55% of total voting power</b> at 27 April 2026. <span class="tag">Filed</span> 10-K/A, 27 Apr 2026</p>
+    <p>Against FY2025 revenue of $34.19M and a net loss of $28.36M, the chief executive alone drew roughly <b>35% of total annual revenue</b>, and the two named officers together drew <b>57%</b>. <span class="tag">Estimate</span> $19,450,922 / $34.19M. On that comparison one executive's compensation equals roughly <b>35% of total annual revenue</b> at a company losing money at the gross profit line. <span class="tag">Estimate</span> Equity-weighted packages are ordinary in early stage infrastructure and preserve cash, but a package of this size at this revenue scale is an outlier, and it sits in an amendment rather than the original annual report.</p>
+  </div>
+
+  <p><b>Reported earnings are distorted by non-operating items.</b> The Q1 net loss of $4.65M contains a $3.76M crypto revaluation loss, a $2.96M foreign exchange gain and a $0.78M warrant fair value gain. <span class="tag">Filed</span> These broadly offset, so the headline loss says little about operations.</p>
+
+  <h3>Two disclosure quality flags</h3>
+  <div class="note caution">
+    <p><b>Adjusted against reported EBITDA.</b> The Q1 press release leads with <b>Adjusted EBITDA of +$1.1M</b>. The segment note inside the same quarterly report shows total <b>EBITDA of &minus;$3.20M</b>. <span class="tag">Filed</span> Both can be correct under their own definitions, but a headline positive figure alongside a filed negative one is reason to read the reconciliation directly.</p>
+    <p><b>Two filings state different digital asset holdings at the same date.</b> The annual report says that at 31 March 2026 the company held approximately <b>51 bitcoin and 1,010 Ethereum</b> in its custodian account. <span class="tag">Filed</span> 10-K, 31 Mar 2026 The quarterly report covering the same date carries <b>166 Bitcoin and 1,013 Ethereum</b> at a fair value of $13.56M. <span class="tag">Filed</span> 10-Q, 15 May 2026 The annual report qualifies its figure as the balance at one named custodian, which may account for the gap, but the two are not reconciled anywhere in either document and this report carries the quarterly figure throughout.</p>
+    <p><b>A misstatement in the discussion and analysis.</b> The Q1 2026 narrative describes the prior year comparative as "net income of $1,633,261". The statements in the same document show that figure as a net loss. <span class="tag">Filed</span> Small in dollars, but an error in a filed document speaks to internal control.</p>
+  </div>
+</section>
+
+<!-- ===================== 7. CAPITAL STRUCTURE & DILUTION ===================== -->
+<section id="s7">
+  <h2 class="sec"><span class="n">07</span>Capital structure &amp; dilution</h2>
+  <p class="sub">Shares, the at-the-market programme, and the instrument overhang. Dilution is the central cost of the strategy and is treated here rather than as one risk among many.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Date</th><th class="num">Subordinate voting shares</th><th class="num">Change vs Dec 2024</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="when">31 Dec 2024</td><td class="num">33,011,600</td><td class="num">n/a</td><td><span class="tag">Filed</span> 10-K, 31 Mar 2026</td></tr>
+      <tr><td class="when">31 Mar 2025</td><td class="num">36,307,870</td><td class="num neg-t">+10%</td><td><span class="tag">Filed</span> 10-K, 31 Mar 2026</td></tr>
+      <tr><td class="when">31 Dec 2025</td><td class="num">69,427,788</td><td class="num neg-t">+110%</td><td><span class="tag">Filed</span> 10-K, 31 Mar 2026</td></tr>
+      <tr><td class="when">31 Mar 2026</td><td class="num">69,807,452</td><td class="num neg-t">+111%</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026</td></tr>
+      <tr><td class="when">15 May 2026</td><td class="num">90,420,824</td><td class="num neg-t">+174%</td><td><span class="tag">Filed</span> 10-Q, 15 May 2026</td></tr>
+      <tr><td class="when">2 Jul 2026</td><td class="num">98,543,355</td><td class="num neg-t">+199%</td><td><span class="tag">Filed</span> S-3, 17 Jul 2026</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>After 31 March 2026 the company issued <b>19,950,000 shares for $102.86M</b> under an at-the-market programme upsized to <b>$175M</b> on 8 May 2026, an average of roughly <b>$5.16</b> per share and above the current price. <span class="tag">Filed</span> 10-Q, 15 May 2026</p>
+
+  <p>A further <b>8,122,531 shares</b> were issued between 15 May and 2 July, roughly 9% dilution in seven weeks, disclosed on the cover of a resale registration rather than announced. <span class="tag">Filed</span> S-3, 17 Jul 2026. At prevailing prices that implies roughly <b>$32&ndash;41M</b> of further drawdown. <span class="tag">Estimate</span></p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Remaining programme capacity cannot be settled from the filings. The Q1 quarterly report records <b>19,950,000 shares for $102.86M</b> after 31 March 2026. The prospectus supplement of <b>8 May 2026</b> states the first supplement covered $75M, of which <b>$72,363,650</b> had been sold before that date. <span class="tag">Filed</span> 424B5, 8 May 2026</p>
+    <p>The two likely span different programmes or periods, the company having run both a Canadian and a U.S. shelf, but on their face they imply materially different remaining capacity: anywhere from roughly <b>$37M to $70M</b> undrawn under the $175M programme. <span class="tag">Estimate</span> I state the band rather than a point because the evidence does not support a point. The Q2 quarterly report should settle it.</p>
+  </div>
+
+  <p>Also disclosed: A.G.P. / Alliance Global Partners earns a <b>3.0% commission</b> on programme sales, and the shares last traded at <b>$6.19 on 7 May 2026</b>, the day before the upsizing. <span class="tag">Filed</span> 424B5, 8 May 2026 That is roughly <b>68% above the 31 July close</b> of $3.68, so the buyers into that programme are carrying a loss of about that size. <span class="tag">Estimate</span> $6.19 / $3.68 &minus; 1</p>
+
+  <h3>Instrument overhang</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Instrument</th><th class="num">Shares</th><th>Terms</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Options</td><td class="num">3,485,000</td><td>Weighted average exercise price C$4.90</td><td><span class="tag">Filed</span> S-3, 17 Jul 2026</td></tr>
+      <tr><td class="lbl">Unvested RSUs</td><td class="num">4,670,946</td><td>No strike</td><td><span class="tag">Filed</span> S-3, 17 Jul 2026</td></tr>
+      <tr><td class="lbl">Warrants</td><td class="num">1,080,475</td><td>$2.98 average strike</td><td><span class="tag">Filed</span> S-3, 17 Jul 2026</td></tr>
+      <tr><td class="lbl">Total overhang</td><td class="num">9,236,421</td><td>9.4% of shares outstanding</td><td><span class="tag">Estimate</span> 9,236,421 / 98,543,355</td></tr>
+      <tr><td class="lbl">Fully diluted shares</td><td class="num">108,446,376</td><td>As stated by the company</td><td><span class="tag">Filed</span> S-3, 17 Jul 2026</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>The RSU pool grew 58% in three months while the option strike moved above the share price. A separate grant around the Q1 report added <b>650,000 options at C$9.84</b> and <b>1,730,000 RSUs</b> vesting in three tranches from 2027 to 2029. <span class="tag">Filed</span> PR, 15 May 2026. That strike sits roughly 2.5 times above the current price, so those options are far out of the money, while the RSUs dilute irrespective of where the stock trades.</p>
+
+  <div class="note">
+    <p>The cash position is accurate and valuable, and it is also shareholders' own capital returned to them as a balance sheet: raised by issuing stock, not generated by the business. Whether that was a good exchange depends entirely on whether the Alabama campus earns a return above the cost of the dilution.</p>
+  </div>
+</section>
+
+<!-- ===================== 8. VALUATION ===================== -->
+<section id="s8">
+  <h2 class="sec"><span class="n">08</span>Valuation</h2>
+  <p class="sub">Multiples with their basis and pricing date. There are no earnings to capitalise and the asset base is mid construction, so what follows is arithmetic. No target price is issued.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Input</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Shares, subordinate plus proportionate as converted</td><td class="num">99,209,955</td><td><span class="tag">Filed</span> S-3, 17 Jul 2026</td></tr>
+      <tr><td class="lbl">Share price</td><td class="num">$3.68</td><td><span class="tag">Market</span> 31 Jul 2026 close</td></tr>
+      <tr><td class="lbl">Market capitalisation</td><td class="num">~$365M</td><td><span class="tag">Estimate</span> $3.68 &times; 99,209,955</td></tr>
+      <tr><td class="lbl">Less cash</td><td class="num neg-t">($155M)</td><td><span class="tag">Filed</span> PR, 7 Jul 2026</td></tr>
+      <tr><td class="lbl">Less digital assets</td><td class="num neg-t">($13.6M)</td><td><span class="tag">Filed</span> 10-Q, 31 Mar 2026 figure</td></tr>
+      <tr><td class="lbl">Plus long-term debt</td><td class="num">$0</td><td><span class="tag">Filed</span> PR, 7 Jul 2026</td></tr>
+      <tr><td class="lbl">Enterprise value</td><td class="num">~$196M</td><td><span class="tag">Estimate</span> $365M &minus; $155M &minus; $13.6M</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="tw"><table>
+    <thead><tr><th>Revenue basis</th><th class="num">Amount</th><th class="num">EV / sales</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Trailing twelve months, actual</td><td class="num">$31.7M</td><td class="num neg-t">6.2&times;</td><td><span class="tag">Estimate</span> $196M / $31.7M</td></tr>
+      <tr><td class="lbl">FY2027 target, low end</td><td class="num">$250M</td><td class="num pos-t">0.79&times;</td><td><span class="tag">Estimate</span> $196M / $250M</td></tr>
+      <tr><td class="lbl">FY2027 target, high end</td><td class="num">$300M</td><td class="num pos-t">0.66&times;</td><td><span class="tag">Estimate</span> $196M / $300M</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>This table is the debate in full. <span class="tag">Estimate</span> On current revenue DGXX trades at roughly 6.2 times sales, expensive for a business with negative gross margin. On the company's fiscal 2027 target it trades below 1 times sales, cheap against AI infrastructure peers trading at high single digit to low double digit multiples of forward sales. The market is pricing something between the two, which is a reasonable response to the uncertainty. A 52 week range of <b>$1.86 to $9.20</b> and a five year beta near <b>6.1</b> show how violently that middle position reprices. <span class="tag">Market</span></p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Building 40 MW of Tier III liquid cooled colocation costs in the region of <b>$7&ndash;12M per MW</b> for powered shell, electrical plant and cooling, implying roughly <b>$280&ndash;480M</b> for the full campus. <span class="tag">Estimate</span> This band is mine, not the company's. DGXX has deployed roughly $95M year to date and holds roughly $155M, which is plausibly enough to finish Phase 1 at 15 MW but not Phase 2 without outside capital. That is consistent with the agreement conditioning Phase 2 on financing, and with the 7 July release pointing to project level debt once documentation is finalised.</p>
+    <p>Treat the band as a sanity check rather than a figure. The company has not disclosed a total project budget, and the absence is itself worth noting.</p>
+  </div>
+
+  <p>Sell-side coverage is thin and positive, as is normal at this capitalisation. <b>Alliance Global Partners</b>, analyst Brian Kinstlinger, raised its target to <b>$10 from $7 on 6 May 2026</b> immediately after the Cerebras announcement, then to <b>$12 from $10 on 15 May 2026</b> alongside the first quarter results, keeping a Buy rating and citing time-to-power as the sector bottleneck. <span class="tag">Market</span> 15 May 2026 <b>H.C. Wainwright</b>, analyst Kevin Dede, last published a target of <b>$5.00 on 17 November 2025</b>, which has not been revisited through any of the events since. <span class="tag">Market</span> 17 Nov 2025</p>
+
+  <p>Coverage therefore runs to two firms whose current published targets are $12 and $5.00, struck eight months apart and on entirely different facts, so an average of them would describe nothing. These are third party targets, reported as market data and attributed to the firms that issued them; this document adopts neither and issues none of its own.</p>
+</section>
+
+<!-- ===================== 9. GROWTH DRIVERS ===================== -->
+<section id="s9">
+  <h2 class="sec"><span class="n">09</span>Growth drivers</h2>
+  <p class="sub">The path from $31.7M to the fiscal 2027 target is not gradual. It steps as megawatts energise, so the schedule is the growth case.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Stage</th><th class="num">Capacity</th><th class="when">Timing</th><th>Status and basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Live today</td><td class="num">~0 MW AI</td><td class="when">Jul 2026</td><td>One ARMS 200 pod live since 15 May 2026 plus the NeoCloudz B200/B300 fleet, producing first AI revenues at an undisclosed amount. <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Columbiana Phase 1</td><td class="num">15 MW</td><td class="when">15 Dec 2026</td><td>Ready-for-service target. Self funded, substation complete, long lead electrical and switchgear secured at 7 July 2026, shell under vertical construction. <span class="tag">Filed</span> 8-K, 8 May 2026</td></tr>
+      <tr><td class="lbl">Columbiana Phase 2</td><td class="num">40 MW</td><td class="when">End Q1 FY2027</td><td>Full Cerebras deployment. The additional 25 MW is conditioned on securing adequate financing, the single most important conditional in the case. <span class="tag">Filed</span> 8-K, 8 May 2026</td></tr>
+      <tr><td class="lbl">Aggregate colocation ambition</td><td class="num">90 MW</td><td class="when">FY2027</td><td>50 MW beyond the Cerebras agreement for up to ~$200M of colocation revenue. No tenant announced. Roughly 15 MW of it may sit at Columbiana, described as a 55 MW build against a 40 MW contract. <span class="tag">Open</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <p>Management has also stated targets beyond fiscal 2027, disclosed on the Q1 call: an annual run-rate of <b>$450&ndash;500M in 2028</b> and <b>$800M&ndash;$1B in 2029</b>, contingent on financing and execution. <span class="tag">Filed</span> These are recorded for completeness. They sit several dependency layers beyond a company that has yet to report a dollar of AI segment revenue, and I attach little weight to them. <span class="tag">Estimate</span></p>
+
+  <h3>Secondary drivers</h3>
+  <ul>
+    <li><b>NeoCloudz scaling</b> to roughly 10 MW of deployed GPUs, targeting up to a $100M annualised run-rate by the end of fiscal 2027, supported by a $20M Supermicro B300 purchase on 12 January 2026 and a $35M NVIDIA Vera Rubin commitment on 3 June 2026. A Silicon Valley office was expected to open by August 2026. <span class="tag">Filed</span></li>
+    <li><b>ARMS modular deployment.</b> If the pod compresses build time as designed, DGXX converts power into revenue faster than conventional builders. The platform holds ANSI/TIA-942-C Tier 3 Ready certification. <span class="tag">Filed</span></li>
+    <li><b>Project level debt.</b> Replacing equity issuance with non-dilutive debt would change the per-share arithmetic. Management stated the preference on 7 July 2026 without announcing terms. <span class="tag">Open</span></li>
+  </ul>
+
+  <div class="note caution">
+    <p>Of the $250&ndash;300M fiscal 2027 target, only the Cerebras portion, guided at <b>$80&ndash;100M</b>, rests on a signed contract, and that portion still needs Phase 2 financing. The remainder, up to ~$100M from additional colocation, up to ~$100M from GPU services and ~$12M from energy, depends on tenants not yet announced. <span class="tag">Estimate</span> Roughly two thirds of the target is uncontracted.</p>
+  </div>
+</section>
+
+<!-- ===================== 10. RISKS ===================== -->
+<section id="s10">
+  <h2 class="sec"><span class="n">10</span>Risks</h2>
+  <p class="sub">Severity ranked, most severe first.</p>
+
+  <div class="risk sev-high">
+    <h4>Customer concentration <span class="sev">Severe</span></h4>
+    <p>One customer represents effectively all contracted future colocation revenue, with no diversified base to absorb a reduction, delay or exit. Cerebras in turn depends heavily on OpenAI, so the chain runs from DGXX through Cerebras to OpenAI, with no visibility and no contractual protection at the far end. Cerebras guided to declining gross margin in its first post-listing results on 23 June 2026 and its shares fell on the news. <span class="tag">Market</span></p>
+  </div>
+
+  <div class="risk sev-high">
+    <h4>Phase 2 financing <span class="sev">Severe</span></h4>
+    <p>Phase 2 is conditional on capital not yet raised. Without project debt on acceptable terms the alternatives are equity at a depressed price or a scaled back deployment. <span class="tag">Filed</span> The risk has grown since the Q1 filings: with AI infrastructure credit spreads widening through July 2026, terms available to a first time sub-scale borrower are likely worse than when the intent was signalled on 7 July. <span class="tag">Estimate</span> At the Q1 combined pace of operating burn plus capital expenditure, roughly $21.6M per quarter, $155M funds about seven quarters, but capital expenditure accelerates during vertical construction so that figure flatters the true runway. <span class="tag">Estimate</span></p>
+  </div>
+
+  <div class="risk sev-high">
+    <h4>Execution and schedule <span class="sev">Severe</span></h4>
+    <p>15 December 2026 is a hard, publicly stated date. Data centre construction slips on transformer lead times, switchgear delivery, commissioning faults and labour. Long lead items are secured, which reduces the risk without eliminating commissioning risk. The agreement contains service credit, penalty and termination provisions, so delay may carry direct financial consequence. <span class="tag">Filed</span> 8-K, 8 May 2026</p>
+  </div>
+
+  <div class="risk sev-high">
+    <h4>Dilution <span class="sev">Severe</span></h4>
+    <p>The share count roughly tripled in nineteen months to 98,543,355, and 9.4% of shares sit in options, RSUs and warrants. Revenue growth per share will lag revenue growth in aggregate. The mechanism deserves emphasis: the 8.1M shares issued between 15 May and 2 July were disclosed in a resale registration filed for an unrelated purpose rather than announced. <span class="tag">Filed</span> Programme sales require no contemporaneous disclosure, so an investor tracking releases and quarterly filings alone will understate the share count between reporting dates.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Governance, insider selling and promotional communications <span class="sev">Moderate</span></h4>
+    <p>Insider transaction filings show president and director Alec Amar executing <b>six transactions over roughly eighteen months, every one a sale and none a purchase</b>, a net disposal of about 137,500 subordinate voting shares. Individual sales include 27,500 shares on 2 January 2026 at $2.72, 1,800 on 1 April at $2.25, 25,700 on 8 April at $2.26 and 27,500 on 1 May at $3.56. Intent to sell notices covering a further 83,000 shares have been lodged. Across the last twelve months insiders as a group were net sellers. <span class="tag">Filed</span> Forms 4, Jan to May 2026</p>
+    <p>This cuts against the usual defence of a founder-led microcap, that interests are aligned through ownership. <span class="tag">Estimate</span> Two qualifications in fairness: the amounts are modest against Alec Amar's remaining ~1.37M direct shares, and routine personal sales evidence nothing improper. But there is no offsetting purchase at any point, including through the drawdown from the $9.20 high. Michel Amar's own holding fell from 8,047,081 shares, being 11.5% of the class at December 2025, to roughly <b>5.97M shares and 6.6%</b> by May 2026, chiefly through dilution rather than sales. <span class="tag">Market</span></p>
+    <p>The company also issues releases at a high cadence, several announcing intentions, letters of intent or conference attendance rather than binding commitments. The chief executive's background is chiefly in fashion and licensing rather than power engineering, which cuts both ways given he has assembled a technical team and secured a nine figure contract. The 7 July 2026 operational update was met with a share price decline of roughly 7%, which suggests the market has become inured to announcement flow. <span class="tag">Market</span></p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>An unverified association <span class="sev">Moderate</span></h4>
+    <p>Promotional material around this stock, including a podcast and third party write-ups, has associated DGXX with Peter Lynch, the former Fidelity Magellan manager, as a shareholder or backer. At least one critical commentator argues this refers to a different individual of the same name. <b>I could not verify any such holding in the ownership filings reviewed</b>, which relate to Michel Amar and affiliated entities at 8,047,081 shares, 11.5% of the class, as of 31 December 2025. <span class="tag">Filed</span> 13G/A. Treat the association as unverified absent a filed ownership document. That a case is marketed on a celebrity endorsement is itself information about the shareholder base.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Interest rate direction has reversed <span class="sev">Moderate</span></h4>
+    <p>At the 29 July 2026 meeting the Federal Open Market Committee held at 3.50&ndash;3.75% on a <b>9&ndash;3 vote, with all three dissents arguing to raise</b>. <span class="tag">Filed</span> Federal Open Market Committee statement, 29 Jul 2026 The June dot plot points to one quarter point increase by end 2026 and futures price two. This bites twice: a capital intensive builder seeking first time project debt faces a higher cost of capital, and a high beta pre-revenue equity faces multiple compression. <span class="tag">Estimate</span> Any model of this company built on falling rates needs revisiting.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Sector sentiment <span class="sev">Moderate</span></h4>
+    <p>A broad AI infrastructure reversal would hit this name harder than larger peers, and execution would not protect it. The cohort fell 25&ndash;38% in the month to mid July 2026 with contract wins and earnings beats failing to arrest the move. <span class="tag">Market</span></p>
+  </div>
+
+  <div class="risk sev-low">
+    <h4>Residual crypto exposure <span class="sev">Low</span></h4>
+    <p>$13.56M of Bitcoin and Ethereum revalue through earnings each quarter, injecting volatility unrelated to the AI business, and the holdings are carried below cost at $13.56M fair value against a $17.33M cost basis at 31 March 2026. <span class="tag">Filed</span> 10-Q, 15 May 2026</p>
+  </div>
+
+  <div class="risk sev-low">
+    <h4>Structural and listing <span class="sev">Low</span></h4>
+    <p>Dual U.S. and Canadian listing and regulatory regimes; a dual class structure in which proportionate voting shares carry 200 votes each; a recent conversion from IFRS to U.S. GAAP whose first full audited year is still ahead. <span class="tag">Filed</span> 10-Q, 15 May 2026</p>
+  </div>
+</section>
+
+<!-- ===================== 11. BULL / BASE / BEAR ===================== -->
+<section id="s11">
+  <h2 class="sec"><span class="n">11</span>Bull / base / bear</h2>
+  <p class="sub">Conditional scenarios with their preconditions, carrying no probabilities. They state what must be true, not what might be.</p>
+  <div class="cases">
+    <div class="case bear"><h4>Bear</h4>
+      <p>One of three failures. Construction slips past December 2026, triggering service credits or penalties and delaying all revenue. Project financing fails to close, a risk raised by AI infrastructure credit spreads widening through July 2026, forcing Phase 2 into equity at a depressed price or abandonment. Or Cerebras, facing its own margin pressure and OpenAI concentration, renegotiates, delays or reduces. Meanwhile the legacy business keeps shrinking, cash depletes into construction, and the programme is used at falling prices. The stock retests the lower part of its 52 week range. The mitigant is real: with no long-term debt, no lender can force an outcome, so the realistic bear case is severe dilution and a long wait rather than insolvency. <span class="tag">Estimate</span></p>
+      <p class="req">Requires: a schedule slip, a financing failure, or a counterparty change.</p></div>
+    <div class="case"><h4>Base</h4>
+      <p>Phase 1 arrives on time or slips a quarter. Cerebras revenue begins in 2027 and Phase 2 proceeds on a mix of debt and further equity, diluting existing holders. The additional 50 MW and the full $100M GPU run-rate do not arrive on the stated timeline. Fiscal 2027 revenue lands below the $250M floor, perhaps in the $100&ndash;160M region, still a step change on $31.7M. <span class="tag">Estimate</span> The company becomes a small operating AI colocation business rather than a story, and valuation settles between today's trailing multiple and the peer forward multiple, with the outcome turning on how much dilution occurred along the way.</p>
+      <p class="req">Requires: Phase 1 delivering roughly on time.</p></div>
+    <div class="case bull"><h4>Bull</h4>
+      <p>Phase 1 energises on schedule in December 2026 and Cerebras revenue begins. Project debt closes on reasonable terms, funding Phase 2 without further equity. Delivery becomes a reference for the next tenant and DGXX signs part of the additional 50 MW. NeoCloudz scales on the Vera Rubin and B300 fleet. Revenue approaches the lower half of the $250&ndash;300M target, at which the current ~$196M enterprise value is under 1 times sales for a contracted operator against peers at multiples of that. <span class="tag">Estimate</span> The re-rating would be large, though smaller per share than before the recent issuance.</p>
+      <p class="req">Requires: on-time delivery, Phase 2 financing, and new tenants.</p></div>
+  </div>
+</section>
+
+<!-- ===================== 12. RESEARCH SUMMARY ===================== -->
+<section id="s12">
+  <h2 class="sec"><span class="n">12</span>Research summary</h2>
+
+  <p>Digi Power X is an option on a real trend priced with real uncertainty. Stripped of narrative: a microcap that owns power capacity, has converted it into one large signed contract with a newly listed and currently profitable counterparty, has funded the first construction phase from its own cash, and has roughly five months until the date on which the case either proves itself or unravels.</p>
+
+  <p><b>What is verifiably strong.</b> No long-term debt, roughly $155M of cash, a signed ten year contract worth about $1.1B, long lead equipment secured and a substation built. At this size those are not trivial, and several microcap peers with louder narratives have none of them.</p>
+
+  <p><b>What is verifiably weak.</b> Revenue is falling, gross margin is negative, management compensation consumed roughly a third of quarterly revenue, the share count rose 199% in nineteen months, and the AI segment has yet to report a dollar. The distance between release framing and filed figures, Adjusted EBITDA of +$1.1M alongside filed EBITDA of &minus;$3.2M, warrants scepticism toward promotional communications generally.</p>
+
+  <p><b>What is not knowable today.</b> Whether Phase 1 meets 15 December. Whether project debt closes and on what terms. Whether the uncontracted two thirds of the fiscal 2027 target finds tenants. Analysis cannot resolve these in advance; disclosure will.</p>
+
+  <div class="note">
+    <p><b>What to watch, in order of weight.</b></p>
+    <p>1. Q2 2026 results on 13 August 2026: the first quarter with disclosed AI revenue, plus updated cash, capital expenditure and share count. 2. Any project level financing announcement, its terms and whether debt or equity, which determines the Phase 2 dilution question. 3. Construction language on Phase 1, watching for softening from December 2026 toward late 2026 or early 2027. 4. A second colocation tenant, the difference between one contract and a platform. 5. Programme usage and a reconciliation of the $102.86M against $72,363,650 discrepancy. 6. Any insider purchase, which would be the first in eighteen months. 7. A named tenant for the roughly 15 MW of uncommitted Columbiana capacity.</p>
+  </div>
+
+  <p>The company cannot be valued on current financials, because those financials describe a business it is actively dismantling. It can only be assessed on whether a specific construction project completes on a specific date and is financed on acceptable terms.</p>
+</section>
+
+<!-- ===================== 13. NULL CATEGORIES ===================== -->
+<section id="s13">
+  <h2 class="sec"><span class="n">13</span>Null categories</h2>
+  <p class="sub">Categories examined that produced nothing. An absent section is ambiguous; an explicit null is information.</p>
+  <div class="tw"><table class="nulls">
+    <thead><tr><th>Category</th><th>Status</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">AI segment revenue</td><td class="status">None</td><td>The Tier III AI data centre segment reported $0 in Q1 2026. First AI related revenues are described but unquantified. 10-Q, 15 May 2026</td></tr>
+      <tr><td class="lbl">Dividends</td><td class="status">None</td><td>No distribution appears in any period presented in this document. Capital is being consumed by construction and raised by equity issuance. 10-K, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Share buybacks</td><td class="status">None</td><td>The company is a net issuer throughout the periods presented, with an at-the-market programme active. 10-Q, 15 May 2026</td></tr>
+      <tr><td class="lbl">Total project budget</td><td class="status">None</td><td>No project budget appears in the filings and releases listed above, which is why the cost band in section 08 is an analyst estimate. 10-K, 31 Mar 2026; 10-Q, 15 May 2026; S-3, 17 Jul 2026</td></tr>
+      <tr><td class="lbl">Insider purchases</td><td class="status">None</td><td>No purchase appears in insider transaction filings over roughly eighteen months. Forms 4, Jan to May 2026</td></tr>
+      <tr><td class="lbl">Peter Lynch shareholding</td><td class="status caution-t">Not established</td><td>No such holding appears in the ownership filings reviewed, being Schedule 13G/A filings for Michel Amar and affiliates. Those report holdings above the beneficial ownership threshold only, so a smaller position would not appear and absence cannot be established from them. Also named in what was not checked. 13G/A, 31 Dec 2025</td></tr>
+      <tr><td class="lbl">Late filing notifications</td><td class="status">None</td><td>No NT 10-K, NT 10-Q, NT 20-F or NT 40-F has been filed at any point.</td></tr>
+      <tr><td class="lbl">Schedule 13D positions</td><td class="status">None</td><td>No Schedule 13D was located, so no activist position is on record. Only Schedule 13G/A filings appear.</td></tr>
+      <tr><td class="lbl">Analyst coverage</td><td class="status">Covered above</td><td>Not a null: coverage exists and is discussed in section 08, running to Alliance Global Partners and one other contributor. A consensus drawn from one or two contributors carries little averaging benefit.</td></tr>
+      <tr><td class="lbl">Price target issued here</td><td class="status">None</td><td>No target price is issued in this document. Third party targets are reported in section 08 for context only.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 14. METHODOLOGY & SOURCES ===================== -->
+<section id="s14">
+  <h2 class="sec"><span class="n">14</span>Methodology &amp; sources</h2>
+
+  <h3>Pricing basis and tagging</h3>
+  <p>Market figures are struck on the <b>31 July 2026 close</b> at $3.68. The as-of date of this document is 1 August 2026; the two differ because the document was built after the close it uses. Every material claim carries a provenance tag, defined in the table below. Tags are not colour coded, because a filed fact can be bad news.</p>
+
+  <h3>Provenance tags</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Tag</th><th>What it asserts</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl"><span class="tag">Filed</span></td><td>Stated in an SEC filing or company release, cited by form and date. Also covers a dated official publication by a named non-SEC issuer, with the issuer named in the source line. The extension is used here for the Federal Open Market Committee statement of 29 July 2026 and its accompanying projections.</td></tr>
+      <tr><td class="lbl"><span class="tag">Estimate</span></td><td>Derived or inferred here. The arithmetic is shown.</td></tr>
+      <tr><td class="lbl"><span class="tag">Open</span></td><td>Expected but unconfirmed. Nothing filed either way.</td></tr>
+      <tr><td class="lbl"><span class="tag">Market</span></td><td>Price, volume, float, published targets and ratings, stamped with the close or publication date. A third party's target or rating is market data, attributed to the firm that issued it and never adopted here.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Sources</h3>
+  <p>Filings and company releases are primary. Market and sector data are used for corroboration and for figures that only market sources carry.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Source</th><th class="when">Date</th><th>Used for</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Form 10-Q, quarter ended 31 Mar 2026</td><td class="when">15 May 2026</td><td>Q1 financials, segment data, share counts, digital assets, warrants, options, RSUs, related party compensation</td></tr>
+      <tr><td class="lbl">Form 10-K, year ended 31 Dec 2025</td><td class="when">31 Mar 2026</td><td>FY2025 revenue $34.19M, net loss $28.36M, loss per share $(0.64)</td></tr>
+      <tr><td class="lbl">Form 10-K/A, Amendment No. 1</td><td class="when">27 Apr 2026</td><td>Part III: 2025 chief executive compensation of $12,025,227; 72,826,680 subordinate voting shares at that date; director, related party and auditor fee disclosure</td></tr>
+      <tr><td class="lbl">Form 8-K</td><td class="when">16 Mar 2026</td><td>US Data Centers structure: 55% stake, ~35% founder equity, ARMS only scope, equipment at cost</td></tr>
+      <tr><td class="lbl">Form 8-K</td><td class="when">8 May 2026</td><td>Cerebras colocation and master services agreement: phases, dates, financing condition, contract value</td></tr>
+      <tr><td class="lbl">Form 424B5</td><td class="when">8 May 2026</td><td>Programme upsizing to $175M; $72,363,650 sold under the first supplement; 3.0% commission; $6.19 close on 7 May</td></tr>
+      <tr><td class="lbl">Form S-3</td><td class="when">17 Jul 2026</td><td>Resale registration for 380,590 warrant shares; 2 July share count of 98,543,355; option, warrant and RSU schedule; 108,446,376 fully diluted; 55 MW Columbiana description</td></tr>
+      <tr><td class="lbl">Forms 4, Alec Amar</td><td class="when">Jan to May 2026</td><td>Sales dated 2 Jan, 2 Feb, 1 Apr, 8 Apr, 9 Apr and 1 May 2026, with no offsetting purchases</td></tr>
+      <tr><td class="lbl">Schedule 13G/A</td><td class="when">31 Dec 2025</td><td>Michel Amar and affiliates, 8,047,081 shares, 11.5% of the class</td></tr>
+      <tr><td class="lbl">Company releases</td><td class="when">12 Jan, 20 Apr, 5 May, 8 May, 15 May, 3 Jun, 7 Jul 2026</td><td>Supermicro purchase, SubQ AI agreement, Cerebras announcement, programme upsizing, Q1 results and grants, Vera Rubin commitment, operations update</td></tr>
+      <tr><td class="lbl">Third party research, Alliance Global Partners</td><td class="when">6 May and 15 May 2026</td><td>Target raised to $10 from $7, then to $12 from $10, Buy maintained, analyst Brian Kinstlinger, as reported by the distributing service</td></tr>
+      <tr><td class="lbl">Third party research, H.C. Wainwright</td><td class="when">17 Nov 2025</td><td>Target of $5.00, analyst Kevin Dede, as reported by the distributing service</td></tr>
+      <tr><td class="lbl">Market and sector data</td><td class="when">31 Jul 2026 and earlier</td><td>Price, beta, 52 week range, trailing revenue, peer capacity and performance, Cerebras listing and results, credit spread reporting, Federal Open Market Committee statement of 29 July 2026</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>What was not checked</h3>
+  <p>A filing sweep was performed for this revision and reached 2 August 2026, covering the annual, quarterly, current, registration, prospectus, ownership and insider transaction families in both the domestic and foreign private issuer forms. It returned nothing after the shelf registration of 17 July 2026, which is a finding rather than a gap. No notification of late filing has been made in any period, on any form. Market data was not repriced because the last close remains 31 July 2026. Specifically not reached: any Q2 2026 filing, which is not yet due; any Canadian continuous disclosure lodged on SEDAR+ that does not have a U.S. counterpart; and any register of beneficial ownership below the threshold at which a Schedule 13G becomes reportable, which is why the shareholding named in section 13 reads Not established rather than None. An unexamined area is a gap rather than a clean bill.</p>
+
+  <h3>Known limitations carried forward</h3>
+  <p>Two defects are identified and not resolved in this version. Three carried at the previous revision have been closed: the figures owed to the source are restored to the body, the proportionate voting share count is now cited to a filing, and the third party target is attributed and dated.</p>
+  <div class="note caution">
+    <p><b>Remaining programme capacity is a band, not a figure.</b> The text at issue reads: "anywhere from roughly $37M to $70M undrawn under the $175M programme." The Q1 quarterly report and the 8 May prospectus supplement do not reconcile, and resolving them requires the Q2 quarterly report, which was not available and was outside the scope of this pass. Until then the band stands.</p>
+    <p><b>The Columbiana cost band is an analyst estimate with no company figure behind it.</b> The text at issue reads: "in the region of $7&ndash;12M per MW for powered shell, electrical plant and cooling, implying roughly $280&ndash;480M for the full campus." No project budget has been disclosed. Replacing the band with a sourced figure requires research outside this pass.</p>
+  </div>
+</section>
+
+<!-- ===================== 15. DOCUMENT LOG ===================== -->
+<section id="s15">
+  <h2 class="sec"><span class="n">15</span>Document log</h2>
+  <p class="sub">Newest first. One entry per revision date, consolidated as net change since the previous entry. The original build entry is preserved as written.</p>
+  <div class="log">
+
+    <div class="logentry current">
+      <div class="when">2 August 2026 <span class="latest">Latest</span></div>
+      <div class="basis">Priced off 31 Jul 2026 close &middot; $3.68 &middot; ~$365M cap</div>
+      <div class="correction">
+        <span class="lbl">Correction</span>
+        <p><b>A third party target was described as a consensus.</b> The valuation section previously read that "the one year consensus sits near $12 from very few contributors". The $12 is not a consensus: it is Alliance Global Partners' own target, raised from $10 on 15 May 2026. The only other published target is H.C. Wainwright's $5.00 of 17 November 2025. The sentence has been replaced with both targets, each attributed to the firm that issued it and dated, and with the observation that averaging two figures struck eight months apart on different facts would describe nothing.</p>
+      </div>
+      <p>Filing sweep performed and reached 2 August 2026 across the annual, quarterly, current, registration, prospectus, ownership and insider transaction families in both the domestic and foreign private issuer forms. It returned nothing after the shelf registration of 17 July 2026, and no notification of late filing exists in any period. Not repriced: the last close remains 31 Jul 2026 at $3.68, since 31 July was a Friday. Market capitalisation, enterprise value and every multiple are therefore unchanged.</p>
+      <p><b>Backlog closed.</b> Six figures owed to the record are restored to the body rather than to a quotation: the 31 July session change of &minus;3.16% against a $3.80 prior close, the $3.61 after-hours price, session volume of 1.90M against a 4.75M average, and a headcount of 17, all now carried in section 01; and the founder holding of roughly 5.97M shares restored beside the 6.6% that survived alone. The comparison lost with an em dash is restored and recomputed rather than reinstated at its old value: $6.19 on 7 May 2026 is roughly 68% above the 31 July close of $3.68. The proportionate voting share count of 3,333, previously traceable to no source, is cited to the shelf registration of 17 July 2026, which also states the 666,600 subordinate shares issuable on its conversion, so the share reconciliation in section 01 now shows a filed input rather than an unexplained one. Three deferrals are removed; two remain, being the at-the-market capacity band and the Columbiana cost band, both of which still need a figure the filings do not carry.</p>
+      <p><b>Added from the sweep.</b> President Alec Amar's 2025 total compensation of $7,425,695, so the two named officers together drew $19,450,922, or 57% of FY2025 revenue against 35% for the chief executive alone. Directors and executive officers as a group held 11.77% of the subordinate class plus all proportionate voting shares, about 12.55% of voting power at 27 April 2026. Both from the Part III amendment of 27 April 2026. A third disclosure quality flag is added: the annual report puts holdings at 31 March 2026 at approximately 51 bitcoin and 1,010 Ethereum at one named custodian, while the quarterly report covering the same date carries 166 Bitcoin and 1,013 Ethereum at $13.56M fair value, and the two are nowhere reconciled.</p>
+    </div>
+
+    <div class="logentry">
+      <div class="when">1 August 2026</div>
+      <div class="basis">Priced off 31 Jul 2026 close &middot; $3.68 &middot; ~$365M cap</div>
+      <div class="correction">
+        <span class="lbl">Correction</span>
+        <p><b>Insider alignment.</b> The governance discussion previously leaned on founder ownership as evidence of alignment without examining the insider record. Forms 3 and 4 were never checked in the original build. They show President and director Alec Amar making six transactions in roughly eighteen months, all sales and none purchases, netting about 137,500 shares, with no insider buying at any point, including through the drawdown from the $9.20 high. The governance section now carries the actual record.</p>
+      </div>
+      <p>Refreshed against a Form S-3 filed July 17, a systematic sweep of every EDGAR form type, and macro data through the July 29 FOMC. Changes are stated as the net difference from the original build. No new 8-K, Q2 pre-announcement, proxy filing or litigation has appeared; Q2 earnings still track to August 13, 2026.</p>
+      <p><b>Share count, dilution and valuation.</b> Share count 90,420,824 &rarr; 98,543,355 (Form S-3, July 2 figure); cumulative dilution since December 2024 restated +174% &rarr; +199%. The 8.1M-share increase surfaced only on the cover of a resale registration filed for an unrelated purpose, a disclosure mechanism now flagged explicitly in the risk section. Repriced $3.98 &rarr; $3.68 (Friday July 31 close); market cap ~$360M &rarr; ~$365M; enterprise value ~$194M &rarr; ~$196M; multiples 6.1&times; / 0.78&times; / 0.65&times; &rarr; 6.2&times; / 0.79&times; / 0.66&times;. Total shares including proportionate voting as converted are 99,209,955. ATM capacity ~$72M &rarr; a $37&ndash;70M range: the May 8 Form 424B5 reports $72,363,650 sold under the first supplement, which does not reconcile with the 10-Q's $102.86M; presented as an unresolved discrepancy rather than a point estimate, pending the Q2 10-Q. A.G.P. commission of 3.0% added. Overhang schedule replaced: options 3,485,000 at C$4.90, RSUs 4,670,946, warrants 1,080,475, being 9,236,421 shares, 9.4% of the count, against a stated 108,446,376 fully diluted. RSU pool grew 58% in three months. Separate C$9.84 option grant and 1,730,000 RSUs vesting 2027&ndash;29 added.</p>
+      <p><b>Governance and disclosure.</b> CEO compensation added: the 10-K/A of April 27, 2026, a Part III amendment never read in the original build, discloses 2025 CEO compensation of $12,025,227, roughly 35% of FY2025 revenue at a company that lost $28.36M. New callout in the financial performance section. US Data Centers rewritten: the original build flagged the shifting ownership percentages as a disclosure inconsistency; a Form 8-K dated March 16, 2026 sets out the structure explicitly, being a 55% stake, ~35% founder equity held by the USDC management team including Hans Vestberg, ARMS-only scope with no site-level revenue participation, and equipment sold to DGXX at cost. The criticism now addresses messaging drift rather than substance. Clean-filing record confirmed: no Schedule 13D, and no NT 10-K, NT 10-Q, NT 20-F or NT 40-F at any point, so no filing has ever been late. Recorded in sources.</p>
+      <p><b>Macro, sector and operations.</b> Interest rate direction reversed: the July 29 FOMC held 9&ndash;3 with all three dissents favouring a hike, and the dot plot points to an increase by year-end. New subsection in risks; anyone modelling this company on falling rates should revisit that input. Sector and credit deterioration added: neocloud peers fell 25&ndash;38% in a month, with contract wins and earnings beats failing to arrest it; AI-infrastructure credit spreads widened materially, with CoreWeave's 2032 bonds at 10.32% on a junk B rating, which sharpens the Phase 2 financing risk. Columbiana is a 55 MW build: against a 40 MW Cerebras contract, implying ~15 MW of flagship capacity under construction but uncommitted; portfolio-wide secured power of ~400 MW added to the business model section. Longer-dated guidance recorded: management targets $450&ndash;500M in 2028 and $800M&ndash;$1B in 2029, included for completeness with little weight attached at this stage.</p>
+    </div>
+
+    <div class="logentry">
+      <div class="when">26 July 2026 (original build)</div>
+      <div class="basis">Priced off 24 Jul 2026 close &middot; $3.98 &middot; ~$360M cap</div>
+      <p>Report constructed from the Q1 2026 Form 10-Q (filed May 15), the FY2025 Form 10-K (March 31), Forms 8-K through July 7, and company press releases through the July 7 operations update. Priced off a $3.98 reference (July 24 close), a share count of 90,420,824, a market capitalisation of roughly $360M and an enterprise value of ~$194M, giving multiples of 6.1&times; trailing and 0.78&times; / 0.65&times; on the FY2027 target range.</p>
+      <p>Structure: ten numbered sections from business model through final summary, with inline Fact / Estimate / Risk tagging throughout, a megawatt ladder for the growth path, and three scenario cases. No rating issued.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="norec">
+    No buy, sell, or hold recommendation is issued. This document is for research
+    and educational purposes and is not investment advice. Verify all figures
+    against primary filings on sec.gov before acting.
+  </div>
+  <p style="margin-top:16px">DGXX &middot; Digi Power X Inc. &middot; Equity Research Report &middot; as of 2 August 2026</p>
+</footer>
+
+</div>
+</body>
+</html>

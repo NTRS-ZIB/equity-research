@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>BGDE &middot; Big Digital Energy, Inc. &middot; Catalyst Calendar &middot; as of 2 August 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================================
+   PER-TICKER PALETTE
+   ========================================================================= */
+:root{
+  /* Accent derived from the Big Digital Energy mark. The logo carries two
+     colours: a chartreuse symbol #B3F513 and an off-white wordmark #EAEAE5.
+     The wordmark is achromatic, so the chartreuse is the brand colour.
+     #B3F513 is H78 S92% L52%: too light and too saturated to hold at 14px on
+     white. Normalised to H78 S72% L28%, giving #5D7B14 at 4.87:1 on paper.
+     Hue 78 sits clear of every semantic hue by more than 20 degrees, so the
+     colour is carried unrotated. */
+  --accent:      #5D7B14;
+  --accent-deep: #3C4F0D;
+  --accent-wash: rgba(93,123,20,0.06);
+  --accent-line: rgba(93,123,20,0.22);
+}
+
+/* ============================================================================
+   SHARED STYLESHEET v1.50 : BEGIN
+   ========================================================================= */
+:root{
+  color-scheme: light only;
+
+  --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
+  --line:#DEE6EC;   --line-hard:#C0CDD7;
+  --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
+
+  --pos:#0B7A50;      --pos-bg:#E7F4EE;
+  --neg:#B02A21;      --neg-bg:#FBECEA;
+  --caution:#90600A;  --caution-bg:#FBF2E0;
+  --assume:#4F3FA3;   --assume-bg:#EFEDFA;
+
+  --display:'Archivo',ui-sans-serif,system-ui,'Helvetica Neue',Arial,sans-serif;
+  --body:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+
+  --measure:78ch;
+  --col:760px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html,body{background:var(--canvas) !important;background-color:var(--canvas) !important}
+body{
+  margin:0;color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 22px 96px;background:var(--paper);
+      border-left:1px solid var(--line);border-right:1px solid var(--line)}
+p{max-width:var(--measure)}
+/* Boxed prose fills its container: the box supplies its own measure, so the
+   78ch cap applies to top-level running prose only. */
+.first li,.assume p,.note p,.cat p,.risk p,.logentry p,.oc p,.case p,
+.cat-meta,.logentry .basis{max-width:none}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:var(--accent-deep)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- masthead ---------- */
+.mast{padding:44px 0 26px;border-bottom:2px solid var(--line-hard);margin-bottom:8px;
+      position:relative;padding-left:20px}
+.mast::before{content:"";position:absolute;left:0;top:44px;bottom:26px;
+      width:4px;background:var(--accent)}
+.ticker{font-family:var(--mono);font-size:44px;font-weight:700;letter-spacing:-1px;
+      line-height:1;color:var(--accent);margin:0}
+.headline{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.22;
+      color:var(--ink);margin:16px 0 0}
+.functional{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--ink-faint);margin:18px 0 0}
+.mast-strip{display:flex;flex-wrap:wrap;gap:26px;margin-top:20px;padding-top:16px;
+      border-top:1px solid var(--line)}
+.mast-strip div{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint)}
+.mast-strip b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-top:3px}
+
+/* ---------- banner: framing ---------- */
+.first{background:var(--canvas);border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:20px 24px;margin:30px 0 12px}
+.first h2{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.04em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 12px}
+.first ol{margin:0;padding-left:20px}
+.first li{margin-bottom:9px}
+.first li:last-child{margin-bottom:0}
+
+/* ---------- sections ---------- */
+section{padding-top:38px}
+h2.sec{font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);
+      margin:0 0 4px;padding-bottom:10px;border-bottom:1px solid var(--line-hard);
+      display:flex;align-items:baseline;gap:12px}
+h2.sec .n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);
+      letter-spacing:.06em;flex:none}
+.sub{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);margin:10px 0 18px;
+      max-width:var(--measure)}
+h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink-dim);
+      margin:26px 0 8px}
+
+/* ---------- provenance tags (signature) ---------- */
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);
+      background:var(--panel-2);border:1px solid var(--line);
+      border-radius:2px;padding:1px 6px;vertical-align:1px;white-space:nowrap}
+
+/* ---------- assumption block ---------- */
+.assume{background:var(--assume-bg);border-left:4px solid var(--assume);
+      padding:16px 20px;margin:20px 0}
+.assume .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--assume);display:block;margin-bottom:7px}
+.assume p{margin:0}
+
+/* ---------- callouts ---------- */
+.note{border:1px solid var(--line);border-left:4px solid var(--ink-faint);
+      background:var(--canvas);padding:16px 20px;margin:20px 0}
+.note.pos{border-left-color:var(--pos);background:var(--pos-bg)}
+.note.neg{border-left-color:var(--neg);background:var(--neg-bg)}
+.note.caution{border-left-color:var(--caution);background:var(--caution-bg)}
+.note p{margin:0}
+.note p + p{margin-top:10px}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+thead th{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--ink-dim);text-align:left;
+      padding:9px 12px;border-bottom:2px solid var(--line-hard);white-space:nowrap}
+tbody td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--canvas)}
+td.num,th.num{font-family:var(--mono);text-align:right;white-space:nowrap}
+/* td.when marks a timing column. An unmarked cell counts as prose. */
+td.when{font-family:var(--mono);white-space:nowrap}
+td.lbl{font-weight:600}
+.pos-t{color:var(--pos);font-weight:600}
+.neg-t{color:var(--neg);font-weight:600}
+.caution-t{color:var(--caution);font-weight:600}
+
+/* ---------- cases ---------- */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.case{border:1px solid var(--line);border-top:3px solid var(--ink-faint);
+      background:var(--paper);padding:18px}
+.case.bull{border-top-color:var(--pos)}
+.case.bear{border-top-color:var(--neg)}
+.case h4{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 10px}
+.case.bull h4{color:var(--pos)} .case.bear h4{color:var(--neg)}
+.case p{font-size:15px;margin:0}
+.case .req{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+
+/* ---------- risks ---------- */
+.risk{border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:16px 20px;margin-bottom:12px}
+.risk.sev-high{border-left-color:var(--neg)}
+.risk.sev-med{border-left-color:var(--caution)}
+.risk.sev-low{border-left-color:var(--ink-faint)}
+.risk h4{font-family:var(--display);font-size:15.5px;font-weight:600;margin:0 0 6px;
+      display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.risk .sev{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase}
+.risk.sev-high .sev{color:var(--neg)}
+.risk.sev-med .sev{color:var(--caution)}
+.risk.sev-low .sev{color:var(--ink-faint)}
+.risk p{margin:0;font-size:15.5px}
+
+/* ---------- null categories ---------- */
+.nulls td.lbl{width:26%}
+.nulls .status{font-family:var(--mono);font-size:12px;white-space:nowrap}
+
+/* ---------- document log ---------- */
+.log{margin-top:14px}
+.logentry{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:12px}
+.logentry.current{border-left:4px solid var(--accent);background:var(--accent-wash)}
+.logentry .when{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);
+      display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.latest{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-line);
+      background:var(--paper);border-radius:2px;padding:1px 6px}
+.logentry .basis{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-bottom:12px}
+.logentry p{font-size:15.5px;margin:0 0 9px}
+.logentry p:last-child{margin-bottom:0}
+.correction{border:1px solid var(--neg);border-left:4px solid var(--neg);
+      background:var(--neg-bg);padding:12px 16px;margin-bottom:14px}
+.correction .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--neg);display:block;margin-bottom:5px}
+
+/* ---------- footer ---------- */
+footer{margin-top:44px;padding-top:22px;border-top:2px solid var(--line-hard)}
+footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width:none}
+.norec{border:1px solid var(--line-hard);background:var(--canvas);padding:16px 20px;
+      margin-top:20px;font-family:var(--mono);font-size:12.5px;color:var(--ink-dim)}
+
+/* ---------- catalyst cards (calendar) ---------- */
+.cat{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:14px;border-left:4px solid var(--line-hard)}
+.cat.up{border-left-color:var(--pos)}
+.cat.down{border-left-color:var(--neg)}
+.cat.two{border-left-color:var(--caution)}
+.cat.neutral{border-left-color:var(--ink-faint)}
+.cat-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.cid{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);flex:none}
+.cat-head h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink);
+      margin:0;flex:1 1 auto;min-width:200px}
+.dir{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;white-space:nowrap}
+.cat.up .dir{color:var(--pos)} .cat.down .dir{color:var(--neg)}
+.cat.two .dir{color:var(--caution)} .cat.neutral .dir{color:var(--ink-faint)}
+.cat-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:10px 0 12px;padding:9px 0;
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+      font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
+.cat-meta b{color:var(--ink);font-weight:600}
+.cat p{margin:0 0 9px;font-size:15.5px}
+.cat p:last-child{margin-bottom:0}
+.cat.resolved{background:var(--canvas);border-left-color:var(--ink-faint)}
+.cat.resolved .dir{color:var(--ink-faint)}
+
+/* ---------- horizon bands (calendar) ---------- */
+.band{display:flex;align-items:center;gap:14px;margin:30px 0 16px}
+.band-t{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--ink-dim);white-space:nowrap}
+.band-r{flex:1;height:1px;background:var(--line-hard)}
+.band-c{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);white-space:nowrap}
+
+/* ---------- upside / downside pair ---------- */
+.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0}
+.oc{border:1px solid var(--line);padding:11px 14px;background:var(--paper)}
+.oc.up-c{border-left:3px solid var(--pos)}
+.oc.down-c{border-left:3px solid var(--neg)}
+.oc .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.09em;
+      text-transform:uppercase;display:block;margin-bottom:5px}
+.oc.up-c .lbl{color:var(--pos)} .oc.down-c .lbl{color:var(--neg)}
+.oc p{margin:0;font-size:14.5px;line-height:1.5}
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  body{font-size:16px}
+  .wrap{padding:0 16px 70px;border-left:none;border-right:none}
+  .ticker{font-size:34px}
+  .headline{font-size:23px}
+  .cases{grid-template-columns:1fr}
+  .outcomes{grid-template-columns:1fr}
+  .mast-strip{gap:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none !important;transition:none !important}
+}
+@media print{
+  body{font-size:11pt}
+  .wrap{max-width:none;border:none}
+  section{page-break-inside:avoid}
+}
+/* ============================================================================
+   SHARED STYLESHEET v1.50 : END
+   ========================================================================= */
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<!-- ===================== MASTHEAD ===================== -->
+<header class="mast">
+  <p class="ticker">BGDE</p>
+  <h1 class="headline">146 megawatts, no signed tenant, and an unpaid judgment the company agreed to</h1>
+  <p class="functional">BGDE &middot; Big Digital Energy, Inc. &middot; Catalyst Calendar &middot; as of 2 August 2026</p>
+  <div class="mast-strip">
+    <div>Dated catalysts <b>9</b></div>
+    <div>Standing conditions <b>10</b></div>
+    <div>Resolved <b>4</b></div>
+    <div>Horizon <b>12 months</b></div>
+    <div>Pricing basis <b>31 Jul 2026 close</b> <span class="tag">Market</span></div>
+  </div>
+</header>
+
+<!-- ===================== BASIS ===================== -->
+<div class="first">
+  <h2>Basis</h2>
+  <ol>
+    <li>Nine items are genuinely <em>scheduled</em>. Ten are event-driven or continuous and could land any day, which is why they sit in Standing conditions rather than in a horizon band.</li>
+    <li>Timing confidence rates the <em>date</em>, never the outcome. A High-confidence catalyst can still be a coin flip.</li>
+    <li>Estimated dates are cadence-based until the company announces. Treat them as approximate.</li>
+  </ol>
+</div>
+
+<!-- ===================== 1. DATED CATALYSTS ===================== -->
+<section id="s1">
+  <h2 class="sec"><span class="n">01</span>Dated catalysts</h2>
+  <p class="sub">Banded 0&ndash;3 / 3&ndash;6 / 6&ndash;12 months, earliest first. Numbering is gapless and runs straight through the bands. An ID marks position in the current ordering and changes between revisions, so catalysts are named by title.</p>
+
+  <div class="band"><span class="band-t">0&ndash;3 months</span><span class="band-r"></span><span class="band-c">D1&ndash;D4</span></div>
+
+  <div class="cat two" id="cat-q2-2026-earnings-release">
+    <div class="cat-head">
+      <span class="cid">D1</span>
+      <h3>Q2 2026 earnings release and Form 10-Q</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>~mid-August 2026</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>High</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>BGDE is a calendar-year filer. The FY2025 10-K was filed 31 March 2026 and the most recent reported quarter is Q1 2026, filed 14 May 2026. Q1 showed revenue of $4.8M and net income of $0.6M, but the profit came entirely from $10.2M of non-recurring legal gains; operations consumed $17.1M of cash and management disclosed substantial doubt about the ability to continue as a going concern.</p>
+    <p>The August release covers Q2 2026: the first full quarter including the Endeavor colocation agreement signed 27 April 2026, and the first read on operations under the current management team without a large one-off gain flattering the result. Watch whether burn moderated, whether the colocation deal is generating cash, and whether stockholders' equity cleared $5M at 30 June.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Burn falls below the Q1 rate of $17.1M as transition costs roll off, and colocation revenue lands.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Burn near the Q1 rate with no non-recurring explanation, and equity below the $5M Nasdaq threshold.</p></div>
+    </div>
+    <div class="assume">
+      <span class="lbl">Analyst assumption</span>
+      <p>The date is a cadence estimate from third-party sources, not a company announcement.</p>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-Q, 14 May 2026; Form 10-K, 31 March 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat neutral" id="cat-summer-conference-circuit">
+    <div class="cat-head">
+      <span class="cid">D2</span>
+      <h3>Summer conference circuit</h3>
+      <span class="dir">Neutral</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>July to September 2026</b></div>
+      <div>Impact <b>Low</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Open</span></div>
+    </div>
+    <p>Summer carries the digital infrastructure and mining conference season. BGDE presented at the Emerging Growth Conference in January 2026 and released an investor presentation in May 2026 through its investor relations advisor. With effectively no sell-side coverage, conference appearances are one of the few channels through which the equity reaches new holders.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Investor discovery, or a deal disclosed alongside an appearance.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Appearances without operational news reinforce the gap between presentation and execution.</p></div>
+    </div>
+    <div class="assume">
+      <span class="lbl">Analyst assumption</span>
+      <p>No 2026 summer appearance has been announced. The window is inferred from prior cadence.</p>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Company release, 15 January 2026; Form 8-K, May 2026 investor presentation. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat down" id="cat-series-d-conversions-begin">
+    <div class="cat-head">
+      <span class="cid">D3</span>
+      <h3>Series D conversions become available</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>30 August 2026</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>High</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The Series D preferred becomes convertible on 30 August 2026 at 95% of the lowest five-day VWAP, subject to a $1.80 floor. Because the conversion price tracks a falling share price, the number of shares issued rises as the stock weakens. Two limits apply and are frequently conflated: a 4.99% beneficial ownership blocker capping what the holder may own at any moment, and a 19.99% exchange cap on aggregate issuance that lifts only on shareholder approval.</p>
+    <p>The resale registration statement on Form S-3 was filed 20 July 2026 and must be declared effective by 29 August, or 28 September if fully reviewed. Full mechanics sit in the dilution overlay in section 5.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Conversions are slow and priced well above the floor, and the registration clears without extended review.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Conversions print at or near the $1.80 floor, adding shares into a falling price and compounding the decline.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K, 6 July 2026; Form S-3, 20 July 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-jv-loan-maturity">
+    <div class="cat-head">
+      <span class="cid">D4</span>
+      <h3>JV loan to 10NetZero matures</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>13 October 2026</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Confidence <b>High</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>BGDE is sole Manager of Texas Load House, LLC and lent its 50% partner 10NetZero $4.9M. The loan matures 13 October 2026; if unpaid, 10NetZero's interest transfers to BGDE at 10% per month, giving full ownership within ten months of default. Total cash committed to Texas is therefore roughly $14.9M rather than the $10M land price, drawn from a balance that stood at $2.4M on 31 March 2026 before the Series D closed.</p>
+    <p>The structure also qualifies the 50/50 description: BGDE financed both sides of the venture.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Repayment returns $4.9M of scarce liquidity, or default consolidates a site BGDE already manages at no further cash cost.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A partner unable to repay $4.9M is unlikely to fund its half of a 300 MW buildout, and it is 10NetZero's gas platform that underpins the behind-the-meter plan.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K, 20 July 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="band"><span class="band-t">3&ndash;6 months</span><span class="band-r"></span><span class="band-c">D5&ndash;D6</span></div>
+
+  <div class="cat two" id="cat-q3-2026-earnings-release">
+    <div class="cat-head">
+      <span class="cid">D5</span>
+      <h3>Q3 2026 earnings, first full colocation quarter</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>~mid-November 2026</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>High</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>The first release capturing a full quarter of the Endeavor colocation agreement, and the first clean operational benchmark for whether the arrangement produces cash. It also carries the second quarterly test of the $5M Nasdaq equity condition.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>A revenue run rate that annualises above the Q1 result, with burn contained.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Colocation revenue fails to appear at scale, and equity falls below the threshold with no financing event to offset it.</p></div>
+    </div>
+    <div class="assume">
+      <span class="lbl">Analyst assumption</span>
+      <p>The November date is a cadence estimate, not a company announcement.</p>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-Q filing cadence. <span class="tag">Estimate</span></p>
+  </div>
+
+  <div class="cat two" id="cat-annual-meeting-series-d-vote">
+    <div class="cat-head">
+      <span class="cid">D6</span>
+      <h3>Annual meeting and Series D issuance vote</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>By 14 November 2026</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>High</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Under the Series D purchase agreement BGDE committed to hold its annual meeting no later than 14 November 2026. A confirmed agenda item seeks stockholder approval to issue conversion and warrant shares above the 19.99% exchange cap. That vote is the gate on the larger dilution rather than a procedural item: it determines whether issuance can run to the full amount registered on Form S-3.</p>
+    <p>Also on watch: director elections, with the board reconstituted in April 2026, and any further capital-structure proposals.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>A forum to disclose offtaker progress, and headroom requested no larger than the instrument requires.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Approval sought well beyond the Series D signals how much further issuance management anticipates.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K, 6 July 2026, Series D purchase agreement. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="band"><span class="band-t">6&ndash;12 months</span><span class="band-r"></span><span class="band-c">D7&ndash;D8</span></div>
+
+  <div class="cat up" id="cat-first-ai-hpc-revenue">
+    <div class="cat-head">
+      <span class="cid">D7</span>
+      <h3>First AI and HPC revenue from converted capacity</h3>
+      <span class="dir">Up</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>H1 2027</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>Low</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>Converting the 146 MW operational base and the Texas buildout into AI and HPC hosting revenue requires three things in sequence: a signed tenant, site fit-out for cooling, electrical and network, and compute deployment. Management cites potential revenue of $140M to $225M per 100 MW at 40% to 65% site-level margins against $20M to $45M from mining. On those economics even 25 MW contracted would represent roughly $35M to $56M of annual revenue. The 2024 agreement with BE Global produced no revenue.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Even 25 MW contracted at the cited economics would approach the whole of FY2025 revenue from a fraction of capacity.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Fit-out alone typically runs 12 to 24 months and no tenant is signed, so H1 2027 assumes a contract that does not yet exist.</p></div>
+    </div>
+    <div class="assume">
+      <span class="lbl">Analyst assumption</span>
+      <p>The H1 2027 window is aspirational. It is inconsistent with the stated fit-out timeline unless a tenant signs almost immediately, and the per-megawatt economics are management projections rather than contracted terms.</p>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K, May 2026 investor presentation. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-strategic-transactions-committee">
+    <div class="cat-head">
+      <span class="cid">D8</span>
+      <h3>Strategic Transactions Committee outcome</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>H1 2027</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>Low</b></div>
+      <div>Provenance <span class="tag">Open</span></div>
+    </div>
+    <p>A Strategic Transactions Committee was formed under the current board with a mandate covering mergers, acquisitions and joint ventures. Termination of the stockholder rights agreement on 8 June 2026, ahead of its February 2027 expiry, removes the anti-takeover protection. At roughly $30M of market capitalisation against 146 MW of energised capacity, BGDE is small relative to the asset it holds.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>An offer or partnership at a premium would be the most direct route to realising the value of the power base.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Removing the rights plan may reflect the weak standalone position rather than confidence, and a process that runs without an outcome consumes cash and attention.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Company releases, April 2026 and 9 June 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="band"><span class="band-t">Beyond 12 months, context only</span><span class="band-r"></span><span class="band-c">D9</span></div>
+  <p class="sub">A structural item that shapes the backdrop but does not trade in the window.</p>
+
+  <div class="cat neutral" id="cat-next-bitcoin-halving">
+    <div class="cat-head">
+      <span class="cid">D9</span>
+      <h3>Next Bitcoin halving</h3>
+      <span class="dir">Neutral</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>~April 2028</b></div>
+      <div>Impact <b>Low</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>The subsidy halves to 1.5625 BTC at block height 1,050,000, expected around April 2028. It is the dominant long-run force across the mining sector and falls outside this calendar's window. With self-mining at 4.7% of FY2025 revenue, it does not cut BGDE's revenue the way it cuts a pure-play miner's: it transmits through hosting customers' margins, and therefore through their ability to pay and their appetite for capacity. For a landlord that is counterparty and utilisation risk, and an argument for converting megawatts to AI and HPC before 2028.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>If the AI conversion lands first, BGDE is insulated from the event.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>The colocation book is concentrated in a related-party mining counterparty. If that is still the revenue backbone in 2028, the concentration becomes a liability.</p></div>
+    </div>
+    <div class="assume">
+      <span class="lbl">Analyst assumption</span>
+      <p>The date is a protocol estimate derived from block height, not a fixed calendar date.</p>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-K FY2025 for the self-mining revenue share. <span class="tag">Filed</span> Halving date derived from the protocol block schedule. <span class="tag">Estimate</span></p>
+  </div>
+</section>
+
+<!-- ===================== 2. STANDING CONDITIONS ===================== -->
+<section id="s2">
+  <h2 class="sec"><span class="n">02</span>Standing conditions</h2>
+  <p class="sub">Ongoing and undated, most material first. These take &ldquo;Why undated&rdquo; in place of timing confidence.</p>
+
+  <div class="cat down" id="cat-going-concern-and-cash-burn">
+    <div class="cat-head">
+      <span class="cid">S1</span>
+      <h3>Going-concern disclosure and operating cash burn</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing, tested each quarter</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>A continuing condition, not an event</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The Q1 2026 10-Q disclosed substantial doubt about the ability to continue as a going concern and reported $17.1M of cash used in operations in a single quarter, against a market capitalisation near $30M. Reported net income of $0.6M came from $10.2M of non-recurring legal gains, not from operations.</p>
+    <p>The balance sheet matters more than the burn rate alone. At 31 March 2026 cash stood at $2.4M, roughly one seventh of a single quarter's outflow, with working capital of negative $22.8M and an accumulated deficit of $251.8M. Revenue of $4.8M compared with $13.8M a year earlier, a 65% decline, producing an operating loss of $8.2M before the legal gains. Against a market capitalisation near $30M the quarter&rsquo;s burn alone equalled about 57% of the company&rsquo;s entire market value. The FY2025 net loss was $23.66M. Stockholders' equity was $4.3M, already beneath the $5M the exchange requires from the June quarter. The company also drew $6.4M through an at-the-market equity programme during the quarter, a continuous issuance channel separate from the Series D. The 20 July press release lists going concern first among its risk factors.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Burn moderates as transition and legal costs roll off and colocation revenue lands; going-concern language is removed in a later filing, which would itself be a re-rating event.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Burn continues near Q1 levels, consuming the Series D proceeds within quarters and forcing a raise into a weak price, which given the VWAP-linked conversion worsens dilution further.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-Q, 14 May 2026; Form 10-K, 31 March 2026; company release, 20 July 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat down" id="cat-celsius-final-judgment">
+    <div class="cat-head">
+      <span class="cid">S2</span>
+      <h3>Celsius final judgment, entered by stipulation and unpaid</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Entered 10 November 2025, unpaid</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>Enforcement is at the creditor's discretion</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>An arbitral tribunal entered a partial final award on 23 January 2025 against subsidiary Luna Squares LLC for US$8,144,000 on the Note, with interest accruing at US$3,167.11 per day from 23 August 2023, followed in February 2025 by US$641,000 in fees and costs. Payment was due no later than 24 February 2025. The tribunal recorded that Luna did not pay and that the failure triggered the parent's obligations under the Guaranty, and a further award against Mawson on the Guaranty issued 14 April 2025. The bankruptcy stay was lifted in February 2025.</p>
+    <p>Celsius petitioned the District Court for the Southern District of New York on 7 October 2025 to confirm the awards. On 7 November 2025 the parties entered a joint stipulation and agreed request for entry of final judgment, and on 10 November 2025 the court entered final judgment confirming all three awards. As of the Celsius Litigation Administrators' report dated 30 April 2026, neither Luna nor Mawson had paid any amount, and the recovery manager stated it would continue pursuing payment. BGDE agreed to entry rather than contesting confirmation, which removes most appellate avenues and converts an award into a directly enforceable judgment against both subsidiary and parent.</p>
+    <p>The counterclaims are the only offset and are weaker in posture. They comprise four administrative proofs of claim filed 1 March 2024 in the Celsius bankruptcy, numbers 33090, 33100, 33102 and 33103, which only the bankruptcy court can determine and which therefore sit on a separate track from the arbitration; an asserted right of setoff that Celsius rejects; and a dispute over roughly US$15.33M of deposits paid under the co-location agreement. On 30 March 2026 Celsius moved to dismiss BGDE's remaining claims and counterclaims. That motion is fully briefed and awaiting decision. Winning would create an offset; it would not undo the judgment. Losing removes the last offset while the judgment stands. The Ionic portion was settled confidentially in Q1 2026 with amounts paid.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>A negotiated settlement at a discount, as achieved with Ionic, would cap the exposure. BGDE has settled other matters before, cutting current liabilities by roughly $19M. The estate held roughly $128M in its recovery account at 31 March, which gives it capacity to settle cleanly.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Enforcement against the parent under a judgment BGDE stipulated to, competing directly with the Texas buildout for cash and capable of pushing equity below the $5M threshold.</p></div>
+    </div>
+    <div class="assume">
+      <span class="lbl">Analyst assumption</span>
+      <p>Principal of $8,144,000, fees of $641,000 and roughly $3.4M of accrued interest imply exposure on the order of $12M, growing roughly $1.16M a year. That total is calculated from the award amounts and the per-diem rate in the arbitration record and is not a company-disclosed figure. The counterclaims are unquantified in public filings, so the gross exposure can be sized and the net cannot.</p>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Celsius Litigation Administrators' Quarterly Report, Bankruptcy Court for the Southern District of New York, Doc 8417, 30 April 2026; Partial Final Award, 14 April 2025; Form 10-Q, 14 May 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat up" id="cat-first-ai-hpc-anchor-tenant">
+    <div class="cat-head">
+      <span class="cid">S3</span>
+      <h3>First AI and HPC anchor-tenant contract</h3>
+      <span class="dir">Up</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing, in discussion</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>Event-driven, no scheduled trigger</b></div>
+      <div>Provenance <span class="tag">Open</span></div>
+    </div>
+    <p>The single item on which the equity case rests. The Texas site is owned and the company states it is actively engaged in discussions with potential development partners and offtakers, but no tenant is signed. The 2024 agreement with BE Global was announced and produced no revenue.</p>
+    <p>The peer gap widened in July 2026. TeraWulf signed a 20-year lease with Anthropic for roughly 401 MW in Kentucky on 6 July, expecting roughly $19 billion of contracted revenue. Hut 8 announced a 15-year, 352 MW lease at Beacon Point, Texas worth $9.8 billion, taking contracted AI capacity to 597 MW. IREN disclosed $2.8 billion in new cloud contracts and raised its AI-cloud revenue target above $4 billion. Sector research characterises the shift as the market rewarding executed investment-grade leases over pipeline. BGDE holds pipeline only.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>A signed tenant on the owned site validates the buildout roadmap and is the single event on which the equity case turns.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Continued silence leaves BGDE a marginal colocation landlord while better-capitalised peers contract the demand.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K, 20 July 2026. <span class="tag">Filed</span> Peer transaction and sector research, July 2026. <span class="tag">Market</span></p>
+  </div>
+
+  <div class="cat down" id="cat-nasdaq-equity-compliance-watch">
+    <div class="cat-head">
+      <span class="cid">S4</span>
+      <h3>Nasdaq $5M quarterly equity condition</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Each quarter to Q1 2027</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>A recurring test, not a single event</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Following restoration of compliance on 17 June 2026, the exchange imposed a condition that BGDE maintain stockholders' equity of at least $5M in every quarter for twelve months beginning with the quarter ended 30 June 2026 and running to Q1 2027. Every quarterly release now doubles as a compliance checkpoint, so the balance-sheet line matters as much as the earnings headline.</p>
+    <p>The starting point is tight. Equity was $4.3M at 31 March 2026, already below the threshold. The $15.03M Series D closed on 30 June, the final day of the first test quarter, which is what plausibly carries that measurement. Subsequent quarters have no comparable one-off.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Sustained compliance through all four quarters retires the listing question by mid-2027 and removes a risk premium.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A single quarter below $5M triggers immediate review. Remedying it through further issuance is dilutive at a depressed price.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K, 17 June 2026; Form 10-Q, 14 May 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat up" id="cat-endeavor-colocation-ramp">
+    <div class="cat-head">
+      <span class="cid">S5</span>
+      <h3>Endeavor colocation ramp</h3>
+      <span class="dir">Up</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>A deployment ramp with no completion date disclosed</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The agreement dated 27 April 2026 with an Endeavor Group affiliate, controlled by the CEO, COO and Executive Chairman, who together hold 29% of BGDE, covers roughly 25,000 mining computers across roughly 75 MW on a 50/50 profit share. BGDE receives 100% of the cash from the miners and compensates the affiliate in stock (20%) and warrants (80%). The term is twelve months. This is the near-term revenue bridge while the AI conversion is pursued.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Machines deployed on schedule with supportive Bitcoin prices generate cash and demonstrate execution on management's own commitments.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>The related-party structure invites scrutiny, profit share is thin if Bitcoin falls, and reduced deployment or deferred payment would remove the revenue bridge.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K, 27 April 2026; Form 10-Q, FY2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-w-capital-proceedings">
+    <div class="cat-head">
+      <span class="cid">S6</span>
+      <h3>W Capital proceedings, two-way</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Pending, last verified 14 May 2026</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>Court timetable not disclosed</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>BGDE filed an adversary proceeding on 29 December 2025 in the Bankruptcy Court for the District of Delaware against W Capital Advisors Pty Ltd, Marshall Investments GCP Pty Ltd, Rayra Pty Ltd and affiliated individuals, seeking bad-faith damages, fees, costs and interest under United States Code title 11 section 303(i). The involuntary petition was dismissed with prejudice on 4 November 2025 and the court expressly preserved BGDE's right to pursue remedies. BGDE claims a single-day market capitalisation loss of roughly $23M.</p>
+    <p>It is also a defendant against the same counterparty. Since 28 March 2024 it has faced a civil suit in the Supreme Court of New South Wales in which W Capital, as trustee for the W Capital Advisors Fund, claims roughly US$0.2M of unpaid interest under a note whose principal BGDE has repaid in full, plus a related claim of roughly $0.3M under a loan deed alleged to be guaranteed through Mawson SPL. BGDE has sought dismissal on jurisdictional grounds; roughly $0.2M sits as a current liability at 31 March 2026.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Damages including sanctions would be accretive against a $30M market capitalisation.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>W Capital is in receivership in Australia, so collectability is the binding constraint and a judgment may be worth far less than the claim. Legal spend continues in the meantime.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-Q, 14 May 2026, legal proceedings; company release, 30 December 2025. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-power-prices-and-gas-exposure">
+    <div class="cat-head">
+      <span class="cid">S7</span>
+      <h3>Power prices, energy management revenue and gas exposure</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Continuous</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>A market condition, not an event</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Energy management was 29.7% of FY2025 revenue. BGDE earns from grid services and demand response, so the exposure runs in both directions and deserves its own entry rather than a line in a risk list.</p>
+    <p>On the hedging side, when power prices spike, curtailment and grid-services revenue can rise, offsetting higher input costs. On the exposure side, the Pennsylvania sites at Midland, Sharon and Bellefonte sit in PJM, a gas-heavy grid, so sustained gas price increases raise purchased-power costs. The Texas buildout above roughly 111 MW depends on behind-the-meter natural gas for which no firm supply or transportation contract has been disclosed. Midland is adjacent to the Beaver Valley nuclear station, but BGDE has not disclosed whether it holds a contractual arrangement there or simply buys grid power.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Higher volatility lifts energy-management revenue, and securing firm gas supply early would move BGDE from exposed to advantaged.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Gas-driven power inflation compresses margins at the Pennsylvania sites while unsecured Texas gas raises buildout costs, squeezing both ends. Prospective tenants underwriting higher fuel costs negotiate the site economics down before any contract is signed.</p></div>
+    </div>
+    <div class="assume">
+      <span class="lbl">Analyst assumption</span>
+      <p>Third-party analysis arguing that upstream gas deliverability tightens from 2028, with fuel reaching 20% to 30% of cost of compute for behind-the-meter datacentres, is one model and not consensus. BGDE publishes no fuel-mix disclosure, so the exposure cannot be sized from filings.</p>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-K FY2025 for the revenue share; Form 8-K, 20 July 2026 for the gas concept. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-bitcoin-price-indirect-exposure">
+    <div class="cat-head">
+      <span class="cid">S8</span>
+      <h3>Bitcoin price, indirect through colocation</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Continuous</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>A price series, not an event</b></div>
+      <div>Provenance <span class="tag">Market</span></div>
+    </div>
+    <p>FY2025 revenue was 65.6% digital colocation at $26.1M, 29.7% energy management and 4.7% digital asset self-mining. BGDE is a landlord and power operator rather than a miner, so Bitcoin's price reaches it indirectly: through hosting customers' ability to pay, including the related-party Endeavor arrangement, through demand for colocation capacity, and through the sector sentiment that sets multiples on mining-adjacent equities.</p>
+    <p>Bitcoin traded around $63,000 at 31 July 2026, roughly 28% lower year to date, after falling below $58,000 on 1 July and recovering to finish the month up about 7.5%. It reached a high near $126,000 in October 2025.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Recovery improves hosting customers' economics and demand for capacity, supporting utilisation and sector multiples.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A prolonged decline stresses hosting customers' ability to pay, a risk concentrated in a single related-party counterparty, just as BGDE needs utilisation.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-K FY2025 for the revenue mix; price data at 31 July 2026 close. <span class="tag">Market</span></p>
+  </div>
+
+  <div class="cat down" id="cat-federal-reserve-rate-path">
+    <div class="cat-head">
+      <span class="cid">S9</span>
+      <h3>Federal Reserve rate path</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Continuous</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>A policy path, not a single decision</b></div>
+      <div>Provenance <span class="tag">Market</span></div>
+    </div>
+    <p>The direction of this condition has reversed. On 29 July 2026 the Federal Open Market Committee voted 9 to 3 to hold at 3.50% to 3.75%, with three officials dissenting in favour of a quarter-point increase, the most dissents in one direction since September 2016. The June projections carried one quarter-point increase by end-2026 and markets now largely expect a rise in September rather than a cut. The statement cited Middle East conflict as clouding the inflation outlook.</p>
+    <p>This bites harder here than at a typical issuer. BGDE carries a 12% related-party revolver and needs substantial further capital for the Texas buildout, so a higher or rising path raises the cost of every financing option, drains risk appetite for micro-caps, and pressures the infrastructure multiples the pivot depends on.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>A pivot back toward cuts would lower financing costs and lift risk appetite for the sector.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Rising rates raise the cost of capital for a company that must raise it, and reduce enterprise willingness to commit to long-dated infrastructure contracts.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Federal Open Market Committee decision, 29 July 2026. <span class="tag">Market</span></p>
+  </div>
+
+  <div class="cat two" id="cat-us-crypto-regulatory-environment">
+    <div class="cat-head">
+      <span class="cid">S10</span>
+      <h3>United States digital asset regulatory environment</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>A policy backdrop with no scheduled decision</b></div>
+      <div>Provenance <span class="tag">Open</span></div>
+    </div>
+    <p>The current federal posture is the most accommodating in United States digital asset history, following the GENIUS Act, a change of Securities and Exchange Commission leadership, creation of a digital asset task force and strategic reserve activity. That backdrop supports BGDE both as an operator of mining colocation and as a datacentre developer whose permitting and power allocation depend on federal energy policy. It also matters to counterparties: tenants underwriting multi-year contracts price regulatory stability.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Further supportive legislation, or federal backing for domestic datacentre infrastructure and permitting reform, accelerates the pipeline.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A policy reversal on digital assets or on datacentre energy use, or new taxes and reporting requirements, would be a sector-wide headwind.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Sector policy coverage, 2026. <span class="tag">Market</span></p>
+  </div>
+</section>
+
+<!-- ===================== 3. RESOLVED ===================== -->
+<section id="s3">
+  <h2 class="sec"><span class="n">03</span>Resolved</h2>
+  <p class="sub">Closed items, kept for the record, ordered by resolution date. A resolved catalyst takes the next free R number; it does not carry its old number over.</p>
+
+  <div class="cat resolved" id="cat-board-director-share-purchases">
+    <div class="cat-head">
+      <span class="cid">R1</span>
+      <h3>Board director open-market share purchases</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>12 June 2026</b></div>
+      <div>Outcome <b>5,021 shares bought for roughly $36,737</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Director Rodger Davis purchased 2,000 shares for $14,080 and Director Daniel J. Morrison purchased 3,021 shares for $22,657 in open-market transactions. Small in dollar terms against management and affiliate ownership of roughly 14%, but directors adding with personal funds at the prevailing price is a directional signal from inside the board.</p>
+    <p><b>Source:</b> Forms 4, 12 June 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat resolved" id="cat-nasdaq-compliance-restored">
+    <div class="cat-head">
+      <span class="cid">R2</span>
+      <h3>Nasdaq compliance restored</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>17 June 2026</b></div>
+      <div>Outcome <b>Compliance regained; $5M quarterly condition imposed</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The exchange issued a delist determination on 17 April 2026 for stockholders' equity below the $2.5M minimum at 31 December 2025. On 17 June 2026 it confirmed that BGDE had regained compliance, closing the near-term delisting risk that had been the largest single overhang on the equity.</p>
+    <p>It did not close the file. The determination carried a condition requiring at least $5M of equity in each quarter for twelve months from the June quarter, which is tracked as a standing condition rather than a resolved item.</p>
+    <p><b>Source:</b> Form 8-K, 17 June 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat resolved" id="cat-northland-advisor-engaged">
+    <div class="cat-head">
+      <span class="cid">R3</span>
+      <h3>Northland engaged as AI and HPC financial advisor</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>6 July 2026</b></div>
+      <div>Outcome <b>Advisory mandate confirmed</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>BGDE engaged Northland Capital Markets to advise on AI and HPC uses of its power assets, including site-level financing and partnership opportunities, confirmed again in the 20 July release. The mandate signals a more institutional capital process than the related-party financing that preceded it.</p>
+    <p>The same firm acted as exclusive placement agent on the insider-linked Series D for a 6% cash fee. That is ordinary in small-cap finance, but it means the engagement is not an independent third-party validation of the asset base and should not be read as one.</p>
+    <p><b>Source:</b> Form 8-K exhibit, 20 July 2026; Form 8-K, 6 July 2026 for the placement agent fee. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat resolved" id="cat-hood-county-acquisition-completed">
+    <div class="cat-head">
+      <span class="cid">R4</span>
+      <h3>Hood County acquisition completed</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>15 July 2026</b></div>
+      <div>Outcome <b>30 acres acquired for roughly $10M; capacity to 146 MW</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The 50/50 joint venture with 10NetZero, formalised through Texas Load House, LLC under an LLC agreement, a contribution agreement and an interim-management side agreement, acquired 30 of roughly 50 acres in Hood County, Texas on 15 July 2026 from Century Oaks Independence Farms for roughly $10M in cash, with an option on the remainder for a further $600,000. The site sits roughly 40 miles from Dallas Fort Worth, carries 17 MW operational today, a phased path to roughly 111 MW subject to grid validation, and a stated ceiling of up to 300 MW using behind-the-meter gas. Total operational capacity rose to 146 MW.</p>
+    <p>Two qualifications travel with it. The company uses both 300 MW and 311 MW for the ceiling in documents filed the same day. And the venture is 50/50 in name: BGDE is sole Manager and lent 10NetZero $4.9M, so it financed both sides, with that loan tracked as a dated catalyst.</p>
+    <p><b>Source:</b> Form 8-K, 20 July 2026; company release, 20 July 2026. <span class="tag">Filed</span></p>
+  </div>
+</section>
+
+<!-- ===================== 4. NULL CATEGORIES ===================== -->
+<section id="s4">
+  <h2 class="sec"><span class="n">04</span>Null categories</h2>
+  <p class="sub">Every category reviewed appears as a row, including those that produced catalysts, which read across by title and ID. A category checked and found empty is recorded rather than omitted.</p>
+  <div class="tw"><table class="nulls">
+    <thead><tr><th>Category</th><th>Status</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Earnings</td><td class="status">Covered above</td><td>Q2 2026 release (D1); Q3 2026 release (D5).</td></tr>
+      <tr><td class="lbl">Product launches</td><td class="status">None</td><td>No product launch appears in the Form 8-K record or the company releases through 20 July 2026. The business has no product cycle: the analogue is capacity energisation and tenant signing, carried as the anchor-tenant condition (S3) and first AI and HPC revenue (D7).</td></tr>
+      <tr><td class="lbl">Investor days</td><td class="status">None</td><td>No formal investor day announced. Disclosure has come through Form 8-K, press release and periodic investor decks. The annual meeting (D6) is the nearest scheduled forum.</td></tr>
+      <tr><td class="lbl">Regulatory decisions</td><td class="status">Covered above</td><td>Nasdaq quarterly equity condition (S4); digital asset policy backdrop (S10). Grid validation for the Texas expansion sits inside the power and gas condition (S7).</td></tr>
+      <tr><td class="lbl">Lawsuits</td><td class="status">Covered above</td><td>Celsius final judgment (S2); W Capital proceedings, both directions (S6). Checked in the Q1 2026 Form 10-Q legal proceedings note and the Celsius bankruptcy docket. Absence of evidence is not evidence of absence, so the sweep boundary is stated in section 9.</td></tr>
+      <tr><td class="lbl">Macro events</td><td class="status">Covered above</td><td>Bitcoin price (S8); Federal Reserve rate path (S9); halving (D9).</td></tr>
+      <tr><td class="lbl">Industry conferences</td><td class="status">Covered above</td><td>Summer circuit (D2), on inferred cadence rather than an announced appearance.</td></tr>
+      <tr><td class="lbl">Management changes</td><td class="status">None</td><td>Checked against the Form 8-K record and company releases through 20 July 2026: no departure, appointment or auditor change has been disclosed since the team was installed in April 2026. Strategy is closely identified with that team, so a change would be material.</td></tr>
+      <tr><td class="lbl">Share buybacks</td><td class="status">None</td><td>No repurchase appears in the equity and cash flow statements of the Form 10-K FY2025 or the Form 10-Q for Q1 2026. It would also be structurally incompatible with the current position. The company is issuing dilutive preferred and drawing an at-the-market programme while needing to hold $5M of quarterly equity; repurchasing stock would work against both.</td></tr>
+      <tr><td class="lbl">Dividends</td><td class="status">None</td><td>No common dividend has been paid or declared in the Form 10-K FY2025 or Form 10-Q Q1 2026 record. The Series D carries a 5% preferred dividend, rising to 18% on a triggering event, payable in additional preferred or cash at the company's election. That is an obligation senior to common, not a return to it.</td></tr>
+      <tr><td class="lbl">Major contracts</td><td class="status">Covered above</td><td>Endeavor colocation (S5); the anchor tenant that has not been signed (S3); Hood County acquisition, resolved (R4).</td></tr>
+      <tr><td class="lbl">Index inclusion</td><td class="status caution-t">Not established</td><td>No index provider methodology or membership list was examined, so no null can be claimed. On the figures in this file a capitalisation near $30M sits below major index thresholds and broad-market funds already hold the stock, but that is inference rather than a checked source. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Analyst coverage</td><td class="status caution-t">Not established</td><td>No estimate aggregator or research distributor was checked, so absence cannot be asserted. No sell-side coverage was encountered in the sources reviewed, and the Northland engagement is an advisory mandate rather than research coverage. Also named in what was not checked.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 5. DILUTION & CAPITAL OVERLAY ===================== -->
+<section id="s5">
+  <h2 class="sec"><span class="n">05</span>Dilution &amp; capital overlay</h2>
+  <p class="sub">Sits across every other catalyst rather than beside them. Because conversion is priced at a discount to a trailing average with a hard floor, dilution runs inversely to the share price: the weaker the stock, the more shares each conversion creates.</p>
+
+  <div class="note neg">
+    <p><b>The registered amount is the number that matters.</b> The Form S-3 filed 20 July 2026 registers up to <b>10,924,527 shares</b> for resale against <b>5,486,730</b> outstanding at 31 March 2026. That is roughly <b>199%</b> of the current share count; full issuance would take the total to about 16.4 million shares, or <b>299%</b> of the baseline, leaving existing holders with roughly <b>33%</b> of the company. It exceeds a floor-price conversion because it also covers the warrant and headroom for dividend accrual.</p>
+  </div>
+
+  <div class="tw"><table>
+    <thead><tr><th>Element</th><th>Mechanism</th><th class="when">Timing</th><th>Pressure</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Series D preferred</td><td>16,700 shares sold at $900 on a $1,000 stated value, a 10% discount, giving $15.03M of proceeds on $16.7M of face. Converts at 95% of the lowest five-day VWAP with a $1.80 floor. Monthly volume caps, a 4.99% beneficial ownership blocker and a 19.99% exchange cap apply.</td><td class="when">From 30 Aug 2026</td><td class="neg-t">High</td></tr>
+      <tr><td class="lbl">Warrant, held by lenders</td><td>926,748 shares at $10.81, being 120% of the pre-close price, five-year term, transferred to the lenders as the facility commitment fee rather than retained by the purchaser.</td><td class="when">Issued 30 Jun 2026</td><td class="caution-t">Medium</td></tr>
+      <tr><td class="lbl">Lender pledge</td><td>Six Thirty AI purchased with borrowed funds and pledged the preferred to YA II PN as collateral agent. Lenders may exchange loan obligations for Series D or settle in converted common, so the converting party may not be the management-linked purchaser.</td><td class="when">In place since issue</td><td class="neg-t">High</td></tr>
+      <tr><td class="lbl">Registered resale</td><td>Form S-3 covering 10,924,527 shares, filed on deadline. Must be declared effective by 29 August, or 28 September if fully reviewed.</td><td class="when">Filed 20 Jul 2026</td><td class="neg-t">High</td></tr>
+      <tr><td class="lbl">Preferred dividend</td><td>5% base, stepping to 18% on a triggering event, senior to common, payable in additional preferred or cash at the company's election. A payment in kind compounds the share count.</td><td class="when">Accruing</td><td class="caution-t">Medium</td></tr>
+      <tr><td class="lbl">Shareholder vote</td><td>Approval sought by 14 November 2026 to issue above the 19.99% exchange cap. This is the gate on the larger figure.</td><td class="when">By 14 Nov 2026</td><td class="neg-t">High</td></tr>
+      <tr><td class="lbl">At-the-market programme</td><td>A separate, continuous channel: $6.4M drawn in Q1 2026. Unlike the Series D it issues directly into the market with no floor.</td><td class="when">At discretion</td><td class="caution-t">Medium</td></tr>
+      <tr><td class="lbl">Endeavor revolver</td><td>$40M secured related-party facility at 12%. Draws increase leverage rather than share count, but the rate is high and the counterparty is affiliated.</td><td class="when">As drawn</td><td class="caution-t">Medium</td></tr>
+      <tr><td class="lbl">Buildout capital</td><td>Grid expansion and behind-the-meter generation require capital well beyond the facilities in place. Northland is engaged to source it.</td><td class="when">Unscheduled</td><td class="caution-t">Medium</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>On the $16.7M of face value, conversion produces roughly 2.0 million shares at the 30 June VWAP of $8.81, the figure disclosed in the Schedule 13D/A; roughly 3.2 million at the 31 July close of $5.47; and roughly 9.3 million at the $1.80 floor. The second and third are calculated from the stated face value and the conversion formula and are not company disclosures. The 13D/A also puts the purchaser group at 3,652,288 shares, or 47.8% on a fully diluted basis of 7,643,972, including 1,995,221 conversion shares. Excluding those, the group holds 1,657,067 common, or 30.0% of outstanding.</p>
+  </div>
+</section>
+
+<!-- ===================== 6. FALSIFICATION TESTS ===================== -->
+<section id="s6">
+  <h2 class="sec"><span class="n">06</span>Falsification tests</h2>
+  <p class="sub">What would prove this read wrong, stated in advance. Each trigger is settleable from a document; an unquantified threshold is not a test. Twelve tests. The last two carry thresholds set here rather than taken from a filing, and are tagged accordingly.</p>
+  <div class="tw"><table>
+    <thead><tr><th class="num">#</th><th>If this happens&hellip;</th><th>&hellip;this was wrong</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>Stockholders' equity is reported below $5,000,000 on the balance sheet in any Form 10-Q or 10-K covering a quarter from Q2 2026 through Q1 2027.</td><td>That the June Series D closing carries the company through the probationary period, and that listing risk was retired in June 2026.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">2</td><td>A conversion notice or a Form 10-Q share count shows Series D shares issued at the $1.80 floor price.</td><td>That dilution stays near the levels implied by conversion at prevailing market prices.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">3</td><td>10NetZero does not repay the $4.9M loan by 13 October 2026 and the transfer of its interest begins.</td><td>That the partner can fund its half of the buildout, and with it the behind-the-meter gas plan that rests on 10NetZero's platform.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">4</td><td>The Form S-3 is not declared effective by 28 September 2026.</td><td>That the resale registration timetable set out in the purchase agreement holds.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">5</td><td>The annual meeting does not occur by 14 November 2026, or the issuance proposal fails.</td><td>That the contractual commitment in the Series D purchase agreement binds, and that the 19.99% cap lifts on schedule.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">6</td><td>A Celsius Litigation Administrators' quarterly report, or a Form 8-K, records the judgment as satisfied, settled or released.</td><td>That the exposure remains unpaid and compounding. This test falsifies the negative read rather than the positive one.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">7</td><td>A Form 8-K discloses an executed AI or HPC lease naming a stated term and a megawatt commitment.</td><td>That BGDE holds pipeline only, and the peer comparison that follows from it.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">8</td><td>The arbitrator grants the dismissal motion filed 30 March 2026 against BGDE's remaining claims and counterclaims.</td><td>That an offset exists against the judgment, and with it the possibility that net exposure is materially below gross.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">9</td><td>Grid validation confirms interconnection capacity below the 111 MW the company has stated for the Texas site.</td><td>That the phased path to roughly 111 MW, and the 300 MW ceiling that builds on it, are achievable as described.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">10</td><td>Operating cash outflow in any reported quarter equals or exceeds the $17.1M recorded in Q1 2026, with no non-recurring item identified in the filing.</td><td>That the Q1 burn reflected transition costs rather than the underlying operating rate.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">11</td><td>Bitcoin closes below $40,000 on the last trading day of any calendar quarter through Q1 2027. <span class="tag">Estimate</span></td><td>That the counterparty read holds: at that level the hosting book&rsquo;s economics compress far enough to threaten the related-party arrangement that carries near-term revenue. The threshold is a judgement here, not a filed figure: no filing states a level at which the read breaks.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">12</td><td>The company discloses new borrowing at a coupon above the 12% it already pays on the Endeavor revolver. <span class="tag">Estimate</span></td><td>That the rate path leaves the buildout fundable. The 12% comparator is a filed figure; treating it as the point at which financing has become materially worse is a judgement, since no filing states a rate at which the buildout stops.</td><td class="status">Untriggered</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 7. CATALYST SUMMARY ===================== -->
+<section id="s7">
+  <h2 class="sec"><span class="n">07</span>Catalyst summary</h2>
+  <p class="sub">Every ID in one table, gapless within each class, matching the cards above in count and order. Links point at title slugs so they survive renumbering.</p>
+  <div class="tw"><table>
+    <thead><tr><th>ID</th><th>Catalyst</th><th class="when">Timing</th><th>Impact</th><th>Confidence</th><th>Direction</th></tr></thead>
+    <tbody>
+      <tr><td class="num">D1</td><td><a href="#cat-q2-2026-earnings-release">Q2 2026 earnings release and Form 10-Q</a></td><td class="when">~mid-Aug 2026</td><td>High</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D2</td><td><a href="#cat-summer-conference-circuit">Summer conference circuit</a></td><td class="when">Jul&ndash;Sep 2026</td><td>Low</td><td>Medium</td><td>Neutral</td></tr>
+      <tr><td class="num">D3</td><td><a href="#cat-series-d-conversions-begin">Series D conversions become available</a></td><td class="when">30 Aug 2026</td><td>High</td><td>High</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">D4</td><td><a href="#cat-jv-loan-maturity">JV loan to 10NetZero matures</a></td><td class="when">13 Oct 2026</td><td>Medium</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D5</td><td><a href="#cat-q3-2026-earnings-release">Q3 2026 earnings, first full colocation quarter</a></td><td class="when">~mid-Nov 2026</td><td>High</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D6</td><td><a href="#cat-annual-meeting-series-d-vote">Annual meeting and Series D issuance vote</a></td><td class="when">By 14 Nov 2026</td><td>High</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D7</td><td><a href="#cat-first-ai-hpc-revenue">First AI and HPC revenue from converted capacity</a></td><td class="when">H1 2027</td><td>High</td><td>Low</td><td class="pos-t">Up</td></tr>
+      <tr><td class="num">D8</td><td><a href="#cat-strategic-transactions-committee">Strategic Transactions Committee outcome</a></td><td class="when">H1 2027</td><td>High</td><td>Low</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D9</td><td><a href="#cat-next-bitcoin-halving">Next Bitcoin halving</a></td><td class="when">~Apr 2028</td><td>Low</td><td>Medium</td><td>Neutral</td></tr>
+      <tr><td class="num">S1</td><td><a href="#cat-going-concern-and-cash-burn">Going-concern disclosure and operating cash burn</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">S2</td><td><a href="#cat-celsius-final-judgment">Celsius final judgment, unpaid</a></td><td class="when">Entered 10 Nov 2025</td><td>High</td><td>n/a</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">S3</td><td><a href="#cat-first-ai-hpc-anchor-tenant">First AI and HPC anchor-tenant contract</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="pos-t">Up</td></tr>
+      <tr><td class="num">S4</td><td><a href="#cat-nasdaq-equity-compliance-watch">Nasdaq $5M quarterly equity condition</a></td><td class="when">To Q1 2027</td><td>High</td><td>n/a</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">S5</td><td><a href="#cat-endeavor-colocation-ramp">Endeavor colocation ramp</a></td><td class="when">Ongoing</td><td>Medium</td><td>n/a</td><td class="pos-t">Up</td></tr>
+      <tr><td class="num">S6</td><td><a href="#cat-w-capital-proceedings">W Capital proceedings, two-way</a></td><td class="when">Pending</td><td>Medium</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S7</td><td><a href="#cat-power-prices-and-gas-exposure">Power prices, energy management and gas exposure</a></td><td class="when">Continuous</td><td>Medium</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S8</td><td><a href="#cat-bitcoin-price-indirect-exposure">Bitcoin price, indirect through colocation</a></td><td class="when">Continuous</td><td>Medium</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S9</td><td><a href="#cat-federal-reserve-rate-path">Federal Reserve rate path</a></td><td class="when">Continuous</td><td>Medium</td><td>n/a</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">S10</td><td><a href="#cat-us-crypto-regulatory-environment">United States digital asset regulatory environment</a></td><td class="when">Ongoing</td><td>Medium</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">R1</td><td><a href="#cat-board-director-share-purchases">Board director open-market share purchases</a></td><td class="when">12 Jun 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R2</td><td><a href="#cat-nasdaq-compliance-restored">Nasdaq compliance restored</a></td><td class="when">17 Jun 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R3</td><td><a href="#cat-northland-advisor-engaged">Northland engaged as AI and HPC advisor</a></td><td class="when">6 Jul 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R4</td><td><a href="#cat-hood-county-acquisition-completed">Hood County acquisition completed</a></td><td class="when">15 Jul 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 8. METHODOLOGY & CONFIDENCE SCALE ===================== -->
+<section id="s8">
+  <h2 class="sec"><span class="n">08</span>Methodology &amp; confidence scale</h2>
+
+  <h3>ID concordance: earlier numbering</h3>
+  <p class="sub">Maps the numbering used before this revision to the current IDs, so earlier log entries remain resolvable. The earlier scheme used bare numbers for forward catalysts, S for undated structural items and C for completed events. All four C items were completed, so all four map to R.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Was</th><th>Now</th><th>Catalyst</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td class="num">D1</td><td>Q2 2026 earnings release and Form 10-Q</td></tr>
+      <tr><td class="num">2</td><td class="num">S5</td><td>Endeavor colocation ramp</td></tr>
+      <tr><td class="num">3</td><td class="num">S3</td><td>First AI and HPC anchor-tenant contract</td></tr>
+      <tr><td class="num">4</td><td class="num">S1</td><td>Going-concern disclosure and operating cash burn</td></tr>
+      <tr><td class="num">5</td><td class="num">D2</td><td>Summer conference circuit</td></tr>
+      <tr><td class="num">6</td><td class="num">D5</td><td>Q3 2026 earnings, first full colocation quarter</td></tr>
+      <tr><td class="num">7</td><td class="num">S4</td><td>Nasdaq $5M quarterly equity condition</td></tr>
+      <tr><td class="num">8</td><td class="num">D4</td><td>JV loan to 10NetZero matures</td></tr>
+      <tr><td class="num">9</td><td class="num">D6</td><td>Annual meeting and Series D issuance vote</td></tr>
+      <tr><td class="num">10</td><td class="num">S6</td><td>W Capital proceedings, two-way</td></tr>
+      <tr><td class="num">11</td><td class="num">S2</td><td>Celsius final judgment, unpaid</td></tr>
+      <tr><td class="num">12</td><td class="num">D3</td><td>Series D conversions become available</td></tr>
+      <tr><td class="num">13</td><td class="num">D7</td><td>First AI and HPC revenue from converted capacity</td></tr>
+      <tr><td class="num">14</td><td class="num">S7</td><td>Power prices, energy management and gas exposure</td></tr>
+      <tr><td class="num">15</td><td class="num">D8</td><td>Strategic Transactions Committee outcome</td></tr>
+      <tr><td class="num">S1</td><td class="num">S8</td><td>Bitcoin price, indirect through colocation</td></tr>
+      <tr><td class="num">S2</td><td class="num">S9</td><td>Federal Reserve rate path</td></tr>
+      <tr><td class="num">S3</td><td class="num">S10</td><td>United States digital asset regulatory environment</td></tr>
+      <tr><td class="num">S4</td><td class="num">D9</td><td>Next Bitcoin halving</td></tr>
+      <tr><td class="num">C1</td><td class="num">R4</td><td>Hood County acquisition completed</td></tr>
+      <tr><td class="num">C2</td><td class="num">R2</td><td>Nasdaq compliance restored</td></tr>
+      <tr><td class="num">C3</td><td class="num">R3</td><td>Northland engaged as AI and HPC advisor</td></tr>
+      <tr><td class="num">C4</td><td class="num">R1</td><td>Board director open-market share purchases</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Provenance tags</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Tag</th><th>What it asserts</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl"><span class="tag">Filed</span></td><td>Stated in an SEC filing or company release, cited by form and date. Also covers a dated official publication by a named non-SEC issuer, with the issuer named in the source line. That extension is in use here for the Celsius Litigation Administrators' Quarterly Report, a dated filing by a named administrator in a named court.</td></tr>
+      <tr><td class="lbl"><span class="tag">Estimate</span></td><td>Derived or inferred here. The arithmetic is shown.</td></tr>
+      <tr><td class="lbl"><span class="tag">Open</span></td><td>Expected but unconfirmed. Nothing filed either way.</td></tr>
+      <tr><td class="lbl"><span class="tag">Market</span></td><td>Price, volume, float, published targets and ratings, stamped with the close or publication date. A third party's characterisation of someone else's facts is market data, attributed to the firm that issued it and never adopted here.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Timing confidence</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Level</th><th>Means</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">High</td><td>Date is company-announced, contractually fixed or protocol-defined.</td></tr>
+      <tr><td class="lbl">Medium</td><td>Date inferred from filing cadence or a stated deadline window.</td></tr>
+      <tr><td class="lbl">Low</td><td>Date is a judgement call. Could move by a quarter or more.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="note caution">
+    <p><b>The earlier version of this calendar no longer exists in full.</b> It was replaced at the
+    same filename, so only a plain-text extraction survives, taken earlier for another purpose. The
+    figure set in that extraction is intact and the comparison above rests on it; <b>the markup is
+    not</b>, so no comparison of structure, class usage or tag placement against the earlier version
+    is possible. The companion report&rsquo;s earlier version survives in full, for no better reason
+    than that it happened to carry a different filename.</p>
+  </div>
+
+  <h3>Known limitations carried forward</h3>
+  <p class="sub">Defects identified but not resolved in this pass, with the text at issue quoted and the reason each remains open.</p>
+
+  <div class="note caution">
+    <p><b>One citation lacks its authority.</b> The dismissal motion filed 30 March 2026 was described in the source as a <i>&ldquo;Rule 34 dispositive motion&rdquo;</i>. A rule pointer must name the authority immediately before the number. The governing rule set has been narrowed but not established: the number is consistent with the American Arbitration Association Commercial Rule R-34, which is that body&rsquo;s dispositive-motion rule, and inconsistent with JAMS Rule 34, which is an optional appeal procedure and does not govern dispositive motions. Neither the arbitration agreement nor a docket entry naming the administering body has been examined, so the authority cannot be asserted. The substance is retained and the bare number remains removed.</p>
+  </div>
+
+  <div class="note caution">
+    <p><b>The capacity ceiling is stated two ways.</b> Documents filed on the same day give both &ldquo;up to 300 MW&rdquo; and &ldquo;up to 311 MW&rdquo; for the Texas site. Both are carried as filed rather than reconciled, since choosing between them would require a document not examined here.</p>
+  </div>
+
+  <div class="note caution">
+    <p>Confidence rates <b>timing</b>, never outcome. A High-confidence catalyst can be a coin flip; a Low-confidence one can be near-certain in direction.</p>
+    <p><b>Impact is independent of confidence.</b> A High-impact, Low-confidence item is the most important kind here: it matters enormously and could land any time. The anchor-tenant condition is the clearest example.</p>
+  </div>
+</section>
+
+<!-- ===================== 9. SOURCES ===================== -->
+<section id="s9">
+  <h2 class="sec"><span class="n">09</span>Sources</h2>
+  <p class="sub">Primary filings and company releases first, with form type and date.</p>
+  <p>Form 10-K for FY2025, filed 31 March 2026. Form 10-Q for Q1 2026, filed 14 May 2026, including the legal proceedings note. Form 8-K filings dated 23 April, 27 April, 9 June, 17 June, 6 July and 20 July 2026, including the Texas joint venture and acquisition exhibits. Form S-3 registration statement filed 20 July 2026. Schedule 13D/A filed 2 July 2026. Forms 4 and 4/A covering insider transactions. All on the Commission's electronic filing system under central index key 0001218683.</p>
+  <p>Company releases through GlobeNewswire dated 30 December 2025 and 23 April, 27 April, 9 June, 17 June, 6 July and 20 July 2026. Investor presentation of May 2026.</p>
+  <p>Court records: the Celsius Litigation Administrators' Quarterly Report, Bankruptcy Court for the Southern District of New York, Doc 8417, 30 April 2026; and the Partial Final Award of 14 April 2025.</p>
+  <p>Market and sector data: price and capitalisation at the 31 July 2026 close; Federal Open Market Committee decision of 29 July 2026; CoinShares Bitcoin Mining Report Q1 2026; sector coverage of July 2026 peer transactions. Secondary aggregators were used for corroboration only, never as the sole basis for a material claim.</p>
+
+  <h3>What was not checked</h3>
+  <p>This revision changed presentation and wording only. It performed <b>no filing sweep and no repricing</b>, so nothing filed after 20 July 2026 was examined and no figure was re-verified against its source. The full filing families were not re-swept: 8-K, 6-K, 10-Q, 10-K, 20-F, 40-F, S-1, S-3, 424, 13D, the NT series, Forms 3 and 4, and the annual proxy. Foreign private issuer forms were treated as inapplicable on the basis of the prior record rather than re-confirmed.</p>
+  <p>Two null-table categories rest on no checked source and are recorded as not established rather than as nulls: <b>index inclusion</b>, where no index provider methodology or membership list was examined, and <b>analyst coverage</b>, where no estimate aggregator or research distributor was checked.</p>
+  <p>Beyond filings: the arbitration rule set governing the March 2026 dismissal motion was not identified; the docket was not re-read for activity after 30 April 2026; no independent confirmation of the Texas grid validation status was sought; and the power procurement arrangements at Midland, Sharon and Bellefonte remain undisclosed and unexamined. An unexamined area is a gap, not a clean bill.</p>
+</section>
+
+<!-- ===================== 10. DOCUMENT LOG ===================== -->
+<section id="s10">
+  <h2 class="sec"><span class="n">10</span>Document log</h2>
+  <p class="sub">Newest first. The original build entry is never removed or rewritten.</p>
+  <div class="log">
+    <div class="logentry current">
+      <div class="when">2 August 2026 <span class="latest">Latest</span></div>
+      <div class="basis">9 dated &middot; 10 standing &middot; 4 resolved &middot; priced off 31 Jul 2026 close</div>
+      <p>Filing sweep to today found <b>nothing filed since 20 July 2026</b>, so no figure moved on
+      the evidence and no catalyst changed state. The 31 July close remains the latest, the market is
+      shut on 2 August, and the file is <b>not repriced</b>: price stays $5.47 and capitalisation
+      $30.2M. <b>No NT filing of any kind has ever been made</b>, which for an issuer that has changed
+      name, ticker and filer status inside twelve months is a finding rather than an absence.
+      <b>No identifier moved</b>, so there is no renumber map to publish.</p>
+      <p><b>Backlog closed.</b> Thirteen figures owed restoration are back in the body and no longer
+      sit only inside a quotation: the FY2025 net loss $23.66M and the burn at 57% of capitalisation
+      into the going-concern condition; colocation revenue $26.1M and the July recovery of 7.5% into
+      the Bitcoin condition; accrued interest $3.4M completing the Celsius arithmetic, and the ~$19M
+      of settled liabilities into its upside; the IREN target above $4 billion into the anchor-tenant
+      condition; the $35M to $56M illustration into first AI and HPC revenue; the 100/20/80 split
+      into the Endeavor condition; and holdings of 3,652,288 and 1,657,067 with the 120% warrant
+      premium into the dilution overlay.</p>
+      <p><b>Three are recorded as superseded rather than reinstated.</b> $15M for the Series D was a
+      rounded restatement of the $15.03M stated throughout, and reinstating it would put two figures
+      for one raise into the document. $3M and 76.9% both belonged to the Q4 2025 mislabelling an
+      earlier pass corrected: each was wrong when written.</p>
+      <p><b>Both falsification tests are now written</b>, taking the count from 10 to 12. Each carries
+      a threshold set here rather than taken from a filing, tagged accordingly: Bitcoin below $40,000
+      at a quarter end, and new borrowing above the 12% already paid on the Endeavor revolver.</p>
+      <p><b>The Rule 34 citation is narrowed but still open.</b> The number matches the American
+      Arbitration Association Commercial Rule R-34, that body's dispositive-motion rule, and does not
+      match JAMS Rule 34, an optional appeal procedure. Without the arbitration agreement or a docket
+      entry naming the administering body the authority is not asserted.</p>
+    </div>
+    <div class="logentry">
+      <div class="when">1 August 2026 </div>
+      <div class="basis">Full filing review and macro refresh</div>
+      <p>Full filing form review and macro refresh. No new company operating events since 20 July and no filings after that date; no late-filing notices; foreign private issuer forms not applicable as a domestic filer.</p>
+      <p>1. Dilution is far larger than previously shown, and is now company-disclosed. The Form S-3 filed 20 July registers 10,924,527 shares for resale, roughly 199% of the 5,486,730 outstanding, taking the total to about 16.4M or 299% of baseline and leaving existing holders near 33%. This supersedes the earlier analyst estimate. The Schedule 13D/A also discloses the Six Thirty AI group at 47.8% fully diluted, including 1,995,221 conversion shares at the 30 June VWAP. Both a 4.99% beneficial-ownership blocker and a 19.99% exchange cap apply: these are separate provisions, and the 14 November vote lifts the second. A $6.4M at-the-market programme is now tracked as a further, floorless dilution channel.</p>
+      <p>2. New catalyst, a $4.9M JV loan to 10NetZero maturing 13 October 2026, previously missed. BGDE financed both sides of its 50/50 joint venture, taking total Texas cash committed to roughly $14.9M; non-payment transfers 10NetZero's 50% interest at 10% per month.</p>
+      <p>3. Q1 2026 balance-sheet detail added: $2.4M cash, negative $22.8M working capital, an $8.2M operating loss before legal gains, accumulated deficit corrected to $251.8M, and stockholders' equity of $4.3M, already beneath the $5M threshold that applies from the June quarter.</p>
+      <p>4. Macro reversed and the peer gap widened. The rate-path catalyst flipped direction: the Federal Open Market Committee held 9 to 3 on 29 July with three dissents favouring a hike, the most one-directional dissents since September 2016, and markets now expect an increase in September rather than a cut. Meanwhile TeraWulf signed a 20-year, roughly 401 MW Anthropic lease worth roughly $19B, Hut 8 a 15-year, 352 MW lease worth $9.8B, and IREN $2.8B in new cloud contracts, while sector research notes the market now rewards executed leases over pipeline. Bitcoin refreshed to roughly $63,000, down 28% year to date.</p>
+      <p>5. Market data updated to the Friday, 31 July 2026 close of $5.47, down 3.01%, roughly $30.2M market capitalisation, about 8% below the 21 July close and near the low end of the $4.30 to $11.69 52-week range.</p>
+    </div>
+
+    <div class="logentry">
+      <div class="when">25 July 2026</div>
+      <div class="basis">Structural revision, no new company events</div>
+      <p>Structural revision, no new company events. Added a section for undated and beyond-window forces, and moved three catalysts into it: Bitcoin price, the Fed rate path and US crypto regulation. Each carried a timing badge of &ldquo;Continuous&rdquo; or &ldquo;Ongoing&rdquo; while sitting inside a dated 0&ndash;3 or 6&ndash;12 month bucket, and the confidence scale, which measures timing certainty, could not meaningfully rate them; they are now marked undated. Added the ~April 2028 Bitcoin halving, previously untracked, with the caveat that it matters far less to BGDE than to pure-play miners given self-mining is ~4.7% of revenue. Power prices and gas exposure was deliberately kept with the dated long-term items because energy management is ~30% of revenue today. Dated catalysts renumbered 1&ndash;14; later sections shifted. Also removed a stray orphaned section comment left by an earlier restructure.</p>
+    </div>
+
+    <div class="logentry">
+      <div class="when">24 July 2026</div>
+      <div class="basis">Celsius severity raised; W Capital status checked</div>
+      <p>Catalyst #11 rewritten twice, severity raised. Per the Celsius Litigation Administrators' Q1 2026 Quarterly Report (Doc 8417, 30 April 2026), this is not a pending motion but a confirmed final judgment: awards of US$8.144M on the Note, 23 January 2025, US$641K in fees, February 2025, and a Guaranty award against Mawson, 14 April 2025, were consolidated into a final judgment entered 10 November 2025 by joint stipulation, which BGDE agreed to, and remain wholly unpaid. BGDE's counterclaims, being four administrative proofs of claim filed 1 March 2024, an asserted setoff, and the disputed US$15.33M deposit, are the only remaining offset and face a dismissal motion filed 30 March 2026. Added the Litigation Administrators' quarterly reports as an independent status source.</p>
+      <p>Earlier same-day revision noted: primary arbitration records show the Celsius matter is not merely a pending motion. Partial final awards were entered against subsidiary Luna Squares on 23 January 2025, US$8.144M plus US$3,167.11 per day interest from 23 August 2023, and 28 February 2025, US$641K in fees. Payment was due 24 February 2025; the Tribunal recorded non-payment, which triggered Mawson's Guaranty obligations, and a further award followed 14 April 2025. The bankruptcy stay was lifted in February 2025, and a 30 April 2026 filing by Celsius' counsel states amounts remain unpaid and are being pursued. Indicative exposure roughly $12M, compounding roughly $1.16M a year, an analyst calculation and not company-disclosed. The 30 March 2026 motion concerns BGDE's own remaining claims, not the awards.</p>
+      <p>Catalyst #10 status check: not resolved. The W Capital adversary proceeding remains pending; the most recent confirmation is the Q1 2026 10-Q of 14 May 2026, with no ruling or settlement reported since. Two details added: the involuntary petition was dismissed with prejudice and the Court expressly preserved BGDE's right to pursue remedies; and BGDE is simultaneously a defendant against W Capital in the Supreme Court of New South Wales, Australia, a roughly $0.2M interest claim plus a roughly $0.3M loan-deed guarantee claim, so the dispute is two-way rather than purely offensive as previously framed.</p>
+      <p>Verification pass against filings and company press releases. No new company events since 20 July; the 20 July 8-K exhibit confirms 146 MW online, 17 MW and roughly 111 MW grid capacity and up to 300 MW, the Northland mandate, and that the Company &ldquo;is actively engaged in discussions with potential development partners and off takers.&rdquo; Notably, that release lists &ldquo;the Company's ability to continue as a going concern&rdquo; first among its risk factors. Material correction to #12: the Series D purchaser is Six Thirty AI, controlled by Kilgore, Stanley and Smith, which acquired the preferred with borrowed funds; the preferred is pledged to YA II PN as collateral agent, the warrant was transferred to the lenders as a commitment fee, and lenders may exchange loan obligations for Series D or settle in converted common, materially weakening the &ldquo;insiders are backing it&rdquo; reading. Also added: 10% discount to $1,000 stated value, payment-in-kind dividend election, and Northland's dual role as paid placement agent on a 6% fee, alongside the Special Transactions Committee and Audit Committee approval. Dilution overlay and dependency chain updated for the lender layer.</p>
+    </div>
+
+    <div class="logentry">
+      <div class="when">22 July 2026</div>
+      <div class="basis">Material corrections against the Q1 2026 10-Q and FY2025 10-K</div>
+      <p>Material corrections following review against the Q1 2026 Form 10-Q, filed 14 May 2026, and the FY2025 Form 10-K, filed 31 March 2026. (1) Quarter mislabelled: the most recent reported quarter is Q1 2026, revenue $4.8M, not Q4 2025; the August release covers Q2 2026. (2) A previously cited &ldquo;&minus;76.9% estimate miss&rdquo; was a misread of the roughly 79% year-over-year decline in Q4 2025 preliminary revenue, $3.2M against $15.1M, and has been removed. (3) Revenue mix corrected: colocation ~65.6%, energy management ~29.7%, self-mining only ~4.7%; the Bitcoin catalyst is reframed from direct to indirect exposure. (4) Three catalysts added: going-concern and $17.1M quarterly cash burn, the Celsius and Ionic arbitration, and power prices, energy-management revenue and gas exposure. (5) Fixed the Nasdaq probation end date, two stale ~$42M market capitalisations, a stale monitor reference, a broken cross-reference, and overlapping section date windows. Forward catalysts renumbered 1&ndash;17.</p>
+    </div>
+
+    <div class="logentry">
+      <div class="when">21 July 2026</div>
+      <div class="basis">Texas acquisition closed</div>
+      <p>On 20 July 2026 BGDE announced the Texas Hood County acquisition has closed via the 50/50 joint venture with 10NetZero. Per the 8-K, the joint venture acquired 30 of the 50 acres on 15 July 2026 from Century Oaks for roughly $10M cash, with an option on the remainder for a further $600K, through Texas Load House, LLC. Operational capacity now confirmed at 146 MW; full-buildout ceiling revised to &ldquo;up to 300 MW&rdquo;; company now &ldquo;actively engaged with potential development partners and offtakers.&rdquo; The Texas joint venture catalyst was upgraded from LOI-pending to closed. Source: Form 8-K and GlobeNewswire, 20 July 2026.</p>
+    </div>
+
+    <div class="logentry">
+      <div class="when">8 July 2026</div>
+      <div class="basis">Texas LOI, Series D, Northland engagement</div>
+      <p>On 6 July 2026 BGDE announced (1) a 50/50 joint venture with 10NetZero plus a signed letter of intent to acquire a power-ready Hood County, Texas datacentre site, 17 MW live rising to up to 311 MW, lifting operational capacity to 146 MW; (2) a $15.03M insider-led Series D convertible preferred raise; and (3) engagement of Northland Capital Markets as AI and HPC financial advisor. Annual meeting date now committed to no later than 14 November 2026. Added the Texas joint venture and Northland advisor catalysts; updated the anchor-tenant, annual-meeting and financing entries. Source: Form 8-K and GlobeNewswire, 6 July 2026.</p>
+    </div>
+
+    <div class="logentry">
+      <div class="when">17 June 2026</div>
+      <div class="basis">Nasdaq compliance restored</div>
+      <p>Catalyst #2, the Nasdaq hearing, resolved as of 17 June 2026: BGDE formally regained compliance. Catalyst #9 reframed from monitor expiry to an ongoing $5M quarterly equity compliance watch running Q2 2026 through Q1 2027. Source: Form 8-K filed 17 June 2026.</p>
+    </div>
+
+    <div class="logentry">
+      <div class="when">15 June 2026 (original build)</div>
+      <div class="basis">17 catalysts across three horizons</div>
+      <p>Initial catalyst calendar published covering 17 catalysts across three horizons, 0&ndash;3, 3&ndash;6 and 6&ndash;12 months, spanning earnings, regulatory and listing items, contracts, litigation, macro and Bitcoin, governance, insider activity and industry events. Built on public filings and press releases available as of 15 June 2026. Sources: filings; GlobeNewswire; StockTitan; CoinShares Q1 2026; and other cited public sources.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="norec">
+    No buy, sell, or hold recommendation is issued and no price target is derived.
+    Third-party targets and ratings, where shown, are the published views of the
+    firms named. This document is for research and educational purposes and is not
+    investment advice. Estimated dates are not company announcements. Verify
+    against primary filings on sec.gov before acting.
+  </div>
+  <p style="margin-top:16px">BGDE &middot; Big Digital Energy, Inc. &middot; Catalyst Calendar &middot; as of 2 August 2026</p>
+</footer>
+
+</div>
+
+</body>
+</html>

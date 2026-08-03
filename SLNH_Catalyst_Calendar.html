@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>SLNH &middot; Soluna Holdings, Inc. &middot; Catalyst Calendar &middot; as of 2 August 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================================
+   PER-TICKER PALETTE
+   ========================================================================= */
+:root{
+  /* Soluna wordmark blue, the brand colour of record. The mark carries two
+     chromatic colours over a black wordmark: this blue on the triangular "A" and
+     an orange, #CB5828, on the "O". The orange normalises to hue 18 and sits 13.7
+     degrees from the red used for negative figures, so it is not available as an
+     accent. Raw #2B76BC is H209 S63 L45. Saturation is unchanged and lightness is
+     pulled to 42 for paper, giving 5.40:1 on white. The hue is unrotated: 209 sits
+     41 degrees off the nearest semantic hue. */
+  --accent:      #286DAE;
+  --accent-deep: #1E5385;
+  --accent-wash: rgba(40,109,174,0.06);
+  --accent-line: rgba(40,109,174,0.22);
+}
+
+/* ============================================================================
+   SHARED STYLESHEET v1.50 : BEGIN
+   ========================================================================= */
+:root{
+  color-scheme: light only;
+
+  --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
+  --line:#DEE6EC;   --line-hard:#C0CDD7;
+  --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
+
+  --pos:#0B7A50;      --pos-bg:#E7F4EE;
+  --neg:#B02A21;      --neg-bg:#FBECEA;
+  --caution:#90600A;  --caution-bg:#FBF2E0;
+  --assume:#4F3FA3;   --assume-bg:#EFEDFA;
+
+  --display:'Archivo',ui-sans-serif,system-ui,'Helvetica Neue',Arial,sans-serif;
+  --body:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+
+  --measure:78ch;
+  --col:760px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html,body{background:var(--canvas) !important;background-color:var(--canvas) !important}
+body{
+  margin:0;color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 22px 96px;background:var(--paper);
+      border-left:1px solid var(--line);border-right:1px solid var(--line)}
+p{max-width:var(--measure)}
+/* Boxed prose fills its container: the box supplies its own measure, so the
+   78ch cap applies to top-level running prose only. */
+.first li,.assume p,.note p,.cat p,.risk p,.logentry p,.oc p,.case p,
+.cat-meta,.logentry .basis{max-width:none}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:var(--accent-deep)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- masthead ---------- */
+.mast{padding:44px 0 26px;border-bottom:2px solid var(--line-hard);margin-bottom:8px;
+      position:relative;padding-left:20px}
+.mast::before{content:"";position:absolute;left:0;top:44px;bottom:26px;
+      width:4px;background:var(--accent)}
+.ticker{font-family:var(--mono);font-size:44px;font-weight:700;letter-spacing:-1px;
+      line-height:1;color:var(--accent);margin:0}
+.headline{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.22;
+      color:var(--ink);margin:16px 0 0}
+.functional{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--ink-faint);margin:18px 0 0}
+.mast-strip{display:flex;flex-wrap:wrap;gap:26px;margin-top:20px;padding-top:16px;
+      border-top:1px solid var(--line)}
+.mast-strip div{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint)}
+.mast-strip b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-top:3px}
+
+/* ---------- banner: framing ---------- */
+.first{background:var(--canvas);border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:20px 24px;margin:30px 0 12px}
+.first h2{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.04em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 12px}
+.first ol{margin:0;padding-left:20px}
+.first li{margin-bottom:9px}
+.first li:last-child{margin-bottom:0}
+
+/* ---------- sections ---------- */
+section{padding-top:38px}
+h2.sec{font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);
+      margin:0 0 4px;padding-bottom:10px;border-bottom:1px solid var(--line-hard);
+      display:flex;align-items:baseline;gap:12px}
+h2.sec .n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);
+      letter-spacing:.06em;flex:none}
+.sub{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);margin:10px 0 18px;
+      max-width:var(--measure)}
+h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink-dim);
+      margin:26px 0 8px}
+
+/* ---------- provenance tags (signature) ---------- */
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);
+      background:var(--panel-2);border:1px solid var(--line);
+      border-radius:2px;padding:1px 6px;vertical-align:1px;white-space:nowrap}
+
+/* ---------- assumption block ---------- */
+.assume{background:var(--assume-bg);border-left:4px solid var(--assume);
+      padding:16px 20px;margin:20px 0}
+.assume .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--assume);display:block;margin-bottom:7px}
+.assume p{margin:0}
+
+/* ---------- callouts ---------- */
+.note{border:1px solid var(--line);border-left:4px solid var(--ink-faint);
+      background:var(--canvas);padding:16px 20px;margin:20px 0}
+.note.pos{border-left-color:var(--pos);background:var(--pos-bg)}
+.note.neg{border-left-color:var(--neg);background:var(--neg-bg)}
+.note.caution{border-left-color:var(--caution);background:var(--caution-bg)}
+.note p{margin:0}
+.note p + p{margin-top:10px}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+thead th{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--ink-dim);text-align:left;
+      padding:9px 12px;border-bottom:2px solid var(--line-hard);white-space:nowrap}
+tbody td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--canvas)}
+td.num,th.num{font-family:var(--mono);text-align:right;white-space:nowrap}
+/* td.when marks a timing column. An unmarked cell counts as prose. */
+td.when{font-family:var(--mono);white-space:nowrap}
+td.lbl{font-weight:600}
+.pos-t{color:var(--pos);font-weight:600}
+.neg-t{color:var(--neg);font-weight:600}
+.caution-t{color:var(--caution);font-weight:600}
+
+/* ---------- cases ---------- */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.case{border:1px solid var(--line);border-top:3px solid var(--ink-faint);
+      background:var(--paper);padding:18px}
+.case.bull{border-top-color:var(--pos)}
+.case.bear{border-top-color:var(--neg)}
+.case h4{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 10px}
+.case.bull h4{color:var(--pos)} .case.bear h4{color:var(--neg)}
+.case p{font-size:15px;margin:0}
+.case .req{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+
+/* ---------- risks ---------- */
+.risk{border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:16px 20px;margin-bottom:12px}
+.risk.sev-high{border-left-color:var(--neg)}
+.risk.sev-med{border-left-color:var(--caution)}
+.risk.sev-low{border-left-color:var(--ink-faint)}
+.risk h4{font-family:var(--display);font-size:15.5px;font-weight:600;margin:0 0 6px;
+      display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.risk .sev{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase}
+.risk.sev-high .sev{color:var(--neg)}
+.risk.sev-med .sev{color:var(--caution)}
+.risk.sev-low .sev{color:var(--ink-faint)}
+.risk p{margin:0;font-size:15.5px}
+
+/* ---------- null categories ---------- */
+.nulls td.lbl{width:26%}
+.nulls .status{font-family:var(--mono);font-size:12px;white-space:nowrap}
+
+/* ---------- document log ---------- */
+.log{margin-top:14px}
+.logentry{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:12px}
+.logentry.current{border-left:4px solid var(--accent);background:var(--accent-wash)}
+.logentry .when{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);
+      display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.latest{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-line);
+      background:var(--paper);border-radius:2px;padding:1px 6px}
+.logentry .basis{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-bottom:12px}
+.logentry p{font-size:15.5px;margin:0 0 9px}
+.logentry p:last-child{margin-bottom:0}
+.correction{border:1px solid var(--neg);border-left:4px solid var(--neg);
+      background:var(--neg-bg);padding:12px 16px;margin-bottom:14px}
+.correction .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--neg);display:block;margin-bottom:5px}
+
+/* ---------- footer ---------- */
+footer{margin-top:44px;padding-top:22px;border-top:2px solid var(--line-hard)}
+footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width:none}
+.norec{border:1px solid var(--line-hard);background:var(--canvas);padding:16px 20px;
+      margin-top:20px;font-family:var(--mono);font-size:12.5px;color:var(--ink-dim)}
+
+/* ---------- catalyst cards (calendar) ---------- */
+.cat{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:14px;border-left:4px solid var(--line-hard)}
+.cat.up{border-left-color:var(--pos)}
+.cat.down{border-left-color:var(--neg)}
+.cat.two{border-left-color:var(--caution)}
+.cat.neutral{border-left-color:var(--ink-faint)}
+.cat-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.cid{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);flex:none}
+.cat-head h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink);
+      margin:0;flex:1 1 auto;min-width:200px}
+.dir{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;white-space:nowrap}
+.cat.up .dir{color:var(--pos)} .cat.down .dir{color:var(--neg)}
+.cat.two .dir{color:var(--caution)} .cat.neutral .dir{color:var(--ink-faint)}
+.cat-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:10px 0 12px;padding:9px 0;
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+      font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
+.cat-meta b{color:var(--ink);font-weight:600}
+.cat p{margin:0 0 9px;font-size:15.5px}
+.cat p:last-child{margin-bottom:0}
+.cat.resolved{background:var(--canvas);border-left-color:var(--ink-faint)}
+.cat.resolved .dir{color:var(--ink-faint)}
+
+/* ---------- horizon bands (calendar) ---------- */
+.band{display:flex;align-items:center;gap:14px;margin:30px 0 16px}
+.band-t{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--ink-dim);white-space:nowrap}
+.band-r{flex:1;height:1px;background:var(--line-hard)}
+.band-c{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);white-space:nowrap}
+
+/* ---------- upside / downside pair ---------- */
+.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0}
+.oc{border:1px solid var(--line);padding:11px 14px;background:var(--paper)}
+.oc.up-c{border-left:3px solid var(--pos)}
+.oc.down-c{border-left:3px solid var(--neg)}
+.oc .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.09em;
+      text-transform:uppercase;display:block;margin-bottom:5px}
+.oc.up-c .lbl{color:var(--pos)} .oc.down-c .lbl{color:var(--neg)}
+.oc p{margin:0;font-size:14.5px;line-height:1.5}
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  body{font-size:16px}
+  .wrap{padding:0 16px 70px;border-left:none;border-right:none}
+  .ticker{font-size:34px}
+  .headline{font-size:23px}
+  .cases{grid-template-columns:1fr}
+  .outcomes{grid-template-columns:1fr}
+  .mast-strip{gap:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none !important;transition:none !important}
+}
+@media print{
+  body{font-size:11pt}
+  .wrap{max-width:none;border:none}
+  section{page-break-inside:avoid}
+}
+/* ============================================================================
+   SHARED STYLESHEET v1.50 : END
+   ========================================================================= */
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ===================== MASTHEAD ===================== -->
+<header class="mast">
+  <p class="ticker">SLNH</p>
+  <h1 class="headline">One signature stands between an operating Bitcoin hoster and an AI landlord</h1>
+  <p class="functional">SLNH &middot; Soluna Holdings, Inc. &middot; Catalyst Calendar &middot; as of 2 August 2026</p>
+  <div class="mast-strip">
+    <div>Dated catalysts <b>20</b></div>
+    <div>Standing conditions <b>12</b></div>
+    <div>Resolved <b>6</b></div>
+    <div>Horizon <b>12 months</b></div>
+    <div>Pricing basis <b>31 Jul 2026 close</b> <span class="tag">Market</span></div>
+  </div>
+</header>
+
+<!-- ===================== BASIS ===================== -->
+<div class="first">
+  <h2>Basis</h2>
+  <ol>
+    <li>Which items are genuinely <em>scheduled</em>, and which are event-driven and could land any day. Six items the previous numbering carried as dated catalysts have no date at all and sit in Standing conditions.</li>
+    <li>Timing confidence rates the <em>date</em>, never the outcome. A High-confidence catalyst can still be a coin flip. Impact is independent of both.</li>
+    <li>Estimated dates are cadence-based or deadline-based until the company announces. Treat them as approximate.</li>
+    <li>These items are correlated, not independent. Almost every forward item is downstream of one event: a creditworthy tenant signing a binding lease at Kati 2. Counting them as separate shots on goal overstates the number of ways this resolves well.</li>
+  </ol>
+</div>
+
+<!-- ===================== 1. DATED CATALYSTS ===================== -->
+<section id="s1">
+  <h2 class="sec"><span class="n">01</span>Dated catalysts</h2>
+  <p class="sub">Banded 0&ndash;3 / 3&ndash;6 / 6&ndash;12 months, earliest first. Numbering is gapless and runs straight through the bands, so a boundary never resets the count. An ID marks position in the current ordering and changes between revisions, so catalysts are named by title.</p>
+
+  <div class="band"><span class="band-t">0&ndash;3 months</span><span class="band-r"></span><span class="band-c">D1&ndash;D10</span></div>
+  <div class="cat two" id="cat-q2-2026-results-and-first-earnings-call">
+    <div class="cat-head">
+      <span class="cid">D1</span>
+      <h3>Q2 2026 results and first quarterly earnings call</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>13 August 2026, 5:00 pm EDT</b></div>
+    <div>Impact <b>Critical</b></div>
+    <div>Confidence <b>High</b></div>
+    <div>Provenance <b><span class="tag">Filed</span></b></div>
+    </div>
+  <p>The release that ends the information blackout, and the company's first quarterly earnings call. Six things get disclosed for the first time: post-acquisition unrestricted cash and debt; the share count at a recent date; whether the FY2025 material weakness is remediated; covenant compliance and whether the cash sweep triggered; Briscoe's contribution to revenue against cost of revenue; and whether the four-quarter sequential revenue streak survived summer curtailment. Management will face live questions on Kati 2 tenant status for the first time.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>Cash holds better than the roughly $8 million estimated <em>without</em> a large increase in share count, which is the genuinely good outcome and the one to look for. Briscoe visibly lifts consolidated gross margin. Management gives a concrete Kati 2 timeline or names a tenant category. Material weakness declared remediated.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>A low cash balance combined with a share count materially above 157,747,354 confirms the acquisitions were funded by issuance and the pattern continues. Summer curtailment breaks the growth streak. Stock compensation stays elevated after Q1's $10.2 million. Vague answers on Kati 2 read as absence of progress. With 21.8% of shares short at 1.85 days to cover, a disappointment moves violently.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Press release, 30 Jul 2026 (date, time, live question and answer); monthly business update, 14 Jul 2026; Form 10-Q for Q1 2026, filed 15 May 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-monthly-business-updates">
+    <div class="cat-head">
+      <span class="cid">D2</span>
+      <h3>Monthly business updates</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>~9th to 14th of each month</b></div>
+    <div>Impact <b>Medium</b></div>
+    <div>Confidence <b>High</b></div>
+    <div>Provenance <b><span class="tag">Filed</span></b></div>
+    </div>
+  <p>Recent releases: 10 March, 9 April, 7 May, 9 June and 14 July 2026. The cadence matters more than a routine disclosure normally would, because it is the only regular channel through which Kati 2 tenant progress becomes visible. The June and July updates are where the letter of intent and the general contractor selection were disclosed.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>A tenant named, a letter of intent converted, a financing mandate closed, or a new capital partner disclosed. Historically these have appeared here first rather than in a standalone release.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>Kati 2 language repeats unchanged month over month, which is how a stalling negotiation reads in practice. Watch for the disappearance of the letter of intent reference: an omission, not a statement, would be the signal.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Company press releases dated 10 Mar, 9 Apr, 7 May, 9 Jun and 14 Jul 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat neutral" id="cat-2026-annual-meeting-of-stockholders">
+    <div class="cat-head">
+      <span class="cid">D3</span>
+      <h3>2026 annual meeting of stockholders</h3>
+      <span class="dir">Neutral</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>Estimated mid to late August 2026</b></div>
+    <div>Impact <b>Medium</b></div>
+    <div>Confidence <b>Medium</b></div>
+    <div>Provenance <b><span class="tag">Estimate</span></b></div>
+    </div>
+  <p>Inferred, not announced: the prior proxy set the universal-proxy notice deadline under Exchange Act Rule 14a-19 at 19 June 2026, and that rule runs 60 days before the anniversary of the prior year's meeting, implying an anniversary around 18 August. No proxy statement was on file as of the build date, so the proxy itself is a near-term filing to watch.</p>
+  <p>Ordinarily routine: director elections, auditor ratification in KPMG's first such vote replacing UHY LLP, and say-on-pay. Two items make it worth reading. Say-on-pay follows a quarter in which stock compensation of $10.2 million exceeded revenue, June grants totalled at least 12,631,694 restricted shares, and the Compensation Committee raised the chief executive's base salary to $600,000 retroactive to 1 January 2026 with a target bonus of 100% of salary. Any proposal touching authorised shares or the incentive plan is a direct dilution signal.</p>
+  <p>One structural caveat limits what this meeting can do: the board sits in three classes on staggered three-year terms, so only one class stands for election and replacing a majority takes at least two successive meetings. Directors are removable only for cause and only on a 75% vote. The annual meeting is a weaker shareholder lever here than at a company with an annually elected board.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>No dilution-related proposals on the ballot, implying management believes existing authorised headroom is sufficient. Strong say-on-pay support. Board additions with AI infrastructure or project-finance credentials.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>A proposal to increase authorised common above 375 million, or to enlarge the incentive plan, would signal that the roughly 217 million share headroom is expected to be consumed. A weak say-on-pay vote against the Q1 compensation charge would be a governance flag.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Prior-year DEF 14A; 8-K of Nov 2025 (authorised shares raised from 75m to 375m); 8-K filed 24 Jul 2026, Item 5.02(e). <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-series-a-preferred-becomes-callable">
+    <div class="cat-head">
+      <span class="cid">D4</span>
+      <h3>Series A preferred becomes callable</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>23 August 2026</b></div>
+    <div>Impact <b>High</b></div>
+    <div>Confidence <b>High</b></div>
+    <div>Provenance <b><span class="tag">Filed</span></b></div>
+    </div>
+  <p>Contractual: the Series A was issued as not redeemable prior to this date except in limited circumstances. The date arrives regardless of what anyone does. Redemption would cost $123.0 million of liquidation preference plus roughly $35 million of accrued arrears, far beyond the company's means, so this is a forcing function for disclosure rather than an action. Arrears grow about $2.8 million a quarter, which makes eventual resolution more visible: a negotiated exchange into common, a partial paydown from any large financing, or continued accrual.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>A resolution on favourable terms, an exchange at a discount to face or a plan to resume dividends, removes an overhang the equity market largely ignores and the preferred market clearly does not. The preferred traded at $10.75 to $11.00 in June, near 44% of its $25 face, so settlement below face is plausible.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>Arrears keep compounding at 9% of face, roughly $11.1 million a year, silently enlarging the claim ahead of the common. Any exchange into stock at $1.22 would issue an enormous number of shares. The protective provision requiring two-thirds holder approval before issuing anything senior constrains future financing structures.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Series A prospectus supplement; Form 10-Q at 31 Mar 2026 (4,920,045 shares, ~$32.4m arrears); Forms 4, Jun 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-jackson-hole-symposium">
+    <div class="cat-head">
+      <span class="cid">D5</span>
+      <h3>Jackson Hole Economic Policy Symposium</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>27 to 29 August 2026</b></div>
+    <div>Impact <b>Medium</b></div>
+    <div>Confidence <b>High</b></div>
+    <div>Provenance <b><span class="tag">Filed</span></b></div>
+    </div>
+  <p>Chair Kevin Warsh is expected to speak, and the address is watched for how the framework and communication approach evolve. Elevated relative to a normal symposium for two reasons: the July statement was notably short and offered neither a path nor explicit conditions, so this is one of few structured opportunities to read the reaction function before September; and it falls two weeks after the 13 August results, making it the first major macro event the post-earnings share price is marked against.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>A dovish or neutral framing takes some September hike probability out of the market, supporting Bitcoin and micro-cap risk appetite into the autumn, the window in which a capital raise would most plausibly be needed.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>Confirmation of the hawkish tilt implied by the three July dissents hardens September expectations. For a stock with a beta of 5.13 and a fifth of its shares short, that compounds directly into the financing cost of everything downstream.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Symposium dates published by the Federal Reserve Bank of Kansas City, the organiser; FOMC statement and press conference, Federal Reserve, 29 Jul 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat up" id="cat-kati-1b-phase-3-completion">
+    <div class="cat-head">
+      <span class="cid">D6</span>
+      <h3>Kati 1B Phase 3 completion, 14 MW</h3>
+      <span class="dir">Up</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>Expected within 0&ndash;3 months</b></div>
+    <div>Impact <b>Medium</b></div>
+    <div>Confidence <b>Medium</b></div>
+    <div>Provenance <b><span class="tag">Filed</span></b></div>
+    </div>
+  <p>As of 14 July 2026, Phase 2 modular data centres of 9 MW reached substantial completion and Phase 3 of 14 MW was under construction and described as ahead of schedule. Kati 1B totals 35 MW within the 83 MW Kati 1 site. This is incremental contracted Bitcoin hosting revenue: the highest-certainty revenue growth on the calendar and the item least dependent on a Kati 2 tenant.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>Completion ahead of schedule with immediate customer deployment, demonstrating execution capability that supports credibility on the much larger AI builds. Kati 1 fully energised at 83 MW takes total operating capacity meaningfully higher.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>Equipment or interconnection delay. The precedent exists: Dorothy 1A required transformer repair that took two modular data centres offline in early 2026, and Briscoe has needed remediation. Capacity completed into a weak Bitcoin tape may energise into softer hosting demand.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Monthly business updates, 9 Apr and 14 Jul 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-fomc-september-decision">
+    <div class="cat-head">
+      <span class="cid">D7</span>
+      <h3>FOMC September decision</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>16 September 2026</b></div>
+    <div>Impact <b>Medium</b></div>
+    <div>Confidence <b>High</b></div>
+    <div>Provenance <b><span class="tag">Filed</span></b></div>
+    </div>
+  <p>The July meeting held the target range at 3.50% to 3.75% on a 9 to 3 vote, with all three dissents favouring a rate hike. September carries a Summary of Economic Projections and dot plot. Three transmission channels apply. Rate expectations drive Bitcoin, which drives about 23% of revenue directly and hosting demand indirectly. Rates set risk appetite for the equity issuance the company depends on, and a beta of 5.13 means macro shifts land several times harder than on the index. Least discussed, the long end sets the discount rate for a fifteen or twenty year lease: the 30-year Treasury reached roughly 5.25% in late July, its highest since 2007.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>A dovish turn lifts Bitcoin, small-cap risk appetite and speculative AI infrastructure at once, the three things this equity is levered to. Cheaper project debt improves Kati 2 economics directly.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>The skew has turned. Following the July hold, market-implied odds moved toward a September increase rather than a hold. A hawkish September compresses Bitcoin and micro-cap valuations together, raising the cost of equity roughly a month after the 13 August disclosure.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> FOMC statement and meeting calendar, Federal Reserve, 29 Jul 2026 <span class="tag">Filed</span>. Implied probabilities as reported 29 to 30 Jul 2026 <span class="tag">Market</span>.</p>
+  </div>
+
+  <div class="cat up" id="cat-ercot-summer-curtailment-season-ends">
+    <div class="cat-head">
+      <span class="cid">D8</span>
+      <h3>ERCOT summer curtailment season ends</h3>
+      <span class="dir">Up</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>End of September 2026</b></div>
+    <div>Impact <b>Medium</b></div>
+    <div>Confidence <b>High</b></div>
+    <div>Provenance <b><span class="tag">Filed</span></b></div>
+    </div>
+  <p>Texas allocates certain wholesale transmission charges by a large customer's load during four coincident-peak intervals across June to September, so flexible loads curtail heavily through summer and then stop. Four of five sites are in Texas, and the June and July updates disclosed increased curtailment at Dorothy 1A and 1B, Dorothy 2 and Kati 1A. Uptime and therefore hosting and mining revenue should recover in the December quarter. This is why the June and September quarters are seasonally weakest and the December quarter mechanically stronger, a pattern easy to misread as operational improvement.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>December-quarter revenue rebounds visibly as curtailment ends and Kati 1B phases add capacity, producing a strong-looking sequential quarter. Demand response revenue may also be elevated for the summer period.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>The June and September quarters print weak first. If the market has not internalised the seasonality, the August and November reports disappoint on a basis that is structural rather than a deterioration in the business.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Monthly business updates, 9 Jun and 14 Jul 2026; Form 10-Q glossary. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-fomc-october-and-december-decisions">
+    <div class="cat-head">
+      <span class="cid">D9</span>
+      <h3>FOMC October and December decisions</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>28 October and 9 December 2026</b></div>
+    <div>Impact <b>Medium</b></div>
+    <div>Confidence <b>High</b></div>
+    <div>Provenance <b><span class="tag">Filed</span></b></div>
+    </div>
+  <p>Statements at 2:00 pm Eastern, with a Summary of Economic Projections in December. The same channels as the September decision, inheriting a hawkish skew after three July dissents favoured a hike. A specific overlay applies to December: it coincides with year-end tax-loss selling season, and the stock is far below its 52-week high of $5.14, making it a natural tax-loss candidate. Note that the long-end move is not under committee control, since 30-year yields reached 19-year highs in late July even as the front end was held, so a dovish decision does not automatically relieve project-financing costs.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>A dovish December, combined with post-tax-loss January reversal dynamics, has historically been a favourable setup for beaten-down high-beta micro caps. Cheaper capital improves Kati 2 financing terms directly.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>A hawkish December plus tax-loss selling plus 21.8% short interest into thin year-end liquidity is a poor combination. Any equity issuance completed into that window would be maximally dilutive.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Meeting calendar published by the Federal Reserve <span class="tag">Filed</span>. 52-week range and short interest at the 31 Jul 2026 close <span class="tag">Market</span>.</p>
+  </div>
+
+  <div class="cat two" id="cat-generate-tranche-b-draw-window-closes">
+    <div class="cat-head">
+      <span class="cid">D10</span>
+      <h3>Generate Tranche B draw window closes</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>31 October 2026</b></div>
+    <div>Impact <b>High</b></div>
+    <div>Confidence <b>High</b></div>
+    <div>Provenance <b><span class="tag">Filed</span></b></div>
+    </div>
+  <p>Contractual: the Credit Agreement permits Tranche B draws from 12 September 2025 until this date, subject to conditions. Tranche B funds Kati construction and was cut from $18.5 million to $6.0 million in the 1 April 2026 amendment, with the released capacity redirected to the $12.5 million Tranche C for Briscoe. Only $6.0 million of committed project debt remains available before the window shuts. The agreement contemplates up to $64.5 million of Additional Tranche Loan Commitments, but only subject to lender and agent approval, which is not a commitment.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>The remaining $6.0 million drawn before expiry, plus an approved Additional Tranche commitment for Kati or Dorothy 3. An incremental commitment would be third-party validation of a different kind: a project lender underwriting the asset base rather than an equity buyer underwriting a narrative.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>The window closes with capacity undrawn because draw conditions are not met, or the company draws it purely for liquidity rather than construction. Either pushes the next dollar toward equity issuance. A 1.00% commitment fee is payable on undrawn Tranche B amounts.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Form 10-Q at 31 Mar 2026, Note 8; 8-K, 2 Apr 2026 (Amendment No. 1). <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="band"><span class="band-t">3&ndash;6 months</span><span class="band-r"></span><span class="band-c">D11&ndash;D15</span></div>
+  <div class="cat two" id="cat-briscoe-repair-completion-and-first-full-quarter">
+    <div class="cat-head">
+      <span class="cid">D11</span>
+      <h3>Briscoe repair completion and first full quarter of contribution</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>December quarter 2026</b></div>
+    <div>Impact <b>Medium</b></div>
+    <div>Confidence <b>Medium</b></div>
+    <div>Provenance <b><span class="tag">Filed</span></b></div>
+    </div>
+  <p>Repairs were ongoing as of 14 July 2026, delayed roughly two weeks by high winds, with an additional crew and crane deployed. Renewable energy credit sales for the June quarter were completed. Briscoe is the foundation of the vertical-integration thesis and of Dorothy 3. Management projected $6 million to $11 million of year-one adjusted EBITDA on $20 million to $24.4 million of annualised revenue against a $53.0 million headline price. The 8-K/A of 17 June 2026 complicates that: total cash consideration was approximately $55.9 million, and the asset's 2025 accounts show revenue of $8,950,927 against a net loss of $14,773,838.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>Repairs complete, full output achieved, and disclosed contribution lands in or above the projected range. Visible compression of cost of revenue at the co-located Dorothy sites would be the cleanest evidence.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>Further repair delay or cost. Also a presentation trap: because Briscoe's primary purpose is powering Soluna's own co-located data centres, intercompany power sales eliminate on consolidation and appear as lower cost of revenue rather than added revenue. Only third-party and renewable energy credit sales reach the top line, so the projected revenue may never appear as investors expect even if the asset performs.</p></div>
+  </div>
+  <div class="assume"><span class="lbl">Analyst assumption</span><p>The projected $20 million to $24.4 million of annualised revenue is unlikely to appear in consolidated revenue at that magnitude, because the intercompany portion eliminates on consolidation. This is an inference from the asset's stated purpose, not a company statement about accounting treatment.</p></div>
+  <p style="margin-top:12px"><b>Source:</b> Monthly business update, 14 Jul 2026; press release, 2 Apr 2026; 8-K/A, 17 Jun 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-q3-2026-results-and-10-q">
+    <div class="cat-head">
+      <span class="cid">D12</span>
+      <h3>Q3 2026 results and Form 10-Q</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>Estimated mid-November 2026</b></div>
+    <div>Impact <b>High</b></div>
+    <div>Confidence <b>Medium</b></div>
+    <div>Provenance <b><span class="tag">Estimate</span></b></div>
+    </div>
+  <p>Based on the statutory filing deadline for a non-accelerated smaller reporting company and prior-year practice. No date announced. Presumably accompanied by a conference call following the August precedent. This is the confirmation quarter: the June quarter reads as transitional because of the acquisitions, so September is the first clean period showing post-acquisition run-rate burn, full Briscoe contribution, and whether the liquidity trajectory is sustainable. It also captures the tail of summer curtailment and first contribution from Kati 1B phases.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>Adjusted EBITDA approaching breakeven as Briscoe's cost benefit and Kati 1B capacity compound, with cash burn moderating and no emergency financing having been required. Material weakness remediated. Any Kati 2 lease progress disclosed alongside.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>Two consecutive quarters of heavy cash consumption with no AI lease and a diminished cash balance shifts the frame from growth optionality to financing risk. A materially higher share count versus August confirms facility usage. Coverage-covenant pressure would be visible here first.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Periodic reporting deadlines for non-accelerated filers; Form 10-Q cover page at 31 Mar 2026; Q1 filing precedent of 15 May 2026. <span class="tag">Estimate</span></p>
+  </div>
+
+  <div class="cat two" id="cat-puct-transmission-cost-allocation-review">
+    <div class="cat-head">
+      <span class="cid">D13</span>
+      <h3>PUCT transmission cost allocation review</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>Statutory deadline 31 December 2026</b></div>
+    <div>Impact <b>High</b></div>
+    <div>Confidence <b>High</b></div>
+    <div>Provenance <b><span class="tag">Filed</span></b></div>
+    </div>
+  <p>Texas Senate Bill 6 requires the Public Utility Commission of Texas to complete its review of wholesale transmission charge allocation and amend rules as necessary by that date, explicitly considering alternatives to the four-coincident-peak method, such as multiple seasonal peaks or peak energy intervals. This rewrites the economics of the Texas fleet directly: the coincident-peak mechanism is what the company curtails around each summer, so replacing it changes the uptime against transmission cost trade-off across all four Texas sites and every project in the pipeline.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>A methodology spreading charges across more intervals could reduce the value of curtailing during four narrow windows, allowing higher summer uptime and therefore higher June and September quarter revenue. It could also raise costs for inflexible competitors relative to a flexible load, widening the relative advantage.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>A methodology assigning more transmission cost to large loads regardless of curtailment behaviour would eliminate an arbitrage the company currently harvests, raising costs with no offsetting revenue. The bill's stated purpose includes ensuring large energy users contribute appropriately to transmission cost recovery, which is not a framing that favours large loads.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Texas Senate Bill 6, signed 20 Jun 2025, and Public Utility Regulatory Act amendments, published by the Texas Legislature; PUCT implementation dockets, published by the Public Utility Commission of Texas <span class="tag">Filed</span>. Law firm analyses of both, 2025 to 2026 <span class="tag">Market</span>.</p>
+  </div>
+
+  <div class="cat two" id="cat-puct-co-location-and-net-metering-rule">
+    <div class="cat-head">
+      <span class="cid">D14</span>
+      <h3>PUCT co-location and net-metering rule, Project 58479</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>Final adoption targeted during 2026</b></div>
+    <div>Impact <b>Critical</b></div>
+    <div>Confidence <b>Medium</b></div>
+    <div>Provenance <b><span class="tag">Open</span></b></div>
+    </div>
+  <p>The draft was published in autumn 2025 and comments submitted; adoption was targeted for early 2026 and the status was not confirmable at the build date, so this may already be adopted. The most consequential regulatory item for this company specifically. The draft requires Commission approval of net-metering arrangements between new large-load customers of 75 MW or more and existing stand-alone generators, and authorises conditions on approval including callable dispatchable capacity and behind-the-meter curtailment obligations, plus hold-harmless proceedings to keep stranded-asset costs out of rates. Dorothy 3, a planned 300+ MW campus co-located with the Briscoe wind farm, is exactly the arrangement this governs.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>A workable approval pathway with predictable conditions de-risks Dorothy 3 and makes the owned-generation position more valuable, since co-location becomes a regulated but permitted structure rather than an open question. The bill contains an exemption where a generator's registration already included a co-located large load when the resource was energised.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>Mandatory behind-the-meter curtailment obligations would undercut the uptime guarantees AI tenants require, attacking the business model at its weakest joint, since interruptibility is already the core objection to this company as an AI landlord. Approval requirements add timeline and cost to Dorothy 3.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Published analyses of PUCT Project 58479, Dec 2025 and May 2026; Senate Bill 6 co-location exemption analyses; monthly business update, 18 May 2026. <span class="tag">Open</span></p>
+  </div>
+
+  <div class="cat two" id="cat-puct-large-load-interconnection-standard">
+    <div class="cat-head">
+      <span class="cid">D15</span>
+      <h3>PUCT large-load interconnection standard</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>Adoption expected 2026, may be final</b></div>
+    <div>Impact <b>High</b></div>
+    <div>Confidence <b>Medium</b></div>
+    <div>Provenance <b><span class="tag">Open</span></b></div>
+    </div>
+  <p>The Commission voted to publish the draft on 12 March 2026, the comment period closed 17 April 2026, and reporting indicated adoption could come as early as 26 April 2026. Status unconfirmed at the build date. The rule sets entry cost and process for every new load of 75 MW or more, which covers Kati 2 Phase I at 100 MW, Kati 2 in full at 350 MW and Dorothy 3 at 300+ MW. The draft requires financial security of <b>$50,000 per megawatt</b> of requested peak demand plus a study fee of at least $100,000: roughly $5 million for Kati 2 Phase I alone, roughly $17.5 million for the full 350 MW. Against estimated unrestricted cash on the order of $8 million, that is a live liquidity item rather than an abstraction.</p>
+  <p>Siting risk is no longer theoretical anywhere. On 14 July 2026 New York's governor imposed a moratorium on new large data centre development statewide, citing utility bills and resource use. There is no New York exposure here, but the precedent is that a jurisdiction can close to new capacity quickly.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>Clear final rules let developers plan and price with certainty, and high entry costs disproportionately screen out weaker speculative entrants from an interconnection queue that grew from 63 GW in December 2024 to roughly 410 GW by March 2026. Existing energised sites and owned generation are relative advantages in a rationed queue.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>The security posting is a direct cash demand at the wrong point in the liquidity cycle, and must generally be funded before a tenant lease produces revenue. Higher costs and longer study timelines push Kati 2 and Dorothy 3 revenue further right. New large loads interconnecting after 31 December 2025 also face mandatory curtailment protocols and remote-disconnection equipment requirements.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Published analyses of draft 16 Texas Administrative Code Section 25.194, 17 Mar and May 2026; Senate Bill 6 analyses. <span class="tag">Open</span></p>
+  </div>
+
+  <div class="band"><span class="band-t">6&ndash;12 months</span><span class="band-r"></span><span class="band-c">D16&ndash;D20</span></div>
+  <div class="cat two" id="cat-fy2026-10-k-and-first-kpmg-opinion">
+    <div class="cat-head">
+      <span class="cid">D16</span>
+      <h3>FY2026 Form 10-K and first KPMG audit opinion</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>Expected late March 2027</b></div>
+    <div>Impact <b>High</b></div>
+    <div>Confidence <b>High</b></div>
+    <div>Provenance <b><span class="tag">Estimate</span></b></div>
+    </div>
+  <p>Prior-year precedent: the FY2025 Form 10-K was filed late March 2026. KPMG was appointed for the year ending 31 December 2026, so this is its first opinion. The highest-information single document of the year, and unusually loaded. Three things resolve at once: whether KPMG's first audit surfaces anything its predecessor did not; whether the FY2025 material weakness covering debt classification, lease classification and valuation, and overstated equipment deposits is remediated; and what the going-concern language says. Audits for FY2022 through FY2024 carried going-concern explanatory paragraphs, and after a year of heavy cash consumption that question is live again.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>A clean opinion with no going-concern paragraph and the material weakness declared remediated is a real if unglamorous upgrade in the quality of the reported numbers, and a brand-name audit lends credibility with the project lenders and tenants the company needs.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>A new auditor arriving after a disclosed material weakness is the classic setting for restatements, additional weaknesses or reclassifications. A return of going-concern language would be damaging beyond the accounting: for a company selling twenty-year leases, an auditor's doubt about twelve-month viability is a commercial problem.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> FY2025 Form 10-K, Item 9A; 8-K and monthly update, Mar to Apr 2026 (KPMG appointment); auditor consents referencing going-concern paragraphs for FY2022 to FY2023. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-fy2026-results-and-q1-2027-results">
+    <div class="cat-head">
+      <span class="cid">D17</span>
+      <h3>FY2026 results and Q1 2027 results</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>Late March 2027 and mid-May 2027</b></div>
+    <div>Impact <b>High</b></div>
+    <div>Confidence <b>Medium</b></div>
+    <div>Provenance <b><span class="tag">Estimate</span></b></div>
+    </div>
+  <p>Precedents: FY2025 results released 30 March 2026 alongside the 10-K, and Q1 2026 results 15 to 18 May 2026. Neither announced. The full-year release is where management historically frames the strategic narrative: the FY2025 version introduced the 4.3 GW pipeline figure and the $142 million raised. The FY2026 equivalent will either announce contracted AI capacity or explain its absence after a full year of Kati 2 development. The following quarter then shows whether the December quarter's post-curtailment recovery held.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>A full year of revenue growth, adjusted EBITDA at or near breakeven with Briscoe and Kati 1 fully contributing, and contracted AI capacity to point to. The December quarter should benefit mechanically from the end of summer curtailment.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>A second consecutive annual report with zero HPC revenue would be difficult to reconcile with a pipeline-based valuation. Watch the pipeline figure itself: a 4.3 GW number that grows while operating capacity does not is a signal about what management is measuring. Continued heavy stock compensation and a much larger share count would confirm the dilution trajectory.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> FY2025 results release, 30 Mar 2026; Q1 2026 release, 18 May 2026, and Form 10-Q filed 15 May 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat down" id="cat-dorothy-1a-promissory-note-matures">
+    <div class="cat-head">
+      <span class="cid">D18</span>
+      <h3>Dorothy 1A promissory note matures, $12 million</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>15 May 2027</b></div>
+    <div>Impact <b>High</b></div>
+    <div>Confidence <b>High</b></div>
+    <div>Provenance <b><span class="tag">Filed</span></b></div>
+    </div>
+  <p>Contractual. Issued 15 April 2026 to YA II PN under a Securities Purchase Agreement as part-funding for the $16.5 million purchase of Spring Lane Capital's 85.4% Class B interest in Project Dorothy 1A, unsecured and carrying a 2,400,000 share warrant. A $12 million cash obligation against estimated unrestricted cash on the order of $8 million. It must be repaid, refinanced or converted. It also carries a redemption trigger: if the company closes a financing, or series of financings within thirty days, exceeding $20 million in gross proceeds, 20% of principal plus accrued interest falls due, with the at-the-market programme, both standby facilities and pre-existing warrant exercises carved out. A large parent-level raise to fund Kati 2 therefore triggers a cash call unless waived.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>Repaid from operating cash flow or refinanced into cheaper project debt, demonstrating that the Dorothy 1A consolidation was self-funding. An early partial redemption from a large financing would show the note being retired ahead of schedule.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>Repayment funded by equity issuance at a depressed price, or conversion into stock. Combined with the Green Cloud maturity, roughly $19 million of debt matures within about thirteen months, a meaningful call on a company generating negative free cash flow near $50 million a year.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Press release, 16 Apr 2026; 8-K, 17 Apr 2026 (membership interest purchase agreement and note terms). <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-russell-reconstitution">
+    <div class="cat-head">
+      <span class="cid">D19</span>
+      <h3>Russell reconstitution, retention or deletion</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>June 2027</b></div>
+    <div>Impact <b>Medium</b></div>
+    <div>Confidence <b>High</b></div>
+    <div>Provenance <b><span class="tag">Filed</span></b></div>
+    </div>
+  <p>Following the annual reconstitution calendar, with rank day typically in late April and implementation in late June. Soluna was added to the Russell 3000 and Russell 2000 Value indices in the June 2026 reconstitution. Mechanical passive flows in either direction, and a useful market-capitalisation checkpoint. One caution on the mechanics: heavy share issuance can support index eligibility by raising market capitalisation even as per-share value falls, so retention is not straightforwardly good news.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>Retention, or promotion within the index family if market capitalisation rises on a signed AI lease. Membership modestly widens the institutional buyer base from the current roughly 8%.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>Deletion if market capitalisation falls below the eligibility threshold, producing forced passive selling into an already high-short-interest, high-beta name. The effect is amplified in micro caps where passive holdings are large relative to average daily volume.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Monthly business update, 14 Jul 2026 (June 2026 index addition); reconstitution calendar published by FTSE Russell, the index provider. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat down" id="cat-green-cloud-secured-note-matures">
+    <div class="cat-head">
+      <span class="cid">D20</span>
+      <h3>Green Cloud secured note matures, approximately $7.1 million</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>20 June 2027</b></div>
+    <div>Impact <b>High</b></div>
+    <div>Confidence <b>High</b></div>
+    <div>Provenance <b><span class="tag">Filed</span></b></div>
+    </div>
+  <p>Contractual. Originally a $12.5 million secured promissory note issued 20 June 2024 by a Soluna Cloud subsidiary at 9% interest, later modified; carrying value approximately $7.07 million at 31 March 2026, of which $5.49 million was current. Amortising through the period, so the residual at maturity should be smaller than current carrying value, but it is secured and the investor holds a lien on substantially all Company property. The company became a direct co-obligor under a March 2025 modification, making this a parent-level obligation rather than merely a subsidiary one.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>Amortised down and retired on schedule, releasing the lien on Company property, which would materially simplify the collateral picture for future financings. The modification also contemplated penny warrants issuable when the investor removes its lien, so resolution would clarify a small dilution item.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>The lien on substantially all Company property constrains raising secured debt elsewhere. The note is convertible into up to 2,500,000 shares at a $5.00 conversion price, far out of the money at $1.22, which is itself a reminder of how far the share price has fallen relative to terms creditors once accepted.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Form 10-Q at 31 Mar 2026, Note 8. <span class="tag">Filed</span></p>
+  </div>
+
+</section>
+
+<!-- ===================== 2. STANDING CONDITIONS ===================== -->
+<section id="s2">
+  <h2 class="sec"><span class="n">02</span>Standing conditions</h2>
+  <p class="sub">Ongoing and undated, most material first. These take &ldquo;Why undated&rdquo; in place of timing confidence. Six of the twelve were carried as dated catalysts under the previous numbering despite having no date; the concordance in Methodology maps them.</p>
+  <div class="cat two" id="cat-kati-2-letter-of-intent-converts-to-binding-lease">
+    <div class="cat-head">
+      <span class="cid">S1</span>
+      <h3>Kati 2 letter of intent converts to a binding lease</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>Ongoing</b></div>
+    <div>Impact <b>Critical</b></div>
+    <div>Why undated <b>Commercial negotiation, no announced schedule</b></div>
+    <div>Provenance <b><span class="tag">Open</span></b></div>
+    </div>
+  <p>As of the 14 July 2026 update a letter of intent is signed with one potential tenant, the focus is finalising design, commercial terms and the lease agreement, detailed design is roughly 50% complete and a general contractor has been selected. No target date has been published. This is the single largest value driver and the event nearly everything else is downstream of. A binding lease would move the company from the announcement category into the execution category the market has been rewarding, and would unlock project financing that is currently theoretical.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>A signed long-dated lease with a named investment-grade or hyperscaler-backstopped tenant for Phase I's 100 MW. On sector precedent, peers disclosed contracted revenue figures at or above their market capitalisations, so a comparable disclosure against a $192 million market capitalisation would be a step-change rather than an increment. One caution on magnitude: through July 2026 the peer group derated 25% to 38% despite signed contracts, with one operator falling about 37% in a month having announced a $3.4 billion NVIDIA deal and another selling off after a 61% revenue beat. Signing may be necessary without currently being sufficient.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>A letter of intent is ordinarily non-binding: it establishes intent to negotiate, not an obligation to lease. It can lapse quietly, with no announcement and no disclosure obligation, so silence is the most likely form of bad news. A competitor with a completed facility can take the tenant, and this would be a first-time AI landlord negotiating against counterparties who have signed with operators of far greater scale.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Monthly business updates, 9 Jun and 14 Jul 2026. <span class="tag">Open</span></p>
+  </div>
+
+  <div class="cat two" id="cat-kati-2-phase-i-project-financing">
+    <div class="cat-head">
+      <span class="cid">S2</span>
+      <h3>Kati 2 Phase I project financing</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>Ongoing</b></div>
+    <div>Impact <b>Critical</b></div>
+    <div>Why undated <b>Gated by the lease; follows rather than precedes it</b></div>
+    <div>Provenance <b><span class="tag">Open</span></b></div>
+    </div>
+  <p>The company disclosed in its 9 June 2026 update that it had engaged an investment bank experienced in financing AI infrastructure to lead capital raising for Kati 2. Project financing of this type ordinarily follows a signed lease rather than preceding it. This determines whether Kati 2 happens and how much of it SLNH shareholders own. A 100 MW critical-IT data centre typically costs well over a billion dollars, many times the market capitalisation. The joint venture already has Metrobloks holding all Class B interests, with the distribution waterfall returning capital plus a 14% internal rate of return plus $100,000 per Gross PPA MW before a 50/50 split.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>Financing closed at the project level with a meaningful promoted interest and development fees retained, the structure that made this model work for peers. A named institutional partner would validate the asset independently of the tenant.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>Conditions tightened materially in July 2026: a major peer was reported on 29 July to be seeking a higher interest rate on a $2.6 billion loan tied to Anthropic capacity, and credit-default-swap costs for technology borrowers have been rising. Two failure modes follow. Financing does not close and Kati 2 stalls; or it closes on terms leaving a small residual interest, in which case the 350 MW headline overstates what accrues to shareholders, a dynamic already visible in the $65.8 million of non-controlling interests. A large parent-level component would also trip the 20% redemption clause on the Dorothy 1A note.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Monthly business update, 9 Jun 2026; 8-K, ~9 Jun 2026 (joint venture agreement and waterfall); Form 10-Q at 31 Mar 2026; 8-K, 17 Apr 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat down" id="cat-standing-dilution-machinery">
+    <div class="cat-head">
+      <span class="cid">S3</span>
+      <h3>Standing dilution machinery</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>Ongoing</b></div>
+    <div>Impact <b>Critical</b></div>
+    <div>Why undated <b>Facilities are pre-negotiated and can be drawn at any time</b></div>
+    <div>Provenance <b><span class="tag">Filed</span></b></div>
+    </div>
+  <p>Four live instruments: the at-the-market offering agreement with H.C. Wainwright dated 29 April 2025; standby equity purchase agreements with YA II PN dated 12 August 2024 and 24 March 2026; and a shelf registration filed 9 March 2026 registering up to <b>$1.0 billion</b> of securities, of which <b>$500 million</b> is carved out for an at-the-market sales agreement prospectus. Registered capacity is roughly five times the entire market capitalisation. Shares went from 10.6 million at end-2024 to 102.6 million at end-2025 to 157,747,354 by 12 May 2026, including 46 million in the six weeks after 31 March.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>Issuance into strength, at prices well above current levels and funding accretive project equity, is how this model is supposed to work. The 2025 raises did fund real assets: Dorothy 2, Kati 1 and ultimately Briscoe.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>Issuance at $1.22 into 21.8% short interest. The facilities are standing and pre-negotiated, so issuance requires no new shareholder approval and can occur at any time without advance notice. This is why dilution belongs in the base case rather than in a risk scenario.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Form 10-Q at 31 Mar 2026; Form S-3 filed 9 Mar 2026 and amended 30 Mar 2026; Form 424B5, 1 Apr 2026; Form 424B3, ~12 May 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat down" id="cat-series-a-preferred-arrears-accrual">
+    <div class="cat-head">
+      <span class="cid">S4</span>
+      <h3>Series A preferred arrears accrual</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>Ongoing</b></div>
+    <div>Impact <b>High</b></div>
+    <div>Why undated <b>Accrues continuously whether or not declared</b></div>
+    <div>Provenance <b><span class="tag">Filed</span></b></div>
+    </div>
+  <p>4,920,045 shares at a $25.00 liquidation preference and a 9.0% cumulative rate of $2.25 per share annually. Arrears accrue at approximately $11.1 million a year, about $2.8 million a quarter, whether or not dividends are declared. Disclosed at approximately $32.4 million at 31 March 2026, so on that run rate roughly $35 million by 30 June and $38 million by 30 September. Combined with the $123.0 million preference, a claim of roughly $155 million to $158 million ranks ahead of a $192 million common market capitalisation, about 81% of the equity beneath it.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>The preferred trades near 45% of face, so a negotiated settlement well below the stated claim is plausible and would be accretive relative to the headline figure. Removing the overhang would clarify the equity story considerably. That level is independently corroborated: at the 31 July close one quote provider showed a market capitalisation of $247.74 million against 157.75 million shares at $1.22, a gap implying about $11.24 per preferred share.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>The claim grows quarterly and silently, and no equity screening metric reflects it. Any settlement in stock at a depressed price would be severely dilutive. The two-thirds consent requirement for senior issuance also constrains financing structures.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Form 10-Q at 31 Mar 2026; Series A prospectus supplement; Forms 4, Apr to Jun 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat down" id="cat-generate-covenants-cash-sweep-and-hpe-liability">
+    <div class="cat-head">
+      <span class="cid">S5</span>
+      <h3>Generate covenants, cash sweep, and the HPE liability</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>Ongoing</b></div>
+    <div>Impact <b>High</b></div>
+    <div>Why undated <b>Tested continuously; the liability has no scheduled date</b></div>
+    <div>Provenance <b><span class="tag">Filed</span></b></div>
+    </div>
+  <p>The Credit Agreement requires a minimum trailing debt service coverage ratio of 1.60:1.00 and a minimum forward contracted ratio of 1.20:1.00, secured by first-priority liens on substantially all borrower and guarantor assets. A mandatory cash sweep applies a percentage of free cash flow to principal, and the current versus long-term debt split depends on management's own forecast of that sweep. Separately, the contract termination liability to Hewlett Packard Enterprise stood at $19.348 million at 31 March 2026, with no payments made since termination in March 2025.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>Continued compliance, as reported through the Q1 filing. Rising contracted hosting revenue supports the forward coverage test. A negotiated settlement of the termination liability below carrying value would release an obligation the market largely ignores.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>Coverage covenants tied to project cash flow are the transmission mechanism that turns a weak operating quarter into a financing problem. A limited waiver was already obtained in connection with diligence requests. The termination liability is unpaid and could crystallise through litigation or demand at any time, with no scheduled date, which is why it sits here rather than among the dated items.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Form 10-Q at 31 Mar 2026, Note 6 and Note 8. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-bitcoin-price-and-network-difficulty">
+    <div class="cat-head">
+      <span class="cid">S6</span>
+      <h3>Bitcoin price and network difficulty</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>Ongoing</b></div>
+    <div>Impact <b>High</b></div>
+    <div>Why undated <b>Continuous market exposure</b></div>
+    <div>Provenance <b><span class="tag">Market</span></b></div>
+    </div>
+  <p>Roughly 23% of Q1 2026 revenue was direct proprietary mining, exposed immediately to price and difficulty. The 71% hosting share is contractually insulated in the short term but not economically insulated: hosting customers are themselves leveraged Bitcoin operators who stop expanding, then stop paying, then fail. FY2025 revenue fell 21.8% year over year largely on weaker Bitcoin-linked economics, so the sensitivity is demonstrated rather than theoretical.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>A strong tape lifts mining revenue directly, accelerates hosting expansions of the kind one customer has done four times, raises the value of existing energised capacity, and improves equity issuance terms simultaneously.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>A sustained decline compresses mining revenue, stalls hosting demand, and depresses the share price used to fund the AI pivot, all at once. The current backdrop is already unfavourable: Bitcoin has traded near a 21-month low of about $58,115 and in a roughly $58,000 to $64,000 range after record spot exchange-traded fund outflows of approximately $4.5 billion in June 2026. There is no halving within this window; the next is expected around 2028.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Form 10-Q at 31 Mar 2026; FY2025 results release, 30 Mar 2026; press releases 21 and 28 Apr 2026; market levels as reported Jul 2026. <span class="tag">Market</span></p>
+  </div>
+
+  <div class="cat two" id="cat-nasdaq-listing-compliance-and-trading-mechanics">
+    <div class="cat-head">
+      <span class="cid">S7</span>
+      <h3>Nasdaq listing compliance and trading mechanics</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>Ongoing</b></div>
+    <div>Impact <b>Medium</b></div>
+    <div>Why undated <b>Tested on a rolling closing-bid basis</b></div>
+    <div>Provenance <b><span class="tag">Market</span></b></div>
+    </div>
+  <p>Compliance with the $1.00 minimum bid requirement under Nasdaq Listing Rule 5550(a)(2) was regained on 1 May 2026, after maintaining a close of $1.00 or more from 14 to 29 April 2026. At the 31 July close of $1.22 the buffer is roughly 22%. Alongside: short interest of 34.41 million shares, 21.8% of shares outstanding and 33.8% of float, at 1.85 days to cover; average daily volume near 15.5 million shares; and a beta of 5.13.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>Short interest at a third of float with less than two days to cover creates genuine squeeze potential on a positive surprise, a signed Kati 2 lease being the obvious trigger. High-beta micro caps can move several hundred percent on such news, as the move from $0.41 to $5.14 within twelve months demonstrates.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>The same mechanics operate in reverse, and the 22% buffer above $1.00 is thin: the stock fell 6.15% on 31 July alone, on roughly 15 million shares. A disappointing quarter plus a hawkish macro turn could put the listing requirement back in play within a single quarter, which would in turn constrain the equity issuance the company relies on.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Press release, 1 May 2026; market data at the 31 Jul 2026 close. <span class="tag">Market</span></p>
+  </div>
+
+  <div class="cat down" id="cat-customer-concentration-structure-and-related-parties">
+    <div class="cat-head">
+      <span class="cid">S8</span>
+      <h3>Customer concentration, structural complexity, and related parties</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>Ongoing</b></div>
+    <div>Impact <b>Medium</b></div>
+    <div>Why undated <b>Structural feature of the business, not an event</b></div>
+    <div>Provenance <b><span class="tag">Filed</span></b></div>
+    </div>
+  <p>Three customers account for the substantial majority of revenue, with project-level concentration disclosed for Dorothy 1A, Sophie, Dorothy 2 and Kati 1, and one customer alone exceeding 17 MW across four expansions. Structurally, multiple consolidated variable interest entities with Class A and Class B membership tiers and priority-return waterfalls sit beneath the parent, producing $65.8 million of non-controlling interests within $113.0 million of total equity. The related-party relationship with Harmattan Energy is a named overlap rather than an abstract one: <b>Matthew Lipman, a member of the Soluna board, is also a director and the President of that company.</b> Under the 2021 merger agreement 17,820 shares were issued to it on 8 October 2025 and 10,692 on 6 February 2026, with 30,888 remaining issuable through 29 October 2026. Separately, Schedule 13G filings show Robert L. Bugbee moving from 9,168,000 shares at 9.3% to 13,336,362 shares at 8.5%, buying roughly 4.2 million shares while his percentage fell.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>Continued minority buyouts, as executed at Dorothy 1A and 1B in April and May 2026, increase the shareholders' share of project economics. Each buyout makes consolidated figures more representative of what actually accrues.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>Losing one hosting customer would be a material revenue event, and those customers are themselves Bitcoin-leveraged. The variable interest entity structure means consolidated revenue and book value both overstate what reaches shareholders. Complexity plus the FY2025 material weakness plus a first-year auditor warrants scrutiny of the reported figures generally.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Form 10-Q at 31 Mar 2026, concentration note and Note 14; press releases 16 and 21 Apr 2026; Form S-3, Apr 2026; Schedule 13G, Feb and May 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-dorothy-3-development-milestones">
+    <div class="cat-head">
+      <span class="cid">S9</span>
+      <h3>Dorothy 3 development milestones</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>Ongoing</b></div>
+    <div>Impact <b>Medium</b></div>
+    <div>Why undated <b>Rolling development work with no scheduled milestones</b></div>
+    <div>Provenance <b><span class="tag">Filed</span></b></div>
+    </div>
+  <p>As of 14 July 2026: environmental due diligence, survey work and fiber studies in progress; schematic design and master planning begun; hiring in final stages for a Texas-based community engagement consultant. A definitive purchase agreement for 300 acres was signed by May 2026. Moderate near term and high eventually: Dorothy 3 is the purest expression of the vertical-integration thesis, 300+ MW of AI and HPC capacity adjacent to Dorothy 1, Dorothy 2 and the owned Briscoe wind farm. It is at least two development stages behind Kati 2 and realistically a 2028 or later revenue contributor.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>Interconnection progress, a power purchase or firming arrangement, or an anchor tenant discussion disclosed earlier than the stage would suggest. Community and county support secured smoothly; the consultant hire suggests management treats local approval as a real gate.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>Environmental, fiber or interconnection findings that impair the site. Local opposition, which has delayed data centre projects across multiple jurisdictions. Directly exposed to the co-location rule. Pre-development spending continues with no revenue against a constrained cash position.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Monthly business updates, 9 Jun and 14 Jul 2026; Q1 release, 18 May 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-pipeline-project-progression">
+    <div class="cat-head">
+      <span class="cid">S10</span>
+      <h3>Pipeline project progression: Annie, Fei, Ellen, Hedy, Rosa, Grace</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>Ongoing</b></div>
+    <div>Impact <b>Medium</b></div>
+    <div>Why undated <b>Interconnection and land processes with no published dates</b></div>
+    <div>Provenance <b><span class="tag">Filed</span></b></div>
+    </div>
+  <p>As of 14 July 2026: capital formation and construction design commenced for Annie, sized at 74 MW, and Fei, with interconnection studies nearing completion; land secured for Fei with purchase agreement negotiations being finalised; Ellen, Hedy, Rosa and Grace advancing through interconnection and transmission processes. Discussions continue with multiple independent power producers. These projects constitute most of the 4.3 GW pipeline figure supporting the valuation premium, and interconnection study completion is the nearest observable proof point that the pipeline is more than a list of sites.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>Studies completed and agreements executed, converting pipeline megawatts into queue positions with defined capacity and cost, which is the point at which pipeline starts to mean something specific. A new project-level capital partner, as secured twice in 2025, would validate the model again. Geographic diversification beyond Texas would reduce the concentration in one grid and one rulemaking programme.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>Studies returning poor results or high upgrade costs. Land agreements not closing. Each project sized at 75 MW or above also faces the $50,000 per megawatt security requirement. Pre-development capital continues to be consumed with no revenue. The risk here is quiet attrition: projects fading from the update list rather than being formally cancelled.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Monthly business update, 14 Jul 2026; FY2025 results release, 30 Mar 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat down" id="cat-possible-authorised-share-increase">
+    <div class="cat-head">
+      <span class="cid">S11</span>
+      <h3>Possible authorised-share increase or capital restructuring vote</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>Ongoing</b></div>
+    <div>Impact <b>High</b></div>
+    <div>Why undated <b>Speculative; no filing exists</b></div>
+    <div>Provenance <b><span class="tag">Open</span></b></div>
+    </div>
+  <p>Authorised common stands at 375 million following the special meeting of 7 November 2025, against 157,747,354 outstanding at 12 May 2026, so roughly 217 million shares of headroom before restricted stock, warrants and the two standby facilities are considered. Prior precedent shows the company will call a special meeting when headroom is needed. A proxy seeking more authorised shares, or a reverse split, would be among the clearest available signals about management's own dilution expectations. The company executed a 1-for-25 reverse split in October 2023 and raised authorised shares by 300% in November 2025, so neither action would be out of character.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>No such filing appears, implying existing headroom is considered sufficient, which is genuinely informative given the issuance pace. Alternatively, a Series A exchange proposal resolving the $155 million senior claim on terms favourable to the common could be positive despite the share issuance involved.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>A request to authorise more shares within roughly eighteen months of a 300% increase would signal expected issuance on a scale the market may not be discounting. A reverse split would signal concern about the $1.00 minimum bid requirement, cured only in May 2026.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Reporting and 8-K, Nov 2025; Form 10-Q at 31 Mar 2026; stock split history. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat neutral" id="cat-investor-conference-appearances-and-ir-outreach">
+    <div class="cat-head">
+      <span class="cid">S12</span>
+      <h3>Investor conference appearances and investor relations outreach</h3>
+      <span class="dir">Neutral</span>
+    </div>
+    <div class="cat-meta">
+    <div>Timing <b>Ongoing</b></div>
+    <div>Impact <b>Low</b></div>
+    <div>Why undated <b>Nothing announced; appearances confirmed days ahead</b></div>
+    <div>Provenance <b><span class="tag">Open</span></b></div>
+    </div>
+  <p>No announced upcoming conference appearance at the build date. Recent precedent: a virtual fireside chat at an investor research conference on 14 to 15 April 2026, plus a recurring investor question and answer format with the chief financial officer. Low individually, modestly relevant collectively, because institutional ownership near 8% against fresh Russell 3000 and Russell 2000 Value membership leaves room for a sponsorship-building effort. The 13 August earnings call is the more consequential version of this.</p>
+  <div class="outcomes">
+    <div class="oc up-c"><span class="lbl">Upside</span><p>Appearances at data-centre or power-infrastructure conferences rather than crypto events would support the repositioning from Bitcoin miner to infrastructure developer. New sell-side coverage from a firm without a banking relationship would matter considerably more.</p></div>
+    <div class="oc down-c"><span class="lbl">Downside</span><p>Minimal direct downside. The indirect signal is that promotional activity outpacing contracted progress tends to read poorly, and disclosure has leaned on magazine covers, index inclusion and media features.</p></div>
+  </div>
+  <p style="margin-top:12px"><b>Source:</b> Press release, 10 Apr 2026; monthly business updates, 9 Jun and 14 Jul 2026. <span class="tag">Open</span></p>
+  </div>
+
+</section>
+
+<!-- ===================== 3. RESOLVED ===================== -->
+<section id="s3">
+  <h2 class="sec"><span class="n">03</span>Resolved</h2>
+  <p class="sub">Closed items, kept for the record, ordered by the date each completed rather than the date it began. A resolved catalyst takes the next free R number; it does not carry a previous number over. Note what this list contains and what it does not: asset acquisitions, vertical integration, a listing cure and capital-structure cleanup, but not one AI or HPC revenue contract.</p>
+  <div class="cat resolved" id="cat-briscoe-wind-farm-acquired">
+    <div class="cat-head">
+      <span class="cid">R1</span>
+      <h3>Briscoe Wind Farm acquired, approximately 149.85 MW</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+    <div>Resolved <b>1 April 2026</b></div>
+    <div>Outcome <b>Closed at approximately $55.9m total cash consideration against a $53.0m headline</b></div>
+    <div>Provenance <b><span class="tag">Filed</span></b></div>
+    </div>
+  <p>Acquired 100% of the equity in Briscoe Wind Farm, LLC, an approximately 149.85 MW nameplate wind project co-located with the Dorothy campus in West Texas, for $53.0 million, funded with cash plus $12.5 million of new Tranche C debt. Treated as an asset acquisition with $5.0 million of transaction costs capitalised. Management projected $6 million to $11 million of year-one adjusted EBITDA on $20 million to $24.4 million of annualised revenue. The 8-K/A of 17 June 2026 put total cash consideration at approximately $55.9 million and disclosed the asset's 2025 revenue of $8,950,927 against a net loss of $14,773,838.</p>
+  <p>Creates the vertical integration underpinning Dorothy 3 and the contracted-uptime pitch to AI tenants. It is also the largest single cash outflow in the company's history and the main driver of the liquidity question at the August results.</p>
+  <p style="margin-top:12px"><b>Source:</b> 8-K and press release, 2 Apr 2026; Form 10-Q Note 16; 8-K/A with audited and pro forma financials, 17 Jun 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat resolved" id="cat-nasdaq-minimum-bid-compliance-regained">
+    <div class="cat-head">
+      <span class="cid">R2</span>
+      <h3>Nasdaq minimum bid compliance regained</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+    <div>Resolved <b>1 May 2026</b></div>
+    <div>Outcome <b>Compliance regained; matter closed by the exchange</b></div>
+    <div>Provenance <b><span class="tag">Filed</span></b></div>
+    </div>
+  <p>Compliance with Nasdaq Listing Rule 5550(a)(2) regained after maintaining a minimum closing bid of $1.00 or greater from 14 April through 29 April 2026. The exchange closed the matter and the company stated it was in full compliance with all continued listing requirements. This removed a delisting overhang that had constrained institutional participation through 2025, when the stock traded largely below $1.00. The cure is not permanent: at $1.22 the buffer is roughly 22%, and the requirement remains a standing condition.</p>
+  <p style="margin-top:12px"><b>Source:</b> Press release, 1 May 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat resolved" id="cat-dorothy-1-campus-fully-consolidated">
+    <div class="cat-head">
+      <span class="cid">R3</span>
+      <h3>Dorothy 1 campus fully consolidated</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+    <div>Resolved <b>20 May 2026</b></div>
+    <div>Outcome <b>100% ownership of the 50 MW campus; a $12m note issued and $8,765,490 paid in cash</b></div>
+    <div>Provenance <b><span class="tag">Filed</span></b></div>
+    </div>
+  <p>Two transactions. <b>Dorothy 1A:</b> acquired Spring Lane Capital's 85.4% Class B interest for $16.5 million, closing 15 April 2026, with $6.0 million paid at closing and $10.5 million due no later than 1 July 2026, part-funded by a $12 million note issued to YA II PN under a Securities Purchase Agreement dated 15 April 2026, maturing 15 May 2027 and carrying a 2,400,000 share warrant. <b>Dorothy 1B:</b> acquired the remaining 49% membership interest from Navitas West Texas Investments for <b>$8,765,490</b>, closed 19 May 2026 and funded with balance sheet cash.</p>
+  <p>Together these complete equity consolidation of the 50 MW Dorothy 1 campus, increase the shareholders' share of Dorothy economics and clear title for the Dorothy 3 development. They leave the $12 million maturity in May 2027 and the financing-triggered 20% redemption clause. The completion date is the date the second transaction closed, not the date the first began.</p>
+  <p style="margin-top:12px"><b>Source:</b> Press release, 16 Apr 2026 and 8-K, 17 Apr 2026; Form S-3, Apr 2026; 8-K and Exhibit 99.1, 20 May 2026; Form 424B3, ~12 May 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat resolved" id="cat-kati-2-definitive-joint-venture-signed">
+    <div class="cat-head">
+      <span class="cid">R4</span>
+      <h3>Kati 2 definitive joint venture signed with Metrobloks</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+    <div>Resolved <b>3 June 2026</b></div>
+    <div>Outcome <b>Definitive agreement replaced a non-binding memorandum; vehicle formed, no tenant</b></div>
+    <div>Provenance <b><span class="tag">Filed</span></b></div>
+    </div>
+  <p>A definitive limited liability company agreement replaced the earlier non-binding memorandum of understanding, governing Soluna MB KK II JVCo, LLC between Soluna HPC KK II HoldCo, holding all Class A interests and acting as manager, and DC Kati Venture LLC, managed by Metrobloks, holding all Class B interests. Soluna contributed the Phase I property, a purchase agreement for the Phase II property and approximately $3.5 million of operating expenses, with total commitments reported around $21 million to $22.5 million including roughly $19 million for the Phase II property. Phase I is 100 MW critical IT; Phase II adds 250 MW. The distribution waterfall returns capital plus a 14% internal rate of return plus $100,000 per Gross PPA MW, then splits 50/50.</p>
+  <p>Converting a memorandum to a definitive agreement is real progress on the partner side. It is not a tenant, a lease, or financing, which remain open. This is the vehicle, not the revenue.</p>
+  <p style="margin-top:12px"><b>Source:</b> 8-K, ~9 Jun 2026 (agreement effective 3 Jun 2026); monthly update, 9 Jun 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat resolved" id="cat-series-b-preferred-eliminated">
+    <div class="cat-head">
+      <span class="cid">R5</span>
+      <h3>Series B preferred eliminated</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+    <div>Resolved <b>23 June 2026</b></div>
+    <div>Outcome <b>Class retired into 6,510,416 common shares plus $2.1m of dividends paid</b></div>
+    <div>Provenance <b><span class="tag">Filed</span></b></div>
+    </div>
+  <p>All 62,500 outstanding Series B Convertible Preferred shares were converted into 6,510,416 common shares during 2026, with $2.1 million of accrued dividends paid at full conversion. A Withdrawal of Designation was filed in Nevada on 23 June 2026, terminating the designation and removing the provisions from the Articles of Incorporation. Only common stock and the Series A preferred now remain.</p>
+  <p>A genuine simplification that removed roughly $1.8 million of Series B arrears. But it was achieved by moving the claim into the common share count: 6.5 million new shares plus $2.1 million of cash. The far larger Series A layer, at roughly $155 million including arrears, is untouched.</p>
+  <p style="margin-top:12px"><b>Source:</b> 8-K, 23 to 25 Jun 2026; Form 10-Q at 31 Mar 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat resolved" id="cat-management-build-out">
+    <div class="cat-head">
+      <span class="cid">R6</span>
+      <h3>Management build-out: chief financial officer, chief development officer, auditor</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+    <div>Resolved <b>16 July 2026</b></div>
+    <div>Outcome <b>Three appointments completed; the chief financial officer bought stock on the open market</b></div>
+    <div>Provenance <b><span class="tag">Filed</span></b></div>
+    </div>
+  <p>Michael Picchi appointed Chief Financial Officer effective 1 April 2026, previously chief financial and accounting officer at a data centre developer. Ryan Carver, formerly of Microsoft, appointed Chief Development Officer in July 2026 to lead the AI and HPC data centre platform lifecycle. KPMG appointed independent registered public accounting firm for FY2026, replacing UHY LLP, which audited FY2025 and FY2024. Notably, Picchi purchased 100,000 common shares in the open market at $1.63 on 22 May 2026.</p>
+  <p>Relevant credibility for the tenant negotiations and the financing that follow: a former hyperscaler executive is a meaningful hire for a company trying to lease to hyperscalers. The open-market purchase is the most substantive insider signal of the period. The first KPMG opinion arrives with the FY2026 annual report.</p>
+  <p style="margin-top:12px"><b>Source:</b> Monthly update, Feb 2026; press release, 16 Jul 2026; Q1 release, 18 May 2026; Form 4, 22 May 2026. <span class="tag">Filed</span></p>
+  </div>
+
+</section>
+
+<!-- ===================== 4. NULL CATEGORIES ===================== -->
+<section id="s4">
+  <h2 class="sec"><span class="n">04</span>Null categories</h2>
+  <p class="sub">Every category reviewed appears as a row, including those that produced catalysts, which read across by title and ID. A category checked and found empty is recorded rather than omitted.</p>
+  <div class="tw"><table class="nulls">
+    <thead><tr><th>Category</th><th>Status</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Earnings</td><td class="status">Covered above</td><td>Q2 2026 results and first quarterly earnings call (D1), Q3 2026 results and Form 10-Q (D12), FY2026 Form 10-K and first KPMG audit opinion (D16), FY2026 results and Q1 2027 results (D17).</td></tr>
+      <tr><td class="lbl">Product launches</td><td class="status">None</td><td>Checked against company press releases and monthly business updates through 30 July 2026 and found empty. The category does not apply to an infrastructure business with no product cycle: the nearest equivalents are capacity energisations, carried as Kati 1B Phase 3 completion (D6), and the MaestroOS control software, which is internal tooling rather than a sold product.</td></tr>
+      <tr><td class="lbl">Investor days</td><td class="status">None</td><td>Checked against company press releases and monthly business updates through 30 July 2026 and found empty. No capital markets day is announced. For a company asking the market to underwrite a 4.3 GW pipeline that absence is itself notable, and the first earnings call on 13 August 2026 is the first step toward closing it.</td></tr>
+      <tr><td class="lbl">Regulatory decisions</td><td class="status">Covered above</td><td>PUCT transmission cost allocation review (D13), PUCT co-location and net-metering rule (D14), PUCT large-load interconnection standard (D15).</td></tr>
+      <tr><td class="lbl">Lawsuits</td><td class="status caution-t">Not established</td><td>Never examined. No litigation search was performed and no legal proceedings disclosure was checked. Also named in what was not checked, and carried forward in Methodology.</td></tr>
+      <tr><td class="lbl">Macro events</td><td class="status">Covered above</td><td>Jackson Hole Economic Policy Symposium (D5), FOMC September decision (D7), FOMC October and December decisions (D9).</td></tr>
+      <tr><td class="lbl">Industry conferences</td><td class="status">None</td><td>Checked against company press releases and the investor relations events page through 30 July 2026 and found empty. No appearance is announced. Carried as a standing condition, investor conference appearances and investor relations outreach (S12), because appearances have historically been confirmed only days ahead.</td></tr>
+      <tr><td class="lbl">Management changes</td><td class="status">Covered above</td><td>Management build-out (R6): chief financial officer effective 1 April 2026, chief development officer July 2026, auditor changed to KPMG for FY2026.</td></tr>
+      <tr><td class="lbl">Buybacks</td><td class="status caution-t">Not established</td><td>Never examined. The company is a structural net issuer with $1.0bn of registered capacity, which makes a repurchase improbable, but improbable is not the same as checked. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Dividends</td><td class="status caution-t">Not established</td><td>Never examined for a <em>common</em> dividend. Series B preferred dividends of $2.1m paid on conversion and Series A arrears of roughly $32.4m accruing unpaid are both recorded above. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Major contracts</td><td class="status">Covered above</td><td>Kati 2 letter of intent converts to a binding lease (S1), carried as standing because it has no date. The most consequential item in the document, and it has not occurred.</td></tr>
+      <tr><td class="lbl">Signed AI or HPC lease</td><td class="status">None</td><td>Checked against the Form 10-Q for the quarter ended 31 March 2026 and the monthly business update of 14 July 2026, and found empty: zero HPC revenue and one non-binding letter of intent, against peers holding multi-billion-dollar contracted backlogs.</td></tr>
+      <tr><td class="lbl">Bitcoin halving</td><td class="status">None</td><td>Checked against the protocol issuance schedule and found none within the twelve-month horizon; the next is expected around 2028. This removes one recurring sector catalyst that would otherwise appear.</td></tr>
+      <tr><td class="lbl">Credit rating action</td><td class="status caution-t">Not established</td><td>Never examined. No rating agency was checked, so the absence of a rating here is a gap rather than a finding. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Index events</td><td class="status">Covered above</td><td>Russell 3000 and Russell 2000 Value addition completed June 2026; the forward event is retention or deletion (D19).</td></tr>
+      <tr><td class="lbl">Company sale or takeover</td><td class="status">None</td><td>Checked against the 8-K current reports listed in Sources through 30 July 2026 and found empty. No process or approach is disclosed. The $155m preferred claim and the variable interest entity structure would complicate any acquisition of the parent.</td></tr>
+      <tr><td class="lbl">Stock split</td><td class="status">None</td><td>Checked against the 8-K current reports listed in Sources through 30 July 2026 and found empty. A 1-for-25 reverse split occurred 16 October 2023, relevant only as precedent should the minimum bid requirement come back into play.</td></tr>
+      <tr><td class="lbl">Series B preferred events</td><td class="status">Covered above</td><td>Class eliminated (R5) on 23 June 2026. No further conversions or dividends are possible from this class.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 5. DILUTION & CAPITAL OVERLAY ===================== -->
+<section id="s5">
+  <h2 class="sec"><span class="n">05</span>Dilution &amp; capital overlay</h2>
+  <p class="sub">Sits across every other catalyst rather than beside them. No item here is meaningful in per-share terms without tracking the denominator.</p>
+
+  <p>Loss per share <em>improved</em> from $(1.21) to $(0.24) year over year while the absolute loss grew, because the share count grew faster than the loss.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Date</th><th class="num">Shares outstanding</th><th>Driver and basis</th></tr></thead>
+    <tbody>
+      <tr><td class="when">31 Dec 2024</td><td class="num">10,607,020</td><td>Post 1-for-25 reverse split baseline. <span class="tag">Filed</span></td></tr>
+      <tr><td class="when">31 Dec 2025</td><td class="num">102,531,089</td><td>At-the-market settlements, warrant exercises, standby facility draws, restricted stock, July and December offerings. <span class="tag">Filed</span></td></tr>
+      <tr><td class="when">31 Mar 2026</td><td class="num">111,717,040</td><td>8.15m warrant exercises, 1.37m restricted stock, partial Series B conversion, and 335,976 commitment fee shares. <span class="tag">Filed</span></td></tr>
+      <tr><td class="when">6 Apr 2026</td><td class="num">113,181,690</td><td>Plus 1.5m. The same prospectus reported a last sale price of $0.9259. <span class="tag">Filed</span></td></tr>
+      <tr><td class="when">24 Apr 2026</td><td class="num">141,347,055</td><td>Plus 28.2m in the eighteen days from 6 April, bracketing the Briscoe and Dorothy 1A closings. <span class="tag">Filed</span> Form 424B3</td></tr>
+      <tr><td class="when">12 May 2026</td><td class="num">157,747,354</td><td>Plus 16.4m more; roughly 46m added in six weeks, about 41% of the starting count. <span class="tag">Filed</span> 10-Q cover</td></tr>
+      <tr><td class="when">Authorised</td><td class="num">375,000,000</td><td>Increased from 75m at the special meeting of 7 Nov 2025; roughly 217m of headroom remains. <span class="tag">Filed</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Standing capacity to issue, requiring no further approval</h3>
+
+  <div class="tw"><table>
+    <thead><tr><th>Instrument</th><th class="num">Capacity</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Shelf registration, total</td><td class="num">$1.0bn</td><td><span class="tag">Filed</span> Form S-3, 9 Mar 2026, amended 30 Mar 2026</td></tr>
+      <tr><td class="lbl">of which ATM sales agreement prospectus</td><td class="num">$500m</td><td><span class="tag">Filed</span> Form 424B5, 1 Apr 2026. Supersedes an earlier 2025 filing of $87.65m</td></tr>
+      <tr><td class="lbl">Resale registrations, April 2026</td><td class="num">31.66m sh</td><td><span class="tag">Filed</span> 26,512,815 under the 2024 standby agreement; 2,459,400 warrant and Harmattan merger shares; 2,700,000 Generate warrant shares. Resale only, producing no cash for the company</td></tr>
+      <tr><td class="lbl">Warrants outstanding</td><td class="num">27,549,840 sh</td><td><span class="tag">Filed</span> Form 424B3</td></tr>
+      <tr><td class="lbl">Generate warrant package</td><td class="num">2,700,000 sh</td><td><span class="tag">Filed</span> a pre-funded warrant for 700,000 shares plus common warrants for up to 2,000,000 more, being 1,350,000 and 650,000, issued with the $12.5m Tranche C loan</td></tr>
+      <tr><td class="lbl">Placement agent warrants</td><td class="num">$1.313m</td><td><span class="tag">Filed</span> carried in mezzanine equity</td></tr>
+      <tr><td class="lbl">Green Cloud conversion</td><td class="num">2,500,000 sh</td><td><span class="tag">Filed</span> at $5.00, far out of the money</td></tr>
+      <tr><td class="lbl">June 2026 restricted stock grants</td><td class="num">12,631,694 sh</td><td><span class="tag">Filed</span> five insiders, about 8% of shares outstanding</td></tr>
+      <tr><td class="lbl">Company ATM illustration</td><td class="num">760,178,588 sh</td><td><span class="tag">Filed</span> shares issuable were the ATM fully sold at $0.77</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>The gating chain</h3>
+
+  <p>These catalysts are correlated, not independent. Almost every forward item is downstream of one event, and the sequence runs: liquidity survives the acquisitions, the letter of intent becomes a binding lease, project financing closes, construction and energisation follow, and only then does AI revenue appear. Counting the items as separate shots on goal overstates the number of ways this resolves well.</p>
+
+  <p>The first gate is easy to miss, and it is not really a cash gate. Pre-development spending, the $50,000 per megawatt security deposit contemplated by the proposed interconnection rule, and ordinary operating burn all require cash the company may have substantially less of than screens show: roughly <b>$8 million</b> of unrestricted cash after $59 million to $64 million of outflows across three acquisitions, on the estimate below. But between 31 March and 12 May 2026 the share count went from 111,717,040 to 157,747,354, roughly <b>46 million shares, about 41% of the starting count, in six weeks</b>. That is how the acquisitions were funded. The company does not run out of money so long as it can sell stock, and with $1.0 billion registered it has ample capacity to do so.</p>
+
+  <p>The question at that first gate is therefore never whether there is cash, but at what price, and how much of the eventual upside still belongs to today's shareholders. Read the August cash balance and share count together; either alone is misleading.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Working from disclosed transaction terms, the June quarter cash impact is roughly $43m for Briscoe net of the $12.5m Tranche C draw, or nearer $48m if the $5.0m of capitalised transaction costs sits outside that figure since the filing is not explicit, $4.5m net for Dorothy 1A after the $12m note, $8.8m for Dorothy 1B, and $2.1m of Series B dividends: about <b>$59 million to $64 million out</b> against $68.6 million at the start, implying <b>$5 million to $10 million</b> unrestricted before operating burn or construction spending. With trailing free cash outflow near $50 million, roughly $19 million of debt maturing by June 2027, a possible $5 million to $17.5 million interconnection security requirement, and $500 million of at-the-market capacity registered, further issuance is the base case rather than a risk scenario. The question is price and size, not whether. The single most useful figure on 13 August is not revenue; it is the share count on the Form 10-Q cover page.</p>
+  </div>
+
+  <p>One structural quirk cuts the other way. The $12 million Dorothy 1A note requires redemption of 20% of principal plus accrued interest if the company closes a financing, or series of financings within thirty days, exceeding $20 million in gross proceeds, with the at-the-market programme, both standby facilities and pre-existing warrant exercises carved out. A large parent-level raise to fund Kati 2 therefore triggers a cash call unless waived. Success at the financing gate has a toll attached.</p>
+</section>
+
+<!-- ===================== 6. FALSIFICATION TESTS ===================== -->
+<section id="s6">
+  <h2 class="sec"><span class="n">06</span>Falsification tests</h2>
+  <p class="sub">What would prove this read wrong, stated in advance. Each trigger names an observable event settleable from a document: a filing, a date passing, a disclosed figure crossing a stated threshold, or a price. An unquantified threshold is not a test. All ten now carry one: eight are settleable from a filing or a date, and two rest on a stated judgement, tagged as an estimate where the threshold is not a filed figure.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th class="num">#</th><th>If this happens&hellip;</th><th>&hellip;this was wrong</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>The Q2 2026 Form 10-Q shows unrestricted cash above $35 million <em>and</em> shares outstanding at or below 157,747,354 on the cover page.</td><td>The roughly $8 million liquidity estimate, for reasons other than issuance. A high cash balance with a much larger share count confirms the framing instead.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">2</td><td>An 8-K or press release discloses a binding Kati 2 lease with a named tenant before 31 December 2026.</td><td>The low timing confidence on the lease, and the ordering that places project financing, Dorothy 3 and pipeline progression behind it.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">3</td><td>Shares outstanding on the Q2 or Q3 2026 Form 10-Q cover page are no higher than 157,747,354.</td><td>The conclusion that dilution is the base case rather than a risk scenario.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">4</td><td>Q2 2026 total revenue as filed exceeds $9.394 million, the Q1 2026 figure reported in the Form 10-Q of 15 May 2026.</td><td>The inference that summer curtailment breaks the four-quarter sequential growth streak.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">5</td><td>Consolidated revenue attributable to Briscoe reaches $5.0 million or more in a single quarter, the quarterly equivalent of the $20 million annualised projection.</td><td>The caveat that intercompany power sales eliminate on consolidation and so will not appear in reported revenue.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">6</td><td>The PUCT adopts the co-location rule and the adopted text contains no mandatory behind-the-meter curtailment obligation.</td><td>The treatment of that rule as the most serious regulatory threat to the model.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">7</td><td>A firm other than the company's at-the-market sales agent publishes an initiation of coverage.</td><td>The implication that the bullish view is confined to a conflicted source.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">8</td><td>The FY2026 Form 10-K carries an audit opinion with no going-concern explanatory paragraph and Item 9A reports the material weakness remediated.</td><td>The reporting-quality discount applied throughout this document.</td><td class="status">Untriggered</td></tr>
+    </tbody>
+      <tr><td class="num">9</td><td>The company announces a settlement, exchange or redemption of the Series A preferred for aggregate consideration below <b>$77.5 million</b>, being half of the $155 million claim of $123.0 million liquidation preference plus roughly $32.4 million of arrears. <span class="tag">Estimate</span> the threshold is a judgement anchored on the preferred trading near 45% of its $25 face, not a filed figure.</td><td>The treatment of the preferred claim as an overhang that resolves expensively for the common.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">10</td><td>Forms 4 disclose open-market purchases of common stock by <b>two or more insiders other than the chief financial officer, totalling 200,000 shares or more within any rolling ninety days</b>. <span class="tag">Estimate</span> the count and the share threshold are judgements set against the single 100,000 share purchase of 22 May 2026, not filed figures.</td><td>The reading that insider conviction is confined to one officer and that the liquidity position is under strain.</td><td class="status">Untriggered</td></tr>
+    </table></div>
+
+  <div class="note caution">
+    <p><b>All ten tests now carry a settleable trigger.</b> Three stood as open defects at the previous revision, one for want of a baseline this document did not hold and two for want of any threshold at all. The baseline is now sourced here from the quarterly filing, and the two judgement thresholds are stated as judgements and tagged, which is what the rule requires of a threshold that is not a filed figure. A stated threshold that turns out to be wrong is still a test; an unstated one never was.</p>
+  </div>
+</section>
+
+<!-- ===================== 7. CATALYST SUMMARY ===================== -->
+<section id="s7">
+  <h2 class="sec"><span class="n">07</span>Catalyst summary</h2>
+  <p class="sub">Every ID in one table, gapless within each class, matching the cards above in count and order. Links point at title slugs so they survive renumbering.</p>
+  <div class="tw"><table>
+    <thead><tr><th>ID</th><th>Catalyst</th><th>Timing</th><th>Impact</th><th>Confidence</th><th>Direction</th></tr></thead>
+    <tbody>
+      <tr><td class="num">D1</td><td><a href="#cat-q2-2026-results-and-first-earnings-call">Q2 2026 results and first quarterly earnings call</a></td><td class="when">13 Aug 2026</td><td>Critical</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D2</td><td><a href="#cat-monthly-business-updates">Monthly business updates</a></td><td class="when">~9th&ndash;14th monthly</td><td>Medium</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D3</td><td><a href="#cat-2026-annual-meeting-of-stockholders">2026 annual meeting of stockholders</a></td><td class="when">~mid to late Aug 2026</td><td>Medium</td><td>Medium</td><td>Neutral</td></tr>
+      <tr><td class="num">D4</td><td><a href="#cat-series-a-preferred-becomes-callable">Series A preferred becomes callable</a></td><td class="when">23 Aug 2026</td><td>High</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D5</td><td><a href="#cat-jackson-hole-symposium">Jackson Hole Economic Policy Symposium</a></td><td class="when">27&ndash;29 Aug 2026</td><td>Medium</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D6</td><td><a href="#cat-kati-1b-phase-3-completion">Kati 1B Phase 3 completion, 14 MW</a></td><td class="when">within 0&ndash;3 months</td><td>Medium</td><td>Medium</td><td class="pos-t">Up</td></tr>
+      <tr><td class="num">D7</td><td><a href="#cat-fomc-september-decision">FOMC September decision</a></td><td class="when">16 Sep 2026</td><td>Medium</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D8</td><td><a href="#cat-ercot-summer-curtailment-season-ends">ERCOT summer curtailment season ends</a></td><td class="when">end Sep 2026</td><td>Medium</td><td>High</td><td class="pos-t">Up</td></tr>
+      <tr><td class="num">D9</td><td><a href="#cat-fomc-october-and-december-decisions">FOMC October and December decisions</a></td><td class="when">28 Oct, 9 Dec 2026</td><td>Medium</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D10</td><td><a href="#cat-generate-tranche-b-draw-window-closes">Generate Tranche B draw window closes</a></td><td class="when">31 Oct 2026</td><td>High</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D11</td><td><a href="#cat-briscoe-repair-completion-and-first-full-quarter">Briscoe repair completion and first full quarter</a></td><td class="when">Dec quarter 2026</td><td>Medium</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D12</td><td><a href="#cat-q3-2026-results-and-10-q">Q3 2026 results and Form 10-Q</a></td><td class="when">~mid-Nov 2026</td><td>High</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D13</td><td><a href="#cat-puct-transmission-cost-allocation-review">PUCT transmission cost allocation review</a></td><td class="when">by 31 Dec 2026</td><td>High</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D14</td><td><a href="#cat-puct-co-location-and-net-metering-rule">PUCT co-location and net-metering rule</a></td><td class="when">during 2026</td><td>Critical</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D15</td><td><a href="#cat-puct-large-load-interconnection-standard">PUCT large-load interconnection standard</a></td><td class="when">2026, may be final</td><td>High</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D16</td><td><a href="#cat-fy2026-10-k-and-first-kpmg-opinion">FY2026 Form 10-K and first KPMG audit opinion</a></td><td class="when">~late Mar 2027</td><td>High</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D17</td><td><a href="#cat-fy2026-results-and-q1-2027-results">FY2026 results and Q1 2027 results</a></td><td class="when">Mar and May 2027</td><td>High</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D18</td><td><a href="#cat-dorothy-1a-promissory-note-matures">Dorothy 1A promissory note matures, $12m</a></td><td class="when">15 May 2027</td><td>High</td><td>High</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">D19</td><td><a href="#cat-russell-reconstitution">Russell reconstitution, retention or deletion</a></td><td class="when">Jun 2027</td><td>Medium</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D20</td><td><a href="#cat-green-cloud-secured-note-matures">Green Cloud secured note matures, ~$7.1m</a></td><td class="when">20 Jun 2027</td><td>High</td><td>High</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">S1</td><td><a href="#cat-kati-2-letter-of-intent-converts-to-binding-lease">Kati 2 letter of intent converts to a binding lease</a></td><td class="when">Ongoing</td><td>Critical</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S2</td><td><a href="#cat-kati-2-phase-i-project-financing">Kati 2 Phase I project financing</a></td><td class="when">Ongoing</td><td>Critical</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S3</td><td><a href="#cat-standing-dilution-machinery">Standing dilution machinery</a></td><td class="when">Ongoing</td><td>Critical</td><td>n/a</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">S4</td><td><a href="#cat-series-a-preferred-arrears-accrual">Series A preferred arrears accrual</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">S5</td><td><a href="#cat-generate-covenants-cash-sweep-and-hpe-liability">Generate covenants, cash sweep, and the HPE liability</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">S6</td><td><a href="#cat-bitcoin-price-and-network-difficulty">Bitcoin price and network difficulty</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S7</td><td><a href="#cat-nasdaq-listing-compliance-and-trading-mechanics">Nasdaq listing compliance and trading mechanics</a></td><td class="when">Ongoing</td><td>Medium</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S8</td><td><a href="#cat-customer-concentration-structure-and-related-parties">Customer concentration, structure, related parties</a></td><td class="when">Ongoing</td><td>Medium</td><td>n/a</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">S9</td><td><a href="#cat-dorothy-3-development-milestones">Dorothy 3 development milestones</a></td><td class="when">Ongoing</td><td>Medium</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S10</td><td><a href="#cat-pipeline-project-progression">Pipeline project progression</a></td><td class="when">Ongoing</td><td>Medium</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S11</td><td><a href="#cat-possible-authorised-share-increase">Possible authorised-share increase or restructuring vote</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">S12</td><td><a href="#cat-investor-conference-appearances-and-ir-outreach">Investor conference appearances and outreach</a></td><td class="when">Ongoing</td><td>Low</td><td>n/a</td><td>Neutral</td></tr>
+      <tr><td class="num">R1</td><td><a href="#cat-briscoe-wind-farm-acquired">Briscoe Wind Farm acquired</a></td><td class="when">1 Apr 2026</td><td>High</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R2</td><td><a href="#cat-nasdaq-minimum-bid-compliance-regained">Nasdaq minimum bid compliance regained</a></td><td class="when">1 May 2026</td><td>Medium</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R3</td><td><a href="#cat-dorothy-1-campus-fully-consolidated">Dorothy 1 campus fully consolidated</a></td><td class="when">20 May 2026</td><td>High</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R4</td><td><a href="#cat-kati-2-definitive-joint-venture-signed">Kati 2 definitive joint venture signed</a></td><td class="when">3 Jun 2026</td><td>High</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R5</td><td><a href="#cat-series-b-preferred-eliminated">Series B preferred eliminated</a></td><td class="when">23 Jun 2026</td><td>Medium</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R6</td><td><a href="#cat-management-build-out">Management build-out</a></td><td class="when">16 Jul 2026</td><td>Medium</td><td>n/a</td><td>Resolved</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="note">
+    <p><b>Reading the table honestly.</b> Five items carry Critical impact: the Q2 results and first earnings call (D1), the PUCT co-location and net-metering rule (D14), the Kati 2 letter of intent converting to a binding lease (S1), Kati 2 Phase I project financing (S2), and the standing dilution machinery (S3). Four of the five are either the tenant lease itself, its financing, the regulation governing its structure, or the dilution required to fund it. That concentration is the document's real message, and the reason the gating chain sits in the capital overlay rather than as a footnote.</p>
+  </div>
+</section>
+
+<!-- ===================== 8. METHODOLOGY & CONFIDENCE SCALE ===================== -->
+<section id="s8">
+  <h2 class="sec"><span class="n">08</span>Methodology &amp; confidence scale</h2>
+
+  <h3>ID concordance: earlier numbering</h3>
+  <p class="sub">Maps the numbering used before this revision to the current IDs, so earlier log entries remain resolvable. The earlier scheme used bare numbers for dated items, S for standing conditions and C for completed events. Six items it carried as dated catalysts have no date and are now standing conditions.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Was</th><th>Now</th><th>Catalyst</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td class="num">D1</td><td>Q2 2026 results and first quarterly earnings call</td></tr>
+      <tr><td class="num">2</td><td class="num">S1</td><td>Kati 2 letter of intent converts to a binding lease</td></tr>
+      <tr><td class="num">3</td><td class="num">D4</td><td>Series A preferred becomes callable</td></tr>
+      <tr><td class="num">4</td><td class="num">D3</td><td>2026 annual meeting of stockholders</td></tr>
+      <tr><td class="num">5</td><td class="num">D10</td><td>Generate Tranche B draw window closes</td></tr>
+      <tr><td class="num">6</td><td class="num">D8</td><td>ERCOT summer curtailment season ends</td></tr>
+      <tr><td class="num">7</td><td class="num">D6</td><td>Kati 1B Phase 3 completion, 14 MW</td></tr>
+      <tr><td class="num">8</td><td class="num">D11</td><td>Briscoe repair completion and first full quarter</td></tr>
+      <tr><td class="num">9</td><td class="num">D2</td><td>Monthly business updates</td></tr>
+      <tr><td class="num">10</td><td class="num">D7</td><td>FOMC September decision</td></tr>
+      <tr><td class="num">11</td><td class="num">D5</td><td>Jackson Hole Economic Policy Symposium</td></tr>
+      <tr><td class="num">12</td><td class="num">S12</td><td>Investor conference appearances and outreach</td></tr>
+      <tr><td class="num">13</td><td class="num">D13</td><td>PUCT transmission cost allocation review</td></tr>
+      <tr><td class="num">14</td><td class="num">D14</td><td>PUCT co-location and net-metering rule</td></tr>
+      <tr><td class="num">15</td><td class="num">D15</td><td>PUCT large-load interconnection standard</td></tr>
+      <tr><td class="num">16</td><td class="num">D12</td><td>Q3 2026 results and Form 10-Q</td></tr>
+      <tr><td class="num">17</td><td class="num">S2</td><td>Kati 2 Phase I project financing</td></tr>
+      <tr><td class="num">18</td><td class="num">D9</td><td>FOMC October and December decisions</td></tr>
+      <tr><td class="num">19</td><td class="num">S9</td><td>Dorothy 3 development milestones</td></tr>
+      <tr><td class="num">20</td><td class="num">D16</td><td>FY2026 Form 10-K and first KPMG audit opinion</td></tr>
+      <tr><td class="num">21</td><td class="num">D18</td><td>Dorothy 1A promissory note matures</td></tr>
+      <tr><td class="num">22</td><td class="num">D20</td><td>Green Cloud secured note matures</td></tr>
+      <tr><td class="num">23</td><td class="num">D17</td><td>FY2026 results and Q1 2027 results</td></tr>
+      <tr><td class="num">24</td><td class="num">D19</td><td>Russell reconstitution, retention or deletion</td></tr>
+      <tr><td class="num">25</td><td class="num">S10</td><td>Pipeline project progression</td></tr>
+      <tr><td class="num">26</td><td class="num">S11</td><td>Possible authorised-share increase or restructuring vote</td></tr>
+      <tr><td class="num">S1</td><td class="num">S6</td><td>Bitcoin price and network difficulty</td></tr>
+      <tr><td class="num">S2</td><td class="num">S3</td><td>Standing dilution machinery</td></tr>
+      <tr><td class="num">S3</td><td class="num">S4</td><td>Series A preferred arrears accrual</td></tr>
+      <tr><td class="num">S4</td><td class="num">S5</td><td>Generate covenants, cash sweep, and the HPE liability</td></tr>
+      <tr><td class="num">S5</td><td class="num">S7</td><td>Nasdaq listing compliance and trading mechanics</td></tr>
+      <tr><td class="num">S6</td><td class="num">S8</td><td>Customer concentration, structure, related parties</td></tr>
+      <tr><td class="num">C1</td><td class="num">R1</td><td>Briscoe Wind Farm acquired</td></tr>
+      <tr><td class="num">C2</td><td class="num">R3</td><td>Dorothy 1 campus fully consolidated</td></tr>
+      <tr><td class="num">C3</td><td class="num">R4</td><td>Kati 2 definitive joint venture signed</td></tr>
+      <tr><td class="num">C4</td><td class="num">R2</td><td>Nasdaq minimum bid compliance regained</td></tr>
+      <tr><td class="num">C5</td><td class="num">R5</td><td>Series B preferred eliminated</td></tr>
+      <tr><td class="num">C6</td><td class="num">R6</td><td>Management build-out</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Provenance tags</h3>
+  <p class="sub">Tags record where a claim came from and nothing else. They are not colour-coded, because colour is reserved for meaning and identity and provenance is neither. A <span class="tag">Filed</span> fact can be terrible news.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Tag</th><th>What it asserts</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl"><span class="tag">Filed</span></td><td>Stated in an SEC filing or company release, cited by form and date. <b>This also covers a dated official publication by a named non-SEC issuer</b>, such as an exchange notice, a central bank statement or a schedule published by its organiser, with the issuer named in the source line. What the tag asserts is unchanged: a specific body published this, on this date, and the reader can go and look. It never covers a third party's characterisation of someone else's facts, which is <span class="tag">Market</span>.</td></tr>
+      <tr><td class="lbl"><span class="tag">Estimate</span></td><td>Derived or inferred here. The arithmetic is shown.</td></tr>
+      <tr><td class="lbl"><span class="tag">Open</span></td><td>Expected but unconfirmed. Nothing filed either way.</td></tr>
+      <tr><td class="lbl"><span class="tag">Market</span></td><td>Price, volume, float, short interest, and published targets and ratings, stamped with the close or publication date. A third party's target or rating is market data, attributed to the firm that issued it and never adopted here.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Confidence scale</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Level</th><th>Means</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">High</td><td>Date is company-announced, contractually fixed, or statutorily set.</td></tr>
+      <tr><td class="lbl">Medium</td><td>Date inferred from filing cadence, prior-year practice, or a stated deadline window.</td></tr>
+      <tr><td class="lbl">Low</td><td>Date is a judgement call and could move by a quarter or more.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="note caution">
+    <p>Confidence rates <b>timing</b>, never outcome. A High-confidence catalyst can be a coin flip; a Low-confidence one can be near-certain in direction.</p>
+    <p><b>Impact is independent of confidence.</b> A High-impact, Low-confidence item is the most important kind here: it matters enormously and could land at any time. Standing conditions take a reason for being undated in place of a confidence rating, because there is no date to rate.</p>
+  </div>
+
+  <h3>Ordering conventions</h3>
+  <p>Dated items are ordered by expected date, earliest first, with ties broken by the previous ordering. Standing conditions are ordered by materiality. Resolved items are ordered by the date each <em>completed</em>, not the date it began, which is why the Dorothy 1 consolidation (R3) sorts after the Nasdaq compliance cure (R2) despite starting first: its second transaction closed on 20 May 2026 and the cure completed on 1 May 2026. Ordering the resolved class this way means a newly resolved item always lands at the end and existing numbers stay put.</p>
+
+  <h3>Coverage of the capital overlay on this document's own evidence</h3>
+
+  <p>Two figures were removed from the dilution and capital overlay in this revision,
+  for two different reasons.</p>
+
+  <p>The count of standby facility shares already issued by 1 April, part of the
+  breakdown of the April resale registrations, is a fact belonging to the research
+  report's evidence rather than to this document's. It is the mirror of several
+  figures removed from that report in the same pass, and applying the rule in one
+  direction only would be worse than not applying it. The overlay still carries the
+  total resale registration of 31.66m shares and its three components, so what is lost
+  is how much of the standby tranche had already been drawn at that date.</p>
+
+  <p>The weighted average exercise price of the outstanding warrants is a different
+  and more serious case: <b>a figure with no traceable source in either document</b>.
+  It appears in neither predecessor file, so it was never a companion import; it
+  entered from research during an earlier update and was carried forward as though it
+  had always been present. A revision that examines no new source may reorganise and
+  restate what is in front of it, but it may not introduce a claim that was not already there. The overlay still
+  carries the total of 27,549,840 shares issuable on warrants, so what is lost is the
+  price at which they would be exercised, and with it any sense of how far the warrant
+  book sits in or out of the money.</p>
+
+  <p>Separately, the market capitalisation cited in the standing conditions was carrying a more precise figure than this document holds, and reverts to the $192 million stated on its own evidence. The falsification table has since regained that test on this document's own evidence, and now lists ten with no deferrals outstanding.</p>
+
+  <p><b>What the overlay still covers on this document's own evidence:</b> the share
+  count progression from 31 December 2024 to 12 May 2026, including the 6 April
+  reading and the eighteen-day April window; the authorised total and remaining
+  headroom; the shelf and at-the-market capacities; the resale registrations and their
+  components; the Generate and Yorkville warrant packages; the June 2026 restricted
+  stock grants; the company's own illustration of full at-the-market issuance; and the
+  gating chain that ties liquidity to dilution. Neither removal has been backfilled
+  from the companion, and restoring either requires going to the underlying filing,
+  which is new research.</p>
+
+  <h3>Known limitations carried forward</h3>
+  <p class="sub">Defects identified but not resolved in this pass, with the text at issue quoted and the reason each remains open.</p>
+
+  <div class="note caution">
+    <p><b>Three null categories rest on material the source never examined.</b> Lawsuits, buybacks and common dividends are recorded above as <i>"Not established"</i> rather than as absences, because no litigation search, repurchase history or common dividend history appears anywhere in the source. A category that produces a finding or is stated explicitly as empty satisfies the coverage requirement; a category never examined does neither. Resolving these requires new research.</p>
+    <p><b>Two regulatory items may already have resolved.</b> The co-location and net-metering rule (D14) and the large-load interconnection standard (D15) both carry adoption windows that had opened before the build date, and neither status was confirmable. They remain dated catalysts on the published deadlines rather than being moved to resolved.</p>
+  </div>
+</section>
+
+<!-- ===================== 9. SOURCES ===================== -->
+<section id="s9">
+  <h2 class="sec"><span class="n">09</span>Sources</h2>
+  <p class="sub">Primary filings and company releases first, with form type and date.</p>
+
+  <p><b>Primary.</b> Form 10-Q for the quarter ended 31 March 2026, filed 15 May 2026, which is the source of the $9.394 million Q1 revenue baseline used in the falsification tests; FY2025 Form 10-K; 8-K current reports of 20 January, 31 March, 2 April, 15 April, 17 April, 18 May, 20 May, 9 June, 17 June (8-K/A), 14 July, 24 July and 30 July 2026; Forms 3 and 4 filed April to June 2026; Schedule 13G filings of February and May 2026; the prior-year DEF 14A; the Series A prospectus supplement; Form S-3 filed 9 March 2026 and amended 30 March 2026, a further Form S-3 of 29 April 2026, Form 424B5 of 1 April 2026 and Forms 424B3 of April and May 2026. Company press releases and monthly business updates dated 10 March, 30 March, 2 April, 9 April, 10 April, 16 April, 21 April, 28 April, 1 May, 7 May, 18 May, 20 May, 9 June, 23 June, 14 July, 16 July and 30 July 2026.</p>
+
+  <p><b>Secondary.</b> S&amp;P Global Market Intelligence for market data at the 31 July 2026 close. Texas Senate Bill 6 and PUCT implementation dockets as described in published law firm analyses between December 2025 and May 2026. Federal Reserve meeting calendar and the FOMC statement of 29 July 2026, with implied probabilities and Jackson Hole dates as reported 29 to 30 July 2026. Peer lease disclosures, the July 2026 AI infrastructure derating, the reported CoreWeave loan repricing, the New York data centre moratorium and US Treasury yield levels as reported between December 2025 and July 2026.</p>
+
+  <h3>Third-party modelling and coverage, reported as market data</h3>
+
+  <p>Two ratings exist on the stock. Both are the published views of the firms named, reported here as market data and adopted by nothing in this document, which issues no rating and derives no target of its own.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Firm</th><th>Rating</th><th class="num">Target</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">H.C. Wainwright (M. Colonnese)</td><td>Buy</td><td class="num">$4.00</td><td><span class="tag">Market</span> initiated or assumed 20 Jul 2026</td></tr>
+      <tr><td class="lbl">Weiss Ratings</td><td>Sell (D&minus;)</td><td class="num">n/a</td><td><span class="tag">Market</span> upgraded from Sell (E+), 12 Jun 2026</td></tr>
+      <tr><td class="lbl">Wall Street Zen</td><td>Hold</td><td class="num">n/a</td><td><span class="tag">Market</span> upgraded from Sell, 25 Apr 2026</td></tr>
+      <tr><td class="lbl">MarketBeat consensus</td><td>Hold</td><td class="num">$4.00</td><td><span class="tag">Market</span> one Buy and one Sell</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>That firm's published estimates project losses throughout: $(0.11) for Q2 2026, $(0.08) for each of the following two quarters, $(0.45) for FY2026 and $(0.27) for FY2027. The $(0.11) estimate is the only published benchmark for the 13 August print and will function as the de facto bar. On 157.75 million shares the $4.00 target implies a market capitalisation near $631 million, roughly 19 times trailing revenue, a level consistent with the same analyst's loss estimates only on the assumption that the pipeline converts. Analysing what a published target assumes is in scope; adopting it is not.</p>
+
+  <div class="note neg">
+    <p><b>The sole positive rating comes from the company's share-selling agent.</b> Per the Q1 2026 Form 10-Q, the at-the-market offering agreement through which the company sells newly issued shares into the open market is with <b>H.C. Wainwright &amp; Co., LLC</b>, dated 29 April 2025. On 20 July 2026 that firm published the only Buy rating on the stock.</p>
+    <p>Nothing about this is improper, and research and banking coexist under disclosure rules at every firm. To that firm's credit its own estimates candidly project losses through 2027. But a bullish note from the firm earning commissions on the company's share issuance is not independent corroboration, and a higher share price directly increases the proceeds available under the facility. Read that firm's own disclosure section before assigning weight.</p>
+  </div>
+
+  <h3>Insider activity, both directions</h3>
+  <p>Selling has concentrated in the Series A preferred rather than the common: a director sold 18,000 preferred shares on 17, 18 and 22 June 2026 at $10.75 and $11.00; the chief executive sold 1,000-share lots in April and May under a Rule 10b5-1 plan adopted 16 December 2025; the chief accounting officer sold 4,838 common shares at $1.70 in June. On the buying side, the chief financial officer purchased 100,000 common shares at $1.63 on 22 May 2026, an open-market purchase and the most substantive insider signal of the period. Insiders hold roughly 35% of shares outstanding; institutions roughly 8%. The chief executive's 1 June 2026 grant of 3,018,802 restricted shares is compensation, not a purchase. <span class="tag">Filed</span> Forms 4, Apr to Jun 2026</p>
+
+  <h3>What was not checked</h3>
+  <ul>
+    <li><b>Rating agencies.</b> None was checked, so the credit rating row is a gap rather than a finding.</li>
+    <li><b>Litigation.</b> No docket, securities class action database or legal proceedings disclosure was examined. The null table records this as unexamined rather than as an absence.</li>
+    <li><b>Common dividend and buyback history.</b> Neither appears anywhere in the source material behind this document.</li>
+    <li><b>Regulatory docket status after the build date.</b> The two PUCT rules with 2026 adoption windows were not re-checked against the current docket, so both may already have been adopted.</li>
+    <li><b>Peer figures.</b> Indicative of scale and contracting status only, not verified against each peer's own filings.</li>
+    <li><b>Post-acquisition balance sheet.</b> None exists. Every liquidity figure after 31 March 2026 is reconstructed from disclosed deal terms and is tagged as an estimate.</li>
+    <li><b>The FY2025 audit opinion.</b> Not read directly; only the EXPERTS paragraph incorporated by reference into the April 2026 Form S-3, which references the report without going-concern language.</li>
+    <li><b>Date ranges.</b> Nothing filed after 30 July 2026 was swept, and no filing sweep was performed as part of this revision.</li>
+  </ul>
+</section>
+
+<!-- ===================== 10. DOCUMENT LOG ===================== -->
+<section id="s10">
+  <h2 class="sec"><span class="n">10</span>Document log</h2>
+  <p class="sub">Newest first. The original build entry is never removed or rewritten.</p>
+  <div class="log">
+
+    <div class="logentry current">
+      <div class="when">2 August 2026 <span class="latest">Latest</span></div>
+      <div class="basis">20 dated &middot; 12 standing &middot; 6 resolved &middot; priced off 31 Jul 2026 close</div>
+      <div class="correction">
+        <span class="lbl">Correction</span>
+        <p>The falsification table carried seven tests and three open defects. All three are closed and the table carries ten. The Q2 revenue test is restored with its baseline sourced here from the quarterly filing of 15 May 2026 rather than from the companion document, which is what put it in the deferrals. The Series A settlement test and the insider buying test now carry stated thresholds, tagged as estimates because each is a judgement rather than a filed figure.</p>
+      </div>
+      <p>Net change since the previous entry. No repricing: 31 July 2026 was a Friday and the as-of date is the following Sunday, so the close the figures come from has not moved and the pricing basis is unchanged.</p>
+      <p><b>No catalyst moved.</b> Nothing resolved, nothing was added and nothing changed its expected date between the two entries, so the ordering is unchanged, no identifier moved and there is no renumber map for this build. The concordance in Methodology is unaltered and remains correct.</p>
+      <p><b>Filing sweep.</b> Swept 8-K, 6-K, 10-Q, 10-K, 20-F, 40-F, S-1, S-3, 424, 13D, 13G, the full NT series, Forms 3 and 4 and DEF 14A, most recent first, reaching 2 August 2026. Nothing has been filed since the 8-K of 30 July 2026. No NT filing of any kind exists, which for an issuer that has changed accounting basis and filer status is a finding rather than an absence of one. The earnings call at 13 August 2026 (D1) is unaffected and remains the next dated item.</p>
+      <p>The previous entry follows unchanged.</p>
+    </div>
+
+    <div class="logentry">
+      <div class="when">1 August 2026</div>
+      <div class="basis">20 dated &middot; 12 standing &middot; 6 resolved &middot; priced off 31 Jul 2026 close</div>
+      <p>This revision supersedes the 26 July build. Net changes from that version:</p>
+      <p><b>Liquidity, corrected twice.</b> A third acquisition was added: $8,765,490 in cash for the remaining 49% of Project Dorothy 1B on 19 May 2026, referenced only qualitatively at C2 in the original. Briscoe was restated at approximately $55.9 million total cash consideration against the $53.0 million headline (C1), with the asset's 2025 net loss of $14,773,838 on revenue of $8,950,927 now shown against the $6&ndash;11 million EBITDA projection (#8). Estimated post-acquisition unrestricted cash falls from roughly $16&ndash;19 million to roughly $5&ndash;10 million.</p>
+      <p><b>Liquidity and dilution merged into one question.</b> The gating note and Section 8 now show that roughly 46 million shares, about 41% of the starting count, were issued between 31 March and 12 May 2026, which is how the acquisitions were funded. Registered capacity corrected from $87.65 million to a $1.0 billion shelf including a $500 million ATM prospectus, and split into primary capacity versus resale overhang: roughly 31.7 million shares registered for resale, 27,549,840 issuable on warrants, and the company's own illustration of 760,178,588 shares were the ATM fully sold at $0.77. The June 2026 grant cluster totalled at least 12,631,694 restricted shares, about 8% of shares outstanding, with director awards vesting on separation (#4).</p>
+      <p><b>Structure and ownership.</b> Kati 2 economics quantified: capital returned plus a 14% IRR plus $100,000 per Gross PPA MW, then 50/50 with Metrobloks (C3, #17). Schedule 13G holder Robert L. Bugbee went from 9.3% to 8.5% while buying 4.2 million shares (S6). A sixth pipeline project, Grace, was added at #25. A systematic review across 8-K, 6-K, 10-Q, 10-K, 20-F, 40-F, S-1, S-3, 424, 13D, 13G, Forms 3 and 4 and the full NT series confirmed no NT, 13D, 6-K, 20-F or 40-F filings exist; the last three cannot, as Soluna is a domestic filer, and nothing has been filed since 30 July 2026. The review reconciled the resale figure (26.5m SEPA plus 2.7m Generate warrants plus 2,459,400 YA and HEL equals 31.66m) and the June grant cluster (12,631,694 across five insiders), and added four details: Briscoe's nameplate is approximately 149.85 MW (C1); the board is classified into three staggered classes, with removal only for cause on a 75% vote, which weakens the annual meeting as a lever (#4); Soluna director Matthew Lipman is also President and a director of Harmattan Energy (S6); and UHY LLP audited FY2025 and FY2024, with the incorporated EXPERTS paragraph carrying no going-concern language.</p>
+      <p><b>Resolved, added and renumbered.</b> Catalyst #10 resolved: the FOMC held at 3.50&ndash;3.75% on 29 July on a 9&ndash;3 vote with three dissents favouring a hike, and implied odds moved toward a September increase. New catalyst #11, Jackson Hole, 27&ndash;29 August 2026, shifting former #11&ndash;#25 to #12&ndash;#26. Added: the 30 July earnings-date confirmation (#1), the CEO salary increase to $600,000 (#4), the Dorothy 1B terms (C2), and Bitcoin's 21-month low near $58,000 (S1).</p>
+      <p><b>Sector and macro.</b> The July 2026 derating of 25&ndash;38% across the AI infrastructure peer group, in which signed contracts did not protect share prices (#2); tightening AI project-finance conditions including the reported CoreWeave loan repricing (#17); the long-end rate channel, with the 30-year Treasury near 5.25%, its highest since 2007 (#10, #18); and the New York data centre moratorium of 14 July as siting precedent (#15).</p>
+      <p><b>Market data.</b> All price-linked figures reset from the 24 July to the 31 July 2026 close of $1.22 (&minus;6.15%), market capitalisation $192 million. S3 gains an independent corroboration that the Series A preferred trades near 45% of face.</p>
+    </div>
+
+    <div class="logentry">
+      <div class="when">26 July 2026 (original build)</div>
+      <div class="basis">25 dated &middot; 6 standing &middot; 6 settled &middot; priced off 24 Jul 2026 close</div>
+      <p>The baseline version, superseded by the entry above. It carried 25 dated catalysts (#1&ndash;#25) across three horizons, 6 standing conditions (S1&ndash;S6), 6 settled events (C1&ndash;C6), 12 explicit null categories, the gating-dependency chain, the dilution overlay, the disclosed-conflicts section and 10 falsification tests. Market data was at the 24 July 2026 close of $1.26, market capitalisation $198.8 million.</p>
+      <p>It was built from the Form 10-Q for the quarter ended 31 March 2026, the FY2025 Form 10-K, 8-K current reports and Forms 4 filed March to July 2026, the prior-year DEF 14A, the Series A prospectus supplement and monthly business updates through 14 July 2026, plus Texas SB 6 and PUCT docket analyses and the published FOMC calendar. Its central judgement, that almost every forward catalyst is downstream of a single signature at Kati 2, and that the catalysts are correlated rather than independent, is unchanged.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="norec">
+    No buy, sell, or hold recommendation is issued and no price target is derived.
+    Third-party targets and ratings, where shown, are the published views of the
+    firms named. This document is for research and educational purposes and is not
+    investment advice. Estimated dates are not company announcements. Verify
+    against primary filings on sec.gov before acting.
+  </div>
+  <p style="margin-top:16px">SLNH &middot; Soluna Holdings, Inc. &middot; Catalyst Calendar &middot; as of 2 August 2026</p>
+</footer>
+
+</div>
+</body>
+</html>
