@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>CLSK &middot; CleanSpark, Inc. &middot; Catalyst Calendar &middot; as of 3 August 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================================
+   PER-TICKER PALETTE
+   ========================================================================= */
+:root{
+  /* CleanSpark's brand blue, #1935A9, taken from the company's own site chrome,
+     where it is published as the theme colour and as the mask-icon colour. The
+     mark carries the same blue as a deep field behind a white spark glyph. It is
+     a strongly saturated blue at hue 228. Held at that hue and eased to a 72%
+     saturation so it holds on white at small sizes, it becomes #1B36A7, which
+     reads at 9.85:1 against paper. The hue sits clear of every meaning-bearing
+     colour in this document, so no rotation was needed. */
+  --accent:      #1B36A7;
+  --accent-deep: #14287B;
+  --accent-wash: rgba(27,54,167,0.06);
+  --accent-line: rgba(27,54,167,0.22);
+}
+
+/* ============================================================================
+   SHARED STYLESHEET v1.57 : BEGIN
+   ========================================================================= */
+:root{
+  color-scheme: light only;
+
+  --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
+  --line:#DEE6EC;   --line-hard:#C0CDD7;
+  --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
+
+  --pos:#0B7A50;      --pos-bg:#E7F4EE;
+  --neg:#B02A21;      --neg-bg:#FBECEA;
+  --caution:#90600A;  --caution-bg:#FBF2E0;
+  --assume:#4F3FA3;   --assume-bg:#EFEDFA;
+
+  --display:'Archivo',ui-sans-serif,system-ui,'Helvetica Neue',Arial,sans-serif;
+  --body:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+
+  --measure:78ch;
+  --col:760px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html,body{background:var(--canvas) !important;background-color:var(--canvas) !important}
+body{
+  margin:0;color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 22px 96px;background:var(--paper);
+      border-left:1px solid var(--line);border-right:1px solid var(--line)}
+p{max-width:var(--measure)}
+/* Boxed prose fills its container: the box supplies its own measure, so the
+   78ch cap applies to top-level running prose only. */
+.first li,.assume p,.note p,.cat p,.risk p,.logentry p,.oc p,.case p,
+.cat-meta,.logentry .basis{max-width:none}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:var(--accent-deep)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- masthead ---------- */
+.mast{padding:44px 0 26px;border-bottom:2px solid var(--line-hard);margin-bottom:8px;
+      position:relative;padding-left:20px}
+.mast::before{content:"";position:absolute;left:0;top:44px;bottom:26px;
+      width:4px;background:var(--accent)}
+.ticker{font-family:var(--mono);font-size:44px;font-weight:700;letter-spacing:-1px;
+      line-height:1;color:var(--accent);margin:0}
+.headline{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.22;
+      color:var(--ink);margin:16px 0 0}
+.functional{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--ink-faint);margin:18px 0 0}
+.mast-strip{display:flex;flex-wrap:wrap;gap:26px;margin-top:20px;padding-top:16px;
+      border-top:1px solid var(--line)}
+.mast-strip div{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint)}
+.mast-strip b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-top:3px}
+
+/* ---------- banner: framing ---------- */
+.first{background:var(--canvas);border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:20px 24px;margin:30px 0 12px}
+.first h2{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.04em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 12px}
+.first ol{margin:0;padding-left:20px}
+.first li{margin-bottom:9px}
+.first li:last-child{margin-bottom:0}
+
+/* ---------- sections ---------- */
+section{padding-top:38px}
+h2.sec{font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);
+      margin:0 0 4px;padding-bottom:10px;border-bottom:1px solid var(--line-hard);
+      display:flex;align-items:baseline;gap:12px}
+h2.sec .n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);
+      letter-spacing:.06em;flex:none}
+.sub{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);margin:10px 0 18px;
+      max-width:var(--measure)}
+h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink-dim);
+      margin:26px 0 8px}
+
+/* ---------- provenance tags (signature) ---------- */
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);
+      background:var(--panel-2);border:1px solid var(--line);
+      border-radius:2px;padding:1px 6px;vertical-align:1px;white-space:nowrap}
+
+/* ---------- assumption block ---------- */
+.assume{background:var(--assume-bg);border-left:4px solid var(--assume);
+      padding:16px 20px;margin:20px 0}
+.assume .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--assume);display:block;margin-bottom:7px}
+.assume p{margin:0}
+
+/* ---------- callouts ---------- */
+.note{border:1px solid var(--line);border-left:4px solid var(--ink-faint);
+      background:var(--canvas);padding:16px 20px;margin:20px 0}
+.note.pos{border-left-color:var(--pos);background:var(--pos-bg)}
+.note.neg{border-left-color:var(--neg);background:var(--neg-bg)}
+.note.caution{border-left-color:var(--caution);background:var(--caution-bg)}
+.note p{margin:0}
+.note p + p{margin-top:10px}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+thead th{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--ink-dim);text-align:left;
+      padding:9px 12px;border-bottom:2px solid var(--line-hard);white-space:nowrap}
+tbody td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--canvas)}
+td.num,th.num{font-family:var(--mono);text-align:right;white-space:nowrap}
+/* td.when marks a timing column. An unmarked cell counts as prose. */
+td.when{font-family:var(--mono);white-space:nowrap}
+td.lbl{font-weight:600}
+.pos-t{color:var(--pos);font-weight:600}
+.neg-t{color:var(--neg);font-weight:600}
+.caution-t{color:var(--caution);font-weight:600}
+
+/* ---------- cases ---------- */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.case{border:1px solid var(--line);border-top:3px solid var(--ink-faint);
+      background:var(--paper);padding:18px}
+.case.bull{border-top-color:var(--pos)}
+.case.bear{border-top-color:var(--neg)}
+.case h4{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 10px}
+.case.bull h4{color:var(--pos)} .case.bear h4{color:var(--neg)}
+.case p{font-size:15px;margin:0}
+.case .req{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+
+/* ---------- risks ---------- */
+.risk{border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:16px 20px;margin-bottom:12px}
+.risk.sev-high{border-left-color:var(--neg)}
+.risk.sev-med{border-left-color:var(--caution)}
+.risk.sev-low{border-left-color:var(--ink-faint)}
+.risk h4{font-family:var(--display);font-size:15.5px;font-weight:600;margin:0 0 6px;
+      display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.risk .sev{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase}
+.risk.sev-high .sev{color:var(--neg)}
+.risk.sev-med .sev{color:var(--caution)}
+.risk.sev-low .sev{color:var(--ink-faint)}
+.risk p{margin:0;font-size:15.5px}
+
+/* ---------- null categories ---------- */
+.nulls td.lbl{width:26%}
+.nulls .status{font-family:var(--mono);font-size:12px;white-space:nowrap}
+
+/* ---------- document log ---------- */
+.log{margin-top:14px}
+.logentry{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:12px}
+.logentry.current{border-left:4px solid var(--accent);background:var(--accent-wash)}
+.logentry .when{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);
+      display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.latest{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-line);
+      background:var(--paper);border-radius:2px;padding:1px 6px}
+.logentry .basis{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-bottom:12px}
+.logentry p{font-size:15.5px;margin:0 0 9px}
+.logentry p:last-child{margin-bottom:0}
+.correction{border:1px solid var(--neg);border-left:4px solid var(--neg);
+      background:var(--neg-bg);padding:12px 16px;margin-bottom:14px}
+.correction .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--neg);display:block;margin-bottom:5px}
+
+/* ---------- footer ---------- */
+footer{margin-top:44px;padding-top:22px;border-top:2px solid var(--line-hard)}
+footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width:none}
+.norec{border:1px solid var(--line-hard);background:var(--canvas);padding:16px 20px;
+      margin-top:20px;font-family:var(--mono);font-size:12.5px;color:var(--ink-dim)}
+
+/* ---------- catalyst cards (calendar) ---------- */
+.cat{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:14px;border-left:4px solid var(--line-hard)}
+.cat.up{border-left-color:var(--pos)}
+.cat.down{border-left-color:var(--neg)}
+.cat.two{border-left-color:var(--caution)}
+.cat.neutral{border-left-color:var(--ink-faint)}
+.cat-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.cid{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);flex:none}
+.cat-head h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink);
+      margin:0;flex:1 1 auto;min-width:200px}
+.dir{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;white-space:nowrap}
+.cat.up .dir{color:var(--pos)} .cat.down .dir{color:var(--neg)}
+.cat.two .dir{color:var(--caution)} .cat.neutral .dir{color:var(--ink-faint)}
+.cat-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:10px 0 12px;padding:9px 0;
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+      font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
+.cat-meta b{color:var(--ink);font-weight:600}
+.cat p{margin:0 0 9px;font-size:15.5px}
+.cat p:last-child{margin-bottom:0}
+.cat.resolved{background:var(--canvas);border-left-color:var(--ink-faint)}
+.cat.resolved .dir{color:var(--ink-faint)}
+
+/* ---------- horizon bands (calendar) ---------- */
+.band{display:flex;align-items:center;gap:14px;margin:30px 0 16px}
+.band-t{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--ink-dim);white-space:nowrap}
+.band-r{flex:1;height:1px;background:var(--line-hard)}
+.band-c{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);white-space:nowrap}
+
+/* ---------- upside / downside pair ---------- */
+.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0}
+.oc{border:1px solid var(--line);padding:11px 14px;background:var(--paper)}
+.oc.up-c{border-left:3px solid var(--pos)}
+.oc.down-c{border-left:3px solid var(--neg)}
+.oc .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.09em;
+      text-transform:uppercase;display:block;margin-bottom:5px}
+.oc.up-c .lbl{color:var(--pos)} .oc.down-c .lbl{color:var(--neg)}
+.oc p{margin:0;font-size:14.5px;line-height:1.5}
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  body{font-size:16px}
+  .wrap{padding:0 16px 70px;border-left:none;border-right:none}
+  .ticker{font-size:34px}
+  .headline{font-size:23px}
+  .cases{grid-template-columns:1fr}
+  .outcomes{grid-template-columns:1fr}
+  .mast-strip{gap:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none !important;transition:none !important}
+}
+@media print{
+  body{font-size:11pt}
+  .wrap{max-width:none;border:none}
+  section{page-break-inside:avoid}
+}
+/* ============================================================================
+   SHARED STYLESHEET v1.57 : END
+   ========================================================================= */
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<!-- ===================== MASTHEAD ===================== -->
+<header class="mast">
+  <p class="ticker">CLSK</p>
+  <h1 class="headline">A twenty-year lease with milestones the company must hit, and the money to hit them is not yet raised</h1>
+  <p class="functional">CLSK &middot; CleanSpark, Inc. &middot; Catalyst Calendar &middot; as of 3 August 2026</p>
+  <div class="mast-strip">
+    <div>Dated catalysts <b>13</b></div>
+    <div>Standing conditions <b>14</b></div>
+    <div>Resolved <b>13</b></div>
+    <div>Horizon <b>12 months</b></div>
+    <div>Pricing basis <b>31 Jul 2026 close</b> <span class="tag">Market</span></div>
+  </div>
+</header>
+
+<!-- ===================== BASIS ===================== -->
+<div class="first">
+  <h2>Basis</h2>
+  <ol>
+    <li>Almost nothing here is scheduled. Two reporting dates are fixed by statute and one webcast is company-announced; everything that decides the thesis, meaning the construction financing, the milestone confirmations and the Texas conversion, is event-driven and could land on any day.</li>
+    <li>Timing confidence rates the <em>date</em>, never the outcome. A High-confidence catalyst can still be a coin flip.</li>
+    <li>Estimated dates are cadence-based until the company announces. The fiscal year ends 30 September, so quarters report in early February, early May, early August and late November, which is a month later than a December year-end peer on the same quarter.</li>
+    <li>An ID marks position in the current ordering and changes between revisions, so catalysts are named by title.</li>
+  </ol>
+</div>
+
+<!-- ===================== 1. DATED CATALYSTS ===================== -->
+<section id="s1">
+  <h2 class="sec"><span class="n">01</span>Dated catalysts</h2>
+  <p class="sub">Banded 0&ndash;3 / 3&ndash;6 / 6&ndash;12 months, earliest first. Numbering is gapless and runs straight through the bands, so a boundary never resets the count. An ID marks position in the current ordering and changes between revisions, so catalysts are named by title.</p>
+
+  <div class="band"><span class="band-t">0&ndash;3 months</span><span class="band-r"></span><span class="band-c">D1&ndash;D5</span></div>
+
+  <div class="cat two" id="cat-q3-fy2026-results-and-quarterly-report">
+    <div class="cat-head">
+      <span class="cid">D1</span>
+      <h3>Third quarter fiscal 2026 results and quarterly report</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>6 to 10 August 2026</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>High</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The company has announced a results webcast for 4:30pm Eastern on Thursday 6 August 2026 covering the quarter ended 30 June 2026. As a large accelerated filer it has forty days from quarter end to lodge the quarterly report, which puts the statutory deadline at Monday 10 August 2026. This is the first full reporting period to be marked at bitcoin's lower levels throughout, and the first commentary from management since the lease was signed.</p>
+    <p>What to watch is not the loss. It is whether the company says anything about how Sandersville will be financed, what the milestone schedule actually requires, and whether the fleet's carrying value is being reassessed now that the all-in cost of a mined bitcoin exceeds its revenue.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Financing structure named, milestone dates disclosed, and cash costs held near $45,000 per bitcoin.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A third consecutive quarterly loss with no financing detail, plus an impairment or a further useful-life change on the fleet.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Company results webcast announcement, 30 July 2026; filing deadline under the Exchange Act rules for a large accelerated filer. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-july-2026-operational-update">
+    <div class="cat-head">
+      <span class="cid">D2</span>
+      <h3>July 2026 monthly operational update</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>First half of August 2026</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>The company publishes a monthly production and treasury release; the June update came on 7 July 2026. It carries bitcoin produced, holdings, average and peak hashrate, fleet efficiency, megawatts actually drawn and the average realised price on bitcoin sold. June showed 614 bitcoin produced, holdings of 13,924, a 42.6 EH/s average against a 50 EH/s peak, and 808 MW drawn against 1.8 GW under contract.</p>
+    <p>The line that matters most is the treasury one. In June the company sold 179 bitcoin at spot and a further 250 into exercised calls at an average of $69,056 including premiums, against 614 produced. Whether it is still a net accumulator at a bitcoin price near $64,700 is the question this release answers each month.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Holdings rise again, drawn megawatts climb toward the contracted figure, and efficiency improves below 16 J/TH.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Holdings fall as bitcoin is sold to fund operations, or average hashrate slips further below the 47.3 EH/s reported at 31 March 2026.</p></div>
+    </div>
+    <div class="assume">
+      <span class="lbl">Analyst assumption</span>
+      <p>The date is a cadence estimate from the June release of 7 July 2026 and the pattern before it, not a company announcement. It may also be folded into the results release, in which case this item and the third quarter results and quarterly report (D1) arrive together.</p>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Company operational update, 7 July 2026, and prior monthly releases. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-ercot-batch-zero-inclusion-decisions">
+    <div class="cat-head">
+      <span class="cid">D3</span>
+      <h3>ERCOT Batch Zero inclusion decisions</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>August 2026</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The Texas grid operator's Batch Zero process covers large loads of 75 MW or greater. Its published schedule set 10 July 2026 as the deadline for interconnecting large load entities to lodge their forms and attestations and 24 July 2026 for the transmission provider to submit the completed package. Applicants are to be told during August 2026 whether they are in the batch, with a final transmission plan covering it expected in the autumn of 2027 and applications for the following batch opening in the summer of 2027.</p>
+    <p>Both Texas campuses clear the 75 MW threshold: Sealy in Austin County at roughly 285 to 300 MW and Brazoria at an initial 300 MW with expansion to 600 MW. The entire 718-acre, 885 MW portfolio sits under the tenant's exclusivity letter of intent, so the batch outcome bears directly on whether that exclusivity can become a lease.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>One or both Texas sites confirmed in the batch, which puts a study path and a date on 885 MW that is currently only secured and planned.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Exclusion pushes the Texas sites to a batch whose applications do not open until summer 2027, against a queue the operator describes at more than 438 GW.</p></div>
+    </div>
+    <div class="assume">
+      <span class="lbl">Analyst assumption</span>
+      <p>Whether CleanSpark lodged Batch Zero applications for either Texas site is not established. The grid operator publishes the process and the deadlines but not the applicant list, and no company filing or release names the process. The impact rating assumes participation; if the company did not apply, the item resolves as not applicable rather than as a negative outcome.</p>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> ERCOT large load integration process publication and PGRR145; Public Utility Commission of Texas approval, 18 June 2026. <span class="tag">Filed</span> <span class="tag">Press</span></p>
+  </div>
+
+  <div class="cat neutral" id="cat-two-prime-facility-maturity">
+    <div class="cat-head">
+      <span class="cid">D4</span>
+      <h3>Two Prime revolving facility maturity</h3>
+      <span class="dir">Neutral</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>14 September 2026</b></div>
+      <div>Impact <b>Low</b></div>
+      <div>Confidence <b>High</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The $100M bitcoin-collateralised revolver entered into with Two Prime Lending Limited on 19 September 2025 matures on 14 September 2026. It was undrawn at 31 March 2026 with no bitcoin posted against it. Its terms are one-month SOFR plus 3.55%, an initial maximum loan-to-value of roughly 62.5%, a margin call above 74% and a liquidation trigger above 80%.</p>
+    <p>The interest is not the balance but the renewal. Whether a bitcoin-collateralised lender extends at these coin prices, and on what loan-to-value, is a read on the sector's credit conditions ahead of a far larger financing requirement.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Renewed or enlarged on similar or better terms, confirming bitcoin-backed liquidity remains available.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Allowed to lapse or renewed at a tighter loan-to-value, cutting undrawn capacity from $400M to $300M.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-Q for the quarter ended 31 March 2026, filed 11 May 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-fiscal-2026-year-end">
+    <div class="cat-head">
+      <span class="cid">D5</span>
+      <h3>Fiscal year end and fleet carrying value assessment</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>30 September 2026</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Confidence <b>High</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The fiscal year closes on 30 September 2026. Two things are struck on that date: the bitcoin treasury is marked to the closing price for the annual accounts, and the miner fleet is assessed for impairment and useful life. The company has form here, having recorded $189.2M and a further $7.8M of miner impairment in fiscal 2024 and shortened miner lives from five years to three effective 1 May 2024.</p>
+    <p>With the all-in cost of a mined bitcoin at $103,440 against $75,827 of revenue per coin in the March quarter, the conditions that produced the last impairment are present again. Nothing is announced on the day itself; the date matters because it fixes what the annual report two months later must show.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Bitcoin recovers into the year end, lifting the treasury mark and the equity base the financing will be raised against.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A further coin decline plus a fleet impairment compounds in one reporting period, with equity already down from $2,175.1M to $986.2M over the prior six months.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-K for fiscal 2025, filed 25 November 2025; Form 10-Q filed 11 May 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="band"><span class="band-t">3&ndash;6 months</span><span class="band-r"></span><span class="band-c">D6</span></div>
+
+  <div class="cat two" id="cat-fiscal-2026-annual-report">
+    <div class="cat-head">
+      <span class="cid">D6</span>
+      <h3>Fiscal 2026 annual report and fourth quarter results</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>~25 November 2026</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>The fiscal 2025 annual report was filed on 25 November 2025 and the fiscal 2024 report drew a late-filing notification on 2 December 2024, so the cadence is late November with a demonstrated history of slipping. As a large accelerated filer the company has sixty days from the 30 September year end, which puts the statutory deadline at 29 November 2026.</p>
+    <p>This is the document that will first put the lease inside audited disclosure: the accounting treatment, the committed construction spend, the milestone obligations as the company describes them under a risk factor rather than a press release, and the auditor's view on a business whose revenue line and whose valuation case have separated.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Lease terms and milestone schedule disclosed in full, financing in place, and no going concern or internal control qualification.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A late-filing notification as in fiscal 2024, a fleet impairment, or a first disclosure that milestone dates are at risk.</p></div>
+    </div>
+    <div class="assume">
+      <span class="lbl">Analyst assumption</span>
+      <p>The date is inferred from the last two filing dates and the statutory sixty-day deadline, not from a company announcement.</p>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Filing history under Central Index Key 0000827876; Form 10-K filed 25 November 2025; Form NT 10-K filed 2 December 2024. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="band"><span class="band-t">6&ndash;12 months</span><span class="band-r"></span><span class="band-c">D7&ndash;D9</span></div>
+
+  <div class="cat two" id="cat-q1-fy2027-results">
+    <div class="cat-head">
+      <span class="cid">D7</span>
+      <h3>First quarter fiscal 2027 results and quarterly report</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>~5 February 2027</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>The quarter ends 31 December 2026 and the last two comparable reports were filed on 5 February 2025 and 5 February 2026. By then the construction financing will either exist or it will be a year old as a question, and the first capital expenditure against the 175 MW should be visible in the cash flow statement.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Construction spend running to plan with financing drawn, and a second lease or a Texas conversion alongside it.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>No financing, no construction spend, and a fourth consecutive loss with the delivery date still fixed at the fourth quarter of 2027.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Filing history under Central Index Key 0000827876. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-2027-annual-meeting">
+    <div class="cat-head">
+      <span class="cid">D8</span>
+      <h3>2027 annual meeting and proxy statement</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>~early March 2027</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>The last two meetings were held on 3 March 2026 and 3 March 2025, with proxy statements filed on 22 January in each year. The 2026 meeting elected five directors and ratified BDO USA as auditor, and nothing else was put to a vote.</p>
+    <p>Two things make the next one worth watching. Withheld votes at the 2026 meeting ran to 31.6M against Larry McNeill and 32.2M against Dr Thomas Wood, on 159.7M cast for the Chief Executive, and the Series A preferred cast 78,750,000 of the 334,500,361 votes on the register. The March 2026 payment of $30.0M to the preferred holders will be the first related-party transaction the meeting has met since it happened.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Board additions with data centre or project finance experience, or a governance change to the preferred voting arrangement.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Withheld votes rise sharply against the directors who hold the preferred, without any change following, confirming that the vote cannot reach the arrangement.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K of 5 March 2026 reporting the meeting results; proxy statements filed 22 January 2025 and 22 January 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-q2-fy2027-results">
+    <div class="cat-head">
+      <span class="cid">D9</span>
+      <h3>Second quarter fiscal 2027 results and quarterly report</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>~10 May 2027</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Confidence <b>Low</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>The quarter ends 31 March 2027. The comparable reports were filed on 8 May 2025 and 11 May 2026. This is the last full quarter reported before the fourth quarter of 2027, when the first Sandersville deliveries are expected, so it is the last routine opportunity to confirm or move that date before it arrives.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Delivery date reaffirmed with the build on schedule, and rent commencement quantified for the first time.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Delivery slips out of 2027, which is the condition the lease attaches rent abatement and termination rights to.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Filing history under Central Index Key 0000827876. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="band"><span class="band-t">Beyond 12 months, context only</span><span class="band-r"></span><span class="band-c">D10&ndash;D13</span></div>
+  <p class="sub">Structural items that shape the backdrop but do not trade in the window.</p>
+
+  <div class="cat up" id="cat-sandersville-first-deliveries">
+    <div class="cat-head">
+      <span class="cid">D10</span>
+      <h3>Sandersville first deliveries and rent commencement</h3>
+      <span class="dir">Up</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Fourth quarter of 2027</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>Low</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The company expects deliveries of 175 MW of critical IT load to begin in the fourth quarter of 2027. That is the point at which the $6.6bn becomes a receivable rather than a commitment, and the point at which the company's stated average annual contribution of roughly $330M begins.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Rent begins on schedule and the company reports its first non-mining revenue in its history at close to a 100% contribution margin.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Delivery is late, exposing the company to the rent abatement and termination rights the lease attaches to the milestones.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K and press release, 14 July 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-ercot-batch-zero-transmission-plan">
+    <div class="cat-head">
+      <span class="cid">D11</span>
+      <h3>ERCOT Batch Zero final transmission plan</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Autumn 2027</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Confidence <b>Low</b></div>
+      <div>Provenance <span class="tag">Press</span></div>
+    </div>
+    <p>A final transmission plan covering the first batch of large load interconnections is expected in the autumn of 2027. For any Texas capacity inside that batch, this is the document that fixes what can actually be energised and when.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Transmission provided for the Texas sites on a timeline that lets the exclusivity convert into a dated lease.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Transmission constrained or deferred, leaving 885 MW of secured and planned capacity without a route to energisation.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Utility Dive, 22 June 2026, reporting the Public Utility Commission of Texas and ERCOT. <span class="tag">Press</span></p>
+  </div>
+
+  <div class="cat down" id="cat-2030-notes-holder-put">
+    <div class="cat-head">
+      <span class="cid">D12</span>
+      <h3>2030 convertible notes holder put at par</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>15 June 2028</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>High</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Holders of the $650M 2030 notes have a one-time non-contingent right to require the company to repurchase all or any portion of them for cash at par on 15 June 2028. This is the only fixed cash date in a capital structure otherwise made entirely of zero-coupon paper, and it falls within months of the first expected lease revenue rather than after it.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>The stock trades above the $14.80 conversion price by then and holders convert rather than put, extinguishing the cash claim.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Holders put in full and $650M of cash is due at the point of peak construction spend on the lease.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-Q for the quarter ended 31 March 2026, filed 11 May 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat neutral" id="cat-2032-notes-first-redemption">
+    <div class="cat-head">
+      <span class="cid">D13</span>
+      <h3>2032 convertible notes first redemption eligibility</h3>
+      <span class="dir">Neutral</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>20 February 2029</b></div>
+      <div>Impact <b>Low</b></div>
+      <div>Confidence <b>High</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The company may not redeem the $1,150M 2032 notes before 20 February 2029, and thereafter only if the stock has traded at least 130% of the $19.16 conversion price, meaning roughly $24.91, for twenty trading days in a thirty-day window. Until that date the notes cannot be called at all.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>The share price condition is met, letting the company force conversion and remove $1,150M of principal from the balance sheet.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>The condition is never met and the principal runs to 2032 as a hard maturity against an unbuilt second business.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K of 13 November 2025 and Form 10-Q filed 11 May 2026. <span class="tag">Filed</span></p>
+  </div>
+</section>
+
+<!-- ===================== 2. STANDING CONDITIONS ===================== -->
+<section id="s2">
+  <h2 class="sec"><span class="n">02</span>Standing conditions</h2>
+  <p class="sub">Ongoing and undated, most material first. These take &ldquo;Why undated&rdquo; in place of timing confidence.</p>
+
+  <div class="cat two" id="cat-sandersville-construction-financing">
+    <div class="cat-head">
+      <span class="cid">S1</span>
+      <h3>Sandersville construction financing</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>No announced process or deadline</b></div>
+      <div>Provenance <span class="tag">Open</span></div>
+    </div>
+    <p>On the company's own stated project cost of $10M to $12M per MW against 175 MW of critical IT load, the build needs $1,750M to $2,100M. Cash stood at $260.3M at 31 March 2026 and the two undrawn revolvers total $400M, both bitcoin-collateralised. Nothing has been announced in the three weeks since the lease.</p>
+    <p>The shape of the financing decides which document describes this company. Project debt secured on an investment-grade rent stream is one outcome; a third convertible or an equity raise against a $3.5bn market capitalisation is another. The company's own forward-looking language names both its need for substantial additional capital and the risks of the significant additional indebtedness it may incur.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Non-recourse project financing at a rate reflecting the tenant's credit rather than the company's, with limited or no equity issuance.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Equity issued near current levels, or a third convertible layered onto $1.8bn of existing notes, or financing late enough to put a milestone at risk.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K and press release, 14 July 2026; Form 10-Q filed 11 May 2026. <span class="tag">Filed</span> <span class="tag">Open</span></p>
+  </div>
+
+  <div class="cat two" id="cat-bitcoin-price-and-the-fair-value-line">
+    <div class="cat-head">
+      <span class="cid">S2</span>
+      <h3>Bitcoin price and the fair value line</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>Continuous market variable</b></div>
+      <div>Provenance <span class="tag">Market</span></div>
+    </div>
+    <p>Bitcoin is marked to the quoted price at every reporting date and the movement runs straight through earnings. From 30 September 2025 to 31 March 2026 the coin went from roughly $114,100 to roughly $68,200, producing a $470.9M fair value loss on holdings and a $142.5M loss on bitcoin posted as collateral, and taking shareholders' equity from $2,175.1M to $986.2M. It was near $64,700 on 31 July 2026, below the March mark.</p>
+    <p>With 13,924 bitcoin at 30 June 2026, each $10,000 on the coin is worth roughly $139M of book value before tax. The same variable sets mining revenue per coin, so it moves both the income statement and the balance sheet in the same direction at once.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>A recovery lifts the treasury, the reported result and the equity base against which construction financing would be raised.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A further fall compounds a fair value loss with mining revenue per coin already below all-in cost, at a point of maximum capital need.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-Q filed 11 May 2026; company operational update, 7 July 2026; bitcoin price at 31 July 2026. <span class="tag">Filed</span> <span class="tag">Market</span></p>
+  </div>
+
+  <div class="cat two" id="cat-lease-milestone-compliance">
+    <div class="cat-head">
+      <span class="cid">S3</span>
+      <h3>Lease milestone compliance</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>Milestone dates are not disclosed</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The lease requires the company to satisfy specified financing, construction and delivery milestones and other covenants and conditions, and states that failure to satisfy applicable milestones may result in rent abatements or termination. The company has not disclosed what the milestones are or when they fall.</p>
+    <p>This is the condition that converts the financing question into a contractual one. A financing that arrives late is a cost of capital problem; a financing that arrives after a milestone is a lease problem.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>The milestone schedule is disclosed and met, removing the largest unquantified term in the largest contract the company has signed.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A missed milestone triggers rent abatement, or termination removes the $6.6bn entirely and with it the exclusivity over 885 MW in Texas.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K, Item 8.01, 14 July 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat up" id="cat-texas-exclusivity-conversion">
+    <div class="cat-head">
+      <span class="cid">S4</span>
+      <h3>Texas exclusivity converting to a lease</h3>
+      <span class="dir">Up</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>No stated exclusivity period</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The tenant executed a letter of intent and exclusivity arrangement covering 718 acres and up to 885 MW of secured and planned capacity across the Sealy and Brazoria campuses. The company calls Sandersville the first chapter of a substantially larger relationship. A letter of intent is not a lease, no exclusivity period has been stated, and the capacity is described as secured and planned rather than energised.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Conversion at Sandersville-like economics across 885 MW would be several times the $6.6bn already contracted.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Exclusivity lapses without a lease, leaving 718 acres of land and power commitments carried at cost with no tenant.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K and press release, 14 July 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat down" id="cat-securities-class-action">
+    <div class="cat-head">
+      <span class="cid">S5</span>
+      <h3>Certified securities class action</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>Court schedule, motions pending</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Hasthantra v. CleanSpark, filed in the Southern District of New York on 20 January 2021, alleges material misstatements and omissions between 10 December 2020 and 16 August 2021 concerning the acquisition of ATL Data Centers and the anticipated expansion of mining. The court granted class certification on 24 September 2025. Expert discovery concluded in late 2025, and the company's motions to exclude the plaintiffs' two experts were fully briefed on 3 March 2026 and remain pending.</p>
+    <p>The company states the claims are without merit and that it cannot estimate potential losses. Class certification is the point at which a securities case acquires settlement value, and a ruling on the expert motions is the next observable step.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>The expert motions are granted, which typically weakens damages and reduces settlement value. The company states it cannot estimate the exposure either way.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>The motions are denied and a certified class proceeds toward trial or a settlement the company has not reserved for.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-Q filed 11 May 2026, Note 15; Form 10-K filed 25 November 2025, Note 19. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat down" id="cat-customs-tariff-assessments">
+    <div class="cat-head">
+      <span class="cid">S6</span>
+      <h3>Customs tariff assessments on imported miners</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>Administrative protest process, no set date</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>From May 2025 US Customs and Border Protection has invoiced the company asserting Chinese-origin import tariffs on miners imported in 2024. The company states that if the agency were to prevail on the remaining entries, total liability could reach approximately $130M excluding statutory interest. It holds importation documentation showing non-Chinese origin, the seller represented the same, some administrative protests have been approved, and no provision has been recorded because a loss is not considered probable.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>The remaining protests are approved and the exposure closes at nil, as several already have.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>An adverse determination crystallises up to $130M plus statutory interest against a balance sheet carrying no provision.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-Q filed 11 May 2026, Note 15. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat down" id="cat-consolidated-smith-derivative-action">
+    <div class="cat-head">
+      <span class="cid">S7</span>
+      <h3>Consolidated Smith derivative action</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>Low</b></div>
+      <div>Why undated <b>Court schedule following the April 2026 denial</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Four shareholder derivative actions filed in Nevada between 21 February and 8 March 2023 against current and former officers and directors, consolidated in the Eighth Judicial District Court in Clark County, assert breach of fiduciary duty, unjust enrichment and corporate waste. The special litigation committee's motion to defer was denied on 2 April 2026 without prejudice, a denial the company describes as procedural rather than a ruling on the merits. The company is evaluating whether to seek appellate review.</p>
+    <p>Derivative claims are brought on the company's behalf, so the direct financial exposure is usually modest. What the case can produce is governance change, and the standing arrangements around the preferred stock (S12) are exactly the kind of matter such an action reaches.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Appellate review reinstates the deferral, or the action is dismissed, closing a matter open since 2023.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>The action proceeds to discovery against sitting directors while the company is negotiating its largest ever financing.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-Q filed 11 May 2026, Note 15. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-convertible-dilution-mechanics">
+    <div class="cat-head">
+      <span class="cid">S8</span>
+      <h3>Convertible note dilution mechanics</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>Conditional conversion tested each quarter</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Full conversion of both issues would deliver 103,941,450 shares, being $650M at 67.5858 shares per $1,000 and $1,150M at 52.1832 shares per $1,000, or 40.5% of the 256,599,199 shares outstanding at 31 March 2026. The company may elect to settle in cash, shares or a combination.</p>
+    <p>Early conversion is tested each calendar quarter against 130% of the conversion price, roughly $19.24 for the 2030 notes and $24.91 for the 2032 notes. Neither condition had been met at 31 March 2026 and the stock closed at $13.76 on 31 July 2026. The 2030 notes carry capped calls struck at $24.66 that blunt dilution above that level; the 2032 notes carry none.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>A re-rating above the conversion prices converts $1.8bn of debt into equity and removes the 2028 cash put entirely.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>The stock stays below both prices, leaving $1.8bn as hard debt with a fixed cash call in June 2028 and no equity relief.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-Q filed 11 May 2026, Note 9; Form 8-K of 13 November 2025. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat down" id="cat-mining-pool-concentration">
+    <div class="cat-head">
+      <span class="cid">S9</span>
+      <h3>Single mining pool as sole customer</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>Terminable by either party at any time</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>All computing power goes to one pool operator, Foundry, which the company names as its sole customer under a contract terminable at any time by either party. Pool fees ran at roughly 0.21% of gross mining revenue in the March 2026 quarter. Every dollar of reported revenue depends on that single relationship continuing.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Diversification across pools, or self-mining, removes a concentration the company itself flags as a risk factor.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Termination or a fee increase hits 100% of revenue with no contractual notice period disclosed.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-K filed 25 November 2025; Form 10-Q filed 11 May 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-institutional-register-turnover">
+    <div class="cat-head">
+      <span class="cid">S10</span>
+      <h3>Institutional register turnover</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>Filed on crossing thresholds, not on a schedule</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The register has turned over in nine months, with three filings in July 2026 alone. D. E. Shaw filed a new position of 12,859,115 shares, 5.0% of the class, on 17 July 2026 with an event date of 10 July 2026, the day the lease was executed; 1,117,500 of those shares are held through call options. Bank of Nova Scotia filed a new 5.62% position, 14,791,062 shares, on 15 July 2026 for the 30 June date. Dimensional went from 5.5% at 31 March to 3.8% at 30 June.</p>
+    <p>The Vanguard sequence needs stating carefully because two entities are involved. The Vanguard Group reported 10.05% at 28 November 2025 and then reported zero on an amendment with an event date of 13 March 2026. Separately, Vanguard Capital Management reported 5.08% at 31 March 2026. The two together are more consistent with a change in which entity reports than with a sale and a repurchase, but neither filing says so, and this file does not choose between the readings. BlackRock's last filing, at 15.5% for 31 March 2025, has not been amended since.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Further new 5% holders after the lease, as with the two filed in mid-July, on a register with 30% of shares already short.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Continued index and quantitative selling, as with the Dimensional reduction, into a name whose passive weight follows a falling market capitalisation.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Eleven beneficial ownership filings under the newer form label between 13 November 2025 and 17 July 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-short-interest">
+    <div class="cat-head">
+      <span class="cid">S11</span>
+      <h3>Short interest at roughly 30% of shares outstanding</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>Reported twice monthly, position is continuous</b></div>
+      <div>Provenance <span class="tag">Market</span></div>
+    </div>
+    <p>77,993,876 shares were short at the 15 July 2026 settlement date, against 78,632,173 at 30 June 2026, with days to cover of 3.3. On the 256,608,606 shares outstanding that is 30.4%. Part of the position is structural: convertible arbitrage against $1.8bn of notes requires a short in the underlying, and the company itself repurchased $605.0M of stock from note investors to let them establish it.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Good news on financing or a Texas conversion forces covering into a float where three days of volume are already committed.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A large short base is also a large body of informed sellers, and it grew through the period in which the equity halved.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Short interest at the 15 July 2026 settlement date; Form 10-Q filed 11 May 2026 for the share count. <span class="tag">Market</span> <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat down" id="cat-preferred-voting-block-and-related-party-dealing">
+    <div class="cat-head">
+      <span class="cid">S12</span>
+      <h3>Preferred voting block and related-party dealing</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>Structural, alterable only by the holders or the board</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>1,750,000 Series A preferred shares carry 45 votes each, being 78,750,000 of the 334,500,361 votes on the 9 January 2026 record date, or 23.5%. The liquidation preference is $0.02 a share. The holders are the Chairman and Chief Executive S. Matthew Schultz, the director Larry McNeill, Celtic LLC which they control, and the former Chief Executive Zachary K. Bradford. The amended certificate of designation effective 20 March 2026 makes the class vote as a bloc in line with its own majority while officers and directors hold a majority of it, and converts each share into three common shares on a change of control.</p>
+    <p>The same amendment paid those holders $30.0M in cash, being $17.1428571428571 a share, to extinguish a dividend entitlement of 2% of earnings before interest, taxes and amortisation. It was recorded as a deemed dividend in a quarter that reported a $378.3M net loss, and approved by the board excluding the two directors who hold the preferred.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Removing a perpetual claim on earnings for a fixed sum simplifies the capital structure ahead of a project financing that will be diligenced closely.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A control block on 0.7% of the economics, paid $30.0M in a loss-making quarter, is a governance discount a lender or an index provider may price.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K of 24 March 2026; Form 8-K of 5 March 2026; Form 10-Q filed 11 May 2026, Note 11. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-new-hampshire-conduit-bond-revival">
+    <div class="cat-head">
+      <span class="cid">S13</span>
+      <h3>New Hampshire conduit bond revival</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>Low</b></div>
+      <div>Why undated <b>Reconsideration requires a council meeting to be scheduled</b></div>
+      <div>Provenance <span class="tag">Press</span></div>
+    </div>
+    <p>The Business Finance Authority of the State of New Hampshire proposed up to $100M of taxable conduit revenue bonds with CleanSpark as borrower, secured by bitcoin pledged into a custody trust with BitGo as custodian and liquidation agent. Moody's assigned a provisional Ba2 rating in late March 2026, with an initial collateral coverage of 1.60 times and mandatory redemption at a 1.40 times trigger. The state's Executive Council rejected it 3 to 2 on the account read here, citing concern for the state's financial reputation. A New Hampshire legislator has said publicly that reconsideration will be sought at a future council meeting.</p>
+    <p>The sum is small against $1.8bn of existing notes. What it tests is whether bitcoin-collateralised structured debt is available to this company at all, which is a live question given how much capital the lease requires.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Reconsideration succeeds, establishing a template for bitcoin-collateralised term debt that does not dilute equity.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>The rejection stands, confirming that a rated, over-collateralised, $100M structure could not clear a public body, at a point of far larger capital need.</p></div>
+    </div>
+    <div class="assume">
+      <span class="lbl">Analyst assumption</span>
+      <p>The company has filed nothing on this matter: no current report on the rating, the proposal or the rejection appears in its filing record. Everything above is from the rating agency's action and press coverage of the council. The date of the vote differs between accounts, and the newspaper of record could not be retrieved when attempted on 3 August 2026.</p>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> CoinDesk, 9 July 2026; reporting of the Moody's rating action of late March 2026. <span class="tag">Press</span></p>
+  </div>
+
+  <div class="cat down" id="cat-mawson-litigation-over-the-sandersville-bill-of-sale">
+    <div class="cat-head">
+      <span class="cid">S14</span>
+      <h3>Counterparty litigation over the Sandersville bill of sale</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>Low</b></div>
+      <div>Why undated <b>Court schedule, settlement discussions in progress</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Big Digital Energy, formerly Mawson Infrastructure Group, discloses that on 16 July 2024 it and Luna Squares sued CleanSpark and CSRE Properties Sandersville LLC in the Southern District of New York, case 1:24-cv-5379, for at least $2.0M for breach of a bill of sale dated 1 October 2022. It states the defendants' motion to dismiss, filed 13 September 2024, was denied, that the matter is proceeding, and that the parties are actively pursuing informal settlement discussions.</p>
+    <p>CleanSpark acquired the Sandersville facility from Mawson effective October 2022 and names neither the matter nor the counterparty's claim in its own legal contingencies. The amount is immaterial at this size. The subject is title and terms around the campus now carrying a $6.6bn lease, which is why it is listed rather than ignored.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Settlement closes a claim against the lease campus before a lender diligences it.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>An unresolved claim touching the Sandersville assets surfaces during financing diligence, having never appeared in the company's own disclosure.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Big Digital Energy, Inc. Form 10-Q filed 14 May 2026; CleanSpark Form 10-K filed 25 November 2025 for the acquisition. <span class="tag">Filed</span></p>
+  </div>
+</section>
+
+<!-- ===================== 3. RESOLVED ===================== -->
+<section id="s3">
+  <h2 class="sec"><span class="n">03</span>Resolved</h2>
+  <p class="sub">Closed items, kept for the record, ordered by resolution date. A resolved catalyst takes the next free R number; it does not carry its old D number over.</p>
+
+  <div class="cat resolved" id="cat-griid-acquisition">
+    <div class="cat-head">
+      <span class="cid">R1</span>
+      <h3>GRIID Infrastructure acquisition</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>30 October 2024</b></div>
+      <div>Outcome <b>Completed in stock</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Completed under an agreement of 26 June 2024. 5,031,221 shares issued at $12.06, valued at $60.7M, plus 22,803,726 warrants valued at $6.1M. It added three Tennessee sites and moved the company into Tennessee Valley Authority territory, and carried $48.3M of tax-deductible goodwill at close. Total goodwill went from $8.0M to $135.3M in the quarter that followed.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-sp-smallcap-600-addition">
+    <div class="cat-head">
+      <span class="cid">R2</span>
+      <h3>Addition to the S&amp;P SmallCap 600</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>24 March 2025</b></div>
+      <div>Outcome <b>Added, effective before the open</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Announced by the company on 10 March 2025 and effective before the open on 24 March 2025. Index membership is decided by the provider rather than by the company, and it creates a passive holder base whose weight follows the market capitalisation down as well as up.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-chief-executive-transition">
+    <div class="cat-head">
+      <span class="cid">R3</span>
+      <h3>Chief executive transition and leadership realignment</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>4 September 2025</b></div>
+      <div>Outcome <b>Schultz appointed, Bradford departed</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>S. Matthew Schultz was appointed Chief Executive by a current report of 11 August 2025, replacing Zachary K. Bradford. Effective 4 September 2025 Gary Vecchiarelli added President to Chief Financial Officer, Scott Garrison became Executive Vice President and Chief Development Officer, and Taylor Monnig added Chief Operating Officer to Chief Technology Officer. New employment agreements were entered for five executives, with base salary of $950,000 and a bonus target of up to 200% for the Chief Executive, and with bitcoin introduced as an element of executive pay. The former Chief Executive's severance included restricted stock units, which the company cites as a driver of the rise in stock-based compensation to $45.3M in fiscal 2025.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-hosted-operations-wind-down">
+    <div class="cat-head">
+      <span class="cid">R4</span>
+      <h3>Exit from hosted mining operations</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>30 September 2025</b></div>
+      <div>Outcome <b>All capacity vacated</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The 50 MW Coinmint hosting arrangement in Massena, New York expired at the end of December 2024 and wind-down began on expiry. The company states all megawatts allocated to it had been vacated as of 30 September 2025, and that from 31 March 2025 it mines exclusively at owned and leased facilities. It no longer reports hosted-facility metrics. Hosting and profit-sharing fees fell from $32.7M in fiscal 2024 to $11.2M in fiscal 2025.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-austin-county-texas-acquisition">
+    <div class="cat-head">
+      <span class="cid">R5</span>
+      <h3>Austin County, Texas acquisition</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>27 October 2025</b></div>
+      <div>Outcome <b>271 acres and 285 MW secured</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Approximately 271 acres acquired with an option over adjacent land, plus long-term power supply agreements totalling 285 MW providing for a progressive buildout over an estimated eighteen-month development period. Consideration was cash and stock approximating $66.0M at closing, including 1,788,834 shares, with further cash payable on certain post-closing events. This is the Sealy campus now under the tenant's exclusivity.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-2032-notes-and-share-repurchase">
+    <div class="cat-head">
+      <span class="cid">R6</span>
+      <h3>2032 convertible notes and concurrent share repurchase</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>13 November 2025</b></div>
+      <div>Outcome <b>$1,150M raised, $460M returned</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>$1,150M of 0% convertible senior notes due 15 February 2032 sold under Rule 144A through Cantor Fitzgerald, at an initial conversion price of approximately $19.16. Net proceeds were approximately $1,130.7M. Approximately $460.0M was used to repurchase 30,605,456 shares from investors in the notes themselves, implying roughly $15.03 a share, with $3.19M of excise tax accrued. No capped call was purchased. The company said it does not intend to file a shelf registration for the notes or the underlying shares.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-fiscal-2025-annual-report">
+    <div class="cat-head">
+      <span class="cid">R7</span>
+      <h3>Fiscal 2025 annual report</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>25 November 2025</b></div>
+      <div>Outcome <b>Filed on time, $364.5M net income</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Revenue of $766.3M, up 102%, with net income of $364.5M against a $145.8M loss, on a $425.6M fair value gain on bitcoin. Filed without a late notification, unlike the prior year. It reported 1,027 MW contracted, 45.6 EH/s, 336,544 miners owned and 241,934 in service, and 10,428 bitcoin held with a further 2,583 posted as collateral.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-brazoria-county-texas-acquisition">
+    <div class="cat-head">
+      <span class="cid">R8</span>
+      <h3>Brazoria County, Texas acquisition</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>27 February 2026</b></div>
+      <div>Outcome <b>447 acres, 300 MW framework</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Property acquired in Brazoria County with a framework for approximately 300 MW of power capacity and potential expansion to approximately 600 MW, where transmission-level infrastructure supports the initial demand load. Together with the Sealy campus this took the Texas portfolio to 718 acres and up to 885 MW.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-2026-annual-meeting">
+    <div class="cat-head">
+      <span class="cid">R9</span>
+      <h3>2026 annual meeting of stockholders</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>3 March 2026</b></div>
+      <div>Outcome <b>All five directors elected, auditor ratified</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Held on a 9 January 2026 record date of 255,750,361 common shares and 1,750,000 preferred carrying 78,750,000 votes, an aggregate 334,500,361. Quorum was 68.19%. Schultz, McNeill, Wood, Beynon and Cavaleri were elected and BDO USA ratified for fiscal 2026. Withheld votes ran to 31,646,526 against McNeill and 32,164,897 against Wood, against 3,744,323 for the Chief Executive.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-series-a-amendment-and-special-dividend">
+    <div class="cat-head">
+      <span class="cid">R10</span>
+      <h3>Series A amendment and $30.0M special dividend</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>24 March 2026</b></div>
+      <div>Outcome <b>Dividend right extinguished for cash</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>An amended certificate of designation effective 20 March 2026 eliminated the preferred's quarterly dividend of 2% of earnings before interest, taxes and amortisation and paid a one-time $17.1428571428571 per share, being $30,000,000 across 1,750,000 shares, on or about 24 March 2026 to a record date of 19 March 2026. The 45 votes a share continue. The board approved it excluding the two directors who hold the preferred, and it was recorded as a deemed dividend in a quarter reporting a $378.3M net loss.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-special-litigation-committee-motion-denied">
+    <div class="cat-head">
+      <span class="cid">R11</span>
+      <h3>Special litigation committee motion denied</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>2 April 2026</b></div>
+      <div>Outcome <b>Denied without prejudice</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The Nevada court denied the special litigation committee's motion that the derivative claims should be dismissed, without prejudice to the defendants' contentions on the merits. The company describes the denial as procedural and is evaluating whether to seek appellate review. It ended a stay that had run since 6 November 2023, and it is why the derivative action is carried as a live standing condition (S7) rather than as resolved.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-new-hampshire-conduit-bond-rejected">
+    <div class="cat-head">
+      <span class="cid">R12</span>
+      <h3>New Hampshire conduit bond rejected</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>9 July 2026</b></div>
+      <div>Outcome <b>Rejected 3 to 2</b></div>
+      <div>Provenance <span class="tag">Press</span></div>
+    </div>
+    <p>The state's Executive Council voted 3 to 2 against authorising up to $100M of taxable conduit revenue bonds through the Business Finance Authority with CleanSpark as borrower, against roughly $175M of bitcoin pledged into a custody trust. Moody's had assigned a provisional Ba2 rating in late March 2026. Reported reasons centred on the state's financial reputation. Reconsideration has been signalled and is carried as a standing condition (S13). The date differs between accounts and the newspaper of record could not be retrieved when attempted on 3 August 2026.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-sandersville-lease-executed">
+    <div class="cat-head">
+      <span class="cid">R13</span>
+      <h3>Sandersville twenty-year lease executed</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>10 July 2026</b></div>
+      <div>Outcome <b>$6.6bn contracted, announced 14 July</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>A twenty-year triple net lease with two five-year extension options, covering 175 MW of critical IT load, with annual escalators, expected contract value of $6.6bn over the initial term and $11.6bn if both extensions are taken, expected cumulative contribution margin close to 100% and average annual contribution of approximately $330M, and landlord project costs of $10M to $12M per MW. Morgan Stanley advised, Davis Polk acted as counsel. The tenant also signed a letter of intent and exclusivity over 718 acres and up to 885 MW in Texas. Reported under Item 8.01 rather than as a material definitive agreement, and the lease itself was not filed as an exhibit.</p>
+  </div>
+</section>
+
+<!-- ===================== 4. NULL CATEGORIES ===================== -->
+<section id="s4">
+  <h2 class="sec"><span class="n">04</span>Null categories</h2>
+  <p class="sub">Every category reviewed appears as a row, including those that produced catalysts, which read across by title and ID. A category checked and found empty is recorded rather than omitted.</p>
+  <div class="tw"><table class="nulls">
+    <thead><tr><th>Category</th><th>Status</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Earnings</td><td class="status">Covered above</td><td>Third quarter fiscal 2026 results (D1), fiscal 2026 annual report (D6), first quarter fiscal 2027 results (D7), second quarter fiscal 2027 results (D9), fiscal 2025 annual report (R7).</td></tr>
+      <tr><td class="lbl">Product launches</td><td class="status">None</td><td>The company sells computation, not products, so the category has no direct referent. What stands in its place is capacity energisation and the move into leased AI and HPC infrastructure, covered by the Sandersville lease (R13) and its first deliveries (D10).</td></tr>
+      <tr><td class="lbl">Investor days</td><td class="status">None</td><td>No investor day or analyst day appears in the filing record to 17 July 2026 or in the company's releases to 31 July 2026, which carry only quarterly results webcasts. The company's events page was reached on 3 August 2026 but populates by script and returned no listings.</td></tr>
+      <tr><td class="lbl">Regulatory decisions</td><td class="status">Covered above</td><td>ERCOT Batch Zero inclusion decisions (D3) and the final transmission plan (D11). The customs tariff assessments (S6) are an administrative determination in the same family.</td></tr>
+      <tr><td class="lbl">Lawsuits</td><td class="status">Covered above</td><td>Certified securities class action (S5), consolidated Smith derivative action (S7), counterparty litigation over the Sandersville bill of sale (S14), and the special litigation committee motion denied (R11).</td></tr>
+      <tr><td class="lbl">Macro events</td><td class="status">Covered above</td><td>Bitcoin price and the fair value line (S2). Network difficulty and global hashrate act through the same channel and are discussed there.</td></tr>
+      <tr><td class="lbl">Industry conferences</td><td class="status caution-t">Not established</td><td>Not examined. No conference calendar was checked. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Management changes</td><td class="status">Covered above</td><td>Chief executive transition and leadership realignment (R3). No change has been filed since; the most recent officer appointment disclosed is the Senior Vice President of AI Data Centers in October 2025.</td></tr>
+      <tr><td class="lbl">Buybacks</td><td class="status">None</td><td>No authorised repurchase programme exists. The buyback authority took a different form: $605.0M of shares repurchased in privately negotiated transactions from the investors in two convertible offerings, covered by the 2032 notes and concurrent repurchase (R6), plus $90.4M of capped calls on the 2030 notes covered by the dilution mechanics (S8).</td></tr>
+      <tr><td class="lbl">Dividends</td><td class="status">Covered above</td><td>No common dividend has ever been declared and the fiscal 2025 annual report states none is planned. The preferred dividend right was extinguished for $30.0M in cash, covered by the Series A amendment (R10).</td></tr>
+      <tr><td class="lbl">Major contracts</td><td class="status">Covered above</td><td>Sandersville twenty-year lease executed (R13), lease milestone compliance (S3), Texas exclusivity converting to a lease (S4), first deliveries (D10).</td></tr>
+      <tr><td class="lbl">Index membership</td><td class="status">Covered above</td><td>Addition to the S&amp;P SmallCap 600 (R2). Decided by the provider rather than the company, which is why it is tracked separately from company events.</td></tr>
+      <tr><td class="lbl">Convertible and other financings</td><td class="status">Covered above</td><td>2032 notes and concurrent repurchase (R6), dilution mechanics (S8), 2030 notes holder put (D12), 2032 notes first redemption eligibility (D13), Sandersville construction financing (S1), Two Prime facility maturity (D4), New Hampshire conduit bond rejected (R12) and its revival (S13).</td></tr>
+      <tr><td class="lbl">Mergers and acquisitions</td><td class="status">Covered above</td><td>GRIID Infrastructure acquisition (R1), Austin County acquisition (R5), Brazoria County acquisition (R8). No pending transaction is on file.</td></tr>
+      <tr><td class="lbl">Analyst coverage and short interest</td><td class="status">Covered above</td><td>Short interest at roughly 30% of shares outstanding (S11). Thirteen covering analysts and five named firm targets are reported in the companion research report as market data.</td></tr>
+      <tr><td class="lbl">Credit rating actions</td><td class="status">None</td><td>No corporate credit rating exists. Both note issues were sold under Rule 144A unrated. The only rating found is the provisional Ba2 on the New Hampshire conduit bonds, which were not issued, covered by the rejection (R12).</td></tr>
+      <tr><td class="lbl">Segment reporting</td><td class="status">None</td><td>The company reports a single reportable segment, bitcoin mining, and states so in its goodwill disclosure. A second segment would follow the first lease revenue, which is not expected before the fourth quarter of 2027 (D10).</td></tr>
+      <tr><td class="lbl">Exchange listing compliance</td><td class="status">None</td><td>No deficiency, compliance or listing determination notice appears across the complete 750-filing record under Central Index Key 0000827876. The common stock and the warrants are listed on Nasdaq under file number 001-39187.</td></tr>
+      <tr><td class="lbl">Late filing notifications</td><td class="status">None</td><td>Six late annual and eleven late quarterly notifications exist across the 750-filing record, the most recent being a late annual notification on 2 December 2024 and a late quarterly notification on 10 August 2022. None has been filed since, and the two most recent annual reports were lodged on time.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 5. DILUTION & CAPITAL OVERLAY ===================== -->
+<section id="s5">
+  <h2 class="sec"><span class="n">05</span>Dilution &amp; capital overlay</h2>
+  <p class="sub">Sits across every other catalyst rather than beside them.</p>
+  <p>Every item on this calendar is read against one fact: the company must find between $1,750M and $2,100M to build what it has just leased, and it has $260.3M of cash, $400M of undrawn bitcoin-collateralised revolvers and $986.2M of book equity. The overlay is therefore not a footnote about share count. It is the main event, and each of the sources of capital below carries a different consequence for the equity.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Source</th><th class="num">Capacity</th><th>Consequence, and basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Cash on hand</td><td class="num">$260.3M</td><td>At 31 March 2026. Covers roughly one eighth of the low end of the build <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Bitcoin treasury</td><td class="num">~$900.9M</td><td>13,924 bitcoin at 30 June 2026 marked near $64,700. Selling it funds the build and removes the asset the equity story has rested on <span class="tag">Estimate</span></td></tr>
+      <tr><td class="lbl">Undrawn revolvers</td><td class="num">$400.0M</td><td>Coinbase $300M indicative and Two Prime $100M, both requiring bitcoin collateral at loan-to-value ratios that tighten as the coin falls <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Authorised share headroom</td><td class="num">301,035,410</td><td>600,000,000 authorised less 298,964,590 issued at 31 March 2026. Ample room to issue, which is the point <span class="tag">Estimate</span></td></tr>
+      <tr><td class="lbl">Convertible conversion shares</td><td class="num">103,941,450</td><td>Both issues at their initial rates, being 40.5% of shares outstanding. Settleable in cash, shares or a mix at the company's election <span class="tag">Estimate</span></td></tr>
+      <tr><td class="lbl">2030 notes cash put</td><td class="num">$650.0M</td><td>Holder option at par on 15 June 2028. A cash claim, not a dilution, and it lands months before first rent <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Preferred change-of-control conversion</td><td class="num">5,250,000</td><td>1,750,000 preferred at three common each, triggered automatically on a change of control <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Warrants</td><td class="num">1,604,559</td><td>Exercisable at $165.24 per whole share. Immaterial at any plausible price <span class="tag">Filed</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The company has raised $1,800M of convertible debt in eleven months and returned $605.0M of it to the buyers as a share repurchase. It has never issued project-level debt. Whether Sandersville is financed at the project or at the parent decides whether the equity is diluted at $13.76 or insulated behind a non-recourse structure secured on an investment-grade rent stream. Nothing filed indicates which is intended, and the company's own forward-looking language names both the need for substantial additional capital and the risks of significant additional indebtedness without choosing between them.</p>
+  </div>
+</section>
+
+<!-- ===================== 6. FALSIFICATION TESTS ===================== -->
+<section id="s6">
+  <h2 class="sec"><span class="n">06</span>Falsification tests</h2>
+  <p class="sub">What would prove this read wrong, stated in advance. Each trigger is settleable from a document; an unquantified threshold is not a test.</p>
+  <div class="tw"><table>
+    <thead><tr><th>#</th><th>If this happens&hellip;</th><th>&hellip;this was wrong</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>A current report or press release announces committed financing of $1,000M or more specifically for the Sandersville build, on or before 30 November 2026.</td><td>That the financing gap is the binding constraint on this equity.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">2</td><td>The quarterly report for the period ended 30 June 2026 discloses average revenue per bitcoin mined at or above the all-in cost to mine one bitcoin, on the owned-facilities table.</td><td>That mining has stopped recovering its capital.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">3</td><td>A current report discloses an executed lease, not a letter of intent, covering 200 MW or more of the Texas portfolio, on or before 31 December 2026.</td><td>That the Texas exclusivity should be treated as an option rather than as contracted capacity.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">4</td><td>The fiscal 2026 annual report discloses the Sandersville milestone dates and states that all milestones falling before its filing date have been met.</td><td>That milestone risk is unquantifiable from the public record.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">5</td><td>A monthly operational update reports total bitcoin holdings below 10,000, or the quarterly report discloses bitcoin sold to fund construction.</td><td>That the treasury will be preserved rather than spent on the build.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">6</td><td>Holders of the 2030 notes are reported to have converted, or the notes become conditionally convertible because the stock closes at or above $19.24 for 20 of 30 trading days in a quarter.</td><td>That the June 2028 put is a live $650M cash claim.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">7</td><td>A current report discloses that Customs and Border Protection has withdrawn or that the company has recorded a provision against the asserted tariffs.</td><td>That the $130M exposure remains an open, unprovisioned contingency.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">8</td><td>The court rules on the motions to exclude the plaintiffs' two experts in the securities class action.</td><td>That the next observable step in that matter is a ruling on those motions.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">9</td><td>An amended beneficial ownership filing reports D. E. Shaw below 5%, or Bank of Nova Scotia below 5%, before 31 December 2026.</td><td>That the post-lease institutional buying represents durable positioning.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">10</td><td>A short interest settlement date on or before 31 December 2026 reports fewer than 50,000,000 shares short.</td><td>That the roughly 30% short position is structural rather than directional.</td><td class="status">Untriggered</td></tr>
+    </tbody>
+  </table></div>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The thresholds in tests 1, 3, 5, 6 and 10 are analyst judgements rather than figures the company has published. $1,000M is set at roughly half the low end of the stated build cost, 200 MW at roughly a quarter of the Texas portfolio, 10,000 bitcoin at roughly 70% of the 30 June 2026 holding, $19.24 as 130% of the 2030 conversion price, and 50,000,000 shares at roughly two thirds of the current short position. Each is stated so that the test can be settled from a document even where the level itself is a judgement.</p>
+  </div>
+</section>
+
+<!-- ===================== 7. CATALYST SUMMARY ===================== -->
+<section id="s7">
+  <h2 class="sec"><span class="n">07</span>Catalyst summary</h2>
+  <p class="sub">Every ID in one table, gapless within each class. Must match the cards above exactly: same IDs, same count, same order. Links point at title slugs so they survive renumbering.</p>
+  <div class="tw"><table>
+    <thead><tr><th>ID</th><th>Catalyst</th><th>Timing</th><th>Impact</th><th>Confidence</th><th>Direction</th></tr></thead>
+    <tbody>
+      <tr><td class="num">D1</td><td><a href="#cat-q3-fy2026-results-and-quarterly-report">Third quarter fiscal 2026 results and quarterly report</a></td><td class="when">6&ndash;10 Aug 2026</td><td>High</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D2</td><td><a href="#cat-july-2026-operational-update">July 2026 monthly operational update</a></td><td class="when">First half Aug 2026</td><td>Medium</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D3</td><td><a href="#cat-ercot-batch-zero-inclusion-decisions">ERCOT Batch Zero inclusion decisions</a></td><td class="when">Aug 2026</td><td>High</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D4</td><td><a href="#cat-two-prime-facility-maturity">Two Prime revolving facility maturity</a></td><td class="when">14 Sep 2026</td><td>Low</td><td>High</td><td>Neutral</td></tr>
+      <tr><td class="num">D5</td><td><a href="#cat-fiscal-2026-year-end">Fiscal year end and fleet carrying value assessment</a></td><td class="when">30 Sep 2026</td><td>Medium</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D6</td><td><a href="#cat-fiscal-2026-annual-report">Fiscal 2026 annual report and fourth quarter results</a></td><td class="when">~25 Nov 2026</td><td>High</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D7</td><td><a href="#cat-q1-fy2027-results">First quarter fiscal 2027 results and quarterly report</a></td><td class="when">~5 Feb 2027</td><td>Medium</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D8</td><td><a href="#cat-2027-annual-meeting">2027 annual meeting and proxy statement</a></td><td class="when">~early Mar 2027</td><td>Medium</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D9</td><td><a href="#cat-q2-fy2027-results">Second quarter fiscal 2027 results and quarterly report</a></td><td class="when">~10 May 2027</td><td>Medium</td><td>Low</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D10</td><td><a href="#cat-sandersville-first-deliveries">Sandersville first deliveries and rent commencement</a></td><td class="when">Q4 2027</td><td>High</td><td>Low</td><td class="pos-t">Up</td></tr>
+      <tr><td class="num">D11</td><td><a href="#cat-ercot-batch-zero-transmission-plan">ERCOT Batch Zero final transmission plan</a></td><td class="when">Autumn 2027</td><td>Medium</td><td>Low</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D12</td><td><a href="#cat-2030-notes-holder-put">2030 convertible notes holder put at par</a></td><td class="when">15 Jun 2028</td><td>High</td><td>High</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">D13</td><td><a href="#cat-2032-notes-first-redemption">2032 convertible notes first redemption eligibility</a></td><td class="when">20 Feb 2029</td><td>Low</td><td>High</td><td>Neutral</td></tr>
+      <tr><td class="num">S1</td><td><a href="#cat-sandersville-construction-financing">Sandersville construction financing</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S2</td><td><a href="#cat-bitcoin-price-and-the-fair-value-line">Bitcoin price and the fair value line</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S3</td><td><a href="#cat-lease-milestone-compliance">Lease milestone compliance</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S4</td><td><a href="#cat-texas-exclusivity-conversion">Texas exclusivity converting to a lease</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="pos-t">Up</td></tr>
+      <tr><td class="num">S5</td><td><a href="#cat-securities-class-action">Certified securities class action</a></td><td class="when">Ongoing</td><td>Medium</td><td>n/a</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">S6</td><td><a href="#cat-customs-tariff-assessments">Customs tariff assessments on imported miners</a></td><td class="when">Ongoing</td><td>Medium</td><td>n/a</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">S7</td><td><a href="#cat-consolidated-smith-derivative-action">Consolidated Smith derivative action</a></td><td class="when">Ongoing</td><td>Low</td><td>n/a</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">S8</td><td><a href="#cat-convertible-dilution-mechanics">Convertible note dilution mechanics</a></td><td class="when">Ongoing</td><td>Medium</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S9</td><td><a href="#cat-mining-pool-concentration">Single mining pool as sole customer</a></td><td class="when">Ongoing</td><td>Medium</td><td>n/a</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">S10</td><td><a href="#cat-institutional-register-turnover">Institutional register turnover</a></td><td class="when">Ongoing</td><td>Medium</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S11</td><td><a href="#cat-short-interest">Short interest at roughly 30% of shares outstanding</a></td><td class="when">Ongoing</td><td>Medium</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S12</td><td><a href="#cat-preferred-voting-block-and-related-party-dealing">Preferred voting block and related-party dealing</a></td><td class="when">Ongoing</td><td>Medium</td><td>n/a</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">S13</td><td><a href="#cat-new-hampshire-conduit-bond-revival">New Hampshire conduit bond revival</a></td><td class="when">Ongoing</td><td>Low</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S14</td><td><a href="#cat-mawson-litigation-over-the-sandersville-bill-of-sale">Counterparty litigation over the Sandersville bill of sale</a></td><td class="when">Ongoing</td><td>Low</td><td>n/a</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">R1</td><td><a href="#cat-griid-acquisition">GRIID Infrastructure acquisition</a></td><td class="when">30 Oct 2024</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R2</td><td><a href="#cat-sp-smallcap-600-addition">Addition to the S&amp;P SmallCap 600</a></td><td class="when">24 Mar 2025</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R3</td><td><a href="#cat-chief-executive-transition">Chief executive transition and leadership realignment</a></td><td class="when">4 Sep 2025</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R4</td><td><a href="#cat-hosted-operations-wind-down">Exit from hosted mining operations</a></td><td class="when">30 Sep 2025</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R5</td><td><a href="#cat-austin-county-texas-acquisition">Austin County, Texas acquisition</a></td><td class="when">27 Oct 2025</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R6</td><td><a href="#cat-2032-notes-and-share-repurchase">2032 convertible notes and concurrent share repurchase</a></td><td class="when">13 Nov 2025</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R7</td><td><a href="#cat-fiscal-2025-annual-report">Fiscal 2025 annual report</a></td><td class="when">25 Nov 2025</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R8</td><td><a href="#cat-brazoria-county-texas-acquisition">Brazoria County, Texas acquisition</a></td><td class="when">27 Feb 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R9</td><td><a href="#cat-2026-annual-meeting">2026 annual meeting of stockholders</a></td><td class="when">3 Mar 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R10</td><td><a href="#cat-series-a-amendment-and-special-dividend">Series A amendment and $30.0M special dividend</a></td><td class="when">24 Mar 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R11</td><td><a href="#cat-special-litigation-committee-motion-denied">Special litigation committee motion denied</a></td><td class="when">2 Apr 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R12</td><td><a href="#cat-new-hampshire-conduit-bond-rejected">New Hampshire conduit bond rejected</a></td><td class="when">9 Jul 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R13</td><td><a href="#cat-sandersville-lease-executed">Sandersville twenty-year lease executed</a></td><td class="when">10 Jul 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 8. METHODOLOGY & CONFIDENCE SCALE ===================== -->
+<section id="s8">
+  <h2 class="sec"><span class="n">08</span>Methodology &amp; confidence scale</h2>
+
+  <h3>Provenance tags</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Tag</th><th>What it asserts</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl"><span class="tag">Filed</span></td><td>Stated in an SEC filing or company release, cited by form and date. Also covers a dated official publication by a named non-SEC issuer, with the issuer named in the Source line. Used here for ERCOT's published Batch Zero process and for the company's monthly operational updates.</td></tr>
+      <tr><td class="lbl"><span class="tag">Estimate</span></td><td>Derived or inferred here. The arithmetic is shown.</td></tr>
+      <tr><td class="lbl"><span class="tag">Open</span></td><td>Expected but unconfirmed. Nothing filed either way.</td></tr>
+      <tr><td class="lbl"><span class="tag">Market</span></td><td>Price, volume, float, short interest, published targets and ratings. Stamped with the close or publication date.</td></tr>
+      <tr><td class="lbl"><span class="tag">Press</span></td><td>Reported by a named publication that is neither the issuer nor an analyst, cited by outlet and date. Corroborates; never the sole basis for a material claim.</td></tr>
+      <tr><td class="lbl"><span class="tag">Social</span></td><td>Publicly posted by a named account, cited by handle and date. Asserts that the statement was made, never that it is true. Not used in this document.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Timing confidence</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Level</th><th>Means</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">High</td><td>Date is company-announced, protocol-defined, or statutorily fixed.</td></tr>
+      <tr><td class="lbl">Medium</td><td>Date inferred from filing cadence or a stated deadline window.</td></tr>
+      <tr><td class="lbl">Low</td><td>Date is a judgement call. Could move by a quarter or more.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>How the reporting dates were derived</h3>
+  <p>The fiscal year ends 30 September, so the reporting cadence runs a month later than a December year-end peer on the same calendar quarter. Deriving a date from a December year-end would put every estimate here roughly thirty days out. The cadence was taken from the filing record itself: quarterly reports lodged 5 February 2025, 8 May 2025, 7 August 2025, 5 February 2026 and 11 May 2026, and annual reports lodged 25 November 2025 for fiscal 2025 and, after a late notification on 2 December 2024, for fiscal 2024. As a large accelerated filer the company has forty days from a quarter end and sixty days from a year end.</p>
+
+  <div class="note caution">
+    <p>Confidence rates <b>timing</b>, never outcome. A High-confidence catalyst can be a coin flip; a Low-confidence one can be near-certain in direction.</p>
+    <p><b>Impact is independent of confidence.</b> A High-impact, Low-confidence item is the most important kind here: it matters enormously and could land any time. The Sandersville first deliveries (D10) and the Sandersville construction financing (S1) are both of that kind.</p>
+  </div>
+</section>
+
+<!-- ===================== 9. SOURCES ===================== -->
+<section id="s9">
+  <h2 class="sec"><span class="n">09</span>Sources</h2>
+  <p class="sub">Primary filings and company releases first, with form type and date.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Source</th><th class="when">Date</th><th>What it settles here</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Form 8-K, Sandersville lease</td><td class="when">14 Jul 2026</td><td>Lease terms, 175 MW, $6.6bn, milestones, Texas exclusivity, project cost per MW</td></tr>
+      <tr><td class="lbl">Operational update, June 2026</td><td class="when">7 Jul 2026</td><td>614 bitcoin produced, 13,924 held, 42.6 EH/s average, 808 MW drawn, treasury activity</td></tr>
+      <tr><td class="lbl">Form 10-Q, quarter ended 31 Mar 2026</td><td class="when">11 May 2026</td><td>Half-year financials, indebtedness, collateral, litigation, tariffs, equity, capacity</td></tr>
+      <tr><td class="lbl">Form 8-K, Series A amendment</td><td class="when">24 Mar 2026</td><td>$30.0M special dividend, holder identities, voting mechanics</td></tr>
+      <tr><td class="lbl">Form 8-K, annual meeting results</td><td class="when">5 Mar 2026</td><td>Vote totals, voting power split, directors, auditor</td></tr>
+      <tr><td class="lbl">Form 10-K, FY ended 30 Sep 2025</td><td class="when">25 Nov 2025</td><td>Full-year financials, fleet, sites, competitors, legal matters, subsequent events</td></tr>
+      <tr><td class="lbl">Form 8-K, 2032 notes</td><td class="when">13 Nov 2025</td><td>$1,150M issue, conversion terms, $460M concurrent repurchase</td></tr>
+      <tr><td class="lbl">Beneficial ownership filings, eleven</td><td class="when">to 17 Jul 2026</td><td>The institutional register: D. E. Shaw, Bank of Nova Scotia, Vanguard, Dimensional, Susquehanna, BlackRock</td></tr>
+      <tr><td class="lbl">Big Digital Energy Form 10-Q</td><td class="when">14 May 2026</td><td>The Mawson litigation over the Sandersville bill of sale</td></tr>
+      <tr><td class="lbl">ERCOT large load integration publication</td><td class="when">to Jul 2026</td><td>Batch Zero process, the 75 MW threshold, the 10 and 24 July 2026 deadlines</td></tr>
+      <tr><td class="lbl">Utility Dive</td><td class="when">22 Jun 2026</td><td>Public Utility Commission of Texas approval of 18 June 2026, queue size, batch timeline</td></tr>
+      <tr><td class="lbl">CoinDesk</td><td class="when">9 Jul 2026</td><td>New Hampshire Executive Council rejection of the conduit bond</td></tr>
+      <tr><td class="lbl">Company results webcast announcement</td><td class="when">30 Jul 2026</td><td>Third quarter fiscal 2026 webcast set for 6 August 2026</td></tr>
+    </tbody>
+  </table></div>
+  <p>The filing sweep was run against Central Index Key 0000827876, which is the permanent identifier and survives the company's earlier names Stratean Inc. and SmartData Corp. The complete index holds 750 filings from 17 November 2008 to 17 July 2026, and all eighteen form families were swept across it, most recent first, with exhibit lists enumerated rather than form types alone. Beneficial ownership was swept under both of the labels the electronic filing system emits: eleven filings have been made under the newer label since 13 November 2025, against twenty under the older label whose most recent is 12 November 2024, so a search on the older label alone returns none of the current register.</p>
+
+  <h3>What was not checked</h3>
+  <p>Categories, date ranges and filing families the sweep did not reach. An unexamined area is a gap, not a clean bill.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Area</th><th>Status</th><th>What is missing</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Industry conferences</td><td class="status caution-t">Not established</td><td>No conference calendar was checked for the twelve months ahead. The company's events page was reached on 3 August 2026 but populates by script and returned no listings.</td></tr>
+      <tr><td class="lbl">Individual Form 4 transactions</td><td class="status caution-t">Not established</td><td>The 222 Forms 4 and 55 Forms 144 in the index were enumerated by date and count. Individual transaction codes were not read, so insider open-market buying is not established either way.</td></tr>
+      <tr><td class="lbl">ERCOT Batch Zero applicant list</td><td class="status caution-t">Not established</td><td>Whether the Sealy or Brazoria sites lodged applications by the 24 July 2026 deadline is not on any record read. The grid operator publishes the process but not the applicants.</td></tr>
+      <tr><td class="lbl">Sandersville power regime</td><td class="status caution-t">Not established</td><td>Sandersville operates a municipal electrical system while the Georgia Public Service Commission rule on customers above 100 MW binds Georgia Power. Which regime governs the new 175 MW, and on what tariff, was not settled.</td></tr>
+      <tr><td class="lbl">Court dockets, read directly</td><td class="status caution-t">Not established</td><td>Litigation status is taken from the parties' own filings. Neither CourtListener nor PACER nor the Nevada state portal was queried, so posture is as of each party's last report rather than as of today.</td></tr>
+      <tr><td class="lbl">New Hampshire council vote date</td><td class="status caution-t">Not established</td><td>CoinDesk dates the vote 9 July 2026; other coverage dates it 8 July. The Union Leader account was attempted on 3 August 2026 and returned a rate-limit response rather than content, so it is a gap rather than a check.</td></tr>
+      <tr><td class="lbl">The lease document</td><td class="status caution-t">Not established</td><td>The lease was not filed as an exhibit. Escalator rates, the milestone schedule, the abatement formula and the termination triggers are known only from the company's own summary.</td></tr>
+      <tr><td class="lbl">Canadian and Australian registries</td><td class="status">None</td><td>Not applicable rather than unexamined. A Nevada corporation filing as a US domestic filer on Forms 10-K, 10-Q, 8-K and DEF 14A, with no 20-F, 40-F or 6-K across 750 filings, so no SEDAR+ or ASIC obligation arises.</td></tr>
+      <tr><td class="lbl">Federal energy dockets</td><td class="status">None</td><td>FERC eLibrary was not required: the sites take retail service from utilities and municipal systems rather than holding Federal Power Act authorisations, and no such authorisation is referenced in any filing read.</td></tr>
+      <tr><td class="lbl">Exchange notices</td><td class="status">None</td><td>The Nasdaq listing record was checked through the complete filing index. No deficiency, compliance or listing determination notice appears across 750 filings.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 10. DOCUMENT LOG ===================== -->
+<section id="s10">
+  <h2 class="sec"><span class="n">10</span>Document log</h2>
+  <p class="sub">Newest first. The original build entry is never removed or rewritten.</p>
+  <div class="log">
+    <div class="logentry current">
+      <div class="when">3 August 2026 <span class="latest">Latest</span></div>
+      <div class="basis">Original build &middot; 13 dated &middot; 14 standing &middot; 13 resolved &middot; priced off 31 Jul 2026 close</div>
+      <p><b>Built from</b> the complete Central Index Key 0000827876 filing record, 750 filings from 17 November 2008 to 17 July 2026, swept across all eighteen form families with exhibit lists enumerated rather than form types alone. The load-bearing documents are the Form 8-K of 14 July 2026 reporting the Sandersville lease, the June 2026 operational update of 7 July 2026, the Form 10-Q for the quarter ended 31 March 2026 filed 11 May 2026, the Form 8-K of 24 March 2026 amending the Series A certificate of designation, and the fiscal 2025 Form 10-K of 25 November 2025. Beneficial ownership was swept under both labels the electronic filing system emits, which surfaced eleven filings since 13 November 2025 that a search on the older label alone returns none of, and those filings supply the whole of the institutional register recorded here. Full-text search of other filers' documents supplied the counterparty litigation from Big Digital Energy's quarterly report of 14 May 2026, which CleanSpark's own filings do not name. Non-SEC sources were ERCOT's published Batch Zero process, the Public Utility Commission of Texas approval as reported by Utility Dive, the Georgia Public Service Commission rule on customers above 100 MW, and press coverage of the New Hampshire conduit bond.</p>
+      <p><b>Pricing basis</b> is the Nasdaq close of 31 July 2026 at $13.76. The as-of stamp of 3 August 2026 is the build date and is later than that close, which is why the two differ.</p>
+      <p><b>Conventions fixed at construction:</b> identifiers are gapless within each class and are positions rather than names, so catalysts are named by title with the current identifier in parentheses. Anchors are permanent title slugs. Resolved items are ordered by the date they completed rather than the date they began, which is why the exit from hosted mining operations sits at 30 September 2025, when the last capacity was vacated, rather than at the December 2024 expiry. Reporting dates are derived from the company's own filing cadence against a 30 September year end, not from a December year-end assumption.</p>
+      <p><b>Known gaps in this version.</b> No conference calendar was checked, so that category reads as not established rather than empty. Individual Form 4 transaction codes were not read, so insider open-market buying is not established either way. Whether the Texas sites lodged ERCOT Batch Zero applications is not on any record read, which is why the inclusion decisions (D3) carry an assumption of participation. Which power regime governs the new 175 MW at Sandersville was not settled. Court dockets were not queried directly, so litigation posture is as of each party's last filing. The lease itself was not filed as an exhibit, so its escalators, milestone schedule and termination triggers rest on the company's summary. The date of the New Hampshire Executive Council vote differs between sources and the newspaper of record returned a rate-limit response rather than content when attempted.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="norec">
+    No buy, sell, or hold recommendation is issued and no price target is derived.
+    Third-party targets and ratings, where shown, are the published views of the
+    firms named. This document is for research and educational purposes and is not
+    investment advice. Estimated dates are not company announcements. Verify
+    against primary filings on sec.gov before acting.
+  </div>
+  <p style="margin-top:16px">CLSK &middot; CleanSpark, Inc. &middot; Catalyst Calendar &middot; as of 3 August 2026</p>
+</footer>
+
+</div>
+
+</body>
+</html>

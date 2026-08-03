@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light only">
 <meta name="supported-color-schemes" content="light">
-<title>WYFI &middot; WhiteFiber, Inc. &middot; Equity Research Report &middot; as of 1 August 2026</title>
+<title>WYFI &middot; WhiteFiber, Inc. &middot; Equity Research Report &middot; as of 3 August 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -15,9 +15,12 @@
    PER-TICKER PALETTE
    ========================================================================= */
 :root{
-  /* Violet, hue 280, saturation 58%, lightness 34%. The WhiteFiber wordmark is
-     achromatic, carrying no usable hue, and the only other colour in the mark is a
-     grey at 93% lightness.
+  /* Violet, hue 280, saturation 58%, lightness 34%. The WhiteFiber wordmark remains
+     achromatic. As published it carries white letterforms and a single dark
+     blue-grey, #222A30, at hue 206, saturation 17% and lightness 16%: its channel
+     spread of 14 of 255 clears the noise floor, but the saturation sits below the
+     20% required of a colour before it counts as chromatic, so the mark still
+     yields no usable hue.
      This accent is an interim identity, pending a published chromatic brand
      colour. It reaches 9.59:1 against paper and clears the green, red, amber and
      violet that carry meaning in this document by at least 30 degrees of hue. */
@@ -273,13 +276,13 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
 <header class="mast">
   <p class="ticker">WYFI</p>
   <h1 class="headline">A $923.7 million backlog resting on one site whose billing start remains unconfirmed</h1>
-  <p class="functional">WYFI &middot; WhiteFiber, Inc. &middot; Equity Research Report &middot; as of 1 August 2026</p>
+  <p class="functional">WYFI &middot; WhiteFiber, Inc. &middot; Equity Research Report &middot; as of 3 August 2026</p>
   <div class="mast-strip">
-    <div>Price <b>$23.70</b></div>
-    <div>Market cap <b>$915M</b></div>
-    <div>Enterprise value <b>$1.09B</b></div>
-    <div>Shares out <b>38,614,216</b></div>
-    <div>Pricing basis <b>31 Jul 2026 close</b></div>
+    <div>Price <b>$23.70</b> <span class="tag">Market</span></div>
+    <div>Market cap <b>$915M</b> <span class="tag">Estimate</span></div>
+    <div>Enterprise value <b>$1.09B</b> <span class="tag">Estimate</span></div>
+    <div>Shares out <b>38,614,216</b> <span class="tag">Filed</span></div>
+    <div>Pricing basis <b>31 Jul 2026 close</b> <span class="tag">Market</span></div>
   </div>
 </header>
 
@@ -369,6 +372,8 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   immediately before the IPO. WhiteFiber listed on 7 August 2025 at $17.00, raising about $183M gross
   including the over-allotment exercised on 2 September 2025. <span class="tag">Filed</span> Form 8-K
   exhibit, 8 August 2025.</p>
+  <p><b>The parent filed a Schedule 13D on 8 August 2025, and it establishes the opening position.</b> Bit Digital reported <b>27,043,750 ordinary shares</b>, with sole voting and sole dispositive power over all of them, being <b>approximately 74.3%</b> of the shares outstanding and 74.3% of total voting power immediately after the offering, assuming the over-allotment went unexercised. The count reconciles against the contribution: 27,043,749 shares issued for the HPC business, plus the single subscriber share on incorporation. Both companies are Cayman Islands exempted companies. <span class="tag">Filed</span> Schedule 13D, 8 August 2025</p>
+  <p><b>The stake has fallen 4.2 percentage points in nine months</b>, from 74.3% at the offering to 70.1% at the May report, and it has fallen through issuance rather than any disclosed sale: no amendment to that Schedule 13D has been filed. Control is not in question at either figure, and the direction is what matters, since each further issuance dilutes the parent alongside everyone else.</p>
   <p>Bit Digital held approximately 70.1% as of the May 2026 10-Q, and since 27 May 2026 is also a lender.
   The relationship is analytically load-bearing rather than historical: it sets the terms of the bridge
   financing described in section 7, the governance position described in section 10, and the shared
@@ -650,7 +655,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   <div class="tw"><table>
     <thead><tr><th>Measure</th><th class="num">Value</th><th>Basis</th></tr></thead>
     <tbody>
-      <tr><td class="lbl">Market capitalisation</td><td class="num">$915M</td><td><span class="tag">Market</span> 31 Jul 2026 close, $23.70 &times; 38.61M shares</td></tr>
+      <tr><td class="lbl">Market capitalisation</td><td class="num">$915M</td><td><span class="tag">Estimate</span> 31 Jul 2026 close, $23.70 &times; 38.61M shares filed as of 12 May 2026</td></tr>
       <tr><td class="lbl">Plus convertible notes, face</td><td class="num">+$230M</td><td><span class="tag">Filed</span> 4.50% due 2031</td></tr>
       <tr><td class="lbl">Plus Iceland term loan</td><td class="num">+$20M</td><td><span class="tag">Filed</span> Secured, Mar 2026</td></tr>
       <tr><td class="lbl">Less cash and restricted cash</td><td class="num">&minus;$80M</td><td><span class="tag">Filed</span> At 31 Mar 2026</td></tr>
@@ -660,10 +665,14 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
     </tbody>
   </table></div>
 
-  <p>Two warnings attach to that table. The cash figure is four months old and the company was consuming
+  <p>Three warnings attach to that table. The cash figure is four months old and the company was consuming
   cash heavily, so any Q2 draw on the RBC, Iceland or Bit Digital facilities raises enterprise value
-  further. A trailing EBITDA multiple of 63x on a company mid-construction is not a signal in either
-  direction.</p>
+  further. The share count is eleven weeks older than the price: 38,614,216 was filed as of 12 May 2026
+  and the close is 31 July, so any shares issued between those dates sit outside the count and the market
+  capitalisation is understated to that extent. Whether any were issued is not established here, because
+  the equity incentive plan's authorised pool is not disclosed in this document's evidence and share
+  buybacks were not examined. A trailing EBITDA multiple of 63x on a company mid-construction is not a
+  signal in either direction.</p>
 
   <h3>The forward case</h3>
   <div class="assume">
@@ -808,7 +817,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
     <p>The December 2025 Nscale announcement said the company was in advanced discussions with lenders and
     expected to formalise a construction credit facility in early Q1 2026. By late May 2026 it described
     itself as still advancing non-dilutive permanent financing solutions while using a related-party bridge.
-    No announcement of a closed permanent facility was found as of 1 August 2026, a slipped milestone of
+    No announcement of a closed permanent facility was found as of 3 August 2026, a slipped milestone of
     roughly two quarters on the most important financing in the company. <span class="tag">Open</span></p>
   </div>
 
@@ -860,6 +869,26 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
     RSUs) and CFO and director Erke Huang (41,982 RSUs), report transactions dated 31 March 2026. Exchange
     Act Section 16(a) requires a Form 4 within two business days. These were filed roughly four months late.
     <span class="tag">Filed</span> Forms 4, 28 July 2026.</p>
+    <p><b>Both officers named in that delinquency have since changed roles.</b> On 30 July 2026, effective
+    1 August, <b>Erke Huang resigned as chief financial officer, principal financial and accounting officer
+    and director</b>, moving to senior adviser and non-voting board observer while <b>remaining chief
+    financial officer of the parent</b>. <b>Justin Zhu</b> succeeds him, having resigned his own Bit Digital
+    posts, where he had been vice president of finance since 2021 and, from July 2025, principal financial
+    officer and chief accounting officer. His terms are $450,000 a year to 31 July 2028, restricted units
+    worth $100,000 on signing, and three months' salary plus a pro-rated bonus on termination without cause
+    or on a change of control. <span class="tag">Filed</span> Form 8-K, 3 August 2026</p>
+    <p><b>The board turned over at the same time, and the committee arithmetic is worth watching.</b>
+    <b>David Andre resigned</b> from the board and from the audit, compensation and nominating committees.
+    <b>Samir Tabar</b>, chief executive since February 2025 and previously chief executive of the parent,
+    joined the board. <b>Michael Rulf</b> joined at $150,000 a year for the board and the compensation and
+    nominating committees, <b>not the audit committee</b>; separately his own company holds a professional
+    services agreement with the issuer, terminable on thirty days' notice. <b>Pruitt Hall</b> continues on
+    all three committees, his fee rising from $150,000 to $270,000, and <b>his professional services
+    agreement was terminated</b> in connection with continued audit committee membership, the board
+    confirming he meets the Nasdaq listing standard and the heightened audit-committee independence test.
+    The pattern is consistent: the director with a consulting arrangement sits off the audit committee and
+    the director on it gave his up. What the filing does not name is a third audit-committee member to
+    replace Mr Andre, and the exchange requires three.</p>
   </div>
 
   <div class="assume">
@@ -925,7 +954,8 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
       <p>Commissioning problems push billing into late 2026. The permanent facility either does not close or
       closes on terms transferring most of the project economics to lenders, a path that became more
       plausible in late July when AI-infrastructure credit repriced and a much larger peer was reported to be
-      raising the rate on its own loan. The related-party bridge is drawn heavily at 9.5% plus a 1.1x
+      raising the rate on its own loan, its junk-rated 2032 bond yielding around <b>10.32%</b> at a B
+      rating from S&amp;P. The related-party bridge is drawn heavily at 9.5% plus a 1.1x
       repayment multiple, and the company returns to equity markets at a depressed price. Cloud revenue keeps
       declining sequentially, so the segment funding overhead shrinks while G&amp;A holds at its new level. In
       the worst version something goes wrong at Nscale and the $921M backlog stops anchoring the valuation.
@@ -951,7 +981,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
       greenfield costs, proves repeatable at two or three further pipeline sites, funded increasingly by
       project-level debt and customer prepayments rather than equity. Project Redwood commercialises in Q3
       2026 and gives the cloud business a product no one else sells. The company compounds contracted
-      megawatts at a falling cost of capital, and the current enterprise value of roughly $1.06 billion is
+      megawatts at a falling cost of capital, and the current enterprise value of roughly $1.09 billion is
       applied to a materially larger contracted base.</p>
       <p class="req">Requires: clean NC-1 commissioning, a Nscale expansion order, repeatable site
       acquisition, and Redwood reaching commercial launch with a customer.</p></div>
@@ -1065,7 +1095,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   <p>Peer credit data, including CoreWeave bond yields and the reported loan repricing, comes from secondary
   market reporting rather than from primary filings reviewed here. Energy-price sources conflict on where
   crude currently sits. Items tagged Open are targets or expectations for which no confirming public source
-  was found as of 1 August 2026; absence of confirmation is not evidence of failure.</p>
+  was found as of 3 August 2026; absence of confirmation is not evidence of failure.</p>
   <p>The Nscale end customer is not named in the disclosures reviewed, so the credit quality behind the
   largest contract cannot be independently assessed here.</p>
   <p>Section 7 is thinner than the heading suggests. The equity incentive plan's authorised pool, the share
@@ -1075,25 +1105,29 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   than presenting figures this document did not establish.</p>
 
   <h3>Known limitations carried forward</h3>
-  <div class="note neg">
-    <p><b>A qualification was dropped from the valuation caveat.</b> The caveat below the forward case
-    originally carried a supporting parenthetical, quoted here as evidence of the omission:
-    <i>"a peer openly raising the rate on its own loan, junk-rated bonds near 10.3%"</i>. It was lost when
-    the surrounding sentence was recast, and the section now states that credit has repriced without the
-    two specifics that showed it. The governing requirement is that no figure or qualification attached to
-    a figure may be dropped when prose is rewritten; restoring it changes a figure, which is outside the
-    scope of this pass. The related figure at a different precision, the 2032 bond yield of 10.32%, does
-    survive in the industry section, where it supports a different claim.</p>
+  <div class="note pos">
+    <p><b>The qualification dropped from the valuation caveat is restored.</b> The caveat below the
+    forward case had lost a supporting parenthetical when the surrounding sentence was recast, leaving
+    the section stating that credit had repriced without the specifics that showed it. The bear case
+    now carries both: the peer raising the rate on its own loan, and its junk-rated 2032 bond yielding
+    around <b>10.32%</b> at a B rating. The figure is restored at the precision the industry section
+    already establishes rather than at the rounded 10.3% the lost clause used, since the two are one
+    quantity and the file should state it once.</p>
+    <p><b>The enterprise value now reads on one basis.</b> The bull case carried roughly $1.06 billion,
+    struck at the 27 July close and left behind when the file was repriced, against approximately
+    $1.09B in the valuation section at the 31 July close. The bull case is restated to <b>$1.09
+    billion</b>, which is the valuation section's own figure at the pricing basis this document uses
+    throughout. The companion label defect, a sourcing line naming the 27 July close against text
+    priced off 31 July, was corrected earlier and section 8 names 31 July.</p>
   </div>
 
-  <p>Two internal inconsistencies were identified in the source material and are not resolved in this pass,
-  because settling either requires a repricing that this pass did not perform.</p>
-  <div class="note neg">
+  <p>Both internal inconsistencies recorded below are now resolved, and the entries are kept so the correction remains auditable against what was previously carried.</p>
+  <div class="note">
     <p><b>Enterprise value in the bull case.</b> Section 11 reads: <i>"the current enterprise value of
     roughly $1.06 billion is applied to a materially larger contracted base."</i> Section 8 gives an
     enterprise value of approximately $1.09B at the 31 July 2026 close. The $1.06B figure was struck at the
     27 July 2026 close and was not updated when the file was repriced. The text is preserved as written
-    rather than altered, since changing a figure is outside the scope of this pass. The governing
+    rather than altered at the time. The governing
     requirement is that every figure carry the pricing date it was struck at, and that a document use one
     pricing basis throughout.</p>
     <p><b>Valuation source label.</b> The source carried a sourcing label reading <i>"Market data 27 Jul 2026
@@ -1110,7 +1144,21 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   <div class="log">
 
     <div class="logentry current">
-      <div class="when">1 August 2026 <span class="latest">Latest</span></div>
+      <div class="when">3 August 2026 <span class="latest">Latest</span></div>
+      <div class="basis">Priced off 31 Jul 2026 close &middot; $23.70 &middot; $915M cap &middot; not repriced</div>
+      <div class="correction">
+                <span class="lbl">Correction</span>
+        <p><b>Market capitalisation was tagged as published market data and is computed in this document.</b> The masthead figure and the valuation-table figure both read <b>Market</b>. Each is the 31 July close multiplied by the filed share count, so each now reads <b>Estimate</b>. The tag asserted that a data provider had published the figure rather than that this document derived it.</p>
+        <p><b>The parent's beneficial-ownership filing exists and this report did not carry it.</b> The ownership record was described as resting on periodic reports and the parent's own filings rather than a Schedule 13D. <b>Bit Digital filed a Schedule 13D on 8 August 2025</b> reporting <b>27,043,750 ordinary shares</b>, sole voting and dispositive power, <b>approximately 74.3%</b> of the shares outstanding and of total voting power at the offering. It is captioned in full rather than abbreviated, which is why a search for the abbreviated caption returned nothing. The count reconciles against the contribution: 27,043,749 shares for the HPC business plus the subscriber share. Read against the 70.1% carried from the May report, the parent has been diluted 4.2 points in nine months with no amendment filed and no disclosed sale.</p>
+      </div>
+      <p><b>Two carried defects are closed.</b> The qualification dropped from the valuation caveat is restored to the bear case, the peer raising the rate on its own loan and its junk-rated 2032 bond near <b>10.32%</b> at a B rating, stated at the precision the industry section already carries rather than at the rounded figure the lost clause used. And the bull case is restated from roughly $1.06 billion to <b>$1.09 billion</b>, which is the valuation section's own enterprise value at the 31 July close, so the document now reads on one pricing basis throughout.</p>
+      <p><b>The board and the finance function turned over on 1 August.</b> Erke Huang left as chief financial officer and director, staying on as adviser and board observer and remaining chief financial officer of the parent; <b>Justin Zhu</b> succeeded him at $450,000 a year to July 2028, having resigned his own posts at the parent. <b>David Andre</b> left the board and all three committees. <b>Samir Tabar</b>, chief executive, joined the board, and <b>Michael Rulf</b> joined the compensation and nominating committees but not the audit committee, while holding a professional services agreement through his own company. <b>Pruitt Hall</b> stays on all three committees at $270,000, up from $150,000, and gave up his own services agreement to do so. The filing names no third audit-committee member in Mr Andre's place.</p>
+      <p><b>The accent stays provisional, and that is the correct outcome rather than an outstanding debt.</b> The published wordmark carries white letterforms and a single dark blue-grey, #222A30: its channel spread clears the noise floor but its saturation of 17% sits below the 20% a colour must reach to count as chromatic. The mark has changed since the note was written, so the description is updated, but it still yields no usable hue.</p>
+      <p><b>Not repriced.</b> The 31 July close of $23.70 remains the latest and no session has traded since. The filing record was swept to today by issuer central index key against the complete index of <b>73 filings</b>, which carries no overflow, and the newest item is a Form 8-K filed today.</p>
+    </div>
+
+    <div class="logentry">
+      <div class="when">1 August 2026</div>
       <div class="basis">Priced off 31 Jul 2026 close &middot; $23.70 &middot; $915M cap</div>
       <p>Revised against the 28 July publication.</p>
       <p><b>Pricing.</b> Repriced to the 31 July close of $23.70 (down 9.71% on the day, from a $27.06 open,
@@ -1166,7 +1214,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
     educational purposes and is not investment advice. Verify all figures against
     primary filings on sec.gov before acting.
   </div>
-  <p style="margin-top:16px">WYFI &middot; WhiteFiber, Inc. &middot; Equity Research Report &middot; as of 1 August 2026</p>
+  <p style="margin-top:16px">WYFI &middot; WhiteFiber, Inc. &middot; Equity Research Report &middot; as of 3 August 2026</p>
 </footer>
 
 </div>

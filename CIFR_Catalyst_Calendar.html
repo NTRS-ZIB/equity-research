@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>CIFR &middot; Cipher Digital Inc. &middot; Catalyst Calendar &middot; as of 3 August 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================================
+   PER-TICKER PALETTE
+   ========================================================================= */
+:root{
+  /* The Cipher Digital mark carries one chromatic colour, #ABD233, a yellow-green
+     at hue 74.7, saturation 63.9%, lightness 51.2%. It accounts for the whole of
+     the inked area of the company's own icon; the only other colour in the
+     wordmark is a near-white at chroma 2, which is achromatic. Normalised for
+     white paper the saturation is unchanged, already inside range, and the
+     lightness falls to 30%, giving #657D1C at 4.66:1 against the page. The hue is
+     carried through unchanged: it sits 35.7 degrees clear of the nearest
+     meaning-bearing colour, so no rotation was needed. */
+  --accent:      #657D1C;
+  --accent-deep: #445412;
+  --accent-wash: rgba(101,125,28,0.06);
+  --accent-line: rgba(101,125,28,0.22);
+}
+
+/* ============================================================================
+   SHARED STYLESHEET v1.57 : BEGIN
+   ========================================================================= */
+:root{
+  color-scheme: light only;
+
+  --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
+  --line:#DEE6EC;   --line-hard:#C0CDD7;
+  --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
+
+  --pos:#0B7A50;      --pos-bg:#E7F4EE;
+  --neg:#B02A21;      --neg-bg:#FBECEA;
+  --caution:#90600A;  --caution-bg:#FBF2E0;
+  --assume:#4F3FA3;   --assume-bg:#EFEDFA;
+
+  --display:'Archivo',ui-sans-serif,system-ui,'Helvetica Neue',Arial,sans-serif;
+  --body:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+
+  --measure:78ch;
+  --col:760px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html,body{background:var(--canvas) !important;background-color:var(--canvas) !important}
+body{
+  margin:0;color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 22px 96px;background:var(--paper);
+      border-left:1px solid var(--line);border-right:1px solid var(--line)}
+p{max-width:var(--measure)}
+/* Boxed prose fills its container: the box supplies its own measure, so the
+   78ch cap applies to top-level running prose only. */
+.first li,.assume p,.note p,.cat p,.risk p,.logentry p,.oc p,.case p,
+.cat-meta,.logentry .basis{max-width:none}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:var(--accent-deep)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- masthead ---------- */
+.mast{padding:44px 0 26px;border-bottom:2px solid var(--line-hard);margin-bottom:8px;
+      position:relative;padding-left:20px}
+.mast::before{content:"";position:absolute;left:0;top:44px;bottom:26px;
+      width:4px;background:var(--accent)}
+.ticker{font-family:var(--mono);font-size:44px;font-weight:700;letter-spacing:-1px;
+      line-height:1;color:var(--accent);margin:0}
+.headline{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.22;
+      color:var(--ink);margin:16px 0 0}
+.functional{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--ink-faint);margin:18px 0 0}
+.mast-strip{display:flex;flex-wrap:wrap;gap:26px;margin-top:20px;padding-top:16px;
+      border-top:1px solid var(--line)}
+.mast-strip div{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint)}
+.mast-strip b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-top:3px}
+
+/* ---------- banner: framing ---------- */
+.first{background:var(--canvas);border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:20px 24px;margin:30px 0 12px}
+.first h2{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.04em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 12px}
+.first ol{margin:0;padding-left:20px}
+.first li{margin-bottom:9px}
+.first li:last-child{margin-bottom:0}
+
+/* ---------- sections ---------- */
+section{padding-top:38px}
+h2.sec{font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);
+      margin:0 0 4px;padding-bottom:10px;border-bottom:1px solid var(--line-hard);
+      display:flex;align-items:baseline;gap:12px}
+h2.sec .n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);
+      letter-spacing:.06em;flex:none}
+.sub{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);margin:10px 0 18px;
+      max-width:var(--measure)}
+h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink-dim);
+      margin:26px 0 8px}
+
+/* ---------- provenance tags (signature) ---------- */
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);
+      background:var(--panel-2);border:1px solid var(--line);
+      border-radius:2px;padding:1px 6px;vertical-align:1px;white-space:nowrap}
+
+/* ---------- assumption block ---------- */
+.assume{background:var(--assume-bg);border-left:4px solid var(--assume);
+      padding:16px 20px;margin:20px 0}
+.assume .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--assume);display:block;margin-bottom:7px}
+.assume p{margin:0}
+
+/* ---------- callouts ---------- */
+.note{border:1px solid var(--line);border-left:4px solid var(--ink-faint);
+      background:var(--canvas);padding:16px 20px;margin:20px 0}
+.note.pos{border-left-color:var(--pos);background:var(--pos-bg)}
+.note.neg{border-left-color:var(--neg);background:var(--neg-bg)}
+.note.caution{border-left-color:var(--caution);background:var(--caution-bg)}
+.note p{margin:0}
+.note p + p{margin-top:10px}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+thead th{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--ink-dim);text-align:left;
+      padding:9px 12px;border-bottom:2px solid var(--line-hard);white-space:nowrap}
+tbody td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--canvas)}
+td.num,th.num{font-family:var(--mono);text-align:right;white-space:nowrap}
+/* td.when marks a timing column. An unmarked cell counts as prose. */
+td.when{font-family:var(--mono);white-space:nowrap}
+td.lbl{font-weight:600}
+.pos-t{color:var(--pos);font-weight:600}
+.neg-t{color:var(--neg);font-weight:600}
+.caution-t{color:var(--caution);font-weight:600}
+
+/* ---------- cases ---------- */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.case{border:1px solid var(--line);border-top:3px solid var(--ink-faint);
+      background:var(--paper);padding:18px}
+.case.bull{border-top-color:var(--pos)}
+.case.bear{border-top-color:var(--neg)}
+.case h4{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 10px}
+.case.bull h4{color:var(--pos)} .case.bear h4{color:var(--neg)}
+.case p{font-size:15px;margin:0}
+.case .req{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+
+/* ---------- risks ---------- */
+.risk{border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:16px 20px;margin-bottom:12px}
+.risk.sev-high{border-left-color:var(--neg)}
+.risk.sev-med{border-left-color:var(--caution)}
+.risk.sev-low{border-left-color:var(--ink-faint)}
+.risk h4{font-family:var(--display);font-size:15.5px;font-weight:600;margin:0 0 6px;
+      display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.risk .sev{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase}
+.risk.sev-high .sev{color:var(--neg)}
+.risk.sev-med .sev{color:var(--caution)}
+.risk.sev-low .sev{color:var(--ink-faint)}
+.risk p{margin:0;font-size:15.5px}
+
+/* ---------- null categories ---------- */
+.nulls td.lbl{width:26%}
+.nulls .status{font-family:var(--mono);font-size:12px;white-space:nowrap}
+
+/* ---------- document log ---------- */
+.log{margin-top:14px}
+.logentry{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:12px}
+.logentry.current{border-left:4px solid var(--accent);background:var(--accent-wash)}
+.logentry .when{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);
+      display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.latest{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-line);
+      background:var(--paper);border-radius:2px;padding:1px 6px}
+.logentry .basis{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-bottom:12px}
+.logentry p{font-size:15.5px;margin:0 0 9px}
+.logentry p:last-child{margin-bottom:0}
+.correction{border:1px solid var(--neg);border-left:4px solid var(--neg);
+      background:var(--neg-bg);padding:12px 16px;margin-bottom:14px}
+.correction .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--neg);display:block;margin-bottom:5px}
+
+/* ---------- footer ---------- */
+footer{margin-top:44px;padding-top:22px;border-top:2px solid var(--line-hard)}
+footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width:none}
+.norec{border:1px solid var(--line-hard);background:var(--canvas);padding:16px 20px;
+      margin-top:20px;font-family:var(--mono);font-size:12.5px;color:var(--ink-dim)}
+
+/* ---------- catalyst cards (calendar) ---------- */
+.cat{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:14px;border-left:4px solid var(--line-hard)}
+.cat.up{border-left-color:var(--pos)}
+.cat.down{border-left-color:var(--neg)}
+.cat.two{border-left-color:var(--caution)}
+.cat.neutral{border-left-color:var(--ink-faint)}
+.cat-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.cid{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);flex:none}
+.cat-head h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink);
+      margin:0;flex:1 1 auto;min-width:200px}
+.dir{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;white-space:nowrap}
+.cat.up .dir{color:var(--pos)} .cat.down .dir{color:var(--neg)}
+.cat.two .dir{color:var(--caution)} .cat.neutral .dir{color:var(--ink-faint)}
+.cat-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:10px 0 12px;padding:9px 0;
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+      font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
+.cat-meta b{color:var(--ink);font-weight:600}
+.cat p{margin:0 0 9px;font-size:15.5px}
+.cat p:last-child{margin-bottom:0}
+.cat.resolved{background:var(--canvas);border-left-color:var(--ink-faint)}
+.cat.resolved .dir{color:var(--ink-faint)}
+
+/* ---------- horizon bands (calendar) ---------- */
+.band{display:flex;align-items:center;gap:14px;margin:30px 0 16px}
+.band-t{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--ink-dim);white-space:nowrap}
+.band-r{flex:1;height:1px;background:var(--line-hard)}
+.band-c{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);white-space:nowrap}
+
+/* ---------- upside / downside pair ---------- */
+.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0}
+.oc{border:1px solid var(--line);padding:11px 14px;background:var(--paper)}
+.oc.up-c{border-left:3px solid var(--pos)}
+.oc.down-c{border-left:3px solid var(--neg)}
+.oc .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.09em;
+      text-transform:uppercase;display:block;margin-bottom:5px}
+.oc.up-c .lbl{color:var(--pos)} .oc.down-c .lbl{color:var(--neg)}
+.oc p{margin:0;font-size:14.5px;line-height:1.5}
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  body{font-size:16px}
+  .wrap{padding:0 16px 70px;border-left:none;border-right:none}
+  .ticker{font-size:34px}
+  .headline{font-size:23px}
+  .cases{grid-template-columns:1fr}
+  .outcomes{grid-template-columns:1fr}
+  .mast-strip{gap:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none !important;transition:none !important}
+}
+@media print{
+  body{font-size:11pt}
+  .wrap{max-width:none;border:none}
+  section{page-break-inside:avoid}
+}
+/* ============================================================================
+   SHARED STYLESHEET v1.57 : END
+   ========================================================================= */
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<!-- ===================== MASTHEAD ===================== -->
+<header class="mast">
+  <p class="ticker">CIFR</p>
+  <h1 class="headline">Four rent commencement dates between here and May 2027, and no rent yet</h1>
+  <p class="functional">CIFR &middot; Cipher Digital Inc. &middot; Catalyst Calendar &middot; as of 3 August 2026</p>
+  <div class="mast-strip">
+    <div>Dated catalysts <b>11</b></div>
+    <div>Standing conditions <b>8</b></div>
+    <div>Resolved <b>15</b></div>
+    <div>Horizon <b>12 months</b></div>
+    <div>Pricing basis <b>31 Jul 2026 close &middot; $22.32</b> <span class="tag">Market</span></div>
+  </div>
+</header>
+
+<!-- ===================== BASIS ===================== -->
+<div class="first">
+  <h2>Basis</h2>
+  <ol>
+    <li>This calendar is unusually dense with <em>company-stated</em> dates. Four delivery or rent commencement targets between September 2026 and May 2027 come from the filings themselves, not from cadence, and they are marked accordingly.</li>
+    <li>Timing confidence rates the <em>date</em>, never the outcome. A High-confidence catalyst can still be a coin flip.</li>
+    <li>Estimated reporting dates are cadence-based until the company announces. Treat them as approximate.</li>
+    <li>Revenue is expected to fall through 2026 by design, because mining capacity is being withdrawn to make room for tenants. A declining revenue line is not, on its own, a negative surprise here.</li>
+  </ol>
+</div>
+
+<!-- ===================== 1. DATED CATALYSTS ===================== -->
+<section id="s1">
+  <h2 class="sec"><span class="n">01</span>Dated catalysts</h2>
+  <p class="sub">Banded 0&ndash;3 / 3&ndash;6 / 6&ndash;12 months, earliest first. Numbering is gapless and runs straight through the bands, so a boundary never resets the count. An ID marks position in the current ordering and changes between revisions, so catalysts are named by title.</p>
+
+  <div class="band"><span class="band-t">0&ndash;3 months</span><span class="band-r"></span><span class="band-c">D1&ndash;D2</span></div>
+
+  <div class="cat two" id="cat-second-quarter-2026-results">
+    <div class="cat-head">
+      <span class="cid">D1</span>
+      <h3>Second quarter 2026 results</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>~early August 2026</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>The first full quarter with no mining at Black Pearl and no joint-venture mining sites, so it shows the floor of the mining business rather than a transition. Revenue was already down 28.8% year on year in the first quarter, to $34.8 million, against interest expense of $59.2 million.</p>
+    <p>Watch whether interest expense keeps outrunning revenue, whether construction progress at three simultaneous sites shows in property and equipment, and what remains of the $628.3 million of free cash after a quarter of building.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Construction milestones confirmed at all three sites and the September Barber Lake target reaffirmed, with restricted cash covering the build as designed.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A delivery date moves, or free cash falls faster than construction progress justifies, with the first rent still a quarter or more away.</p></div>
+    </div>
+    <div class="assume">
+      <span class="lbl">Analyst assumption</span>
+      <p>The date is a cadence estimate. The company filed its second quarter report on 7 August in 2025 and its first quarter report on 5 May in 2026; no date has been announced for this one.</p>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Filing cadence from Forms 10-Q filed 7 August 2025 and 5 May 2026. <span class="tag">Estimate</span></p>
+  </div>
+
+  <div class="cat up" id="cat-barber-lake-phase-one-delivery">
+    <div class="cat-head">
+      <span class="cid">D2</span>
+      <h3>Barber Lake Phase I delivery</h3>
+      <span class="dir">Up</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Targeted by 30 September 2026</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>244 MW of the 300 MW gross capacity at the Barber Lake site near Colorado City, Texas, leased to Fluidstack USA II Inc. with Google backstopping certain of Fluidstack's obligations. The site has 300 MW of interconnection approved without any restrictions on the load profile, which is a firmer position than a conditional or curtailable approval.</p>
+    <p>This is the first hard date the company has given itself and the first opportunity to demonstrate that its modular construction approach delivers. The June 2026 investor presentation stated both Barber Lake and Black Pearl were on schedule and tracking towards delivery of initial capacity in September 2026.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Delivery on the stated date validates the construction method across all three sites and brings the first lease within a quarter of commencing.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A slip at the first and most advanced site casts doubt on the three later dates behind it, none of which has more schedule slack.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-K, 24 February 2026; investor presentation, Exhibit 99.1 to Form 8-K, 8 June 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="band"><span class="band-t">3&ndash;6 months</span><span class="band-r"></span><span class="band-c">D3&ndash;D4</span></div>
+
+  <div class="cat up" id="cat-black-pearl-first-rent-commencement">
+    <div class="cat-head">
+      <span class="cid">D3</span>
+      <h3>Black Pearl first rent commencement</h3>
+      <span class="dir">Up</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Targeted Q4 2026</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The initial subphase of Phase I at the Black Pearl site near Wink, Texas, leased to Amazon Web Services on a 15-year agreement over approximately 300 gross MW. The site has 300 MW of interconnection approved and the retrofit began in 2025; bitcoin mining there ceased in February 2026 to clear the way.</p>
+    <p>This is the single most consequential item on the calendar, because it is the first dollar of lease revenue the company will ever record and the point at which the conversion stops being prospective.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Rent begins from a hyperscaler tenant, and the revenue line stops falling for the first time since mining capacity began coming out.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Commencement slips into 2027, extending a period in which a site that used to earn mining revenue earns nothing at all.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-K, 24 February 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-third-quarter-2026-results">
+    <div class="cat-head">
+      <span class="cid">D4</span>
+      <h3>Third quarter 2026 results</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>~early November 2026</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>The first report after the Barber Lake Phase I target date, and therefore the first place a slip would have to be disclosed. It should also carry the Stingray financing on the balance sheet for the first time, $810.0 million having closed on 15 June 2026.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Barber Lake confirmed delivered and Black Pearl rent commencement reaffirmed for the fourth quarter, with two of four targets met.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A first missed date, disclosed alongside another quarter of falling mining revenue and rising interest expense.</p></div>
+    </div>
+    <div class="assume">
+      <span class="lbl">Analyst assumption</span>
+      <p>The date is a cadence estimate from the third quarter report filed 3 November 2025. No date has been announced.</p>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Filing cadence from Form 10-Q filed 3 November 2025. <span class="tag">Estimate</span></p>
+  </div>
+
+  <div class="band"><span class="band-t">6&ndash;12 months</span><span class="band-r"></span><span class="band-c">D5&ndash;D9</span></div>
+
+  <div class="cat up" id="cat-barber-lake-phase-two-delivery">
+    <div class="cat-head">
+      <span class="cid">D5</span>
+      <h3>Barber Lake Phase II delivery</h3>
+      <span class="dir">Up</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Targeted by 31 January 2027</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The remaining 56 MW of the 300 MW gross allocation to Fluidstack at Barber Lake, four months after Phase I. Completing it takes the site to full contracted capacity and closes out the first of the three leases.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>The site reaches full contracted capacity on schedule, proving phased delivery works at a site already partly commissioned.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A slip on the smaller phase would signal that the constraint is equipment or labour rather than site readiness, which would reach the other sites too.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-K, 24 February 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-fy2026-annual-report">
+    <div class="cat-head">
+      <span class="cid">D6</span>
+      <h3>FY2026 annual report on Form 10-K</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>~late February 2027</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>High</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>The first audited year in which the company was Cipher Digital rather than Cipher Mining, and the first to contain any lease revenue if Black Pearl commenced on target. It will settle the full-year revenue decline, the derivative and warrant marks, and whether the auditor's view of going concern and internal control is unchanged.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>A first quarter of lease revenue on the face of the statements and a clean audit, with the revenue decline visibly bottoming.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A going concern paragraph, a material weakness, or a full year in which revenue fell and no lease commenced.</p></div>
+    </div>
+    <div class="assume">
+      <span class="lbl">Analyst assumption</span>
+      <p>The date is a cadence estimate from annual reports filed 5 March 2024, 25 February 2025 and 24 February 2026. No date has been announced.</p>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Filing cadence from Forms 10-K, 5 March 2024, 25 February 2025 and 24 February 2026. <span class="tag">Estimate</span></p>
+  </div>
+
+  <div class="cat up" id="cat-black-pearl-full-rent-ramp">
+    <div class="cat-head">
+      <span class="cid">D7</span>
+      <h3>Black Pearl Phase II and full rent ramp</h3>
+      <span class="dir">Up</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Targeted Q1 2027</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The initial subphase of Black Pearl Phase II is targeted for the first quarter of 2027, and rent for the whole lease is expected to fully ramp by the same quarter on completion of the final subphase. That takes approximately 300 gross MW to full contracted rent under the 15-year Amazon agreement.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>The largest of the three leases reaches full rent, giving the first quarter in which lease revenue could exceed what mining ever produced at the site.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Partial ramp only, leaving a site financed and built but earning a fraction of its contracted rent.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-K, 24 February 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat up" id="cat-stingray-rent-commencement">
+    <div class="cat-head">
+      <span class="cid">D8</span>
+      <h3>Stingray rent commencement</h3>
+      <span class="dir">Up</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>1 April 2027 network hall; 1 May 2027 data hall</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The 10 MW critical IT network hall at Andrews, Texas carries a target rent commencement date of 1 April 2027 and the 60 MW data hall 1 May 2027, together making up the 70 MW of critical IT load leased to Amazon Data Services under a 15-year triple-net agreement with three five-year tenant extension options.</p>
+    <p>The economics are the most fully disclosed of the three leases: approximately $2.0 billion of base-term contracted lease payments rising to roughly $5.7 billion if all extensions are exercised, a 3.0% annual rent escalator, an approximately 100% net operating income margin, and a full guarantee of base rent and operating expenses by Amazon.com, Inc.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Rent begins on the most creditworthy of the three leases, and the $810.0 million financing begins amortising from contracted cash flow as designed.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Delay pushes the start of amortisation and extends the period in which the notes accrue interest against no rent, on a site with the tightest disclosed cost budget.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Investor presentation, Exhibit 99.1 to Form 8-K, 8 June 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat neutral" id="cat-2027-annual-meeting">
+    <div class="cat-head">
+      <span class="cid">D9</span>
+      <h3>2027 annual meeting of stockholders</h3>
+      <span class="dir">Neutral</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>~June 2027</b></div>
+      <div>Impact <b>Low</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>The 2026 meeting was held on 2 June 2026 following a proxy statement filed on 20 April 2026. Authorised common stock was doubled to 1,000,000,000 shares during 2025 against 409 million outstanding, so a further authorisation request would be the item to watch rather than a routine expectation.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Routine re-election with no new authorisation sought, implying the funding programme is complete.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A request for further authorised shares, signalling equity issuance ahead on top of two in-the-money convertible series.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K Item 5.07, 8 June 2026; definitive proxy statement, 20 April 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="band"><span class="band-t">Beyond 12 months, context only</span><span class="band-r"></span><span class="band-c">D10&ndash;D11</span></div>
+  <p class="sub">Structural items that shape the backdrop but do not trade in the window.</p>
+
+  <div class="cat two" id="cat-luminant-power-agreement-expiry">
+    <div class="cat-head">
+      <span class="cid">D10</span>
+      <h3>Luminant power agreement protection lapses</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>From July 2027</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The Odessa facility draws power under an agreement with Luminant ET Services Company LLC giving access to electricity at approximately 2.8 cents per kilowatt hour, raised from 2.7 cents in October 2025, until at least July 2027. Odessa is the company's only remaining operating mining site at 207 MW, and the company states it may itself be suitable for retrofitting for HPC tenants.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Odessa is converted to an HPC lease before the protection lapses, making the power price irrelevant to the site's economics.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Mining continues at Odessa into an unhedged power price, on the last asset still producing revenue.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-K, 24 February 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat up" id="cat-pipeline-energisation">
+    <div class="cat-head">
+      <span class="cid">D11</span>
+      <h3>Pipeline sites energise</h3>
+      <span class="dir">Up</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ulysses Q4 2027; Colchis, McLennan and Mikeska 2028; Milsing 2028&ndash;2029</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>Low</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The 3.4 GW development pipeline energises on a staggered schedule. Ulysses in Ohio, 200 MW with capacity secured from AEP Ohio, is expected in the fourth quarter of 2027 and would give direct access to PJM, the company's first position outside Texas and outside ERCOT. Colchis in West Texas is a 1 GW site with a fully executed direct interconnection agreement with AEP targeting energisation in 2028. McLennan, Mikeska and Milsing are each up to 500 MW between 2028 and 2029, all three options having been exercised between December 2025 and February 2026.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Energised capacity outside ERCOT diversifies grid exposure, and a pipeline site leased before energisation would repeat the pattern that produced all three current leases.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Interconnection or construction slips across a pipeline of eight sites, leaving capital in land and options that produce nothing for years.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-K, 24 February 2026. <span class="tag">Filed</span></p>
+  </div>
+</section>
+
+<!-- ===================== 2. STANDING CONDITIONS ===================== -->
+<section id="s2">
+  <h2 class="sec"><span class="n">02</span>Standing conditions</h2>
+  <p class="sub">Ongoing and undated, most material first. These take &ldquo;Why undated&rdquo; in place of timing confidence.</p>
+
+  <div class="cat two" id="cat-revenue-withdrawn-before-rent-arrives">
+    <div class="cat-head">
+      <span class="cid">S1</span>
+      <h3>The only revenue is being withdrawn before the rent arrives</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing until first rent commencement</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>Depends on construction completion, not a calendar date</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>All revenue is bitcoin mining. It fell 28.8% year on year in the first quarter of 2026 because mining at Black Pearl ceased in February 2026 and the three joint-venture sites were sold the same month. Interest expense of $59.2 million in that quarter already exceeded revenue of $34.8 million, and the first rent is targeted for the fourth quarter of 2026.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>The decline is a choice rather than a market outcome, and every megawatt withdrawn is a megawatt already contracted at a higher rate.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>The gap between revenue falling and rent starting is funded from cash and debt, and it widens with every delivery slip.</p></div>
+    </div>
+  </div>
+
+  <div class="cat two" id="cat-tenant-concentration">
+    <div class="cat-head">
+      <span class="cid">S2</span>
+      <h3>Two tenant groups across three sites</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>Counterparty condition with no scheduled review</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Amazon entities take Black Pearl and Stingray; Fluidstack, backstopped by Google, takes Barber Lake. At Stingray, Amazon.com, Inc. fully guarantees base rent and operating expenses and has agreed to cover construction cost overruns above $10.5 million per critical IT megawatt. The credit support at Black Pearl is not disclosed in those terms.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Two of the strongest credits in the sector, one with an explicit parent guarantee and a construction cost cap, is a higher-quality book than a longer list of weaker names.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A change of plan at either counterparty reaches a large part of the contracted book, and the same Fluidstack and Google pairing appears in peers' filings, so a single decision could move several issuers.</p></div>
+    </div>
+  </div>
+
+  <div class="cat two" id="cat-debt-raised-against-no-operating-lease">
+    <div class="cat-head">
+      <span class="cid">S3</span>
+      <h3>Four billion dollars of debt raised against no operating lease</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing to 2031</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>A balance-sheet state, revisited at each reporting date</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Face value across five instruments totals $4,015.5 million, of which $2,543.0 million is secured at subsidiary level through Cipher Compute LLC and Stingray Compute LLC. Total liabilities rose from $173.5 million at 31 December 2024 to $3,456.1 million a year later and $5,653.7 million at 31 March 2026, against stockholders' equity of $714.2 million.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>All three projects are fully funded through construction, so delivery does not depend on raising further capital.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Interest accrues on the whole of it while nothing earns rent, and the secured issuers hold first claim on the assets that will.</p></div>
+    </div>
+  </div>
+
+  <div class="cat two" id="cat-restricted-cash-is-committed">
+    <div class="cat-head">
+      <span class="cid">S4</span>
+      <h3>Most of the cash is restricted, not available</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing through construction</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>Released against construction milestones, not on a date</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>At 31 December 2025 the company held $628.3 million of cash and cash equivalents against $2,036.4 million of restricted cash, of which $1,761.3 million was classified as current. That is money raised and ring-fenced for construction and debt service. A reader treating total cash as liquidity would overstate the company's flexibility by more than three times.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>The construction programme is pre-funded and drawn against milestones, which is what allowed three sites to be built at once.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Free cash is a fraction of the headline, and overruns beyond the funded budget would have to come from elsewhere.</p></div>
+    </div>
+  </div>
+
+  <div class="cat down" id="cat-convertible-dilution-in-the-money">
+    <div class="cat-head">
+      <span class="cid">S5</span>
+      <h3>Both convertible series are in the money</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing to 2031</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>Holder-elected conversion, with company settlement choice</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>The 2030 notes convert at approximately $4.45 and the 2031 notes at approximately $16.03, against a close of $22.32. See the dilution and capital overlay in section 5 for the arithmetic and for what could not be established about the capped call offset.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Conversion retires $1,472.5 million of debt without a cash outflow, and the capped calls absorb part of the dilution.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Roughly 119.9 million shares, about 29.3% of the current count, on an unhedged basis, at prices far below the market.</p></div>
+    </div>
+  </div>
+
+  <div class="cat two" id="cat-results-driven-by-fair-value-marks">
+    <div class="cat-head">
+      <span class="cid">S6</span>
+      <h3>Reported results are driven by derivative and warrant marks</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing, revalued every reporting date</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>Revalued at each reporting date with no scheduled trigger</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The FY2025 net loss of $822.2 million includes a $450.4 million loss on the fair value of the embedded derivative in the 2031 convertible notes, which arises from the share price rising. The warrant liability of $525.2 million works the same way in reverse and produced a $43.6 million gain in the first quarter of 2026.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>These are non-cash and reverse on conversion or exercise, so a reader who separates them sees a cleaner operating picture than the headline.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>The bottom line will keep moving with the share price rather than the business, which makes any earnings-linked test unreliable.</p></div>
+    </div>
+  </div>
+
+  <div class="cat two" id="cat-ercot-concentration-and-interconnection">
+    <div class="cat-head">
+      <span class="cid">S7</span>
+      <h3>Grid exposure concentrated in ERCOT, and interconnection not independently corroborated</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing until Ulysses energises</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>Regulatory and utility process with no published decision date</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Nine of ten sites are in Texas and operate within ERCOT. The company reports 300 MW of interconnection approved at each of Barber Lake and Black Pearl, the former without any restrictions on the load profile, plus conditional approval up to 100 MW at Stingray and up to 70 MW at Reveille. The Texas grid operator's large load records could not be retrieved on 3 August 2026, so none of these is corroborated by an independent source.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Approvals stated with megawatt figures and load profile terms are more specific than most of this sector discloses, and Ulysses adds PJM exposure from late 2027.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A single grid operator governs nine sites, and no public record was available against which to check the approvals the financings were underwritten on.</p></div>
+    </div>
+  </div>
+
+  <div class="cat two" id="cat-three-registrant-names">
+    <div class="cat-head">
+      <span class="cid">S8</span>
+      <h3>Three registrant names on one filing record</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing since the rename of 20 February 2026</b></div>
+      <div>Impact <b>Low</b></div>
+      <div>Why undated <b>A standing feature of the record, not an event</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The filer was Good Works Acquisition Corp. to August 2021, Cipher Mining Inc. to February 2026, and Cipher Digital Inc. since. The ticker has been CIFR throughout and the warrants were delisted on 29 December 2025. Nothing here indicates a disclosure problem; the practical consequence is that any research keyed to a name rather than to the permanent filer identifier will return a partial history.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>The unchanged ticker keeps the price history continuous, which a symbol change would have broken.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Name-keyed screens and databases may show a company with a two-year history rather than a six-year one, and miss the earlier filings entirely.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 3. RESOLVED ===================== -->
+<section id="s3">
+  <h2 class="sec"><span class="n">03</span>Resolved</h2>
+  <p class="sub">Closed items, kept for the record, ordered by resolution date. A resolved catalyst takes the next free R number; it does not carry its old D number over.</p>
+
+  <div class="cat resolved" id="cat-2030-convertible-notes-issued">
+    <div class="cat-head"><span class="cid">R1</span><h3>2030 convertible notes issued</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>22 May 2025</b></div>
+      <div>Outcome <b>$172.5M at 1.75%, conversion ~$4.45</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Senior unsecured, due 15 May 2030, interest semiannually from 15 November 2025. At the 31 July 2026 close of $22.32 the conversion price is far below the market, so this series is deep in the money.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-barber-lake-leases-signed">
+    <div class="cat-head"><span class="cid">R2</span><h3>Barber Lake leased to Fluidstack with a Google backstop</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>Q3 2025, day not stated</b></div>
+      <div>Outcome <b>300 gross MW contracted</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Long-term leases with Fluidstack USA II Inc. through Cipher Barber Lake LLC, supported by a lease recognition agreement under which Google LLC backstops certain of Fluidstack's obligations. 250 acres, 300 MW gross, split 244 MW to Phase I and 56 MW to Phase II. The filings state the quarter but not the day, so this item sorts at the end of that quarter.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-2031-convertible-notes-issued">
+    <div class="cat-head"><span class="cid">R3</span><h3>2031 convertible notes issued</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>30 September 2025</b></div>
+      <div>Outcome <b>$1,300.0M at a zero coupon, conversion ~$16.03</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Senior unsecured, bearing no interest, with capped call transactions funded from the proceeds. The embedded conversion feature is accounted for separately at fair value and produced a $450.4 million loss in FY2025 as the share price rose.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-black-pearl-leased-to-amazon">
+    <div class="cat-head"><span class="cid">R4</span><h3>Black Pearl leased to Amazon</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>October 2025, and see note</b></div>
+      <div>Outcome <b>~300 gross MW on a 15-year lease</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>A 15-year lease with Amazon Web Services, Inc. through Cipher Black Pearl LLC to deliver approximately 300 gross MW of turnkey capacity on about 75 acres near Wink, Texas, with 300 MW of interconnection approved. The annual report dates this lease as October 2025 in one passage and November 2025 in another, describing the same agreement over the same capacity at the same site. The earlier of the two is used for ordering here and the discrepancy is recorded rather than resolved.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-2030-senior-secured-notes-issued">
+    <div class="cat-head"><span class="cid">R5</span><h3>2030 senior secured notes issued</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>13 November 2025</b></div>
+      <div>Outcome <b>$1,400.0M at 7.125%</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Issued by Cipher Compute LLC, a wholly-owned indirect subsidiary, as senior secured obligations of that issuer with interest payable semiannually on 15 May and 15 November.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-colchis-joint-venture-acquired">
+    <div class="cat-head"><span class="cid">R6</span><h3>Colchis joint venture interest acquired</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>November 2025, day not stated</b></div>
+      <div>Outcome <b>Majority interest in a 1 GW West Texas site</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>A majority interest in a joint venture developing a 1 GW site in West Texas, including a fully executed direct interconnection agreement with American Electric Power for a dual interconnection facility targeting energisation in 2028, and options over approximately 620 acres adjacent to an existing substation. It created the redeemable non-controlling interest of $30.3 million on the balance sheet.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-senior-secured-notes-tapped">
+    <div class="cat-head"><span class="cid">R7</span><h3>Senior secured notes tapped for a further $333.0 million</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>24 November 2025</b></div>
+      <div>Outcome <b>Total 2030 secured issuance $1,733.0M</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>An additional series of the same 7.125% notes issued by Cipher Compute LLC eleven days after the first, taking the secured issuance at that entity to $1,733.0 million.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-ulysses-site-acquired">
+    <div class="cat-head"><span class="cid">R8</span><h3>Ulysses acquired, the first site outside Texas</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>December 2025, day not stated</b></div>
+      <div>Outcome <b>200 MW in Ohio with PJM access</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>A 200 MW data centre site in Ohio with capacity secured from AEP Ohio and land options over approximately 195 acres, expected to energise in the fourth quarter of 2027 and to give direct access to PJM. It expanded the development pipeline to approximately 3.4 GW across eight sites. The Milsing option was exercised the same month.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-warrants-delisted">
+    <div class="cat-head"><span class="cid">R9</span><h3>Warrants removed from listing</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>29 December 2025</b></div>
+      <div>Outcome <b>Only common stock remains listed</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>A Form 25-NSE removed the warrants from listing, and the FY2025 cover page registers only the common stock under Exchange Act Section 12(b). A warrant liability of $525.2 million remains on the balance sheet at fair value.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-windhq-interests-sold">
+    <div class="cat-head"><span class="cid">R10</span><h3>Joint venture mining interests sold to Canaan</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>19 February 2026</b></div>
+      <div>Outcome <b>49% interests in three 40 MW sites divested</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The 49% membership interests in Alborz LLC, Bear LLC and Chief Mountain LLC, held through a joint venture with WindHQ LLC since 2022, were sold to Canaan U.S. Inc. Together with the cessation of mining at Black Pearl the same month, this is the step that turned the revenue line down.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-renamed-cipher-digital">
+    <div class="cat-head"><span class="cid">R11</span><h3>Renamed Cipher Digital Inc.</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>20 February 2026</b></div>
+      <div>Outcome <b>Name changed; ticker unchanged</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The company states the rebrand aligns with a strategy to scale into a leading HPC data centre developer and operator. The charter amendment was reported on Form 8-K under Item 5.03 on 24 February 2026. The CIFR ticker was retained, so the price history is continuous across the change.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-black-pearl-mining-ceased">
+    <div class="cat-head"><span class="cid">R12</span><h3>Bitcoin mining ceased at Black Pearl</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>February 2026, day not stated</b></div>
+      <div>Outcome <b>Site handed over for the Amazon retrofit</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Mining at Black Pearl began in June 2025 and had ramped to 150 MW by September 2025. It ceased in February 2026 as a direct consequence of the Amazon lease. The McLennan and Mikeska options were exercised the same month.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-fy2025-annual-report-filed">
+    <div class="cat-head"><span class="cid">R13</span><h3>FY2025 annual report filed</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>24 February 2026</b></div>
+      <div>Outcome <b>Net loss of $822.2M on revenue of $223.9M</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Revenue rose 48% to $223.9 million but a $450.4 million derivative loss and $173.5 million of other operating losses produced a net loss eighteen times the prior year's. Audited by CBIZ CPAs P.C. with no going concern paragraph.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-q1-2026-results-released">
+    <div class="cat-head"><span class="cid">R14</span><h3>First quarter 2026 results released</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>5 May 2026</b></div>
+      <div>Outcome <b>Revenue down 28.8%; interest expense exceeded revenue</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Revenue of $34.8 million against $48.959 million a year earlier, and interest expense of $59.2 million against it. Total liabilities reached $5,653.7 million and total assets $6,393.6 million.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-stingray-leased-and-financed">
+    <div class="cat-head"><span class="cid">R15</span><h3>Stingray leased to Amazon and financed</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>15 June 2026</b></div>
+      <div>Outcome <b>70 MW critical IT contracted; $810.0M raised</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>A second lease with Amazon Data Services for 100 gross MW and 70 MW of critical IT load at Andrews, Texas, announced 8 June 2026 with approximately $2.0 billion of base-term contracted payments, a 3.0% escalator and a full Amazon.com, Inc. guarantee. Stingray Compute LLC closed $810.0 million of 6.000% senior secured notes due 2031 on 15 June 2026, with Morgan Stanley as representative of the initial purchasers. Signing and financing are resolved; delivery and rent commencement are not, and appear above as dated items.</p>
+  </div>
+</section>
+
+<!-- ===================== 4. NULL CATEGORIES ===================== -->
+<section id="s4">
+  <h2 class="sec"><span class="n">04</span>Null categories</h2>
+  <p class="sub">Every category reviewed appears as a row, including those that produced catalysts, which read across by title and ID. A category checked and found empty is recorded rather than omitted.</p>
+  <div class="tw"><table class="nulls">
+    <thead><tr><th>Category</th><th>Status</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Earnings</td><td class="status">Covered above</td><td>Second quarter 2026 results (D1), third quarter 2026 results (D4), FY2026 annual report on Form 10-K (D6), first quarter 2026 results released (R14), FY2025 annual report filed (R13).</td></tr>
+      <tr><td class="lbl">Product launches</td><td class="status">None</td><td>The company leases data centre capacity and mines bitcoin; it ships no product on a launch cycle. The nearest equivalent is delivery of a site, carried as Barber Lake Phase I delivery (D2) and the other three delivery items.</td></tr>
+      <tr><td class="lbl">Investor days</td><td class="status">None</td><td>No investor day is announced. The company published an investor presentation with the Stingray announcement on 8 June 2026, but no standalone investor day appears in any Form 8-K to 31 July 2026.</td></tr>
+      <tr><td class="lbl">Regulatory decisions</td><td class="status">Covered above</td><td>Grid exposure concentrated in ERCOT, and interconnection not independently corroborated (S7); pipeline sites energise (D11), which depends on interconnection approvals at eight sites.</td></tr>
+      <tr><td class="lbl">Lawsuits</td><td class="status caution-t">Not established</td><td>Not examined. Federal and state court dockets were not searched. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Macro events</td><td class="status">Covered above</td><td>Luminant power agreement protection lapses (D10) carries the power price exposure. Bitcoin price exposure is diminishing by design and is carried by the only revenue is being withdrawn before the rent arrives (S1).</td></tr>
+      <tr><td class="lbl">Industry conferences</td><td class="status caution-t">Not established</td><td>Not examined. No conference organiser's published schedule was checked for company participation. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Management changes</td><td class="status">Covered above</td><td>A Form 8-K under Item 5.02 was filed on 11 February 2026. The change itself is not carried as a catalyst because it produced no dated or standing item, but the category is not empty.</td></tr>
+      <tr><td class="lbl">Buybacks</td><td class="status">None</td><td>No repurchase programme is disclosed in the FY2025 Form 10-K or the first quarter Form 10-Q. Treasury stock of 7,111,468 shares arises from earlier transactions. Capped call transactions exist over the 2031 convertible notes, but they offset conversion dilution rather than authorise repurchase.</td></tr>
+      <tr><td class="lbl">Dividends</td><td class="status">None</td><td>No common dividend has been declared or paid. No preferred stock is outstanding; 10,000,000 shares are authorised.</td></tr>
+      <tr><td class="lbl">Major contracts</td><td class="status">Covered above</td><td>Barber Lake leased to Fluidstack with a Google backstop (R2), Black Pearl leased to Amazon (R4), Stingray leased to Amazon and financed (R15), Barber Lake Phase I delivery (D2), Black Pearl first rent commencement (D3), Barber Lake Phase II delivery (D5), Black Pearl Phase II and full rent ramp (D7), Stingray rent commencement (D8).</td></tr>
+      <tr><td class="lbl">Convertible and other financings</td><td class="status">Covered above</td><td>2030 convertible notes issued (R1), 2031 convertible notes issued (R3), 2030 senior secured notes issued (R5), senior secured notes tapped for a further $333.0 million (R7), Stingray leased to Amazon and financed (R15), both convertible series are in the money (S5).</td></tr>
+      <tr><td class="lbl">Mergers and acquisitions</td><td class="status">Covered above</td><td>Colchis joint venture interest acquired (R6), Ulysses acquired, the first site outside Texas (R8), joint venture mining interests sold to Canaan (R10).</td></tr>
+      <tr><td class="lbl">Index membership</td><td class="status caution-t">Not established</td><td>Not examined. No index provider's published methodology or rebalance schedule was checked. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Analyst coverage and short interest</td><td class="status caution-t">Not established</td><td>Not examined. No attributed, dated third-party target or rating was located, and exchange short interest reports were not retrieved. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Credit rating actions</td><td class="status caution-t">Not established</td><td>Not examined. Three secured note series are outstanding and may carry agency ratings, but no rating agency publication was consulted. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Segment reporting</td><td class="status">None</td><td>Revenue is reported on a single line, bitcoin mining, with no segment split of costs or assets. That will have to change once lease revenue commences.</td></tr>
+      <tr><td class="lbl">Corporate identity changes</td><td class="status">Covered above</td><td>Renamed Cipher Digital Inc. (R11), warrants removed from listing (R9), three registrant names on one filing record (S8).</td></tr>
+      <tr><td class="lbl">Beneficial ownership changes</td><td class="status">Covered above</td><td>Fifty-four filings in the beneficial-ownership family appear on the index, swept under both schedule spellings, including thirteen amendments to a Schedule 13D between July 2025 and June 2026. The positions behind them were not extracted, which is named in what was not checked.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 5. DILUTION & CAPITAL OVERLAY ===================== -->
+<section id="s5">
+  <h2 class="sec"><span class="n">05</span>Dilution &amp; capital overlay</h2>
+  <p class="sub">Sits across every other catalyst rather than beside them.</p>
+  <p>Every catalyst on this calendar is read against a share count that can rise by roughly a third without the company selling a new share, and against $4.0 billion of debt raised before a single dollar of rent has been earned.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Instrument</th><th class="num">Principal</th><th class="num">Conversion</th><th>Implied shares</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">2030 convertible notes</td><td class="num">$172.5M</td><td class="num">$4.45</td><td>~38.8 million</td><td><span class="tag">Estimate</span> principal ÷ conversion price</td></tr>
+      <tr><td class="lbl">2031 convertible notes</td><td class="num">$1,300.0M</td><td class="num">$16.03</td><td>~81.1 million</td><td><span class="tag">Estimate</span> principal ÷ conversion price</td></tr>
+      <tr><td class="lbl">Total convertible</td><td class="num">$1,472.5M</td><td class="num">n/a</td><td>~119.9 million, 29.3% of the count</td><td><span class="tag">Estimate</span> sum of the above</td></tr>
+      <tr><td class="lbl">2030 senior secured notes</td><td class="num">$1,733.0M</td><td class="num">n/a</td><td>n/a; secured at Cipher Compute LLC</td><td><span class="tag">Filed</span> 10-K, incl. the $333.0M add-on</td></tr>
+      <tr><td class="lbl">Stingray senior secured notes</td><td class="num">$810.0M</td><td class="num">n/a</td><td>n/a; secured at Stingray Compute LLC</td><td><span class="tag">Filed</span> 8-K, 15 June 2026</td></tr>
+      <tr><td class="lbl">Warrant liability</td><td class="num">$525.2M</td><td class="num">n/a</td><td>Carried at fair value, not as a share count</td><td><span class="tag">Filed</span> 10-K, at 31 Dec 2025</td></tr>
+    </tbody>
+  </table></div>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The implied share counts divide principal by the stated conversion price, because the conversion rates per $1,000 of principal were not located in the filings read. That method is approximate and it ignores the capped call transactions the company funded from the 2031 note proceeds, whose strike and cap prices were also not located. The 119.9 million figure is therefore an unhedged upper bound rather than an expected outcome, and the true dilution will be lower to the extent the capped calls bite and to the extent the company elects cash settlement. Both gaps are named in the sources section.</p>
+  </div>
+  <p>The debt side ranks ahead of all of it. Of the $4,015.5 million raised, $2,543.0 million is secured at subsidiary issuers holding the very assets that will generate the rent: Cipher Compute LLC and Stingray Compute LLC. The Stingray notes amortise from lease payments beginning on construction completion at a 1.25 times debt service coverage ratio, so that site's cash is spoken for before it reaches the parent.</p>
+  <p>Equity issuance itself has been modest. Shares outstanding rose from 350,783,817 at 31 December 2024 to 409,049,197 at 4 May 2026, an increase of 16.6% across sixteen months, and authorised shares were doubled to 1,000,000,000 during 2025. The growth was funded with debt, which is why total liabilities rose thirty-two-fold over the same period while equity barely moved.</p>
+</section>
+
+<!-- ===================== 6. FALSIFICATION TESTS ===================== -->
+<section id="s6">
+  <h2 class="sec"><span class="n">06</span>Falsification tests</h2>
+  <p class="sub">What would prove this read wrong, stated in advance. Each trigger is settleable from a document; an unquantified threshold is not a test.</p>
+  <div class="tw"><table>
+    <thead><tr><th>#</th><th>If this happens&hellip;</th><th>&hellip;this was wrong</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>A periodic report or Form 8-K states that Barber Lake Phase I did not deliver by 30 September 2026.</td><td>The reading that the first and most advanced site delivers on the company's own stated date.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">2</td><td>The FY2026 Form 10-K reports no HPC lease revenue for the year ended 31 December 2026.</td><td>The reading that Black Pearl rent commences in the fourth quarter of 2026 as targeted.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">3</td><td>A Form 8-K or periodic report discloses termination, or notice of termination, of the Barber Lake, Black Pearl or Stingray lease.</td><td>The reading that the contracted book is durable and the counterparties committed.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">4</td><td>A periodic report discloses a default, reserve shortfall or covenant breach at Cipher Compute LLC or Stingray Compute LLC.</td><td>The reading that all three projects are funded through construction without further parent support.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">5</td><td>The FY2026 Form 10-K carries a going concern paragraph or reports a material weakness in internal control over financial reporting.</td><td>The reading that restricted cash and committed financing carry the company through the revenue trough.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">6</td><td>A registration statement or Form 8-K announces a common equity offering before 31 December 2026.</td><td>The reading that the debt raised through June 2026 funds the programme without parent equity issuance.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">7</td><td>A periodic report discloses that the Odessa power arrangement has ended or been replaced at a stated price above 2.8 cents per kilowatt hour.</td><td>The reading that the last operating mining site remains cost-protected until at least July 2027.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">8</td><td>A periodic report reports quarterly revenue below $20 million before any lease revenue is recognised.</td><td>The reading that the mining decline has a floor near the first quarter 2026 level of $34.8 million.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">9</td><td>A periodic report discloses that the interconnection approval at Barber Lake or Black Pearl has been reduced below 300 MW or made subject to a load profile restriction.</td><td>The reading that firm, unrestricted interconnection is this company's distinguishing asset.</td><td class="status">Untriggered</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 7. CATALYST SUMMARY ===================== -->
+<section id="s7">
+  <h2 class="sec"><span class="n">07</span>Catalyst summary</h2>
+  <p class="sub">Every ID in one table, gapless within each class. Must match the cards above exactly: same IDs, same count, same order. Links point at title slugs so they survive renumbering.</p>
+  <div class="tw"><table>
+    <thead><tr><th>ID</th><th>Catalyst</th><th>Timing</th><th>Impact</th><th>Confidence</th><th>Direction</th></tr></thead>
+    <tbody>
+      <tr><td class="num">D1</td><td><a href="#cat-second-quarter-2026-results">Second quarter 2026 results</a></td><td class="when">~early Aug 2026</td><td>High</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D2</td><td><a href="#cat-barber-lake-phase-one-delivery">Barber Lake Phase I delivery</a></td><td class="when">by 30 Sep 2026</td><td>High</td><td>Medium</td><td class="pos-t">Up</td></tr>
+      <tr><td class="num">D3</td><td><a href="#cat-black-pearl-first-rent-commencement">Black Pearl first rent commencement</a></td><td class="when">Q4 2026</td><td>High</td><td>Medium</td><td class="pos-t">Up</td></tr>
+      <tr><td class="num">D4</td><td><a href="#cat-third-quarter-2026-results">Third quarter 2026 results</a></td><td class="when">~early Nov 2026</td><td>Medium</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D5</td><td><a href="#cat-barber-lake-phase-two-delivery">Barber Lake Phase II delivery</a></td><td class="when">by 31 Jan 2027</td><td>Medium</td><td>Medium</td><td class="pos-t">Up</td></tr>
+      <tr><td class="num">D6</td><td><a href="#cat-fy2026-annual-report">FY2026 annual report on Form 10-K</a></td><td class="when">~late Feb 2027</td><td>High</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D7</td><td><a href="#cat-black-pearl-full-rent-ramp">Black Pearl Phase II and full rent ramp</a></td><td class="when">Q1 2027</td><td>High</td><td>Medium</td><td class="pos-t">Up</td></tr>
+      <tr><td class="num">D8</td><td><a href="#cat-stingray-rent-commencement">Stingray rent commencement</a></td><td class="when">1 Apr 2027</td><td>High</td><td>Medium</td><td class="pos-t">Up</td></tr>
+      <tr><td class="num">D9</td><td><a href="#cat-2027-annual-meeting">2027 annual meeting of stockholders</a></td><td class="when">~Jun 2027</td><td>Low</td><td>Medium</td><td>Neutral</td></tr>
+      <tr><td class="num">D10</td><td><a href="#cat-luminant-power-agreement-expiry">Luminant power agreement protection lapses</a></td><td class="when">From Jul 2027</td><td>Medium</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D11</td><td><a href="#cat-pipeline-energisation">Pipeline sites energise</a></td><td class="when">Q4 2027 onward</td><td>High</td><td>Low</td><td class="pos-t">Up</td></tr>
+      <tr><td class="num">S1</td><td><a href="#cat-revenue-withdrawn-before-rent-arrives">The only revenue is being withdrawn before the rent arrives</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S2</td><td><a href="#cat-tenant-concentration">Two tenant groups across three sites</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S3</td><td><a href="#cat-debt-raised-against-no-operating-lease">Four billion dollars of debt raised against no operating lease</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S4</td><td><a href="#cat-restricted-cash-is-committed">Most of the cash is restricted, not available</a></td><td class="when">Ongoing</td><td>Medium</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S5</td><td><a href="#cat-convertible-dilution-in-the-money">Both convertible series are in the money</a></td><td class="when">Ongoing to 2031</td><td>Medium</td><td>n/a</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">S6</td><td><a href="#cat-results-driven-by-fair-value-marks">Reported results are driven by derivative and warrant marks</a></td><td class="when">Ongoing</td><td>Medium</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S7</td><td><a href="#cat-ercot-concentration-and-interconnection">Grid exposure concentrated in ERCOT, and interconnection not independently corroborated</a></td><td class="when">Ongoing</td><td>Medium</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S8</td><td><a href="#cat-three-registrant-names">Three registrant names on one filing record</a></td><td class="when">Ongoing</td><td>Low</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">R1</td><td><a href="#cat-2030-convertible-notes-issued">2030 convertible notes issued</a></td><td class="when">22 May 2025</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R2</td><td><a href="#cat-barber-lake-leases-signed">Barber Lake leased to Fluidstack with a Google backstop</a></td><td class="when">Q3 2025</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R3</td><td><a href="#cat-2031-convertible-notes-issued">2031 convertible notes issued</a></td><td class="when">30 Sep 2025</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R4</td><td><a href="#cat-black-pearl-leased-to-amazon">Black Pearl leased to Amazon</a></td><td class="when">Oct 2025</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R5</td><td><a href="#cat-2030-senior-secured-notes-issued">2030 senior secured notes issued</a></td><td class="when">13 Nov 2025</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R6</td><td><a href="#cat-colchis-joint-venture-acquired">Colchis joint venture interest acquired</a></td><td class="when">Nov 2025</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R7</td><td><a href="#cat-senior-secured-notes-tapped">Senior secured notes tapped for a further $333.0 million</a></td><td class="when">24 Nov 2025</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R8</td><td><a href="#cat-ulysses-site-acquired">Ulysses acquired, the first site outside Texas</a></td><td class="when">Dec 2025</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R9</td><td><a href="#cat-warrants-delisted">Warrants removed from listing</a></td><td class="when">29 Dec 2025</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R10</td><td><a href="#cat-windhq-interests-sold">Joint venture mining interests sold to Canaan</a></td><td class="when">19 Feb 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R11</td><td><a href="#cat-renamed-cipher-digital">Renamed Cipher Digital Inc.</a></td><td class="when">20 Feb 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R12</td><td><a href="#cat-black-pearl-mining-ceased">Bitcoin mining ceased at Black Pearl</a></td><td class="when">Feb 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R13</td><td><a href="#cat-fy2025-annual-report-filed">FY2025 annual report filed</a></td><td class="when">24 Feb 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R14</td><td><a href="#cat-q1-2026-results-released">First quarter 2026 results released</a></td><td class="when">5 May 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R15</td><td><a href="#cat-stingray-leased-and-financed">Stingray leased to Amazon and financed</a></td><td class="when">15 Jun 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 8. METHODOLOGY & CONFIDENCE SCALE ===================== -->
+<section id="s8">
+  <h2 class="sec"><span class="n">08</span>Methodology &amp; confidence scale</h2>
+
+  <h3>Provenance tags</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Tag</th><th>What it asserts</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl"><span class="tag">Filed</span></td><td>Stated in an SEC filing or company release, cited by form and date. Also covers a dated official publication by a named non-SEC issuer, with the issuer named in the Source line.</td></tr>
+      <tr><td class="lbl"><span class="tag">Estimate</span></td><td>Derived or inferred here. The arithmetic is shown.</td></tr>
+      <tr><td class="lbl"><span class="tag">Open</span></td><td>Expected but unconfirmed. Nothing filed either way.</td></tr>
+      <tr><td class="lbl"><span class="tag">Market</span></td><td>Price, volume, float, published targets and ratings. Stamped with the close or publication date.</td></tr>
+      <tr><td class="lbl"><span class="tag">Press</span></td><td>Reported by a named publication that is neither the issuer nor an analyst, cited by outlet and date. Corroborates; never the sole basis for a material claim.</td></tr>
+      <tr><td class="lbl"><span class="tag">Social</span></td><td>Publicly posted by a named account, cited by handle and date. Asserts that the statement was made, never that it is true.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Timing confidence</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Level</th><th>Means</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">High</td><td>Date is company-announced, protocol-defined, or statutorily fixed.</td></tr>
+      <tr><td class="lbl">Medium</td><td>Date inferred from filing cadence or a stated deadline window.</td></tr>
+      <tr><td class="lbl">Low</td><td>Date is a judgement call. Could move by a quarter or more.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>How dates were derived, and why the delivery dates are Medium rather than High</h3>
+  <p>Reporting dates carry the Estimate tag and rest on this issuer's own cadence: annual filings on 5 March 2024, 25 February 2025 and 24 February 2026; quarterly filings on 7 August 2025, 3 November 2025 and 5 May 2026.</p>
+  <p>The four delivery and rent commencement dates are different. They are company-stated and specific, in two cases to the day, which would ordinarily support High confidence. They are marked Medium because the company describes each as a target rather than a commitment, no lease has yet commenced anywhere in the portfolio, and there is therefore no track record of this company meeting a delivery date. Confidence rates the date, and a target with no precedent behind it is not the same claim as a scheduled filing deadline.</p>
+
+  <div class="note caution">
+    <p>Confidence rates <b>timing</b>, never outcome. A High-confidence catalyst can be a coin flip; a Low-confidence one can be near-certain in direction.</p>
+    <p><b>Impact is independent of confidence.</b> A High-impact, Low-confidence item is the most important kind here: it matters enormously and could land any time. Pipeline sites energise (D11) is the clearest example on this calendar.</p>
+  </div>
+</section>
+
+<!-- ===================== 9. SOURCES ===================== -->
+<section id="s9">
+  <h2 class="sec"><span class="n">09</span>Sources</h2>
+  <p class="sub">Primary filings and company releases first, with form type and date.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Source</th><th>Date</th><th>What it settles</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Form 10-K, FY2025</td><td class="when">24 Feb 2026</td><td>Sites, leases, delivery targets, pipeline, capital structure, the name change</td></tr>
+      <tr><td class="lbl">Form 10-Q, Q1 2026</td><td class="when">5 May 2026</td><td>Balance sheet at 31 Mar 2026, revenue decline, interest expense, share count</td></tr>
+      <tr><td class="lbl">Form 8-K and Exhibit 99.1</td><td class="when">8 Jun 2026</td><td>Stingray lease, base-term value, escalator, guarantee, cost cap, rent dates</td></tr>
+      <tr><td class="lbl">Form 8-K</td><td class="when">15 Jun 2026</td><td>Stingray Compute LLC $810.0M 6.000% senior secured notes due 2031</td></tr>
+      <tr><td class="lbl">Form 8-K, Item 5.07</td><td class="when">8 Jun 2026</td><td>Annual meeting of 2 June 2026</td></tr>
+      <tr><td class="lbl">Form 8-K, Items 2.02 and 5.03</td><td class="when">24 Feb 2026</td><td>Charter amendment effecting the name change</td></tr>
+      <tr><td class="lbl">Form 8-K, Item 5.02</td><td class="when">11 Feb 2026</td><td>A management change during the period</td></tr>
+      <tr><td class="lbl">Form 25-NSE</td><td class="when">29 Dec 2025</td><td>Removal of the warrants from listing</td></tr>
+      <tr><td class="lbl">Big Digital Energy, Form 8-K Exhibit 99.1</td><td class="when">3 Jun 2026</td><td>Third-party peer comparison reproduced in the research report</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>How the sweep was run</h3>
+  <p>Filings were swept against Central Index Key 0001819989 rather than the ticker or the name, which is what carries the search across all three registrant names this filer has used: Good Works Acquisition Corp. to August 2021, Cipher Mining Inc. to February 2026, and Cipher Digital Inc. since. The index holds 606 filings from 25 August 2020 to 31 July 2026 and was read in full for form type. Both spellings of the beneficial-ownership schedules were included: 28 filings carry the legacy prefix and 26 the form the Commission has emitted since December 2024, so a sweep matching only the older spelling would have missed 26 filings, including thirteen amendments to a Schedule 13D between July 2025 and June 2026. Exhibit lists were enumerated rather than form types alone, which is how the Stingray lease economics were reached, since they appear in an exhibit rather than in the filing body.</p>
+  <p>Late-filing notifications were checked for absence as much as presence. No NT 10-K or NT 10-Q appears across those 606 filings. For an issuer that has changed its name twice and delisted a class of securities, that absence is worth recording with the size of the index behind it rather than as a bare negative.</p>
+
+  <h3>What was not checked</h3>
+  <p>The Texas grid operator's large load interconnection records were attempted on 3 August 2026 and could not be retrieved; the public planning pages returned a challenge page rather than data. The 300 MW approvals at Barber Lake and Black Pearl, the absence of load profile restrictions at Barber Lake, the conditional 100 MW at Stingray and the 70 MW at Reveille therefore rest on company statements alone. Texas and Ohio utility commission records were not examined, and the American Electric Power and AEP Ohio interconnection agreements were not independently verified.</p>
+  <p>The capped call transactions funded from the 2031 note proceeds are disclosed as existing, but their strike and cap prices were not located, so the dilution offset in section 5 is not quantified. Conversion rates per $1,000 of principal were not located either, so the implied share counts divide principal by the stated conversion price and are approximate.</p>
+  <p>No rating agency publication was consulted, so no rating on any of the three secured note series is reported. Federal and state court dockets were not searched, so lawsuits read Not established above. No index provider methodology, short interest report or conference schedule was checked. No earnings call transcript was read. The thirteen Schedule 13D amendments were identified in the sweep but the positions behind them were not extracted.</p>
+  <p>On date coverage, the sweep reaches 31 July 2026 and this calendar carries no catalyst arising after that date. Second quarter results for the period ended 30 June 2026 had not been filed, so no reported balance sheet reflects the Stingray lease or its $810.0 million financing.</p>
+</section>
+
+<!-- ===================== 10. DOCUMENT LOG ===================== -->
+<section id="s10">
+  <h2 class="sec"><span class="n">10</span>Document log</h2>
+  <p class="sub">Newest first. The original build entry is never removed or rewritten.</p>
+  <div class="log">
+    <div class="logentry current">
+      <div class="when">3 August 2026 <span class="latest">Latest</span></div>
+      <div class="basis">Original build &middot; 11 dated &middot; 8 standing &middot; 15 resolved &middot; priced off 31 Jul 2026 close</div>
+      <p><b>Built from</b> the company's filings on EDGAR under Central Index Key 0001819989, swept across the complete index of 606 filings from August 2020 to 31 July 2026 and across all three registrant names on that record. The load-bearing documents are the FY2025 Form 10-K of 24 February 2026, the first quarter Form 10-Q of 5 May 2026, and the Current Reports of 24 February, 8 June and 15 June 2026 with their exhibits, of which the investor presentation attached to the 8 June filing carries the fullest lease disclosure in the set.</p>
+      <p><b>Pricing basis</b> is the close of 31 July 2026 at $22.32, the last completed session before the build date.</p>
+      <p><b>Conventions fixed at construction.</b> Dated items are ordered by expected date and banded 0&ndash;3, 3&ndash;6 and 6&ndash;12 months with a fourth context band beyond twelve months; standing conditions are ordered by materiality; resolved items are ordered by resolution date, earliest first, with four items whose day the filings do not state placed at the end of their stated month or quarter and marked as such. Anchors are permanent title slugs rather than ID numbers. Company-stated delivery targets are marked Medium confidence rather than High, because the company describes each as a target and no lease has yet commenced anywhere in the portfolio.</p>
+      <p><b>Known gaps in this version.</b> The Texas grid operator's large load records could not be retrieved on 3 August 2026, so no interconnection approval is corroborated by an independent source. The capped call strike and cap prices and the conversion rates per $1,000 were not located, so the convertible dilution figure is an approximate unhedged upper bound. No rating agency publication was consulted. Court dockets, index methodologies, short interest and conference schedules were not examined, and five categories read Not established as a result. The thirteen Schedule 13D amendments were identified but the positions behind them were not extracted. The annual report dates the Black Pearl lease as both October and November 2025; the earlier date is used for ordering and the discrepancy is recorded rather than resolved. Second quarter results for the period ended 30 June 2026 were not yet filed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="norec">
+    No buy, sell, or hold recommendation is issued and no price target is derived.
+    Third-party targets and ratings, where shown, are the published views of the
+    firms named. This document is for research and educational purposes and is not
+    investment advice. Estimated dates are not company announcements. Verify
+    against primary filings on sec.gov before acting.
+  </div>
+  <p style="margin-top:16px">CIFR &middot; Cipher Digital Inc. &middot; Catalyst Calendar &middot; as of 3 August 2026</p>
+</footer>
+
+</div>
+
+</body>
+</html>

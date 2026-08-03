@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>CLSK &middot; CleanSpark, Inc. &middot; Equity Research Report &middot; as of 3 August 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================================
+   PER-TICKER PALETTE
+   ========================================================================= */
+:root{
+  /* CleanSpark's brand blue, #1935A9, taken from the company's own site chrome,
+     where it is published as the theme colour and as the mask-icon colour. The
+     mark carries the same blue as a deep field behind a white spark glyph. It is
+     a strongly saturated blue at hue 228. Held at that hue and eased to a 72%
+     saturation so it holds on white at small sizes, it becomes #1B36A7, which
+     reads at 9.85:1 against paper. The hue sits clear of every meaning-bearing
+     colour in this document, so no rotation was needed. */
+  --accent:      #1B36A7;
+  --accent-deep: #14287B;
+  --accent-wash: rgba(27,54,167,0.06);
+  --accent-line: rgba(27,54,167,0.22);
+}
+
+/* ============================================================================
+   SHARED STYLESHEET v1.57 : BEGIN
+   ========================================================================= */
+:root{
+  color-scheme: light only;
+
+  --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
+  --line:#DEE6EC;   --line-hard:#C0CDD7;
+  --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
+
+  --pos:#0B7A50;      --pos-bg:#E7F4EE;
+  --neg:#B02A21;      --neg-bg:#FBECEA;
+  --caution:#90600A;  --caution-bg:#FBF2E0;
+  --assume:#4F3FA3;   --assume-bg:#EFEDFA;
+
+  --display:'Archivo',ui-sans-serif,system-ui,'Helvetica Neue',Arial,sans-serif;
+  --body:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+
+  --measure:78ch;
+  --col:760px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html,body{background:var(--canvas) !important;background-color:var(--canvas) !important}
+body{
+  margin:0;color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 22px 96px;background:var(--paper);
+      border-left:1px solid var(--line);border-right:1px solid var(--line)}
+p{max-width:var(--measure)}
+/* Boxed prose fills its container: the box supplies its own measure, so the
+   78ch cap applies to top-level running prose only. */
+.first li,.assume p,.note p,.cat p,.risk p,.logentry p,.oc p,.case p,
+.cat-meta,.logentry .basis{max-width:none}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:var(--accent-deep)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- masthead ---------- */
+.mast{padding:44px 0 26px;border-bottom:2px solid var(--line-hard);margin-bottom:8px;
+      position:relative;padding-left:20px}
+.mast::before{content:"";position:absolute;left:0;top:44px;bottom:26px;
+      width:4px;background:var(--accent)}
+.ticker{font-family:var(--mono);font-size:44px;font-weight:700;letter-spacing:-1px;
+      line-height:1;color:var(--accent);margin:0}
+.headline{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.22;
+      color:var(--ink);margin:16px 0 0}
+.functional{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--ink-faint);margin:18px 0 0}
+.mast-strip{display:flex;flex-wrap:wrap;gap:26px;margin-top:20px;padding-top:16px;
+      border-top:1px solid var(--line)}
+.mast-strip div{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint)}
+.mast-strip b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-top:3px}
+
+/* ---------- banner: framing ---------- */
+.first{background:var(--canvas);border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:20px 24px;margin:30px 0 12px}
+.first h2{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.04em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 12px}
+.first ol{margin:0;padding-left:20px}
+.first li{margin-bottom:9px}
+.first li:last-child{margin-bottom:0}
+
+/* ---------- sections ---------- */
+section{padding-top:38px}
+h2.sec{font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);
+      margin:0 0 4px;padding-bottom:10px;border-bottom:1px solid var(--line-hard);
+      display:flex;align-items:baseline;gap:12px}
+h2.sec .n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);
+      letter-spacing:.06em;flex:none}
+.sub{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);margin:10px 0 18px;
+      max-width:var(--measure)}
+h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink-dim);
+      margin:26px 0 8px}
+
+/* ---------- provenance tags (signature) ---------- */
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);
+      background:var(--panel-2);border:1px solid var(--line);
+      border-radius:2px;padding:1px 6px;vertical-align:1px;white-space:nowrap}
+
+/* ---------- assumption block ---------- */
+.assume{background:var(--assume-bg);border-left:4px solid var(--assume);
+      padding:16px 20px;margin:20px 0}
+.assume .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--assume);display:block;margin-bottom:7px}
+.assume p{margin:0}
+
+/* ---------- callouts ---------- */
+.note{border:1px solid var(--line);border-left:4px solid var(--ink-faint);
+      background:var(--canvas);padding:16px 20px;margin:20px 0}
+.note.pos{border-left-color:var(--pos);background:var(--pos-bg)}
+.note.neg{border-left-color:var(--neg);background:var(--neg-bg)}
+.note.caution{border-left-color:var(--caution);background:var(--caution-bg)}
+.note p{margin:0}
+.note p + p{margin-top:10px}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+thead th{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--ink-dim);text-align:left;
+      padding:9px 12px;border-bottom:2px solid var(--line-hard);white-space:nowrap}
+tbody td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--canvas)}
+td.num,th.num{font-family:var(--mono);text-align:right;white-space:nowrap}
+/* td.when marks a timing column. An unmarked cell counts as prose. */
+td.when{font-family:var(--mono);white-space:nowrap}
+td.lbl{font-weight:600}
+.pos-t{color:var(--pos);font-weight:600}
+.neg-t{color:var(--neg);font-weight:600}
+.caution-t{color:var(--caution);font-weight:600}
+
+/* ---------- cases ---------- */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.case{border:1px solid var(--line);border-top:3px solid var(--ink-faint);
+      background:var(--paper);padding:18px}
+.case.bull{border-top-color:var(--pos)}
+.case.bear{border-top-color:var(--neg)}
+.case h4{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 10px}
+.case.bull h4{color:var(--pos)} .case.bear h4{color:var(--neg)}
+.case p{font-size:15px;margin:0}
+.case .req{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+
+/* ---------- risks ---------- */
+.risk{border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:16px 20px;margin-bottom:12px}
+.risk.sev-high{border-left-color:var(--neg)}
+.risk.sev-med{border-left-color:var(--caution)}
+.risk.sev-low{border-left-color:var(--ink-faint)}
+.risk h4{font-family:var(--display);font-size:15.5px;font-weight:600;margin:0 0 6px;
+      display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.risk .sev{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase}
+.risk.sev-high .sev{color:var(--neg)}
+.risk.sev-med .sev{color:var(--caution)}
+.risk.sev-low .sev{color:var(--ink-faint)}
+.risk p{margin:0;font-size:15.5px}
+
+/* ---------- null categories ---------- */
+.nulls td.lbl{width:26%}
+.nulls .status{font-family:var(--mono);font-size:12px;white-space:nowrap}
+
+/* ---------- document log ---------- */
+.log{margin-top:14px}
+.logentry{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:12px}
+.logentry.current{border-left:4px solid var(--accent);background:var(--accent-wash)}
+.logentry .when{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);
+      display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.latest{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-line);
+      background:var(--paper);border-radius:2px;padding:1px 6px}
+.logentry .basis{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-bottom:12px}
+.logentry p{font-size:15.5px;margin:0 0 9px}
+.logentry p:last-child{margin-bottom:0}
+.correction{border:1px solid var(--neg);border-left:4px solid var(--neg);
+      background:var(--neg-bg);padding:12px 16px;margin-bottom:14px}
+.correction .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--neg);display:block;margin-bottom:5px}
+
+/* ---------- footer ---------- */
+footer{margin-top:44px;padding-top:22px;border-top:2px solid var(--line-hard)}
+footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width:none}
+.norec{border:1px solid var(--line-hard);background:var(--canvas);padding:16px 20px;
+      margin-top:20px;font-family:var(--mono);font-size:12.5px;color:var(--ink-dim)}
+
+/* ---------- catalyst cards (calendar) ---------- */
+.cat{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:14px;border-left:4px solid var(--line-hard)}
+.cat.up{border-left-color:var(--pos)}
+.cat.down{border-left-color:var(--neg)}
+.cat.two{border-left-color:var(--caution)}
+.cat.neutral{border-left-color:var(--ink-faint)}
+.cat-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.cid{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);flex:none}
+.cat-head h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink);
+      margin:0;flex:1 1 auto;min-width:200px}
+.dir{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;white-space:nowrap}
+.cat.up .dir{color:var(--pos)} .cat.down .dir{color:var(--neg)}
+.cat.two .dir{color:var(--caution)} .cat.neutral .dir{color:var(--ink-faint)}
+.cat-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:10px 0 12px;padding:9px 0;
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+      font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
+.cat-meta b{color:var(--ink);font-weight:600}
+.cat p{margin:0 0 9px;font-size:15.5px}
+.cat p:last-child{margin-bottom:0}
+.cat.resolved{background:var(--canvas);border-left-color:var(--ink-faint)}
+.cat.resolved .dir{color:var(--ink-faint)}
+
+/* ---------- horizon bands (calendar) ---------- */
+.band{display:flex;align-items:center;gap:14px;margin:30px 0 16px}
+.band-t{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--ink-dim);white-space:nowrap}
+.band-r{flex:1;height:1px;background:var(--line-hard)}
+.band-c{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);white-space:nowrap}
+
+/* ---------- upside / downside pair ---------- */
+.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0}
+.oc{border:1px solid var(--line);padding:11px 14px;background:var(--paper)}
+.oc.up-c{border-left:3px solid var(--pos)}
+.oc.down-c{border-left:3px solid var(--neg)}
+.oc .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.09em;
+      text-transform:uppercase;display:block;margin-bottom:5px}
+.oc.up-c .lbl{color:var(--pos)} .oc.down-c .lbl{color:var(--neg)}
+.oc p{margin:0;font-size:14.5px;line-height:1.5}
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  body{font-size:16px}
+  .wrap{padding:0 16px 70px;border-left:none;border-right:none}
+  .ticker{font-size:34px}
+  .headline{font-size:23px}
+  .cases{grid-template-columns:1fr}
+  .outcomes{grid-template-columns:1fr}
+  .mast-strip{gap:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none !important;transition:none !important}
+}
+@media print{
+  body{font-size:11pt}
+  .wrap{max-width:none;border:none}
+  section{page-break-inside:avoid}
+}
+/* ============================================================================
+   SHARED STYLESHEET v1.57 : END
+   ========================================================================= */
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ===================== MASTHEAD ===================== -->
+<header class="mast">
+  <p class="ticker">CLSK</p>
+  <h1 class="headline">A $6.6 billion lease that pays nothing until late 2027, and an equity base that halved in the six months before it was signed</h1>
+  <p class="functional">CLSK &middot; CleanSpark, Inc. &middot; Equity Research Report &middot; as of 3 August 2026</p>
+  <div class="mast-strip">
+    <div>Price <b>$13.76</b> <span class="tag">Market</span></div>
+    <div>Market cap <b>$3.53bn</b> <span class="tag">Estimate</span></div>
+    <div>Shares out <b>256,608,606</b> <span class="tag">Filed</span></div>
+    <div>Bitcoin held <b>13,924</b> <span class="tag">Filed</span></div>
+    <div>Pricing basis <b>31 Jul 2026 close</b> <span class="tag">Market</span></div>
+  </div>
+</header>
+
+<!-- ===================== FRAMING ===================== -->
+<div class="first">
+  <h2>Framing</h2>
+  <ol>
+    <li>On 10 July 2026 the company signed a <b>20-year triple net lease</b> at its Sandersville, Georgia campus with an unnamed global technology company it describes as high investment grade, covering <b>175 MW of critical IT load</b> for <b>$6.6bn</b> of expected contracted revenue, or $11.6bn if both five-year extensions are taken. Deliveries are expected to begin in <b>the fourth quarter of 2027</b>. The tenant also signed a letter of intent and exclusivity over the entire Texas portfolio, 718 acres and up to 885 MW of secured and planned capacity. <span class="tag">Filed</span></li>
+    <li>The same filing puts landlord project costs at <b>$10M to $12M per MW of critical IT load</b>. Against 175 MW that is <b>$1.75bn to $2.10bn</b> of construction the company must finance, and it warns that missing the financing, construction and delivery milestones may trigger <b>rent abatements or termination</b>. No financing for it has been announced. <span class="tag">Estimate</span></li>
+    <li>Shareholders' equity fell from <b>$2,175.1M at 30 September 2025 to $986.2M at 31 March 2026</b> as bitcoin went from roughly $114,100 to roughly $68,200. The six months to 31 March 2026 carried a <b>net loss of $757.1M</b> against net income of $108.0M a year earlier. Total debt over the same period rose from $644.6M to $1,788.2M. <span class="tag">Filed</span></li>
+    <li>In the quarter to 31 March 2026 the all-in cost of mining one bitcoin, including miner depreciation, was <b>$103,440</b> against average revenue per bitcoin mined of <b>$75,827</b>. Stripping depreciation out, direct cash cost was $45,411, so the fleet still covers its power bill and does not cover its capital. <span class="tag">Filed</span></li>
+  </ol>
+</div>
+
+<!-- ===================== 1. SNAPSHOT ===================== -->
+<section id="s1">
+  <h2 class="sec"><span class="n">01</span>Snapshot</h2>
+  <p class="sub">Key figures, each tagged by provenance. Balance sheet items are at 31 March 2026 unless stated. The company reports on a fiscal year ending 30 September, so fiscal 2025 is the year to 30 September 2025 and the half year runs October to March.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Metric</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Share price</td><td class="num">$13.76</td><td><span class="tag">Market</span> Nasdaq close, 31 Jul 2026</td></tr>
+      <tr><td class="lbl">Shares outstanding</td><td class="num">256,608,606</td><td><span class="tag">Filed</span> 10-Q cover, 7 May 2026</td></tr>
+      <tr><td class="lbl">Market capitalisation</td><td class="num">$3,530.9M</td><td><span class="tag">Estimate</span> 256,608,606 &times; $13.76</td></tr>
+      <tr><td class="lbl">Revenue, FY2025</td><td class="num">$766.3M</td><td><span class="tag">Filed</span> 10-K, 25 Nov 2025</td></tr>
+      <tr><td class="lbl">Revenue, H1 FY2026</td><td class="num">$317.6M</td><td><span class="tag">Filed</span> 10-Q, 11 May 2026</td></tr>
+      <tr><td class="lbl">Net income, FY2025</td><td class="num pos-t">$364.5M</td><td><span class="tag">Filed</span> 10-K, 25 Nov 2025</td></tr>
+      <tr><td class="lbl">Net loss, H1 FY2026</td><td class="num neg-t">($757.1M)</td><td><span class="tag">Filed</span> 10-Q, 11 May 2026</td></tr>
+      <tr><td class="lbl">Operating loss, H1 FY2026</td><td class="num neg-t">($662.2M)</td><td><span class="tag">Filed</span> 10-Q, 11 May 2026</td></tr>
+      <tr><td class="lbl">Cash and equivalents</td><td class="num">$260.3M</td><td><span class="tag">Filed</span> 10-Q, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Bitcoin on balance sheet</td><td class="num">$813.2M</td><td><span class="tag">Filed</span> 10-Q, 11,920 BTC at 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Bitcoin held, latest</td><td class="num">13,924 BTC</td><td><span class="tag">Filed</span> Operational update, 7 Jul 2026, at 30 Jun 2026</td></tr>
+      <tr><td class="lbl">Convertible notes, principal</td><td class="num">$1,800.0M</td><td><span class="tag">Filed</span> 10-Q, $650M 2030 plus $1,150M 2032</td></tr>
+      <tr><td class="lbl">Total liabilities</td><td class="num">$1,927.3M</td><td><span class="tag">Filed</span> 10-Q, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Shareholders' equity</td><td class="num">$986.2M</td><td><span class="tag">Filed</span> 10-Q, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Contracted power</td><td class="num">1,809 MW</td><td><span class="tag">Filed</span> 10-Q, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Power actually drawn</td><td class="num">808 MW</td><td><span class="tag">Filed</span> Operational update, 7 Jul 2026, peak concurrent June</td></tr>
+      <tr><td class="lbl">Operating hashrate</td><td class="num">42.6 EH/s</td><td><span class="tag">Filed</span> Operational update, June 2026 average</td></tr>
+      <tr><td class="lbl">Fleet deployed</td><td class="num">225,137</td><td><span class="tag">Filed</span> Operational update, at 30 Jun 2026</td></tr>
+      <tr><td class="lbl">Shares short</td><td class="num">77,993,876</td><td><span class="tag">Market</span> 15 Jul 2026 settlement date</td></tr>
+      <tr><td class="lbl">52-week range</td><td class="num">$8.00 &ndash; $23.61</td><td><span class="tag">Market</span> To 31 Jul 2026. No ticker change in the window</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 2. BUSINESS MODEL ===================== -->
+<section id="s2">
+  <h2 class="sec"><span class="n">02</span>Business model</h2>
+  <p>CleanSpark buys electricity and sells computation. Until 10 July 2026 there was only one kind of computation on offer: proof-of-work hashing contributed to a single bitcoin mining pool, Foundry, which the company names as its sole customer under a contract terminable at any time by either party. The company contributes all of its computing power to that pool and is paid in bitcoin under a formula, net of pool fees running at roughly 0.20% of gross mining revenue.</p>
+  <p>Everything upstream of that is an infrastructure business. The company owns and leases data centre shells, substations and power contracts across Georgia, Tennessee, Mississippi and Wyoming, and has since added land and power in Texas and South Dakota. It owns its miners rather than hosting for others, and since March 2025 it has conducted all mining at owned and leased sites, having exited its last hosted arrangement.</p>
+  <p>The second business began on 10 July 2026, when the company signed a 20-year triple net lease at Sandersville, Georgia for 175 MW of critical IT load. Under a triple net structure the tenant bears the costs, charges and expenses of the property, which is why the company can describe the expected cumulative contribution margin as close to 100% and the average annual contribution as roughly $330M. What the company retains is the obligation to build: it must satisfy specified financing, construction and delivery milestones, and failure to do so may result in rent abatements or termination of the lease.</p>
+  <p>A third activity now sits alongside both. Since April 2025 the company has run an in-house trading desk over its own bitcoin, writing covered calls and puts collateralised by treasury bitcoin or cash under a programme it calls Digital Asset Management. In June 2026 alone it sold 179 bitcoin at spot and 250 more into exercised calls, bought 25 through exercised puts and acquired 244 through delta-neutral basis trades, at an average realised price of $69,056 including net premiums. This is a treasury function that generates income and consumes management attention, and it is why 1,719 of the 13,924 bitcoin held at 30 June 2026 sat with derivative counterparties rather than in the company's own custody.</p>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The lease changes what kind of company this is more than any operating figure yet shows. Mining converts power into a commodity whose price the company cannot influence and whose production reward halves on a fixed schedule. A triple net lease converts the same power into a contracted receivable from a named credit over twenty years. Nothing in the reported numbers reflects that yet: the company states it had earned no revenue at all from AI and high performance computing as of 31 March 2026, and the first contracted deliveries are not expected until the fourth quarter of 2027. For at least five more reported quarters, the financial statements describe the old business while the equity is priced on the new one.</p>
+  </div>
+</section>
+
+<!-- ===================== 3. REVENUE STREAMS ===================== -->
+<section id="s3">
+  <h2 class="sec"><span class="n">03</span>Revenue streams</h2>
+  <p class="sub">One reported stream today, one contracted stream from late 2027, and a treasury activity that is reported below the revenue line.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Stream</th><th class="num">FY2025</th><th class="num">H1 FY2026</th><th>Share and durability</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Bitcoin mining</td><td class="num">$766.3M</td><td class="num">$317.6M</td><td>100% of revenue in both periods. Paid in bitcoin by one pool operator under a contract terminable at will <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">AI and HPC hosting</td><td class="num">$0.0M</td><td class="num">$0.0M</td><td>No revenue earned to 31 Mar 2026. First deliveries under the Sandersville lease expected Q4 2027 <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Other services</td><td class="num">$0.0M</td><td class="num">$0.0M</td><td>The former data centre services line ceased in FY2023 and the energy segment is in discontinued operations <span class="tag">Filed</span></td></tr>
+    </tbody>
+  </table></div>
+  <p>Mining revenue is the product of two variables the company reports separately. In fiscal 2025 it mined 7,873 bitcoin at an average price of $97,337. In the half to 31 March 2026 it mined 3,612 bitcoin at an average of $87,916, against 3,902 at $88,170 a year earlier. Both terms moved against it: fewer coins and a lower price. The company attributes the volume decline to global hashrate growing faster than its own fleet, so that its share of network computational power fell even as miners in operation rose from 205,412 to 224,473.</p>
+  <p>The contracted stream is large enough to dwarf the reported one. $6.6bn over an initial twenty years averages $330M a year, against $766.3M of mining revenue in fiscal 2025. The company describes the expected cumulative contribution margin as close to 100%, which is the ordinary consequence of a triple net structure rather than a claim about operating skill.</p>
+  <div class="note caution">
+    <p>The Sandersville lease has not been filed as an exhibit. The company reported it under Item 8.01 of Form 8-K, other events, and furnished only the press release. The $6.6bn figure, the escalators, the milestone schedule and the abatement and termination triggers are therefore known from the company's own summary rather than from the document.</p>
+  </div>
+</section>
+
+<!-- ===================== 4. INDUSTRY & MARKET BACKDROP ===================== -->
+<section id="s4">
+  <h2 class="sec"><span class="n">04</span>Industry &amp; market backdrop</h2>
+  <p>Two markets set the terms here, and they are moving in opposite directions.</p>
+  <h3>Bitcoin mining is getting harder</h3>
+  <p>Global network hashrate reached 1,060 EH/s at 30 September 2025 against 627 EH/s a year earlier and 391.8 EH/s the year before that. The April 2024 halving cut the block reward from 6.25 to 3.125 bitcoin. The arithmetic of the industry is that every participant must run faster to hold share, and that share is worth less per unit each cycle. CleanSpark's own share went from 2.45% at 30 September 2023 to 4.40% in 2024 to 4.30% in 2025, and stood at 4.66% at 31 March 2026 against a global 1,016 EH/s.</p>
+  <p>Bitcoin's price has then removed the compensation. Intraday ranges reported by the company show $105,120 to $124,533 in the September 2025 quarter, $80,525 to $126,296 in the December quarter, and $60,000 to $97,964 in the March 2026 quarter. On 31 July 2026 bitcoin opened at $64,724.03 and traded down to $63,652.09 by mid-morning, roughly 45% below its level a year earlier.</p>
+  <h3>Data centre power is getting scarcer</h3>
+  <p>The constraint in AI infrastructure has moved from chips to interconnection. ERCOT, the Texas grid operator, is processing a large load interconnection queue it has described at more than 438 GW, with close to 90% of it data centres, and the Public Utility Commission of Texas approved rules on 18 June 2026 for an initial cohort known as Batch Zero. ERCOT's own published process covers loads of 75 MW or greater and set a deadline of 10 July 2026 for interconnecting entities to lodge their forms and 24 July 2026 for the transmission provider to submit them. Applicants are to be told whether they are in the batch during August 2026, with a final transmission plan expected in the autumn of 2027.</p>
+  <p>Georgia is not an organised market. It is served by vertically integrated utilities and municipal systems under the Georgia Public Service Commission, which since 1 February 2025 has required any new Georgia Power customer expecting 100 MW or more of peak demand to take service under a customised contract rather than standard rates, with minimum billing terms permitted. In July 2026 the Commission voted to open a review of how Georgia Power charges data centres. Sandersville operates its own municipal electrical system, of which CleanSpark is the largest customer, so the applicability of the Georgia Power rule to this specific campus is not established here.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Backdrop measure</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Global hashrate, 31 Mar 2026</td><td class="num">1,016 EH/s</td><td><span class="tag">Filed</span> 10-Q, sourced by the company to Hashrate Index</td></tr>
+      <tr><td class="lbl">CleanSpark share of global hashrate</td><td class="num">4.66%</td><td><span class="tag">Filed</span> 10-Q, at 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Bitcoin, 31 Jul 2026</td><td class="num">~$64,700</td><td><span class="tag">Market</span> Opened $64,724.03, $63,652.09 at 08:52 ET</td></tr>
+      <tr><td class="lbl">ERCOT large load queue</td><td class="num">&gt;438 GW</td><td><span class="tag">Press</span> Utility Dive, 22 Jun 2026, reporting ERCOT</td></tr>
+      <tr><td class="lbl">PUCT large load rules approved</td><td class="num">18 Jun 2026</td><td><span class="tag">Press</span> Utility Dive, 22 Jun 2026</td></tr>
+      <tr><td class="lbl">Georgia customised contract threshold</td><td class="num">100 MW</td><td><span class="tag">Filed</span> Georgia Public Service Commission rule, effective 1 Feb 2025</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 5. COMPETITIVE POSITION ===================== -->
+<section id="s5">
+  <h2 class="sec"><span class="n">05</span>Competitive position</h2>
+  <p class="sub">Named peers on comparable measures. The company names its own competitors in its annual report and constructs its own peer index; both lists are used here.</p>
+  <p>CleanSpark names MARA Holdings, Riot Platforms, Core Scientific, Bitfarms, IREN Limited, Cipher Mining and TeraWulf as its principal North American competitors, and adds Equinix, Digital Realty Trust and CoreWeave for the data centre business it is entering. Its self-constructed performance peer index is MARA, Riot, HIVE, Bitfarms, TeraWulf, Cipher, IREN and Hut 8.</p>
+  <p>The naming runs both ways, which is worth stating because it settles that these companies regard each other as direct comparables rather than merely operating in the same sector. IREN's proxy statement of 6 October 2025 places CleanSpark in both its compensation peer group and the performance peer group used for its pay-versus-performance disclosure. MARA's proxy statement of 30 April 2026 places CleanSpark in its compensation peer group and in the four-company market-capitalisation-weighted peer group used for its total shareholder return comparison.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Measure</th><th class="num">CleanSpark</th><th>Position and basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Operating hashrate</td><td class="num">42.6 EH/s</td><td>June 2026 average, against a 50 EH/s peak. Among the largest listed fleets <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Share of global hashrate</td><td class="num">4.66%</td><td>At 31 Mar 2026. Was 4.40% at 30 Sep 2024, so share has drifted despite fleet growth <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Fleet efficiency</td><td class="num">16.2 J/TH</td><td>Average operating efficiency at 31 Mar 2026, range 13.5 to 29.5. Peak deployed efficiency 16.07 J/TH in June 2026 <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Power cost</td><td class="num">$0.052 / kWh</td><td>Quarter to 31 Mar 2026, against $0.060 a year earlier. Low relative to the sector <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Contracted power</td><td class="num">1,809 MW</td><td>At 31 Mar 2026, against 1,027 MW at 30 Sep 2025 <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Power actually drawn</td><td class="num">808 MW</td><td>Peak concurrent usage in June 2026, so under half the contracted figure is energised <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Bitcoin held</td><td class="num">13,924 BTC</td><td>At 30 Jun 2026. Among the larger miner treasuries <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Contracted AI and HPC revenue</td><td class="num">$6.6bn</td><td>Over an initial 20-year term, first deliveries expected Q4 2027 <span class="tag">Filed</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">
+    <p><b>Where this file and a companion document differ.</b> The MARA report in this set, as of 1 August 2026, describes CleanSpark as having more than 1.8 GW under contract with advanced hyperscaler discussions and AI deployments targeted for 2026 to 2027, on industry press from April to July 2026, and flags that the figure was not verified against CleanSpark's own filings. The power figure is corroborated here from the primary record: 1,809 MW at 31 March 2026 in the quarterly report, and 1.8 GW in the company's own June operational update. The characterisation of the customer position is not. As of 31 March 2026 the company stated it had earned no AI or HPC revenue, and the position advanced from discussions to an executed lease on 10 July 2026, with first deliveries expected in the fourth quarter of 2027 rather than in 2026.</p>
+  </div>
+</section>
+
+<!-- ===================== 6. FINANCIAL PERFORMANCE ===================== -->
+<section id="s6">
+  <h2 class="sec"><span class="n">06</span>Financial performance</h2>
+  <p class="sub">Fiscal years end 30 September. Fair value movements on bitcoin run through the income statement under the crypto asset standard adopted from 1 October 2023, which is why reported earnings swing with the coin price.</p>
+  <div class="tw"><table>
+    <thead><tr><th>$ millions</th><th class="num">FY2023</th><th class="num">FY2024</th><th class="num">FY2025</th><th class="num">H1 FY2026</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Revenue</td><td class="num">168.1</td><td class="num">379.0</td><td class="num">766.3</td><td class="num">317.6</td></tr>
+      <tr><td class="lbl">Cost of revenues</td><td class="num">93.6</td><td class="num">165.5</td><td class="num">343.1</td><td class="num">177.3</td></tr>
+      <tr><td class="lbl">Depreciation and amortisation</td><td class="num">120.7</td><td class="num">154.6</td><td class="num">348.3</td><td class="num">222.2</td></tr>
+      <tr><td class="lbl">Payroll</td><td class="num">45.7</td><td class="num">74.1</td><td class="num">104.4</td><td class="num">48.7</td></tr>
+      <tr><td class="lbl">General and administrative</td><td class="num">20.8</td><td class="num">30.2</td><td class="num">52.6</td><td class="num">31.5</td></tr>
+      <tr><td class="lbl">Gain (loss) on fair value of bitcoin</td><td class="num">n/a</td><td class="num pos-t">113.4</td><td class="num pos-t">425.6</td><td class="num neg-t">(470.9)</td></tr>
+      <tr><td class="lbl">Operating income (loss)</td><td class="num neg-t">n/a</td><td class="num neg-t">(149.0)</td><td class="num pos-t">318.9</td><td class="num neg-t">(662.2)</td></tr>
+      <tr><td class="lbl">Net income (loss)</td><td class="num neg-t">(138.1)</td><td class="num neg-t">(145.8)</td><td class="num pos-t">364.5</td><td class="num neg-t">(757.1)</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub">Source: Form 10-K filed 25 November 2025 and Form 10-Q filed 11 May 2026. <span class="tag">Filed</span></p>
+  <h3>The trend, stated plainly</h3>
+  <p>Revenue doubled in fiscal 2025 and then fell. The half to 31 March 2026 brought in $317.6M against $344.0M a year earlier, an 8% decline, and the March quarter alone fell 25% to $136.4M. Underneath that, cost of revenues rose 14% over the half, because energy consumption tracks the fleet rather than the coin price. Energy took 55.8% of mining revenue in the half against 43.4% a year before, and 59.9% in the March quarter alone against 46.0%.</p>
+  <p>Depreciation is the line that has changed the business. The company shortened miner useful lives from five years to three effective 1 May 2024. Depreciation and amortisation ran $348.3M in fiscal 2025 and $222.2M in the first half of fiscal 2026, against $145.1M in the comparable half. Set against the half's $317.6M of revenue, depreciation alone now consumes 70 cents of every revenue dollar.</p>
+  <h3>The economics of one bitcoin</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Cost to mine one bitcoin, owned facilities</th><th class="num">FY2024</th><th class="num">FY2025</th><th class="num">Q2 FY2026</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Energy</td><td class="num">$21,308</td><td class="num">$42,890</td><td class="num">$45,387</td></tr>
+      <tr><td class="lbl">Other direct, non-energy</td><td class="num">$93</td><td class="num">$66</td><td class="num">$24</td></tr>
+      <tr><td class="lbl">Direct cash cost</td><td class="num">$21,401</td><td class="num">$42,956</td><td class="num">$45,411</td></tr>
+      <tr><td class="lbl">Miner depreciation</td><td class="num">$17,156</td><td class="num">$39,727</td><td class="num">$58,029</td></tr>
+      <tr><td class="lbl">All-in cost</td><td class="num">$38,766</td><td class="num">$82,727</td><td class="num">$103,440</td></tr>
+      <tr><td class="lbl">Average revenue per bitcoin mined</td><td class="num">$53,708</td><td class="num">$97,687</td><td class="num">$75,827</td></tr>
+      <tr><td class="lbl">All-in cost as % of revenue per coin</td><td class="num">72.2%</td><td class="num">84.7%</td><td class="num neg-t">136.4%</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub">Source: Form 10-K filed 25 November 2025 and Form 10-Q filed 11 May 2026. Q2 FY2026 is the quarter to 31 March 2026. <span class="tag">Filed</span></p>
+  <p>The crossing happened in the March 2026 quarter. Every bitcoin mined cost $103,440 to produce on a full-cost basis and sold for $75,827, a shortfall of $27,613 per coin. On a cash basis the fleet remains well ahead, earning $75,827 against $45,411 of avoidable cost, and the company says explicitly that it does not consider depreciation when deciding whether to run a machine, because depreciation is not an avoidable operating cost. Both statements are true and they answer different questions. The cash figure says the machines should keep running. The full-cost figure says the capital that bought them is not being recovered at these prices.</p>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The gap between the two figures is a three-year clock. A fleet depreciated over three years must earn back its purchase price within three years or the replacement cycle is funded from somewhere other than mining. At the March 2026 quarter's rates that shortfall runs at roughly $27,600 per coin against roughly 1,800 coins a quarter, or about $50M a quarter of capital not recovered. That is an inference from the company's own per-coin disclosures and not a figure the company states.</p>
+  </div>
+  <div class="note caution">
+    <p><b>Two internal inconsistencies in the fiscal 2025 annual report are worth noting for anyone reading the primary document.</b> The business section states that the company mined approximately 7,873 bitcoins, net of mining pool fees, "representing a decrease of 11.0% compared to the 7,092 bitcoins mined in fiscal year 2024". The two figures it cites imply an increase of 11.0%, and the management discussion in the same filing describes the same movement as an increase and states the figure is gross of pool fees rather than net. Separately, the market risk disclosure in the March 2026 quarterly report states holdings and collateral of approximately "$925 and $112 million" respectively, where the balance sheet carries $813.2M and $111.9M and $925.2M is their sum, and gives a 10% sensitivity of approximately $104M where 10% of $925.2M is $92.5M.</p>
+  </div>
+</section>
+
+<!-- ===================== 7. CAPITAL STRUCTURE & DILUTION ===================== -->
+<section id="s7">
+  <h2 class="sec"><span class="n">07</span>Capital structure &amp; dilution</h2>
+  <p class="sub">Shares, preferred, convertibles, capped calls, bitcoin-backed revolvers and warrants, at 31 March 2026 unless stated.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Instrument</th><th class="num">Amount</th><th>Terms and basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Common stock authorised</td><td class="num">600,000,000</td><td>Par $0.001 <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Common issued</td><td class="num">298,964,590</td><td>At 31 Mar 2026 <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Common outstanding</td><td class="num">256,599,199</td><td>At 31 Mar 2026, after 42,365,391 treasury shares <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Series A preferred</td><td class="num">1,750,000</td><td>45 votes each, liquidation preference $0.02 per share, converts to 3 common each on a change of control <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">2030 convertible notes</td><td class="num">$650.0M</td><td>0% coupon, due 15 Jun 2030, conversion price ~$14.80, holder put at par 15 Jun 2028 <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">2032 convertible notes</td><td class="num">$1,150.0M</td><td>0% coupon, due 15 Feb 2032, conversion price ~$19.16, not redeemable before 20 Feb 2029 <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">2030 capped calls</td><td class="num">$90.4M cost</td><td>Cap price $24.66. No capped call was bought against the 2032 notes <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Coinbase revolving facility</td><td class="num">$300.0M</td><td>Indicative capacity, 8.25%, bitcoin collateral, undrawn at 31 Mar 2026 <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Two Prime revolving facility</td><td class="num">$100.0M</td><td>SOFR plus 3.55%, matures 14 Sep 2026, undrawn at 31 Mar 2026 <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Other secured debt</td><td class="num">$7.7M</td><td>$5.69M aircraft note to 2029 and a $2.0M corporate mortgage to 2030 <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Warrants</td><td class="num">1,604,559 shares</td><td>22,821,286 warrants at $165.24 per whole share, listed as CLSKW. Deeply out of the money <span class="tag">Filed</span></td></tr>
+    </tbody>
+  </table></div>
+  <h3>The convertibles are the balance sheet</h3>
+  <p>Both note issues carry a 0% coupon, so the cash cost of $1.8bn of debt is close to nothing: effective rates of 0.46% and 0.27% respectively, reflecting only the accretion of issuance costs. What the company sold instead of a coupon is equity optionality, and the market has repriced it. At 31 March 2026 the 2032 notes carried a fair value of $779.2M against $1,150.0M of principal, roughly 68 cents on the dollar, while the 2030 notes stood at $635.7M against $650.0M.</p>
+  <p>If both issues converted in full they would deliver 103,941,450 shares, computed as $650M at 67.5858 shares per $1,000 plus $1,150M at 52.1832 shares per $1,000. Against 256,599,199 shares outstanding that is 40.5% dilution, and the company may elect to settle in cash instead. Neither conversion price is currently in reach: the stock closed at $13.76 on 31 July 2026 against conversion prices of $14.80 and $19.16.</p>
+  <p>The date that matters before then is 15 June 2028, when holders of the 2030 notes have a one-time non-contingent right to require the company to repurchase their notes at par for cash. That is $650M of potential cash demand at a fixed date, and it falls roughly six months after the Sandersville lease is expected to begin delivering.</p>
+  <h3>The buybacks were part of the note offerings, not a capital return</h3>
+  <p>The company has no share repurchase programme. It has nonetheless retired 42,365,391 shares for $605.0M in two transactions, and both were struck alongside a convertible offering with the investors buying the notes. In December 2024 it repurchased 11,759,935 shares for approximately $145.0M from investors in the 2030 notes. In November 2025 it repurchased 30,605,456 shares for approximately $460.0M from investors in the 2032 notes, accruing $3.19M of excise tax. The 2025 transaction implies roughly $15.03 a share, against $13.76 on 31 July 2026.</p>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Repurchasing stock from the buyers of a convertible bond is a hedging accommodation rather than a statement about value. Convertible arbitrage funds short the underlying to hedge the equity component, and a concurrent repurchase lets them establish that short without selling into the open market. Reading the $605.0M as management's view on the share price would misread the structure. What it does establish is that $605.0M of the $1.76bn raised across the two offerings was never available for the power and land portfolio.</p>
+  </div>
+  <h3>Voting control sits with 0.7% of the economics</h3>
+  <p>The Series A preferred carries 45 votes a share. At the 3 March 2026 annual meeting the record showed 255,750,361 common votes and 78,750,000 preferred votes, so the preferred held 23.5% of the aggregate voting power. The holders are the Chairman and Chief Executive S. Matthew Schultz, the director Larry McNeill, Celtic LLC which they control, and the former Chief Executive Zachary K. Bradford. The amended certificate of designation filed on 20 March 2026 provides that all Series A shares vote together in accordance with the majority of that class while officers and directors hold a majority of it.</p>
+  <div class="note neg">
+    <p>On 20 March 2026 the company eliminated the Series A quarterly dividend, which had been calculated as 2% of earnings before interest, taxes and amortisation, in exchange for a one-time special dividend of $17.1428571428571 per preferred share. Against 1,750,000 shares that is <b>$30,000,000</b>, paid on or about 24 March 2026 to the four holders named above. It was recorded as a deemed dividend in a quarter that reported a net loss of $378.3M. The board approved it excluding Messrs Schultz and McNeill.</p>
+  </div>
+</section>
+
+<!-- ===================== 8. VALUATION ===================== -->
+<section id="s8">
+  <h2 class="sec"><span class="n">08</span>Valuation</h2>
+  <p class="sub">Multiples with their basis and date shown. Market data is at the 31 July 2026 close; balance sheet inputs are at 31 March 2026 and bitcoin holdings at 30 June 2026, so the enterprise value below mixes three dates and is labelled accordingly.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Measure</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Market capitalisation</td><td class="num">$3,530.9M</td><td><span class="tag">Estimate</span> 256,608,606 shares &times; $13.76 close of 31 Jul 2026</td></tr>
+      <tr><td class="lbl">Plus total debt</td><td class="num">$1,788.2M</td><td><span class="tag">Filed</span> Carrying value at 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Less cash</td><td class="num">($260.3M)</td><td><span class="tag">Filed</span> At 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Enterprise value</td><td class="num">$5,058.8M</td><td><span class="tag">Estimate</span> Sum of the three lines above, across three dates</td></tr>
+      <tr><td class="lbl">Less bitcoin at ~$64,700</td><td class="num">($900.9M)</td><td><span class="tag">Estimate</span> 13,924 BTC at 30 Jun 2026 marked at the 31 Jul 2026 price</td></tr>
+      <tr><td class="lbl">Enterprise value ex-bitcoin</td><td class="num">$4,157.9M</td><td><span class="tag">Estimate</span> $5,058.8M less $900.9M</td></tr>
+      <tr><td class="lbl">EV / FY2025 revenue</td><td class="num">6.6&times;</td><td><span class="tag">Estimate</span> $5,058.8M / $766.3M</td></tr>
+      <tr><td class="lbl">EV / annualised H1 FY2026 revenue</td><td class="num">8.0&times;</td><td><span class="tag">Estimate</span> $5,058.8M / ($317.6M &times; 2)</td></tr>
+      <tr><td class="lbl">Price / book</td><td class="num">3.58&times;</td><td><span class="tag">Estimate</span> $3,530.9M / $986.2M equity at 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Market cap per EH/s</td><td class="num">$82.9M</td><td><span class="tag">Estimate</span> $3,530.9M / 42.6 EH/s June 2026 average</td></tr>
+      <tr><td class="lbl">EV per contracted MW</td><td class="num">$2.80M</td><td><span class="tag">Estimate</span> $5,058.8M / 1,809 MW at 31 Mar 2026</td></tr>
+      <tr><td class="lbl">EV per drawn MW</td><td class="num">$6.26M</td><td><span class="tag">Estimate</span> $5,058.8M / 808 MW peak concurrent June 2026</td></tr>
+    </tbody>
+  </table></div>
+  <h3>What the lease is worth on the company's own inputs</h3>
+  <p>The 14 July 2026 announcement supplies enough figures to test the deal on its own terms without adding any of this file's own. It states $6.6bn of expected contract value over twenty years, an expected cumulative contribution margin close to 100%, an average annual contribution of approximately $330M, and landlord project costs of $10M to $12M per MW of critical IT load against 175 MW.</p>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Project cost of $10M to $12M per MW against 175 MW gives $1,750M to $2,100M. Set the company's stated $330M average annual contribution against the midpoint of $1,925M and the unlevered yield on cost is 17.1%, and against the top of the range 15.7%. That is an attractive return on paper for a twenty-year lease to an investment-grade credit. It also implies capital expenditure between 1.8 and 2.1 times the company's entire 31 March 2026 shareholders' equity of $986.2M, to be spent before the first rent is received in the fourth quarter of 2027. The yield calculation and the capex-to-equity ratio are arithmetic on the company's stated inputs; the company publishes neither.</p>
+  </div>
+  <h3>Published third-party targets</h3>
+  <p>Analyst targets are reported here as market data. This file issues no rating and derives no target of its own.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Firm and analyst</th><th class="num">Target</th><th>Rating and basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Consensus, 13 analysts</td><td class="num">$23.19</td><td>Range $19 to $27 <span class="tag">Market</span> As reported 27 Jul 2026</td></tr>
+      <tr><td class="lbl">BTIG, Gregory Lewis</td><td class="num">$26</td><td>Buy <span class="tag">Market</span> As reported 27 Jul 2026</td></tr>
+      <tr><td class="lbl">KBW, Stephen Glagola</td><td class="num">$25</td><td>Buy, raised from $16 <span class="tag">Market</span> As reported 27 Jul 2026</td></tr>
+      <tr><td class="lbl">Bernstein, Chad Dillard</td><td class="num">$24</td><td>Buy <span class="tag">Market</span> As reported 27 Jul 2026</td></tr>
+      <tr><td class="lbl">Maxim Group, Matthew Galinko</td><td class="num">$24</td><td>Buy, raised from $22 <span class="tag">Market</span> As reported 27 Jul 2026</td></tr>
+      <tr><td class="lbl">Northland Securities, Michael Grondahl</td><td class="num">$21</td><td>Buy <span class="tag">Market</span> As reported 27 Jul 2026</td></tr>
+    </tbody>
+  </table></div>
+  <p>The KBW revision from $16 to $25 dates the sell-side re-rating to the fortnight after the lease announcement. Every target in the set was published after 14 July 2026 and therefore incorporates the lease; none of them predates an event that would plainly have changed it.</p>
+</section>
+
+<!-- ===================== 9. GROWTH DRIVERS ===================== -->
+<section id="s9">
+  <h2 class="sec"><span class="n">09</span>Growth drivers</h2>
+  <div class="tw"><table>
+    <thead><tr><th>Driver</th><th class="num">Scale</th><th>What has to happen, and basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Sandersville lease</td><td class="num">$6.6bn</td><td>Finance and build 175 MW of critical IT load, hit the milestones, deliver from Q4 2027 <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Extension options</td><td class="num">$5.0bn</td><td>The difference between $11.6bn with both five-year extensions and $6.6bn without. Tenant's option, exercisable at the end of year 20 <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Texas portfolio</td><td class="num">885 MW</td><td>718 acres under a letter of intent and exclusivity with the same tenant, converting to a lease is unconfirmed <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Georgia platform for retrofit</td><td class="num">620 MW</td><td>The company describes the existing Georgia estate as a base for retrofit and dual-purpose compute <span class="tag">Filed</span></td></tr>
+      <tr><td class="lbl">Unenergised contracted power</td><td class="num">~1,000 MW</td><td>1,809 MW contracted against 808 MW drawn. Bringing it online needs capital and interconnection <span class="tag">Estimate</span></td></tr>
+      <tr><td class="lbl">Bitcoin price recovery</td><td class="num">13,924 BTC</td><td>Each $10,000 on the coin moves the treasury by roughly $139M before tax <span class="tag">Estimate</span></td></tr>
+    </tbody>
+  </table></div>
+  <p>The company has also added a South Dakota property in December 2025 and further Tennessee property in February 2026, and in October 2025 appointed Jeffrey Thomas as Senior Vice President of AI Data Centers. It is working with Submer Technologies on modular AI data centre design under what it describes as a non-binding framework, with no definitive agreement in place.</p>
+</section>
+
+<!-- ===================== 10. RISKS ===================== -->
+<section id="s10">
+  <h2 class="sec"><span class="n">10</span>Risks</h2>
+  <p class="sub">Severity-ranked, most severe first.</p>
+
+  <div class="risk sev-high">
+    <h4>The lease requires capital the company has not raised <span class="sev">Severe</span></h4>
+    <p>On the company's own stated project cost of $10M to $12M per MW against 175 MW, Sandersville needs $1.75bn to $2.10bn. Cash was $260.3M at 31 March 2026 and the undrawn revolvers total $400M, both of which are bitcoin-collateralised. The 8-K states that failure to satisfy the financing, construction and delivery milestones may result in rent abatements or termination of the lease. The company's own forward-looking statement names its need for substantial additional capital and the risks of the significant additional indebtedness it may incur. No financing has been announced in the three weeks since.</p>
+  </div>
+
+  <div class="risk sev-high">
+    <h4>Bitcoin sets the equity, and the equity has halved <span class="sev">Severe</span></h4>
+    <p>Shareholders' equity went from $2,175.1M at 30 September 2025 to $1,382.3M at 31 December 2025 to $986.2M at 31 March 2026, tracking bitcoin from roughly $114,100 to roughly $87,500 to roughly $68,200. The fair value standard puts those movements straight through earnings, so a further decline reduces both the reported result and the book value against which the company would borrow. Bitcoin was near $64,700 on 31 July 2026, below the 31 March mark.</p>
+  </div>
+
+  <div class="risk sev-high">
+    <h4>Mining no longer recovers its capital <span class="sev">Severe</span></h4>
+    <p>In the March 2026 quarter the all-in cost of a mined bitcoin was $103,440 against $75,827 of revenue per coin. The fleet is depreciated over three years, so the shortfall is a real claim on future capital rather than an accounting artefact. Energy took 59.9% of mining revenue in the quarter against 46.0% a year earlier, and global hashrate has grown faster than the fleet, so the company's share of network rewards has drifted down even as it added machines.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>The 2030 notes carry a $650M cash put in June 2028 <span class="sev">Moderate</span></h4>
+    <p>Holders have a one-time non-contingent right to require repurchase at par on 15 June 2028. With the stock at $13.76 against a $14.80 conversion price, the notes are not currently equity-like, and the put falls within months of the first expected lease revenue. The 2032 notes, at a $19.16 conversion price and trading around 68 cents on the dollar at 31 March 2026, carry no equivalent early put but also no capped call to blunt their dilution.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Related-party governance and a super-voting block <span class="sev">Moderate</span></h4>
+    <p>Four holders, three of them current or former insiders plus an entity two of them control, hold 23.5% of the vote on 1,750,000 preferred shares with a $0.02 liquidation preference. In March 2026 they received $30.0M in cash to give up a dividend entitlement, in a quarter with a $378.3M net loss. The board has five members, two of whom are among those holders. At the March 2026 meeting, withheld votes ran to 31.6M for Mr McNeill and 32.2M for Dr Wood against 159.7M cast for the Chief Executive.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>A certified securities class action and a live derivative action <span class="sev">Moderate</span></h4>
+    <p>In Hasthantra v. CleanSpark, filed in the Southern District of New York in January 2021 over statements between 10 December 2020 and 16 August 2021 concerning the ATL Data Centers acquisition, the court granted class certification on 24 September 2025. The company's motions to exclude the plaintiffs' two experts were fully briefed on 3 March 2026 and remain pending. In the consolidated Smith derivative action in Nevada, the court denied the special litigation committee's motion to defer on 2 April 2026, and the company is evaluating whether to seek appellate review. The company states it cannot estimate potential losses in either matter.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Up to $130M of tariff exposure with no provision taken <span class="sev">Moderate</span></h4>
+    <p>From May 2025 US Customs and Border Protection has asserted Chinese-origin import tariffs on miners imported in 2024. The company states total liability could reach approximately $130M excluding statutory interest, that it holds importation documentation showing non-Chinese origin, that some administrative protests have been approved, and that it has recorded no provision because a loss is not probable.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>One customer, terminable at will <span class="sev">Moderate</span></h4>
+    <p>All computing power goes to a single mining pool operator, Foundry, which the company names as its sole customer under a contract either party may terminate at any time. Every dollar of reported revenue depends on that relationship continuing.</p>
+  </div>
+
+  <div class="risk sev-low">
+    <h4>The tenant is unnamed and the lease is not on file <span class="sev">Lower</span></h4>
+    <p>The counterparty is described only as a high investment grade global technology company. The lease itself was not filed as an exhibit and the 8-K reported it under other events rather than as a material definitive agreement, so the escalators, milestone schedule and termination triggers cannot be read directly.</p>
+  </div>
+
+  <div class="risk sev-low">
+    <h4>Texas capacity depends on an interconnection process still being designed <span class="sev">Lower</span></h4>
+    <p>The 885 MW under exclusivity is described as secured and planned rather than energised. ERCOT's Batch Zero process for loads of 75 MW or more only closed its submission window on 24 July 2026, applicants learn of inclusion during August 2026, and a final transmission plan for the batch is expected in the autumn of 2027.</p>
+  </div>
+
+  <div class="risk sev-low">
+    <h4>Short interest at roughly 30% of shares outstanding <span class="sev">Lower</span></h4>
+    <p>77,993,876 shares were short at the 15 July 2026 settlement date, against 78,632,173 at 30 June. On 256,608,606 shares outstanding that is 30.4%. The position cuts both ways: it is a standing bid under bad news and an accelerant on good news, and days-to-cover of 3.3 means it can move quickly.</p>
+  </div>
+
+  <div class="risk sev-low">
+    <h4>A litigation the company's own filings do not carry <span class="sev">Lower</span></h4>
+    <p>Big Digital Energy, formerly Mawson Infrastructure Group, discloses in its quarterly report filed 14 May 2026 that on 16 July 2024 it sued CleanSpark and CSRE Properties Sandersville LLC in the Southern District of New York, case 1:24-cv-5379, for at least $2.0M for breach of a bill of sale dated 1 October 2022, that the defendants' motion to dismiss was denied, and that the parties are pursuing informal settlement discussions. Neither CleanSpark's fiscal 2025 annual report nor its March 2026 quarterly report names the matter. The sum is immaterial to CleanSpark at this size; the subject is the Sandersville campus now under the $6.6bn lease.</p>
+  </div>
+</section>
+
+<!-- ===================== 11. BULL / BASE / BEAR ===================== -->
+<section id="s11">
+  <h2 class="sec"><span class="n">11</span>Bull / base / bear</h2>
+  <p class="sub">Each case with its preconditions: what must be true, not what might be.</p>
+  <div class="cases">
+    <div class="case bear"><h4>Bear</h4><p>Bitcoin stays near $65,000 and the fleet keeps failing to recover its capital while the balance sheet carries $1.8bn of debt against $986.2M of equity. Sandersville financing arrives late or expensive, milestones slip, and rent abatement or termination becomes live. The $650M put in June 2028 falls at most two or three quarters after rent is due to begin.</p>
+      <p class="req">Requires: bitcoin flat to lower, financing on poor terms or delayed, and no second lease to validate the Texas exclusivity.</p></div>
+    <div class="case"><h4>Base</h4><p>The company finances Sandersville with a mix of project debt and equity, dilutes, and builds. Mining continues to cover cash costs but not capital, and the reported result stays hostage to the bitcoin mark for five more quarters. The lease begins delivering in late 2027 and the story becomes a rent roll rather than a hash rate.</p>
+      <p class="req">Requires: financing closed on ordinary terms during fiscal 2027, milestones met, bitcoin no worse than current levels.</p></div>
+    <div class="case bull"><h4>Bull</h4><p>Financing closes cheaply against an investment-grade rent stream, the Texas letter of intent converts into leases across some or all of the 885 MW, and the market reprices 1.8 GW of controlled power as contracted infrastructure rather than as mining capacity. A short position of 30% of shares outstanding has to be covered into that.</p>
+      <p class="req">Requires: Texas exclusivity converting to signed leases, financing at project-finance rather than corporate rates, milestones met on schedule.</p></div>
+  </div>
+</section>
+
+<!-- ===================== 12. RESEARCH SUMMARY ===================== -->
+<section id="s12">
+  <h2 class="sec"><span class="n">12</span>Research summary</h2>
+  <p>CleanSpark spent fiscal 2025 doing what a bitcoin miner does well. Revenue doubled to $766.3M, the fleet reached 45.6 EH/s across 1,027 MW, and the fair value of a rising coin delivered $364.5M of net income. It then spent the following six months demonstrating the limits of that model. Revenue fell 8%, the coin fell roughly 40% from the September mark, and the fair value line reversed from a $425.6M gain to a $470.9M loss. Shareholders' equity halved. The all-in cost of mining a bitcoin passed the revenue a bitcoin brings in.</p>
+  <p>Into that, on 10 July 2026, came a twenty-year triple net lease worth $6.6bn from a tenant the company describes as high investment grade, plus exclusivity over 885 MW more. On the company's own inputs the deal earns roughly 17% unlevered on cost. It also requires between $1.75bn and $2.10bn of construction, which is between 1.8 and 2.1 times the equity the company had at 31 March 2026, spent before the first rent arrives in late 2027, with rent abatement or termination available to the tenant if the milestones slip. That financing has not been announced.</p>
+  <p>Three things are worth watching more than the coin price. The first is what the financing looks like when it comes, because the difference between project debt secured on a rent stream and further corporate convertibles is the difference between the two halves of this document. The second is whether the Texas letter of intent converts, because 885 MW under exclusivity is either the second chapter the company says it is or an option that expires. The third is the June 2028 put on the 2030 notes, which is the only fixed cash date in a capital structure otherwise made of zero-coupon paper.</p>
+  <p>The unusual feature of this situation is that the reported financial statements and the reason for owning the shares no longer describe the same business, and will not for at least five more quarters. That is not by itself a criticism. It does mean that quarterly results through fiscal 2027 will say very little about whether the thesis is working, and that the observable tests are financing announcements, milestone confirmations and lease conversions rather than earnings.</p>
+</section>
+
+<!-- ===================== 13. NULL CATEGORIES ===================== -->
+<section id="s13">
+  <h2 class="sec"><span class="n">13</span>Null categories</h2>
+  <p class="sub">Requested categories with nothing to report. Status reads Covered above, None where a
+  named source was checked and found empty, or Not established where the category was not examined.
+  A category nobody looked at is a gap, not an absence.</p>
+  <div class="tw"><table class="nulls">
+    <thead><tr><th>Category</th><th>Status</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Common dividends</td><td class="status">None</td><td>The fiscal 2025 annual report states no dividend has ever been declared on the common stock and none is planned.</td></tr>
+      <tr><td class="lbl">Preferred dividends</td><td class="status">Covered above</td><td>The $30.0M Series A special dividend of March 2026 is in section 7.</td></tr>
+      <tr><td class="lbl">Share repurchase programme</td><td class="status">None</td><td>No authorised programme exists. The $605.0M of privately negotiated repurchases alongside the two note offerings is in section 7.</td></tr>
+      <tr><td class="lbl">Segment reporting</td><td class="status">None</td><td>The company reports a single reportable segment, bitcoin mining. The lease will create a second business with no segment history.</td></tr>
+      <tr><td class="lbl">Corporate credit rating</td><td class="status">None</td><td>Both note issues were sold under Rule 144A without a corporate rating. The only rating found is a provisional (P)Ba2 assigned to the New Hampshire conduit bonds that were not issued.</td></tr>
+      <tr><td class="lbl">Going concern</td><td class="status">None</td><td>No going concern qualification appears in the fiscal 2025 audit report or the March 2026 quarterly report. The company states existing resources are sufficient for at least twelve months.</td></tr>
+      <tr><td class="lbl">Analyst coverage</td><td class="status">Covered above</td><td>Thirteen analysts and five named firm targets are in section 8, reported as market data.</td></tr>
+      <tr><td class="lbl">Index membership</td><td class="status">Covered above</td><td>S&amp;P SmallCap 600 from 24 March 2025, in section 5 and the calendar record.</td></tr>
+      <tr><td class="lbl">At-the-market equity programme</td><td class="status">None</td><td>The last at-the-market issuance recorded was 16,619,361 shares for $191.6M gross in the half to 31 March 2025. No at-the-market sales are recorded in the half to 31 March 2026.</td></tr>
+      <tr><td class="lbl">Product launches</td><td class="status">None</td><td>The company sells computation, not products. The nearest referent is capacity energisation and the AI and HPC lease, both covered in sections 2 and 9.</td></tr>
+      <tr><td class="lbl">Insider open-market purchases</td><td class="status caution-t">Not established</td><td>Not examined. The Form 4 record was enumerated by count and date but individual transaction codes were not read. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Industry conferences</td><td class="status caution-t">Not established</td><td>Not examined. Also named in what was not checked.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 14. METHODOLOGY & SOURCES ===================== -->
+<section id="s14">
+  <h2 class="sec"><span class="n">14</span>Methodology &amp; sources</h2>
+  <p class="sub">Pricing basis, the tagging scheme, and, importantly, what was not checked.</p>
+
+  <h3>Pricing basis</h3>
+  <p>Market figures are struck at the Nasdaq close of 31 July 2026, $13.76. The as-of stamp of 3 August 2026 is the build date and is later than the close, which is why the two differ. Bitcoin is referenced at approximately $64,700 for 31 July 2026: the sources read give an opening price of $64,724.03 and $63,652.09 at 08:52 Eastern, and no single settled closing print was established, so the enterprise value line in section 8 is sensitive to roughly $14M across that range.</p>
+
+  <h3>Primary sources</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Document</th><th class="when">Filed</th><th>What it settles</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Form 10-K, FY ended 30 Sep 2025</td><td class="when">25 Nov 2025</td><td>Full-year financials, fleet, sites, competitors, legal matters, subsequent events</td></tr>
+      <tr><td class="lbl">Form 10-Q, quarter ended 31 Mar 2026</td><td class="when">11 May 2026</td><td>Half-year financials, indebtedness, collateral, litigation, tariffs, equity</td></tr>
+      <tr><td class="lbl">Form 8-K, Sandersville lease</td><td class="when">14 Jul 2026</td><td>Lease terms, 175 MW, $6.6bn, milestones, Texas exclusivity</td></tr>
+      <tr><td class="lbl">Form 8-K, Series A amendment</td><td class="when">24 Mar 2026</td><td>$30.0M special dividend, holder identities, voting mechanics</td></tr>
+      <tr><td class="lbl">Form 8-K, 2032 notes</td><td class="when">13 Nov 2025</td><td>$1,150M issue, conversion terms, $460M concurrent repurchase</td></tr>
+      <tr><td class="lbl">Form 8-K, annual meeting results</td><td class="when">5 Mar 2026</td><td>Vote totals, voting power split, directors, auditor</td></tr>
+      <tr><td class="lbl">Operational update, June 2026</td><td class="when">7 Jul 2026</td><td>13,924 bitcoin, 42.6 EH/s average, 808 MW drawn, treasury activity</td></tr>
+      <tr><td class="lbl">Schedule 13G filings, eleven since Nov 2025</td><td class="when">to 17 Jul 2026</td><td>The institutional register. Detailed in the companion calendar</td></tr>
+      <tr><td class="lbl">Big Digital Energy Form 10-Q</td><td class="when">14 May 2026</td><td>The Mawson litigation over the Sandersville bill of sale</td></tr>
+      <tr><td class="lbl">IREN Limited proxy statement</td><td class="when">6 Oct 2025</td><td>CleanSpark in IREN's compensation and performance peer groups</td></tr>
+      <tr><td class="lbl">MARA Holdings proxy statement</td><td class="when">30 Apr 2026</td><td>CleanSpark in MARA's compensation and total-return peer groups</td></tr>
+    </tbody>
+  </table></div>
+  <p>The filing sweep was run against Central Index Key 0000827876, which is the permanent identifier and survives the company's earlier names Stratean Inc. and SmartData Corp. The complete index holds 750 filings from 17 November 2008 to 17 July 2026, and all eighteen form families were swept across it, most recent first. Exhibit lists were enumerated rather than form types alone. Beneficial ownership was swept under both of the labels the electronic system emits, which is how the eleven filings made under the newer label since November 2025 were found alongside the twenty made under the older one.</p>
+
+  <h3>Provenance tags</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Tag</th><th>What it asserts</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl"><span class="tag">Filed</span></td><td>Stated in an SEC filing or company release, cited by form and date. Also covers a dated official publication by a named non-SEC issuer, with the issuer named in the source line. Used here for the Georgia Public Service Commission rule, ERCOT's published Batch Zero process, and the company's monthly operational updates.</td></tr>
+      <tr><td class="lbl"><span class="tag">Estimate</span></td><td>Derived or inferred here. The arithmetic is shown.</td></tr>
+      <tr><td class="lbl"><span class="tag">Open</span></td><td>Expected but unconfirmed. Nothing filed either way.</td></tr>
+      <tr><td class="lbl"><span class="tag">Market</span></td><td>Price, volume, float, short interest, published targets and ratings, stamped with the close or publication date. A third party's target or rating is market data, attributed to the firm that issued it and never adopted here.</td></tr>
+      <tr><td class="lbl"><span class="tag">Press</span></td><td>Reported by a named publication that is neither the issuer nor an analyst, cited by outlet and date. Corroborates; never the sole basis for a material claim.</td></tr>
+      <tr><td class="lbl"><span class="tag">Social</span></td><td>Publicly posted by a named account, cited by handle and date. Asserts that the statement was made, never that it is true. Not used in this document.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>What was not checked</h3>
+  <p>An unexamined area is a gap, not a clean bill. The following were not established.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Area</th><th>Status</th><th>What is missing</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Individual Form 4 transactions</td><td class="status caution-t">Not established</td><td>The 222 Forms 4 and 55 Forms 144 were enumerated by date and count. Individual transaction codes, so whether insiders have bought on the open market rather than received awards, were not read.</td></tr>
+      <tr><td class="lbl">Industry conferences</td><td class="status caution-t">Not established</td><td>No conference calendar was checked. The company's events page was reached on 3 August 2026 but populates by script and returned no listings.</td></tr>
+      <tr><td class="lbl">Sandersville power contract</td><td class="status caution-t">Not established</td><td>Sandersville operates a municipal electrical system and the Georgia Public Service Commission regulates Georgia Power. Which regime governs the 175 MW of new load, and on what tariff, was not settled.</td></tr>
+      <tr><td class="lbl">ERCOT Batch Zero participation</td><td class="status caution-t">Not established</td><td>ERCOT publishes the process but not the applicant list. Whether the Sealy or Brazoria sites lodged Batch Zero applications by the 24 July 2026 deadline is not on any record read.</td></tr>
+      <tr><td class="lbl">New Hampshire council vote date</td><td class="status caution-t">Not established</td><td>CoinDesk dates the Executive Council vote 9 July 2026; other coverage dates it 8 July. The Union Leader account was attempted on 3 August 2026 and returned a rate-limit response rather than content.</td></tr>
+      <tr><td class="lbl">Court dockets, read directly</td><td class="status caution-t">Not established</td><td>Litigation status is taken from the parties' own filings. Neither CourtListener nor PACER nor the Nevada state portal was queried, so procedural posture is as of each party's last report rather than as of today.</td></tr>
+      <tr><td class="lbl">Bitcoin closing print, 31 Jul 2026</td><td class="status caution-t">Not established</td><td>Two named sources give an opening price and an intraday price but no settled close. The mark used is stated as approximate in the pricing basis above.</td></tr>
+      <tr><td class="lbl">Canadian and Australian registries</td><td class="status">None</td><td>Not applicable rather than unexamined. The company is a Nevada corporation filing as a US domestic filer on Forms 10-K, 10-Q, 8-K and DEF 14A, with no 20-F, 40-F or 6-K in 750 filings, so no SEDAR+ or ASIC obligation arises.</td></tr>
+      <tr><td class="lbl">Federal energy dockets</td><td class="status">None</td><td>FERC eLibrary was not required: the sites take retail service from utilities and municipal systems rather than holding Federal Power Act authorisations, and no such authorisation is referenced in any filing read.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 15. DOCUMENT LOG ===================== -->
+<section id="s15">
+  <h2 class="sec"><span class="n">15</span>Document log</h2>
+  <p class="sub">Newest first. The original build entry is never removed or rewritten.</p>
+  <div class="log">
+    <div class="logentry current">
+      <div class="when">3 August 2026 <span class="latest">Latest</span></div>
+      <div class="basis">Original build &middot; priced off 31 Jul 2026 close &middot; $13.76 &middot; $3,530.9M cap</div>
+      <p><b>Built from</b> the complete Central Index Key 0000827876 filing record, 750 filings from 17 November 2008 to 17 July 2026, swept across all eighteen form families with exhibit lists enumerated rather than form types alone. The load-bearing documents are the fiscal 2025 Form 10-K of 25 November 2025, the Form 10-Q for the quarter ended 31 March 2026 filed 11 May 2026, the Form 8-K of 14 July 2026 reporting the Sandersville lease, the Form 8-K of 24 March 2026 amending the Series A certificate of designation, and the June 2026 operational update of 7 July 2026. Beneficial ownership was swept under both labels the electronic filing system emits, which surfaced eleven filings made since 13 November 2025 that a search on the older label alone returns none of. Full-text search of other filers' documents supplied the Mawson litigation from Big Digital Energy's quarterly report of 14 May 2026 and the peer-group placements in the IREN and MARA proxy statements. Non-SEC sources were the Georgia Public Service Commission, ERCOT's published Batch Zero process, and press coverage of the New Hampshire conduit bond.</p>
+      <p><b>Pricing basis</b> is the Nasdaq close of 31 July 2026 at $13.76, with market capitalisation computed against the 256,608,606 shares on the quarterly report cover of 7 May 2026. Balance sheet inputs are at 31 March 2026 and bitcoin holdings at 30 June 2026, so the enterprise value in section 8 mixes three dates and says so.</p>
+      <p><b>Conventions fixed at construction:</b> fiscal years end 30 September, so fiscal 2025 is the year to 30 September 2025 and half-year figures run October to March. Mining cost comparisons use the owned-facilities table, since the company exited hosted facilities in March 2025 and no longer reports hosted metrics. The accent was derived from the brand blue the company publishes in its own site chrome.</p>
+      <p><b>Known gaps in this version.</b> Individual Form 4 transaction codes were not read, so whether insiders have bought on the open market is not established. No conference calendar was checked. Which power regime governs the new 175 MW at Sandersville was not settled, the site sitting on a municipal system while the Public Service Commission rule binds Georgia Power. Whether the Texas sites lodged ERCOT Batch Zero applications is not on any record read. Court dockets were not queried directly, so litigation posture is as of each party's last filing. No settled bitcoin closing print for 31 July 2026 was established from the sources read, and the mark is stated as approximate. The date of the New Hampshire Executive Council vote differs between sources and the Union Leader account returned a rate-limit response rather than content.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="norec">
+    No buy, sell, or hold recommendation is issued and no price target is derived.
+    Third-party targets and ratings, where shown, are the published views of the
+    firms named and are reported as market data. This document is for research and
+    educational purposes and is not investment advice. Verify all figures against
+    primary filings on sec.gov before acting.
+  </div>
+  <p style="margin-top:16px">CLSK &middot; CleanSpark, Inc. &middot; Equity Research Report &middot; as of 3 August 2026</p>
+</footer>
+
+</div>
+</body>
+</html>

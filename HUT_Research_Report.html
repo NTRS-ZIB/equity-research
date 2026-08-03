@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>HUT · Hut 8 Corp. · Equity Research Report · as of 3 August 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================================
+   PER-TICKER PALETTE
+   ========================================================================= */
+:root{
+  /* Hut 8's wordmark and icon are achromatic: measured across the company's own
+     512px mark, every inked pixel falls below both the chroma and the saturation
+     floor, so the mark carries no colour to take. The accent therefore comes
+     from the brand colour in the site chrome, which Hut 8 declares as its own
+     token: #B3FF00, a chartreuse at hue 77.9, saturation 100%, lightness 50%.
+     Normalised for white paper the saturation falls to 72% and the lightness to
+     28%, giving #5C7B14 at 4.89:1 against the page. The hue is carried through
+     unchanged: it sits 38.9 degrees clear of the nearest meaning-bearing colour,
+     so no rotation was needed. */
+  --accent:      #5C7B14;
+  --accent-deep: #3B4F0D;
+  --accent-wash: rgba(92,123,20,0.06);
+  --accent-line: rgba(92,123,20,0.22);
+}
+
+/* ============================================================================
+   SHARED STYLESHEET v1.57 : BEGIN
+   ========================================================================= */
+:root{
+  color-scheme: light only;
+
+  --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
+  --line:#DEE6EC;   --line-hard:#C0CDD7;
+  --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
+
+  --pos:#0B7A50;      --pos-bg:#E7F4EE;
+  --neg:#B02A21;      --neg-bg:#FBECEA;
+  --caution:#90600A;  --caution-bg:#FBF2E0;
+  --assume:#4F3FA3;   --assume-bg:#EFEDFA;
+
+  --display:'Archivo',ui-sans-serif,system-ui,'Helvetica Neue',Arial,sans-serif;
+  --body:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+
+  --measure:78ch;
+  --col:760px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html,body{background:var(--canvas) !important;background-color:var(--canvas) !important}
+body{
+  margin:0;color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 22px 96px;background:var(--paper);
+      border-left:1px solid var(--line);border-right:1px solid var(--line)}
+p{max-width:var(--measure)}
+/* Boxed prose fills its container: the box supplies its own measure, so the
+   78ch cap applies to top-level running prose only. */
+.first li,.assume p,.note p,.cat p,.risk p,.logentry p,.oc p,.case p,
+.cat-meta,.logentry .basis{max-width:none}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:var(--accent-deep)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- masthead ---------- */
+.mast{padding:44px 0 26px;border-bottom:2px solid var(--line-hard);margin-bottom:8px;
+      position:relative;padding-left:20px}
+.mast::before{content:"";position:absolute;left:0;top:44px;bottom:26px;
+      width:4px;background:var(--accent)}
+.ticker{font-family:var(--mono);font-size:44px;font-weight:700;letter-spacing:-1px;
+      line-height:1;color:var(--accent);margin:0}
+.headline{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.22;
+      color:var(--ink);margin:16px 0 0}
+.functional{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--ink-faint);margin:18px 0 0}
+.mast-strip{display:flex;flex-wrap:wrap;gap:26px;margin-top:20px;padding-top:16px;
+      border-top:1px solid var(--line)}
+.mast-strip div{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint)}
+.mast-strip b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-top:3px}
+
+/* ---------- banner: framing ---------- */
+.first{background:var(--canvas);border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:20px 24px;margin:30px 0 12px}
+.first h2{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.04em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 12px}
+.first ol{margin:0;padding-left:20px}
+.first li{margin-bottom:9px}
+.first li:last-child{margin-bottom:0}
+
+/* ---------- sections ---------- */
+section{padding-top:38px}
+h2.sec{font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);
+      margin:0 0 4px;padding-bottom:10px;border-bottom:1px solid var(--line-hard);
+      display:flex;align-items:baseline;gap:12px}
+h2.sec .n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);
+      letter-spacing:.06em;flex:none}
+.sub{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);margin:10px 0 18px;
+      max-width:var(--measure)}
+h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink-dim);
+      margin:26px 0 8px}
+
+/* ---------- provenance tags (signature) ---------- */
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);
+      background:var(--panel-2);border:1px solid var(--line);
+      border-radius:2px;padding:1px 6px;vertical-align:1px;white-space:nowrap}
+
+/* ---------- assumption block ---------- */
+.assume{background:var(--assume-bg);border-left:4px solid var(--assume);
+      padding:16px 20px;margin:20px 0}
+.assume .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--assume);display:block;margin-bottom:7px}
+.assume p{margin:0}
+
+/* ---------- callouts ---------- */
+.note{border:1px solid var(--line);border-left:4px solid var(--ink-faint);
+      background:var(--canvas);padding:16px 20px;margin:20px 0}
+.note.pos{border-left-color:var(--pos);background:var(--pos-bg)}
+.note.neg{border-left-color:var(--neg);background:var(--neg-bg)}
+.note.caution{border-left-color:var(--caution);background:var(--caution-bg)}
+.note p{margin:0}
+.note p + p{margin-top:10px}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+thead th{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--ink-dim);text-align:left;
+      padding:9px 12px;border-bottom:2px solid var(--line-hard);white-space:nowrap}
+tbody td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--canvas)}
+td.num,th.num{font-family:var(--mono);text-align:right;white-space:nowrap}
+/* td.when marks a timing column. An unmarked cell counts as prose. */
+td.when{font-family:var(--mono);white-space:nowrap}
+td.lbl{font-weight:600}
+.pos-t{color:var(--pos);font-weight:600}
+.neg-t{color:var(--neg);font-weight:600}
+.caution-t{color:var(--caution);font-weight:600}
+
+/* ---------- cases ---------- */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.case{border:1px solid var(--line);border-top:3px solid var(--ink-faint);
+      background:var(--paper);padding:18px}
+.case.bull{border-top-color:var(--pos)}
+.case.bear{border-top-color:var(--neg)}
+.case h4{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 10px}
+.case.bull h4{color:var(--pos)} .case.bear h4{color:var(--neg)}
+.case p{font-size:15px;margin:0}
+.case .req{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+
+/* ---------- risks ---------- */
+.risk{border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:16px 20px;margin-bottom:12px}
+.risk.sev-high{border-left-color:var(--neg)}
+.risk.sev-med{border-left-color:var(--caution)}
+.risk.sev-low{border-left-color:var(--ink-faint)}
+.risk h4{font-family:var(--display);font-size:15.5px;font-weight:600;margin:0 0 6px;
+      display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.risk .sev{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase}
+.risk.sev-high .sev{color:var(--neg)}
+.risk.sev-med .sev{color:var(--caution)}
+.risk.sev-low .sev{color:var(--ink-faint)}
+.risk p{margin:0;font-size:15.5px}
+
+/* ---------- null categories ---------- */
+.nulls td.lbl{width:26%}
+.nulls .status{font-family:var(--mono);font-size:12px;white-space:nowrap}
+
+/* ---------- document log ---------- */
+.log{margin-top:14px}
+.logentry{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:12px}
+.logentry.current{border-left:4px solid var(--accent);background:var(--accent-wash)}
+.logentry .when{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);
+      display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.latest{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-line);
+      background:var(--paper);border-radius:2px;padding:1px 6px}
+.logentry .basis{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-bottom:12px}
+.logentry p{font-size:15.5px;margin:0 0 9px}
+.logentry p:last-child{margin-bottom:0}
+.correction{border:1px solid var(--neg);border-left:4px solid var(--neg);
+      background:var(--neg-bg);padding:12px 16px;margin-bottom:14px}
+.correction .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--neg);display:block;margin-bottom:5px}
+
+/* ---------- footer ---------- */
+footer{margin-top:44px;padding-top:22px;border-top:2px solid var(--line-hard)}
+footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width:none}
+.norec{border:1px solid var(--line-hard);background:var(--canvas);padding:16px 20px;
+      margin-top:20px;font-family:var(--mono);font-size:12.5px;color:var(--ink-dim)}
+
+/* ---------- catalyst cards (calendar) ---------- */
+.cat{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:14px;border-left:4px solid var(--line-hard)}
+.cat.up{border-left-color:var(--pos)}
+.cat.down{border-left-color:var(--neg)}
+.cat.two{border-left-color:var(--caution)}
+.cat.neutral{border-left-color:var(--ink-faint)}
+.cat-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.cid{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);flex:none}
+.cat-head h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink);
+      margin:0;flex:1 1 auto;min-width:200px}
+.dir{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;white-space:nowrap}
+.cat.up .dir{color:var(--pos)} .cat.down .dir{color:var(--neg)}
+.cat.two .dir{color:var(--caution)} .cat.neutral .dir{color:var(--ink-faint)}
+.cat-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:10px 0 12px;padding:9px 0;
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+      font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
+.cat-meta b{color:var(--ink);font-weight:600}
+.cat p{margin:0 0 9px;font-size:15.5px}
+.cat p:last-child{margin-bottom:0}
+.cat.resolved{background:var(--canvas);border-left-color:var(--ink-faint)}
+.cat.resolved .dir{color:var(--ink-faint)}
+
+/* ---------- horizon bands (calendar) ---------- */
+.band{display:flex;align-items:center;gap:14px;margin:30px 0 16px}
+.band-t{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--ink-dim);white-space:nowrap}
+.band-r{flex:1;height:1px;background:var(--line-hard)}
+.band-c{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);white-space:nowrap}
+
+/* ---------- upside / downside pair ---------- */
+.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0}
+.oc{border:1px solid var(--line);padding:11px 14px;background:var(--paper)}
+.oc.up-c{border-left:3px solid var(--pos)}
+.oc.down-c{border-left:3px solid var(--neg)}
+.oc .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.09em;
+      text-transform:uppercase;display:block;margin-bottom:5px}
+.oc.up-c .lbl{color:var(--pos)} .oc.down-c .lbl{color:var(--neg)}
+.oc p{margin:0;font-size:14.5px;line-height:1.5}
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  body{font-size:16px}
+  .wrap{padding:0 16px 70px;border-left:none;border-right:none}
+  .ticker{font-size:34px}
+  .headline{font-size:23px}
+  .cases{grid-template-columns:1fr}
+  .outcomes{grid-template-columns:1fr}
+  .mast-strip{gap:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none !important;transition:none !important}
+}
+@media print{
+  body{font-size:11pt}
+  .wrap{max-width:none;border:none}
+  section{page-break-inside:avoid}
+}
+/* ============================================================================
+   SHARED STYLESHEET v1.57 : END
+   ========================================================================= */
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ===================== MASTHEAD ===================== -->
+<header class="mast">
+  <p class="ticker">HUT</p>
+  <h1 class="headline">Twenty-six billion dollars of contracted rent, reported through the price of bitcoin</h1>
+  <p class="functional">HUT · Hut 8 Corp. · Equity Research Report · as of 3 August 2026</p>
+  <div class="mast-strip">
+    <div>Price <b>$107.63</b> <span class="tag">Market</span></div>
+    <div>Market cap <b>$12.12bn</b> <span class="tag">Estimate</span></div>
+    <div>Shares out <b>112,594,112</b> <span class="tag">Filed</span></div>
+    <div>Bitcoin held <b>16,332</b> <span class="tag">Filed</span></div>
+    <div>Pricing basis <b>31 Jul 2026 close</b> <span class="tag">Market</span></div>
+  </div>
+</header>
+
+<!-- ===================== FRAMING ===================== -->
+<div class="first">
+  <h2>Framing</h2>
+  <ol>
+    <li>As of 20 July 2026 the company reports 949 MW of contracted IT capacity across its AI data centre portfolio, with aggregate base-term contract value of $26.6 billion and average annual net operating income it puts above $1.75 billion. All of it is leased to or backstopped by investment-grade counterparties. <span class="tag">Filed</span></li>
+    <li>The tenant taking 704 MW of that capacity, at the Beacon Point campus in Nueces County, Texas, is described only as a high-investment-grade company rated AA- or higher. It is not named in any filing. <span class="tag">Filed</span></li>
+    <li>At 31 March 2026 the company held 16,332 bitcoin worth approximately $1.11 billion, about 43% of its $2.61 billion balance sheet. A $295.7 million loss on those holdings produced most of the quarter's $253.1 million net loss. <span class="tag">Filed</span></li>
+    <li>Both data centre campuses are financed off the parent balance sheet: $3.25 billion at 6.192% for River Bend and $4.25 billion at 6.129% for Beacon Point, each fully amortising to 2042 and each expressly non-recourse to Hut 8 Corp. <span class="tag">Filed</span></li>
+  </ol>
+</div>
+
+<!-- ===================== 1. SNAPSHOT ===================== -->
+<section id="s1">
+  <h2 class="sec"><span class="n">01</span>Snapshot</h2>
+  <p class="sub">Key figures, each tagged by provenance. Balance-sheet items are struck at 31 March 2026; the price is four months later, and two project financings closed in between.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Metric</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Share price</td><td class="num">$107.63</td><td><span class="tag">Market</span> 31 Jul 2026 close</td></tr>
+      <tr><td class="lbl">52-week range</td><td class="num">$18.68 – $140.80</td><td><span class="tag">Market</span> intraday, 251 sessions to 31 Jul 2026</td></tr>
+      <tr><td class="lbl">Shares outstanding</td><td class="num">112,594,112</td><td><span class="tag">Filed</span> 10-Q cover, as of 4 May 2026</td></tr>
+      <tr><td class="lbl">Market capitalisation</td><td class="num">$12,118.5M</td><td><span class="tag">Estimate</span> 112,594,112 × $107.63. Share count is 4 May 2026, price 31 Jul 2026</td></tr>
+      <tr><td class="lbl">Revenue (FY2025)</td><td class="num">$235.1M</td><td><span class="tag">Filed</span> 10-K, 25 Feb 2026</td></tr>
+      <tr><td class="lbl">Revenue (Q1 2026)</td><td class="num">$71.0M</td><td><span class="tag">Filed</span> 10-Q, 6 May 2026</td></tr>
+      <tr><td class="lbl">Net loss (FY2025)</td><td class="num neg-t">($248.0M)</td><td><span class="tag">Filed</span> 10-K, 25 Feb 2026</td></tr>
+      <tr><td class="lbl">Net loss attributable to Hut 8 (FY2025)</td><td class="num neg-t">($226.1M)</td><td><span class="tag">Filed</span> 10-K, 25 Feb 2026</td></tr>
+      <tr><td class="lbl">Net loss (Q1 2026)</td><td class="num neg-t">($253.1M)</td><td><span class="tag">Filed</span> 10-Q, 6 May 2026</td></tr>
+      <tr><td class="lbl">Loss on digital assets (Q1 2026)</td><td class="num neg-t">($295.7M)</td><td><span class="tag">Filed</span> 10-Q, 6 May 2026</td></tr>
+      <tr><td class="lbl">Total assets</td><td class="num">$2,609.7M</td><td><span class="tag">Filed</span> 10-Q, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Total liabilities</td><td class="num">$919.6M</td><td><span class="tag">Filed</span> 10-Q, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Total equity</td><td class="num">$1,690.2M</td><td><span class="tag">Filed</span> 10-Q, 31 Mar 2026, incl. $310.3M non-controlling interests</td></tr>
+      <tr><td class="lbl">Bitcoin held</td><td class="num">16,332</td><td><span class="tag">Filed</span> 10-Q, 31 Mar 2026: 9,311 Hut 8, 7,021 American Bitcoin</td></tr>
+      <tr><td class="lbl">Bitcoin fair value</td><td class="num">$1.11bn</td><td><span class="tag">Filed</span> 10-Q, at ~$68,222 per bitcoin, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Contracted IT capacity</td><td class="num">949 MW</td><td><span class="tag">Filed</span> 8-K, 20 Jul 2026: River Bend 245, Beacon Point 704</td></tr>
+      <tr><td class="lbl">Base-term contract value</td><td class="num">$26.6bn</td><td><span class="tag">Filed</span> 8-K, 20 Jul 2026, company figure</td></tr>
+      <tr><td class="lbl">Project debt raised</td><td class="num">$7,500.0M</td><td><span class="tag">Filed</span> 8-Ks, 28 Apr and 10 Jun 2026. Non-recourse; closed after 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Bitcoin mined (FY2025)</td><td class="num">1,803</td><td><span class="tag">Filed</span> 10-K, against 1,184 in FY2024</td></tr>
+    </tbody>
+  </table></div>
+  <p>No enterprise value is shown. The most recent reported balance sheet is 31 March 2026, and $7.5 billion of project debt closed on 30 April and 9 June 2026, after that date and before the 31 July close used for the price. A figure combining the two would understate leverage by the entire project financing.</p>
+</section>
+
+<!-- ===================== 2. BUSINESS MODEL ===================== -->
+<section id="s2">
+  <h2 class="sec"><span class="n">02</span>Business model</h2>
+  <p>Hut 8 describes itself as an energy infrastructure platform in three layers: Power, Digital Infrastructure and Compute. In practice it does three separable things, and they have almost nothing to do with one another commercially.</p>
+  <p><strong>It is a landlord to AI.</strong> Two campuses, River Bend in Louisiana and Beacon Point in Nueces County, Texas, are being built to lease as turnkey data centres on triple-net terms of 15 years with 3.0% annual escalators. This is the business the market is paying for, and it produces no revenue yet.</p>
+  <p><strong>It is a bitcoin holder.</strong> At 31 March 2026 it held 16,332 bitcoin worth roughly $1.11 billion, which is about 43% of total assets. Under fair-value accounting those holdings run through the income statement every quarter, which is why a company with $71.0 million of quarterly revenue reported a $253.1 million quarterly loss.</p>
+  <p><strong>It runs operating businesses.</strong> American Bitcoin, a majority-owned Nasdaq-listed subsidiary, mines bitcoin at industrial scale. Hut 8 Canada runs five data centres serving more than 200 cloud and colocation customers. Highrise AI operated 1,000 NVIDIA H100 and 96 H200 GPUs at 31 December 2025.</p>
+  <h3>The contracted portfolio</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Campus</th><th>Location</th><th class="num">Contracted IT</th><th class="num">Utility capacity</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">River Bend</td><td>Louisiana</td><td class="num">245 MW</td><td class="num">330 MW</td><td><span class="tag">Filed</span> 8-K, 28 Apr 2026; 10-K</td></tr>
+      <tr><td class="lbl">Beacon Point, Phase 1</td><td>Nueces County, TX</td><td class="num">352 MW</td><td class="num">500 MW</td><td><span class="tag">Filed</span> 8-K, 5 Jun 2026</td></tr>
+      <tr><td class="lbl">Beacon Point, Phase 2</td><td>Nueces County, TX</td><td class="num">352 MW</td><td class="num">500 MW</td><td><span class="tag">Filed</span> 8-K, 20 Jul 2026</td></tr>
+      <tr><td class="lbl">Total contracted</td><td>n/a</td><td class="num">949 MW</td><td class="num">1,330 MW</td><td><span class="tag">Filed</span> 8-K, 20 Jul 2026</td></tr>
+    </tbody>
+  </table></div>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Contracted IT capacity and utility capacity are two bases for one asset and are shown separately here because the company uses both. River Bend appears as 330 MW in the annual report, which is the utility capacity secured, and as 245 MW in the project financing, which is the critical IT capacity being built and leased. The ratio, roughly 74% at River Bend and 70% at Beacon Point, is the conversion the reader needs to move between the two. Where a single figure is quoted elsewhere for this company without a basis, it is more likely to be the larger utility number.</p>
+  </div>
+</section>
+
+<!-- ===================== 3. REVENUE STREAMS ===================== -->
+<section id="s3">
+  <h2 class="sec"><span class="n">03</span>Revenue streams</h2>
+  <p>The company reports revenue in three layers. None of them is data centre lease revenue, because no lease has commenced.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Layer</th><th class="num">FY2025</th><th class="num">Share</th><th class="num">Q1 2026</th><th class="num">Share</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Compute</td><td class="num">$202.3M</td><td class="num">86.1%</td><td class="num">$66.0M</td><td class="num">92.9%</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+      <tr><td class="lbl">Power</td><td class="num">$23.2M</td><td class="num">9.9%</td><td class="num">$3.7M</td><td class="num">5.3%</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+      <tr><td class="lbl">Digital Infrastructure</td><td class="num">$9.6M</td><td class="num">4.1%</td><td class="num">$1.3M</td><td class="num">1.8%</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+      <tr><td class="lbl">Total</td><td class="num">$235.1M</td><td class="num">100%</td><td class="num">$71.0M</td><td class="num">100%</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+    </tbody>
+  </table></div>
+  <p>Compute is overwhelmingly bitcoin mining. It grew from $80.7 million to $202.3 million in 2025, driven by average revenue per bitcoin mined rising from $60,436 to $103,647 and by volume rising from 1,184 to 1,803 bitcoin. Both drivers reversed in the first quarter of 2026, when the fair value used for the holdings fell to roughly $68,222 per bitcoin.</p>
+  <p>Power revenue halved, from $56.6 million to $23.2 million. The company attributes the fall principally to a $40.8 million decrease in managed services revenue, which included $13.5 million of contract termination fees received from MARA Holdings in the prior year and the termination of a managed services agreement with Ionic in December 2024. Digital Infrastructure fell for the same reason, the Ionic colocation agreement having ended in the fourth quarter of 2024.</p>
+  <p>The structural point is that the revenue reported today and the revenue the contracts promise are unrelated. Present revenue is bitcoin mining plus a shrinking services book. Future revenue is $26.6 billion of triple-net rent over 15-year base terms, none of which begins before 2027.</p>
+</section>
+
+<!-- ===================== 4. INDUSTRY & MARKET BACKDROP ===================== -->
+<section id="s4">
+  <h2 class="sec"><span class="n">04</span>Industry &amp; market backdrop</h2>
+  <p>The constraint on AI infrastructure is power and the interconnection rights that deliver it. That has made converted bitcoin miners the sector's unlikely landlords: they hold zoned industrial land, energised substations and granted interconnections, which a greenfield developer would spend years acquiring.</p>
+  <p>What separates the winners in this group is the ability to finance construction at investment-grade cost. Hut 8's answer is project finance: each campus sits in its own special-purpose issuer, raises its own debt against its own lease, and is expressly non-recourse to the parent. The market accepted that structure at 6.192% and 6.129% for twenty-two-year fully amortising paper, secured on the leases and the project assets rather than on the parent.</p>
+  <p>Two features of the demand side matter for reading the contracts. First, the tenant list is short: a handful of hyperscalers, AI labs and neoclouds account for nearly all contracted capacity across the sector, so counterparty concentration is structural rather than a company-specific failing. Second, credit support has become the norm, either from the tenant's own rating or from a third-party backstop. Hut 8 states that 100% of its contracted AI capacity is leased to or backstopped by investment-grade counterparties, and that the Beacon Point tenant is rated AA- or higher.</p>
+  <p>Against that, the sector is being valued on contracted megawatts rather than on delivered ones. A peer comparison published by Big Digital Energy on 3 June 2026, drawn from its own reading of public filings and struck at 16 April 2026 market values, is reproduced in section 5 as the published view of another issuer.</p>
+</section>
+
+<!-- ===================== 5. COMPETITIVE POSITION ===================== -->
+<section id="s5">
+  <h2 class="sec"><span class="n">05</span>Competitive position</h2>
+  <p class="sub">Named peers on comparable metrics. Every company below is converting mining infrastructure to AI hosting, and they compete for power, for capital and for the same few creditworthy tenants.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Ticker</th><th>Company</th><th class="num">Market cap</th><th class="num">Contracted</th><th class="num">MW</th><th class="num">EV / MW</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">APLD</td><td>Applied Digital</td><td class="num">$8.6bn</td><td class="num">$16bn</td><td class="num">600</td><td class="num">$15.3M</td></tr>
+      <tr><td class="lbl">WULF</td><td>TeraWulf</td><td class="num">$8.3bn</td><td class="num">$12.8bn</td><td class="num">522</td><td class="num">$21.1M</td></tr>
+      <tr><td class="lbl">HUT</td><td>Hut 8</td><td class="num">$7.9bn</td><td class="num">$10bn</td><td class="num">245</td><td class="num">$30.0M</td></tr>
+      <tr><td class="lbl">CIFR</td><td>Cipher Digital</td><td class="num">$6.9bn</td><td class="num">$9.3bn</td><td class="num">600</td><td class="num">$15.1M</td></tr>
+      <tr><td class="lbl">CORZ</td><td>Core Scientific</td><td class="num">$6.1bn</td><td class="num">$10.2bn</td><td class="num">590</td><td class="num">$11.3M</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub">Source: Big Digital Energy investor presentation, Exhibit 99.1 to Form 8-K, 3 June 2026. Market values as of 16 April 2026. <span class="tag">Market</span></p>
+  <p>That table was struck before Beacon Point existed as a contracted asset. At 16 April 2026 Hut 8 carried 245 MW, all of it River Bend, and the highest enterprise value per contracted megawatt in the group by a wide margin. The two Beacon Point leases of June and July 2026 took contracted capacity to 949 MW, which is a near-fourfold increase in the denominator, and the base-term contract value from $10 billion to $26.6 billion. On the company's own current figures the per-megawatt measure falls from the $30.0 million shown there to the $12.8 million computed in section 8, and the reader should not carry the $30.0 million forward.</p>
+  <p>The distinguishing features against this group are the financing structure and the tenant disclosure, and they cut in opposite directions. Non-recourse investment-grade project debt at just over 6% is the cheapest capital in the peer set and it ring-fences the parent. Against that, TeraWulf names Anthropic and discloses Google as the backstop provider; Core Scientific names CoreWeave; Hut 8 names neither the tenant nor a backstop provider for 704 of its 949 contracted megawatts, disclosing only a rating band.</p>
+</section>
+
+<!-- ===================== 6. FINANCIAL PERFORMANCE ===================== -->
+<section id="s6">
+  <h2 class="sec"><span class="n">06</span>Financial performance</h2>
+  <div class="note caution">
+    <p><b>The comparative periods are not all years.</b> The company changed its fiscal year end from 30 June to 31 December and filed a transition report covering the six months from 1 July to 31 December 2023. The column below headed 2023 is that six-month period, not a year, and doubling it to compare against a full year would be wrong in both directions, since the business was also acquiring assets throughout.</p>
+  </div>
+  <div class="tw"><table>
+    <thead><tr><th>Line</th><th class="num">6mo to Dec 2023</th><th class="num">FY2024</th><th class="num">FY2025</th><th class="num">Q1 2026</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Total revenue</td><td class="num">$59.9M</td><td class="num">$162.4M</td><td class="num">$235.1M</td><td class="num">$71.0M</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+      <tr><td class="lbl">Total cost of revenue</td><td class="num">$33.7M</td><td class="num">$86.7M</td><td class="num">$107.8M</td><td class="num">$25.5M</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+      <tr><td class="lbl">Depreciation and amortisation</td><td class="num">$10.6M</td><td class="num">$47.8M</td><td class="num">$101.9M</td><td class="num">$38.4M</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+      <tr><td class="lbl">General and administrative</td><td class="num">$37.5M</td><td class="num">$72.9M</td><td class="num">$122.8M</td><td class="num">$81.7M</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+      <tr><td class="lbl">Losses (gains) on digital assets</td><td class="num pos-t">($32.6M)</td><td class="num pos-t">($509.3M)</td><td class="num neg-t">$220.0M</td><td class="num neg-t">$295.7M</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+      <tr><td class="lbl">Operating (loss) income</td><td class="num">$10.2M</td><td class="num">$460.5M</td><td class="num neg-t">($322.0M)</td><td class="num neg-t">($370.4M)</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+      <tr><td class="lbl">Interest expense</td><td class="num neg-t">($11.7M)</td><td class="num neg-t">($29.8M)</td><td class="num neg-t">($30.1M)</td><td class="num neg-t">($9.2M)</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+      <tr><td class="lbl">Net (loss) income</td><td class="num">$6.2M</td><td class="num">$331.4M</td><td class="num neg-t">($248.0M)</td><td class="num neg-t">($253.1M)</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+      <tr><td class="lbl">Attributable to Hut 8 Corp.</td><td class="num">$6.2M</td><td class="num">$331.9M</td><td class="num neg-t">($226.1M)</td><td class="num neg-t">($219.8M)</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+      <tr><td class="lbl">Earnings per share, basic</td><td class="num">$0.12</td><td class="num">$3.71</td><td class="num neg-t">($2.14)</td><td class="num neg-t">n/a</td><td><span class="tag">Filed</span> 10-K, continuing operations</td></tr>
+    </tbody>
+  </table></div>
+  <p>Read the digital asset line first and everything else follows. A $509.3 million gain in 2024 became a $220.0 million loss in 2025 and a further $295.7 million loss in the first quarter of 2026, a swing of more than a billion dollars across nine quarters on an asset the company does not sell. That single line turned reported operating income of $460.5 million into an operating loss of $322.0 million without any change in the operating business.</p>
+  <p>Strip it out and the trend is legible: revenue up from $162.4 million to $235.1 million, cost of revenue up less than proportionately, and general and administrative expense up from $72.9 million to $122.8 million as the company built a project development and financing capability. Depreciation more than doubled to $101.9 million as mining fleet and data centre assets came into service.</p>
+  <p>The first quarter of 2026 is where the shape of the future business starts to show. Revenue tripled year on year to $71.0 million. General and administrative expense reached $81.7 million, more than the quarter's revenue, which is what building two gigawatt-scale campuses at once costs before any of it earns rent. A $33.6 million gain on the sale of the Far North joint venture offset part of it.</p>
+  <p>The balance sheet is the strongest in this peer group. Total equity of $1,690.2 million against $919.6 million of liabilities at 31 March 2026, and retained earnings that had turned to a $214.4 million accumulated deficit only because of the bitcoin marks. That comparison will change at the next reporting date, when $7.5 billion of project debt appears.</p>
+</section>
+
+<!-- ===================== 7. CAPITAL STRUCTURE & DILUTION ===================== -->
+<section id="s7">
+  <h2 class="sec"><span class="n">07</span>Capital structure &amp; dilution</h2>
+  <p class="sub">Two project financings that do not sit on the parent balance sheet, a miner purchase liability that does, and no convertible debt at all.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Instrument</th><th class="num">Principal</th><th>Rate</th><th>Maturity</th><th>Recourse</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Hut 8 DC LLC senior secured notes</td><td class="num">$3,250.0M</td><td>6.192%</td><td>15 Nov 2042</td><td>Non-recourse</td><td><span class="tag">Filed</span> 8-K, 28 Apr 2026; River Bend</td></tr>
+      <tr><td class="lbl">Beacon Point DC LLC senior secured notes</td><td class="num">$4,250.0M</td><td>6.129%</td><td>30 Nov 2042</td><td>Non-recourse</td><td><span class="tag">Filed</span> 8-K, 10 Jun 2026; Beacon Point</td></tr>
+      <tr><td class="lbl">Loans, notes payable and other</td><td class="num">$410.2M</td><td>n/a</td><td>n/a</td><td>Recourse</td><td><span class="tag">Filed</span> 10-K, at 31 Dec 2025: $199.9M current, $210.2M non-current</td></tr>
+      <tr><td class="lbl">Miner purchase liability</td><td class="num">$433.1M</td><td>n/a</td><td>n/a</td><td>Recourse</td><td><span class="tag">Filed</span> 10-K, at 31 Dec 2025: $100.9M current, $332.2M non-current</td></tr>
+      <tr><td class="lbl">Convertible notes</td><td class="num">n/a</td><td>n/a</td><td>n/a</td><td>n/a</td><td><span class="tag">Filed</span> None outstanding</td></tr>
+      <tr><td class="lbl">Preferred stock</td><td class="num">n/a</td><td>n/a</td><td>n/a</td><td>n/a</td><td><span class="tag">Filed</span> None issued; 25,000,000 authorised</td></tr>
+    </tbody>
+  </table></div>
+  <p>Both project financings are fully amortising, which is unusual and important. River Bend begins amortising on 15 May 2028 and Beacon Point on 30 May 2030, so each loan retires itself over the base lease term rather than requiring a refinancing at maturity. Each is secured on substantially all assets of its issuer plus a pledge of the issuer's equity held by its immediate parent, and each is expressly non-recourse to Hut 8 Corp.</p>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Non-recourse does not mean costless. What is at risk in a failed project is the equity Hut 8 has contributed to that issuer plus the value of the campus, and the River Bend notes were partly used to reimburse the parent for prior equity contributions, so some of that exposure has already been returned. The structure caps the downside at the project rather than eliminating it, and it also ring-fences the upside: cash generated inside an issuer services its own debt and reserves first. Neither financing appears on the 31 March 2026 balance sheet because both closed after that date.</p>
+  </div>
+  <h3>Dilution</h3>
+  <p>Shares outstanding rose from 99,478,012 at 31 December 2024 to 110,091,358 at 31 December 2025 and 112,594,112 at 4 May 2026, an increase of 13.2% over sixteen months. There are no convertible notes and no preferred stock, so the ordinary dilution channels in this sector are absent. Authorised common stock is 1,000,000,000 shares against 112.6 million outstanding, which leaves ample headroom for future issuance without a shareholder vote.</p>
+  <p>The material dilution question is at the subsidiary rather than the parent. American Bitcoin is separately listed on Nasdaq and issues its own stock, so Hut 8's economic interest in it falls as it raises capital. Non-controlling interests on the consolidated balance sheet rose from $3.9 million at 31 December 2024 to $267.5 million at 31 December 2025 and $310.3 million at 31 March 2026, which is the accounting trace of that effect.</p>
+</section>
+
+<!-- ===================== 8. VALUATION ===================== -->
+<section id="s8">
+  <h2 class="sec"><span class="n">08</span>Valuation</h2>
+  <p class="sub">Multiples shown with their basis and pricing date. No target price is derived here.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Measure</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Market capitalisation</td><td class="num">$12,118.5M</td><td><span class="tag">Estimate</span> 112,594,112 shares × $107.63, 31 Jul 2026 close</td></tr>
+      <tr><td class="lbl">Price to trailing revenue</td><td class="num">51.5×</td><td><span class="tag">Estimate</span> $12,118.5M ÷ FY2025 revenue of $235.1M</td></tr>
+      <tr><td class="lbl">Market cap per contracted MW</td><td class="num">$12.8M</td><td><span class="tag">Estimate</span> $12,118.5M ÷ 949 MW contracted</td></tr>
+      <tr><td class="lbl">Market cap less bitcoin, per contracted MW</td><td class="num">$11.6M</td><td><span class="tag">Estimate</span> ($12,118.5M − $1,110M) ÷ 949 MW</td></tr>
+      <tr><td class="lbl">Bitcoin as share of market cap</td><td class="num">9.2%</td><td><span class="tag">Estimate</span> $1,110M ÷ $12,118.5M, bitcoin at 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Market cap to base-term contract value</td><td class="num">0.46×</td><td><span class="tag">Estimate</span> $12,118.5M ÷ $26,600M over 15-year base terms</td></tr>
+      <tr><td class="lbl">Market cap to stated stabilised annual NOI</td><td class="num">6.9×</td><td><span class="tag">Estimate</span> $12,118.5M ÷ $1,750M, the company's own NOI figure</td></tr>
+      <tr><td class="lbl">Earnings multiple</td><td class="num">n/a</td><td><span class="tag">Filed</span> Loss-making in FY2025 and Q1 2026</td></tr>
+    </tbody>
+  </table></div>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The NOI multiple is the most informative line and the least reliable. It divides today's market capitalisation by a net operating income figure the company states it expects at stabilisation, which is a forward number for capacity not yet built, published by the party that benefits from it, and unaudited. It also ignores the $7.5 billion of project debt that will service itself out of that NOI before any of it reaches the parent. Shown because the alternative measures are worse, not because it is dependable, and a reader wanting a levered figure should subtract debt service from the NOI before comparing it with the equity value.</p>
+  </div>
+  <p>The bitcoin holding is worth separating out because it is the one asset here with a daily observable price. At $1.11 billion it is 9.2% of market capitalisation and 43% of the balance sheet, so the equity is not primarily a bitcoin proxy even though the income statement makes it look like one.</p>
+  <p>No third-party price target or rating is reproduced in this document. None was located in a primary or dated published source during the work described in section 14. The Beacon Point tenant's credit rating of AA- or higher is a rating of the tenant by an unnamed agency as reported by the company, not a rating of Hut 8 or its securities.</p>
+</section>
+
+<!-- ===================== 9. GROWTH DRIVERS ===================== -->
+<section id="s9">
+  <h2 class="sec"><span class="n">09</span>Growth drivers</h2>
+  <p><strong>River Bend delivery.</strong> 245 MW of critical IT capacity in Louisiana, targeted for initial delivery and commissioning in the second quarter of 2027. It is the first campus to reach rent commencement and it is fully financed by the $3.25 billion issued in April 2026.</p>
+  <p><strong>Beacon Point at full commercialisation.</strong> Two 15-year triple-net leases totalling 704 MW of IT capacity to a single tenant rated AA- or higher, against 1,000 MW of utility capacity secured under an interconnection agreement with AEP Texas. Base-term contract value of $19.6 billion for the campus, rising to a potential $50.2 billion if all three five-year renewal options per lease are exercised.</p>
+  <p><strong>The remaining development pipeline.</strong> The annual report describes 1,230 MW of utility capacity under development across multiple sites beyond the two contracted campuses. Converting any of it on Beacon Point terms would be the single largest incremental driver, and the company has now demonstrated it can both let and finance capacity at that scale.</p>
+  <p><strong>Repeating the financing structure.</strong> Two investment-grade non-recourse project bonds inside three months, at 6.192% and 6.129%, establish a template. If a third campus can be financed the same way, growth is limited by power and tenants rather than by the parent's balance sheet.</p>
+  <p><strong>American Bitcoin as a separately capitalised vehicle.</strong> Because it is listed in its own right, it can fund its own mining expansion without consuming Hut 8 equity, while Hut 8 retains a majority interest and consolidates the result.</p>
+</section>
+
+<!-- ===================== 10. RISKS ===================== -->
+<section id="s10">
+  <h2 class="sec"><span class="n">10</span>Risks</h2>
+  <p class="sub">Severity-ranked, most severe first.</p>
+
+  <div class="risk sev-high">
+    <h4>The largest tenant is not named, and the concentration is extreme <span class="sev">Severe</span></h4>
+    <p>One counterparty holds 704 of 949 contracted megawatts, 74% of the book, across both phases of Beacon Point. The filings describe it only as a high-investment-grade company rated AA- or higher as of the date of the offering. A reader cannot verify the rating, identify the agency, assess sector exposure, or check whether the same name appears in a peer's contracts. The rating is also stated as of a date, and ratings move.</p>
+  </div>
+
+  <div class="risk sev-high">
+    <h4>Reported results are governed by a bitcoin price the company does not control <span class="sev">Severe</span></h4>
+    <p>16,332 bitcoin worth approximately $1.11 billion at 31 March 2026, held at fair value with changes through profit and loss. The line moved from a $509.3 million gain in FY2024 to a $220.0 million loss in FY2025 and a $295.7 million loss in a single quarter. Any covenant, index inclusion test or financing decision keyed to reported earnings inherits that volatility, and the holding is 43% of total assets.</p>
+  </div>
+
+  <div class="risk sev-high">
+    <h4>No lease has commenced, and the first is a year away <span class="sev">Severe</span></h4>
+    <p>All $26.6 billion of base-term contract value rests on capacity that does not yet exist. River Bend is targeted for initial delivery in the second quarter of 2027 and Beacon Point is not given a delivery date in the filings examined. Until commencement the company carries construction risk on two gigawatt-scale campuses while earning nothing from either, and the project debt begins paying cash interest from November 2026 regardless.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Non-recourse cuts both ways <span class="sev">Moderate</span></h4>
+    <p>$7.5 billion of project debt is ring-fenced from the parent, which protects Hut 8 in a failure. It equally ring-fences the cash: each issuer services its own notes, funds its own reserves and amortises from 2028 and 2030 respectively before distributing anything upward. Equity holders at the parent are structurally subordinated to $7.5 billion of project claims on the assets generating all the future revenue.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>The legacy revenue base is shrinking <span class="sev">Moderate</span></h4>
+    <p>Power revenue fell from $56.6 million to $23.2 million and Digital Infrastructure from $17.5 million to $9.6 million, both driven by the loss of managed services and colocation contracts including the Ionic agreements terminated in late 2024. The prior year also included $13.5 million of contract termination fees from MARA Holdings, which is not recurring revenue. The businesses funding overhead until the leases commence are contracting.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Custody and pledge exposure on the bitcoin <span class="sev">Moderate</span></h4>
+    <p>Bitcoin is held with four third-party custodians, Coinbase Custody, NYDIG, Anchorage and BitGo, and a large part of it is encumbered rather than free: at 31 March 2026 the balance sheet showed $477.5 million pledged as collateral and $210.8 million pledged for miner purchases, against $435.7 million held in custody unencumbered. A price fall therefore reaches collateral calls before it reaches liquidity.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Two listings, two regimes, one set of obligations <span class="sev">Moderate</span></h4>
+    <p>The common stock is registered on Nasdaq and the Toronto Stock Exchange. A dual-listed issuer carries the disclosure obligations of both jurisdictions, and the Canadian filing record was not established here because the registry could not be reached. Nothing in the filings suggests a compliance problem; the point is that one side of the record has not been checked.</p>
+  </div>
+
+  <div class="risk sev-low">
+    <h4>Halving and mining economics <span class="sev">Low</span></h4>
+    <p>Compute revenue of $202.3 million is overwhelmingly bitcoin mining, and the next halving of the block subsidy is expected in 2028. Average revenue per bitcoin mined already fell from the $103,647 realised across 2025 to a fair value of roughly $68,222 at 31 March 2026. This is the smaller and shrinking half of the story, and the mining assets sit largely inside a separately listed subsidiary.</p>
+  </div>
+</section>
+
+<!-- ===================== 11. BULL / BASE / BEAR ===================== -->
+<section id="s11">
+  <h2 class="sec"><span class="n">11</span>Bull / base / bear</h2>
+  <p class="sub">Each case with its preconditions: what must be true, not what might be.</p>
+  <div class="cases">
+    <div class="case bear"><h4>Bear</h4><p>Construction slips at River Bend, the unnamed tenant renegotiates or walks, and bitcoin falls further. Project equity is impaired inside issuers that keep their own cash, the shrinking services book cannot cover overhead, and the parent funds the gap by issuing stock against 1,000,000,000 authorised shares.</p>
+      <p class="req">Requires: a delivery failure or tenant default at one campus; continued bitcoin weakness; no third campus contracted.</p></div>
+    <div class="case"><h4>Base</h4><p>River Bend commissions during 2027 and begins paying rent, Beacon Point follows, and reported results stay noisy because the bitcoin holding keeps moving them. The equity is valued on contracted megawatts and on how fast the 1,230 MW pipeline converts, with earnings uninformative throughout.</p>
+      <p class="req">Requires: delivery broadly on schedule; no covenant or reserve breach inside either issuer; the tenant performing.</p></div>
+    <div class="case bull"><h4>Bull</h4><p>Both campuses deliver, $1.75 billion of annual NOI arrives against $7.5 billion of self-amortising non-recourse debt, and the pipeline converts on the same template. The company re-rates from a bitcoin miner with a project to an infrastructure owner with investment-grade tenants and the cheapest capital in its peer group.</p>
+      <p class="req">Requires: River Bend rent commencement in 2027 and Beacon Point thereafter; at least one further campus contracted and financed; the tenant's rating holding.</p></div>
+  </div>
+</section>
+
+<!-- ===================== 12. RESEARCH SUMMARY ===================== -->
+<section id="s12">
+  <h2 class="sec"><span class="n">12</span>Research summary</h2>
+  <p>Hut 8 has done something none of its peers has matched: it financed 949 MW of contracted AI data centre capacity with $7.5 billion of investment-grade, fully amortising, non-recourse project debt at just over 6%, inside three months, against leases worth $26.6 billion over their base terms. That is a genuine capital markets achievement and it is the reason the equity is worth $12.1 billion against $235.1 million of annual revenue.</p>
+  <p>Two things sit awkwardly beside it. The first is that 74% of the contracted book belongs to a tenant the filings will not name, described only by a rating band. The second is that the company's reported results are governed by 16,332 bitcoin, which produced a swing of more than a billion dollars across nine quarters and turned a $460.5 million operating profit into a $322.0 million operating loss without anything happening in the operating business.</p>
+  <p>The result is a company whose accounts describe a bitcoin miner and whose contracts describe a data centre landlord, with roughly a year before the second starts producing revenue. Anyone reading the income statement to understand this business will reach the wrong conclusion in either direction depending on which quarter they pick.</p>
+  <p>Three things would change the reading. Rent commencement at River Bend in 2027 would convert the thesis from contracted to realised. Naming the Beacon Point tenant, or disclosing a backstop provider, would let the concentration be assessed rather than accepted. And a third campus financed on the same template would establish that the structure is repeatable rather than a function of one favourable window. Readers should watch delivery milestones, the project issuers' reserve and amortisation tests, and contracted megawatts, and should treat the net loss line as an artefact of bitcoin accounting.</p>
+</section>
+
+<!-- ===================== 13. NULL CATEGORIES ===================== -->
+<section id="s13">
+  <h2 class="sec"><span class="n">13</span>Null categories</h2>
+  <p class="sub">Requested categories with nothing to report. Status reads Covered above, None where a
+  named source was checked and found empty, or Not established where the category was not examined.
+  A category nobody looked at is a gap, not an absence.</p>
+  <div class="tw"><table class="nulls">
+    <thead><tr><th>Category</th><th>Status</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Dividends</td><td class="status">None</td><td>No common dividend has been declared or paid by Hut 8 Corp. since its formation in 2023.</td></tr>
+      <tr><td class="lbl">Share buybacks</td><td class="status">None</td><td>No repurchase programme is disclosed in the FY2025 Form 10-K or the first quarter Form 10-Q, and no treasury stock is carried.</td></tr>
+      <tr><td class="lbl">Preferred stock</td><td class="status">None</td><td>None issued or outstanding at 31 March 2026. 25,000,000 shares authorised.</td></tr>
+      <tr><td class="lbl">Convertible debt</td><td class="status">None</td><td>No convertible notes are outstanding. Both financings are straight senior secured project debt.</td></tr>
+      <tr><td class="lbl">Analyst price targets</td><td class="status">None</td><td>No attributed, dated third-party target or rating was located in a primary or published source during the sweep described in section 14.</td></tr>
+      <tr><td class="lbl">Late filings</td><td class="status">None</td><td>No NT 10-K or NT 10-Q appears across the 250 filings on this issuer's EDGAR index, nor across the 247 filings of the predecessor entity.</td></tr>
+      <tr><td class="lbl">Going concern qualification</td><td class="status">None</td><td>The FY2025 audit report contains no going concern paragraph.</td></tr>
+      <tr><td class="lbl">Canadian continuous disclosure record</td><td class="status caution-t">Not established</td><td>The stock is listed on the Toronto Stock Exchange, confirmed from the exchange's own company directory on 3 August 2026, but the Canadian filing registry could not be reached. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Grid interconnection corroboration</td><td class="status caution-t">Not established</td><td>The Texas grid operator's large load interconnection records could not be retrieved. Capacity figures rest on company statements. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Credit ratings on the project notes</td><td class="status caution-t">Not established</td><td>Both financings are described by the company as investment grade, but no rating agency publication was consulted. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Securities class action</td><td class="status caution-t">Not established</td><td>Not examined. Federal and state court dockets were not searched. Also named in what was not checked.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 14. METHODOLOGY & SOURCES ===================== -->
+<section id="s14">
+  <h2 class="sec"><span class="n">14</span>Methodology &amp; sources</h2>
+  <p class="sub">Pricing basis, the tagging scheme, and, importantly, what was not checked.</p>
+
+  <h3>Which entity this document is about</h3>
+  <p>Two companies have carried the Hut 8 name and both have SEC filing records, so the distinction is set out rather than assumed. This document covers <b>Hut 8 Corp.</b>, a Delaware corporation with Central Index Key 0001964789, Commission file 001-41864, whose common stock trades on Nasdaq and the Toronto Stock Exchange under the symbol HUT. It files as a US domestic filer on Forms 10-K, 10-Q, 8-K and DEF 14A.</p>
+  <p>Its predecessor, <b>Hut 8 Mining Corp.</b>, was a British Columbia corporation with Central Index Key 0001731805 and Commission file 001-40487. It filed as a foreign private issuer on Forms 40-F and 6-K from February 2018, was delisted from Nasdaq on 1 December 2023, and terminated its registration by a Form 15 filed on 11 December 2023 under Exchange Act Rules 12g-4(a)(1) and 12h-3(b)(1)(i), reporting one holder of record. That filing states that, effective 30 November 2023, the registrant and its subsidiary amalgamated under a court-approved plan of arrangement under the Business Corporations Act (British Columbia) and the amalgamated company became a wholly owned subsidiary of Hut 8 Corp. Filings before December 2023 sit under the predecessor and are not part of this issuer's own record.</p>
+
+  <h3>Fiscal year, and why the comparatives are uneven</h3>
+  <p>The fiscal year ends 31 December, confirmed from the FY2025 Form 10-K cover. It has not always done so. The company's first annual filing was a transition report on Form 10-KT covering the six months from 1 July to 31 December 2023, which moved the year end from 30 June to 31 December. Financial periods before 2024 are therefore not comparable to later years without stating which basis they are on, and the tables in section 6 label the six-month period explicitly.</p>
+
+  <h3>Pricing basis</h3>
+  <p>Market figures are struck at the close of 31 July 2026, the last completed session before the as-of date. The share price of $107.63 and the 52-week range of $18.68 to $140.80 rest on 251 daily sessions from 1 August 2025, a full year with no gap. The session count is stated because a price history keyed to a symbol rather than to an issuer can silently begin at a corporate change, and this issuer has one in recent memory.</p>
+
+  <h3>Provenance tags</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Tag</th><th>What it asserts</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl"><span class="tag">Filed</span></td><td>Stated in an SEC filing or company release, cited by form and date. Also covers a dated official publication by a named non-SEC issuer, with the issuer named in the source line. Used here for the Toronto Stock Exchange company directory.</td></tr>
+      <tr><td class="lbl"><span class="tag">Estimate</span></td><td>Derived or inferred here. The arithmetic is shown.</td></tr>
+      <tr><td class="lbl"><span class="tag">Open</span></td><td>Expected but unconfirmed. Nothing filed either way.</td></tr>
+      <tr><td class="lbl"><span class="tag">Market</span></td><td>Price, volume, float, published targets and ratings, stamped with the close or publication date. A third party's target or rating is market data, attributed to the firm that issued it and never adopted here. Used here for another issuer's published peer comparison.</td></tr>
+      <tr><td class="lbl"><span class="tag">Press</span></td><td>Reported by a named publication that is neither the issuer nor an analyst, cited by outlet and date. Corroborates; never the sole basis for a material claim.</td></tr>
+      <tr><td class="lbl"><span class="tag">Social</span></td><td>Publicly posted by a named account, cited by handle and date. Asserts that the statement was made, never that it is true.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Primary sources</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Source</th><th>Date</th><th>What it settles</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Form 10-K, FY2025</td><td class="when">25 Feb 2026</td><td>Platform structure, sites, FY2024 to FY2025 financials, six-month 2023 comparative</td></tr>
+      <tr><td class="lbl">Form 10-Q, Q1 2026</td><td class="when">6 May 2026</td><td>Balance sheet at 31 Mar 2026, bitcoin holdings and custodians, Far North disposal</td></tr>
+      <tr><td class="lbl">Form 8-K and Exhibit 99.1</td><td class="when">20 Jul 2026</td><td>Beacon Point Phase 2 lease; 949 MW and $26.6bn portfolio figures</td></tr>
+      <tr><td class="lbl">Form 8-K and Exhibit 99.1</td><td class="when">5 Jun 2026</td><td>Beacon Point $4.25bn notes pricing; tenant rated AA- or higher; 521-acre site</td></tr>
+      <tr><td class="lbl">Form 8-K</td><td class="when">10 Jun 2026</td><td>Beacon Point notes closing, 6.129%, due 2042, non-recourse</td></tr>
+      <tr><td class="lbl">Form 8-K and Exhibit 99.1</td><td class="when">28 Apr 2026</td><td>River Bend $3.25bn notes pricing, 6.192%, 245 MW critical IT</td></tr>
+      <tr><td class="lbl">Form 10-KT, transition period</td><td class="when">28 Mar 2024</td><td>Change of fiscal year end from 30 June to 31 December</td></tr>
+      <tr><td class="lbl">Form 424B3 prospectus</td><td class="when">9 Nov 2023</td><td>Terms of the business combination; predecessor's foreign private issuer status</td></tr>
+      <tr><td class="lbl">Hut 8 Mining Corp., Form 15-12G</td><td class="when">11 Dec 2023</td><td>Predecessor deregistration and the 30 Nov 2023 plan of arrangement</td></tr>
+      <tr><td class="lbl">Big Digital Energy, Form 8-K Exhibit 99.1</td><td class="when">3 Jun 2026</td><td>Third-party peer comparison table reproduced in section 5</td></tr>
+      <tr><td class="lbl">Toronto Stock Exchange company directory</td><td class="when">3 Aug 2026</td><td>Current TSX listing of the common stock under the symbol HUT</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Filing sweep</h3>
+  <p>The sweep was run against Central Index Key 0001964789 rather than the ticker, and separately against the predecessor's key 0001731805, because the two records do not join. The current issuer's index holds 250 filings from 7 February 2023 to 31 July 2026 and the predecessor's holds 247 from 22 February 2018 to 11 December 2023; both were read in full for form type. Both spellings of the beneficial-ownership schedules were included: 6 filings carry the legacy prefix and 8 the form the Commission has emitted since December 2024, so a sweep matching only the older spelling would have missed more than half of them, including every filing since October 2025. Exhibit lists were enumerated rather than form types alone, which is how the tenant's rating band, the 521-acre site description and the peer comparison in section 5 were reached, all of which sit in exhibits rather than in a filing body. Full-text search was used to find the company named inside other parties' filings, which surfaced the American Bitcoin filings under the former Gryphon Digital Mining registrant.</p>
+
+  <h3>What was not checked</h3>
+  <p>The Canadian securities filing registry was attempted on 3 August 2026 and could not be queried: it returned a challenge page rather than data. The company's Canadian continuous disclosure record is therefore not established. The Toronto Stock Exchange listing itself was confirmed independently from the exchange's own company directory on the same date, which settles the listing but not the filing record, and the two must not be conflated.</p>
+  <p>The Texas grid operator's large load interconnection records were attempted on 3 August 2026 and could not be retrieved; the public planning pages returned a challenge page. The 1,000 MW of utility capacity at Beacon Point, the AEP Texas interconnection agreement and the 330 MW at River Bend therefore rest on the company's own statements and are not corroborated by grid data. Louisiana and Texas utility commission records were not examined.</p>
+  <p>No rating agency publication was consulted, so the investment-grade characterisation of both project financings, and the AA- or higher rating attributed to the Beacon Point tenant, are reported as the company states them and are not independently verified. Federal and state court dockets were not searched. Exchange short interest reports were not retrieved. No earnings call transcript was read. American Bitcoin's own filings were identified but not read in full, so Hut 8's precise economic and voting percentage in that subsidiary is not stated here; the consolidated non-controlling interest of $310.3 million at 31 March 2026 is given instead.</p>
+  <p>Figures after 31 March 2026 are limited to what has been announced on Form 8-K. Second quarter results for the period ended 30 June 2026 had not been filed at the as-of date, so no reported balance sheet reflects either project financing or the Beacon Point Phase 2 lease.</p>
+</section>
+
+<!-- ===================== 15. DOCUMENT LOG ===================== -->
+<section id="s15">
+  <h2 class="sec"><span class="n">15</span>Document log</h2>
+  <p class="sub">Newest first. The original build entry is never removed or rewritten.</p>
+  <div class="log">
+    <div class="logentry current">
+      <div class="when">3 August 2026 <span class="latest">Latest</span></div>
+      <div class="basis">Original build · priced off 31 Jul 2026 close · $107.63 · $12.12bn cap</div>
+      <p><b>Built from</b> the company's filings on EDGAR under Central Index Key 0001964789, swept across its complete index of 250 filings from February 2023 to 31 July 2026, together with the predecessor entity's 247 filings under Central Index Key 0001731805. The load-bearing documents are the FY2025 Form 10-K of 25 February 2026, the first quarter Form 10-Q of 6 May 2026, and the Current Reports of 28 April, 5 June, 10 June and 20 July 2026 with their exhibits. The Form 10-KT of 28 March 2024 establishes the change of fiscal year end, and the predecessor's Form 15 of 11 December 2023 establishes the succession. The Toronto Stock Exchange company directory confirmed the second listing. Big Digital Energy's investor presentation of 3 June 2026 supplied the peer comparison in section 5.</p>
+      <p><b>Pricing basis</b> is the close of 31 July 2026, the last completed session before the build date. The market capitalisation of $12.12 billion multiplies that price by the 112,594,112 shares reported on the 10-Q cover as of 4 May 2026; the two dates differ and the snapshot says so. Enterprise value is deliberately absent: $7.5 billion of project debt closed after the most recent reported balance sheet.</p>
+      <p><b>Structure established.</b> Fifteen sections, provenance tags on every tabled figure and framing item, analyst inference confined to marked assumption blocks. Capacity is carried on two explicit bases, contracted IT and utility, because the company uses both for the same asset. The six-month transition period is labelled as such wherever it appears as a comparative.</p>
+      <p><b>Known gaps in this version.</b> The Canadian securities filing registry and the Texas grid operator's large load records both returned challenge pages on 3 August 2026 and could not be queried, so the Canadian disclosure record is not established and no capacity figure is corroborated by grid data. No rating agency publication was consulted, so the investment-grade characterisations and the tenant's AA- rating band are reported as the company states them. Court dockets and short interest were not examined. Hut 8's precise percentage interest in American Bitcoin is not stated because it was not established from the filings read.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="norec">
+    No buy, sell, or hold recommendation is issued and no price target is derived.
+    Third-party targets and ratings, where shown, are the published views of the
+    firms named and are reported as market data. This document is for research and
+    educational purposes and is not investment advice. Verify all figures against
+    primary filings on sec.gov before acting.
+  </div>
+  <p style="margin-top:16px">HUT · Hut 8 Corp. · Equity Research Report · as of 3 August 2026</p>
+</footer>
+
+</div>
+</body>
+</html>

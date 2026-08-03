@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>HUT &middot; Hut 8 Corp. &middot; Catalyst Calendar &middot; as of 3 August 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================================
+   PER-TICKER PALETTE
+   ========================================================================= */
+:root{
+  /* Hut 8's wordmark and icon are achromatic: measured across the company's own
+     512px mark, every inked pixel falls below both the chroma and the saturation
+     floor, so the mark carries no colour to take. The accent therefore comes
+     from the brand colour in the site chrome, which Hut 8 declares as its own
+     token: #B3FF00, a chartreuse at hue 77.9, saturation 100%, lightness 50%.
+     Normalised for white paper the saturation falls to 72% and the lightness to
+     28%, giving #5C7B14 at 4.89:1 against the page. The hue is carried through
+     unchanged: it sits 38.9 degrees clear of the nearest meaning-bearing colour,
+     so no rotation was needed. */
+  --accent:      #5C7B14;
+  --accent-deep: #3B4F0D;
+  --accent-wash: rgba(92,123,20,0.06);
+  --accent-line: rgba(92,123,20,0.22);
+}
+
+/* ============================================================================
+   SHARED STYLESHEET v1.57 : BEGIN
+   ========================================================================= */
+:root{
+  color-scheme: light only;
+
+  --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
+  --line:#DEE6EC;   --line-hard:#C0CDD7;
+  --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
+
+  --pos:#0B7A50;      --pos-bg:#E7F4EE;
+  --neg:#B02A21;      --neg-bg:#FBECEA;
+  --caution:#90600A;  --caution-bg:#FBF2E0;
+  --assume:#4F3FA3;   --assume-bg:#EFEDFA;
+
+  --display:'Archivo',ui-sans-serif,system-ui,'Helvetica Neue',Arial,sans-serif;
+  --body:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+
+  --measure:78ch;
+  --col:760px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html,body{background:var(--canvas) !important;background-color:var(--canvas) !important}
+body{
+  margin:0;color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 22px 96px;background:var(--paper);
+      border-left:1px solid var(--line);border-right:1px solid var(--line)}
+p{max-width:var(--measure)}
+/* Boxed prose fills its container: the box supplies its own measure, so the
+   78ch cap applies to top-level running prose only. */
+.first li,.assume p,.note p,.cat p,.risk p,.logentry p,.oc p,.case p,
+.cat-meta,.logentry .basis{max-width:none}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:var(--accent-deep)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- masthead ---------- */
+.mast{padding:44px 0 26px;border-bottom:2px solid var(--line-hard);margin-bottom:8px;
+      position:relative;padding-left:20px}
+.mast::before{content:"";position:absolute;left:0;top:44px;bottom:26px;
+      width:4px;background:var(--accent)}
+.ticker{font-family:var(--mono);font-size:44px;font-weight:700;letter-spacing:-1px;
+      line-height:1;color:var(--accent);margin:0}
+.headline{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.22;
+      color:var(--ink);margin:16px 0 0}
+.functional{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--ink-faint);margin:18px 0 0}
+.mast-strip{display:flex;flex-wrap:wrap;gap:26px;margin-top:20px;padding-top:16px;
+      border-top:1px solid var(--line)}
+.mast-strip div{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint)}
+.mast-strip b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-top:3px}
+
+/* ---------- banner: framing ---------- */
+.first{background:var(--canvas);border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:20px 24px;margin:30px 0 12px}
+.first h2{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.04em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 12px}
+.first ol{margin:0;padding-left:20px}
+.first li{margin-bottom:9px}
+.first li:last-child{margin-bottom:0}
+
+/* ---------- sections ---------- */
+section{padding-top:38px}
+h2.sec{font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);
+      margin:0 0 4px;padding-bottom:10px;border-bottom:1px solid var(--line-hard);
+      display:flex;align-items:baseline;gap:12px}
+h2.sec .n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);
+      letter-spacing:.06em;flex:none}
+.sub{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);margin:10px 0 18px;
+      max-width:var(--measure)}
+h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink-dim);
+      margin:26px 0 8px}
+
+/* ---------- provenance tags (signature) ---------- */
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);
+      background:var(--panel-2);border:1px solid var(--line);
+      border-radius:2px;padding:1px 6px;vertical-align:1px;white-space:nowrap}
+
+/* ---------- assumption block ---------- */
+.assume{background:var(--assume-bg);border-left:4px solid var(--assume);
+      padding:16px 20px;margin:20px 0}
+.assume .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--assume);display:block;margin-bottom:7px}
+.assume p{margin:0}
+
+/* ---------- callouts ---------- */
+.note{border:1px solid var(--line);border-left:4px solid var(--ink-faint);
+      background:var(--canvas);padding:16px 20px;margin:20px 0}
+.note.pos{border-left-color:var(--pos);background:var(--pos-bg)}
+.note.neg{border-left-color:var(--neg);background:var(--neg-bg)}
+.note.caution{border-left-color:var(--caution);background:var(--caution-bg)}
+.note p{margin:0}
+.note p + p{margin-top:10px}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+thead th{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--ink-dim);text-align:left;
+      padding:9px 12px;border-bottom:2px solid var(--line-hard);white-space:nowrap}
+tbody td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--canvas)}
+td.num,th.num{font-family:var(--mono);text-align:right;white-space:nowrap}
+/* td.when marks a timing column. An unmarked cell counts as prose. */
+td.when{font-family:var(--mono);white-space:nowrap}
+td.lbl{font-weight:600}
+.pos-t{color:var(--pos);font-weight:600}
+.neg-t{color:var(--neg);font-weight:600}
+.caution-t{color:var(--caution);font-weight:600}
+
+/* ---------- cases ---------- */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.case{border:1px solid var(--line);border-top:3px solid var(--ink-faint);
+      background:var(--paper);padding:18px}
+.case.bull{border-top-color:var(--pos)}
+.case.bear{border-top-color:var(--neg)}
+.case h4{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 10px}
+.case.bull h4{color:var(--pos)} .case.bear h4{color:var(--neg)}
+.case p{font-size:15px;margin:0}
+.case .req{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+
+/* ---------- risks ---------- */
+.risk{border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:16px 20px;margin-bottom:12px}
+.risk.sev-high{border-left-color:var(--neg)}
+.risk.sev-med{border-left-color:var(--caution)}
+.risk.sev-low{border-left-color:var(--ink-faint)}
+.risk h4{font-family:var(--display);font-size:15.5px;font-weight:600;margin:0 0 6px;
+      display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.risk .sev{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase}
+.risk.sev-high .sev{color:var(--neg)}
+.risk.sev-med .sev{color:var(--caution)}
+.risk.sev-low .sev{color:var(--ink-faint)}
+.risk p{margin:0;font-size:15.5px}
+
+/* ---------- null categories ---------- */
+.nulls td.lbl{width:26%}
+.nulls .status{font-family:var(--mono);font-size:12px;white-space:nowrap}
+
+/* ---------- document log ---------- */
+.log{margin-top:14px}
+.logentry{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:12px}
+.logentry.current{border-left:4px solid var(--accent);background:var(--accent-wash)}
+.logentry .when{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);
+      display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.latest{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-line);
+      background:var(--paper);border-radius:2px;padding:1px 6px}
+.logentry .basis{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-bottom:12px}
+.logentry p{font-size:15.5px;margin:0 0 9px}
+.logentry p:last-child{margin-bottom:0}
+.correction{border:1px solid var(--neg);border-left:4px solid var(--neg);
+      background:var(--neg-bg);padding:12px 16px;margin-bottom:14px}
+.correction .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--neg);display:block;margin-bottom:5px}
+
+/* ---------- footer ---------- */
+footer{margin-top:44px;padding-top:22px;border-top:2px solid var(--line-hard)}
+footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width:none}
+.norec{border:1px solid var(--line-hard);background:var(--canvas);padding:16px 20px;
+      margin-top:20px;font-family:var(--mono);font-size:12.5px;color:var(--ink-dim)}
+
+/* ---------- catalyst cards (calendar) ---------- */
+.cat{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:14px;border-left:4px solid var(--line-hard)}
+.cat.up{border-left-color:var(--pos)}
+.cat.down{border-left-color:var(--neg)}
+.cat.two{border-left-color:var(--caution)}
+.cat.neutral{border-left-color:var(--ink-faint)}
+.cat-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.cid{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);flex:none}
+.cat-head h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink);
+      margin:0;flex:1 1 auto;min-width:200px}
+.dir{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;white-space:nowrap}
+.cat.up .dir{color:var(--pos)} .cat.down .dir{color:var(--neg)}
+.cat.two .dir{color:var(--caution)} .cat.neutral .dir{color:var(--ink-faint)}
+.cat-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:10px 0 12px;padding:9px 0;
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+      font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
+.cat-meta b{color:var(--ink);font-weight:600}
+.cat p{margin:0 0 9px;font-size:15.5px}
+.cat p:last-child{margin-bottom:0}
+.cat.resolved{background:var(--canvas);border-left-color:var(--ink-faint)}
+.cat.resolved .dir{color:var(--ink-faint)}
+
+/* ---------- horizon bands (calendar) ---------- */
+.band{display:flex;align-items:center;gap:14px;margin:30px 0 16px}
+.band-t{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--ink-dim);white-space:nowrap}
+.band-r{flex:1;height:1px;background:var(--line-hard)}
+.band-c{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);white-space:nowrap}
+
+/* ---------- upside / downside pair ---------- */
+.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0}
+.oc{border:1px solid var(--line);padding:11px 14px;background:var(--paper)}
+.oc.up-c{border-left:3px solid var(--pos)}
+.oc.down-c{border-left:3px solid var(--neg)}
+.oc .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.09em;
+      text-transform:uppercase;display:block;margin-bottom:5px}
+.oc.up-c .lbl{color:var(--pos)} .oc.down-c .lbl{color:var(--neg)}
+.oc p{margin:0;font-size:14.5px;line-height:1.5}
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  body{font-size:16px}
+  .wrap{padding:0 16px 70px;border-left:none;border-right:none}
+  .ticker{font-size:34px}
+  .headline{font-size:23px}
+  .cases{grid-template-columns:1fr}
+  .outcomes{grid-template-columns:1fr}
+  .mast-strip{gap:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none !important;transition:none !important}
+}
+@media print{
+  body{font-size:11pt}
+  .wrap{max-width:none;border:none}
+  section{page-break-inside:avoid}
+}
+/* ============================================================================
+   SHARED STYLESHEET v1.57 : END
+   ========================================================================= */
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<!-- ===================== MASTHEAD ===================== -->
+<header class="mast">
+  <p class="ticker">HUT</p>
+  <h1 class="headline">Two campuses financed to 2042, and not one megawatt earning rent yet</h1>
+  <p class="functional">HUT &middot; Hut 8 Corp. &middot; Catalyst Calendar &middot; as of 3 August 2026</p>
+  <div class="mast-strip">
+    <div>Dated catalysts <b>7</b></div>
+    <div>Standing conditions <b>8</b></div>
+    <div>Resolved <b>11</b></div>
+    <div>Horizon <b>12 months</b></div>
+    <div>Pricing basis <b>31 Jul 2026 close &middot; $107.63</b> <span class="tag">Market</span></div>
+  </div>
+</header>
+
+<!-- ===================== BASIS ===================== -->
+<div class="first">
+  <h2>Basis</h2>
+  <ol>
+    <li>Only the reporting dates are genuinely <em>scheduled</em>. Delivery of a data hall, commencement of a lease and conversion of a pipeline site are event-driven and can land on any day the company chooses to file.</li>
+    <li>Timing confidence rates the <em>date</em>, never the outcome. A High-confidence catalyst can still be a coin flip.</li>
+    <li>Estimated reporting dates are cadence-based until the company announces. Treat them as approximate.</li>
+    <li>This issuer's reported results are dominated by a bitcoin holding carried at fair value, so an earnings date is a catalyst about the bitcoin price as much as about the business.</li>
+  </ol>
+</div>
+
+<!-- ===================== 1. DATED CATALYSTS ===================== -->
+<section id="s1">
+  <h2 class="sec"><span class="n">01</span>Dated catalysts</h2>
+  <p class="sub">Banded 0&ndash;3 / 3&ndash;6 / 6&ndash;12 months, earliest first. Numbering is gapless and runs straight through the bands, so a boundary never resets the count. An ID marks position in the current ordering and changes between revisions, so catalysts are named by title.</p>
+
+  <div class="band"><span class="band-t">0&ndash;3 months</span><span class="band-r"></span><span class="band-c">D1</span></div>
+
+  <div class="cat two" id="cat-second-quarter-2026-results">
+    <div class="cat-head">
+      <span class="cid">D1</span>
+      <h3>Second quarter 2026 results</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>~early August 2026</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>The first balance sheet to carry either project financing. $3.25 billion closed on 30 April 2026 and $4.25 billion on 9 June 2026, both after the 31 March 2026 reporting date, so total liabilities of $919.6 million are about to be joined by $7.5 billion of non-recourse project debt.</p>
+    <p>Watch three things: how the project debt is presented and whether it is consolidated, the mark on the 16,332 bitcoin holding after a quarter in which the fair value used was roughly $68,222, and whether general and administrative expense of $81.7 million in the first quarter, more than that quarter's revenue, persists at that level.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>A recovered bitcoin mark turns the reported loss around, and the project debt is presented cleanly as non-recourse with the parent's own leverage unchanged.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A further bitcoin write-down deepens the accumulated deficit while overhead keeps running ahead of revenue and no lease has commenced.</p></div>
+    </div>
+    <div class="assume">
+      <span class="lbl">Analyst assumption</span>
+      <p>The date is a cadence estimate. The company filed its second quarter report on 7 August in 2025 and its first quarter report on 6 May in 2026; no date has been announced for this one.</p>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Filing cadence from Forms 10-Q filed 7 August 2025 and 6 May 2026. <span class="tag">Estimate</span></p>
+  </div>
+
+  <div class="band"><span class="band-t">3&ndash;6 months</span><span class="band-r"></span><span class="band-c">D2</span></div>
+
+  <div class="cat two" id="cat-third-quarter-2026-results">
+    <div class="cat-head">
+      <span class="cid">D2</span>
+      <h3>Third quarter 2026 results</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>~early November 2026</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>The last report before the first cash interest payment on the River Bend notes falls due on 15 November 2026, and the quarter in which construction progress at both campuses should become visible in property and equipment. It is also the first full quarter with both financings in place.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Capital expenditure tracks the construction schedule and management confirms delivery timing for River Bend, converting a plan into a date.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Construction spend lags, or a delivery date moves, with interest now running on $7.5 billion and nothing earning rent.</p></div>
+    </div>
+    <div class="assume">
+      <span class="lbl">Analyst assumption</span>
+      <p>The date is a cadence estimate from the third quarter report filed 4 November 2025. No date has been announced.</p>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Filing cadence from Form 10-Q filed 4 November 2025. <span class="tag">Estimate</span></p>
+  </div>
+
+  <div class="band"><span class="band-t">6&ndash;12 months</span><span class="band-r"></span><span class="band-c">D3&ndash;D5</span></div>
+
+  <div class="cat two" id="cat-fy2026-annual-report">
+    <div class="cat-head">
+      <span class="cid">D3</span>
+      <h3>FY2026 annual report on Form 10-K</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>~late February 2027</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>High</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>The first audited statement of the year in which the company became a project-financed data centre developer. It will settle the accounting treatment of both issuers, the year-end bitcoin mark, and whether the auditor's view of internal control and going concern is unchanged. It is also where the Beacon Point lease terms receive their fullest description to date.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>A clean audit with both projects on schedule, and disclosure that lets the tenant concentration be assessed rather than accepted.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>An impairment, a construction overrun disclosed for the first time, or lease terms that turn out to carry conditions the press releases did not describe.</p></div>
+    </div>
+    <div class="assume">
+      <span class="lbl">Analyst assumption</span>
+      <p>The date is a cadence estimate from the transition report filed 28 March 2024 and annual reports filed 3 March 2025 and 25 February 2026. No date has been announced.</p>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Filing cadence from Forms 10-KT and 10-K, 28 March 2024, 3 March 2025 and 25 February 2026. <span class="tag">Estimate</span></p>
+  </div>
+
+  <div class="cat neutral" id="cat-2027-annual-meeting">
+    <div class="cat-head">
+      <span class="cid">D4</span>
+      <h3>2027 annual meeting of stockholders</h3>
+      <span class="dir">Neutral</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>~June 2027</b></div>
+      <div>Impact <b>Low</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>The 2026 meeting was held on 11 June 2026 following a proxy statement filed on 28 April 2026. With 1,000,000,000 shares authorised against 112.6 million outstanding, no further authorisation is needed, so the agenda is likely to be routine and the interest lies in the vote counts rather than the resolutions.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Routine re-election with high support, and a proxy statement that discloses more about the lease counterparties than the press releases have.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Opposition to directors or to pay, which for a company with no revenue from its principal assets would signal impatience with the timeline.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K Item 5.07, 12 June 2026; definitive proxy statement, 28 April 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat up" id="cat-river-bend-initial-delivery">
+    <div class="cat-head">
+      <span class="cid">D5</span>
+      <h3>River Bend initial delivery and commissioning</h3>
+      <span class="dir">Up</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Targeted Q2 2027</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>Low</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The single most important item on this calendar. The annual report targets initial delivery and commissioning of the River Bend AI data centre in the second quarter of 2027, commercialising 330 MW of utility capacity, of which 245 MW of critical IT capacity is the subject of the $3.25 billion financing.</p>
+    <p>It is the first revenue any of the contracted portfolio will produce, and the first evidence that the company can convert a financing into an operating asset. Until it happens, every megawatt of the 949 MW book is a promise.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Delivery on target starts rent under a 15-year triple-net lease with escalators, and the model moves from contracted to realised.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Slippage extends the period in which $7.5 billion of debt accrues interest against no lease revenue, and casts doubt on the Beacon Point schedule behind it.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-K, 25 February 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="band"><span class="band-t">Beyond 12 months, context only</span><span class="band-r"></span><span class="band-c">D6&ndash;D7</span></div>
+  <p class="sub">Structural items that shape the backdrop but do not trade in the window.</p>
+
+  <div class="cat two" id="cat-river-bend-notes-amortisation-begins">
+    <div class="cat-head">
+      <span class="cid">D6</span>
+      <h3>River Bend notes begin amortising</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>15 May 2028; Beacon Point from 30 May 2030</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Confidence <b>High</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Both financings are fully amortising rather than bullet, which removes refinancing risk at maturity but front-loads cash demands on each project. River Bend begins semi-annual amortisation payments on 15 May 2028 and Beacon Point on 30 May 2030. Each date is contractually fixed, which is why timing confidence is High even at this distance.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Amortisation from stabilised lease income steadily deleverages each project and increases the residual equity value at the parent.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>If a campus is late or under-let, amortisation begins against insufficient cash flow and the reserves absorb the shortfall before the parent hears about it.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Forms 8-K, 28 April 2026 and 10 June 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat down" id="cat-next-bitcoin-halving">
+    <div class="cat-head">
+      <span class="cid">D7</span>
+      <h3>Next bitcoin halving</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Expected 2028</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The block subsidy halves at a protocol-defined interval. Compute revenue of $202.3 million in 2025 was overwhelmingly bitcoin mining, so the event reaches the majority of present revenue even though it reaches none of the contracted lease book. Much of the mining sits inside American Bitcoin, a separately listed subsidiary, so the effect is shared with that company's minority holders.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Lease revenue from both campuses is running by then and the halving reaches a business that has become a minority of the whole.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>The subsidy cut lands while mining is still the main revenue source and the campuses are not yet stabilised.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-K, 25 February 2026. <span class="tag">Filed</span></p>
+  </div>
+</section>
+
+<!-- ===================== 2. STANDING CONDITIONS ===================== -->
+<section id="s2">
+  <h2 class="sec"><span class="n">02</span>Standing conditions</h2>
+  <p class="sub">Ongoing and undated, most material first. These take &ldquo;Why undated&rdquo; in place of timing confidence.</p>
+
+  <div class="cat two" id="cat-unnamed-tenant-concentration">
+    <div class="cat-head">
+      <span class="cid">S1</span>
+      <h3>One unnamed tenant holds 74% of the contracted book</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>Counterparty condition with no scheduled review</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Both phases of Beacon Point, 704 of 949 contracted megawatts, are leased to a single counterparty described only as a high-investment-grade company rated AA- or higher as of the date of the June 2026 offering. The name, the agency and the sector are not disclosed. The rating is stated as of a date, and a reader cannot track it.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>A AA- or better counterparty on a 15-year triple net lease is among the highest-quality contracted revenue available in this sector, whoever it is.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Concentration cannot be assessed, cross-checked against peers' disclosures, or monitored for downgrade, so the reader is accepting the characterisation rather than verifying it.</p></div>
+    </div>
+  </div>
+
+  <div class="cat two" id="cat-bitcoin-drives-reported-results">
+    <div class="cat-head">
+      <span class="cid">S2</span>
+      <h3>A bitcoin holding governs the reported result</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing, revalued every reporting date</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>Continuous market exposure with no scheduled trigger</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>16,332 bitcoin at 31 March 2026, worth approximately $1.11 billion at a fair value of roughly $68,222 each, split 9,311 to Hut 8 and 7,021 to American Bitcoin. The line moved from a $509.3 million gain in FY2024 to a $220.0 million loss in FY2025 and a $295.7 million loss in the first quarter of 2026. It is 43% of total assets and it decides the sign of the reported result.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>A recovery in the bitcoin price restores reported earnings without anything changing in the operating business, and the holding is a liquid reserve against construction cost.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Further declines deepen losses, and because much of the holding is pledged, a fall reaches collateral before it reaches liquidity.</p></div>
+    </div>
+  </div>
+
+  <div class="cat two" id="cat-no-lease-has-commenced">
+    <div class="cat-head">
+      <span class="cid">S3</span>
+      <h3>No lease has commenced anywhere in the portfolio</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing until Q2 2027 at the earliest</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>Depends on construction completion, not a calendar date</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>All $26.6 billion of base-term contract value rests on capacity that does not exist yet. Reported revenue is bitcoin mining and a shrinking services book. Cash interest on the River Bend notes begins 15 November 2026 and on the Beacon Point notes 30 November 2026, both well before any rent.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Both campuses are fully financed, so construction does not depend on raising further capital, and delivery converts the whole book at once.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>The gap between interest starting and rent starting is funded from bitcoin, mining cash flow and the parent, none of which is contracted.</p></div>
+    </div>
+  </div>
+
+  <div class="cat two" id="cat-non-recourse-ring-fencing">
+    <div class="cat-head">
+      <span class="cid">S4</span>
+      <h3>Project debt ring-fences the losses and the cash alike</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing to 2042</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>A structural feature, not an event</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>$7.5 billion across two issuers, each secured on substantially all of its own assets plus a pledge of its equity by its immediate parent, and each expressly non-recourse to Hut 8 Corp. The parent's equity holders sit behind those claims on the assets that generate all the future revenue.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>A failure at one campus cannot reach the parent or the other campus, which is a genuine protection few peers have.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Cash generated inside an issuer services its notes and funds reserves before any of it can be distributed upward, so the parent waits.</p></div>
+    </div>
+  </div>
+
+  <div class="cat two" id="cat-american-bitcoin-minority">
+    <div class="cat-head">
+      <span class="cid">S5</span>
+      <h3>A separately listed subsidiary consolidates into the accounts</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>Continuing structure with no scheduled trigger</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>American Bitcoin trades on Nasdaq in its own right and is consolidated as a majority-owned subsidiary. Non-controlling interests rose from $3.9 million at 31 December 2024 to $267.5 million at 31 December 2025 and $310.3 million at 31 March 2026. Every share American Bitcoin issues dilutes Hut 8's economic interest without touching Hut 8's own share count.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>The subsidiary funds its own mining expansion from its own market, sparing the parent's balance sheet while the parent still consolidates the assets.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>The consolidated accounts report revenue and losses that partly belong to outside shareholders, and the parent's true look-through interest is harder to read.</p></div>
+    </div>
+  </div>
+
+  <div class="cat two" id="cat-power-delivery-and-interconnection">
+    <div class="cat-head">
+      <span class="cid">S6</span>
+      <h3>Power delivery rests on interconnection agreements not independently corroborated</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>Regulatory and utility process with no published decision date</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Beacon Point's 1,000 MW of utility capacity is secured under an interconnection agreement with AEP Texas, and River Bend commercialises 330 MW of utility capacity. These are the company's own statements. The Texas grid operator's large load interconnection records could not be retrieved on 3 August 2026, so no independent record corroborates the capacity or its delivery date.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Executed interconnection agreements with a named utility are a stronger position than a queue place, and the financings were underwritten against them.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Delivery of utility-scale power slips for reasons outside the company's control, and there is no public record against which to track it.</p></div>
+    </div>
+  </div>
+
+  <div class="cat two" id="cat-dual-listing-obligations">
+    <div class="cat-head">
+      <span class="cid">S7</span>
+      <h3>Two listings, and only one filing record checked</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing since November 2023</b></div>
+      <div>Impact <b>Low</b></div>
+      <div>Why undated <b>A standing obligation, not an event</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The common stock is registered on Nasdaq and the Toronto Stock Exchange, the latter confirmed from the exchange's own company directory on 3 August 2026. The predecessor entity filed with the Canadian provincial regulators, and a dual-listed issuer carries obligations in both jurisdictions. The Canadian filing registry could not be reached, so that side of the record is unexamined.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>A second listing widens the shareholder base and nothing in the SEC record suggests a compliance issue in either jurisdiction.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Material disclosure could be made in Canada and not surface in a sweep confined to the SEC families, which is the failure mode this note exists to flag.</p></div>
+    </div>
+  </div>
+
+  <div class="cat two" id="cat-shrinking-legacy-revenue">
+    <div class="cat-head">
+      <span class="cid">S8</span>
+      <h3>The revenue funding overhead is shrinking</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>Contract expiries and market pricing, no single trigger</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Power revenue fell from $56.6 million to $23.2 million and Digital Infrastructure from $17.5 million to $9.6 million between FY2024 and FY2025. The company attributes most of it to a $40.8 million fall in managed services, including $13.5 million of contract termination fees received from MARA Holdings in the prior year and the end of the Ionic agreements in late 2024. General and administrative expense meanwhile reached $81.7 million in the first quarter of 2026.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>The legacy book is being wound down deliberately as capacity is redirected to higher-value uses, and mining revenue more than replaced it in 2025.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Overhead exceeds total revenue while the contracted assets are still under construction, and the gap is funded from the balance sheet.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 3. RESOLVED ===================== -->
+<section id="s3">
+  <h2 class="sec"><span class="n">03</span>Resolved</h2>
+  <p class="sub">Closed items, kept for the record, ordered by resolution date. A resolved catalyst takes the next free R number; it does not carry its old D number over.</p>
+
+  <div class="cat resolved" id="cat-business-combination-completed">
+    <div class="cat-head"><span class="cid">R1</span><h3>Business combination completed and Hut 8 Corp. formed</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>30 November 2023</b></div>
+      <div>Outcome <b>New Delaware holding company, listed on Nasdaq and TSX</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Hut 8 Mining Corp. and US Bitcoin Corp combined under a court-approved plan of arrangement under the Business Corporations Act (British Columbia). The predecessor and its subsidiary amalgamated and became a wholly owned subsidiary of the new Delaware parent, which listed on both exchanges under the symbol HUT.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-predecessor-deregistered">
+    <div class="cat-head"><span class="cid">R2</span><h3>Predecessor entity deregistered</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>11 December 2023</b></div>
+      <div>Outcome <b>Registration terminated, one holder of record</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Hut 8 Mining Corp. filed a Form 15 terminating its Exchange Act registration under Rules 12g-4(a)(1) and 12h-3(b)(1)(i), having been delisted from Nasdaq on 1 December 2023. Its filing history, on Forms 40-F and 6-K from February 2018, sits under a separate index and does not form part of the current issuer's record.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-fiscal-year-end-changed">
+    <div class="cat-head"><span class="cid">R3</span><h3>Fiscal year end moved to 31 December</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>28 March 2024</b></div>
+      <div>Outcome <b>Transition report covering 1 July to 31 December 2023</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>A transition report on Form 10-KT covered the six months to 31 December 2023, moving the year end from 30 June. The consequence persists in every comparative table: the period labelled 2023 in this company's statements is six months long, and revenue of $59.9 million for it is not an annual figure.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-american-bitcoin-merger-closed">
+    <div class="cat-head"><span class="cid">R4</span><h3>American Bitcoin listed through the Gryphon merger</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>3 September 2025</b></div>
+      <div>Outcome <b>Nasdaq-listed majority-owned subsidiary</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Gryphon Digital Mining, Inc. merged with the company's majority-owned bitcoin subsidiary and was renamed American Bitcoin Corp., trading on Nasdaq as ABTC. Existing Gryphon shareholders held approximately 2% of the combined company on a fully diluted basis. The transaction was accounted for as a reverse acquisition with the subsidiary as accounting acquirer, generating goodwill of $154.4 million.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-fy2025-annual-report-filed">
+    <div class="cat-head"><span class="cid">R5</span><h3>FY2025 annual report filed</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>25 February 2026</b></div>
+      <div>Outcome <b>Net loss of $248.0M on revenue of $235.1M</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Revenue rose from $162.4 million to $235.1 million, but a $220.0 million loss on digital assets, against a $509.3 million gain the year before, turned operating income of $460.5 million into an operating loss of $322.0 million. No going concern paragraph.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-power-generation-assets-divested">
+    <div class="cat-head"><span class="cid">R6</span><h3>Four power generation assets divested</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>Q1 2026, day not stated</b></div>
+      <div>Outcome <b>~310 MW released; $33.6M gain on the Far North joint venture</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The annual report records that approximately 310 MW of the 1,020 MW under management at 31 December 2025 related to four power generation assets divested in the first quarter of 2026. The first quarter accounts record a $33.6 million gain, net of transaction costs, on the sale of the Far North joint venture. The filings state the quarter but not the completion day, so this item sorts at the end of that quarter.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-river-bend-project-financing">
+    <div class="cat-head"><span class="cid">R7</span><h3>River Bend project financing closed</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>30 April 2026</b></div>
+      <div>Outcome <b>$3.25bn at 6.192%, non-recourse, due 2042</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Hut 8 DC LLC priced on 27 April and closed on 30 April 2026. Proceeds fund a turnkey data centre of 245 MW critical IT capacity and its substation, reimburse the parent for part of its prior equity contributions, and fund debt service reserves. Fully amortising from 15 May 2028; secured on the issuer's assets and an equity pledge by its direct parent.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-q1-2026-results-released">
+    <div class="cat-head"><span class="cid">R8</span><h3>First quarter 2026 results released</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>6 May 2026</b></div>
+      <div>Outcome <b>Revenue tripled; $295.7M bitcoin loss</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Revenue of $71.0 million against $21.8 million a year earlier, and a net loss of $253.1 million driven by a $295.7 million loss on digital assets. Total equity held at $1,690.2 million because the loss fell partly on non-controlling interests and partly against additional paid-in capital.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-beacon-point-project-financing">
+    <div class="cat-head"><span class="cid">R9</span><h3>Beacon Point project financing closed</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>9 June 2026</b></div>
+      <div>Outcome <b>$4.25bn at 6.129%, non-recourse, due 2042</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Beacon Point DC LLC priced on 4 June and closed on 9 June 2026, with J.P. Morgan Securities as representative of the initial purchasers. Proceeds fund a turnkey data centre of six data halls totalling 352 MW critical IT capacity on an approximately 521-acre property in Nueces County, Texas, plus the substation and debt service reserves. Fully amortising from 30 May 2030.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-2026-annual-meeting-held">
+    <div class="cat-head"><span class="cid">R10</span><h3>2026 annual meeting held</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>11 June 2026</b></div>
+      <div>Outcome <b>Matters voted; results filed the following day</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Held following a definitive proxy statement filed on 28 April 2026, with voting results reported on Form 8-K under Item 5.07 on 12 June 2026.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-beacon-point-fully-commercialised">
+    <div class="cat-head"><span class="cid">R11</span><h3>Beacon Point fully commercialised by a second lease</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>20 July 2026</b></div>
+      <div>Outcome <b>704 MW to one tenant; portfolio to 949 MW and $26.6bn</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>A second 15-year triple-net lease for 352 MW of IT capacity, on substantially the same terms as the first, doubled the existing tenant's contracted capacity at the campus and took campus base-term contract value to $19.6 billion. Portfolio contracted IT capacity rose to 949 MW against 1,330 MW of utility capacity, with aggregate base-term value of $26.6 billion. Signing is resolved; delivery and rent commencement are not, and appear above as dated items.</p>
+  </div>
+</section>
+
+<!-- ===================== 4. NULL CATEGORIES ===================== -->
+<section id="s4">
+  <h2 class="sec"><span class="n">04</span>Null categories</h2>
+  <p class="sub">Every category reviewed appears as a row, including those that produced catalysts, which read across by title and ID. A category checked and found empty is recorded rather than omitted.</p>
+  <div class="tw"><table class="nulls">
+    <thead><tr><th>Category</th><th>Status</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Earnings</td><td class="status">Covered above</td><td>Second quarter 2026 results (D1), third quarter 2026 results (D2), FY2026 annual report on Form 10-K (D3), first quarter 2026 results released (R8), FY2025 annual report filed (R5).</td></tr>
+      <tr><td class="lbl">Product launches</td><td class="status">None</td><td>The company leases data centre capacity, mines bitcoin and sells cloud services; it ships no product on a launch cycle. The nearest equivalent is delivery of a campus, carried as River Bend initial delivery and commissioning (D5).</td></tr>
+      <tr><td class="lbl">Investor days</td><td class="status">None</td><td>No investor day is announced. No Form 8-K to 31 July 2026 announces one, and the company's disclosed events are quarterly earnings calls.</td></tr>
+      <tr><td class="lbl">Regulatory decisions</td><td class="status">Covered above</td><td>Power delivery rests on interconnection agreements not independently corroborated (S6). No pending approval is disclosed as a condition to either financing or either lease.</td></tr>
+      <tr><td class="lbl">Lawsuits</td><td class="status caution-t">Not established</td><td>Not examined. Federal and state court dockets were not searched. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Macro events</td><td class="status">Covered above</td><td>Next bitcoin halving (D7); a bitcoin holding governs the reported result (S2), which carries the continuous price exposure.</td></tr>
+      <tr><td class="lbl">Industry conferences</td><td class="status caution-t">Not established</td><td>Not examined. No conference organiser's published schedule was checked for company participation. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Management changes</td><td class="status">None</td><td>No Form 8-K under Item 5.02 was filed between 1 November 2025 and 31 July 2026.</td></tr>
+      <tr><td class="lbl">Buybacks</td><td class="status">None</td><td>No repurchase programme is disclosed in the FY2025 Form 10-K or the first quarter Form 10-Q, and no treasury stock is carried. No capped call or prepaid forward transaction exists, because there is no convertible debt to hedge.</td></tr>
+      <tr><td class="lbl">Dividends</td><td class="status">None</td><td>No common dividend has been declared or paid since the company's formation in 2023. No preferred stock is outstanding.</td></tr>
+      <tr><td class="lbl">Major contracts</td><td class="status">Covered above</td><td>Beacon Point fully commercialised by a second lease (R11); one unnamed tenant holds 74% of the contracted book (S1); River Bend initial delivery and commissioning (D5).</td></tr>
+      <tr><td class="lbl">Convertible and other financings</td><td class="status">Covered above</td><td>River Bend project financing closed (R7), Beacon Point project financing closed (R9), River Bend notes begin amortising (D6), project debt ring-fences the losses and the cash alike (S4). No convertible instrument exists.</td></tr>
+      <tr><td class="lbl">Mergers and acquisitions</td><td class="status">Covered above</td><td>American Bitcoin listed through the Gryphon merger (R4), four power generation assets divested (R6), business combination completed and Hut 8 Corp. formed (R1).</td></tr>
+      <tr><td class="lbl">Index membership</td><td class="status caution-t">Not established</td><td>Not examined. No index provider's published methodology or rebalance schedule was checked, and the dual Nasdaq and TSX listing makes more than one index family relevant. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Analyst coverage and short interest</td><td class="status caution-t">Not established</td><td>Not examined. No attributed, dated third-party target or rating was located, and exchange short interest reports were not retrieved. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Credit rating actions</td><td class="status caution-t">Not established</td><td>Not examined. Both project financings are described by the company as investment grade and the Beacon Point tenant as rated AA- or higher, but no rating agency publication was consulted. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Segment reporting</td><td class="status">None</td><td>Revenue is presented in three layers, Power, Digital Infrastructure and Compute, with cost of revenue split the same way. No segment balance sheet or capital expenditure split is disclosed.</td></tr>
+      <tr><td class="lbl">Canadian continuous disclosure</td><td class="status caution-t">Not established</td><td>The Toronto Stock Exchange listing was confirmed from the exchange's own company directory on 3 August 2026, but the Canadian filing registry returned a challenge page and could not be queried. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Beneficial ownership changes</td><td class="status">None</td><td>Fourteen filings in the beneficial-ownership family appear on the index, swept under both schedule spellings, the most recent a Schedule 13G of 31 July 2026. None discloses an activist position or a change of control intent.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 5. DILUTION & CAPITAL OVERLAY ===================== -->
+<section id="s5">
+  <h2 class="sec"><span class="n">05</span>Dilution &amp; capital overlay</h2>
+  <p class="sub">Sits across every other catalyst rather than beside them.</p>
+  <p>This issuer's capital overlay is unusual for the sector because the ordinary dilution channels are absent. There are no convertible notes, no preferred stock, no warrants of substance at the parent, and no at-the-market programme disclosed in the filings examined. Share count rose from 99,478,012 at 31 December 2024 to 112,594,112 at 4 May 2026, an increase of 13.2% over sixteen months, which is modest against peers.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Layer</th><th class="num">Amount</th><th>Rank</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">River Bend project notes</td><td class="num">$3,250.0M</td><td>Senior secured at the issuer; non-recourse to the parent</td><td><span class="tag">Filed</span> 8-K, 28 Apr 2026</td></tr>
+      <tr><td class="lbl">Beacon Point project notes</td><td class="num">$4,250.0M</td><td>Senior secured at the issuer; non-recourse to the parent</td><td><span class="tag">Filed</span> 8-K, 10 Jun 2026</td></tr>
+      <tr><td class="lbl">Loans, notes payable and other</td><td class="num">$410.2M</td><td>Recourse to the parent group</td><td><span class="tag">Filed</span> 10-K, at 31 Dec 2025</td></tr>
+      <tr><td class="lbl">Miner purchase liability</td><td class="num">$433.1M</td><td>Recourse; partly secured by pledged bitcoin</td><td><span class="tag">Filed</span> 10-K, at 31 Dec 2025</td></tr>
+      <tr><td class="lbl">Non-controlling interests</td><td class="num">$310.3M</td><td>Equity held outside the group in consolidated subsidiaries</td><td><span class="tag">Filed</span> 10-Q, at 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Convertible instruments</td><td class="num">n/a</td><td>None outstanding</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+    </tbody>
+  </table></div>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The dilution that matters here happens one level down rather than at the parent. American Bitcoin is separately listed and issues its own stock, so Hut 8's economic interest in the mining business falls each time it does, without any change to Hut 8's share count. The non-controlling interest line is the visible trace: $3.9 million at 31 December 2024, $267.5 million a year later, $310.3 million at 31 March 2026. A reader tracking dilution only through the parent's share count will miss it entirely. The precise look-through percentage is not stated in the filings read here, so the effect is described rather than quantified.</p>
+  </div>
+  <p>Against that, the structural subordination is the larger claim on value. Of the assets that will produce all the contracted revenue, $7.5 billion is spoken for by project noteholders who are secured on those assets, hold a pledge of each issuer's equity, and are repaid on a fixed amortisation schedule from 2028 and 2030 before any cash reaches the parent. Non-recourse protects the parent from loss; it does not accelerate the parent's access to gain.</p>
+  <p>The parent retains 1,000,000,000 authorised shares against 112.6 million outstanding, so nothing structural prevents an equity raise. The absence of one so far, through two multi-billion-dollar financings, is itself a data point about how the company intends to fund growth.</p>
+</section>
+
+<!-- ===================== 6. FALSIFICATION TESTS ===================== -->
+<section id="s6">
+  <h2 class="sec"><span class="n">06</span>Falsification tests</h2>
+  <p class="sub">What would prove this read wrong, stated in advance. Each trigger is settleable from a document; an unquantified threshold is not a test.</p>
+  <div class="tw"><table>
+    <thead><tr><th>#</th><th>If this happens&hellip;</th><th>&hellip;this was wrong</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>A periodic report or Form 8-K states that River Bend will not deliver and commission during the second quarter of 2027.</td><td>The reading that the first campus converts to revenue on the announced timetable.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">2</td><td>A Form 8-K or periodic report discloses termination, or notice of termination, of either Beacon Point lease or the River Bend lease.</td><td>The reading that $26.6 billion of base-term contract value is durable.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">3</td><td>A periodic report discloses that the Beacon Point tenant is rated below investment grade, or ceases to describe it as investment grade.</td><td>The reading that the tenant concentration is offset by counterparty quality.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">4</td><td>A periodic report discloses a default, reserve shortfall or covenant breach at either Hut 8 DC LLC or Beacon Point DC LLC.</td><td>The reading that both projects are financed through to delivery without further parent support.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">5</td><td>The FY2026 Form 10-K carries a going concern paragraph or reports a material weakness in internal control over financial reporting.</td><td>The reading that $1.69 billion of equity and a $1.11 billion bitcoin holding make the loss-making periods a presentational matter.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">6</td><td>A periodic report shows bitcoin holdings below 12,000, having been 16,332 at 31 March 2026, other than through a disclosed sale to fund construction.</td><td>The reading that the holding is a reserve rather than a source of funding under stress.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">7</td><td>A registration statement or Form 8-K announces an equity offering by Hut 8 Corp. before 31 December 2026.</td><td>The reading that project finance removes the need for parent equity issuance.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">8</td><td>A periodic report discloses that contracted IT capacity is below the 949 MW stated on 20 July 2026.</td><td>The reading that the contracted book only grows from here.</td><td class="status">Untriggered</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 7. CATALYST SUMMARY ===================== -->
+<section id="s7">
+  <h2 class="sec"><span class="n">07</span>Catalyst summary</h2>
+  <p class="sub">Every ID in one table, gapless within each class. Must match the cards above exactly: same IDs, same count, same order. Links point at title slugs so they survive renumbering.</p>
+  <div class="tw"><table>
+    <thead><tr><th>ID</th><th>Catalyst</th><th>Timing</th><th>Impact</th><th>Confidence</th><th>Direction</th></tr></thead>
+    <tbody>
+      <tr><td class="num">D1</td><td><a href="#cat-second-quarter-2026-results">Second quarter 2026 results</a></td><td class="when">~early Aug 2026</td><td>High</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D2</td><td><a href="#cat-third-quarter-2026-results">Third quarter 2026 results</a></td><td class="when">~early Nov 2026</td><td>Medium</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D3</td><td><a href="#cat-fy2026-annual-report">FY2026 annual report on Form 10-K</a></td><td class="when">~late Feb 2027</td><td>High</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D4</td><td><a href="#cat-2027-annual-meeting">2027 annual meeting of stockholders</a></td><td class="when">~Jun 2027</td><td>Low</td><td>Medium</td><td>Neutral</td></tr>
+      <tr><td class="num">D5</td><td><a href="#cat-river-bend-initial-delivery">River Bend initial delivery and commissioning</a></td><td class="when">Q2 2027</td><td>High</td><td>Low</td><td class="pos-t">Up</td></tr>
+      <tr><td class="num">D6</td><td><a href="#cat-river-bend-notes-amortisation-begins">River Bend notes begin amortising</a></td><td class="when">15 May 2028</td><td>Medium</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D7</td><td><a href="#cat-next-bitcoin-halving">Next bitcoin halving</a></td><td class="when">2028</td><td>Medium</td><td>Medium</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">S1</td><td><a href="#cat-unnamed-tenant-concentration">One unnamed tenant holds 74% of the contracted book</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S2</td><td><a href="#cat-bitcoin-drives-reported-results">A bitcoin holding governs the reported result</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S3</td><td><a href="#cat-no-lease-has-commenced">No lease has commenced anywhere in the portfolio</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S4</td><td><a href="#cat-non-recourse-ring-fencing">Project debt ring-fences the losses and the cash alike</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S5</td><td><a href="#cat-american-bitcoin-minority">A separately listed subsidiary consolidates into the accounts</a></td><td class="when">Ongoing</td><td>Medium</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S6</td><td><a href="#cat-power-delivery-and-interconnection">Power delivery rests on interconnection agreements not independently corroborated</a></td><td class="when">Ongoing</td><td>Medium</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S7</td><td><a href="#cat-dual-listing-obligations">Two listings, and only one filing record checked</a></td><td class="when">Ongoing</td><td>Low</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S8</td><td><a href="#cat-shrinking-legacy-revenue">The revenue funding overhead is shrinking</a></td><td class="when">Ongoing</td><td>Medium</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">R1</td><td><a href="#cat-business-combination-completed">Business combination completed and Hut 8 Corp. formed</a></td><td class="when">30 Nov 2023</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R2</td><td><a href="#cat-predecessor-deregistered">Predecessor entity deregistered</a></td><td class="when">11 Dec 2023</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R3</td><td><a href="#cat-fiscal-year-end-changed">Fiscal year end moved to 31 December</a></td><td class="when">28 Mar 2024</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R4</td><td><a href="#cat-american-bitcoin-merger-closed">American Bitcoin listed through the Gryphon merger</a></td><td class="when">3 Sep 2025</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R5</td><td><a href="#cat-fy2025-annual-report-filed">FY2025 annual report filed</a></td><td class="when">25 Feb 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R6</td><td><a href="#cat-power-generation-assets-divested">Four power generation assets divested</a></td><td class="when">Q1 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R7</td><td><a href="#cat-river-bend-project-financing">River Bend project financing closed</a></td><td class="when">30 Apr 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R8</td><td><a href="#cat-q1-2026-results-released">First quarter 2026 results released</a></td><td class="when">6 May 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R9</td><td><a href="#cat-beacon-point-project-financing">Beacon Point project financing closed</a></td><td class="when">9 Jun 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R10</td><td><a href="#cat-2026-annual-meeting-held">2026 annual meeting held</a></td><td class="when">11 Jun 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R11</td><td><a href="#cat-beacon-point-fully-commercialised">Beacon Point fully commercialised by a second lease</a></td><td class="when">20 Jul 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 8. METHODOLOGY & CONFIDENCE SCALE ===================== -->
+<section id="s8">
+  <h2 class="sec"><span class="n">08</span>Methodology &amp; confidence scale</h2>
+
+  <h3>Provenance tags</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Tag</th><th>What it asserts</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl"><span class="tag">Filed</span></td><td>Stated in an SEC filing or company release, cited by form and date. Also covers a dated official publication by a named non-SEC issuer, with the issuer named in the Source line. Used here for the Toronto Stock Exchange company directory.</td></tr>
+      <tr><td class="lbl"><span class="tag">Estimate</span></td><td>Derived or inferred here. The arithmetic is shown.</td></tr>
+      <tr><td class="lbl"><span class="tag">Open</span></td><td>Expected but unconfirmed. Nothing filed either way.</td></tr>
+      <tr><td class="lbl"><span class="tag">Market</span></td><td>Price, volume, float, published targets and ratings. Stamped with the close or publication date.</td></tr>
+      <tr><td class="lbl"><span class="tag">Press</span></td><td>Reported by a named publication that is neither the issuer nor an analyst, cited by outlet and date. Corroborates; never the sole basis for a material claim.</td></tr>
+      <tr><td class="lbl"><span class="tag">Social</span></td><td>Publicly posted by a named account, cited by handle and date. Asserts that the statement was made, never that it is true.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Timing confidence</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Level</th><th>Means</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">High</td><td>Date is company-announced, protocol-defined, or statutorily fixed.</td></tr>
+      <tr><td class="lbl">Medium</td><td>Date inferred from filing cadence or a stated deadline window.</td></tr>
+      <tr><td class="lbl">Low</td><td>Date is a judgement call. Could move by a quarter or more.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>How dates were derived where the company gave none</h3>
+  <p>Reporting dates carry the Estimate tag and rest on this issuer's own cadence: annual filings on 28 March 2024, 3 March 2025 and 25 February 2026; quarterly filings on 7 August 2025, 4 November 2025 and 6 May 2026. The spread is roughly three weeks, which supports Medium confidence and no better. Two dates are contractual rather than estimated and are marked High: the amortisation start dates of 15 May 2028 and 30 May 2030 come from the note terms.</p>
+  <p>Where the company gave a window rather than a date, the window is carried as stated. River Bend delivery is recorded as targeted for the second quarter of 2027 because that is the company's own phrasing, and confidence is Low because a construction target eighteen months out is a judgement rather than a commitment. No delivery date for Beacon Point appears in the filings examined, so none is invented here.</p>
+
+  <div class="note caution">
+    <p>Confidence rates <b>timing</b>, never outcome. A High-confidence catalyst can be a coin flip; a Low-confidence one can be near-certain in direction.</p>
+    <p><b>Impact is independent of confidence.</b> A High-impact, Low-confidence item is the most important kind here: it matters enormously and could land any time. River Bend initial delivery and commissioning (D5) is the clearest example on this calendar.</p>
+  </div>
+</section>
+
+<!-- ===================== 9. SOURCES ===================== -->
+<section id="s9">
+  <h2 class="sec"><span class="n">09</span>Sources</h2>
+  <p class="sub">Primary filings and company releases first, with form type and date.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Source</th><th>Date</th><th>What it settles</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Form 10-K, FY2025</td><td class="when">25 Feb 2026</td><td>Platform structure, sites, River Bend target, FY2024 to FY2025 financials</td></tr>
+      <tr><td class="lbl">Form 10-Q, Q1 2026</td><td class="when">6 May 2026</td><td>Balance sheet at 31 Mar 2026, bitcoin holdings, Far North disposal gain</td></tr>
+      <tr><td class="lbl">Form 8-K and Exhibit 99.1</td><td class="when">20 Jul 2026</td><td>Beacon Point Phase 2 lease; 949 MW and $26.6bn portfolio figures</td></tr>
+      <tr><td class="lbl">Form 8-K</td><td class="when">10 Jun 2026</td><td>Beacon Point notes closing at 6.129%, non-recourse, due 2042</td></tr>
+      <tr><td class="lbl">Form 8-K and Exhibit 99.1</td><td class="when">5 Jun 2026</td><td>Beacon Point pricing; tenant rated AA- or higher; 521-acre site; six data halls</td></tr>
+      <tr><td class="lbl">Form 8-K and Exhibit 99.1</td><td class="when">28 Apr 2026</td><td>River Bend pricing at 6.192%; 245 MW critical IT; amortisation from May 2028</td></tr>
+      <tr><td class="lbl">Form 8-K, Item 5.07</td><td class="when">12 Jun 2026</td><td>Annual meeting of 11 June 2026</td></tr>
+      <tr><td class="lbl">Form 10-KT, transition period</td><td class="when">28 Mar 2024</td><td>Change of fiscal year end; the six-month 2023 comparative</td></tr>
+      <tr><td class="lbl">Hut 8 Mining Corp., Form 15-12G</td><td class="when">11 Dec 2023</td><td>Predecessor deregistration and the 30 Nov 2023 plan of arrangement</td></tr>
+      <tr><td class="lbl">Toronto Stock Exchange company directory</td><td class="when">3 Aug 2026</td><td>Current TSX listing of the common stock under the symbol HUT</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>How the sweep was run</h3>
+  <p>Filings were swept against Central Index Key 0001964789, and separately against the predecessor entity's key 0001731805, because the two records do not join and the predecessor holds everything before December 2023. The current index holds 250 filings from February 2023 to 31 July 2026 and the predecessor's holds 247 from February 2018 to December 2023; both were read in full for form type. Both spellings of the beneficial-ownership schedules were included: 6 filings carry the legacy prefix and 8 the form the Commission has emitted since December 2024, so a sweep matching only the older spelling would have missed more than half, including every filing since October 2025. Exhibit lists were enumerated rather than form types alone, which is how the tenant rating band and the site description were reached, both of which sit in exhibits.</p>
+  <p>Late-filing notifications were checked for absence as much as presence. No NT 10-K or NT 10-Q appears on either index, across 497 filings in total. For an issuer that changed its fiscal year end, filed a transition report and completed a cross-border reorganisation inside eighteen months, that absence is a finding rather than a formality, and the size of the index it was established against is stated so the search can be judged.</p>
+
+  <h3>What was not checked</h3>
+  <p>The Canadian securities filing registry was attempted on 3 August 2026 and returned a challenge page rather than data, so the Canadian continuous disclosure record is not established. The Toronto Stock Exchange listing itself was confirmed independently from the exchange's own company directory on the same date. That settles the listing and not the filing record, and the two are not the same claim.</p>
+  <p>The Texas grid operator's large load interconnection records were attempted on 3 August 2026 and could not be retrieved; the public planning pages returned a challenge page. The 1,000 MW at Beacon Point, the AEP Texas interconnection agreement and the 330 MW at River Bend therefore rest on company statements alone. Louisiana and Texas utility commission records were not examined.</p>
+  <p>No rating agency publication was consulted, so the investment-grade characterisation of both financings and the AA- or higher rating attributed to the Beacon Point tenant are reported as stated by the company and are not independently verified. Federal and state court dockets were not searched, so lawsuits read Not established above. No index provider methodology, short interest report or conference schedule was checked. No earnings call transcript was read. American Bitcoin's own filings were identified but not read in full, so Hut 8's precise economic and voting percentage in that subsidiary is not stated.</p>
+  <p>On date coverage, the sweep reaches 31 July 2026 and this calendar carries no catalyst arising after that date. Second quarter results for the period ended 30 June 2026 had not been filed, so no reported balance sheet reflects either project financing.</p>
+</section>
+
+<!-- ===================== 10. DOCUMENT LOG ===================== -->
+<section id="s10">
+  <h2 class="sec"><span class="n">10</span>Document log</h2>
+  <p class="sub">Newest first. The original build entry is never removed or rewritten.</p>
+  <div class="log">
+    <div class="logentry current">
+      <div class="when">3 August 2026 <span class="latest">Latest</span></div>
+      <div class="basis">Original build &middot; 7 dated &middot; 8 standing &middot; 11 resolved &middot; priced off 31 Jul 2026 close</div>
+      <p><b>Built from</b> the company's filings on EDGAR under Central Index Key 0001964789, swept across its complete index of 250 filings from February 2023 to 31 July 2026, together with the predecessor entity's 247 filings under Central Index Key 0001731805. The load-bearing documents are the FY2025 Form 10-K of 25 February 2026, the first quarter Form 10-Q of 6 May 2026, and the Current Reports of 28 April, 5 June, 10 June, 12 June and 20 July 2026 with their exhibits. The Form 10-KT of 28 March 2024 establishes the change of fiscal year end and the predecessor's Form 15 of 11 December 2023 establishes the succession. The Toronto Stock Exchange company directory confirmed the second listing.</p>
+      <p><b>Pricing basis</b> is the close of 31 July 2026 at $107.63, the last completed session before the build date.</p>
+      <p><b>Conventions fixed at construction.</b> Dated items are ordered by expected date and banded 0&ndash;3, 3&ndash;6 and 6&ndash;12 months with a fourth context band beyond twelve months; standing conditions are ordered by materiality; resolved items are ordered by resolution date, earliest first, with the divestiture of the four power generation assets placed at the end of the first quarter of 2026 because the filings state the quarter and not the day. Anchors are permanent title slugs rather than ID numbers. Reporting dates are estimates from this issuer's own cadence and are tagged as such; the two amortisation start dates are contractual and are marked High confidence.</p>
+      <p><b>Known gaps in this version.</b> The Canadian securities filing registry and the Texas grid operator's large load records both returned challenge pages on 3 August 2026, so the Canadian disclosure record is not established and no capacity figure is corroborated by grid data. No rating agency publication was consulted, so the investment-grade characterisations and the tenant's rating band are reported as the company states them. Court dockets, index methodologies, short interest and conference schedules were not examined, and six categories read Not established as a result. Hut 8's precise percentage interest in American Bitcoin was not established from the filings read. Second quarter results for the period ended 30 June 2026 were not yet filed, so no reported balance sheet carries either project financing.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="norec">
+    No buy, sell, or hold recommendation is issued and no price target is derived.
+    Third-party targets and ratings, where shown, are the published views of the
+    firms named. This document is for research and educational purposes and is not
+    investment advice. Estimated dates are not company announcements. Verify
+    against primary filings on sec.gov before acting.
+  </div>
+  <p style="margin-top:16px">HUT &middot; Hut 8 Corp. &middot; Catalyst Calendar &middot; as of 3 August 2026</p>
+</footer>
+
+</div>
+
+</body>
+</html>

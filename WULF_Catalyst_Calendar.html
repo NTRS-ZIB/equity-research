@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>WULF &middot; TeraWulf Inc. &middot; Catalyst Calendar &middot; as of 3 August 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================================
+   PER-TICKER PALETTE
+   ========================================================================= */
+:root{
+  /* TeraWulf's mark is a wolf-head shield in a single blue-grey family. The
+     dominant colour by inked area is the shield's outer gradient, #D9E4EF to
+     #B8C9D6, whose midpoint is #C8D6E2 (hue 207.7, saturation 31%, lightness
+     84%). Normalised for white paper the saturation rises to 45% and the
+     lightness falls to 42%, giving #3B6F9B at 5.34:1 against the page. The hue
+     is carried through unchanged: it sits 42 degrees clear of the nearest
+     meaning-bearing colour, so no rotation was needed. */
+  --accent:      #3B6F9B;
+  --accent-deep: #2D5476;
+  --accent-wash: rgba(59,111,155,0.06);
+  --accent-line: rgba(59,111,155,0.22);
+}
+
+/* ============================================================================
+   SHARED STYLESHEET v1.57 : BEGIN
+   ========================================================================= */
+:root{
+  color-scheme: light only;
+
+  --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
+  --line:#DEE6EC;   --line-hard:#C0CDD7;
+  --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
+
+  --pos:#0B7A50;      --pos-bg:#E7F4EE;
+  --neg:#B02A21;      --neg-bg:#FBECEA;
+  --caution:#90600A;  --caution-bg:#FBF2E0;
+  --assume:#4F3FA3;   --assume-bg:#EFEDFA;
+
+  --display:'Archivo',ui-sans-serif,system-ui,'Helvetica Neue',Arial,sans-serif;
+  --body:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+
+  --measure:78ch;
+  --col:760px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html,body{background:var(--canvas) !important;background-color:var(--canvas) !important}
+body{
+  margin:0;color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 22px 96px;background:var(--paper);
+      border-left:1px solid var(--line);border-right:1px solid var(--line)}
+p{max-width:var(--measure)}
+/* Boxed prose fills its container: the box supplies its own measure, so the
+   78ch cap applies to top-level running prose only. */
+.first li,.assume p,.note p,.cat p,.risk p,.logentry p,.oc p,.case p,
+.cat-meta,.logentry .basis{max-width:none}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:var(--accent-deep)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- masthead ---------- */
+.mast{padding:44px 0 26px;border-bottom:2px solid var(--line-hard);margin-bottom:8px;
+      position:relative;padding-left:20px}
+.mast::before{content:"";position:absolute;left:0;top:44px;bottom:26px;
+      width:4px;background:var(--accent)}
+.ticker{font-family:var(--mono);font-size:44px;font-weight:700;letter-spacing:-1px;
+      line-height:1;color:var(--accent);margin:0}
+.headline{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.22;
+      color:var(--ink);margin:16px 0 0}
+.functional{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--ink-faint);margin:18px 0 0}
+.mast-strip{display:flex;flex-wrap:wrap;gap:26px;margin-top:20px;padding-top:16px;
+      border-top:1px solid var(--line)}
+.mast-strip div{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint)}
+.mast-strip b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-top:3px}
+
+/* ---------- banner: framing ---------- */
+.first{background:var(--canvas);border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:20px 24px;margin:30px 0 12px}
+.first h2{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.04em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 12px}
+.first ol{margin:0;padding-left:20px}
+.first li{margin-bottom:9px}
+.first li:last-child{margin-bottom:0}
+
+/* ---------- sections ---------- */
+section{padding-top:38px}
+h2.sec{font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);
+      margin:0 0 4px;padding-bottom:10px;border-bottom:1px solid var(--line-hard);
+      display:flex;align-items:baseline;gap:12px}
+h2.sec .n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);
+      letter-spacing:.06em;flex:none}
+.sub{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);margin:10px 0 18px;
+      max-width:var(--measure)}
+h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink-dim);
+      margin:26px 0 8px}
+
+/* ---------- provenance tags (signature) ---------- */
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);
+      background:var(--panel-2);border:1px solid var(--line);
+      border-radius:2px;padding:1px 6px;vertical-align:1px;white-space:nowrap}
+
+/* ---------- assumption block ---------- */
+.assume{background:var(--assume-bg);border-left:4px solid var(--assume);
+      padding:16px 20px;margin:20px 0}
+.assume .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--assume);display:block;margin-bottom:7px}
+.assume p{margin:0}
+
+/* ---------- callouts ---------- */
+.note{border:1px solid var(--line);border-left:4px solid var(--ink-faint);
+      background:var(--canvas);padding:16px 20px;margin:20px 0}
+.note.pos{border-left-color:var(--pos);background:var(--pos-bg)}
+.note.neg{border-left-color:var(--neg);background:var(--neg-bg)}
+.note.caution{border-left-color:var(--caution);background:var(--caution-bg)}
+.note p{margin:0}
+.note p + p{margin-top:10px}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+thead th{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--ink-dim);text-align:left;
+      padding:9px 12px;border-bottom:2px solid var(--line-hard);white-space:nowrap}
+tbody td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--canvas)}
+td.num,th.num{font-family:var(--mono);text-align:right;white-space:nowrap}
+/* td.when marks a timing column. An unmarked cell counts as prose. */
+td.when{font-family:var(--mono);white-space:nowrap}
+td.lbl{font-weight:600}
+.pos-t{color:var(--pos);font-weight:600}
+.neg-t{color:var(--neg);font-weight:600}
+.caution-t{color:var(--caution);font-weight:600}
+
+/* ---------- cases ---------- */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.case{border:1px solid var(--line);border-top:3px solid var(--ink-faint);
+      background:var(--paper);padding:18px}
+.case.bull{border-top-color:var(--pos)}
+.case.bear{border-top-color:var(--neg)}
+.case h4{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 10px}
+.case.bull h4{color:var(--pos)} .case.bear h4{color:var(--neg)}
+.case p{font-size:15px;margin:0}
+.case .req{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+
+/* ---------- risks ---------- */
+.risk{border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:16px 20px;margin-bottom:12px}
+.risk.sev-high{border-left-color:var(--neg)}
+.risk.sev-med{border-left-color:var(--caution)}
+.risk.sev-low{border-left-color:var(--ink-faint)}
+.risk h4{font-family:var(--display);font-size:15.5px;font-weight:600;margin:0 0 6px;
+      display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.risk .sev{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase}
+.risk.sev-high .sev{color:var(--neg)}
+.risk.sev-med .sev{color:var(--caution)}
+.risk.sev-low .sev{color:var(--ink-faint)}
+.risk p{margin:0;font-size:15.5px}
+
+/* ---------- null categories ---------- */
+.nulls td.lbl{width:26%}
+.nulls .status{font-family:var(--mono);font-size:12px;white-space:nowrap}
+
+/* ---------- document log ---------- */
+.log{margin-top:14px}
+.logentry{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:12px}
+.logentry.current{border-left:4px solid var(--accent);background:var(--accent-wash)}
+.logentry .when{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);
+      display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.latest{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-line);
+      background:var(--paper);border-radius:2px;padding:1px 6px}
+.logentry .basis{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-bottom:12px}
+.logentry p{font-size:15.5px;margin:0 0 9px}
+.logentry p:last-child{margin-bottom:0}
+.correction{border:1px solid var(--neg);border-left:4px solid var(--neg);
+      background:var(--neg-bg);padding:12px 16px;margin-bottom:14px}
+.correction .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--neg);display:block;margin-bottom:5px}
+
+/* ---------- footer ---------- */
+footer{margin-top:44px;padding-top:22px;border-top:2px solid var(--line-hard)}
+footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width:none}
+.norec{border:1px solid var(--line-hard);background:var(--canvas);padding:16px 20px;
+      margin-top:20px;font-family:var(--mono);font-size:12.5px;color:var(--ink-dim)}
+
+/* ---------- catalyst cards (calendar) ---------- */
+.cat{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:14px;border-left:4px solid var(--line-hard)}
+.cat.up{border-left-color:var(--pos)}
+.cat.down{border-left-color:var(--neg)}
+.cat.two{border-left-color:var(--caution)}
+.cat.neutral{border-left-color:var(--ink-faint)}
+.cat-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.cid{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);flex:none}
+.cat-head h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink);
+      margin:0;flex:1 1 auto;min-width:200px}
+.dir{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;white-space:nowrap}
+.cat.up .dir{color:var(--pos)} .cat.down .dir{color:var(--neg)}
+.cat.two .dir{color:var(--caution)} .cat.neutral .dir{color:var(--ink-faint)}
+.cat-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:10px 0 12px;padding:9px 0;
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+      font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
+.cat-meta b{color:var(--ink);font-weight:600}
+.cat p{margin:0 0 9px;font-size:15.5px}
+.cat p:last-child{margin-bottom:0}
+.cat.resolved{background:var(--canvas);border-left-color:var(--ink-faint)}
+.cat.resolved .dir{color:var(--ink-faint)}
+
+/* ---------- horizon bands (calendar) ---------- */
+.band{display:flex;align-items:center;gap:14px;margin:30px 0 16px}
+.band-t{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--ink-dim);white-space:nowrap}
+.band-r{flex:1;height:1px;background:var(--line-hard)}
+.band-c{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);white-space:nowrap}
+
+/* ---------- upside / downside pair ---------- */
+.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0}
+.oc{border:1px solid var(--line);padding:11px 14px;background:var(--paper)}
+.oc.up-c{border-left:3px solid var(--pos)}
+.oc.down-c{border-left:3px solid var(--neg)}
+.oc .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.09em;
+      text-transform:uppercase;display:block;margin-bottom:5px}
+.oc.up-c .lbl{color:var(--pos)} .oc.down-c .lbl{color:var(--neg)}
+.oc p{margin:0;font-size:14.5px;line-height:1.5}
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  body{font-size:16px}
+  .wrap{padding:0 16px 70px;border-left:none;border-right:none}
+  .ticker{font-size:34px}
+  .headline{font-size:23px}
+  .cases{grid-template-columns:1fr}
+  .outcomes{grid-template-columns:1fr}
+  .mast-strip{gap:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none !important;transition:none !important}
+}
+@media print{
+  body{font-size:11pt}
+  .wrap{max-width:none;border:none}
+  section{page-break-inside:avoid}
+}
+/* ============================================================================
+   SHARED STYLESHEET v1.57 : END
+   ========================================================================= */
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<!-- ===================== MASTHEAD ===================== -->
+<header class="mast">
+  <p class="ticker">WULF</p>
+  <h1 class="headline">Everything that matters is a construction date, and none of them has arrived</h1>
+  <p class="functional">WULF &middot; TeraWulf Inc. &middot; Catalyst Calendar &middot; as of 3 August 2026</p>
+  <div class="mast-strip">
+    <div>Dated catalysts <b>10</b></div>
+    <div>Standing conditions <b>8</b></div>
+    <div>Resolved <b>14</b></div>
+    <div>Horizon <b>12 months</b></div>
+    <div>Pricing basis <b>31 Jul 2026 close &middot; $17.66</b> <span class="tag">Market</span></div>
+  </div>
+</header>
+
+<!-- ===================== BASIS ===================== -->
+<div class="first">
+  <h2>Basis</h2>
+  <ol>
+    <li>Only the reporting dates are genuinely <em>scheduled</em>. Every operational item here, delivery of a building, commencement of a lease, closing of a sale, is event-driven and could land on any day the company chooses to file.</li>
+    <li>Timing confidence rates the <em>date</em>, never the outcome. A High-confidence catalyst can still be a coin flip.</li>
+    <li>Estimated reporting dates are cadence-based until the company announces. Treat them as approximate.</li>
+    <li>This issuer has already moved two announced dates. Where a company statement gave a window that has since passed, the card says so rather than quietly re-forecasting.</li>
+  </ol>
+</div>
+
+<!-- ===================== 1. DATED CATALYSTS ===================== -->
+<section id="s1">
+  <h2 class="sec"><span class="n">01</span>Dated catalysts</h2>
+  <p class="sub">Banded 0&ndash;3 / 3&ndash;6 / 6&ndash;12 months, earliest first. Numbering is gapless and runs straight through the bands, so a boundary never resets the count. An ID marks position in the current ordering and changes between revisions, so catalysts are named by title.</p>
+
+  <div class="band"><span class="band-t">0&ndash;3 months</span><span class="band-r"></span><span class="band-c">D1&ndash;D2</span></div>
+
+  <div class="cat two" id="cat-second-quarter-2026-results">
+    <div class="cat-head">
+      <span class="cid">D1</span>
+      <h3>Second quarter 2026 results</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>~mid-August 2026</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>The first reported period to contain the April equity raise, the exhaustion of the at-the-market programme and a full quarter of Core42 rent at 60 MW. It will also be the first balance sheet after the deficit appeared at 31 March 2026, so the direction of shareholders' equity is settled here rather than argued.</p>
+    <p>Watch three lines: HPC lease revenue against the $21.0 million booked in the first quarter, the warrant liability, which rose to $1.06 billion at 31 March and moves with the share price, and whether CB-3 rent commenced after the May delivery.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Lease revenue steps up on CB-3 commencement and equity returns to positive on the April raise, showing the model converting on schedule.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Lease revenue is flat because rent has not commenced, and the deficit deepens while construction payables build.</p></div>
+    </div>
+    <div class="assume">
+      <span class="lbl">Analyst assumption</span>
+      <p>The date is a cadence estimate. The company filed its second quarter report on 8 August in 2025 and its first quarter report on 8 May in 2026; no date has been announced for this one.</p>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Filing cadence from Forms 10-Q filed 8 August 2025 and 8 May 2026. <span class="tag">Estimate</span></p>
+  </div>
+
+  <div class="cat two" id="cat-morgantown-acquisition-completion">
+    <div class="cat-head">
+      <span class="cid">D2</span>
+      <h3>Morgantown generating station acquisition completes</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Overdue against company guidance; any time</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Confidence <b>Low</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The company signed an Equity and Asset Purchase Agreement in late 2025 for the Morgantown generating station in Charles County, Maryland, roughly 210 MW of grid-connected generation which it markets as Chesapeake Data with expansion potential it puts at up to 1 GW. The 10-K said it expected to close in the second quarter of 2026, subject to third-party consents and regulatory approvals including from the Federal Energy Regulatory Commission.</p>
+    <p>That quarter ended on 30 June 2026 and no completion has been announced. The transaction is the company's only owned generation, as distinct from grid-supplied load, so it is the test of whether the stated strategy of pairing sites with on-site generation is executable.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Approval granted and closing announced, giving the company dispatchable generation inside PJM and a template for the next such acquisition.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Approval is refused, conditioned onerously, or the agreement lapses, removing the generation leg of the strategy and raising a question about the other pending approvals.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-K, 27 February 2026, subsequent events; first quarter results release, 8 May 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="band"><span class="band-t">3&ndash;6 months</span><span class="band-r"></span><span class="band-c">D3&ndash;D5</span></div>
+
+  <div class="cat up" id="cat-abernathy-joint-venture-sale-completes">
+    <div class="cat-head">
+      <span class="cid">D3</span>
+      <h3>Abernathy joint venture sale completes</h3>
+      <span class="dir">Up</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>~Q4 2026, no date stated</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Confidence <b>Low</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>On 6 July 2026 the company entered a definitive agreement to sell its entire 50.1% interest in the Abernathy joint venture to an investor group led by Fluidstack, its partner in the venture. It describes the transaction as monetising an approximately $450 million investment at a premium to invested capital, and as eliminating joint venture accounting from its statements.</p>
+    <p>Completion converts a carrying value of $434.8 million at 31 March 2026 into cash and settles whether the premium is real. It also removes 168 MW from the contracted book while removing the attributable-share adjustment that made the reported 522 MW differ from the 606 MW its campus figures sum to.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Cash received above the $434.8 million carrying value, producing a gain and funding wholly owned development without new equity.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>The sale does not complete, leaving capital tied up in a minority-controlled venture, or completes at a price that implies a lower value for comparable contracted capacity elsewhere in the portfolio.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K and Exhibit 99.1, 6 July 2026; carrying value from Form 10-Q, 8 May 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat up" id="cat-cb4-and-cb5-rent-commencement">
+    <div class="cat-head">
+      <span class="cid">D4</span>
+      <h3>CB-4 and CB-5 delivery and rent commencement</h3>
+      <span class="dir">Up</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>During 2026</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The company said in May 2026 that CB-4 and CB-5 at Lake Mariner remain on schedule for delivery and rent commencement in 2026, following CB-3 delivered in May. These are the buildings that carry the Fluidstack capacity, and rent commencement is what triggers the Google backstop for the lease concerned.</p>
+    <p>This is the single most consequential operational item on the calendar. It converts contracted megawatts into revenue, and it moves the credit support from contingent to effective.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Both buildings deliver and rent commences, the backstop engages, and quarterly lease revenue steps up from the $21.0 million first-quarter base.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Delivery slips past a contractual threshold, giving the tenant a termination right that would not trigger the backstop, against buildings financed by secured notes.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> First quarter 2026 results release, 8 May 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-third-quarter-2026-results">
+    <div class="cat-head">
+      <span class="cid">D5</span>
+      <h3>Third quarter 2026 results</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>~early November 2026</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>The first period likely to reflect any proceeds from the Abernathy disposal and the first in which CB-4 or CB-5 rent could appear. It should also carry the first accounting treatment of the Anthropic lease, which was executed in July but generates no revenue until 2027.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Two rent-commenced buildings and disposal proceeds together produce the first quarter in which lease revenue clearly dominates and cash is not being consumed by construction alone.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Construction payables and interest continue to outrun lease revenue, and the deficit widens with no offsetting disposal.</p></div>
+    </div>
+    <div class="assume">
+      <span class="lbl">Analyst assumption</span>
+      <p>The date is a cadence estimate from the third quarter report filed 10 November 2025. No date has been announced.</p>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Filing cadence from Form 10-Q filed 10 November 2025. <span class="tag">Estimate</span></p>
+  </div>
+
+  <div class="band"><span class="band-t">6&ndash;12 months</span><span class="band-r"></span><span class="band-c">D6&ndash;D8</span></div>
+
+  <div class="cat two" id="cat-fy2026-annual-report">
+    <div class="cat-head">
+      <span class="cid">D6</span>
+      <h3>FY2026 annual report on Form 10-K</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>~late February 2027</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>High</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>The first audited statement of the year in which the business was supposed to change character. It will settle the full-year revenue mix between mining and leases, the year-end equity position, and whether the auditor's view of internal control and going concern is unchanged. It is also where the Anthropic lease receives its first full accounting description, including whether the investment-grade support is documented as the company expects.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Lease revenue dominates the full year, equity is restored, and the Anthropic credit support is confirmed in the disclosure.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A going concern paragraph, a material weakness, or an Anthropic lease disclosed with weaker support than the July announcement implied.</p></div>
+    </div>
+    <div class="assume">
+      <span class="lbl">Analyst assumption</span>
+      <p>The date is a cadence estimate from annual reports filed 20 March 2024, 3 March 2025 and 27 February 2026. No date has been announced.</p>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Filing cadence from Forms 10-K, 20 March 2024, 3 March 2025 and 27 February 2026. <span class="tag">Estimate</span></p>
+  </div>
+
+  <div class="cat neutral" id="cat-2027-annual-meeting">
+    <div class="cat-head">
+      <span class="cid">D7</span>
+      <h3>2027 annual meeting of stockholders</h3>
+      <span class="dir">Neutral</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>~June 2027</b></div>
+      <div>Impact <b>Low</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>Nine directors were elected on 9 June 2026 to serve until the 2027 annual meeting, which fixes the next meeting as the point at which the whole board stands again. With authorised common already raised once, from 600,000,000 to 950,000,000 shares during 2025, and 495,532,645 outstanding, a further authorisation proposal would be the item to watch on the agenda.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Routine re-election with high support and no new share authorisation sought, implying the company sees its funding as complete.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A request for further authorised shares, or withhold votes against directors, signalling either more dilution ahead or shareholder discontent with the related-party lease arrangements.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K Item 5.07, 10 June 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat up" id="cat-initial-anthropic-capacity-in-service">
+    <div class="cat-head">
+      <span class="cid">D8</span>
+      <h3>Initial Anthropic capacity placed in service at Justified Data</h3>
+      <span class="dir">Up</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Second half of 2027</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>Low</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The company expects initial capacity at the Hawesville campus to be placed into service during the second half of 2027, ramping to the full 401 MW by early 2028. The start of that window falls just inside twelve months from the as-of date, which is why it appears here rather than as context.</p>
+    <p>Nothing about the $19 billion of contracted revenue reaches the income statement before this date. Until then the lease is a commitment by both parties and a construction obligation for one of them.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>First capacity energized on schedule with an investment-grade counterparty behind it, establishing a second tenant relationship at scale.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>The schedule slips, and because backstop arrangements take effect only on lease commencement, a delay beyond a contractual threshold could allow termination with no credit support engaged.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K and Exhibit 99.1, 6 July 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="band"><span class="band-t">Beyond 12 months, context only</span><span class="band-r"></span><span class="band-c">D9&ndash;D10</span></div>
+  <p class="sub">Structural items that shape the backdrop but do not trade in the window.</p>
+
+  <div class="cat up" id="cat-muskie-initial-capacity">
+    <div class="cat-head">
+      <span class="cid">D9</span>
+      <h3>Muskie Data Campus initial 500 MW ramp</h3>
+      <span class="dir">Up</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>From H2 2028; further 500 MW targeted H2 2030</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Confidence <b>Low</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Kentucky Power, an AEP company, is constructing a 345 kV substation connected to the existing 765 kV transmission network to support the full campus, and transmission and energy service agreements were executed concurrently with the acquisition under the applicable industrial general service tariff. The site is zoned for its intended use with permitting underway. No tenant has been announced.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>A tenant is signed well ahead of delivery, as happened at Hawesville, converting an uncontracted site into a second multi-year revenue stream.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Substation construction or permitting slips, or no tenant emerges, leaving capital in land and interconnection that generates nothing.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K and Exhibit 99.1, 26 May 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat down" id="cat-bitcoin-halving-2028">
+    <div class="cat-head">
+      <span class="cid">D10</span>
+      <h3>Next bitcoin halving</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>~April 2028</b></div>
+      <div>Impact <b>Low</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The block subsidy halves at a protocol-defined interval, which the company anticipates falling in April 2028. It would cut the revenue from a fleet that produced $13.0 million in the first quarter of 2026, against $34.4 million a year earlier. On the current trajectory the mining business may be largely displaced by lease capacity before the date arrives, which is why the impact is marked Low despite the certainty of the event.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>The fleet has been retired or fully displaced by HPC tenants by then, making the halving irrelevant to the company.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Mining is still contributing meaningfully and the subsidy cut removes half of it at a stroke, with no compensating price move.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-K, 27 February 2026. <span class="tag">Filed</span></p>
+  </div>
+</section>
+
+<!-- ===================== 2. STANDING CONDITIONS ===================== -->
+<section id="s2">
+  <h2 class="sec"><span class="n">02</span>Standing conditions</h2>
+  <p class="sub">Ongoing and undated, most material first. These take &ldquo;Why undated&rdquo; in place of timing confidence.</p>
+
+  <div class="cat two" id="cat-backstop-ineffective-until-commencement">
+    <div class="cat-head">
+      <span class="cid">S1</span>
+      <h3>Credit support is ineffective until each lease commences</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing until each lease commences</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>Depends on construction completion, not a calendar date</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Google's backstop of Fluidstack's obligations becomes effective only after the relevant lease commences. If a project is delayed beyond specified thresholds the customer may terminate, and such a termination does not trigger the backstop. The backstop is triggered only by a payment or insolvency default, so other events of default can end a lease without it engaging.</p>
+    <p>This is the structural gap in the credit story: the investment-grade support that made the debt financing possible is absent during the period when the risk is highest.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Each commencement closes the gap permanently for that lease, converting a construction exposure into an investment-grade receivable.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A delay-triggered termination ends a lease with the backstop never engaged, leaving financed buildings without a tenant or a guarantor.</p></div>
+    </div>
+  </div>
+
+  <div class="cat down" id="cat-dilution-overhang">
+    <div class="cat-head">
+      <span class="cid">S2</span>
+      <h3>Dilution overhang of 264 million shares</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing to 2032</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>Holder-elected conversion, with company settlement choice</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>Three convertible series and the Google warrants together underlie 264,413,068 shares against 495,532,645 outstanding, a ceiling of 53.4%. See the dilution and capital overlay in section 5 for the arithmetic and the offsets.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Cash settlement and the capped calls hold realised dilution far below the ceiling, and conversion retires $2.5 billion of debt without a cash outflow.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>All three series convert in shares above their caps while the warrants exercise in full, and per-share claims on the contracted book fall by a third.</p></div>
+    </div>
+  </div>
+
+  <div class="cat two" id="cat-tenant-concentration">
+    <div class="cat-head">
+      <span class="cid">S3</span>
+      <h3>Two tenants carry almost the whole contracted book</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>Counterparty condition with no scheduled review</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Fluidstack holds 378 MW at Lake Mariner and 168 MW at Abernathy; Anthropic holds approximately 401 MW at Hawesville. Core42's 60 MW is the only energized and revenue-generating lease. The company also discloses that certain customer agreements may restrict it from providing services to competitors of existing tenants, which narrows the replacement pool if a lease is lost.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Concentration in two of the best-capitalised names in AI, both with third-party credit support, is a higher quality book than a diversified list of unfunded startups.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>One counterparty changing plan strands capacity built to its specification, with a replacement pool narrowed further by the exclusivity terms.</p></div>
+    </div>
+  </div>
+
+  <div class="cat down" id="cat-negative-equity-and-secured-debt">
+    <div class="cat-head">
+      <span class="cid">S4</span>
+      <h3>Negative shareholders' equity against $5.29 billion of debt</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing since 31 March 2026</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>A balance-sheet state, revisited only at each reporting date</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Liabilities of $7,086.4 million exceeded assets of $7,008.8 million at 31 March 2026, a deficit of $77.6 million against positive equity of $140.4 million three months earlier. The 2030 Senior Secured Notes are secured on substantially all assets of Wulf Compute and its guarantors, which hold the Lake Mariner HPC buildings, and the revolving facility carries a minimum liquidity covenant.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>The April raise and rent commencement restore positive equity within two reporting periods, and the deficit reads as a timing artefact of warrant accounting.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>The deficit deepens as construction payables and interest accrue ahead of revenue, tightening the minimum liquidity covenant and forcing equity issuance into weakness.</p></div>
+    </div>
+  </div>
+
+  <div class="cat two" id="cat-nyiso-approval-for-lake-mariner-expansion">
+    <div class="cat-head">
+      <span class="cid">S5</span>
+      <h3>NYISO approval gates Lake Mariner beyond roughly 500 MW</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>Study process with no published decision date</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The company states Lake Mariner can scale to approximately 500 MW in the near term and to approximately 750 MW subject to additional approvals from the New York Independent System Operator. The operator's own load interconnection queue carries two requests at the Kintigh 345 kV substation in Zone A, each for 250 MW, which is consistent with 500 MW being requested and the further step not yet lodged.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Approval for the step to 750 MW adds 250 MW at a site with transmission already built, which is the cheapest capacity in the portfolio to deliver.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>The operator declines or defers, capping the flagship campus at roughly 500 MW and pushing growth to sites with longer paths to power.</p></div>
+    </div>
+  </div>
+
+  <div class="cat two" id="cat-related-party-ground-leases">
+    <div class="cat-head">
+      <span class="cid">S6</span>
+      <h3>Core sites are leased from parties connected to management</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>35-year and 80-year initial terms</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>Continuing contractual relationship, no scheduled event</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The Lake Mariner ground lease was replaced in October 2024 with a related-party counterparty on a 35-year initial term for 20.0 million shares valued at $68.8 million plus $12.0 million cash. The Cayuga lease of August 2025 runs 80 years with no renewal rights, prepaid with 18.6 million shares valued at $95.0 million plus $3.0 million cash, to a lessor controlled by a member of management. The New York load interconnection requests for the Lansing site are lodged under Cayuga Operating Company rather than a TeraWulf entity.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Long prepaid terms of 35 and 80 years remove renewal risk on the core sites and fix the land cost against decades of escalating rents.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Terms struck with a non-independent counterparty invite governance challenge, and the company controls neither the land under its flagship campus nor the queue positions for the Lansing site.</p></div>
+    </div>
+  </div>
+
+  <div class="cat down" id="cat-atm-programme-exhausted">
+    <div class="cat-head">
+      <span class="cid">S7</span>
+      <h3>The at-the-market programme is exhausted</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing since 8 May 2026</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>Resolves only when a new programme is registered</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The company sold 10,326,000 shares for $190.9 million gross under the programme between 31 March and 8 May 2026, and the 10-Q states no amounts remained available for sale. Incremental equity now requires a new registration or another underwritten offering, both of which are slower and more visible than tapping an existing shelf.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>With $3.09 billion of cash and a $250 million revolver, no further equity is needed, and the exhausted programme simply marks the end of the dilution phase.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Capital is needed sooner than planned and must be raised through an announced offering, which signals the need publicly and prices it accordingly.</p></div>
+    </div>
+  </div>
+
+  <div class="cat two" id="cat-residual-bitcoin-exposure">
+    <div class="cat-head">
+      <span class="cid">S8</span>
+      <h3>Residual bitcoin exposure on a shrinking fleet</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>Low</b></div>
+      <div>Why undated <b>Continuous market exposure with no scheduled trigger</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Roughly 49,400 miners at 9.3 EH/s produced $13.0 million in the first quarter of 2026 against $34.4 million a year earlier. Rewards come through the Foundry mining pool and digital assets are custodied at NYDIG. The company carries no business interruption insurance on the mining assets, citing limited market availability, and property cover is approximately $50 million per occurrence.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>A rising bitcoin price funds construction from operations while the fleet occupies capacity no tenant has yet called for.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A sharp fall removes the residual cash contribution and writes down the fleet, with no business interruption cover behind the assets.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 3. RESOLVED ===================== -->
+<section id="s3">
+  <h2 class="sec"><span class="n">03</span>Resolved</h2>
+  <p class="sub">Closed items, kept for the record, ordered by resolution date. A resolved catalyst takes the next free R number; it does not carry its old D number over.</p>
+
+  <div class="cat resolved" id="cat-akela-fluidstack-leases-signed">
+    <div class="cat-head"><span class="cid">R1</span><h3>Akela Fluidstack leases signed</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>August 2025</b></div>
+      <div>Outcome <b>378 MW contracted with Google credit support</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Three data centre lease agreements with Fluidstack USA I Inc. for 378 MW of critical IT load at Lake Mariner, supported by credit enhancement from Google. This is the transaction that made the subsequent debt financing possible at scale, and it created the warrant block that now dominates the reported loss.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-2031-convertible-notes-issued">
+    <div class="cat-head"><span class="cid">R2</span><h3>2031 convertible notes issued</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>August 2025</b></div>
+      <div>Outcome <b>$1,000.0M raised at 1.00%</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Net proceeds of approximately $975.3 million, conversion price approximately $12.43, effective interest rate 10.9% against a 1.00% coupon. Capped calls costing $100.6 million lift the effective dilution threshold to $18.76.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-2030-senior-secured-notes-issued">
+    <div class="cat-head"><span class="cid">R3</span><h3>2030 senior secured notes issued</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>22 October 2025</b></div>
+      <div>Outcome <b>$3,200.0M raised at 7.75%</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Issued through Wulf Compute LLC to finance the Lake Mariner HPC buildout, secured on substantially all assets of that subsidiary and its guarantors, on the equity of Wulf Compute, and on a designated Fluidstack lockbox account. Issuance costs and up-front fees of $105.4 million bring the effective rate to 8.7%. The single largest financing in the company's history.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-abernathy-joint-venture-agreed">
+    <div class="cat-head"><span class="cid">R4</span><h3>Abernathy joint venture agreement entered</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>27 October 2025</b></div>
+      <div>Outcome <b>50.1% interest in a 168 MW Texas campus</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>An amended and restated limited liability company agreement with Fluidstack CS I Inc. governing FS CS 1 LLC, with a board of managers of three TeraWulf designees and two from the partner. Fully pre-leased to Fluidstack USA III on a 25-year term with Google credit support. The interest is now under agreement to be sold.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-2032-convertible-notes-issued">
+    <div class="cat-head"><span class="cid">R5</span><h3>2032 convertible notes issued</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>October 2025, day not stated</b></div>
+      <div>Outcome <b>$1,025.0M raised at a zero coupon</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Net proceeds of approximately $998.4 million on notes bearing no regular interest, conversion price approximately $19.94, effective rate 0.4%. The filing states the month but not the day, so this item sorts last within October.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-hawesville-site-acquired">
+    <div class="cat-head"><span class="cid">R6</span><h3>Hawesville site acquired</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>2 February 2026</b></div>
+      <div>Outcome <b>Closed; $200M cash plus a 6.8% minority interest</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Approximately 750 acres at Hawesville, Kentucky, acquired by Justified DataPower LLC from Century Aluminum of Kentucky General Partnership. The seller retains a 6.8% non-dilutive minority equity interest in Raylan Data Holdings LLC with a right to require repurchase from the first anniversary of the data centre's commencement of operations. The company's own disclosure states the acreage and the minority interest but not the price; the $200,000,000 cash consideration appears in the seller's Current Report of the same date.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-fy2025-annual-report-filed">
+    <div class="cat-head"><span class="cid">R7</span><h3>FY2025 annual report filed</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>27 February 2026</b></div>
+      <div>Outcome <b>Unqualified opinion; controls effective</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Revenue of $168.5 million and a net loss of $661.4 million, of which $429.8 million was fair value movement on warrants and derivatives. Deloitte &amp; Touche LLP issued an unqualified opinion and a clean opinion on internal control at 31 December 2025. No going concern paragraph.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-bridge-facility-entered">
+    <div class="cat-head"><span class="cid">R8</span><h3>Delayed-draw bridge facility entered</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>13 March 2026</b></div>
+      <div>Outcome <b>$500M, 364-day, senior secured</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Between Raylan Finance LLC, Raylan Data LLC and Justified DataPower LLC with Morgan Stanley Senior Funding as administrative and collateral agent, at Term SOFR plus 2.75%, to finance construction at Hawesville. Short-term debt of $98.6 million appeared on the 31 March 2026 balance sheet.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-april-2026-equity-offering-closed">
+    <div class="cat-head"><span class="cid">R9</span><h3>Underwritten equity offering closed</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>16 April 2026</b></div>
+      <div>Outcome <b>54,510,000 shares at $19.00, ~$1,035.7M gross</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>47,400,000 shares plus the full exercise of a 30-day option over 7,110,000 more, with Morgan Stanley as representative of the underwriters. Priced at $19.00, which is above the 31 July 2026 close of $17.66.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-revolving-credit-facility-entered">
+    <div class="cat-head"><span class="cid">R10</span><h3>Revolving credit facility entered</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>7 May 2026</b></div>
+      <div>Outcome <b>$250M committed to May 2030</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Senior secured, at Term SOFR plus 1.75% until the first Fluidstack lease commencement and thereafter on a grid tied to total debt against market capitalisation. Secured on substantially all assets, with a minimum liquidity covenant and a maturity that springs 91 days before the 2030 convertible notes if certain conditions exist.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-q1-2026-results-released">
+    <div class="cat-head"><span class="cid">R11</span><h3>First quarter 2026 results released</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>8 May 2026</b></div>
+      <div>Outcome <b>Revenue mix crossed over; equity went negative</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>HPC lease revenue of $21.0 million exceeded digital asset revenue of $13.0 million for the first time. Total equity of negative $77.6 million was reported. Sixty megawatts were energized for Core42.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-muskie-data-campus-acquired">
+    <div class="cat-head"><span class="cid">R12</span><h3>Muskie Data Campus acquired</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>26 May 2026</b></div>
+      <div>Outcome <b>285 acres in eastern Kentucky, 1+ GW potential</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Acquired from Industrial Equity Partners within the 1,000-acre EastPark Industrial Park. Transmission infrastructure and energy service agreements were executed concurrently. No price was disclosed and no tenant has been announced.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-2026-annual-meeting-held">
+    <div class="cat-head"><span class="cid">R13</span><h3>2026 annual meeting held</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>9 June 2026</b></div>
+      <div>Outcome <b>Nine directors elected; Deloitte ratified</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>348,345,521 shares were present or represented, approximately 80.01% of the common stock outstanding at the 13 April 2026 record date. Directors serve until the 2027 annual meeting.</p>
+  </div>
+
+  <div class="cat resolved" id="cat-anthropic-lease-and-abernathy-sale-agreed">
+    <div class="cat-head"><span class="cid">R14</span><h3>Anthropic lease executed and Abernathy sale agreed</h3><span class="dir">Resolved</span></div>
+    <div class="cat-meta">
+      <div>Resolved <b>6 July 2026</b></div>
+      <div>Outcome <b>~401 MW for 20 years; 50.1% interest to be sold</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>A 20-year lease with Anthropic at Justified Data expected to generate approximately $19 billion of contracted revenue over the initial term, and a definitive agreement to sell the entire Abernathy joint venture interest to an investor group led by Fluidstack. The chief executive noted that the customer commitment had been expected by around the end of the second quarter, which is when it was delivered. Execution of the lease is resolved; commencement of the lease and completion of the sale are not, and both appear above as dated items.</p>
+  </div>
+</section>
+
+<!-- ===================== 4. NULL CATEGORIES ===================== -->
+<section id="s4">
+  <h2 class="sec"><span class="n">04</span>Null categories</h2>
+  <p class="sub">Every category reviewed appears as a row, including those that produced catalysts, which read across by title and ID. A category checked and found empty is recorded rather than omitted.</p>
+  <div class="tw"><table class="nulls">
+    <thead><tr><th>Category</th><th>Status</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Earnings</td><td class="status">Covered above</td><td>Second quarter 2026 results (D1), third quarter 2026 results (D5), FY2026 annual report on Form 10-K (D6), first quarter 2026 results released (R11), FY2025 annual report filed (R7).</td></tr>
+      <tr><td class="lbl">Product launches</td><td class="status">None</td><td>The company leases data centre capacity and mines bitcoin; it ships no product. The nearest equivalent is delivery of a building, carried as CB-4 and CB-5 delivery and rent commencement (D4).</td></tr>
+      <tr><td class="lbl">Investor days</td><td class="status">None</td><td>No investor day is announced. The company's events page hosts quarterly earnings calls only, and no Form 8-K to 31 July 2026 announces one.</td></tr>
+      <tr><td class="lbl">Regulatory decisions</td><td class="status">Covered above</td><td>Morgantown generating station acquisition completes (D2), which requires Federal Energy Regulatory Commission approval; NYISO approval gates Lake Mariner beyond roughly 500 MW (S5).</td></tr>
+      <tr><td class="lbl">Lawsuits</td><td class="status caution-t">Not established</td><td>Not examined. Federal and state court dockets were not searched. The FY2025 Form 10-K legal proceedings item was read and discloses no material pending proceeding, but that is the issuer's own account rather than a docket check. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Macro events</td><td class="status">Covered above</td><td>Next bitcoin halving (D10). Residual bitcoin exposure on a shrinking fleet (S8) carries the continuous price exposure.</td></tr>
+      <tr><td class="lbl">Industry conferences</td><td class="status caution-t">Not established</td><td>Not examined. No conference organiser's published schedule was checked for company participation. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Management changes</td><td class="status">None</td><td>No Form 8-K under Item 5.02 was filed between 1 October 2025 and 31 July 2026. Paul Prager remains chairman and chief executive and Patrick Fleury chief financial officer, both named in the 8 May 2026 results release.</td></tr>
+      <tr><td class="lbl">Buybacks</td><td class="status">None</td><td>No repurchase programme is disclosed in the FY2025 Form 10-K or the first quarter Form 10-Q. Treasury stock of 24,468,750 shares arises from earlier transactions. Capped call transactions exist over the 2030 and 2031 notes, but they offset conversion dilution rather than authorise repurchase.</td></tr>
+      <tr><td class="lbl">Dividends</td><td class="status">None</td><td>No common dividend has been declared or paid, and the FY2025 Form 10-K states the company does not currently intend to pay one. No preferred stock was outstanding at 31 March 2026.</td></tr>
+      <tr><td class="lbl">Major contracts</td><td class="status">Covered above</td><td>Anthropic lease executed and Abernathy sale agreed (R14), Akela Fluidstack leases signed (R1), Abernathy joint venture agreement entered (R4), initial Anthropic capacity placed in service at Justified Data (D8).</td></tr>
+      <tr><td class="lbl">Convertible and other financings</td><td class="status">Covered above</td><td>2030 senior secured notes issued (R3), 2031 convertible notes issued (R2), 2032 convertible notes issued (R5), delayed-draw bridge facility entered (R8), revolving credit facility entered (R10), underwritten equity offering closed (R9), the at-the-market programme is exhausted (S7).</td></tr>
+      <tr><td class="lbl">Mergers and acquisitions</td><td class="status">Covered above</td><td>Hawesville site acquired (R6), Muskie Data Campus acquired (R12), Morgantown generating station acquisition completes (D2), Abernathy joint venture sale completes (D3).</td></tr>
+      <tr><td class="lbl">Index membership</td><td class="status caution-t">Not established</td><td>Not examined. No index provider's published methodology or rebalance schedule was checked. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Analyst coverage and short interest</td><td class="status caution-t">Not established</td><td>Not examined. No attributed, dated third-party target or rating was located, and exchange short interest reports were not retrieved. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Credit rating actions</td><td class="status caution-t">Not established</td><td>Not examined. The $3.2 billion 2030 senior secured notes are a rated-market instrument and may carry agency ratings, but no rating agency publication was consulted. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Segment reporting</td><td class="status">None</td><td>The FY2025 Form 10-K and first quarter Form 10-Q present revenue in two lines, digital assets and HPC leases, within a single reportable segment. No segment split of costs or assets is disclosed.</td></tr>
+      <tr><td class="lbl">Beneficial ownership changes</td><td class="status">Covered above</td><td>Filings by Vanguard, BlackRock, Bank of Nova Scotia, Citadel Securities, Jane Street and Lone Pine Capital were swept under both schedule spellings; the dilution overhang of 264 million shares (S2) carries the structural share-count effect. Individual position sizes were not extracted.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 5. DILUTION & CAPITAL OVERLAY ===================== -->
+<section id="s5">
+  <h2 class="sec"><span class="n">05</span>Dilution &amp; capital overlay</h2>
+  <p class="sub">Sits across every other catalyst rather than beside them.</p>
+  <p>Every catalyst on this calendar is read against a share count that can rise by more than half without the company selling a single new share into the market. That is the overlay: the outcomes above change the value of the enterprise, and this changes how much of it each holder owns.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Source</th><th class="num">Shares</th><th class="num">Strike</th><th>Working</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">2030 convertible notes</td><td class="num">58,962,250</td><td class="num">$8.48</td><td>500,000 units &times; 117.9245 per $1,000</td><td><span class="tag">Estimate</span> from stated conversion rate</td></tr>
+      <tr><td class="lbl">2031 convertible notes</td><td class="num">80,460,200</td><td class="num">$12.43</td><td>1,000,000 units &times; 80.4602 per $1,000</td><td><span class="tag">Estimate</span> from stated conversion rate</td></tr>
+      <tr><td class="lbl">2032 convertible notes</td><td class="num">51,410,618</td><td class="num">$19.94</td><td>1,025,000 units &times; 50.1567 per $1,000</td><td><span class="tag">Estimate</span> from stated conversion rate</td></tr>
+      <tr><td class="lbl">Google warrants</td><td class="num">73,580,000</td><td class="num">$0.01</td><td>stated in the filing</td><td><span class="tag">Filed</span> Form 10-K; Form 10-Q</td></tr>
+      <tr><td class="lbl">Total potential</td><td class="num">264,413,068</td><td class="num">n/a</td><td>53.4% of 495,532,645 outstanding</td><td><span class="tag">Estimate</span> sum of the above</td></tr>
+    </tbody>
+  </table></div>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Treat 53.4% as a ceiling rather than a forecast. The company may settle conversions in cash at its election. Capped calls bought for $60.0 million and $100.6 million offset dilution on the 2030 and 2031 notes up to cap prices of $12.80 and $18.76. At the 31 July 2026 close of $17.66 the 2032 notes are out of the money at $19.94, while the 2030 and 2031 notes are in the money. The Google warrants are the firm part: struck at $0.01 and automatically exercised on a net basis at expiry if in the money, so that 73,580,000 block is close to certain rather than contingent.</p>
+  </div>
+  <p>The equity side has already moved. Shares outstanding went from 425,050,328 at 31 March 2026 to 495,532,645 at 5 May 2026, a rise of 16.6% in five weeks, through an underwritten offering of 54,510,000 shares at $19.00 and 10,326,000 at-the-market shares for $190.9 million. That at-the-market programme is now exhausted, which removes the quiet route and means the next equity raise will be an announced event in its own right.</p>
+  <p>Debt does not dilute but it does rank ahead. Of the $5,290.0 million outstanding at 31 March 2026, the $3,200.0 million of 2030 senior secured notes sit against the Lake Mariner buildings specifically, through security over Wulf Compute and its guarantors. A stress case at Lake Mariner therefore reaches the equity before it reaches most of the debt.</p>
+</section>
+
+<!-- ===================== 6. FALSIFICATION TESTS ===================== -->
+<section id="s6">
+  <h2 class="sec"><span class="n">06</span>Falsification tests</h2>
+  <p class="sub">What would prove this read wrong, stated in advance. Each trigger is settleable from a document; an unquantified threshold is not a test.</p>
+  <div class="tw"><table>
+    <thead><tr><th>#</th><th>If this happens&hellip;</th><th>&hellip;this was wrong</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>The second or third quarter 2026 Form 10-Q reports HPC lease revenue below the $21.0 million recorded for the first quarter of 2026.</td><td>The reading that lease revenue ramps monotonically as buildings energize.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">2</td><td>Any Form 8-K or periodic report discloses termination, or notice of termination, of a Fluidstack or Anthropic lease.</td><td>The reading that the contracted book is durable and that the counterparties are committed.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">3</td><td>The FY2026 Form 10-K carries a going concern paragraph, or reports a material weakness in internal control over financial reporting.</td><td>The reading that a $3.09 billion cash balance makes the negative equity position a presentational matter rather than a solvency one.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">4</td><td>A periodic report states that CB-4 and CB-5 will not deliver and commence rent during calendar 2026.</td><td>The reading that delivery is broadly on the announced schedule.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">5</td><td>The Abernathy joint venture sale is reported as terminated, or completes at consideration below the $434.8 million carrying value at 31 March 2026.</td><td>The company's statement that the sale monetises its investment at a premium to invested capital.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">6</td><td>A Form 8-K or periodic report discloses that the Morgantown agreement has been terminated, or the FY2026 Form 10-K still reports it as pending.</td><td>The reading that the owned-generation leg of the strategy is executable on the announced timetable.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">7</td><td>A registration statement or prospectus supplement registers common stock for sale, or a Form 8-K announces an underwritten offering, before 31 December 2026.</td><td>The reading that the April 2026 raise and the $250 million revolver fund the programme through the year.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">8</td><td>A periodic report or Form 8-K discloses that the credit support behind the Anthropic lease has not been documented, or describes that support as other than investment grade.</td><td>The reading that the $19 billion contracted revenue figure rests on a rated counterparty.</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">9</td><td>The New York Independent System Operator interconnection queue shows either Kintigh 345 kV request, queue 1670 or 1732, withdrawn.</td><td>The reading that Lake Mariner has a settled path to approximately 500 MW.</td><td class="status">Untriggered</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 7. CATALYST SUMMARY ===================== -->
+<section id="s7">
+  <h2 class="sec"><span class="n">07</span>Catalyst summary</h2>
+  <p class="sub">Every ID in one table, gapless within each class. Must match the cards above exactly: same IDs, same count, same order. Links point at title slugs so they survive renumbering.</p>
+  <div class="tw"><table>
+    <thead><tr><th>ID</th><th>Catalyst</th><th>Timing</th><th>Impact</th><th>Confidence</th><th>Direction</th></tr></thead>
+    <tbody>
+      <tr><td class="num">D1</td><td><a href="#cat-second-quarter-2026-results">Second quarter 2026 results</a></td><td class="when">~mid-Aug 2026</td><td>High</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D2</td><td><a href="#cat-morgantown-acquisition-completion">Morgantown generating station acquisition completes</a></td><td class="when">Overdue; any time</td><td>Medium</td><td>Low</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D3</td><td><a href="#cat-abernathy-joint-venture-sale-completes">Abernathy joint venture sale completes</a></td><td class="when">~Q4 2026</td><td>Medium</td><td>Low</td><td class="pos-t">Up</td></tr>
+      <tr><td class="num">D4</td><td><a href="#cat-cb4-and-cb5-rent-commencement">CB-4 and CB-5 delivery and rent commencement</a></td><td class="when">During 2026</td><td>High</td><td>Medium</td><td class="pos-t">Up</td></tr>
+      <tr><td class="num">D5</td><td><a href="#cat-third-quarter-2026-results">Third quarter 2026 results</a></td><td class="when">~early Nov 2026</td><td>Medium</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D6</td><td><a href="#cat-fy2026-annual-report">FY2026 annual report on Form 10-K</a></td><td class="when">~late Feb 2027</td><td>High</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D7</td><td><a href="#cat-2027-annual-meeting">2027 annual meeting of stockholders</a></td><td class="when">~Jun 2027</td><td>Low</td><td>Medium</td><td>Neutral</td></tr>
+      <tr><td class="num">D8</td><td><a href="#cat-initial-anthropic-capacity-in-service">Initial Anthropic capacity placed in service at Justified Data</a></td><td class="when">H2 2027</td><td>High</td><td>Low</td><td class="pos-t">Up</td></tr>
+      <tr><td class="num">D9</td><td><a href="#cat-muskie-initial-capacity">Muskie Data Campus initial 500 MW ramp</a></td><td class="when">From H2 2028</td><td>Medium</td><td>Low</td><td class="pos-t">Up</td></tr>
+      <tr><td class="num">D10</td><td><a href="#cat-bitcoin-halving-2028">Next bitcoin halving</a></td><td class="when">~Apr 2028</td><td>Low</td><td>Medium</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">S1</td><td><a href="#cat-backstop-ineffective-until-commencement">Credit support is ineffective until each lease commences</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S2</td><td><a href="#cat-dilution-overhang">Dilution overhang of 264 million shares</a></td><td class="when">Ongoing to 2032</td><td>High</td><td>n/a</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">S3</td><td><a href="#cat-tenant-concentration">Two tenants carry almost the whole contracted book</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S4</td><td><a href="#cat-negative-equity-and-secured-debt">Negative shareholders' equity against $5.29 billion of debt</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">S5</td><td><a href="#cat-nyiso-approval-for-lake-mariner-expansion">NYISO approval gates Lake Mariner beyond roughly 500 MW</a></td><td class="when">Ongoing</td><td>Medium</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S6</td><td><a href="#cat-related-party-ground-leases">Core sites are leased from parties connected to management</a></td><td class="when">Ongoing</td><td>Medium</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S7</td><td><a href="#cat-atm-programme-exhausted">The at-the-market programme is exhausted</a></td><td class="when">Ongoing</td><td>Medium</td><td>n/a</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">S8</td><td><a href="#cat-residual-bitcoin-exposure">Residual bitcoin exposure on a shrinking fleet</a></td><td class="when">Ongoing</td><td>Low</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">R1</td><td><a href="#cat-akela-fluidstack-leases-signed">Akela Fluidstack leases signed</a></td><td class="when">Aug 2025</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R2</td><td><a href="#cat-2031-convertible-notes-issued">2031 convertible notes issued</a></td><td class="when">Aug 2025</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R3</td><td><a href="#cat-2030-senior-secured-notes-issued">2030 senior secured notes issued</a></td><td class="when">22 Oct 2025</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R4</td><td><a href="#cat-abernathy-joint-venture-agreed">Abernathy joint venture agreement entered</a></td><td class="when">27 Oct 2025</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R5</td><td><a href="#cat-2032-convertible-notes-issued">2032 convertible notes issued</a></td><td class="when">Oct 2025</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R6</td><td><a href="#cat-hawesville-site-acquired">Hawesville site acquired</a></td><td class="when">2 Feb 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R7</td><td><a href="#cat-fy2025-annual-report-filed">FY2025 annual report filed</a></td><td class="when">27 Feb 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R8</td><td><a href="#cat-bridge-facility-entered">Delayed-draw bridge facility entered</a></td><td class="when">13 Mar 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R9</td><td><a href="#cat-april-2026-equity-offering-closed">Underwritten equity offering closed</a></td><td class="when">16 Apr 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R10</td><td><a href="#cat-revolving-credit-facility-entered">Revolving credit facility entered</a></td><td class="when">7 May 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R11</td><td><a href="#cat-q1-2026-results-released">First quarter 2026 results released</a></td><td class="when">8 May 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R12</td><td><a href="#cat-muskie-data-campus-acquired">Muskie Data Campus acquired</a></td><td class="when">26 May 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R13</td><td><a href="#cat-2026-annual-meeting-held">2026 annual meeting held</a></td><td class="when">9 Jun 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R14</td><td><a href="#cat-anthropic-lease-and-abernathy-sale-agreed">Anthropic lease executed and Abernathy sale agreed</a></td><td class="when">6 Jul 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 8. METHODOLOGY & CONFIDENCE SCALE ===================== -->
+<section id="s8">
+  <h2 class="sec"><span class="n">08</span>Methodology &amp; confidence scale</h2>
+
+  <h3>Provenance tags</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Tag</th><th>What it asserts</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl"><span class="tag">Filed</span></td><td>Stated in an SEC filing or company release, cited by form and date. Also covers a dated official publication by a named non-SEC issuer, with the issuer named in the Source line. Used here for the New York Independent System Operator interconnection queue.</td></tr>
+      <tr><td class="lbl"><span class="tag">Estimate</span></td><td>Derived or inferred here. The arithmetic is shown.</td></tr>
+      <tr><td class="lbl"><span class="tag">Open</span></td><td>Expected but unconfirmed. Nothing filed either way.</td></tr>
+      <tr><td class="lbl"><span class="tag">Market</span></td><td>Price, volume, float, published targets and ratings. Stamped with the close or publication date.</td></tr>
+      <tr><td class="lbl"><span class="tag">Press</span></td><td>Reported by a named publication that is neither the issuer nor an analyst, cited by outlet and date. Corroborates; never the sole basis for a material claim.</td></tr>
+      <tr><td class="lbl"><span class="tag">Social</span></td><td>Publicly posted by a named account, cited by handle and date. Asserts that the statement was made, never that it is true.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Timing confidence</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Level</th><th>Means</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">High</td><td>Date is company-announced, protocol-defined, or statutorily fixed.</td></tr>
+      <tr><td class="lbl">Medium</td><td>Date inferred from filing cadence or a stated deadline window.</td></tr>
+      <tr><td class="lbl">Low</td><td>Date is a judgement call. Could move by a quarter or more.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>How dates were derived where the company gave none</h3>
+  <p>Reporting dates carry the Estimate tag and rest on this issuer's own cadence: annual reports filed 20 March 2024, 3 March 2025 and 27 February 2026; quarterly reports filed 8 August 2025, 10 November 2025 and 8 May 2026. The spread is roughly three weeks around the same point each quarter, which supports Medium confidence and no better. Where a company statement gave a window that has since passed, as with the Morgantown completion expected in the second quarter of 2026, the card records the statement and the fact the window closed rather than substituting a new estimate.</p>
+
+  <div class="note caution">
+    <p>Confidence rates <b>timing</b>, never outcome. A High-confidence catalyst can be a coin flip; a Low-confidence one can be near-certain in direction.</p>
+    <p><b>Impact is independent of confidence.</b> A High-impact, Low-confidence item is the most important kind here: it matters enormously and could land any time. Initial Anthropic capacity placed in service at Justified Data (D8) is the clearest example on this calendar.</p>
+  </div>
+</section>
+
+<!-- ===================== 9. SOURCES ===================== -->
+<section id="s9">
+  <h2 class="sec"><span class="n">09</span>Sources</h2>
+  <p class="sub">Primary filings and company releases first, with form type and date.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Source</th><th>Date</th><th>What it settles</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Form 10-K, FY2025</td><td class="when">27 Feb 2026</td><td>Campuses, capital structure, backstop conditionality, related-party leases, subsequent events</td></tr>
+      <tr><td class="lbl">Form 10-Q, Q1 2026</td><td class="when">8 May 2026</td><td>Deficit equity, revolver terms, at-the-market exhaustion, share count, Abernathy carrying value</td></tr>
+      <tr><td class="lbl">Form 8-K and Exhibit 99.1</td><td class="when">6 Jul 2026</td><td>Anthropic lease and Abernathy sale agreement</td></tr>
+      <tr><td class="lbl">Form 8-K and Exhibit 99.1</td><td class="when">26 May 2026</td><td>Muskie Data Campus acquisition and Kentucky Power substation</td></tr>
+      <tr><td class="lbl">Form 8-K, Item 5.07</td><td class="when">10 Jun 2026</td><td>Annual meeting of 9 June 2026 and the 2027 meeting date reference</td></tr>
+      <tr><td class="lbl">Form 8-K</td><td class="when">16 Apr 2026</td><td>Underwritten offering terms and closing</td></tr>
+      <tr><td class="lbl">Form 8-K</td><td class="when">16 Mar 2026</td><td>Delayed-draw bridge facility</td></tr>
+      <tr><td class="lbl">Form 8-K and Exhibit 99.1</td><td class="when">2 Feb 2026</td><td>Hawesville and Morgantown announcements</td></tr>
+      <tr><td class="lbl">Q1 2026 results release, Exhibit 99.1</td><td class="when">8 May 2026</td><td>Energized capacity, CB-3 to CB-5 schedule, pipeline megawatts</td></tr>
+      <tr><td class="lbl">Century Aluminum Company, Form 8-K</td><td class="when">2 Feb 2026</td><td>Hawesville consideration of $200,000,000 cash and the 6.8% interest</td></tr>
+      <tr><td class="lbl">NYISO interconnection queue</td><td class="when">3 Aug 2026</td><td>Load interconnection requests 1670, 1683, 1732 and 1733</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>How the sweep was run</h3>
+  <p>Filings were swept against Central Index Key 0001083301 rather than the ticker, which is what carries the search across the two former registrant names on this issuer's record, Chromaline Corp and Ikonics Corp. The complete index holds 1,223 filings from 7 April 1999 to 31 July 2026. Both spellings of the beneficial-ownership schedules were included: 85 filings carry the legacy prefix and 18 the form the Commission has emitted since December 2024, and a sweep matching only the older spelling would have missed all 18. Exhibit lists were enumerated rather than form types alone, which is how the Century Aluminum consideration was reached. Full-text search was used to find the company named inside other parties' filings.</p>
+  <p>Late-filing notifications were checked for absence as much as presence. Across those 1,223 filings the index holds exactly one: an NT 10-K filed 3 May 2023 for the period ended 31 December 2022, two days before a Form 10-K/A. None has been filed since, and none has ever been filed for a quarterly report. A company that has changed name twice and filer status once is exactly the case where a missing notification would matter, so the count is stated rather than the bare negative.</p>
+
+  <h3>What was not checked</h3>
+  <p>The Federal Energy Regulatory Commission eLibrary was attempted on 3 August 2026 and did not return data to an automated request. No docket reference for the Morgantown authorisation under Federal Power Act Section 203 has therefore been established, and the status of that approval rests on the company's own statements. This is a gap rather than a finding of absence.</p>
+  <p>Federal and state court dockets were not searched, so lawsuits read Not established above. No index provider's methodology or rebalance calendar was checked. No rating agency publication was consulted, so any ratings on the 2030 senior secured notes are unknown. Exchange short interest reports were not retrieved and no attributed, dated third-party price target or rating was located. No conference organiser's published schedule was checked for company participation.</p>
+  <p>The Southwest Power Pool, PJM and Kentucky interconnection records were not retrieved, so the Abernathy, Hawesville, Muskie and Morgantown capacity figures rest on company statements alone; only the New York sites are corroborated by grid data. Kentucky Public Service Commission and Maryland Public Service Commission records were not examined. No earnings call transcript was read.</p>
+  <p>On date coverage, the sweep reaches 31 July 2026 and the calendar carries no catalyst arising after that date. Second quarter results for the period ended 30 June 2026 had not been filed, so no reported figures reflect the April equity raise or the July transactions.</p>
+</section>
+
+<!-- ===================== 10. DOCUMENT LOG ===================== -->
+<section id="s10">
+  <h2 class="sec"><span class="n">10</span>Document log</h2>
+  <p class="sub">Newest first. The original build entry is never removed or rewritten.</p>
+  <div class="log">
+    <div class="logentry current">
+      <div class="when">3 August 2026 <span class="latest">Latest</span></div>
+      <div class="basis">Original build &middot; 10 dated &middot; 8 standing &middot; 14 resolved &middot; priced off 31 Jul 2026 close</div>
+      <p><b>Built from</b> the company's filings on EDGAR under Central Index Key 0001083301, swept across the complete index of 1,223 filings from April 1999 to 31 July 2026. The load-bearing documents are the FY2025 Form 10-K of 27 February 2026, the first quarter Form 10-Q of 8 May 2026, and the Current Reports of 2 February, 16 March, 16 April, 26 May, 10 June and 6 July 2026 with their exhibits. Grid data comes from the New York Independent System Operator load interconnection queue, retrieved 3 August 2026. Century Aluminum's Current Report of 2 February 2026 supplied the Hawesville consideration, which the issuer's own filing does not state.</p>
+      <p><b>Pricing basis</b> is the close of 31 July 2026 at $17.66, the last completed session before the build date.</p>
+      <p><b>Conventions fixed at construction.</b> Dated items are ordered by expected date and banded 0&ndash;3, 3&ndash;6 and 6&ndash;12 months with a fourth context band beyond twelve months; standing conditions are ordered by materiality; resolved items are ordered by resolution date, earliest first. Anchors are permanent title slugs rather than ID numbers. Every reporting date is an estimate from this issuer's own filing cadence and is tagged as such. Where a company statement gave a window that has since passed, the card records both rather than re-forecasting.</p>
+      <p><b>Known gaps in this version.</b> The Federal Energy Regulatory Commission eLibrary could not be queried on 3 August 2026, so the Morgantown authorisation has no docket reference. Court dockets, index provider methodologies, rating agency publications, short interest reports and conference schedules were not examined, and five categories read Not established as a result. Only the New York sites are corroborated by grid operator data; the Texas, Kentucky and Maryland capacity figures rest on company statements. Second quarter results for the period ended 30 June 2026 were not yet filed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="norec">
+    No buy, sell, or hold recommendation is issued and no price target is derived.
+    Third-party targets and ratings, where shown, are the published views of the
+    firms named. This document is for research and educational purposes and is not
+    investment advice. Estimated dates are not company announcements. Verify
+    against primary filings on sec.gov before acting.
+  </div>
+  <p style="margin-top:16px">WULF &middot; TeraWulf Inc. &middot; Catalyst Calendar &middot; as of 3 August 2026</p>
+</footer>
+
+</div>
+
+</body>
+</html>

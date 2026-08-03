@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>WULF · TeraWulf Inc. · Equity Research Report · as of 3 August 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================================
+   PER-TICKER PALETTE
+   ========================================================================= */
+:root{
+  /* TeraWulf's mark is a wolf-head shield in a single blue-grey family. The
+     dominant colour by inked area is the shield's outer gradient, #D9E4EF to
+     #B8C9D6, whose midpoint is #C8D6E2 (hue 207.7, saturation 31%, lightness
+     84%). Normalised for white paper the saturation rises to 45% and the
+     lightness falls to 42%, giving #3B6F9B at 5.34:1 against the page. The hue
+     is carried through unchanged: it sits 42 degrees clear of the nearest
+     meaning-bearing colour, so no rotation was needed. */
+  --accent:      #3B6F9B;
+  --accent-deep: #2D5476;
+  --accent-wash: rgba(59,111,155,0.06);
+  --accent-line: rgba(59,111,155,0.22);
+}
+
+/* ============================================================================
+   SHARED STYLESHEET v1.57 : BEGIN
+   ========================================================================= */
+:root{
+  color-scheme: light only;
+
+  --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
+  --line:#DEE6EC;   --line-hard:#C0CDD7;
+  --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
+
+  --pos:#0B7A50;      --pos-bg:#E7F4EE;
+  --neg:#B02A21;      --neg-bg:#FBECEA;
+  --caution:#90600A;  --caution-bg:#FBF2E0;
+  --assume:#4F3FA3;   --assume-bg:#EFEDFA;
+
+  --display:'Archivo',ui-sans-serif,system-ui,'Helvetica Neue',Arial,sans-serif;
+  --body:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+
+  --measure:78ch;
+  --col:760px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html,body{background:var(--canvas) !important;background-color:var(--canvas) !important}
+body{
+  margin:0;color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 22px 96px;background:var(--paper);
+      border-left:1px solid var(--line);border-right:1px solid var(--line)}
+p{max-width:var(--measure)}
+/* Boxed prose fills its container: the box supplies its own measure, so the
+   78ch cap applies to top-level running prose only. */
+.first li,.assume p,.note p,.cat p,.risk p,.logentry p,.oc p,.case p,
+.cat-meta,.logentry .basis{max-width:none}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:var(--accent-deep)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- masthead ---------- */
+.mast{padding:44px 0 26px;border-bottom:2px solid var(--line-hard);margin-bottom:8px;
+      position:relative;padding-left:20px}
+.mast::before{content:"";position:absolute;left:0;top:44px;bottom:26px;
+      width:4px;background:var(--accent)}
+.ticker{font-family:var(--mono);font-size:44px;font-weight:700;letter-spacing:-1px;
+      line-height:1;color:var(--accent);margin:0}
+.headline{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.22;
+      color:var(--ink);margin:16px 0 0}
+.functional{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--ink-faint);margin:18px 0 0}
+.mast-strip{display:flex;flex-wrap:wrap;gap:26px;margin-top:20px;padding-top:16px;
+      border-top:1px solid var(--line)}
+.mast-strip div{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint)}
+.mast-strip b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-top:3px}
+
+/* ---------- banner: framing ---------- */
+.first{background:var(--canvas);border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:20px 24px;margin:30px 0 12px}
+.first h2{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.04em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 12px}
+.first ol{margin:0;padding-left:20px}
+.first li{margin-bottom:9px}
+.first li:last-child{margin-bottom:0}
+
+/* ---------- sections ---------- */
+section{padding-top:38px}
+h2.sec{font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);
+      margin:0 0 4px;padding-bottom:10px;border-bottom:1px solid var(--line-hard);
+      display:flex;align-items:baseline;gap:12px}
+h2.sec .n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);
+      letter-spacing:.06em;flex:none}
+.sub{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);margin:10px 0 18px;
+      max-width:var(--measure)}
+h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink-dim);
+      margin:26px 0 8px}
+
+/* ---------- provenance tags (signature) ---------- */
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);
+      background:var(--panel-2);border:1px solid var(--line);
+      border-radius:2px;padding:1px 6px;vertical-align:1px;white-space:nowrap}
+
+/* ---------- assumption block ---------- */
+.assume{background:var(--assume-bg);border-left:4px solid var(--assume);
+      padding:16px 20px;margin:20px 0}
+.assume .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--assume);display:block;margin-bottom:7px}
+.assume p{margin:0}
+
+/* ---------- callouts ---------- */
+.note{border:1px solid var(--line);border-left:4px solid var(--ink-faint);
+      background:var(--canvas);padding:16px 20px;margin:20px 0}
+.note.pos{border-left-color:var(--pos);background:var(--pos-bg)}
+.note.neg{border-left-color:var(--neg);background:var(--neg-bg)}
+.note.caution{border-left-color:var(--caution);background:var(--caution-bg)}
+.note p{margin:0}
+.note p + p{margin-top:10px}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+thead th{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--ink-dim);text-align:left;
+      padding:9px 12px;border-bottom:2px solid var(--line-hard);white-space:nowrap}
+tbody td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--canvas)}
+td.num,th.num{font-family:var(--mono);text-align:right;white-space:nowrap}
+/* td.when marks a timing column. An unmarked cell counts as prose. */
+td.when{font-family:var(--mono);white-space:nowrap}
+td.lbl{font-weight:600}
+.pos-t{color:var(--pos);font-weight:600}
+.neg-t{color:var(--neg);font-weight:600}
+.caution-t{color:var(--caution);font-weight:600}
+
+/* ---------- cases ---------- */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.case{border:1px solid var(--line);border-top:3px solid var(--ink-faint);
+      background:var(--paper);padding:18px}
+.case.bull{border-top-color:var(--pos)}
+.case.bear{border-top-color:var(--neg)}
+.case h4{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 10px}
+.case.bull h4{color:var(--pos)} .case.bear h4{color:var(--neg)}
+.case p{font-size:15px;margin:0}
+.case .req{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+
+/* ---------- risks ---------- */
+.risk{border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:16px 20px;margin-bottom:12px}
+.risk.sev-high{border-left-color:var(--neg)}
+.risk.sev-med{border-left-color:var(--caution)}
+.risk.sev-low{border-left-color:var(--ink-faint)}
+.risk h4{font-family:var(--display);font-size:15.5px;font-weight:600;margin:0 0 6px;
+      display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.risk .sev{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase}
+.risk.sev-high .sev{color:var(--neg)}
+.risk.sev-med .sev{color:var(--caution)}
+.risk.sev-low .sev{color:var(--ink-faint)}
+.risk p{margin:0;font-size:15.5px}
+
+/* ---------- null categories ---------- */
+.nulls td.lbl{width:26%}
+.nulls .status{font-family:var(--mono);font-size:12px;white-space:nowrap}
+
+/* ---------- document log ---------- */
+.log{margin-top:14px}
+.logentry{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:12px}
+.logentry.current{border-left:4px solid var(--accent);background:var(--accent-wash)}
+.logentry .when{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);
+      display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.latest{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-line);
+      background:var(--paper);border-radius:2px;padding:1px 6px}
+.logentry .basis{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-bottom:12px}
+.logentry p{font-size:15.5px;margin:0 0 9px}
+.logentry p:last-child{margin-bottom:0}
+.correction{border:1px solid var(--neg);border-left:4px solid var(--neg);
+      background:var(--neg-bg);padding:12px 16px;margin-bottom:14px}
+.correction .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--neg);display:block;margin-bottom:5px}
+
+/* ---------- footer ---------- */
+footer{margin-top:44px;padding-top:22px;border-top:2px solid var(--line-hard)}
+footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width:none}
+.norec{border:1px solid var(--line-hard);background:var(--canvas);padding:16px 20px;
+      margin-top:20px;font-family:var(--mono);font-size:12.5px;color:var(--ink-dim)}
+
+/* ---------- catalyst cards (calendar) ---------- */
+.cat{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:14px;border-left:4px solid var(--line-hard)}
+.cat.up{border-left-color:var(--pos)}
+.cat.down{border-left-color:var(--neg)}
+.cat.two{border-left-color:var(--caution)}
+.cat.neutral{border-left-color:var(--ink-faint)}
+.cat-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.cid{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);flex:none}
+.cat-head h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink);
+      margin:0;flex:1 1 auto;min-width:200px}
+.dir{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;white-space:nowrap}
+.cat.up .dir{color:var(--pos)} .cat.down .dir{color:var(--neg)}
+.cat.two .dir{color:var(--caution)} .cat.neutral .dir{color:var(--ink-faint)}
+.cat-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:10px 0 12px;padding:9px 0;
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+      font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
+.cat-meta b{color:var(--ink);font-weight:600}
+.cat p{margin:0 0 9px;font-size:15.5px}
+.cat p:last-child{margin-bottom:0}
+.cat.resolved{background:var(--canvas);border-left-color:var(--ink-faint)}
+.cat.resolved .dir{color:var(--ink-faint)}
+
+/* ---------- horizon bands (calendar) ---------- */
+.band{display:flex;align-items:center;gap:14px;margin:30px 0 16px}
+.band-t{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--ink-dim);white-space:nowrap}
+.band-r{flex:1;height:1px;background:var(--line-hard)}
+.band-c{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);white-space:nowrap}
+
+/* ---------- upside / downside pair ---------- */
+.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0}
+.oc{border:1px solid var(--line);padding:11px 14px;background:var(--paper)}
+.oc.up-c{border-left:3px solid var(--pos)}
+.oc.down-c{border-left:3px solid var(--neg)}
+.oc .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.09em;
+      text-transform:uppercase;display:block;margin-bottom:5px}
+.oc.up-c .lbl{color:var(--pos)} .oc.down-c .lbl{color:var(--neg)}
+.oc p{margin:0;font-size:14.5px;line-height:1.5}
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  body{font-size:16px}
+  .wrap{padding:0 16px 70px;border-left:none;border-right:none}
+  .ticker{font-size:34px}
+  .headline{font-size:23px}
+  .cases{grid-template-columns:1fr}
+  .outcomes{grid-template-columns:1fr}
+  .mast-strip{gap:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none !important;transition:none !important}
+}
+@media print{
+  body{font-size:11pt}
+  .wrap{max-width:none;border:none}
+  section{page-break-inside:avoid}
+}
+/* ============================================================================
+   SHARED STYLESHEET v1.57 : END
+   ========================================================================= */
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ===================== MASTHEAD ===================== -->
+<header class="mast">
+  <p class="ticker">WULF</p>
+  <h1 class="headline">A nineteen billion dollar lease book signed against sixty megawatts that actually run</h1>
+  <p class="functional">WULF · TeraWulf Inc. · Equity Research Report · as of 3 August 2026</p>
+  <div class="mast-strip">
+    <div>Price <b>$17.66</b> <span class="tag">Market</span></div>
+    <div>Market cap <b>$8.75bn</b> <span class="tag">Estimate</span></div>
+    <div>Shares out <b>495,532,645</b> <span class="tag">Filed</span></div>
+    <div>Cash and restricted cash <b>$3.09bn</b> <span class="tag">Filed</span></div>
+    <div>Pricing basis <b>31 Jul 2026 close</b> <span class="tag">Market</span></div>
+  </div>
+</header>
+
+<!-- ===================== FRAMING ===================== -->
+<div class="first">
+  <h2>Framing</h2>
+  <ol>
+    <li>On 6 July 2026 TeraWulf executed a 20-year lease with Anthropic for roughly 401 MW of critical IT load at the Justified Data campus in Hawesville, Kentucky, which the company expects to generate approximately $19 billion of contracted revenue over the initial term. Initial capacity is targeted for the second half of 2027. <span class="tag">Filed</span></li>
+    <li>At 31 March 2026 the balance sheet carried $7.01 billion of assets against $7.09 billion of liabilities, leaving a total deficit of $77.6 million. Debt and convertible notes stood at $5.29 billion and the Google warrant liability at $1.06 billion. <span class="tag">Filed</span></li>
+    <li>Sixty megawatts of critical IT capacity were energized and generating revenue at 31 March 2026, for Core42. Every other contracted megawatt, at Lake Mariner, Abernathy and Hawesville alike, is still to be built. <span class="tag">Filed</span></li>
+    <li>Quarterly revenue crossed over in the first quarter of 2026: HPC leases contributed $21.0 million against $13.0 million from bitcoin mining, the first period in which the legacy business was not the larger half. <span class="tag">Filed</span></li>
+  </ol>
+</div>
+
+<!-- ===================== 1. SNAPSHOT ===================== -->
+<section id="s1">
+  <h2 class="sec"><span class="n">01</span>Snapshot</h2>
+  <p class="sub">Key figures, each tagged by provenance. Balance-sheet items are struck at 31 March 2026, the most recent reported date; the price is four months later.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Metric</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Share price</td><td class="num">$17.66</td><td><span class="tag">Market</span> 31 Jul 2026 close</td></tr>
+      <tr><td class="lbl">52-week range</td><td class="num">$4.64 – $29.84</td><td><span class="tag">Market</span> intraday, 251 sessions to 31 Jul 2026</td></tr>
+      <tr><td class="lbl">Shares outstanding</td><td class="num">495,532,645</td><td><span class="tag">Filed</span> 10-Q cover, as of 5 May 2026</td></tr>
+      <tr><td class="lbl">Market capitalisation</td><td class="num">$8,751.1M</td><td><span class="tag">Estimate</span> 495,532,645 × $17.66. Share count is 5 May 2026, price 31 Jul 2026</td></tr>
+      <tr><td class="lbl">Revenue (FY2025)</td><td class="num">$168.5M</td><td><span class="tag">Filed</span> 10-K, 27 Feb 2026</td></tr>
+      <tr><td class="lbl">Revenue (Q1 2026)</td><td class="num">$34.0M</td><td><span class="tag">Filed</span> 10-Q, 8 May 2026</td></tr>
+      <tr><td class="lbl">HPC lease revenue (Q1 2026)</td><td class="num">$21.0M</td><td><span class="tag">Filed</span> 10-Q, 8 May 2026</td></tr>
+      <tr><td class="lbl">Net loss (FY2025)</td><td class="num neg-t">($661.4M)</td><td><span class="tag">Filed</span> 10-K, 27 Feb 2026</td></tr>
+      <tr><td class="lbl">Net loss (Q1 2026)</td><td class="num neg-t">($427.7M)</td><td><span class="tag">Filed</span> 10-Q, 8 May 2026</td></tr>
+      <tr><td class="lbl">Cash and restricted cash</td><td class="num">$3,092.7M</td><td><span class="tag">Filed</span> 10-Q, 31 Mar 2026: $2,630.0M cash, $196.3M and $266.5M restricted</td></tr>
+      <tr><td class="lbl">Debt and convertible notes</td><td class="num">$5,290.0M</td><td><span class="tag">Estimate</span> 10-Q, 31 Mar 2026: $3,060.2 + $43.6 + $98.6 + $1,597.3 + $490.4</td></tr>
+      <tr><td class="lbl">Warrant liabilities</td><td class="num">$1,061.0M</td><td><span class="tag">Filed</span> 10-Q, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Total equity (deficit)</td><td class="num neg-t">($77.6M)</td><td><span class="tag">Filed</span> 10-Q, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Accumulated deficit</td><td class="num neg-t">($1,421.3M)</td><td><span class="tag">Filed</span> 10-Q, 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Critical IT energized</td><td class="num">60 MW</td><td><span class="tag">Filed</span> Q1 2026 release, 8 May 2026, at 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Contracted critical IT load</td><td class="num">522 MW</td><td><span class="tag">Filed</span> 10-K, at 31 Dec 2025, attributable basis</td></tr>
+      <tr><td class="lbl">Self-mining hashrate</td><td class="num">9.3 EH/s</td><td><span class="tag">Filed</span> 10-K, ~49,400 miners at 31 Dec 2025</td></tr>
+      <tr><td class="lbl">Employees</td><td class="num">141</td><td><span class="tag">Filed</span> 10-K, at 27 Feb 2026</td></tr>
+    </tbody>
+  </table></div>
+  <p>No enterprise value is shown. Cash and debt are reported at 31 March 2026 and the price at 31 July 2026, and three capital events fall between them: an equity offering of 54,510,000 shares at $19.00 in April, $190.9 million of at-the-market sales, and a definitive agreement in July to sell the Abernathy joint venture interest. A figure combining the two dates would be a guess with a decimal point.</p>
+</section>
+
+<!-- ===================== 2. BUSINESS MODEL ===================== -->
+<section id="s2">
+  <h2 class="sec"><span class="n">02</span>Business model</h2>
+  <p>TeraWulf owns land, interconnection rights and electrical infrastructure at utility scale, builds liquid-cooled data centre shells on it, and leases the finished capacity to operators of AI compute under long-dated triple-net-style agreements. It is a landlord to the AI industry rather than a compute provider: it does not own the GPUs, does not sell inference, and takes no position on which model wins.</p>
+  <p>The unit of sale is the <em>critical IT megawatt</em>, contracted years in advance and delivered in phases as buildings energize. Leases run 10 to 25 years with contractual escalators and renewal and contraction options. Rent begins at commencement of each phase, not at signature, which is why a large contracted book and a small revenue line coexist.</p>
+  <p>Two things distinguish the model from a conventional data centre developer. The first is that the company came from bitcoin mining and still runs it: roughly 49,400 miners at Lake Mariner representing 9.3 EH/s at 31 December 2025, a flexible load that occupies energized capacity until a lease tenant needs it. The second is credit enhancement. The Fluidstack leases at Lake Mariner and Abernathy, and the Anthropic lease at Hawesville, are supported by investment-grade backing from a third party rather than by the tenant's own balance sheet, which is what made the debt financing possible at the size it reached.</p>
+  <h3>Where the megawatts are</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Campus</th><th>Market</th><th class="num">Critical IT</th><th>Status</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Lake Mariner, Barker NY</td><td>NYISO Zone A</td><td class="num">438 MW</td><td>60 MW energized; balance in construction</td><td><span class="tag">Filed</span> 10-K; Q1 2026 release</td></tr>
+      <tr><td class="lbl">Abernathy, TX</td><td>Southwest Power Pool</td><td class="num">168 MW</td><td>Construction; interest under agreement to be sold</td><td><span class="tag">Filed</span> 10-K; 8-K, 6 Jul 2026</td></tr>
+      <tr><td class="lbl">Justified Data, Hawesville KY</td><td>Kentucky Power (AEP)</td><td class="num">401 MW</td><td>Leased to Anthropic; initial capacity targeted H2 2027</td><td><span class="tag">Filed</span> 8-K, 6 Jul 2026</td></tr>
+      <tr><td class="lbl">Lake Hawkeye, Lansing NY</td><td>NYISO Zone C</td><td class="num">n/a</td><td>Site plan review; uncontracted</td><td><span class="tag">Filed</span> 10-K; Q1 2026 release</td></tr>
+      <tr><td class="lbl">Muskie, EastPark KY</td><td>Kentucky Power (AEP)</td><td class="num">n/a</td><td>Acquired May 2026; uncontracted</td><td><span class="tag">Filed</span> 8-K, 26 May 2026</td></tr>
+      <tr><td class="lbl">Chesapeake Data, Morgantown MD</td><td>PJM</td><td class="num">n/a</td><td>Acquisition pending regulatory approval</td><td><span class="tag">Filed</span> 10-K; Q1 2026 release</td></tr>
+    </tbody>
+  </table></div>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The 522 MW the company reports as its contracted platform and the 606 MW that the campus figures sum to are one quantity on two bases, not a discrepancy. The 10-K states the 522 MW figure includes only TeraWulf's 50.1% attributable share of Abernathy: 438 MW at Lake Mariner plus 50.1% of 168 MW gives 522 MW, and the gross contracted figure is 606 MW. The July agreement to sell the Abernathy interest removes the reconciling item entirely, and on completion the contracted book becomes 438 MW at Lake Mariner plus 401 MW at Hawesville, or 839 MW gross with no attributable adjustment.</p>
+  </div>
+</section>
+
+<!-- ===================== 3. REVENUE STREAMS ===================== -->
+<section id="s3">
+  <h2 class="sec"><span class="n">03</span>Revenue streams</h2>
+  <p>Two streams, and they crossed over in the quarter just reported.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Stream</th><th class="num">FY2025</th><th class="num">Share</th><th class="num">Q1 2026</th><th class="num">Share</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Digital asset (bitcoin)</td><td class="num">$151.6M</td><td class="num">90.0%</td><td class="num">$13.0M</td><td class="num">38.2%</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+      <tr><td class="lbl">HPC lease</td><td class="num">$16.9M</td><td class="num">10.0%</td><td class="num">$21.0M</td><td class="num">61.8%</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+      <tr><td class="lbl">Total</td><td class="num">$168.5M</td><td class="num">100%</td><td class="num">$34.0M</td><td class="num">100%</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+    </tbody>
+  </table></div>
+  <p>HPC lease revenue did not exist before 2025 and reached $21.0 million in a single quarter, more than the $16.9 million booked across all of 2025. Against that, digital asset revenue fell from $34.4 million in the first quarter of 2025 to $13.0 million in the first quarter of 2026, a decline of 62%. Total revenue was flat as a result: $34.0 million against $34.4 million.</p>
+  <p>The durability of the two streams differs completely. Lease revenue is contracted for 10 to 25 years with escalators and, on the Fluidstack and Anthropic agreements, third-party credit support. Mining revenue is a function of the bitcoin price, network difficulty and the company's own decision to keep giving the load to miners rather than to tenants. The company states that capital allocation is now directed at HPC and that mining occupies infrastructure pending conversion, which makes the decline in mining revenue partly a choice rather than only a market outcome.</p>
+</section>
+
+<!-- ===================== 4. INDUSTRY & MARKET BACKDROP ===================== -->
+<section id="s4">
+  <h2 class="sec"><span class="n">04</span>Industry &amp; market backdrop</h2>
+  <p>The binding constraint in AI infrastructure has moved from chips to electricity. Interconnection queues at the regional transmission organisations run years long, and a site with energized capacity and a signed service agreement is worth more than a site with land and a plan. TeraWulf's own framing is explicit on the point: management told investors in May 2026 that the defining constraint is power, transmission infrastructure and execution certainty rather than computing hardware.</p>
+  <p>That backdrop favours the converted bitcoin miners, which is why so many of them are attempting the same pivot. They hold three things a greenfield developer does not: land already zoned for heavy industrial use, interconnection already granted, and substations already energized. What they generally lack is the balance sheet to build a hyperscale data centre and the customer relationships to fill it, which is why the sector's deals are structured around third-party credit support.</p>
+  <p>The grid data corroborates the scale of what is being requested rather than what is delivered. NYISO's load interconnection queue carries two TeraWulf-affiliated requests at the Kintigh 345 kV substation in Zone A, each for 250 MW of peak load, and two at the Milliken 115 kV substation in Zone C for 162 MW and 88 MW. Those are requests in study, not delivered capacity.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Queue</th><th>Developer</th><th>Project</th><th class="num">Peak MW</th><th>Point of interconnection</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1670</td><td>Lake Mariner Data LLC</td><td>Lake Mariner Data II</td><td class="num">250</td><td>Kintigh 345 kV, Zone A</td><td><span class="tag">Filed</span> NYISO interconnection queue, retrieved 3 Aug 2026</td></tr>
+      <tr><td class="num">1732</td><td>TeraWulf Brookings LLC</td><td>Wulf Compute Data Center II</td><td class="num">250</td><td>Kintigh 345 kV, Zone A</td><td><span class="tag">Filed</span> NYISO interconnection queue, retrieved 3 Aug 2026</td></tr>
+      <tr><td class="num">1733</td><td>Cayuga Operating Company LLC</td><td>Cayuga Data</td><td class="num">162</td><td>Milliken 115 kV, Zone C</td><td><span class="tag">Filed</span> NYISO interconnection queue, retrieved 3 Aug 2026</td></tr>
+      <tr><td class="num">1683</td><td>Cayuga Operating Company LLC</td><td>Cayuga Compute</td><td class="num">88</td><td>Milliken 115 kV, Zone C</td><td><span class="tag">Filed</span> NYISO interconnection queue, retrieved 3 Aug 2026</td></tr>
+    </tbody>
+  </table></div>
+  <p>Two features of that table are worth stating plainly. The 500 MW of Zone A requests match the 10-K's statement that Lake Mariner can scale to approximately 500 MW in the near term, and the further step to roughly 750 MW is described in the same document as requiring additional NYISO approval, which is consistent with no third request being lodged. The Zone C requests sit under Cayuga Operating Company rather than a TeraWulf entity, which is the related party that leases the Lansing site to the company.</p>
+</section>
+
+<!-- ===================== 5. COMPETITIVE POSITION ===================== -->
+<section id="s5">
+  <h2 class="sec"><span class="n">05</span>Competitive position</h2>
+  <p class="sub">Named peers on comparable metrics. Every company below is attempting the same conversion from mining to AI hosting, and they are competing for power, for capital and for the same handful of creditworthy tenants.</p>
+  <p>The peer set is unusually well defined because the tenants are few. Fluidstack, backed by Google, appears in TeraWulf's leases at two campuses. CoreWeave appears in the contracts of Core Scientific, Applied Digital and Galaxy Digital. Anthropic now appears in TeraWulf's. A tenant list that short means a single counterparty's change of plan moves several issuers at once.</p>
+  <p>A peer comparison published by Big Digital Energy on 3 June 2026, drawn from its own reading of public filings and struck at 16 April 2026 market values, places the group as follows. It is reproduced as the published view of another issuer, not as this document's valuation.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Ticker</th><th>Company</th><th class="num">Market cap</th><th class="num">Contracted</th><th class="num">MW</th><th class="num">EV / MW</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">APLD</td><td>Applied Digital</td><td class="num">$8.6bn</td><td class="num">$16bn</td><td class="num">600</td><td class="num">$15.3M</td></tr>
+      <tr><td class="lbl">WULF</td><td>TeraWulf</td><td class="num">$8.3bn</td><td class="num">$12.8bn</td><td class="num">522</td><td class="num">$21.1M</td></tr>
+      <tr><td class="lbl">HUT</td><td>Hut 8</td><td class="num">$7.9bn</td><td class="num">$10bn</td><td class="num">245</td><td class="num">$30.0M</td></tr>
+      <tr><td class="lbl">CIFR</td><td>Cipher Digital</td><td class="num">$6.9bn</td><td class="num">$9.3bn</td><td class="num">600</td><td class="num">$15.1M</td></tr>
+      <tr><td class="lbl">CORZ</td><td>Core Scientific</td><td class="num">$6.1bn</td><td class="num">$10.2bn</td><td class="num">590</td><td class="num">$11.3M</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub">Source: Big Digital Energy investor presentation, Exhibit 99.1 to Form 8-K, 3 June 2026. Market values as of 16 April 2026. <span class="tag">Market</span></p>
+  <div class="note caution">
+    <p>The same presentation describes the TeraWulf and Fluidstack arrangement as "200+ MW, $3.7B, 10-yr". TeraWulf's own 10-K describes the Akela Fluidstack leases as 378 MW of critical IT load at Lake Mariner, and the Abernathy lease as 168 MW on a 25-year term. The two accounts are not reconciled here. The company's filing is the primary record of its own contracts; the presentation is a third party's characterisation and appears to describe an earlier or partial tranche.</p>
+  </div>
+  <p>On the published figures TeraWulf carried the second-highest enterprise value per contracted megawatt in the group at that date. Read alongside the July announcements, which added 401 MW at Hawesville and agreed the disposal of 168 MW at Abernathy, the denominator has moved by 233 MW since the presentation was struck.</p>
+</section>
+
+<!-- ===================== 6. FINANCIAL PERFORMANCE ===================== -->
+<section id="s6">
+  <h2 class="sec"><span class="n">06</span>Financial performance</h2>
+  <div class="tw"><table>
+    <thead><tr><th>Line</th><th class="num">FY2023</th><th class="num">FY2024</th><th class="num">FY2025</th><th class="num">Q1 2026</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Total revenue</td><td class="num">$69.2M</td><td class="num">$140.1M</td><td class="num">$168.5M</td><td class="num">$34.0M</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+      <tr><td class="lbl">Cost of revenue</td><td class="num">$27.3M</td><td class="num">$62.6M</td><td class="num">$82.7M</td><td class="num">$2.4M</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+      <tr><td class="lbl">Selling, general and administrative</td><td class="num">$23.7M</td><td class="num">$57.9M</td><td class="num">$139.5M</td><td class="num">$127.6M</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+      <tr><td class="lbl">Depreciation</td><td class="num">$28.4M</td><td class="num">$59.8M</td><td class="num">$88.6M</td><td class="num">$28.5M</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+      <tr><td class="lbl">Operating loss</td><td class="num neg-t">($29.4M)</td><td class="num neg-t">($76.2M)</td><td class="num neg-t">($186.2M)</td><td class="num neg-t">($162.1M)</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+      <tr><td class="lbl">Interest expense</td><td class="num neg-t">($34.8M)</td><td class="num neg-t">($19.8M)</td><td class="num neg-t">($80.2M)</td><td class="num neg-t">($67.1M)</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+      <tr><td class="lbl">Change in fair value of warrants and derivatives</td><td class="num">n/a</td><td class="num">n/a</td><td class="num neg-t">($429.8M)</td><td class="num neg-t">($216.3M)</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+      <tr><td class="lbl">Net loss</td><td class="num neg-t">($73.4M)</td><td class="num neg-t">($72.4M)</td><td class="num neg-t">($661.4M)</td><td class="num neg-t">($427.7M)</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+      <tr><td class="lbl">Loss per share</td><td class="num neg-t">($0.35)</td><td class="num neg-t">($0.21)</td><td class="num neg-t">($1.66)</td><td class="num neg-t">($1.01)</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+    </tbody>
+  </table></div>
+  <p>The trend is of a company whose losses are increasingly financial rather than operational. Revenue has grown every year, from $69.2 million to $168.5 million across two years, and the operating loss has grown faster, from $29.4 million to $186.2 million, as the company spends ahead of capacity delivery. But the FY2025 net loss of $661.4 million is dominated by a non-cash item: $429.8 million of fair value movement on the Google warrants and the embedded conversion feature of the 2031 notes, of which $329.2 million was the warrants alone. The same effect recurred in the first quarter of 2026 at $216.3 million.</p>
+  <div class="note caution">
+    <p>The warrant charge moves against the shareholder in the way that matters least to cash and most to reported equity. The Google warrants are struck at $0.01, so as the shares rise the liability rises almost one for one with the market value of 73,580,000 shares. A quarter in which the stock performs well therefore produces a larger reported loss. Reading the net loss line as an operating result would invert the signal.</p>
+  </div>
+  <p>Two further items deserve attention. Cost of revenue fell from $24.6 million in the first quarter of 2025 to $2.4 million in the first quarter of 2026, which is consistent with mining capacity being taken out of service or reallocated rather than with a cost improvement in a continuing operation. Selling, general and administrative expense reached $127.6 million in a single quarter against $46.6 million a year earlier, an increase larger than total quarterly revenue.</p>
+  <p>The company also recorded a $25.7 million impairment of property, plant and equipment in the first quarter of 2026, and its auditor is Deloitte &amp; Touche LLP, appointed after the dismissal of RSM US LLP in August 2024 and ratified by shareholders on 9 June 2026 for the year ending 31 December 2026. Management concluded that internal control over financial reporting was effective at 31 December 2025 and the auditor issued an unqualified opinion on that assessment.</p>
+</section>
+
+<!-- ===================== 7. CAPITAL STRUCTURE & DILUTION ===================== -->
+<section id="s7">
+  <h2 class="sec"><span class="n">07</span>Capital structure &amp; dilution</h2>
+  <p class="sub">Five debt instruments, one warrant block struck at a cent, and an at-the-market programme that is now exhausted.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Instrument</th><th class="num">Principal</th><th>Coupon</th><th>Maturity</th><th class="num">Conversion</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">2030 Senior Secured Notes</td><td class="num">$3,200.0M</td><td>7.75%</td><td>15 Oct 2030</td><td class="num">n/a</td><td><span class="tag">Filed</span> 10-K; issued 22 Oct 2025</td></tr>
+      <tr><td class="lbl">2030 Convertible Notes</td><td class="num">$500.0M</td><td>2.75%</td><td>1 Feb 2030</td><td class="num">$8.48</td><td><span class="tag">Filed</span> 10-K; issued Oct 2024</td></tr>
+      <tr><td class="lbl">2031 Convertible Notes</td><td class="num">$1,000.0M</td><td>1.00%</td><td>1 Sep 2031</td><td class="num">$12.43</td><td><span class="tag">Filed</span> 10-K; issued Aug 2025</td></tr>
+      <tr><td class="lbl">2032 Convertible Notes</td><td class="num">$1,025.0M</td><td>0.00%</td><td>1 May 2032</td><td class="num">$19.94</td><td><span class="tag">Filed</span> 10-K; issued Oct 2025</td></tr>
+      <tr><td class="lbl">Delayed-draw bridge facility</td><td class="num">$500.0M</td><td>SOFR + 2.75%</td><td>364 days</td><td class="num">n/a</td><td><span class="tag">Filed</span> 8-K, 16 Mar 2026</td></tr>
+      <tr><td class="lbl">Revolving credit facility</td><td class="num">$250.0M</td><td>SOFR + 1.75%</td><td>7 May 2030</td><td class="num">n/a</td><td><span class="tag">Filed</span> 10-Q; entered 7 May 2026</td></tr>
+      <tr><td class="lbl">Google warrants</td><td class="num">73,580,000 sh</td><td>n/a</td><td>Aug 2030</td><td class="num">$0.01</td><td><span class="tag">Filed</span> 10-K; 10-Q</td></tr>
+    </tbody>
+  </table></div>
+  <p>The 2030 Senior Secured Notes were issued by Wulf Compute LLC and are secured by first-priority liens on substantially all the assets of that subsidiary and its guarantors, on the equity of Wulf Compute held by its parent, and on a designated Fluidstack lockbox account. Google separately pledged the Google warrants to the collateral agent for the benefit of those lenders, a pledge that releases on the earlier of Fluidstack lease commencement and discharge of the notes. The effective interest rate on those notes is 8.7% against a 7.75% coupon.</p>
+  <h3>Dilution arithmetic</h3>
+  <p>Taking the stated conversion rates rather than the approximate prices, and the warrant block at its full size:</p>
+  <div class="tw"><table>
+    <thead><tr><th>Source</th><th class="num">Shares</th><th>Working</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">2030 Convertible Notes</td><td class="num">58,962,250</td><td>500,000 × 117.9245 per $1,000</td><td><span class="tag">Estimate</span> from 10-K conversion rate</td></tr>
+      <tr><td class="lbl">2031 Convertible Notes</td><td class="num">80,460,200</td><td>1,000,000 × 80.4602 per $1,000</td><td><span class="tag">Estimate</span> from 10-K conversion rate</td></tr>
+      <tr><td class="lbl">2032 Convertible Notes</td><td class="num">51,410,618</td><td>1,025,000 × 50.1567 per $1,000</td><td><span class="tag">Estimate</span> from 10-K conversion rate</td></tr>
+      <tr><td class="lbl">Google warrants</td><td class="num">73,580,000</td><td>stated</td><td><span class="tag">Filed</span> 10-K</td></tr>
+      <tr><td class="lbl">Total potential</td><td class="num">264,413,068</td><td>53.4% of 495,532,645 outstanding</td><td><span class="tag">Estimate</span> sum of the above</td></tr>
+    </tbody>
+  </table></div>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The 53.4% figure is a ceiling, not a forecast, and three things pull the realised number below it. The company may settle conversions in cash rather than shares at its election. Capped call transactions covering the 2030 and 2031 notes, bought for $60.0 million and $100.6 million respectively, offset dilution up to cap prices of $12.80 and $18.76. And at the 31 July 2026 close of $17.66 the 2032 notes are out of the money at $19.94. Against that, the Google warrants are struck at $0.01 and exercise automatically on a net basis at expiry if they are in the money, so that block of 73,580,000 shares is close to certain rather than contingent.</p>
+  </div>
+  <p>Equity issuance during 2026 has been heavy. The company sold 54,510,000 shares at $19.00 in an underwritten offering that closed on 16 April 2026, raising approximately $1,035.7 million gross, and sold a further 10,326,000 shares for $190.9 million gross under its at-the-market programme between 31 March and 8 May 2026. The 10-Q states that no amount remained available under that programme, which removes the company's most flexible funding route until a new one is registered. Shares outstanding moved from 425,050,328 at 31 March 2026 to 495,532,645 at 5 May 2026.</p>
+  <p>No preferred stock was outstanding at 31 March 2026, against 9,566 shares a year earlier. Treasury stock stood at 24,468,750 shares. Authorised common was raised from 600,000,000 to 950,000,000 during 2025.</p>
+</section>
+
+<!-- ===================== 8. VALUATION ===================== -->
+<section id="s8">
+  <h2 class="sec"><span class="n">08</span>Valuation</h2>
+  <p class="sub">Multiples shown with their basis and pricing date. No target price is derived here.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Measure</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Market capitalisation</td><td class="num">$8,751.1M</td><td><span class="tag">Estimate</span> 495,532,645 shares × $17.66, 31 Jul 2026 close</td></tr>
+      <tr><td class="lbl">Price to trailing revenue</td><td class="num">45.7×</td><td><span class="tag">Estimate</span> $8,751.1M ÷ FY2025 revenue of $168.5M</td></tr>
+      <tr><td class="lbl">Price to annualised Q1 2026 revenue</td><td class="num">64.3×</td><td><span class="tag">Estimate</span> $8,751.1M ÷ ($34.0M × 4)</td></tr>
+      <tr><td class="lbl">Market cap per contracted MW, pre-July</td><td class="num">$16.8M</td><td><span class="tag">Estimate</span> $8,751.1M ÷ 522 MW attributable</td></tr>
+      <tr><td class="lbl">Market cap per contracted MW, post-July</td><td class="num">$10.4M</td><td><span class="tag">Estimate</span> $8,751.1M ÷ 839 MW, Lake Mariner 438 plus Hawesville 401</td></tr>
+      <tr><td class="lbl">Market cap per energized MW</td><td class="num">$145.9M</td><td><span class="tag">Estimate</span> $8,751.1M ÷ 60 MW energized at 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Earnings multiple</td><td class="num">n/a</td><td><span class="tag">Filed</span> Loss-making in every period reported</td></tr>
+    </tbody>
+  </table></div>
+  <p>Revenue multiples are close to meaningless for this business and are shown mainly to make that visible. The company is being valued on capacity it has contracted but not delivered, so the informative denominators are megawatts, and the spread between them is the whole argument: $145.9 million per energized megawatt against $10.4 million per contracted megawatt is a fourteenfold gap that closes only through construction.</p>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The post-July per-megawatt figure treats the Abernathy disposal as complete and the Anthropic lease as effective, neither of which is yet true: the Abernathy sale was a definitive agreement without a stated closing date at the as-of date, and the Anthropic capacity is targeted for the second half of 2027. It also uses a market capitalisation struck on 31 July against a share count from 5 May. Both denominators are stated so the reader can substitute their own.</p>
+  </div>
+  <p>The $19 billion of contracted revenue announced on 6 July 2026 is the company's own expectation over a 20-year initial term, which is approximately $950 million a year once fully ramped. Set against FY2025 revenue of $168.5 million, that single lease is a step change in scale if it commences as described. It is also a claim about 2028 onward: nothing in it reaches the current financial year.</p>
+  <p>No third-party price target or rating is reproduced in this document. None was located in a primary or dated published source during the work described in section 14, and an undated or unattributed target is not market data.</p>
+</section>
+
+<!-- ===================== 9. GROWTH DRIVERS ===================== -->
+<section id="s9">
+  <h2 class="sec"><span class="n">09</span>Growth drivers</h2>
+  <p><strong>Phased delivery at Lake Mariner.</strong> Sixty megawatts were energized for Core42 at 31 March 2026, with CB-3 delivered in May 2026 and CB-4 and CB-5 scheduled for delivery and rent commencement during 2026. Each phase converts contracted capacity into recognised revenue, and the 378 MW of Fluidstack capacity at Lake Mariner is the largest single block of that conversion.</p>
+  <p><strong>The Anthropic lease at Hawesville.</strong> Approximately 401 MW of critical IT load on a 20-year term, expected to be supported by an investment-grade credit, with initial capacity targeted for the second half of 2027 and full ramp by early 2028. It roughly doubles the contracted book and introduces a second named AI tenant.</p>
+  <p><strong>Capital recycling.</strong> The agreement to sell the 50.1% Abernathy interest converts a stated $450 million investment into cash at what the company describes as a premium to invested capital, and removes joint venture accounting from the statements. The company has said the proceeds are for redeployment into wholly owned sites.</p>
+  <p><strong>The uncontracted pipeline.</strong> Muskie in eastern Kentucky is expected to support more than 1 GW over time, with initial 500 MW ramping from the second half of 2028 and a further 500 MW targeted for the second half of 2030; Kentucky Power is constructing a 345 kV substation connected to the existing 765 kV network, and transmission and energy service agreements were executed at acquisition. Lake Hawkeye in Lansing is in site plan review. Chesapeake Data at Morgantown would add roughly 210 MW of grid-connected generation with expansion potential the company puts at up to 1 GW.</p>
+  <p><strong>The stated development target.</strong> Management reaffirmed in May 2026 a goal of contracting 250 MW to 500 MW of new critical IT capacity a year. The Anthropic lease at 401 MW satisfies that target for 2026 on its own.</p>
+</section>
+
+<!-- ===================== 10. RISKS ===================== -->
+<section id="s10">
+  <h2 class="sec"><span class="n">10</span>Risks</h2>
+  <p class="sub">Severity-ranked, most severe first.</p>
+
+  <div class="risk sev-high">
+    <h4>Liabilities exceed assets, and the debt is secured on the assets that matter <span class="sev">Severe</span></h4>
+    <p>At 31 March 2026 total liabilities of $7,086.4 million exceeded total assets of $7,008.8 million, leaving a deficit of $77.6 million against equity of $140.4 million three months earlier. Debt and convertible notes stood at $5,290.0 million. The 2030 Senior Secured Notes are secured on substantially all the assets of Wulf Compute and its guarantors, which hold the Lake Mariner HPC buildings, and the revolving facility is secured on substantially all assets of the company. A cash balance of $3.09 billion makes near-term insolvency remote, but it is largely committed to a construction programme, and the equity sits behind $5.29 billion of claims.</p>
+  </div>
+
+  <div class="risk sev-high">
+    <h4>The credit support does not apply when it would be needed most <span class="sev">Severe</span></h4>
+    <p>The company discloses that Google's backstop of Fluidstack's obligations is effective only after the relevant lease commences. If a campus is not completed by specified thresholds the tenant may terminate, and a termination on that ground does not trigger the backstop. The backstop is also triggered only by a payment or insolvency default, so other events of default or termination can end a lease with the credit support never engaging. The period of maximum construction risk is precisely the period in which the investment-grade support is not yet in force.</p>
+  </div>
+
+  <div class="risk sev-high">
+    <h4>Two tenants carry almost the entire contracted book <span class="sev">Severe</span></h4>
+    <p>Fluidstack accounts for 378 MW at Lake Mariner and 168 MW at Abernathy; Anthropic accounts for approximately 401 MW at Hawesville. Core42's 60 MW is the only energized capacity and the only revenue-generating lease. A change of plan at either principal counterparty would leave shells built to a specification and a market with few buyers able to absorb capacity of that size. The company also discloses that certain customer agreements may restrict it from serving competitors of existing tenants, which narrows the replacement pool further.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Potential dilution of 53% of the current count <span class="sev">Moderate</span></h4>
+    <p>Conversion of the three note series at their stated rates plus the Google warrants would create 264,413,068 shares against 495,532,645 outstanding. Capped calls and the company's cash settlement election mitigate part of it, and the 2032 notes are out of the money at the 31 July 2026 close, but the 73,580,000 warrants struck at $0.01 are close to certain. The at-the-market programme is exhausted, so further equity funding requires a new registration or another underwritten offering.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Delivery dates have already moved once <span class="sev">Moderate</span></h4>
+    <p>The 10-K stated that the Morgantown acquisition was expected to close in the second quarter of 2026 subject to consents and regulatory approvals including the Federal Energy Regulatory Commission. That quarter has ended and no completion has been announced. Abernathy delivery moved from "second half of 2026" in the 10-K to "fourth quarter of 2026" in the May earnings release. Neither is large on its own; together they are the pattern to watch, because the entire investment case is a construction schedule.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Core infrastructure is leased from parties connected to management <span class="sev">Moderate</span></h4>
+    <p>The Lake Mariner ground lease was terminated and replaced in October 2024 with a related-party counterparty on a 35-year initial term, consideration being 20.0 million shares valued at $68.8 million plus $12.0 million in cash. The Cayuga lease signed in August 2025 runs 80 years with no renewal rights and was prepaid with 18.6 million shares valued at $95.0 million plus $3.0 million cash, to a lessor controlled by a member of management. The land under the flagship campus is not owned by the company, and the counterparty is not independent.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Reported losses will keep moving with the share price <span class="sev">Moderate</span></h4>
+    <p>The Google warrants are carried as a liability at fair value with changes through profit and loss. At $0.01 exercise the liability tracks the market value of 73,580,000 shares, so a rising share price produces a larger reported loss: $329.2 million in FY2025 and $216.3 million in the first quarter of 2026. This is non-cash and reverses on exercise, but it will keep the net loss line uninformative about operations for as long as the warrants are outstanding.</p>
+  </div>
+
+  <div class="risk sev-low">
+    <h4>Residual bitcoin exposure, shrinking but not gone <span class="sev">Low</span></h4>
+    <p>Digital assets still produced $13.0 million of the $34.0 million booked in the first quarter of 2026. The fleet is roughly 49,400 miners at 9.3 EH/s, mined through the Foundry pool with digital assets custodied at NYDIG, and the company carries no business interruption insurance on the mining assets. The next halving is anticipated in April 2028. The exposure is real but it is now the smaller half of a small revenue line, and it is being deliberately displaced.</p>
+  </div>
+</section>
+
+<!-- ===================== 11. BULL / BASE / BEAR ===================== -->
+<section id="s11">
+  <h2 class="sec"><span class="n">11</span>Bull / base / bear</h2>
+  <p class="sub">Each case with its preconditions: what must be true, not what might be.</p>
+  <div class="cases">
+    <div class="case bear"><h4>Bear</h4><p>A construction milestone slips far enough for a tenant to exercise a termination right before its lease commences, so the backstop never engages. The company is left with secured debt against buildings without a tenant, negative equity, and an exhausted at-the-market programme, and must raise equity into weakness.</p>
+      <p class="req">Requires: a delay beyond a contractual threshold at Lake Mariner or Hawesville, or a counterparty choosing to exit; and capital markets closed to a company with a deficit balance sheet.</p></div>
+    <div class="case"><h4>Base</h4><p>CB-3 through CB-5 energize during 2026 and Fluidstack rent commences, taking lease revenue from $21 million a quarter toward a run rate several times that. Hawesville builds to schedule for a 2027 start. Losses stay large on warrant revaluation and interest, and the equity story remains a bet on 2028 cash flows.</p>
+      <p class="req">Requires: delivery broadly on the announced schedule; the Abernathy sale closing; no covenant breach under the secured notes or the revolver.</p></div>
+    <div class="case bull"><h4>Bull</h4><p>The Anthropic lease commences on time and the investment-grade support is confirmed, converting roughly $950 million a year of contracted rent into a bankable stream. The uncontracted pipeline at Muskie, Lake Hawkeye and Morgantown gets leased on comparable terms, and the company re-rates from a developer to an infrastructure owner with long-dated credit-supported cash flows.</p>
+      <p class="req">Requires: Hawesville delivered by early 2028; the investment-grade backing documented and effective; at least one further large lease signed from the pipeline; NYISO approval for the step to 750 MW at Lake Mariner.</p></div>
+  </div>
+</section>
+
+<!-- ===================== 12. RESEARCH SUMMARY ===================== -->
+<section id="s12">
+  <h2 class="sec"><span class="n">12</span>Research summary</h2>
+  <p>TeraWulf has assembled, in under two years, a contracted lease book that on its own announcements reaches roughly $19 billion at Hawesville alone, tenants that include Anthropic and a Google-backed Fluidstack, $3.09 billion of cash, and six campuses across four power markets. It has also assembled $5.29 billion of debt, a warrant block that dilutes by 15% on its own, negative shareholders' equity, and sixty megawatts of capacity that actually run.</p>
+  <p>The gap between those two paragraphs is the investment question, and it is a question about construction and dates rather than about demand. Demand is evidenced: the leases are signed, the counterparties are named, and the credit support is disclosed. What is not yet evidenced is delivery. The company has energized 60 MW of a contracted 839 MW on the post-July basis, and the credit enhancement that makes the contracts bankable does not take effect until each lease commences.</p>
+  <p>Three things would change the reading. Rent commencement at CB-4 and CB-5 during 2026 would show the Fluidstack relationship converting on schedule. Documentation of the investment-grade support behind the Anthropic lease would move that $19 billion from an expectation to a contractual claim on a rated counterparty. And closing the Abernathy sale would prove the company can realise value from a developed asset rather than only build them.</p>
+  <p>The reported net loss will remain a poor guide throughout. Two thirds of the FY2025 loss and half of the first-quarter 2026 loss were fair value movements on warrants that rise when the shares do. Readers tracking this company should watch energized megawatts, rent commencement dates and the secured notes' covenant tests, and treat the bottom line as an accounting artefact of the financing structure.</p>
+</section>
+
+<!-- ===================== 13. NULL CATEGORIES ===================== -->
+<section id="s13">
+  <h2 class="sec"><span class="n">13</span>Null categories</h2>
+  <p class="sub">Requested categories with nothing to report. Status reads Covered above, None where a
+  named source was checked and found empty, or Not established where the category was not examined.
+  A category nobody looked at is a gap, not an absence.</p>
+  <div class="tw"><table class="nulls">
+    <thead><tr><th>Category</th><th>Status</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Dividends</td><td class="status">None</td><td>No common dividend has been declared or paid. The 10-K states the company does not currently intend to pay cash dividends.</td></tr>
+      <tr><td class="lbl">Share buybacks</td><td class="status">None</td><td>No repurchase programme is disclosed in the FY2025 10-K or the Q1 2026 10-Q. Treasury stock of 24,468,750 shares arises from prior transactions rather than an authorised programme.</td></tr>
+      <tr><td class="lbl">Preferred stock</td><td class="status">None</td><td>None outstanding at 31 March 2026, against 9,566 shares at 31 December 2024. 100,000,000 authorised.</td></tr>
+      <tr><td class="lbl">Analyst price targets</td><td class="status">None</td><td>No attributed, dated third-party target or rating was located in a primary or published source during the sweep described in section 14.</td></tr>
+      <tr><td class="lbl">Credit ratings</td><td class="status caution-t">Not established</td><td>Not examined. The 2030 Senior Secured Notes are a $3.2 billion rated-market instrument and may carry agency ratings. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Securities class action</td><td class="status caution-t">Not established</td><td>Not examined. Federal court dockets were not searched. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Going concern qualification</td><td class="status">None</td><td>The FY2025 audit report is unqualified and contains no going concern paragraph.</td></tr>
+      <tr><td class="lbl">Late filings</td><td class="status">None</td><td>One NT 10-K exists across the 1,223 filings on the company's EDGAR index, filed 3 May 2023 for the period ended 31 December 2022, two days before a Form 10-K/A. No NT filing has been made since.</td></tr>
+      <tr><td class="lbl">Material weakness, current</td><td class="status">None</td><td>Internal control over financial reporting was assessed effective at 31 December 2025 and the auditor concurred. A material weakness disclosed for FY2023, concerning classification of business-combination payments in the cash flow statement, is not carried forward.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 14. METHODOLOGY & SOURCES ===================== -->
+<section id="s14">
+  <h2 class="sec"><span class="n">14</span>Methodology &amp; sources</h2>
+  <p class="sub">Pricing basis, the tagging scheme, and, importantly, what was not checked.</p>
+
+  <h3>Pricing basis</h3>
+  <p>Market figures are struck at the close of 31 July 2026, the last completed session before the as-of date. The share price of $17.66 and the 52-week range of $4.64 to $29.84 rest on 251 daily sessions from 1 August 2025, a full year with no gap. This matters because the company's registrant name has changed twice on its EDGAR record, from Chromaline Corp to Ikonics Corp in 2002 and to TeraWulf Inc. in December 2021, and a price history keyed to a symbol rather than to the issuer can silently begin at a rename. The session count is stated so the window can be checked rather than assumed.</p>
+
+  <h3>Provenance tags</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Tag</th><th>What it asserts</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl"><span class="tag">Filed</span></td><td>Stated in an SEC filing or company release, cited by form and date. Also covers a dated official publication by a named non-SEC issuer, with the issuer named in the source line. Used here for the New York Independent System Operator interconnection queue.</td></tr>
+      <tr><td class="lbl"><span class="tag">Estimate</span></td><td>Derived or inferred here. The arithmetic is shown.</td></tr>
+      <tr><td class="lbl"><span class="tag">Open</span></td><td>Expected but unconfirmed. Nothing filed either way.</td></tr>
+      <tr><td class="lbl"><span class="tag">Market</span></td><td>Price, volume, float, published targets and ratings, stamped with the close or publication date. A third party's target or rating is market data, attributed to the firm that issued it and never adopted here. Used here for another issuer's published peer comparison.</td></tr>
+      <tr><td class="lbl"><span class="tag">Press</span></td><td>Reported by a named publication that is neither the issuer nor an analyst, cited by outlet and date. Corroborates; never the sole basis for a material claim.</td></tr>
+      <tr><td class="lbl"><span class="tag">Social</span></td><td>Publicly posted by a named account, cited by handle and date. Asserts that the statement was made, never that it is true.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Primary sources</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Source</th><th>Date</th><th>What it settles</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Form 10-K, FY2025</td><td class="when">27 Feb 2026</td><td>Business, campuses, capital structure, FY2023 to FY2025 financials, subsequent events</td></tr>
+      <tr><td class="lbl">Form 10-Q, Q1 2026</td><td class="when">8 May 2026</td><td>Balance sheet at 31 Mar 2026, deficit equity, revolver, at-the-market exhaustion, share count</td></tr>
+      <tr><td class="lbl">Form 8-K and Exhibit 99.1</td><td class="when">6 Jul 2026</td><td>Anthropic 20-year lease, 401 MW, ~$19bn; agreement to sell the Abernathy interest</td></tr>
+      <tr><td class="lbl">Form 8-K and Exhibit 99.1</td><td class="when">26 May 2026</td><td>Muskie Data Campus acquisition, Kentucky Power 345 kV substation, phased 1+ GW</td></tr>
+      <tr><td class="lbl">Form 8-K</td><td class="when">16 Apr 2026</td><td>Underwritten offering, 47,400,000 shares plus 7,110,000 option shares at $19.00</td></tr>
+      <tr><td class="lbl">Form 8-K</td><td class="when">16 Mar 2026</td><td>$500 million 364-day delayed-draw senior secured bridge facility</td></tr>
+      <tr><td class="lbl">Form 8-K</td><td class="when">2 Feb 2026</td><td>Hawesville and Morgantown acquisitions announced</td></tr>
+      <tr><td class="lbl">Form 8-K, Item 5.07</td><td class="when">10 Jun 2026</td><td>Annual meeting of 9 June 2026; nine directors elected; Deloitte ratified for 2026</td></tr>
+      <tr><td class="lbl">Century Aluminum Company, Form 8-K</td><td class="when">2 Feb 2026</td><td>Counterparty disclosure of the Hawesville sale terms</td></tr>
+      <tr><td class="lbl">Big Digital Energy, Form 8-K Exhibit 99.1</td><td class="when">3 Jun 2026</td><td>Third-party peer comparison table reproduced in section 5</td></tr>
+      <tr><td class="lbl">NYISO interconnection queue</td><td class="when">3 Aug 2026</td><td>Load interconnection requests at Kintigh 345 kV and Milliken 115 kV</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>What the counterparty disclosed and the issuer did not</h3>
+  <p>Century Aluminum Company filed its own Form 8-K on the Hawesville transaction on 2 February 2026, the same day TeraWulf announced the acquisition. Century's filing states the consideration: $200,000,000 in cash plus a 6.8% non-dilutive minority equity interest in Raylan Data Holdings LLC, for approximately 750 acres at 1627 State Route 3543, Hawesville. TeraWulf's own subsequent-events note describes the same transaction as covering "more than 250 buildable acres" and records the 6.8% interest, but states no price. The acreage figures are not in conflict, since one is the whole parcel and the other the buildable part; the cash consideration appears only on the seller's side of the record.</p>
+
+  <h3>Filing sweep</h3>
+  <p>The sweep was run against Central Index Key 0001083301 rather than the ticker, which is what makes it survive the two former registrant names. The complete index holds 1,223 filings from 7 April 1999 to 31 July 2026, and all of it was read for form type, not only the recent page. Both spellings of the beneficial-ownership schedules were included: 85 filings carry the legacy prefix and 18 the form of the name EDGAR has emitted since December 2024, and a sweep matching only the older spelling would have missed all 18, including every filing by Vanguard, BlackRock, Lone Pine Capital and Jane Street since November 2025. Exhibit lists were enumerated rather than form types alone, which is how the Century Aluminum consideration and the Big Digital Energy peer table were reached, both of which sit in exhibits rather than in the filing body. Full-text search was run to find the company named inside other parties' filings.</p>
+
+  <h3>What was not checked</h3>
+  <p>The Federal Energy Regulatory Commission eLibrary was attempted on 3 August 2026 and could not be queried; its search interface did not return data to an automated request. No filing or docket number for the Morgantown authorisation under Federal Power Act Section 203 has therefore been established, and the status of that approval rests on the company's own statements. This is a gap, not a finding of absence, and it should be re-attempted.</p>
+  <p>Credit ratings on the 2030 Senior Secured Notes were not examined; no rating agency publication was consulted. Federal and state court dockets were not searched, so no statement is made about securities litigation. The Southwest Power Pool and PJM interconnection queues were not retrieved, so the Abernathy, Hawesville, Muskie and Morgantown capacity claims are not corroborated by grid data in the way the New York sites are. Kentucky Public Service Commission and Maryland Public Service Commission records were not examined. No investor call transcript was read; the quarterly figures come from the filings and the earnings release rather than from management commentary on the call. Institutional ownership percentages were not extracted from the individual beneficial-ownership schedules; the filers are named but their positions are not quantified here.</p>
+  <p>Figures after 31 March 2026 are limited to what has been announced on Form 8-K. The second-quarter results for the period ended 30 June 2026 had not been filed at the as-of date, so no balance sheet reflects the April equity raise, the July lease or the agreed Abernathy disposal.</p>
+</section>
+
+<!-- ===================== 15. DOCUMENT LOG ===================== -->
+<section id="s15">
+  <h2 class="sec"><span class="n">15</span>Document log</h2>
+  <p class="sub">Newest first. The original build entry is never removed or rewritten.</p>
+  <div class="log">
+    <div class="logentry current">
+      <div class="when">3 August 2026 <span class="latest">Latest</span></div>
+      <div class="basis">Original build · priced off 31 Jul 2026 close · $17.66 · $8.75bn cap</div>
+      <p><b>Built from</b> the company's own filings on EDGAR under Central Index Key 0001083301, swept across the complete index of 1,223 filings from April 1999 to 31 July 2026. The load-bearing documents are the FY2025 Form 10-K of 27 February 2026, the first-quarter Form 10-Q of 8 May 2026, and the Current Reports of 2 February, 16 March, 16 April, 26 May, 10 June and 6 July 2026 with their exhibits. Grid data comes from the New York Independent System Operator load interconnection queue. Two outside filings were used: Century Aluminum's Current Report of 2 February 2026, which carries the Hawesville consideration, and Big Digital Energy's investor presentation of 3 June 2026, which carries the peer comparison in section 5.</p>
+      <p><b>Pricing basis</b> is the close of 31 July 2026, the last completed session before the build date. The market capitalisation of $8.75 billion multiplies that price by the 495,532,645 shares reported on the 10-Q cover as of 5 May 2026; the two dates differ and the snapshot says so. Enterprise value is deliberately absent: cash and debt are reported at 31 March 2026 and three capital events intervene.</p>
+      <p><b>Structure established.</b> Fifteen sections, provenance tags on every tabled figure and framing item, analyst inference confined to marked assumption blocks. Megawatt figures are carried on two explicit bases, attributable and gross, because the company reports the first and its own campus figures sum to the second.</p>
+      <p><b>Known gaps in this version.</b> The Federal Energy Regulatory Commission eLibrary could not be queried on 3 August 2026, so the Morgantown authorisation under Federal Power Act Section 203 has no docket reference and its status rests on company statements. Credit ratings, court dockets, the Southwest Power Pool and PJM queues, and state utility commission records were not examined. Institutional holders are named from the beneficial-ownership schedules but their positions are not quantified. Second-quarter results for the period ended 30 June 2026 were not yet filed, so no reported balance sheet reflects the April equity raise or the July transactions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="norec">
+    No buy, sell, or hold recommendation is issued and no price target is derived.
+    Third-party targets and ratings, where shown, are the published views of the
+    firms named and are reported as market data. This document is for research and
+    educational purposes and is not investment advice. Verify all figures against
+    primary filings on sec.gov before acting.
+  </div>
+  <p style="margin-top:16px">WULF · TeraWulf Inc. · Equity Research Report · as of 3 August 2026</p>
+</footer>
+
+</div>
+</body>
+</html>
