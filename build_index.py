@@ -104,12 +104,8 @@ def build(rows):
             '  </article>'.format(t=html.escape(ticker), c=company, h=headline,
                                   d="".join(links)))
 
-    built = datetime.date.today().strftime("%-d %B %Y") if hasattr(
-        datetime.date.today(), "strftime") else ""
-    try:
-        built = datetime.date.today().strftime("%-d %B %Y")
-    except ValueError:
-        built = datetime.date.today().strftime("%d %B %Y").lstrip("0")
+    today = datetime.date.today()
+    built = "%d %s %d" % (today.day, today.strftime("%B"), today.year)
 
     return TEMPLATE.format(entries="\n".join(cells), count=len(ordered), built=built)
 
