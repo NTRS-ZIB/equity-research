@@ -7,39 +7,78 @@ house style. Nothing is hand-maintained: adding a ticker file is all it takes.
 """
 
 import re
+import sys
 import html
 import pathlib
 import datetime
+import urllib.parse
 
 ROOT = pathlib.Path(__file__).resolve().parent
 MONTHS = {m: i for i, m in enumerate(
     ["January", "February", "March", "April", "May", "June",
      "July", "August", "September", "October", "November", "December"], 1)}
 
+# Full name and three-letter abbreviation, both lowercased. Lookups are exact
+# against these keys rather than prefix matches, so "Jan" resolves but "Janice"
+# does not.
+MONTH_LOOKUP = {}
+for _name, _num in MONTHS.items():
+    MONTH_LOOKUP[_name.lower()] = _num
+    MONTH_LOOKUP[_name.lower()[:3]] = _num
+
+WARNINGS = []
+
+
+def warn(message):
+    """Record a problem and put it on stderr, so a drop is visible in the log.
+
+    Repeats are collapsed: sort_key runs more than once per document, and a
+    warning counted twice would misstate how many files were affected.
+    """
+    if message in WARNINGS:
+        return
+    WARNINGS.append(message)
+    print("warning: " + message, file=sys.stderr)
+
+
+def plain(fragment):
+    """Tags out, then entities decoded, in that order.
+
+    Stripping while the value is still markup means an escaped &lt;b&gt;
+    survives as literal text instead of becoming a tag the strip has already
+    passed. Decoding afterwards collapses every encoding of a character to the
+    character itself, so callers can split on plain text and the html.escape()
+    in build() is the only escaping applied.
+    """
+    return html.unescape(re.sub(r'<[^>]+>', '', fragment)).strip()
+
 
 def read(path):
     """Pull ticker, company, headline and as-of date out of a delivered file."""
     t = path.read_text(encoding="utf-8", errors="replace")
+    if "</style>" not in t:
+        warn("%s: no </style> marker; file is malformed, skipped" % path.name)
+        return None
     body = t.split("</style>", 1)[-1]
 
     func = re.search(
         r'<p class="functional">(.*?)</p>', body, re.S)
     if not func:
+        warn("%s: no functional line found, skipped" % path.name)
         return None
-    parts = [p.strip() for p in re.split(r'&middot;|·', func.group(1))]
+
+    # Decode before splitting, so &middot;, &#183;, &#xB7; and a literal U+00B7
+    # are all the same character by the time the separator is applied. One
+    # pattern then covers every encoding, with nothing to enumerate.
+    parts = [p.strip() for p in plain(func.group(1)).split("·")]
     if len(parts) < 4:
+        warn("%s: functional line has %d fields, expected 4, skipped"
+             % (path.name, len(parts)))
         return None
 
-    def plain(fragment):
-        """Tags out, then entities decoded. Everything read() returns is plain
-        text, so the html.escape() in build() is the only escaping applied.
-        Decoding after the tag strip keeps an escaped &lt;b&gt; as literal text
-        rather than turning it into a tag that the strip has already passed."""
-        return html.unescape(re.sub(r'<[^>]+>', '', fragment)).strip()
-
-    ticker = plain(parts[0])
-    company = plain(parts[1])
-    asof = re.sub(r'^as of\s+', '', plain(parts[3]), flags=re.I).strip()
+    ticker = parts[0]
+    company = parts[1]
+    asof = re.sub(r'^as of\s+', '', parts[3], flags=re.I).strip()
 
     h1 = re.search(r'<h1 class="headline">(.*?)</h1>', body, re.S)
     headline = re.sub(r'\s+', ' ', plain(h1.group(1))).strip() if h1 else ""
@@ -52,11 +91,20 @@ def sort_key(asof):
     """Newest first; anything unparseable sorts last."""
     m = re.match(r'(\d{1,2})\s+(\w+)\s+(\d{4})', asof or "")
     if not m:
+        warn("date %r does not parse as 'D Month YYYY', sorting last" % (asof,))
         return datetime.date.min
-    day, month, year = m.group(1), m.group(2), m.group(3)
-    if month not in MONTHS:
+    day, month_name, year = m.group(1), m.group(2), m.group(3)
+    month = MONTH_LOOKUP.get(month_name.lower())
+    if month is None:
+        warn("unrecognised month %r in date %r, sorting last" % (month_name, asof))
         return datetime.date.min
-    return datetime.date(int(year), MONTHS[month], int(day))
+    try:
+        return datetime.date(int(year), month, int(day))
+    except ValueError:
+        # The regex admits any one or two digit day, so 31 February reaches
+        # here. The docstring promises this sorts last rather than raising.
+        warn("impossible date %r, sorting last" % (asof,))
+        return datetime.date.min
 
 
 def collect():
@@ -95,7 +143,8 @@ def build(rows):
                 links.append(
                     '<div class="doc"><a href="{f}">{l}</a>'
                     '<span class="asof">as of {a}</span></div>'.format(
-                        f=html.escape(d["file"]), l=label, a=html.escape(d["asof"])))
+                        f=html.escape(urllib.parse.quote(d["file"])), l=label,
+                        a=html.escape(d["asof"])))
             else:
                 links.append(
                     '<div class="doc"><span class="none">{l}</span>'
@@ -221,3 +270,10 @@ if __name__ == "__main__":
     for ticker in sorted(rows):
         have = "+".join(sorted(rows[ticker]))
         print("  %-6s %s" % (ticker, have))
+
+    if WARNINGS:
+        print("%d file(s) skipped or warned about:" % len(WARNINGS))
+        for message in WARNINGS:
+            print("  " + message)
+    else:
+        print("No files skipped, no warnings.")
