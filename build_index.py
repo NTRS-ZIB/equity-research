@@ -30,13 +30,19 @@ def read(path):
     if len(parts) < 4:
         return None
 
-    ticker = re.sub(r'<[^>]+>', '', parts[0]).strip()
-    company = re.sub(r'<[^>]+>', '', parts[1]).strip()
-    asof_raw = re.sub(r'<[^>]+>', '', parts[3]).strip()
-    asof = re.sub(r'^as of\s+', '', asof_raw, flags=re.I).strip()
+    def plain(fragment):
+        """Tags out, then entities decoded. Everything read() returns is plain
+        text, so the html.escape() in build() is the only escaping applied.
+        Decoding after the tag strip keeps an escaped &lt;b&gt; as literal text
+        rather than turning it into a tag that the strip has already passed."""
+        return html.unescape(re.sub(r'<[^>]+>', '', fragment)).strip()
+
+    ticker = plain(parts[0])
+    company = plain(parts[1])
+    asof = re.sub(r'^as of\s+', '', plain(parts[3]), flags=re.I).strip()
 
     h1 = re.search(r'<h1 class="headline">(.*?)</h1>', body, re.S)
-    headline = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', '', h1.group(1))).strip() if h1 else ""
+    headline = re.sub(r'\s+', ' ', plain(h1.group(1))).strip() if h1 else ""
 
     return dict(ticker=ticker, company=company, asof=asof, headline=headline,
                 file=path.name)
