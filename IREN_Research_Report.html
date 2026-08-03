@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>IREN · IREN Limited · Equity Research Report · as of 2 August 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================================
+   PER-TICKER PALETTE
+   ========================================================================= */
+:root{
+  /* The company mark is a green field carrying the letterforms in dark navy.
+     The green is the brand colour: #71DA80 as published, nine tenths of the
+     mark's inked area. Darkened for white paper to #21822F, which holds its
+     hue and reads at 4.9:1 against the page. No rotation was needed; the green
+     sits well clear of the bands reserved for meaning. */
+  --accent:      #21822F;
+  --accent-deep: #175920;
+  --accent-wash: rgba(33,130,47,0.06);
+  --accent-line: rgba(33,130,47,0.22);
+}
+
+/* ============================================================================
+   SHARED STYLESHEET v1.52 : BEGIN
+   ========================================================================= */
+:root{
+  color-scheme: light only;
+
+  --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
+  --line:#DEE6EC;   --line-hard:#C0CDD7;
+  --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
+
+  --pos:#0B7A50;      --pos-bg:#E7F4EE;
+  --neg:#B02A21;      --neg-bg:#FBECEA;
+  --caution:#90600A;  --caution-bg:#FBF2E0;
+  --assume:#4F3FA3;   --assume-bg:#EFEDFA;
+
+  --display:'Archivo',ui-sans-serif,system-ui,'Helvetica Neue',Arial,sans-serif;
+  --body:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+
+  --measure:78ch;
+  --col:760px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html,body{background:var(--canvas) !important;background-color:var(--canvas) !important}
+body{
+  margin:0;color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 22px 96px;background:var(--paper);
+      border-left:1px solid var(--line);border-right:1px solid var(--line)}
+p{max-width:var(--measure)}
+/* Boxed prose fills its container: the box supplies its own measure, so the
+   78ch cap applies to top-level running prose only. */
+.first li,.assume p,.note p,.cat p,.risk p,.logentry p,.oc p,.case p,
+.cat-meta,.logentry .basis{max-width:none}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:var(--accent-deep)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- masthead ---------- */
+.mast{padding:44px 0 26px;border-bottom:2px solid var(--line-hard);margin-bottom:8px;
+      position:relative;padding-left:20px}
+.mast::before{content:"";position:absolute;left:0;top:44px;bottom:26px;
+      width:4px;background:var(--accent)}
+.ticker{font-family:var(--mono);font-size:44px;font-weight:700;letter-spacing:-1px;
+      line-height:1;color:var(--accent);margin:0}
+.headline{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.22;
+      color:var(--ink);margin:16px 0 0}
+.functional{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--ink-faint);margin:18px 0 0}
+.mast-strip{display:flex;flex-wrap:wrap;gap:26px;margin-top:20px;padding-top:16px;
+      border-top:1px solid var(--line)}
+.mast-strip div{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint)}
+.mast-strip b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-top:3px}
+
+/* ---------- banner: framing ---------- */
+.first{background:var(--canvas);border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:20px 24px;margin:30px 0 12px}
+.first h2{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.04em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 12px}
+.first ol{margin:0;padding-left:20px}
+.first li{margin-bottom:9px}
+.first li:last-child{margin-bottom:0}
+
+/* ---------- sections ---------- */
+section{padding-top:38px}
+h2.sec{font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);
+      margin:0 0 4px;padding-bottom:10px;border-bottom:1px solid var(--line-hard);
+      display:flex;align-items:baseline;gap:12px}
+h2.sec .n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);
+      letter-spacing:.06em;flex:none}
+.sub{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);margin:10px 0 18px;
+      max-width:var(--measure)}
+h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink-dim);
+      margin:26px 0 8px}
+
+/* ---------- provenance tags (signature) ---------- */
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);
+      background:var(--panel-2);border:1px solid var(--line);
+      border-radius:2px;padding:1px 6px;vertical-align:1px;white-space:nowrap}
+
+/* ---------- assumption block ---------- */
+.assume{background:var(--assume-bg);border-left:4px solid var(--assume);
+      padding:16px 20px;margin:20px 0}
+.assume .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--assume);display:block;margin-bottom:7px}
+.assume p{margin:0}
+
+/* ---------- callouts ---------- */
+.note{border:1px solid var(--line);border-left:4px solid var(--ink-faint);
+      background:var(--canvas);padding:16px 20px;margin:20px 0}
+.note.pos{border-left-color:var(--pos);background:var(--pos-bg)}
+.note.neg{border-left-color:var(--neg);background:var(--neg-bg)}
+.note.caution{border-left-color:var(--caution);background:var(--caution-bg)}
+.note p{margin:0}
+.note p + p{margin-top:10px}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+thead th{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--ink-dim);text-align:left;
+      padding:9px 12px;border-bottom:2px solid var(--line-hard);white-space:nowrap}
+tbody td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--canvas)}
+td.num,th.num{font-family:var(--mono);text-align:right;white-space:nowrap}
+/* td.when marks a timing column. An unmarked cell counts as prose. */
+td.when{font-family:var(--mono);white-space:nowrap}
+td.lbl{font-weight:600}
+.pos-t{color:var(--pos);font-weight:600}
+.neg-t{color:var(--neg);font-weight:600}
+.caution-t{color:var(--caution);font-weight:600}
+
+/* ---------- cases ---------- */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.case{border:1px solid var(--line);border-top:3px solid var(--ink-faint);
+      background:var(--paper);padding:18px}
+.case.bull{border-top-color:var(--pos)}
+.case.bear{border-top-color:var(--neg)}
+.case h4{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 10px}
+.case.bull h4{color:var(--pos)} .case.bear h4{color:var(--neg)}
+.case p{font-size:15px;margin:0}
+.case .req{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+
+/* ---------- risks ---------- */
+.risk{border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:16px 20px;margin-bottom:12px}
+.risk.sev-high{border-left-color:var(--neg)}
+.risk.sev-med{border-left-color:var(--caution)}
+.risk.sev-low{border-left-color:var(--ink-faint)}
+.risk h4{font-family:var(--display);font-size:15.5px;font-weight:600;margin:0 0 6px;
+      display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.risk .sev{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase}
+.risk.sev-high .sev{color:var(--neg)}
+.risk.sev-med .sev{color:var(--caution)}
+.risk.sev-low .sev{color:var(--ink-faint)}
+.risk p{margin:0;font-size:15.5px}
+
+/* ---------- null categories ---------- */
+.nulls td.lbl{width:26%}
+.nulls .status{font-family:var(--mono);font-size:12px;white-space:nowrap}
+
+/* ---------- document log ---------- */
+.log{margin-top:14px}
+.logentry{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:12px}
+.logentry.current{border-left:4px solid var(--accent);background:var(--accent-wash)}
+.logentry .when{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);
+      display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.latest{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-line);
+      background:var(--paper);border-radius:2px;padding:1px 6px}
+.logentry .basis{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-bottom:12px}
+.logentry p{font-size:15.5px;margin:0 0 9px}
+.logentry p:last-child{margin-bottom:0}
+.correction{border:1px solid var(--neg);border-left:4px solid var(--neg);
+      background:var(--neg-bg);padding:12px 16px;margin-bottom:14px}
+.correction .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--neg);display:block;margin-bottom:5px}
+
+/* ---------- footer ---------- */
+footer{margin-top:44px;padding-top:22px;border-top:2px solid var(--line-hard)}
+footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width:none}
+.norec{border:1px solid var(--line-hard);background:var(--canvas);padding:16px 20px;
+      margin-top:20px;font-family:var(--mono);font-size:12.5px;color:var(--ink-dim)}
+
+/* ---------- catalyst cards (calendar) ---------- */
+.cat{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:14px;border-left:4px solid var(--line-hard)}
+.cat.up{border-left-color:var(--pos)}
+.cat.down{border-left-color:var(--neg)}
+.cat.two{border-left-color:var(--caution)}
+.cat.neutral{border-left-color:var(--ink-faint)}
+.cat-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.cid{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);flex:none}
+.cat-head h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink);
+      margin:0;flex:1 1 auto;min-width:200px}
+.dir{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;white-space:nowrap}
+.cat.up .dir{color:var(--pos)} .cat.down .dir{color:var(--neg)}
+.cat.two .dir{color:var(--caution)} .cat.neutral .dir{color:var(--ink-faint)}
+.cat-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:10px 0 12px;padding:9px 0;
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+      font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
+.cat-meta b{color:var(--ink);font-weight:600}
+.cat p{margin:0 0 9px;font-size:15.5px}
+.cat p:last-child{margin-bottom:0}
+.cat.resolved{background:var(--canvas);border-left-color:var(--ink-faint)}
+.cat.resolved .dir{color:var(--ink-faint)}
+
+/* ---------- horizon bands (calendar) ---------- */
+.band{display:flex;align-items:center;gap:14px;margin:30px 0 16px}
+.band-t{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--ink-dim);white-space:nowrap}
+.band-r{flex:1;height:1px;background:var(--line-hard)}
+.band-c{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);white-space:nowrap}
+
+/* ---------- upside / downside pair ---------- */
+.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0}
+.oc{border:1px solid var(--line);padding:11px 14px;background:var(--paper)}
+.oc.up-c{border-left:3px solid var(--pos)}
+.oc.down-c{border-left:3px solid var(--neg)}
+.oc .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.09em;
+      text-transform:uppercase;display:block;margin-bottom:5px}
+.oc.up-c .lbl{color:var(--pos)} .oc.down-c .lbl{color:var(--neg)}
+.oc p{margin:0;font-size:14.5px;line-height:1.5}
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  body{font-size:16px}
+  .wrap{padding:0 16px 70px;border-left:none;border-right:none}
+  .ticker{font-size:34px}
+  .headline{font-size:23px}
+  .cases{grid-template-columns:1fr}
+  .outcomes{grid-template-columns:1fr}
+  .mast-strip{gap:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none !important;transition:none !important}
+}
+@media print{
+  body{font-size:11pt}
+  .wrap{max-width:none;border:none}
+  section{page-break-inside:avoid}
+}
+/* ============================================================================
+   SHARED STYLESHEET v1.52 : END
+   ========================================================================= */
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ===================== MASTHEAD ===================== -->
+<header class="mast">
+  <p class="ticker">IREN</p>
+  <h1 class="headline">A $4 billion revenue target, $710 million of booked backlog, and $11.9 billion already committed</h1>
+  <p class="functional">IREN · IREN Limited · Equity Research Report · as of 2 August 2026</p>
+  <div class="mast-strip">
+    <div>Price <b>$36.80</b></div>
+    <div>Market cap <b>$13.2bn</b></div>
+    <div>Shares out <b>357,378,674</b></div>
+    <div>Pricing basis <b>31 Jul 2026 close</b></div>
+  </div>
+</header>
+
+<!-- ===================== FRAMING ===================== -->
+<div class="first">
+  <h2>Framing</h2>
+  <ol>
+    <li>At 31 March 2026 the company carried <b>$710.3M of unsatisfied remaining performance obligations</b>. None of the $9.7bn Microsoft contract sits inside that figure: the accounting policy admits a tranche only once it has been delivered and accepted, and the filing states that as of the reporting date there had been nil. <span class="tag">Filed</span></li>
+    <li>Commitments stood at <b>$11,902.5M</b> at 31 March 2026, against $368.8M nine months earlier. Cash was $2,213.3M at that date and $7.6bn at 30 June 2026, the latter unaudited, preliminary and including $1.7bn of restricted cash. <span class="tag">Filed</span></li>
+    <li>Revenue is falling while the target rises. Quarterly revenue went $240.3M, then $184.7M, then <b>$144.8M</b> across the first three quarters of fiscal 2026, as Bitcoin mining was decommissioned faster than AI Cloud replaced it. <span class="tag">Filed</span></li>
+    <li>Two B Class shares carry <b>15 votes each per ordinary share held</b> and gave the Co-Chief Executives roughly 35.4% of voting power at 15 August 2025. The advisory vote on their July 2026 equity grant will be taken on that register. <span class="tag">Filed</span></li>
+  </ol>
+</div>
+
+<!-- ===================== 1. SNAPSHOT ===================== -->
+<section id="s1">
+  <h2 class="sec"><span class="n">01</span>Snapshot</h2>
+  <p class="sub">Key figures, each tagged by provenance. Balance sheet items are at 31 March 2026 unless stated.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Metric</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Share price</td><td class="num">$36.80</td><td><span class="tag">Market</span> Nasdaq close, 31 Jul 2026</td></tr>
+      <tr><td class="lbl">Ordinary shares outstanding</td><td class="num">357,378,674</td><td><span class="tag">Filed</span> Form 10-Q cover page, count as at 30 Apr 2026</td></tr>
+      <tr><td class="lbl">Market capitalisation</td><td class="num">$13,151.5M</td><td><span class="tag">Estimate</span> 357,378,674 × $36.80. Share count predates the close by three months, so this is a floor</td></tr>
+      <tr><td class="lbl">Revenue, FY2025</td><td class="num">$501.0M</td><td><span class="tag">Filed</span> Form 10-K, 28 Aug 2025, year to 30 Jun 2025</td></tr>
+      <tr><td class="lbl">Revenue, nine months to 31 Mar 2026</td><td class="num">$569.8M</td><td><span class="tag">Filed</span> Form 10-Q, 8 May 2026</td></tr>
+      <tr><td class="lbl">Revenue, quarter to 31 Mar 2026</td><td class="num">$144.8M</td><td><span class="tag">Filed</span> Form 10-Q, 8 May 2026</td></tr>
+      <tr><td class="lbl">Net income, FY2025</td><td class="num pos-t">$86.9M</td><td><span class="tag">Filed</span> Form 10-K, 28 Aug 2025</td></tr>
+      <tr><td class="lbl">Net loss, quarter to 31 Mar 2026</td><td class="num neg-t">($247.8M)</td><td><span class="tag">Filed</span> Form 10-Q, 8 May 2026</td></tr>
+      <tr><td class="lbl">Adjusted EBITDA, quarter to 31 Mar 2026</td><td class="num">$59.5M</td><td><span class="tag">Filed</span> Results release, 7 May 2026. Non-GAAP, reconciled in that release</td></tr>
+      <tr><td class="lbl">Cash and cash equivalents</td><td class="num">$2,213.3M</td><td><span class="tag">Filed</span> Form 10-Q, at 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Cash and cash equivalents</td><td class="num">$7.6bn</td><td><span class="tag">Filed</span> Company release, 20 Jul 2026, at 30 Jun 2026. Unaudited preliminary, includes $1.7bn restricted</td></tr>
+      <tr><td class="lbl">Convertible notes payable</td><td class="num">$3,687.8M</td><td><span class="tag">Filed</span> Form 10-Q, carrying value at 31 Mar 2026, before the May 2026 issue</td></tr>
+      <tr><td class="lbl">Convertible principal outstanding</td><td class="num">$6,745.7M</td><td><span class="tag">Estimate</span> $445.7M + $1,000M + $1,150M + $1,150M filed at 31 Mar 2026, plus the $3,000M issued 14 May 2026</td></tr>
+      <tr><td class="lbl">Total commitments</td><td class="num">$11,902.5M</td><td><span class="tag">Filed</span> Form 10-Q, at 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Unsatisfied remaining performance obligations</td><td class="num">$710.3M</td><td><span class="tag">Filed</span> Form 10-Q, at 31 Mar 2026, under Accounting Standards Codification Topic 606</td></tr>
+      <tr><td class="lbl">Stockholders' equity</td><td class="num">$2,664.5M</td><td><span class="tag">Filed</span> Form 10-Q, at 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Installed hashrate</td><td class="num">38 EH/s</td><td><span class="tag">Filed</span> Form 10-Q, at 31 Mar 2026</td></tr>
+      <tr><td class="lbl">GPUs installed or on order</td><td class="num">~150,000</td><td><span class="tag">Filed</span> Form 10-Q, at 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Grid-connected power under agreement</td><td class="num">4,510 MW</td><td><span class="tag">Filed</span> Form 10-Q, seven sites at 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Short interest</td><td class="num">93.71M sh</td><td><span class="tag">Market</span> FINRA semi-monthly, 15 Jul 2026 settlement, 26.22% of shares outstanding</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note caution">
+    <p><b>Enterprise value is not stated in the masthead.</b> Its three components carry three different dates: a market capitalisation struck on the 31 July 2026 close against a 30 April 2026 share count, convertible principal that changed on 14 May 2026, and a cash figure that is preliminary at 30 June 2026 and includes restricted balances. The drawn balance of the $3.6bn project financing signed on 29 May 2026 is not disclosed at all. A single number assembled from those parts would be a guess wearing a decimal point. The components are set out in section 8 with their dates so a reader can strike their own.</p>
+  </div>
+</section>
+
+<!-- ===================== 2. BUSINESS MODEL ===================== -->
+<section id="s2">
+  <h2 class="sec"><span class="n">02</span>Business model</h2>
+  <p>IREN secures grid-connected land and power, builds its own data centres on it, buys GPUs, and rents compute. It owns each layer rather than leasing capacity from someone who does, and it describes itself as a vertically integrated AI Cloud provider. The company was incorporated in New South Wales on 6 November 2018 as Iris Energy Pty Ltd, converted to a public company on 7 October 2021, listed on Nasdaq on 19 November 2021, and changed its name to IREN Limited on 27 November 2024. <span class="tag">Filed</span></p>
+
+  <h3>The four layers</h3>
+  <p><b>Power and land.</b> Seven sites hold executed grid connection agreements, letters of agreement or equivalents totalling 4,510MW: Childress, Texas at 750MW, Sweetwater 1 at 1,400MW, Sweetwater 2 at 600MW, a site in Oklahoma at 1,600MW, and three in British Columbia, Canal Flats at 30MW, Mackenzie at 80MW and Prince George at 50MW. The company separately describes a 5GW secured power portfolio, which is the wider figure including sites without executed connection documents. <span class="tag">Filed</span></p>
+  <p><b>Data centres.</b> Childress is the build. Horizon 1 to 4 are direct-to-chip liquid-cooled facilities carrying roughly 200MW of critical IT load, and Horizons 5 and 6 add a further 150MW. Total AI Cloud capacity is targeted at 480MW by the end of calendar 2026 and 1,210MW during 2027. <span class="tag">Filed</span></p>
+  <p><b>Compute.</b> Roughly 150,000 GPUs were installed or on order at 31 March 2026, bought through Dell under a series of purchase agreements totalling approximately $10.9bn of stated purchase price across four transactions since November 2025. <span class="tag">Filed</span></p>
+  <p><b>Cloud and software.</b> The company sells both bare metal and managed cloud services, and in May 2026 agreed to acquire Mirantis, Inc., a cloud software and services provider, for approximately $625M payable mostly in shares. <span class="tag">Filed</span></p>
+
+  <h3>What is being retired</h3>
+  <p>Bitcoin mining built the business and is being wound down. The company reported 38 EH/s of installed hashrate at 31 March 2026 and, after that date, announced that all Bitcoin mining at Childress will cease over time as data centres are redeployed. It estimates additional impairment charges of approximately $520M from that transition, an estimate it describes as preliminary and subject to further evaluation. <span class="tag">Filed</span></p>
+  <p>The company mined 5,153 Bitcoin in the nine months to 31 March 2026 against 3,674 in the comparable period, and liquidates what it mines daily, so it held no Bitcoin on balance sheet at 31 March 2026. That is a deliberate choice not to run a treasury, and it separates IREN from several listed miners whose balance sheets move with the coin price. <span class="tag">Filed</span></p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The vertical integration argument cuts both ways and the filings do not settle which way it cuts here. Owning power, shell, cooling and GPUs removes a landlord's margin and a scheduling dependency, which is the case management makes. It also means a single customer decision, a delivery slip or a hardware generation change lands on an asset base the company cannot hand back. The 200MW of Horizon 1 to 4 exists to serve one contract, and the financing raised against it is secured on those specific GPUs and those specific cash flows. Read as a whole, the structure converts operating flexibility into capital commitment, which is a reasonable trade at high utilisation and an expensive one below it.</p>
+  </div>
+</section>
+
+<!-- ===================== 3. REVENUE STREAMS ===================== -->
+<section id="s3">
+  <h2 class="sec"><span class="n">03</span>Revenue streams</h2>
+  <p class="sub">Two streams, moving in opposite directions. Quarterly split as filed.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Stream</th><th class="num">Q3 FY26</th><th class="num">Q2 FY26</th><th class="num">Q3 share</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Bitcoin mining</td><td class="num">$111.2M</td><td class="num">$167.4M</td><td class="num">76.8%</td><td><span class="tag">Filed</span> Results release, 7 May 2026</td></tr>
+      <tr><td class="lbl">AI Cloud services</td><td class="num">$33.6M</td><td class="num">$17.3M</td><td class="num">23.2%</td><td><span class="tag">Filed</span> Results release, 7 May 2026</td></tr>
+      <tr><td class="lbl">Total</td><td class="num">$144.8M</td><td class="num">$184.7M</td><td class="num">100.0%</td><td><span class="tag">Filed</span> Form 10-Q, 8 May 2026</td></tr>
+    </tbody>
+  </table></div>
+  <p>Mining fell $56.2M quarter on quarter. The company attributes $25.8M of the decline to a lower average Bitcoin price and $4.2M to fewer Bitcoin mined, the latter reflecting a rise in implied global hashrate partly offset by growth in its own operating capacity. AI Cloud nearly doubled off a small base, adding $16.3M, so the net movement was a $39.9M decline. <span class="tag">Filed</span></p>
+  <p>Cost of revenue moved with it, down $25.9M to $39.9M, driven by lower electricity cost as mining capacity came out. AI Cloud cost of revenue was $4.6M against $33.6M of AI Cloud revenue, a gross margin materially wider than mining's, though the comparison excludes the depreciation of the GPUs themselves, which sits below the line at $121.2M for the group. <span class="tag">Filed</span></p>
+
+  <h3>The contracted book</h3>
+  <p>The gap between what has been announced and what has been booked is the most important number in this document, so it is set out in one place.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Measure</th><th class="num">Amount</th><th>What it counts</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Microsoft contract value</td><td class="num">$9,700M</td><td><span class="tag">Filed</span> Total consideration over five years to 2031, announced 3 Nov 2025</td></tr>
+      <tr><td class="lbl">NVIDIA contract value</td><td class="num">$3,400M</td><td><span class="tag">Filed</span> Total consideration over five years, announced 7 May 2026</td></tr>
+      <tr><td class="lbl">Further contracts announced 20 Jul 2026</td><td class="num">$2,800M</td><td><span class="tag">Filed</span> Total contract value, multi-year cloud services, counterparties not individually valued</td></tr>
+      <tr><td class="lbl">Unsatisfied remaining performance obligations</td><td class="num">$710.3M</td><td><span class="tag">Filed</span> Form 10-Q at 31 Mar 2026. Enforceable, undelivered consideration recognised under Accounting Standards Codification Topic 606</td></tr>
+      <tr><td class="lbl">Of which due within 12 months</td><td class="num">$308.0M</td><td><span class="tag">Filed</span> Form 10-Q, to 31 Mar 2027</td></tr>
+      <tr><td class="lbl">Of which months 13 to 24</td><td class="num">$265.2M</td><td><span class="tag">Filed</span> Form 10-Q</td></tr>
+      <tr><td class="lbl">Deferred revenue</td><td class="num">$120.4M</td><td><span class="tag">Filed</span> Form 10-Q at 31 Mar 2026, against $0.9M at 30 Jun 2025. Customer prepayments received</td></tr>
+    </tbody>
+  </table></div>
+  <p>These are not competing estimates of one quantity. They are different quantities, and the filing says exactly what separates them: <i>"The Group includes amounts in unsatisfied RPO only for tranches that have been delivered and accepted, of which there have been nil as of the reporting date."</i> Announced contract value is the whole five-year term at signature. The remaining performance obligation is the part the company is presently entitled to bill for work not yet done. On the largest contract in the company's history, that part was zero at the last balance sheet date. <span class="tag">Filed</span></p>
+  <p>The $120.4M of deferred revenue is the countervailing fact and it is growing fast, from $0.9M nine months earlier. Microsoft pays 20% of each tranche's value before its delivery date, credited back against service fees only after the twenty-fourth month of that tranche's term. Cash is arriving ahead of revenue, which is the shape of the model working as designed. <span class="tag">Filed</span></p>
+</section>
+
+<!-- ===================== 4. INDUSTRY & MARKET BACKDROP ===================== -->
+<section id="s4">
+  <h2 class="sec"><span class="n">04</span>Industry &amp; market backdrop</h2>
+  <p>The bid for AI compute has moved upstream from chips to the things that constrain chip deployment: interconnected power, shell capacity and the operational capability to commission at scale. Management describes time-to-compute as the binding constraint, and the contract structure it has won is consistent with that: hyperscalers and model developers contracting years of capacity from a third party rather than building it.</p>
+
+  <h3>Texas interconnection is changing under the company's feet</h3>
+  <p>Three of the seven sites sit in ERCOT, and 2,750MW of the 4,510MW total is Texas. On 11 July 2026 the process by which large loads connect to that grid changed. The Public Utility Commission of Texas approved Planning Guide Revision Request 145 and Nodal Protocol Revision Request 1325, implementing the Batch Zero process, with the previous individual study-based process running only through the end of 10 July 2026. ERCOT describes Batch Zero as a transitional process that evaluates large load interconnection requests system-wide and allocates available transmission capacity to studied and committed loads. <span class="tag">Filed</span> ERCOT Market Notice M-B062326-01, 23 Jun 2026.</p>
+  <p>The company names this risk itself, referring to ERCOT's announced amendments to the approval process for large load interconnection requests and to a process that may batch multiple requests. Sweetwater 1 and Sweetwater 2, at 2,000MW between them, are the exposure: an individual study queue rewards being early, a batch process rewards being mature and committed at the batch date. <span class="tag">Filed</span></p>
+  <p>The 1,600MW Oklahoma site is outside ERCOT and is not governed by this change. The British Columbia sites sit under a different utility and regulator again.</p>
+
+  <h3>The hardware cycle</h3>
+  <p>The Microsoft deployment is NVIDIA GB300. The Childress air-cooled deployment announced in May 2026 is Blackwell, targeted for commissioning in early 2027. The company's own risk disclosure names hardware obsolescence and the impairment it causes as a material exposure, and the $140.4M impairment in the March 2026 quarter plus the further $520M it expects from the mining transition are that exposure realised on the previous generation of hardware rather than on GPUs. A reader should treat the useful-life assumption on a GPU fleet bought for roughly $10.9bn as the single largest accounting judgement in this business.</p>
+</section>
+
+<!-- ===================== 5. COMPETITIVE POSITION ===================== -->
+<section id="s5">
+  <h2 class="sec"><span class="n">05</span>Competitive position</h2>
+  <p class="sub">Named peers on comparable metrics, not a general market description.</p>
+  <p>IREN sits between two groups that are usually analysed separately. It came out of listed Bitcoin mining, where its peers name it as a competitor, and it now sells into the market served by the AI neoclouds.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Peer</th><th>Where it competes</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Core Scientific, Cipher Mining, TeraWulf, Hut 8, Bitfarms, CleanSpark, Riot Platforms, Applied Digital</td><td>Listed miners converting sites to AI and high performance computing. Competing for the same power, the same shells and increasingly the same customers.</td><td><span class="tag">Filed</span> Named as competitors in peer 10-K filings and compensation peer groups, most recently Soluna Holdings Form 10-K, 30 Mar 2026</td></tr>
+      <tr><td class="lbl">CoreWeave, Nebius</td><td>Pure-play AI cloud providers. Compete on GPU supply, delivery speed and contract terms rather than on power ownership.</td><td><span class="tag">Press</span> Routinely compared with IREN in market commentary, for example TipRanks, 12 Jun 2026</td></tr>
+      <tr><td class="lbl">Microsoft, and hyperscalers generally</td><td>Customer and competitor at once. Microsoft contracts capacity from IREN while building its own.</td><td><span class="tag">Filed</span> Partner Statement of Work, 2 Nov 2025, filed as an exhibit to the Form 10-Q of 5 Feb 2026</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>What actually distinguishes it</h3>
+  <p>Three things are checkable rather than asserted. First, the power position: 4,510MW under executed connection documents is large relative to the listed miner group and is the asset the neoclouds do not have. Second, the customer list. As at 20 July 2026 it comprised Microsoft, NVIDIA, Perplexity, Figure AI, Together AI, Fluidstack, Fireworks AI, Fal AI, Hume AI and one further developer not named, across bare metal and managed services. Third, the NVIDIA relationship is unusual in kind: alongside the $3.4bn services contract, NVIDIA holds rights to buy 30,000,000 ordinary shares at $70.00, vesting on delivery volumes of up to 600,000 GPUs. A supplier taking an equity position that vests on how much it ships is a different alignment from a purchase order. <span class="tag">Filed</span></p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Peer enterprise values and revenue multiples were not assembled for this document, so no peer multiple table is shown and none should be inferred. The comparison that would matter, contracted megawatts per dollar of enterprise value across the converting-miner group, requires a consistent definition of contracted megawatts that the group does not use consistently. Constructing one from eight sets of filings is a separate piece of work and is named in section 14 as not done.</p>
+  </div>
+</section>
+
+<!-- ===================== 6. FINANCIAL PERFORMANCE ===================== -->
+<section id="s6">
+  <h2 class="sec"><span class="n">06</span>Financial performance</h2>
+  <p class="sub">Fiscal year ends 30 June. Figures for FY2023 to FY2025 are as restated under US GAAP in the Form 10-K of 28 August 2025.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Year to 30 June</th><th class="num">FY2023</th><th class="num">FY2024</th><th class="num">FY2025</th><th class="num">9M FY2026</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Revenue</td><td class="num">$75.5M</td><td class="num">$187.2M</td><td class="num">$501.0M</td><td class="num">$569.8M</td></tr>
+      <tr><td class="lbl">Cost of revenue</td><td class="num">n/a</td><td class="num">n/a</td><td class="num">$159.0M</td><td class="num">$186.4M</td></tr>
+      <tr><td class="lbl">Operating income (loss)</td><td class="num neg-t">($157.2M)</td><td class="num neg-t">($27.2M)</td><td class="num pos-t">$17.3M</td><td class="num neg-t">($426.3M)</td></tr>
+      <tr><td class="lbl">Net income (loss)</td><td class="num">n/a</td><td class="num">n/a</td><td class="num pos-t">$86.9M</td><td class="num neg-t">($18.6M)</td></tr>
+      <tr><td class="lbl">Basic shares, weighted average</td><td class="num">54,775,771</td><td class="num">99,640,920</td><td class="num">214,586,767</td><td class="num">300,366,927</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub"><span class="tag">Filed</span> Form 10-K, 28 Aug 2025, and Form 10-Q, 8 May 2026. Cost of revenue and net income for FY2023 and FY2024 read n/a because the 10-K's selected data presents those years on a basis that does not isolate them on the same line; the full statements are in that filing.</p>
+
+  <h3>The trend, stated</h3>
+  <p>Revenue rose 6.6 times across three fiscal years and the company reached its first full-year operating profit in FY2025, $17.3M on $501.0M. Fiscal 2026 has gone the other way. The nine-month operating loss of $426.3M is not an operating-cost story: $305.6M of it is depreciation and $188.4M is impairment, together $494.0M against a nine-month revenue of $569.8M. Depreciation more than doubled quarter on quarter as data centres and GPUs came into service ahead of the revenue they were built for.</p>
+  <p>The nine-month net loss of $18.6M is much smaller than the operating loss because $409.6M of non-operating income sits between them, and that item is volatile in both directions. It was $651.7M positive in the September 2025 quarter, $221.5M negative in the December quarter, and $20.6M negative in the March quarter. The December swing includes a $111.8M debt conversion inducement expense and a $107.4M unrealised loss on financial instruments; the March quarter includes a $23.7M unrealised loss on the capped calls. Reading the net line alone will mislead in any single quarter. <span class="tag">Filed</span></p>
+
+  <h3>Cash</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Quarter to</th><th class="num">Operating</th><th class="num">Investing</th><th class="num">Financing</th><th class="num">Closing cash</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">31 Dec 2025</td><td class="num pos-t">$71.6M</td><td class="num neg-t">($850.9M)</td><td class="num">$3,007.5M</td><td class="num">$3,260.6M</td></tr>
+      <tr><td class="lbl">31 Mar 2026</td><td class="num pos-t">$75.3M</td><td class="num neg-t">($1,477.1M)</td><td class="num">$355.0M</td><td class="num">$2,213.3M</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub"><span class="tag">Filed</span> Results release, 7 May 2026.</p>
+  <p>Operations generate cash, modestly and consistently. Investing consumed $1,477.1M in the March quarter alone, $949.2M on property, plant and equipment and $406.1M on computer hardware, and the shortfall is met from the capital markets. That is the arithmetic of the whole business at present: roughly $75M a quarter in, roughly $1.5bn a quarter out, and the difference raised. The $3.0bn convertible issue of 14 May 2026 and the $3.6bn project financing of 29 May 2026 are what the June quarter's version of that gap looked like.</p>
+</section>
+
+<!-- ===================== 7. CAPITAL STRUCTURE & DILUTION ===================== -->
+<section id="s7">
+  <h2 class="sec"><span class="n">07</span>Capital structure &amp; dilution</h2>
+  <p class="sub">Ordinary shares, B Class shares, five convertible series, capped calls, prepaid forwards, an at-the-market programme, supplier equity rights and ring-fenced project debt.</p>
+
+  <h3>Equity</h3>
+  <p>357,378,674 ordinary shares were outstanding at 30 April 2026, up from 283,465,490 at 31 October 2025. A further 15,877,502 shares were issued under the at-the-market programme after 31 March 2026 for gross proceeds of approximately $683.5M, and the Form 10-Q's subsequent-events note does not state how much of that sits inside the 30 April cover-page count. The count used in this document is therefore a floor rather than a current figure. <span class="tag">Filed</span></p>
+  <p>Two B Class shares are also outstanding, held by Awassi Capital Holdings 1 Pty Ltd and Awassi Capital Holdings 2 Pty Ltd as trustees. Each carries fifteen votes per ordinary share held by that holder, and together they gave the Co-Founders and Co-Chief Executives approximately 35.4% of the voting power of outstanding capital stock at 15 August 2025. B Class shares carry no dividend entitlement and each holder may designate a nominee for election to the board. <span class="tag">Filed</span></p>
+
+  <h3>Convertible notes</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Series</th><th class="num">Principal</th><th class="num">Coupon</th><th class="when">Maturity</th><th class="num">Conversion</th><th class="num">Capped call</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">2029 and 2030, combined residual</td><td class="num">$445.7M</td><td class="num">3.50% / 3.25%</td><td class="when">2029 / 2030</td><td class="num">n/a</td><td class="num">partly unwound</td></tr>
+      <tr><td class="lbl">2031</td><td class="num">$1,000.0M</td><td class="num">0.00%</td><td class="when">1 Jul 2031</td><td class="num">$85.63</td><td class="num">$120.18</td></tr>
+      <tr><td class="lbl">2032</td><td class="num">$1,150.0M</td><td class="num">0.25%</td><td class="when">1 Jun 2032</td><td class="num">$51.40</td><td class="num">$82.24</td></tr>
+      <tr><td class="lbl">2033, issued Dec 2025</td><td class="num">$1,150.0M</td><td class="num">1.00%</td><td class="when">1 Jun 2033</td><td class="num">$51.40</td><td class="num">$82.24</td></tr>
+      <tr><td class="lbl">2033, issued May 2026</td><td class="num">$3,000.0M</td><td class="num">1.00%</td><td class="when">1 Dec 2033</td><td class="num">$73.07</td><td class="num">$110.30</td></tr>
+      <tr><td class="lbl">Total principal</td><td class="num">$6,745.7M</td><td class="num">n/a</td><td class="when">n/a</td><td class="num">n/a</td><td class="num">n/a</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub"><span class="tag">Filed</span> Forms 8-K of 14 Oct 2025, 8 Dec 2025 and 14 May 2026, and Form 10-Q of 8 May 2026 for the residual balance. Two distinct series carry a 1.00% coupon and a 2033 maturity; they differ in issue date, maturity day, conversion price and cap, and are not the same instrument.</p>
+  <p>The conversion prices matter against a $36.80 close. The two cheapest series convert at $51.40, 40% above the current price; the largest series converts at $73.07, 99% above it. None is close to the money, so none is presently a live dilution event, and the capped calls sit above each conversion price again. The maximum share counts issuable on conversion, as stated at issue, are 16,641,700 for the 2031 series, 27,966,850 each for the two December 2025 series, and 54,396,900 for the May 2026 series. <span class="tag">Filed</span></p>
+  <p>The capped calls have cost real money: $56.7M in October 2025, $201.0M in December 2025 and $201.3M in May 2026, $459.0M in total, paid in cash to narrow a dilution that has not yet occurred. They also introduce mark-to-market noise, including the $23.7M unrealised loss in the March 2026 quarter. <span class="tag">Estimate</span> The $459.0M total is the sum of three filed figures.</p>
+
+  <h3>Ring-fenced project debt</h3>
+  <p>On 29 May 2026 a wholly owned subsidiary entered approximately $3.6bn of financing to fund the Microsoft deployment: an approximately $1.5bn delayed draw term loan at term SOFR plus 2.25% with a 0.40% commitment fee on undrawn amounts, and $2.1bn of 5.96% senior notes due 31 December 2031, under a common terms agreement. Drawings are available until 29 May 2027. The obligations are secured on the subsidiary's assets, including the GPUs and the Microsoft cash flows, and on a pledge of 100% of its equity. <span class="tag">Filed</span> Form 8-K, 1 Jun 2026.</p>
+  <p>The parent's guarantees are deliberately narrow: performance by an affiliate manager under a managed services agreement, and any shortfall attributable to a tranche of GPU services that Microsoft does not accept or terminates, to the extent not covered by remarketing the hardware. The parent does not guarantee the subsidiary's obligations generally. The structure requires a debt service coverage ratio of at least 1.05 to 1.00 tested quarterly, with mandatory prepayment triggers if that ratio falls below 1.10 to 1.00 for six consecutive months, if the projected ratio for the third and fourth tranches would be below 1.20 to 1.00, or if loan-to-cost exceeds 65%. <span class="tag">Filed</span></p>
+  <div class="note caution">
+    <p>Read the guarantee and the covenant together. The one circumstance in which the parent is on the hook is precisely the circumstance in which the covenant fails: Microsoft declining or terminating a tranche. The ring fence is real for ordinary credit deterioration and thin for the specific risk the structure exists to carry.</p>
+  </div>
+
+  <h3>Supplier and management equity</h3>
+  <p>NVIDIA holds investment rights over 30,000,000 ordinary shares at $70.00, for gross proceeds of up to approximately $2.1bn if fully exercised, vesting in tranches on deliveries of up to 600,000 GPUs and exercisable through 7 May 2031, with a six-month restriction on shares issued. On 30 June 2026 the board approved grants of 9,099,328 restricted stock units to each of the two Co-Chief Executives, granted on or about 1 July 2026, vesting in four equal annual tranches with a further two-year holding period on each tranche and no further equity grants to either until fiscal 2031. The independent chair's letter of 8 July 2026 states that across the 2025 and 2026 awards each Co-Chief Executive has received restricted stock units representing in aggregate approximately 3% of the company. <span class="tag">Filed</span></p>
+
+  <h3>Dilution, totalled</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Source</th><th class="num">Shares</th><th>Trigger</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Outstanding at 30 Apr 2026</td><td class="num">357,378,674</td><td><span class="tag">Filed</span> Form 10-Q cover page</td></tr>
+      <tr><td class="lbl">At-the-market, after 31 Mar 2026</td><td class="num">15,877,502</td><td><span class="tag">Filed</span> Form 10-Q. Overlap with the line above is not disclosed</td></tr>
+      <tr><td class="lbl">Convertible notes, maximum on conversion</td><td class="num">127,062,300</td><td><span class="tag">Estimate</span> 16,641,700 + 27,966,850 + 27,966,850 + 54,396,900, each as stated at issue. Excludes the 2029 and 2030 residual, not restated</td></tr>
+      <tr><td class="lbl">NVIDIA investment rights</td><td class="num">30,000,000</td><td><span class="tag">Filed</span> Vests on GPU delivery volumes, exercisable to 7 May 2031</td></tr>
+      <tr><td class="lbl">Co-Chief Executive grants, Jul 2026</td><td class="num">18,198,656</td><td><span class="tag">Filed</span> 9,099,328 each, vesting over four years</td></tr>
+      <tr><td class="lbl">Mirantis and Nostrum consideration</td><td class="num">not stated</td><td><span class="tag">Filed</span> A fixed number of shares determined at signing, and 35% of EUR 165M, neither disclosed as a count</td></tr>
+    </tbody>
+  </table></div>
+  <p>The convertible maximum is a ceiling reached only well above current prices and is reduced in practice by the capped calls and by the company's right to settle in cash. It is shown because the ceiling is what a reader needs to bound the case, not because it is expected.</p>
+</section>
+
+<!-- ===================== 8. VALUATION ===================== -->
+<section id="s8">
+  <h2 class="sec"><span class="n">08</span>Valuation</h2>
+  <p class="sub">Multiples shown with their basis and pricing date. No target price is derived here.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Multiple</th><th class="num">Value</th><th>Basis and date</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Market capitalisation / FY2025 revenue</td><td class="num">26.2x</td><td><span class="tag">Estimate</span> $13,151.5M ÷ $501.0M, revenue for the year to 30 Jun 2025</td></tr>
+      <tr><td class="lbl">Market capitalisation / annualised Q3 FY26 revenue</td><td class="num">22.7x</td><td><span class="tag">Estimate</span> $13,151.5M ÷ ($144.8M × 4). Annualising a falling quarter overstates the run rate</td></tr>
+      <tr><td class="lbl">Market capitalisation / booked backlog</td><td class="num">18.5x</td><td><span class="tag">Estimate</span> $13,151.5M ÷ $710.3M remaining performance obligations at 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Market capitalisation / stated 2026 ARR target</td><td class="num">3.3x</td><td><span class="tag">Estimate</span> $13,151.5M ÷ $4,000M, the company's year-end 2026 target of 20 Jul 2026. A target, not a result</td></tr>
+      <tr><td class="lbl">Price / book</td><td class="num">4.9x</td><td><span class="tag">Estimate</span> $13,151.5M ÷ $2,664.5M equity at 31 Mar 2026</td></tr>
+      <tr><td class="lbl">Market capitalisation / megawatt under agreement</td><td class="num">$2.92M</td><td><span class="tag">Estimate</span> $13,151.5M ÷ 4,510MW. Counts unbuilt capacity at the same weight as operating capacity</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Enterprise value, as components</h3>
+  <p>No single enterprise value is struck here, for the reason given in section 1. The components, each with its own date, are: market capitalisation of $13,151.5M on the 31 July 2026 close and a 30 April 2026 share count; convertible principal of $6,745.7M after the 14 May 2026 issue; finance lease liabilities of $274.3M at 31 March 2026; cash of $7.6bn at 30 June 2026, preliminary and unaudited, of which $1.7bn is restricted; and an undisclosed drawn balance under the $3.6bn project financing available from 29 May 2026. A reader wanting one number can assemble it; they should not read the result as a like-for-like figure. <span class="tag">Estimate</span></p>
+
+  <h3>Third-party views</h3>
+  <p>These are the published opinions of the firms named, reported as market data. This document adopts none of them, issues no rating, and derives no target.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Source</th><th class="num">Figure</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Consensus of 16 analysts polled by S&amp;P Global</td><td class="num">$81.07</td><td><span class="tag">Market</span> Average price target, consensus rating Buy, as reported 2 Aug 2026. Range $41 to $126</td></tr>
+      <tr><td class="lbl">H.C. Wainwright</td><td class="num">$90.00</td><td><span class="tag">Market</span> Target raised from $85, 22 Jul 2026</td></tr>
+      <tr><td class="lbl">Russell 1000 membership</td><td class="num">n/a</td><td><span class="tag">Filed</span> Company release, 29 Jun 2026, effective after the close on 26 Jun 2026 following the FTSE Russell reconstitution</td></tr>
+      <tr><td class="lbl">Short interest</td><td class="num">93.71M sh</td><td><span class="tag">Market</span> FINRA semi-monthly, 15 Jul 2026 settlement. 26.22% of shares outstanding, 30.34% of float</td></tr>
+    </tbody>
+  </table></div>
+  <p>The consensus target of $81.07 is 120% above the 31 July close, and short interest is above a quarter of the shares outstanding. Those two facts describe a security on which informed opinion is unusually divided, and neither is evidence about the business. The dispersion in the target range, $41 to $126, is itself the observation: a three-fold spread is not a disagreement about the multiple, it is a disagreement about whether the contracted capacity gets delivered.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Every multiple above uses a share count from 30 April 2026 against a price from 31 July 2026. Between those dates the at-the-market programme was in use and two acquisitions with share consideration were pending, so the true count on 31 July is higher and every multiple shown is correspondingly understated. The direction of the error is known; its size is not, and it will be settled by the FY2026 Form 10-K cover page.</p>
+  </div>
+</section>
+
+<!-- ===================== 9. GROWTH DRIVERS ===================== -->
+<section id="s9">
+  <h2 class="sec"><span class="n">09</span>Growth drivers</h2>
+  <p><b>Commissioning Horizon 1 to 4.</b> Roughly 200MW of liquid-cooled capacity at Childress carries the Microsoft contract. Delivery is targeted by the end of calendar 2026 and revenue recognition begins on delivery and acceptance of each tranche. This is the single driver that converts announced value into booked revenue, and nothing else on this list matters as much. <span class="tag">Filed</span></p>
+  <p><b>The 2027 build.</b> Childress Horizons 5 and 6, Childress air-cooled retrofit capacity, and the initial phase of Sweetwater 1 take targeted AI Cloud capacity to 1,210MW during 2027. <span class="tag">Filed</span></p>
+  <p><b>Customer diversification.</b> The book has moved from one hyperscaler in November 2025 to ten named or referenced counterparties by July 2026, with contracts announced on 20 July 2026 carrying customer prepayments of approximately 45% of the associated GPU capital expenditure and a weighted average portfolio term of roughly four years. A prepayment at that level materially changes the funding requirement per megawatt. <span class="tag">Filed</span></p>
+  <p><b>Geographic extension.</b> The pending acquisition of Ingenostrum, S.L., trading as Nostrum Group, adds 490MW in Spain and a development pipeline described as gigawatt-plus, for approximately EUR 165M in a 65% cash and 35% share mix. Australian development projects are described as advancing toward a connection agreement. <span class="tag">Filed</span></p>
+  <p><b>Moving up the stack.</b> Mirantis, at approximately $625M, is bought for orchestration, software and support capability rather than for capacity, and is the mechanism by which managed services can be sold at a different margin from bare metal. <span class="tag">Filed</span></p>
+</section>
+
+<!-- ===================== 10. RISKS ===================== -->
+<section id="s10">
+  <h2 class="sec"><span class="n">10</span>Risks</h2>
+  <p class="sub">Severity-ranked, most severe first.</p>
+
+  <div class="risk sev-high">
+    <h4>Delivery and acceptance, not signature, is what pays <span class="sev">Severe</span></h4>
+    <p>Nil tranches of the $9.7bn Microsoft contract had been delivered and accepted at 31 March 2026. Microsoft may terminate, subject to a cure period, if delivery dates are missed, and the commencement of both parties' obligations is subject to a delivery acceptance process. A slip does not merely defer revenue: it triggers the one parent guarantee in the project financing and the debt service coverage covenant at the same time. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="risk sev-high">
+    <h4>Commitments of $11.9bn against $2.2bn of cash at the same date <span class="sev">Severe</span></h4>
+    <p>Commitments rose from $368.8M at 30 June 2025 to $11,902.5M at 31 March 2026. Cash was $2,213.3M at that date and $7.6bn at 30 June 2026 after two financings, but $1.7bn of the later figure is restricted and it is described as preliminary and unaudited. The gap is closed by continued access to capital markets on terms that have so far been available and are not contractual. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="risk sev-high">
+    <h4>Revenue is falling while the fixed cost base is being built <span class="sev">Severe</span></h4>
+    <p>Quarterly revenue fell from $240.3M to $184.7M to $144.8M across fiscal 2026, while quarterly depreciation rose to $121.2M and impairment to $140.4M. A further $520M of impairment is expected from retiring the mining fleet. The trough between the two businesses is a real period of negative operating income, and its depth depends on a commissioning schedule the company does not control alone. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Customer concentration <span class="sev">Moderate</span></h4>
+    <p>Of the stated $4.4bn ARR construct of 26 May 2026, $1.9bn is expected average annual revenue under the Microsoft contract, roughly 43%. The 20 July 2026 update broadens the base but does not restate the Microsoft share. One counterparty's decision remains the largest single determinant of the outcome. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Governance: the vote that reviews the pay is taken on a register the recipients substantially control <span class="sev">Moderate</span></h4>
+    <p>The two Co-Chief Executives received 9,099,328 restricted stock units each on 1 July 2026 and, through two B Class shares carrying fifteen votes per ordinary share held, controlled approximately 35.4% of voting power at 15 August 2025. The independent chair has written to shareholders defending the grant and points to the advisory vote at the coming annual general meeting. An advisory vote decided on that register is a weak constraint whatever its result. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Reporting history: a going concern paragraph, a material weakness, and a first-year auditor <span class="sev">Moderate</span></h4>
+    <p>The FY2024 audit report contained an explanatory paragraph expressing significant doubt about the ability to continue as a going concern, and the only reportable event on the auditor change was the prior auditor's communication of a material weakness in internal control over financial reporting disclosed in the FY2024 Form 20-F. Raymond Chabot Grant Thornton was dismissed on 26 November 2025 and KPMG appointed on 27 November 2025. The FY2026 Form 10-K will be KPMG's first opinion on this company, in the year its balance sheet grew from $2.9bn to over $7bn. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Texas interconnection risk has changed regime <span class="sev">Moderate</span></h4>
+    <p>2,000MW of the pipeline sits at Sweetwater 1 and Sweetwater 2 in ERCOT. From 11 July 2026 large load interconnection runs through the Batch Zero process rather than individual studies, allocating available transmission capacity among studied and committed loads. The company names this in its own risk disclosure. <span class="tag">Filed</span> ERCOT Market Notice M-B062326-01, 23 Jun 2026.</p>
+  </div>
+
+  <div class="risk sev-med">
+    <h4>Hardware obsolescence on a fleet bought for roughly $10.9bn <span class="sev">Moderate</span></h4>
+    <p>Dell purchase agreements since November 2025 total approximately $5.8bn, $2.3bn, $1.2bn and $1.6bn. The useful life assigned to that fleet is the largest accounting judgement in the accounts, and the company has already shortened the estimated life of mining hardware once, at 31 December 2025. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="risk sev-low">
+    <h4>Securities litigation is dismissed but on appeal <span class="sev">Low</span></h4>
+    <p>The putative class action in the District of New Jersey was dismissed in full and with prejudice on 18 February 2026. Lead plaintiffs appealed to the Third Circuit, and the appeal was docketed there on 20 March 2026 with no briefing schedule yet set. A reversal would restore a claim covering purchasers from the November 2021 initial public offering through 1 November 2022. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="risk sev-low">
+    <h4>Canadian permanent establishment and goods and services tax <span class="sev">Low</span></h4>
+    <p>A Notice of Appeal was filed with the Tax Court of Canada on 23 June 2025 disputing the Canada Revenue Agency's determination that the company has a permanent establishment in Canada and the related assessment. The Crown replied on 3 November 2025 and no timetable has been set. The amount at issue is not quantified in the filings read for this document. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="risk sev-low">
+    <h4>Rights that attach to an Australian incorporation <span class="sev">Low</span></h4>
+    <p>Corporate affairs are governed by the Australian Corporations Act 2001 and the company's constitution. Takeovers fall under Chapter 6 of that Act, acquisitions of substantial interests may require approval under the Australian Foreign Acquisitions and Takeovers Act 1975, and the constitution contains proportional takeover provisions alongside the B Class voting rights. Enforcement of United States civil judgments against the company or its directors may be limited. <span class="tag">Filed</span></p>
+  </div>
+</section>
+
+<!-- ===================== 11. BULL / BASE / BEAR ===================== -->
+<section id="s11">
+  <h2 class="sec"><span class="n">11</span>Bull / base / bear</h2>
+  <p class="sub">Each case with its preconditions: what must be true, not what might be.</p>
+  <div class="cases">
+    <div class="case bear"><h4>Bear</h4><p>Commissioning slips. Tranches are late, Microsoft exercises a cure right, and the delivery-linked structure bites at the worst moment: the coverage covenant fails, the parent guarantee is called on the unaccepted tranches, and further capital is raised into a falling price. Mining revenue is gone by then, so there is nothing underneath. The $520M transition impairment proves conservative.</p>
+      <p class="req">Requires: a delivery slip material enough to trigger the acceptance provisions, and capital markets less accommodating than in the year to July 2026.</p></div>
+    <div class="case"><h4>Base</h4><p>Horizon 1 to 4 lands broadly on schedule through late 2026. Remaining performance obligations step up sharply as tranches are accepted, deferred revenue converts, and fiscal 2027 revenue is a different order of magnitude from fiscal 2026. Mining goes to nil and the impairment is taken. The company remains a serial issuer of equity and converts, and dilution is the price of the growth.</p>
+      <p class="req">Requires: delivery within the contractual windows, and the 2027 build funded from prepayments, project debt and operating cash rather than from equity at these levels.</p></div>
+    <div class="case bull"><h4>Bull</h4><p>Delivery holds, the $4bn year-end ARR target is substantially met, and the 45% customer prepayment rate on recent contracts becomes the norm, cutting the equity needed per megawatt. Sweetwater clears Batch Zero, 1,210MW arrives in 2027, and the NVIDIA rights vest, bringing up to $2.1bn of primary capital at $70.00 from the supplier itself. Booked backlog stops being the constraint on the multiple.</p>
+      <p class="req">Requires: acceptance of the Microsoft tranches, Batch Zero allocation at Sweetwater, and GPU delivery volumes high enough to vest the NVIDIA rights.</p></div>
+  </div>
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>All three cases turn on one variable, which is unusual and worth saying plainly. It is not the Bitcoin price, not the AI capex cycle, and not the multiple. It is whether GPU tranches at Childress are delivered and accepted on the contractual schedule. The financing, the covenant, the guarantee, the revenue recognition and the impairment timetable are all keyed to that same event. A reader who tracks one thing should track that.</p>
+  </div>
+</section>
+
+<!-- ===================== 12. RESEARCH SUMMARY ===================== -->
+<section id="s12">
+  <h2 class="sec"><span class="n">12</span>Research summary</h2>
+  <p>IREN has converted a Bitcoin mining estate into a contracted AI infrastructure business faster than any of its listed peers, and the contracts are with counterparties that do not sign lightly. Announced contract value across the Microsoft, NVIDIA and July 2026 agreements exceeds $15.9bn. Against that, the accounts at 31 March 2026 recognised $710.3M of unsatisfied remaining performance obligations and nil delivered-and-accepted tranches under the largest of those contracts.</p>
+  <p>That is not a contradiction and it is not a red flag on its own. It is the definition of the position: the value has been contracted and the revenue has not yet been earned, and everything between the two is execution on a construction and commissioning schedule. The company has funded that schedule aggressively, with $6.7bn of convertible principal, $3.6bn of ring-fenced project debt, an at-the-market programme and customer prepayments, and it has bought $459.0M of capped calls to limit the dilution the converts imply.</p>
+  <p>What a reader should hold on to: revenue fell for three consecutive quarters while commitments rose thirty-two-fold; the auditor is new and the FY2024 opinion carried a going concern paragraph; the two Co-Chief Executives hold roughly 35.4% of the votes and were granted 18,198,656 restricted stock units in July 2026; and a quarter of the shares outstanding are sold short against a consensus target more than double the current price. Almost every one of those facts resolves, one way or the other, on whether Horizon 1 to 4 is delivered and accepted through the back half of 2026.</p>
+</section>
+
+<!-- ===================== 13. NULL CATEGORIES ===================== -->
+<section id="s13">
+  <h2 class="sec"><span class="n">13</span>Null categories</h2>
+  <p class="sub">Requested categories with nothing to report. Status reads Covered above, None where a
+  named source was checked and found empty, or Not established where the category was not examined.
+  A category nobody looked at is a gap, not an absence.</p>
+  <div class="tw"><table class="nulls">
+    <thead><tr><th>Category</th><th>Status</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Dividends</td><td class="status">None</td><td>No dividend has been paid or declared on the ordinary shares. The Form 10-K states any future dividend is at the board's absolute discretion, and B Class shares carry no dividend entitlement. Checked against the complete filing index on 2 August 2026.</td></tr>
+      <tr><td class="lbl">Share buybacks</td><td class="status">Covered above</td><td>Not a conventional programme. Shareholders approved repurchases pursuant to the Prepaid Forward Transactions and the Capped Call Transactions at the 2025 annual general meeting. Both are described in section 7.</td></tr>
+      <tr><td class="lbl">Analyst coverage</td><td class="status">Covered above</td><td>Named in section 8 with the firms, figures and dates.</td></tr>
+      <tr><td class="lbl">Index membership</td><td class="status">Covered above</td><td>Russell 1000 from the close on 26 June 2026, in section 8. Nasdaq-100 membership is separately not established, below.</td></tr>
+      <tr><td class="lbl">Nasdaq-100 membership</td><td class="status">None</td><td>The company does not appear among the six additions in Nasdaq's announcement of the annual reconstitution effective 22 December 2025. Secondary commentary asserting membership was not corroborated by any index publication located on 2 August 2026.</td></tr>
+      <tr><td class="lbl">Segment reporting</td><td class="status">None</td><td>One operating segment for the year to 30 June 2025, as tagged in the Form 10-K. Revenue is disaggregated between Bitcoin mining and AI Cloud services but no segment result is presented.</td></tr>
+      <tr><td class="lbl">Securities class action</td><td class="status">Covered above</td><td>Dismissed with prejudice 18 February 2026, on appeal to the Third Circuit. Recorded in section 10, and the docket check is described in section 14.</td></tr>
+      <tr><td class="lbl">Bitcoin held on balance sheet</td><td class="status">None</td><td>Nil at 31 March 2026. The company states it liquidates mined Bitcoin daily.</td></tr>
+      <tr><td class="lbl">Preferred stock</td><td class="status">None</td><td>No preferred class is outstanding. The share capital comprises ordinary shares and two B Class shares, per the Form 10-Q balance sheet at 31 March 2026.</td></tr>
+      <tr><td class="lbl">Going concern qualification, current</td><td class="status">None</td><td>The FY2025 audit report was not qualified or modified. The FY2024 report carried a going concern explanatory paragraph, recorded in section 10.</td></tr>
+      <tr><td class="lbl">Late filing notifications</td><td class="status">None</td><td>No filing of type NT 10-K, NT 10-Q, NT 20-F or NT 40-F appears anywhere in the complete submissions index of 309 filings from 26 August 2021 to 20 July 2026, searched on 2 August 2026.</td></tr>
+      <tr><td class="lbl">Secondary listing outside the United States</td><td class="status">None</td><td>The Form 10-K states the ordinary shares are solely listed on Nasdaq. No entity trades under the code IREN on the Australian Securities Exchange, checked against that exchange's company endpoint on 2 August 2026 with three positive controls. Described in section 14.</td></tr>
+      <tr><td class="lbl">Insider open-market purchases</td><td class="status caution-t">Not established</td><td>Eighteen Forms 4 were filed between 3 July 2025 and 1 July 2026 but their transaction codes were not read, so award-related and open-market activity are not separated. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Peer trading multiples</td><td class="status caution-t">Not established</td><td>Peer enterprise values and contracted megawatts were not assembled, so no peer multiple is shown. Also named in what was not checked.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 14. METHODOLOGY & SOURCES ===================== -->
+<section id="s14">
+  <h2 class="sec"><span class="n">14</span>Methodology &amp; sources</h2>
+  <p class="sub">Pricing basis, the tagging scheme, and, importantly, what was not checked.</p>
+
+  <p><b>Pricing basis.</b> All market data is struck on the Nasdaq close of 31 July 2026, a Friday. This document is stamped 2 August 2026, a Sunday, and no session has traded in between. Share counts are the filed cover-page figure at 30 April 2026, which is the most recent count on any document lodged with the Securities and Exchange Commission.</p>
+
+  <h3>Provenance tags</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Tag</th><th>What it asserts</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl"><span class="tag">Filed</span></td><td>Stated in an SEC filing or company release, cited by form and date. Also covers a dated official publication by a named non-SEC issuer, with the issuer named in the source line. Used here for an ERCOT market notice and for a company release published on the investor site but not lodged with the Securities and Exchange Commission.</td></tr>
+      <tr><td class="lbl"><span class="tag">Estimate</span></td><td>Derived or inferred here. The arithmetic is shown.</td></tr>
+      <tr><td class="lbl"><span class="tag">Open</span></td><td>Expected but unconfirmed. Nothing filed either way.</td></tr>
+      <tr><td class="lbl"><span class="tag">Market</span></td><td>Price, volume, float, short interest, published targets and ratings, stamped with the close or publication date. A third party's target or rating is market data, attributed to the firm that issued it and never adopted here.</td></tr>
+      <tr><td class="lbl"><span class="tag">Press</span></td><td>Reported by a named publication that is neither the issuer nor an analyst, cited by outlet and date. Corroborates; never the sole basis for a material claim.</td></tr>
+      <tr><td class="lbl"><span class="tag">Social</span></td><td>Publicly posted by a named account, cited by handle and date. Asserts that the statement was made, never that it is true. No claim in this document rests on it.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>The filing sweep</h3>
+  <p>Run on 2 August 2026 against the complete submissions index for Central Index Key 1878848: <b>309 filings, 26 August 2021 to 20 July 2026</b>, with no supplementary index holding older material back. Exhibit lists were opened rather than form types ticked off; the Microsoft Partner Statement of Work, the Dell purchase agreements and the indentures all sit in exhibits rather than in the covering form.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Form</th><th class="num">Ever</th><th class="num">Count</th><th class="when">Most recent</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">8-K</td><td class="num">yes</td><td class="num">28</td><td class="when">2026-07-20</td></tr>
+      <tr><td class="lbl">10-Q</td><td class="num">yes</td><td class="num">3</td><td class="when">2026-05-08</td></tr>
+      <tr><td class="lbl">10-K</td><td class="num">yes</td><td class="num">1</td><td class="when">2025-08-28</td></tr>
+      <tr><td class="lbl">6-K</td><td class="num">yes</td><td class="num">125</td><td class="when">2025-06-30</td></tr>
+      <tr><td class="lbl">20-F</td><td class="num">yes</td><td class="num">4</td><td class="when">2025-03-20</td></tr>
+      <tr><td class="lbl">40-F</td><td class="num">no</td><td class="num">0</td><td class="when">n/a</td></tr>
+      <tr><td class="lbl">S-1</td><td class="num">no</td><td class="num">0</td><td class="when">n/a</td></tr>
+      <tr><td class="lbl">S-3</td><td class="num">no</td><td class="num">0</td><td class="when">n/a</td></tr>
+      <tr><td class="lbl">424</td><td class="num">yes</td><td class="num">15</td><td class="when">2026-03-04</td></tr>
+      <tr><td class="lbl">Schedule 13D</td><td class="num">yes</td><td class="num">2</td><td class="when">2023-09-19</td></tr>
+      <tr><td class="lbl">Schedule 13G</td><td class="num">yes</td><td class="num">19</td><td class="when">2026-02-13</td></tr>
+      <tr><td class="lbl">NT 10-K, NT 10-Q, NT 20-F, NT 40-F</td><td class="num">no</td><td class="num">0</td><td class="when">n/a</td></tr>
+      <tr><td class="lbl">Form 3</td><td class="num">yes</td><td class="num">8</td><td class="when">2025-09-18</td></tr>
+      <tr><td class="lbl">Form 4</td><td class="num">yes</td><td class="num">18</td><td class="when">2026-07-01</td></tr>
+      <tr><td class="lbl">DEF 14A and related proxy material</td><td class="num">yes</td><td class="num">4</td><td class="when">2026-07-09</td></tr>
+    </tbody>
+  </table></div>
+  <p>The absence of S-1 and S-3 is not a gap: as a foreign private issuer the company used Forms F-1 and F-3, and after the transition it amended its automatic shelf by post-effective amendment on 28 August 2025 rather than filing a new S-3. Eleven such amendments and effectiveness notices sit in the index.</p>
+
+  <h3>Where this issuer's continuous disclosure actually sits</h3>
+  <p>The question matters because incorporation and filing status point in different directions here, and the answer is not what an Australian incorporation would suggest.</p>
+  <p><b>Filing status was established from the forms filed, not from the place of incorporation, and traced to the earliest document that states it.</b> Three dates are involved and each document is accurate from where it stands. The Form 10-K of 28 August 2025 states that <i>"As of December 31, 2024, the Group no longer met the definition of a 'foreign private issuer'"</i>, which is the determination date. The Form 8-K of 3 July 2025 states that <i>"Effective July 1, 2025, the Company is required to file periodic reports and registration statements on U.S. domestic issuer forms"</i>, which is the date the obligation began. Between those two, the automatic shelf registration statement of 21 January 2025 still described the company as qualifying as a foreign private issuer, which was correct: the test is failed on the determination date but the forms do not change until the first day of the next fiscal year. Reading only the July 2025 filing would date the change six months late; reading only the January 2025 filing would miss it entirely.</p>
+  <p>The filing record corroborates both. The last Form 6-K was filed 30 June 2025 and the first Form 8-K on 1 July 2025, with the first Forms 3 following on 3 July 2025 as officers and directors came within Exchange Act Section 16.</p>
+  <p><b>Outside the SEC, one regulator holds filings and no exchange does.</b> The company is an Australian public company and its own exhibit describing the securities registered under Exchange Act Section 12 states that <i>"All public companies are required to prepare annual financial reports and directors' reports for each financial year, and to file these reports with the Australian Securities and Investments Commission."</i> That obligation arises from the Australian Corporations Act 2001 and is independent of any listing.</p>
+  <p>The Australian Securities and Investments Commission's own register was reached, by a route other than its web search. Its published company register extract for July 2026 was read in full, 4,418,335 rows, on 2 August 2026. It records <b>IREN LIMITED, Australian Company Number 629 842 799, an Australian public company limited by shares, sub-class unlisted, registered and current since 6 November 2018, Australian Business Number 60 629 842 799</b>, with former names Iris Energy Limited and Iris Energy Pty Ltd and the current name effective 28 November 2024. The same extract records BHP Group Limited as sub-class listed, which is the control establishing that the unlisted classification discriminates. The two B Class holders, Awassi Capital Holdings 1 Pty Ltd and Awassi Capital Holdings 2 Pty Ltd, are recorded as registered Australian proprietary companies from 5 November 2018.</p>
+  <p>No Australian exchange holds anything. The Form 10-K states the ordinary shares are <i>"solely listed on the Nasdaq in the United States"</i>, and the Australian Securities Exchange returns no entity for the code IREN, while returning BHP Group Limited, Commonwealth Bank of Australia and Iress Limited for their codes on the same request on 2 August 2026.</p>
+  <div class="note">
+      <p><b>What a reader of this file must check that neither the Securities and Exchange Commission nor a United States exchange covers.</b> One thing, and it is a real gap rather than a formality: the annual financial report and directors' report lodged with the Australian Securities and Investments Commission under the Australian Corporations Act 2001. Those documents are prepared under a different framework from the Form 10-K and are not mirrored on EDGAR. That register is not free to search and its documents are purchased individually, so no such lodgement was retrieved for this document. The company register extract establishes that the entity exists, is current and is unlisted; it does not show what has been lodged.</p>
+      <p>Everything else that would ordinarily sit with a home regulator sits with the Securities and Exchange Commission here, because the company reports as a United States domestic filer and lists nowhere else. There is no Australian exchange announcement platform to check, no continuous disclosure notice regime running in parallel, and no second market in the shares.</p>
+  </div>
+
+  <h3>Full-text search, and the issuer named in others' filings</h3>
+  <p>EDGAR full-text search was run on 2 August 2026 against the underlying index. Searching the current name alone is not sufficient for this issuer and would have produced a false negative: the company was Iris Energy Limited until November 2024 and most third-party references still use that name.</p>
+  <p>Restricting to periodic and registration forms and excluding the company's own filings, 59 filings by other registrants named it between January 2025 and August 2026. They divide into two groups. The first is competitor and comparison references from listed miners and data centre developers, including Riot Platforms, Bitfarms, Cipher, CleanSpark, TeraWulf, Applied Digital, Hyperscale Data, BitGo, SharonAI and Blockfusion. The second is a single genuine relationship: Michael Alfred has served on this company's board since 2021 and joined the board of Bakkt Holdings in September 2025, which is disclosed in Bakkt's Form 8-K of 22 September 2025 and its proxy statement of 30 April 2026. No counterparty, supply, offtake or financing relationship with any other issuer was located through that index.</p>
+
+  <h3>Court dockets</h3>
+  <p>The CourtListener federal docket index was searched on 2 August 2026. It confirms the two matters the filings describe: <i>Network Racing Pty Ltd. v. IREN Limited</i>, District of New Jersey 2:22-cv-07273, filed 14 December 2022 and terminated 18 February 2026, and the appeal at the Third Circuit, number 26-1560, docketed 20 March 2026 and open. The one-week difference between the notice of appeal on 13 March and the docketing on 20 March is the ordinary gap between the two courts, not a discrepancy.</p>
+  <p>The search also returned <i>In re Iris Energy Limited Securities Litigation</i>, Eastern District of New York 1:24-cv-07046, filed 7 October 2024 and terminated 19 March 2025, nature of suit securities. No filing read for this document describes that matter, which was open and closed between the FY2024 and FY2025 annual reports. Its disposition was not retrieved and nothing here rests on it; it is recorded because a reader repeating this search will find it.</p>
+  <div class="note caution">
+    <p><b>A name collision worth naming before someone trips over it.</b> The same index returns <i>IRIS ENERGY LIMITED</i>, case 26-90567 in the United States Bankruptcy Court for the Southern District of Texas, petitioned 29 May 2026. It is not this company. It is one of thirty-nine debtors jointly administered under GoldenPeaks Poland Holding Limited, case 26-90564, a group whose other members are named Alpha, Bravo, Charlie, Delta, Echo, Foxtrot, Gamma, Helios, Juno, Leto, Rhea, Sierra and Whiskey Energy. This company changed its name in November 2024, signed $3.6bn of financing on the petition date, reported $7.6bn of cash a month later, and filed no report under Item 1.03 of Form 8-K, which a registrant entering bankruptcy must.</p>
+  </div>
+
+  <h3>Grid operator data</h3>
+  <p>Checked on 2 August 2026 and the result is partly negative, which is itself the finding. ERCOT's Large Load Integration page publishes the Batch Zero process documents, forms and attestations under Planning Guide Revision Request 145, and ERCOT Market Notice M-B062326-01 of 23 June 2026 gives the approval and the 11 July 2026 effective date. <b>ERCOT does not publish a large load interconnection queue naming the requesting entity</b> in the way it publishes generation interconnection data, so the 750MW at Childress and the 2,000MW at Sweetwater cannot be corroborated site by site against the grid operator. They rest on company disclosure. The Oklahoma site sits outside ERCOT and no equivalent check was made for it, nor for the British Columbia sites.</p>
+
+  <h3>What was not checked</h3>
+  <p>An unexamined area is a gap, not a clean bill. The following were not reached or not attempted.</p>
+  <ul>
+    <li><b>Australian Securities and Investments Commission lodged documents.</b> The company register extract was read in full, but the annual financial reports and directors' reports themselves sit behind a paid document service that was not used. The registry's own web search returned a client-side application rather than data on 2 August 2026.</li>
+    <li><b>Australian Business Register.</b> Queried on 2 August 2026 for both the Australian Company Number and the Australian Business Number. The number search returned "No record found matching ACN 629842799" with the registry's own note that an Australian Company Number appears there only if the company also holds an Australian Business Number, and the record pages render their values in the browser rather than in the response. Treated as not reached rather than as an absence, since the Australian Securities and Investments Commission extract records an Australian Business Number for this entity.</li>
+    <li><b>Insider transaction codes.</b> Eighteen Forms 4 were enumerated but not opened, so open-market purchases are not separated from award-related transactions.</li>
+    <li><b>Peer comparables.</b> No peer enterprise value, revenue multiple or contracted-megawatt figure was assembled, so section 5 names peers without pricing them.</li>
+    <li><b>The Microsoft Partner Statement of Work as filed.</b> Its existence and headline terms are taken from the Form 8-K of 3 November 2025 and the Form 10-Q of 5 February 2026 exhibit list. The exhibit's own text, including the redacted portions, was not read line by line.</li>
+    <li><b>The June 2026 quarter.</b> The FY2026 Form 10-K had not been filed as at 2 August 2026. The most recent audited or reviewed financial statements are those to 31 March 2026, and the $7.6bn cash figure at 30 June 2026 is a company statement described as preliminary and unaudited.</li>
+    <li><b>Grid operators other than ERCOT.</b> No check was made against the Southwest Power Pool for the Oklahoma site or against BC Hydro for the three British Columbia sites. The BC Hydro page did not respond on 2 August 2026.</li>
+    <li><b>Trade press and social sentiment.</b> Beyond the analyst and index items cited in section 8, no systematic press or social sweep was run, and no promotional activity finding is asserted either way.</li>
+    <li><b>The disposition of the Eastern District of New York matter</b> described above, and the amount at issue in the Tax Court of Canada appeal.</li>
+  </ul>
+</section>
+
+<!-- ===================== 15. DOCUMENT LOG ===================== -->
+<section id="s15">
+  <h2 class="sec"><span class="n">15</span>Document log</h2>
+  <p class="sub">Newest first. The original build entry is never removed or rewritten.</p>
+  <div class="log">
+    <div class="logentry current">
+      <div class="when">2 August 2026 (original build) <span class="latest">Latest</span></div>
+      <div class="basis">Priced off 31 Jul 2026 close · $36.80 · $13.2bn cap</div>
+      <p><b>Built from primary filings.</b> The complete Securities and Exchange Commission submissions index for Central Index Key 1878848, 309 filings from 26 August 2021 to 20 July 2026, read on 2 August 2026 with exhibit lists opened rather than form types counted. The load-bearing documents are the Form 10-K of 28 August 2025 for the year to 30 June 2025, the Form 10-Q of 8 May 2026 for the quarter to 31 March 2026, the results release of 7 May 2026, and the Forms 8-K covering the Microsoft and Dell agreements of 2 November 2025, the convertible issues of 14 October 2025, 8 December 2025 and 14 May 2026, the NVIDIA agreements of 7 May 2026, the project financing of 29 May 2026, and the customer contracts announced 20 July 2026.</p>
+      <p><b>Beyond the filings.</b> EDGAR full-text search under both the current and the former name; the CourtListener federal docket index; the Australian Securities and Investments Commission company register extract for July 2026, read in full; the Australian Securities Exchange company endpoint; ERCOT's Large Load Integration page and Market Notice M-B062326-01; and the company's own investor site for the Russell 1000 release of 29 June 2026, which was never lodged with the Securities and Exchange Commission.</p>
+      <p><b>Pricing basis.</b> Nasdaq close of 31 July 2026 at $36.80. Share count 357,378,674 as at 30 April 2026 from the Form 10-Q cover page, the most recent filed count. The as-of stamp is two days later than the close and no session traded in between.</p>
+      <p><b>Conventions fixed at construction.</b> Fifteen sections; provenance tagged on every table basis, framing item and masthead figure; analyst inference confined to the violet blocks; accent taken from the company mark.</p>
+      <p><b>Known gaps in this version.</b> No enterprise value is struck, because its components carry four different dates and the project financing drawn balance is undisclosed. No peer multiples are shown. Insider transaction codes were not read, so the insider purchase row is unresolved. The annual financial report lodged with the Australian Securities and Investments Commission was not retrieved; only the company register extract was. No check was made against the Southwest Power Pool or BC Hydro. The June 2026 quarter is unreported and the $7.6bn cash figure at that date is preliminary and unaudited. The Eastern District of New York securities matter surfaced on the docket index is recorded without its disposition.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="norec">
+    No buy, sell, or hold recommendation is issued and no price target is derived.
+    Third-party targets and ratings, where shown, are the published views of the
+    firms named and are reported as market data. This document is for research and
+    educational purposes and is not investment advice. Verify all figures against
+    primary filings on sec.gov before acting.
+  </div>
+  <p style="margin-top:16px">IREN · IREN Limited · Equity Research Report · as of 2 August 2026</p>
+</footer>
+
+</div>
+</body>
+</html>
