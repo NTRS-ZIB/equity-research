@@ -1,7 +1,7 @@
 name: Rebuild index
 
-# Runs whenever a ticker file changes on the main branch, rebuilds index.html
-# from whatever is in the folder, and commits it back if it changed.
+# Runs whenever a ticker file changes on the main branch, rebuilds index.html from
+# whatever is in the folder, and commits it back if it changed.
 
 on:
   push:
@@ -19,23 +19,31 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
       - name: Rebuild index.html
         run: python build_index.py
 
+      - name: Confirm the file was written
+        run: |
+          test -f index.html || { echo "build_index.py wrote no index.html"; exit 1; }
+          echo "index.html is $(wc -c < index.html) bytes"
+
       - name: Commit if changed
         run: |
           git config user.name "index-bot"
           git config user.email "index-bot@users.noreply.github.com"
-          if git diff --quiet index.html; then
+          # Stage first. git diff ignores untracked files, so testing before staging
+          # reports "no change" on a file that has never been committed.
+          git add index.html
+          if git diff --cached --quiet; then
             echo "Index unchanged, nothing to commit."
           else
-            git add index.html
             git commit -m "Rebuild index"
             git push
+            echo "Committed and pushed index.html"
           fi
