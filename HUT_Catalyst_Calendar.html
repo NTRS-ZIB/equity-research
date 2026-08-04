@@ -15,13 +15,12 @@
    PER-TICKER PALETTE
    ========================================================================= */
 :root{
-  /* Hut 8's wordmark and icon are achromatic: measured across the company's own
-     512px mark, every inked pixel falls below both the chroma and the saturation
-     floor, so the mark carries no colour to take. The accent therefore comes
+  /* Hut 8's wordmark and icon are achromatic, so the mark carries no
+     colour to take. The accent therefore comes
      from the brand colour in the site chrome, which Hut 8 declares as its own
      token: #B3FF00, a chartreuse at hue 77.9, saturation 100%, lightness 50%.
      Normalised for white paper the saturation falls to 72% and the lightness to
-     28%, giving #5C7B14 at 4.89:1 against the page. The hue is carried through
+     28%, giving #5C7B14. The hue is carried through
      unchanged: it sits 38.9 degrees clear of the nearest meaning-bearing colour,
      so no rotation was needed. */
   --accent:      #5C7B14;
@@ -31,7 +30,7 @@
 }
 
 /* ============================================================================
-   SHARED STYLESHEET v1.57 : BEGIN
+   SHARED STYLESHEET v1.80 : BEGIN
    ========================================================================= */
 :root{
   color-scheme: light only;
@@ -265,7 +264,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   section{page-break-inside:avoid}
 }
 /* ============================================================================
-   SHARED STYLESHEET v1.57 : END
+   SHARED STYLESHEET v1.80 : END
    ========================================================================= */
 </style>
 </head>
@@ -762,7 +761,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
       <tr><td class="lbl">Convertible and other financings</td><td class="status">Covered above</td><td>River Bend project financing closed (R7), Beacon Point project financing closed (R9), River Bend notes begin amortising (D6), project debt ring-fences the losses and the cash alike (S4). No convertible instrument exists.</td></tr>
       <tr><td class="lbl">Mergers and acquisitions</td><td class="status">Covered above</td><td>American Bitcoin listed through the Gryphon merger (R4), four power generation assets divested (R6), business combination completed and Hut 8 Corp. formed (R1).</td></tr>
       <tr><td class="lbl">Index membership</td><td class="status caution-t">Not established</td><td>Not examined. No index provider's published methodology or rebalance schedule was checked, and the dual Nasdaq and TSX listing makes more than one index family relevant. Also named in what was not checked.</td></tr>
-      <tr><td class="lbl">Analyst coverage and short interest</td><td class="status caution-t">Not established</td><td>Not examined. No attributed, dated third-party target or rating was located, and exchange short interest reports were not retrieved. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Analyst coverage and short interest</td><td class="status caution-t">Not established</td><td>Coverage was examined on 3 August 2026 and is not absent: nineteen analysts cover the issuer and the eleven 2026 actions are carried in the valuation section of the companion report with their dates. This row remains not established because exchange short interest reports were still not retrieved, which is the half of it this calendar would use. Also named in what was not checked.</td></tr>
       <tr><td class="lbl">Credit rating actions</td><td class="status caution-t">Not established</td><td>Not examined. Both project financings are described by the company as investment grade and the Beacon Point tenant as rated AA- or higher, but no rating agency publication was consulted. Also named in what was not checked.</td></tr>
       <tr><td class="lbl">Segment reporting</td><td class="status">None</td><td>Revenue is presented in three layers, Power, Digital Infrastructure and Compute, with cost of revenue split the same way. No segment balance sheet or capital expenditure split is disclosed.</td></tr>
       <tr><td class="lbl">Canadian continuous disclosure</td><td class="status caution-t">Not established</td><td>The Toronto Stock Exchange listing was confirmed from the exchange's own company directory on 3 August 2026, but the Canadian filing registry returned a challenge page and could not be queried. Also named in what was not checked.</td></tr>
@@ -927,6 +926,10 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
     <div class="logentry current">
       <div class="when">3 August 2026 <span class="latest">Latest</span></div>
       <div class="basis">Original build &middot; 7 dated &middot; 8 standing &middot; 11 resolved &middot; priced off 3 Aug 2026 close</div>
+      <div class="correction">
+        <span class="lbl">Correction</span>
+        <p><b>Analyst coverage is not absent.</b> The null row recorded that no attributed, dated third-party target or rating had been located. Nineteen analysts cover this issuer and the eleven 2026 actions are now carried in the companion report, running from $124 to $263. The row stays not established because the half of it this calendar would use, exchange short interest, was still not retrieved, and it now says which half is which rather than resting on a false absence.</p>
+      </div>
       <p><b>Repriced to the 3 August 2026 close, and the register read rather than counted.</b> The 3 August session closed while this file was being assembled, so the basis moves 31 July 2026 &rarr; 3 August 2026 and the price $107.63 &rarr; $112.08, up 4.13%. The beneficial-ownership row had asserted that none of fourteen filings discloses an activist position without naming a holder; the filings are now read, one of the fourteen turns out to be this company&#39;s own statement about a different registrant, and the conclusion is restated on what the filings say. <b>The horizon band boundaries do not move</b>, being a convention this document adopted for dividing near from far rather than a measurement.</p>
       <p><b>Built from</b> the company's filings on EDGAR under Central Index Key 0001964789, swept across its complete index of 250 filings from February 2023 to 31 July 2026, together with the predecessor entity's 247 filings under Central Index Key 0001731805. The load-bearing documents are the FY2025 Form 10-K of 25 February 2026, the first quarter Form 10-Q of 6 May 2026, and the Current Reports of 28 April, 5 June, 10 June, 12 June and 20 July 2026 with their exhibits. The Form 10-KT of 28 March 2024 establishes the change of fiscal year end and the predecessor's Form 15 of 11 December 2023 establishes the succession. The Toronto Stock Exchange company directory confirmed the second listing.</p>
       <p><b>Pricing basis</b> is the close of 3 August 2026 at $112.08, the most recent completed session.</p>

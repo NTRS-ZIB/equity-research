@@ -19,8 +19,7 @@
      where it is published as the theme colour and as the mask-icon colour. The
      mark carries the same blue as a deep field behind a white spark glyph. It is
      a strongly saturated blue at hue 228. Held at that hue and eased to a 72%
-     saturation so it holds on white at small sizes, it becomes #1B36A7, which
-     reads at 9.85:1 against paper. The hue sits clear of every meaning-bearing
+     saturation so it holds on white at small sizes, it becomes #1B36A7. The hue sits clear of every meaning-bearing
      colour in this document, so no rotation was needed. */
   --accent:      #1B36A7;
   --accent-deep: #14287B;
@@ -29,7 +28,7 @@
 }
 
 /* ============================================================================
-   SHARED STYLESHEET v1.57 : BEGIN
+   SHARED STYLESHEET v1.80 : BEGIN
    ========================================================================= */
 :root{
   color-scheme: light only;
@@ -263,7 +262,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   section{page-break-inside:avoid}
 }
 /* ============================================================================
-   SHARED STYLESHEET v1.57 : END
+   SHARED STYLESHEET v1.80 : END
    ========================================================================= */
 </style>
 </head>
@@ -517,14 +516,19 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   <h3>Published third-party targets</h3>
   <p>Analyst targets are reported here as market data. This file issues no rating and derives no target of its own.</p>
   <div class="tw"><table>
-    <thead><tr><th>Firm and analyst</th><th class="num">Target</th><th>Rating and basis</th></tr></thead>
+    <thead><tr><th>Firm and analyst</th><th class="when">Date</th><th>Rating</th><th class="num">Target</th><th class="num">Price at publication</th><th>Basis and disclosed conflict</th></tr></thead>
     <tbody>
-      <tr><td class="lbl">Consensus, 13 analysts</td><td class="num">$23.19</td><td>Range $19 to $27 <span class="tag">Market</span> As reported 27 Jul 2026</td></tr>
-      <tr><td class="lbl">BTIG, Gregory Lewis</td><td class="num">$26</td><td>Buy <span class="tag">Market</span> As reported 27 Jul 2026</td></tr>
-      <tr><td class="lbl">KBW, Stephen Glagola</td><td class="num">$25</td><td>Buy, raised from $16 <span class="tag">Market</span> As reported 27 Jul 2026</td></tr>
-      <tr><td class="lbl">Bernstein, Chad Dillard</td><td class="num">$24</td><td>Buy <span class="tag">Market</span> As reported 27 Jul 2026</td></tr>
-      <tr><td class="lbl">Maxim Group, Matthew Galinko</td><td class="num">$24</td><td>Buy, raised from $22 <span class="tag">Market</span> As reported 27 Jul 2026</td></tr>
-      <tr><td class="lbl">Northland Securities, Michael Grondahl</td><td class="num">$21</td><td>Buy <span class="tag">Market</span> As reported 27 Jul 2026</td></tr>
+      <tr><td class="lbl">KBW, Stephen Glagola</td><td class="when">28 Jul 2026</td><td>Buy</td><td class="num">$25, raised from $16</td><td class="num">$13.48</td><td><span class="tag">Market</span> Action dated by the service to 28 July 2026. This document had recorded reading it on 27 July, and the two cannot both be right; the discrepancy is left visible rather than resolved. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">Chardan Capital, Bill Papanastasiou</td><td class="when">28 Jul 2026</td><td>Buy</td><td class="num">$21, raised from $19</td><td class="num">$13.48</td><td><span class="tag">Market</span> Reported by the service. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">Cantor Fitzgerald, Brett Knoblauch</td><td class="when">15 Jul 2026</td><td>Overweight</td><td class="num">$26, raised from $17</td><td class="num">$14.13</td><td><span class="tag">Market</span> Reported by the service. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">Needham &amp; Company, John Todaro</td><td class="when">15 Jul 2026</td><td>Buy</td><td class="num">$23, raised from $18</td><td class="num">$14.13</td><td><span class="tag">Market</span> Reported by the service. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">BTIG, Gregory Lewis</td><td class="when">14 Jul 2026</td><td>Buy</td><td class="num">$26, reiterated</td><td class="num">$13.45</td><td><span class="tag">Market</span> Reported by the service. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">H.C. Wainwright</td><td class="when">14 Jul 2026</td><td>Buy, reiterated</td><td class="num">none</td><td class="num">$13.45</td><td><span class="tag">Market</span> Reported by the service. The reiteration carries no target. Analyst not established. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">Citizens JMP, Greg P. Miller</td><td class="when">24 Jun 2026</td><td>Market Outperform</td><td class="num">$27, on initiation</td><td class="num">$16.23</td><td><span class="tag">Market</span> Reported by the service. An initiation, which is where a distribution relationship most often sits. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">Bernstein, Chad Dillard</td><td class="when">Not established</td><td>Buy</td><td class="num">$24</td><td class="num">Not established</td><td><span class="tag">Market</span> Carried here from the 27 July reading. The service does not itemise the action, so no publication date is established and no close can be struck against it. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">Maxim Group, Matthew Galinko</td><td class="when">Not established</td><td>Buy</td><td class="num">$24, raised from $22</td><td class="num">Not established</td><td><span class="tag">Market</span> Carried here from the 27 July reading, with no publication date established. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">Northland Securities, Michael Grondahl</td><td class="when">Not established</td><td>Buy</td><td class="num">$21</td><td class="num">Not established</td><td><span class="tag">Market</span> Carried here from the 27 July reading, with no publication date established. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">Consensus over 13 analysts</td><td class="when">27 Jul 2026</td><td>n/a</td><td class="num">$23.19, range $19 to $27</td><td class="num">$14.02</td><td><span class="tag">Market</span> A published aggregate reported as that service figure, not a centre struck in this document. A second service separately counts sixteen covering firms, so the size of the set is not agreed between them.</td></tr>
     </tbody>
   </table></div>
   <p>The KBW revision from $16 to $25 dates the sell-side re-rating to the fortnight after the lease announcement. Every target in the set was published after 14 July 2026 and therefore incorporates the lease; none of them predates an event that would plainly have changed it.</p>
@@ -651,7 +655,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
       <tr><td class="lbl">Segment reporting</td><td class="status">None</td><td>The company reports a single reportable segment, bitcoin mining. The lease will create a second business with no segment history.</td></tr>
       <tr><td class="lbl">Corporate credit rating</td><td class="status">None</td><td>Both note issues were sold under Rule 144A without a corporate rating. The only rating found is a provisional (P)Ba2 assigned to the New Hampshire conduit bonds that were not issued.</td></tr>
       <tr><td class="lbl">Going concern</td><td class="status">None</td><td>No going concern qualification appears in the fiscal 2025 audit report or the March 2026 quarterly report. The company states existing resources are sufficient for at least twelve months.</td></tr>
-      <tr><td class="lbl">Analyst coverage</td><td class="status">Covered above</td><td>Thirteen analysts and five named firm targets are in section 8, reported as market data.</td></tr>
+      <tr><td class="lbl">Analyst coverage</td><td class="status">Covered above</td><td>Ten named firms and a published consensus are in section 8, nine of the ten carrying a target, each with its publication date and the close on that date where the service dates the action. Reported as market data.</td></tr>
       <tr><td class="lbl">Index membership</td><td class="status">Covered above</td><td>S&amp;P SmallCap 600 from 24 March 2025, in section 5 and the calendar record.</td></tr>
       <tr><td class="lbl">At-the-market equity programme</td><td class="status">None</td><td>The last at-the-market issuance recorded was 16,619,361 shares for $191.6M gross in the half to 31 March 2025. No at-the-market sales are recorded in the half to 31 March 2026.</td></tr>
       <tr><td class="lbl">Product launches</td><td class="status">None</td><td>The company sells computation, not products. The nearest referent is capacity energisation and the AI and HPC lease, both covered in sections 2 and 9.</td></tr>
@@ -727,6 +731,8 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
     <div class="logentry current">
       <div class="when">3 August 2026 <span class="latest">Latest</span></div>
       <div class="basis">Original build &middot; priced off 3 Aug 2026 close &middot; $14.65 &middot; $3,759.3M cap</div>
+      <p><b>Third-party coverage extended, not rebuilt.</b> The six rows already carried keep their firm, analyst, rating and target exactly as sourced. What is added is the publication date, the close on that date and a disclosed-conflict column, together with four 2026 actions the earlier reading had not carried: Chardan at $21, Cantor Fitzgerald at $26, Needham at $23 and Citizens JMP at $27 on initiation, plus an H.C. Wainwright reiteration with no target. Ten named firms now appear against five before. Every one of them is cited to the service that reports it rather than to the firm, and no note was read, so no conflict is established for any.</p>
+      <p>Two things the extension could not settle are left visible. The service dates the KBW action to 28 July 2026 while this document had recorded reading it on 27 July, and both cannot hold. And the services disagree on the size of the coverage set, one counting thirteen analysts in the consensus and another sixteen covering firms. Three rows keep a date of Not established because the service does not itemise their actions, so no close can be struck against them.</p>
       <p><b>Repriced to the 3 August 2026 close, and the register carried here rather than deferred.</b> The 3 August session closed while this file was being assembled, so the basis moves 31 July 2026 &rarr; 3 August 2026 and the price $13.76 &rarr; $14.65, up 6.47% on 19.21 million shares against a recent average of 22.95 million. Market capitalisation moves $3,530.9M &rarr; $3,759.3M on the unchanged share count. The 2030 notes now sit about 1% below their $14.80 conversion price, against 8% below on the previous basis. The sources table had recorded the institutional register as <i>detailed in the companion calendar</i>; a companion document is not a source, and each file stands on its own evidence, so the holders are now named here from the filings this document swept itself.</p>
       <p><b>Built from</b> the complete Central Index Key 0000827876 filing record, 750 filings from 17 November 2008 to 17 July 2026, swept across all eighteen form families with exhibit lists enumerated rather than form types alone. The load-bearing documents are the fiscal 2025 Form 10-K of 25 November 2025, the Form 10-Q for the quarter ended 31 March 2026 filed 11 May 2026, the Form 8-K of 14 July 2026 reporting the Sandersville lease, the Form 8-K of 24 March 2026 amending the Series A certificate of designation, and the June 2026 operational update of 7 July 2026. Beneficial ownership was swept under both labels the electronic filing system emits, which surfaced eleven filings made since 13 November 2025 that a search on the older label alone returns none of. Full-text search of other filers' documents supplied the Mawson litigation from Big Digital Energy's quarterly report of 14 May 2026 and the peer-group placements in the IREN and MARA proxy statements. Non-SEC sources were the Georgia Public Service Commission, ERCOT's published Batch Zero process, and press coverage of the New Hampshire conduit bond.</p>
       <p><b>Pricing basis</b> is the Nasdaq close of 31 July 2026 at $13.76, with market capitalisation computed against the 256,608,606 shares on the quarterly report cover of 7 May 2026. Balance sheet inputs are at 31 March 2026 and bitcoin holdings at 30 June 2026, so the enterprise value in section 8 mixes three dates and says so.</p>

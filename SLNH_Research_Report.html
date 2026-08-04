@@ -20,7 +20,7 @@
      an orange, #CB5828, on the "O". The orange normalises to hue 18 and sits 13.7
      degrees from the red used for negative figures, so it is not available as an
      accent. Raw #2B76BC is H209 S63 L45. Saturation is unchanged and lightness is
-     pulled to 42 for paper, giving 5.40:1 on white. The hue is unrotated: 209 sits
+     pulled to 42 for paper. The hue is unrotated: 209 sits
      41 degrees off the nearest semantic hue. */
   --accent:      #286DAE;
   --accent-deep: #1E5385;
@@ -29,7 +29,7 @@
 }
 
 /* ============================================================================
-   SHARED STYLESHEET v1.50 : BEGIN
+   SHARED STYLESHEET v1.80 : BEGIN
    ========================================================================= */
 :root{
   color-scheme: light only;
@@ -263,7 +263,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   section{page-break-inside:avoid}
 }
 /* ============================================================================
-   SHARED STYLESHEET v1.50 : END
+   SHARED STYLESHEET v1.80 : END
    ========================================================================= */
 </style>
 </head>
@@ -696,16 +696,18 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   </ol>
 
   <h3>Third-party coverage, reported as market data</h3>
+  <p class="sub">Price at publication is the close on the date each action carries. Where that date falls on a day the market did not trade, no close is struck against it and the cell says so rather than reaching for a nearby session.</p>
 
   <p>Two ratings exist on the stock. Both are the published views of the firms named and neither is adopted here.</p>
 
   <div class="tw"><table>
-    <thead><tr><th>Firm</th><th>Rating</th><th class="num">Target</th><th>Basis</th></tr></thead>
+    <thead><tr><th>Firm</th><th>Analyst</th><th class="when">Date</th><th>Rating</th><th class="num">Target</th><th class="num">Price at publication</th><th>Basis and disclosed conflict</th></tr></thead>
     <tbody>
-      <tr><td class="lbl">H.C. Wainwright (M. Colonnese)</td><td>Buy</td><td class="num">$4.00</td><td><span class="tag">Market</span> initiated or assumed 20 Jul 2026</td></tr>
-      <tr><td class="lbl">Weiss Ratings</td><td>Sell (D&minus;)</td><td class="num">n/a</td><td><span class="tag">Market</span> upgraded from Sell (E+), 12 Jun 2026</td></tr>
-      <tr><td class="lbl">Wall Street Zen</td><td>Hold</td><td class="num">n/a</td><td><span class="tag">Market</span> upgraded from Sell, 25 Apr 2026</td></tr>
-      <tr><td class="lbl">MarketBeat consensus</td><td>Hold</td><td class="num">$4.00</td><td><span class="tag">Market</span> one Buy and one Sell</td></tr>
+      <tr><td class="lbl">Zacks Research</td><td>n/a</td><td class="when">21 Jul 2026</td><td>Hold, upgraded</td><td class="num">n/a</td><td class="num">$1.37</td><td><span class="tag">Market</span> A quantitative ratings service rather than broker research: model-derived, no target, no named analyst. Not carried before this revision, and it is the most recent action on the stock.</td></tr>
+      <tr><td class="lbl">H.C. Wainwright</td><td>Mike Colonnese</td><td class="when">20 Jul 2026</td><td>Buy</td><td class="num">$4.00</td><td class="num">$1.36</td><td><span class="tag">Market</span> <b>The conflict here is filed, not merely reported.</b> The Q1 2026 Form 10-Q records that the at-the-market offering agreement through which the company sells newly issued shares is with H.C. Wainwright &amp; Co., LLC, dated 29 April 2025. <span class="tag">Filed</span> The only Buy on the stock is published by the firm earning commissions on its share issuance, and a higher price directly increases the proceeds available under that facility. At least one wire described the action as coverage assumed rather than initiated, which suggests an analyst handover, and some services still show a superseded $5.00 attributed to a different Wainwright analyst.</td></tr>
+      <tr><td class="lbl">Weiss Ratings</td><td>n/a</td><td class="when">12 Jun 2026</td><td>Sell, D&minus;, upgraded from E+</td><td class="num">n/a</td><td class="num">$1.48</td><td><span class="tag">Market</span> A quantitative ratings service rather than broker research: model-derived, no target, no named analyst.</td></tr>
+      <tr><td class="lbl">Wall Street Zen</td><td>n/a</td><td class="when">25 Apr 2026</td><td>Hold, upgraded from Sell</td><td class="num">n/a</td><td class="num">Not established</td><td><span class="tag">Market</span> 25 April 2026 was a Saturday and no session traded, so no close can be struck against the date the service gives. The preceding close, 24 April, was $1.20. A quantitative ratings service rather than broker research.</td></tr>
+      <tr><td class="lbl">Consensus over three contributors</td><td>n/a</td><td class="when">3 Aug 2026</td><td>Hold</td><td class="num">$4.00</td><td class="num">$1.22</td><td><span class="tag">Market</span> A published aggregate reported as that service own figure, not a centre struck in this document. Its composition has changed since this file first read it: one Buy, one Hold and one Sell, where it was one Buy and one Sell before the Hold of 21 July was added.</td></tr>
     </tbody>
   </table></div>
 
@@ -869,7 +871,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   <div class="tw"><table class="nulls">
     <thead><tr><th>Category</th><th>Status</th><th>Basis</th></tr></thead>
     <tbody>
-      <tr><td class="lbl">Analyst coverage</td><td class="status">Covered above</td><td>Two ratings exist and are reported in section 08 as market data: H.C. Wainwright Buy with a $4.00 target dated 20 Jul 2026, and Weiss Ratings Sell (D&minus;) dated 12 Jun 2026, with Wall Street Zen at Hold and a MarketBeat consensus of one Buy and one Sell. Coverage is thin but it is not absent.</td></tr>
+      <tr><td class="lbl">Analyst coverage</td><td class="status">Covered above</td><td>One broker and three quantitative ratings services are reported in section 08 as market data, each with its date and the close on that date: H.C. Wainwright Buy at $4.00 dated 20 Jul 2026, and grades from Zacks Research of 21 Jul 2026, Weiss Ratings of 12 Jun 2026 and Wall Street Zen of 25 Apr 2026, alongside a published consensus of one Buy, one Hold and one Sell. Coverage is thin but it is not absent, and only one contributor is broker research.</td></tr>
       <tr><td class="lbl">Price target derived by this document</td><td class="status">None</td><td>Checked against this document's own fifteen sections and found empty. No target is derived anywhere. Third-party targets are reproduced as market data, attributed and dated, and are not adopted.</td></tr>
       <tr><td class="lbl">Rating issued by this document</td><td class="status">None</td><td>Checked against this document's own fifteen sections and found empty. No buy, sell or hold recommendation is issued.</td></tr>
       <tr><td class="lbl">Common dividend</td><td class="status caution-t">Not established</td><td>Never examined. The document records $2.1m of Series B preferred dividends paid on conversion and roughly $32.4m of Series A arrears, but no source was checked for a common dividend. Also named in what was not checked.</td></tr>
@@ -1004,6 +1006,8 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
     <div class="logentry current">
       <div class="when">3 August 2026 <span class="latest">Latest</span></div>
       <div class="basis">Priced off 3 Aug 2026 close &middot; $1.22 &middot; $192.5M cap</div>
+      <p><b>Third-party coverage extended, not rebuilt.</b> The four entries already carried keep their firm, rating and target exactly. Added are the analyst, the date as its own column, the close on that date, and the disclosed conflict, which on this issuer is filed rather than reported: the Q1 2026 Form 10-Q names H.C. Wainwright as the counterparty to the at-the-market offering agreement of 29 April 2025, and that firm publishes the only Buy on the stock. A Zacks Research upgrade to Hold of 21 July 2026 is added, which the earlier reading had not carried and which is the most recent action; the published consensus is accordingly one Buy, one Hold and one Sell where it was one Buy and one Sell.</p>
+      <p>One date resolves to no price. Wall Street Zen carries an action dated 25 April 2026, which was a Saturday, so no close can be struck against it and the cell says so rather than borrowing the preceding session. Three of the four contributors are quantitative services rather than broker research and are now marked as such, so the count of covering firms is not read as four analysts.</p>
       <div class="correction">
         <span class="lbl">Correction</span>
         <p>The ownership discussion carried one holder and described the rest of the register as "institutions roughly 8%". <b>Five further reportable positions are on file and were not recorded</b>, including <b>BlackRock at 8,321,125 shares, 5.3%, filed on 30 July 2026</b>, the same day as the Form 8-K this document treated as the most recent filing. Three more holders each report exactly 9.99% and each is a counterparty to this company's own financing. A Schedule 13D also exists, filed by Wayne W. Boos in August 2023 and run down to 145,000 shares by February 2024. Section 7 now sets out the register with the rule each statement is filed under, because a position reported under the institutional route and a position capped by a contractual blocker are not the same kind of holding and were being aggregated into one percentage.</p>

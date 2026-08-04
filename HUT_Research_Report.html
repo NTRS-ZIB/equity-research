@@ -15,13 +15,12 @@
    PER-TICKER PALETTE
    ========================================================================= */
 :root{
-  /* Hut 8's wordmark and icon are achromatic: measured across the company's own
-     512px mark, every inked pixel falls below both the chroma and the saturation
-     floor, so the mark carries no colour to take. The accent therefore comes
+  /* Hut 8's wordmark and icon are achromatic, so the mark carries no
+     colour to take. The accent therefore comes
      from the brand colour in the site chrome, which Hut 8 declares as its own
      token: #B3FF00, a chartreuse at hue 77.9, saturation 100%, lightness 50%.
      Normalised for white paper the saturation falls to 72% and the lightness to
-     28%, giving #5C7B14 at 4.89:1 against the page. The hue is carried through
+     28%, giving #5C7B14. The hue is carried through
      unchanged: it sits 38.9 degrees clear of the nearest meaning-bearing colour,
      so no rotation was needed. */
   --accent:      #5C7B14;
@@ -31,7 +30,7 @@
 }
 
 /* ============================================================================
-   SHARED STYLESHEET v1.57 : BEGIN
+   SHARED STYLESHEET v1.80 : BEGIN
    ========================================================================= */
 :root{
   color-scheme: light only;
@@ -265,7 +264,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   section{page-break-inside:avoid}
 }
 /* ============================================================================
-   SHARED STYLESHEET v1.57 : END
+   SHARED STYLESHEET v1.80 : END
    ========================================================================= */
 </style>
 </head>
@@ -471,7 +470,28 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
     <p>The NOI multiple is the most informative line and the least reliable. It divides today's market capitalisation by a net operating income figure the company states it expects at stabilisation, which is a forward number for capacity not yet built, published by the party that benefits from it, and unaudited. It also ignores the $7.5 billion of project debt that will service itself out of that NOI before any of it reaches the parent. Shown because the alternative measures are worse, not because it is dependable, and a reader wanting a levered figure should subtract debt service from the NOI before comparing it with the equity value.</p>
   </div>
   <p>The bitcoin holding is worth separating out because it is the one asset here with a daily observable price. At $1.11 billion it is 9.2% of market capitalisation and 43% of the balance sheet, so the equity is not primarily a bitcoin proxy even though the income statement makes it look like one.</p>
-  <p>No third-party price target or rating is reproduced in this document. None was located in a primary or dated published source during the work described in section 14. The Beacon Point tenant's credit rating of AA- or higher is a rating of the tenant by an unnamed agency as reported by the company, not a rating of Hut 8 or its securities.</p>
+  <h3>Third-party coverage</h3>
+  <p>Nineteen analysts cover this issuer. The eleven actions recorded in 2026 are set out below, most recent first, each attributed and dated and reported as market data. This document adopts none of them, issues no rating and derives no target of its own, and no centre is computed from them.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Firm</th><th>Analyst</th><th class="when">Date</th><th>Rating</th><th class="num">Target</th><th class="num">Price at publication</th><th>Basis and disclosed conflict</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Keefe, Bruyette &amp; Woods</td><td>Bill Papanastasiou</td><td class="when">28 Jul 2026</td><td>Outperform</td><td class="num">$157, raised from $138</td><td class="num">$101.14</td><td><span class="tag">Market</span> Reported by an aggregator, not read from the note. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">Morgan Stanley</td><td>Stephen Byrd</td><td class="when">23 Jul 2026</td><td>Overweight, from Equal Weight</td><td class="num">$263</td><td class="num">$117.67</td><td><span class="tag">Market</span> The highest target in the set by a wide margin. The service labels the action an initiation while also recording a rating change, which are different things, so the action type is not established. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">Compass Point</td><td>Not established</td><td class="when">22 Jul 2026</td><td>Not established</td><td class="num">$195</td><td class="num">$109.86</td><td><span class="tag">Market</span> The service records a target without a rating or an analyst. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">Benchmark</td><td>Mark Palmer</td><td class="when">22 Jul 2026</td><td>Buy</td><td class="num">$195, raised from $165</td><td class="num">$109.86</td><td><span class="tag">Market</span> Reported by an aggregator, not read from the note. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">Rosenblatt Securities</td><td>Chris Brendler</td><td class="when">21 Jul 2026</td><td>Buy</td><td class="num">$124, reiterated</td><td class="num">$108.98</td><td><span class="tag">Market</span> The lowest target among the broker actions. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">Needham &amp; Company</td><td>John Todaro</td><td class="when">20 Jul 2026</td><td>Buy</td><td class="num">$145, raised from $128</td><td class="num">$100.93</td><td><span class="tag">Market</span> Reported by an aggregator, not read from the note. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">BTIG</td><td>Gregory Lewis</td><td class="when">24 Jun 2026</td><td>Buy</td><td class="num">$150, raised from $115</td><td class="num">$116.10</td><td><span class="tag">Market</span> Reported by an aggregator, not read from the note. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">Loop Capital</td><td>Not established</td><td class="when">22 Jun 2026</td><td>Not established</td><td class="num">$226</td><td class="num">$121.04</td><td><span class="tag">Market</span> The service records a target without a rating or an analyst. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">Jefferies</td><td>Jonathan Petersen</td><td class="when">14 May 2026</td><td>Buy</td><td class="num">$156, on initiation</td><td class="num">$109.37</td><td><span class="tag">Market</span> An initiation, which is where a distribution relationship most often sits. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">B. Riley</td><td>Nick Giles</td><td class="when">13 May 2026</td><td>Buy</td><td class="num">$130, raised from $76</td><td class="num">$108.32</td><td><span class="tag">Market</span> A raise of 71% in one action, the largest single move in the set. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">Weiss Ratings</td><td>n/a</td><td class="when">7 May 2026</td><td>Sell, downgraded from D+ to D&minus;</td><td class="num">none</td><td class="num">$101.18</td><td><span class="tag">Market</span> A quantitative ratings service rather than broker research: model-derived, no target, no named analyst. The only negative view in the set.</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>The shape of the coverage is the finding.</b> Ten of the eleven actions carry a target and they run from <b>$124 to $263</b>, a spread of more than two to one on the same asset base, with the extremes struck two days apart in late July. Rosenblatt reiterated $124 on 21 July; Morgan Stanley set $263 on 23 July. Nine of the ten are above the $112.08 close and one quantitative service is negative. A spread that wide is not a disagreement about the price so much as a disagreement about what the business becomes.</p>
+  <p><b>The services do not agree on the set or its centre.</b> One counts nineteen analysts and publishes a consensus of Moderate Buy at an average target of $138.85; another counts seventeen and publishes Strong Buy at $158.76. Both are reported here as the figures those services publish. Neither is adopted and no centre is struck in this document, which would in any case be arithmetic on a set the sources cannot agree the size of.</p>
+  <p><b>What is not established.</b> No note was read, so what any of these firms discloses about this issuer specifically is unknown, and no book-wide base rate is offered in its place. Compass Point and Loop Capital are recorded with a target but no rating and no named analyst. One action is an initiation.</p>
+  <p> The Beacon Point tenant's credit rating of AA- or higher is a rating of the tenant by an unnamed agency as reported by the company, not a rating of Hut 8 or its securities.</p>
 </section>
 
 <!-- ===================== 9. GROWTH DRIVERS ===================== -->
@@ -566,7 +586,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
       <tr><td class="lbl">Share buybacks</td><td class="status">None</td><td>No repurchase programme is disclosed in the FY2025 Form 10-K or the first quarter Form 10-Q, and no treasury stock is carried.</td></tr>
       <tr><td class="lbl">Preferred stock</td><td class="status">None</td><td>None issued or outstanding at 31 March 2026. 25,000,000 shares authorised.</td></tr>
       <tr><td class="lbl">Convertible debt</td><td class="status">None</td><td>No convertible notes are outstanding. Both financings are straight senior secured project debt.</td></tr>
-      <tr><td class="lbl">Analyst price targets</td><td class="status">None</td><td>No attributed, dated third-party target or rating was located in a primary or published source during the sweep described in section 14.</td></tr>
+      <tr><td class="lbl">Analyst price targets</td><td class="status">Covered above</td><td>Eleven dated 2026 actions from named firms are carried in section 08, with the analyst, the date and the close on that date. The earlier reading that none was located was wrong, and the correction leads the document log.</td></tr>
       <tr><td class="lbl">Late filings</td><td class="status">None</td><td>No NT 10-K or NT 10-Q appears across the 250 filings on this issuer's EDGAR index, nor across the 247 filings of the predecessor entity.</td></tr>
       <tr><td class="lbl">Going concern qualification</td><td class="status">None</td><td>The FY2025 audit report contains no going concern paragraph.</td></tr>
       <tr><td class="lbl">Canadian continuous disclosure record</td><td class="status caution-t">Not established</td><td>The stock is listed on the Toronto Stock Exchange, confirmed from the exchange's own company directory on 3 August 2026, but the Canadian filing registry could not be reached. Also named in what was not checked.</td></tr>
@@ -646,6 +666,11 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
     <div class="logentry current">
       <div class="when">3 August 2026 <span class="latest">Latest</span></div>
       <div class="basis">Original build · priced off 3 Aug 2026 close · $112.08 · $12.62bn cap</div>
+      <div class="correction">
+        <span class="lbl">Correction</span>
+        <p><b>An absence was asserted that is not there.</b> The valuation section and the null table both read that no attributed, dated third-party target or rating had been located. Nineteen analysts cover this issuer and eleven actions are recorded in 2026, the most recent of them on 28 July 2026. The absence was a failure of the search rather than a fact about the company, and a reader was told the coverage did not exist.</p>
+        <p>Section 08 now carries the eleven 2026 actions with the analyst, the date, the close on that date and the spread they describe. The null row reads Covered above. No target is adopted and no figure elsewhere in this document derives from any of them.</p>
+      </div>
       <p><b>Repriced to the 3 August 2026 close, and the register read rather than counted.</b> The 3 August session closed while this file was being assembled, so the basis moves 31 July 2026 → 3 August 2026 and the price $107.63 → $112.08, up 4.13% on 3.47 million shares against a recent average of 4.25 million. Market capitalisation moves $12.12bn → $12.62bn on the unchanged 4 May 2026 share count. The beneficial-ownership family had been swept and counted but not read: <b>thirteen of the fourteen filings concern this company and the fourteenth is this company&#39;s own statement about American Bitcoin</b>, the only Schedule 13D about Hut 8 is Michael Ho&#39;s at 7.1% from December 2023, and only two holders are above the threshold today. Each is now named with its size, date and the rule its statement is filed under.</p>
       <p><b>Built from</b> the company's filings on EDGAR under Central Index Key 0001964789, swept across its complete index of 250 filings from February 2023 to 31 July 2026, together with the predecessor entity's 247 filings under Central Index Key 0001731805. The load-bearing documents are the FY2025 Form 10-K of 25 February 2026, the first quarter Form 10-Q of 6 May 2026, and the Current Reports of 28 April, 5 June, 10 June and 20 July 2026 with their exhibits. The Form 10-KT of 28 March 2024 establishes the change of fiscal year end, and the predecessor's Form 15 of 11 December 2023 establishes the succession. The Toronto Stock Exchange company directory confirmed the second listing. Big Digital Energy's investor presentation of 3 June 2026 supplied the peer comparison in section 5.</p>
       <p><b>Pricing basis</b> is the close of 31 July 2026, the last completed session before the build date. The market capitalisation of $12.12 billion multiplies that price by the 112,594,112 shares reported on the 10-Q cover as of 4 May 2026; the two dates differ and the snapshot says so. Enterprise value is deliberately absent: $7.5 billion of project debt closed after the most recent reported balance sheet.</p>

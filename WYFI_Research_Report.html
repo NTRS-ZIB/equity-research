@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light only">
 <meta name="supported-color-schemes" content="light">
-<title>WYFI &middot; WhiteFiber, Inc. &middot; Equity Research Report &middot; as of 3 August 2026</title>
+<title>WYFI &middot; WhiteFiber, Inc. &middot; Equity Research Report &middot; as of 4 August 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -15,23 +15,19 @@
    PER-TICKER PALETTE
    ========================================================================= */
 :root{
-  /* Violet, hue 280, saturation 58%, lightness 34%. The WhiteFiber wordmark remains
-     achromatic. As published it carries white letterforms and a single dark
-     blue-grey, #222A30, at hue 206, saturation 17% and lightness 16%: its channel
-     spread of 14 of 255 clears the noise floor, but the saturation sits below the
-     20% required of a colour before it counts as chromatic, so the mark still
-     yields no usable hue.
-     This accent is an interim identity, pending a published chromatic brand
-     colour. It reaches 9.59:1 against paper and clears the green, red, amber and
-     violet that carry meaning in this document by at least 30 degrees of hue. */
-  --accent:      #672489;
-  --accent-deep: #491A61;
-  --accent-wash: rgba(103,36,137,0.06);
-  --accent-line: rgba(103,36,137,0.22);
+  /* Teal, taken from the WhiteFiber mark. The published brand colour is #122F36, and
+     normalised for paper it becomes #245D6B. No rotation away from the green, red,
+     amber and violet that carry meaning in this document was needed. The accent is
+     identity only: it marks the wordmark, the section numbers, the masthead spine and
+     links, and never whether a figure is good or bad. */
+  --accent:      #245D6B;
+  --accent-deep: #173C45;
+  --accent-wash: rgba(36,93,107,0.06);
+  --accent-line: rgba(36,93,107,0.22);
 }
 
 /* ============================================================================
-   SHARED STYLESHEET v1.50 : BEGIN
+   SHARED STYLESHEET v1.80 : BEGIN
    ========================================================================= */
 :root{
   color-scheme: light only;
@@ -265,7 +261,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   section{page-break-inside:avoid}
 }
 /* ============================================================================
-   SHARED STYLESHEET v1.50 : END
+   SHARED STYLESHEET v1.80 : END
    ========================================================================= */
 </style>
 </head>
@@ -276,7 +272,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
 <header class="mast">
   <p class="ticker">WYFI</p>
   <h1 class="headline">A $923.7 million backlog resting on one site whose billing start remains unconfirmed</h1>
-  <p class="functional">WYFI &middot; WhiteFiber, Inc. &middot; Equity Research Report &middot; as of 3 August 2026</p>
+  <p class="functional">WYFI &middot; WhiteFiber, Inc. &middot; Equity Research Report &middot; as of 4 August 2026</p>
   <div class="mast-strip">
     <div>Price <b>$25.95</b> <span class="tag">Market</span></div>
     <div>Market cap <b>$1,002M</b> <span class="tag">Estimate</span></div>
@@ -704,16 +700,19 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   <p>The following are the published views of the firms named and are reported here as market data. This
   document adopts none of them and derives no target of its own.</p>
   <div class="tw"><table>
-    <thead><tr><th>Firm</th><th>Rating</th><th class="num">Target</th><th>Basis</th></tr></thead>
+    <thead><tr><th>Firm</th><th>Analyst</th><th class="when">Date</th><th>Rating</th><th class="num">Target</th><th class="num">Price at publication</th><th>Basis and disclosed conflict</th></tr></thead>
     <tbody>
-      <tr><td class="lbl">Barclays</td><td>Equal Weight</td><td class="num">$29</td><td><span class="tag">Market</span> Raised 21 Jul 2026</td></tr>
-      <tr><td class="lbl">BTIG</td><td>Buy</td><td class="num">$50</td><td><span class="tag">Market</span> Raised 24 Jun 2026</td></tr>
-      <tr><td class="lbl">Needham</td><td>Buy</td><td class="num">$38</td><td><span class="tag">Market</span> 15 May 2026</td></tr>
-      <tr><td class="lbl">Cantor Fitzgerald</td><td>Neutral</td><td class="num">$27</td><td><span class="tag">Market</span> 15 May 2026</td></tr>
-      <tr><td class="lbl">H.C. Wainwright</td><td>n/a</td><td class="num">$20</td><td><span class="tag">Market</span> Cut from $34 on 27 Mar 2026</td></tr>
-      <tr><td class="lbl">Aggregator consensus</td><td>n/a</td><td class="num">$33&ndash;36</td><td><span class="tag">Market</span> As reported</td></tr>
+      <tr><td class="lbl">Barclays</td><td>Raimo Lenschow</td><td class="when">21 Jul 2026</td><td>Equal Weight</td><td class="num">$29</td><td class="num">$27.13</td><td><span class="tag">Market</span> Raised 21 Jul 2026. Price at publication is the close on 20 July 2026, the last session before the action. The firm did not underwrite the offering of 8 August 2025 and no other role for it appears in the company's filings. What it discloses in its own note is not established.</td></tr>
+      <tr><td class="lbl">BTIG</td><td>Gregory Lewis</td><td class="when">24 Jun 2026</td><td>Buy</td><td class="num">$50</td><td class="num">$44.76</td><td><span class="tag">Market</span> Raised 24 Jun 2026. Price at publication is the close on 23 June 2026. The firm did not underwrite the offering of 8 August 2025 and no other role for it appears in the company's filings. What it discloses in its own note is not established.</td></tr>
+      <tr><td class="lbl">Needham</td><td>Not established</td><td class="when">15 May 2026</td><td>Buy</td><td class="num">$38</td><td class="num">$29.99</td><td><span class="tag">Market</span> 15 May 2026. Price at publication is the close on 14 May 2026. Needham &amp; Company, LLC underwrote 2,631,563 of the 9,375,000 shares sold in the offering of 8 August 2025, the second-largest allocation in the syndicate. A data service attributes a $38 Buy to B. Riley Securities dated 18 May 2026 rather than to this firm on 15 May; both underwrote that offering, and which of them struck this target is not established.</td></tr>
+      <tr><td class="lbl">Cantor Fitzgerald</td><td>Brett Knoblauch</td><td class="when">15 May 2026</td><td>Neutral</td><td class="num">$27</td><td class="num">$29.99</td><td><span class="tag">Market</span> 15 May 2026. Price at publication is the close on 14 May 2026. The firm did not underwrite the offering of 8 August 2025 and no other role for it appears in the company's filings. What it discloses in its own note is not established.</td></tr>
+      <tr><td class="lbl">H.C. Wainwright</td><td>Not established</td><td class="when">27 Mar 2026</td><td>n/a</td><td class="num">$20</td><td class="num">$12.16</td><td><span class="tag">Market</span> Cut from $34 on 27 Mar 2026. Price at publication is the close on 26 March 2026. The firm did not underwrite the offering of 8 August 2025 and no other role for it appears in the company's filings. What it discloses in its own note is not established.</td></tr>
+      <tr><td class="lbl">Aggregator consensus</td><td>n/a</td><td class="when">Not established</td><td>n/a</td><td class="num">$33&ndash;36</td><td class="num">n/a</td><td><span class="tag">Market</span> As reported. The figure carries no publication date, so it cannot be placed against a session and no price at publication attaches to it. A service read on 4 August 2026 publishes a different aggregate, $38.11 across nine analysts and dated 21 July 2026.</td></tr>
     </tbody>
   </table></div>
+  <p>Price at publication is the close on the last trading day before the action, which is what the author could see when the target was struck. Read down that column rather than across the targets: the same five figures were struck against prices from $12.16 to $44.76, so a $20 target set on 27 March was a 64% premium to the market of the day while a $50 target set on 24 June was a 12% premium. Against the 3 August close of $25.95 the range runs from 23% below to 93% above, and the two firms furthest apart on target were the two closest to the market when they wrote.</p>
+  <p>One of the five underwrote the company's own offering. Needham &amp; Company took 2,631,563 of the 9,375,000 shares sold on 8 August 2025, behind B. Riley Securities on 4,785,000, with Macquarie Capital, Roth Capital Partners, Craig-Hallum and Clear Street completing the syndicate. Barclays, BTIG, Cantor Fitzgerald and H.C. Wainwright do not appear in it. Stated as a distribution rather than as a superlative: the one disclosed underwriting relationship sits in the middle of the target range, not at either end, so it does not sort the views. What each firm discloses in its own note is not established, no note having been read.</p>
+  <p>The count above is a floor rather than the whole coverage set. A data service read on 4 August 2026 carries 2026 actions from two further firms, B. Riley Securities and Craig-Hallum, both of them underwriters of the same offering, and the company's own statement of who follows it was not read. Two services also disagree about the aggregate, at $33 to $36 undated and $38.11 across nine analysts dated 21 July 2026. Both are reported as those services published them and neither is averaged with the other: where providers disagree about the figure and about how many contributors stand behind it, no meaningful consensus is available, and this document computes no centre of its own and derives no target.</p>
 
   <div class="note">
     <p>B. Riley Securities was a joint bookrunner on the IPO, publishes research on the stock, and in May
@@ -1143,7 +1142,18 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   <div class="log">
 
     <div class="logentry current">
-      <div class="when">3 August 2026 <span class="latest">Latest</span></div>
+      <div class="when">4 August 2026 <span class="latest">Latest</span></div>
+      <div class="basis">Priced off 3 Aug 2026 close &middot; $25.95 &middot; $1,002M cap</div>
+      <p><b>The coverage table now carries the analyst, the date, the price at publication and the disclosed conflict.</b> The six rows and their ratings, targets and bases are unchanged; four columns were added to them. Price at publication is the close on the last trading day before each action, and it runs from $12.16 to $44.76 across a set of targets running $20 to $50, so the premium each firm was asking for at the time varies far more than the targets alone suggest.</p>
+      <p><b>One covering firm underwrote the company's own offering.</b> Needham &amp; Company, LLC took 2,631,563 of the 9,375,000 shares sold on 8 August 2025, the second-largest allocation behind B. Riley Securities. Barclays, BTIG, Cantor Fitzgerald and H.C. Wainwright are not in that syndicate. The relationship sits in the middle of the target range rather than at either end.</p>
+      <p><b>Two attributions are not settled and the table says so.</b> A data service attributes a $38 Buy to B. Riley Securities dated 18 May 2026 where this document records Needham on 15 May, and both firms underwrote the offering, so which struck the target is not established. The analyst behind the H.C. Wainwright action is not established either. The aggregate row carries no publication date, and a service read on 4 August 2026 publishes a different figure, $38.11 across nine analysts dated 21 July 2026; both are reported and neither is averaged with the other.</p>
+      <p><b>The filing sweep was re-run and the record is unchanged in substance.</b> The complete index holds 73 filings from 6 January 2025 to 3 August 2026 and carries no supplementary index. No late-filing notification of any kind exists across it. The Form 8-K of 3 August 2026 reporting the change of Chief Financial Officer, effective 1 August, was already carried and is unaltered.</p>
+            <p><b>The accent is now taken from the published mark.</b> WhiteFiber had published no usable brand colour when the palette was set, so the accent stood as an interim identity. The mark now carries #122F36, and the accent follows from it: #245D6B, with the hover, wash and rule tints derived alongside. No rotation away from the colours that carry meaning here was needed. The accent marks identity only, the wordmark, the section numbers, the masthead spine and links, and it marks nothing as favourable or severe.</p>
+      <p><b>Known gaps.</b> The company's own statement of who follows it was not read, so whether any covering firm has ended coverage is not established, and a service shows 2026 actions from two firms this table does not carry. What each firm discloses about this issuer in its own note is not established. The pricing basis is unchanged at the 3 August close, no session having completed since.</p>
+    </div>
+
+    <div class="logentry">
+      <div class="when">3 August 2026</div>
       <div class="basis">Priced off 3 Aug 2026 close &middot; $25.95 &middot; $1,002M cap</div>
       <div class="correction">
                 <span class="lbl">Correction</span>
@@ -1213,7 +1223,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
     educational purposes and is not investment advice. Verify all figures against
     primary filings on sec.gov before acting.
   </div>
-  <p style="margin-top:16px">WYFI &middot; WhiteFiber, Inc. &middot; Equity Research Report &middot; as of 3 August 2026</p>
+  <p style="margin-top:16px">WYFI &middot; WhiteFiber, Inc. &middot; Equity Research Report &middot; as of 4 August 2026</p>
 </footer>
 
 </div>

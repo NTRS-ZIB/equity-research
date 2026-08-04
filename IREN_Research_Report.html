@@ -16,9 +16,9 @@
    ========================================================================= */
 :root{
   /* The company mark is a green field carrying the letterforms in dark navy.
-     The green is the brand colour: #71DA80 as published, nine tenths of the
-     mark's inked area. Darkened for white paper to #21822F, which holds its
-     hue and reads at 4.9:1 against the page. No rotation was needed; the green
+     The green is the brand colour: #71DA80 as published, the dominant colour of the
+     mark. Darkened for white paper to #21822F, which holds its
+     hue. No rotation was needed; the green
      sits well clear of the bands reserved for meaning. */
   --accent:      #21822F;
   --accent-deep: #175920;
@@ -27,7 +27,7 @@
 }
 
 /* ============================================================================
-   SHARED STYLESHEET v1.52 : BEGIN
+   SHARED STYLESHEET v1.80 : BEGIN
    ========================================================================= */
 :root{
   color-scheme: light only;
@@ -261,7 +261,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   section{page-break-inside:avoid}
 }
 /* ============================================================================
-   SHARED STYLESHEET v1.52 : END
+   SHARED STYLESHEET v1.80 : END
    ========================================================================= */
 </style>
 </head>
@@ -527,16 +527,20 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
       <tr><td class="lbl">Cantor Fitzgerald</td><td>Brett Knoblauch, Gareth Gacetta, Nathan Frankovitz</td><td class="when">20 Jul 2026</td><td>Overweight</td><td class="num">$99</td><td class="num">$33.62</td><td><span class="tag">Market</span> Published note. Discloses that it was lead or co-manager of an offering within the preceding twelve months, owns more than 1% of the common equity, and makes a market in the shares.</td></tr>
       <tr><td class="lbl">Needham</td><td>John Todaro, Michael Chen, Austin Ortiz</td><td class="when">21 Jul 2026</td><td>Hold</td><td class="num">none</td><td class="num">$40.20</td><td><span class="tag">Market</span> Published note. The rating carries no target. Discloses that it received compensation for investment banking services from the company, and that it makes a market in the shares.</td></tr>
       <tr><td class="lbl">Compass Point</td><td>Michael Donovan, Ed Engel</td><td class="when">21 Jul 2026</td><td>Buy</td><td class="num">$105</td><td class="num">$40.20</td><td><span class="tag">Market</span> Published note. What the firm discloses about this issuer specifically is not established.</td></tr>
-      <tr><td class="lbl">H.C. Wainwright</td><td>Mike Colonnese, Dylan Scales, Leon Zhou</td><td class="when">22 Jul 2026</td><td>Buy</td><td class="num">$90</td><td class="num">$40.20</td><td><span class="tag">Market</span> Published note, target raised from $85. Discloses that it received no investment banking compensation in the preceding twelve months and intends to seek such compensation within three months of publication.</td></tr>
+      <tr><td class="lbl">H.C. Wainwright</td><td>Mike Colonnese, Dylan Scales, Leon Zhou</td><td class="when">22 Jul 2026</td><td>Buy</td><td class="num">$90</td><td class="num">$41.29</td><td><span class="tag">Market</span> Published note, target raised from $85. Discloses that it received no investment banking compensation in the preceding twelve months and intends to seek such compensation within three months of publication.</td></tr>
     </tbody>
   </table></div>
+  <p class="sub"><b>Price at publication is the last close before the note's date</b>, not the close on that date: a note carrying a given date is written against the preceding session. On that basis the figures are $33.62 for the notes of 20 July, being the 17 July close, $40.20 for those of 21 July, being the 20 July close, and $41.29 for the note of 22 July, being the 21 July close. The convention was previously unstated and one figure did not follow it; both are corrected and the correction leads the document log.</p>
   <p class="sub">Four of the five disclosure statements are established and are summarised above in the publisher's own terms. Compass Point's is not, and its cell says so rather than being left blank or read as nil: what a firm discloses about its book as a whole is not a statement about any one issuer in it.</p>
+
+  <h3>What this section does not cover</h3>
+  <p>The five notes above are the ones read in full, which is what allows the disclosure blocks to be quoted in each publisher's own terms. Two further actions fall in the same week and are not carried: a Buy at $79 from Canaccord Genuity, analyst Joseph Vafi, and a Market Outperform from Citigroup carrying no target, both dated 21 July 2026 and both known only from an aggregator rather than from the note. <span class="tag">Market</span> They are named here so the set is not read as the whole of that week's coverage, and they are not tabled beside notes that were read, because the evidence behind them is weaker and mixing the two would disguise that.</p>
 
   <h3>None of these is stale, and that has to be re-tested</h3>
   <p>A target is a claim about a moment, so a date does work that a number cannot. All five notes were published on or after 20 July 2026 and therefore postdate the announcement they respond to: none of them was struck before an event that would plainly have changed it, and none is reported here as current market data while resting on superseded facts. That holds as at this document's date and not beyond it. The FY2026 annual report is due by 29 August 2026 and will carry the first audited figures for the year, the transition impairment and the first opinion from a new auditor. Any of the five that is not reissued after it will be a target struck before the year's results, and this section will say so.</p>
 
   <h3>What the dispersion is actually about</h3>
-  <p>Ratings run from Neutral and Hold to Buy and Overweight. Targets run from none at all to $105, against a price of $33.62 on the 20th and $40.20 on the 21st and 22nd. A spread of that width, reached on one week's information, is not a disagreement about what the company has contracted: the contracts are public, they are the same documents for every reader, and their headline values are not in dispute anywhere.</p>
+  <p>Ratings run from Neutral and Hold to Buy and Overweight. Targets run from none at all to $105, against closes of $40.20 on the 20th, $41.29 on the 21st and $41.28 on the 22nd, and against the preceding closes of $33.62, $40.20 and $41.29 that the notes themselves were written on. A spread of that width, reached on one week's information, is not a disagreement about what the company has contracted: the contracts are public, they are the same documents for every reader, and their headline values are not in dispute anywhere.</p>
   <p>What separates the views is <i>when</i> contracted capacity becomes recognised revenue, and this company's own accounting makes that the hinge rather than a matter of taste. Fiscal 2026 ended on 30 June 2026 and three of its four quarters were filed before any of these notes was written, so the near term is largely history and leaves little room to differ. Fiscal 2027 is entirely forward. It turns on the commissioning schedule for Horizon 1 to 4, about which the filings say only that delivery is targeted by the end of calendar 2026, and on the acceptance process that follows delivery. The revenue policy admits a tranche to remaining performance obligations only once it has been delivered and accepted, and at 31 March 2026 there had been nil. A reader who assumes acceptance early in fiscal 2027 and a reader who assumes it late are both consistent with everything on file, and the two readings do not produce the same revenue for that year from identical contracts. <span class="tag">Filed</span></p>
   <p>Conflict does not sort these views, which is worth stating because the intuition runs the other way. <b>Three of the four established disclosures record an investment banking relationship with the issuer, and those three occupy the extremes and the middle alike.</b> The firm disclosing a pending underwriting, a stake of 5% or more and both received and expected banking compensation rates the shares Neutral at the lowest target of the five. The firm disclosing banking compensation received and a market-making role rates them Hold and declines to publish a target at all. The firm disclosing an underwriting within twelve months, a stake above 1% and a market-making role rates them Overweight at the second-highest target. Between them sits the one firm disclosing no banking compensation in twelve months, at Buy.</p>
   <p>A banking relationship therefore appears at the bottom of the range, at the top of it, and at the only refusal to strike a target, while its absence appears in the middle. Whatever is separating these five views, it is not visible in the disclosure blocks. That is one week of coverage on one company, nothing general follows from it, and the highest target of the five is set by the firm whose disclosure could not be read, so it is excluded from this comparison rather than assumed either way.</p>
@@ -782,6 +786,8 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
       <div class="basis">Priced off 3 Aug 2026 close · $39.75 · $14.2bn cap</div>
       <div class="correction">
         <span class="lbl">Correction</span>
+        <p><b>The prices beside the published targets were each one session early, and were described as the prices on the note dates.</b> Section 8 read that the targets stood "against a price of $33.62 on the 20th and $40.20 on the 21st and 22nd". Those are the closes of 17 and 20 July. The 20 July session traded between $36.31 and $41.10 and closed at $40.20, so $33.62 was not a price on the 20th at any point in it; the 21st and 22nd traded no lower than $40.34 and $40.25 and closed at $41.29 and $41.28, so $40.20 was not a price on either.</p>
+        <p>The column was measuring the last close before each note, which is the right thing to measure, and the fault was that the file never said so and then described the figures as something else. The convention is now stated. One figure did not follow it either: the note of 22 July was shown against $40.20, the close of the 20th, where the preceding close was $41.29. That row is corrected. No target, rating, analyst or disclosure changes, and the dispersion argument is unaffected in substance: the targets still run from none at all to $105.</p>
         <p>This document stated that nothing had been filed since the Form 8-K of 20 July 2026, and struck its filing-record findings against an index of 309. Both were true when written and neither is now. <b>Bank of America Corporation filed a Schedule 13G on 3 August 2026</b> and the complete index holds <b>310</b>. The statement reports 21,027,180 ordinary shares, 5.8% of the class, against the 357,378,674 shares outstanding the issuer disclosed on the Form 10-Q of 8 May 2026. It is passive, filed under Exchange Act Rule 13d-1(b) and certified as held in the ordinary course without the purpose or effect of changing or influencing control, so it adds a holder and not a challenge. Every statement resting on the earlier index size has been restruck: the sweep paragraph, the form census row for Schedule 13G, and the null row recording that no late-filing notification has ever been made. That last finding survives the recount, there being still none across 310 filings, which is why it is restated with the larger index rather than withdrawn.</p>
       </div>
       <div class="correction">

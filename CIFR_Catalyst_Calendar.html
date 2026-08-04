@@ -16,11 +16,10 @@
    ========================================================================= */
 :root{
   /* The Cipher Digital mark carries one chromatic colour, #ABD233, a yellow-green
-     at hue 74.7, saturation 63.9%, lightness 51.2%. It accounts for the whole of
-     the inked area of the company's own icon; the only other colour in the
-     wordmark is a near-white at chroma 2, which is achromatic. Normalised for
+     at hue 74.7, saturation 63.9%, lightness 51.2%. The only other colour in the
+     wordmark is a near-white, which is achromatic. Normalised for
      white paper the saturation is unchanged, already inside range, and the
-     lightness falls to 30%, giving #657D1C at 4.66:1 against the page. The hue is
+     lightness falls to 30%, giving #657D1C. The hue is
      carried through unchanged: it sits 35.7 degrees clear of the nearest
      meaning-bearing colour, so no rotation was needed. */
   --accent:      #657D1C;
@@ -30,7 +29,7 @@
 }
 
 /* ============================================================================
-   SHARED STYLESHEET v1.57 : BEGIN
+   SHARED STYLESHEET v1.80 : BEGIN
    ========================================================================= */
 :root{
   color-scheme: light only;
@@ -264,7 +263,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   section{page-break-inside:avoid}
 }
 /* ============================================================================
-   SHARED STYLESHEET v1.57 : END
+   SHARED STYLESHEET v1.80 : END
    ========================================================================= */
 </style>
 </head>
@@ -883,7 +882,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
       <tr><td class="lbl">Convertible and other financings</td><td class="status">Covered above</td><td>2030 convertible notes issued (R1), 2031 convertible notes issued (R3), 2030 senior secured notes issued (R5), senior secured notes tapped for a further $333.0 million (R7), Stingray leased to Amazon and financed (R15), both convertible series are in the money (S5).</td></tr>
       <tr><td class="lbl">Mergers and acquisitions</td><td class="status">Covered above</td><td>Colchis joint venture interest acquired (R6), Ulysses acquired, the first site outside Texas (R8), joint venture mining interests sold to Canaan (R10).</td></tr>
       <tr><td class="lbl">Index membership</td><td class="status caution-t">Not established</td><td>Not examined. No index provider's published methodology or rebalance schedule was checked. Also named in what was not checked.</td></tr>
-      <tr><td class="lbl">Analyst coverage and short interest</td><td class="status caution-t">Not established</td><td>Not examined. No attributed, dated third-party target or rating was located, and exchange short interest reports were not retrieved. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Analyst coverage and short interest</td><td class="status caution-t">Not established</td><td>Coverage was examined on 3 August 2026 and is not absent: nineteen firms have acted, and the twelve 2026 actions are carried in the valuation section of the companion report with their dates. This row remains not established because exchange short interest reports were still not retrieved, which is the half of it this calendar would use. Also named in what was not checked.</td></tr>
       <tr><td class="lbl">Credit rating actions</td><td class="status caution-t">Not established</td><td>Not examined. Three secured note series are outstanding and may carry agency ratings, but no rating agency publication was consulted. Also named in what was not checked.</td></tr>
       <tr><td class="lbl">Segment reporting</td><td class="status">None</td><td>Revenue is reported on a single line, bitcoin mining, with no segment split of costs or assets. That will have to change once lease revenue commences.</td></tr>
       <tr><td class="lbl">Corporate identity changes</td><td class="status">Covered above</td><td>Renamed Cipher Digital Inc. (R11), warrants removed from listing (R9), three registrant names on one filing record (S8).</td></tr>
@@ -1056,6 +1055,10 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
     <div class="logentry current">
       <div class="when">3 August 2026 <span class="latest">Latest</span></div>
       <div class="basis">Original build &middot; 11 dated &middot; 8 standing &middot; 15 resolved &middot; priced off 3 Aug 2026 close</div>
+      <div class="correction">
+        <span class="lbl">Correction</span>
+        <p><b>Analyst coverage is not absent.</b> The null row recorded that no attributed, dated third-party target or rating had been located. Nineteen firms have acted on this issuer and the twelve 2026 actions are now carried in the companion report. The row stays not established, because the half of it this calendar would use, exchange short interest, was still not retrieved, and the row now says which half is which rather than resting on a false absence.</p>
+      </div>
       <p><b>Repriced to the 3 August 2026 close, and the register read rather than counted.</b> The 3 August session closed while this file was being assembled, so the basis moves 31 July 2026 &rarr; 3 August 2026 and the price $22.32 &rarr; $24.16, up 8.24%. Both convertible series stay deep in the money. The beneficial-ownership row had recorded a count and deferred the positions to what was not checked; the filings are now read and the row names the holders. <b>The horizon band boundaries do not move</b>, being a convention this document adopted for dividing near from far rather than a measurement.</p>
       <p><b>Built from</b> the company's filings on EDGAR under Central Index Key 0001819989, swept across the complete index of 606 filings from August 2020 to 31 July 2026 and across all three registrant names on that record. The load-bearing documents are the FY2025 Form 10-K of 24 February 2026, the first quarter Form 10-Q of 5 May 2026, and the Current Reports of 24 February, 8 June and 15 June 2026 with their exhibits, of which the investor presentation attached to the 8 June filing carries the fullest lease disclosure in the set.</p>
       <p><b>Pricing basis</b> is the close of 3 August 2026 at $24.16, the most recent completed session.</p>

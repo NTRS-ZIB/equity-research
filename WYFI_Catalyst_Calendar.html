@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light only">
 <meta name="supported-color-schemes" content="light">
-<title>WYFI &middot; WhiteFiber, Inc. &middot; Catalyst Calendar &middot; as of 3 August 2026</title>
+<title>WYFI &middot; WhiteFiber, Inc. &middot; Catalyst Calendar &middot; as of 4 August 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -15,23 +15,19 @@
    PER-TICKER PALETTE
    ========================================================================= */
 :root{
-  /* Violet, hue 280, saturation 58%, lightness 34%. The WhiteFiber wordmark remains
-     achromatic. As published it carries white letterforms and a single dark
-     blue-grey, #222A30, at hue 206, saturation 17% and lightness 16%: its channel
-     spread of 14 of 255 clears the noise floor, but the saturation sits below the
-     20% required of a colour before it counts as chromatic, so the mark still
-     yields no usable hue.
-     This accent is an interim identity, pending a published chromatic brand
-     colour. It reaches 9.59:1 against paper and clears the green, red, amber and
-     violet that carry meaning in this document by at least 30 degrees of hue. */
-  --accent:      #672489;
-  --accent-deep: #491A61;
-  --accent-wash: rgba(103,36,137,0.06);
-  --accent-line: rgba(103,36,137,0.22);
+  /* Teal, taken from the WhiteFiber mark. The published brand colour is #122F36, and
+     normalised for paper it becomes #245D6B. No rotation away from the green, red,
+     amber and violet that carry meaning in this document was needed. The accent is
+     identity only: it marks the wordmark, the section numbers, the masthead spine and
+     links, and never whether a figure is good or bad. */
+  --accent:      #245D6B;
+  --accent-deep: #173C45;
+  --accent-wash: rgba(36,93,107,0.06);
+  --accent-line: rgba(36,93,107,0.22);
 }
 
 /* ============================================================================
-   SHARED STYLESHEET v1.50 : BEGIN
+   SHARED STYLESHEET v1.80 : BEGIN
    ========================================================================= */
 :root{
   color-scheme: light only;
@@ -265,7 +261,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   section{page-break-inside:avoid}
 }
 /* ============================================================================
-   SHARED STYLESHEET v1.50 : END
+   SHARED STYLESHEET v1.80 : END
    ========================================================================= */
 </style>
 </head>
@@ -276,7 +272,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
 <header class="mast">
   <p class="ticker">WYFI</p>
   <h1 class="headline">Twelve dated catalysts, and the three that matter most are not among them</h1>
-  <p class="functional">WYFI &middot; WhiteFiber, Inc. &middot; Catalyst Calendar &middot; as of 3 August 2026</p>
+  <p class="functional">WYFI &middot; WhiteFiber, Inc. &middot; Catalyst Calendar &middot; as of 4 August 2026</p>
   <div class="mast-strip">
     <div>Dated catalysts <b>12</b></div>
     <div>Standing conditions <b>10</b></div>
@@ -1675,7 +1671,14 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   <div class="log">
 
     <div class="logentry current">
-      <div class="when">3 August 2026 <span class="latest">Latest</span></div>
+      <div class="when">4 August 2026 <span class="latest">Latest</span></div>
+      <div class="basis">12 dated &middot; 10 standing &middot; 9 resolved &middot; priced off 3 Aug 2026 close &middot; $25.95 &middot; $1,002M cap</div>
+      <p><b>The accent is now taken from the published mark.</b> WhiteFiber had published no usable brand colour when the palette was set, so the accent stood as an interim identity. The mark now carries #122F36, and the accent follows from it: #245D6B, with the hover, wash and rule tints derived alongside. No rotation away from the colours that carry meaning here was needed. The accent marks identity only, the wordmark, the section numbers, the masthead spine and links, and it marks nothing as favourable or severe.</p>
+      <p><b>Nothing else changed.</b> No catalyst was added, removed or re-dated, so no identifier moved and no renumbering map is published. The pricing basis is unchanged at the 3 August close, no session having completed since.</p>
+    </div>
+
+    <div class="logentry">
+      <div class="when">3 August 2026</div>
       <div class="basis">12 dated &middot; 10 standing &middot; 9 resolved &middot; priced off 3 Aug 2026 close &middot; $25.95 &middot; $1,002M cap</div>
       <div class="correction">
                 <span class="lbl">Correction</span>
@@ -1733,7 +1736,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
     investment advice. Estimated dates are not company announcements. Verify
     against primary filings on sec.gov before acting.
   </div>
-  <p style="margin-top:16px">WYFI &middot; WhiteFiber, Inc. &middot; Catalyst Calendar &middot; as of 3 August 2026</p>
+  <p style="margin-top:16px">WYFI &middot; WhiteFiber, Inc. &middot; Catalyst Calendar &middot; as of 4 August 2026</p>
 </footer>
 
 </div>

@@ -16,11 +16,10 @@
    ========================================================================= */
 :root{
   /* The Cipher Digital mark carries one chromatic colour, #ABD233, a yellow-green
-     at hue 74.7, saturation 63.9%, lightness 51.2%. It accounts for the whole of
-     the inked area of the company's own icon; the only other colour in the
-     wordmark is a near-white at chroma 2, which is achromatic. Normalised for
+     at hue 74.7, saturation 63.9%, lightness 51.2%. The only other colour in the
+     wordmark is a near-white, which is achromatic. Normalised for
      white paper the saturation is unchanged, already inside range, and the
-     lightness falls to 30%, giving #657D1C at 4.66:1 against the page. The hue is
+     lightness falls to 30%, giving #657D1C. The hue is
      carried through unchanged: it sits 35.7 degrees clear of the nearest
      meaning-bearing colour, so no rotation was needed. */
   --accent:      #657D1C;
@@ -30,7 +29,7 @@
 }
 
 /* ============================================================================
-   SHARED STYLESHEET v1.57 : BEGIN
+   SHARED STYLESHEET v1.80 : BEGIN
    ========================================================================= */
 :root{
   color-scheme: light only;
@@ -264,7 +263,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   section{page-break-inside:avoid}
 }
 /* ============================================================================
-   SHARED STYLESHEET v1.57 : END
+   SHARED STYLESHEET v1.80 : END
    ========================================================================= */
 </style>
 </head>
@@ -304,7 +303,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
     <thead><tr><th>Metric</th><th class="num">Value</th><th>Basis</th></tr></thead>
     <tbody>
       <tr><td class="lbl">Share price</td><td class="num">$24.16</td><td><span class="tag">Market</span> 31 Jul 2026 close</td></tr>
-      <tr><td class="lbl">52-week range</td><td class="num">$4.55 – $30.14</td><td><span class="tag">Market</span> intraday, 251 sessions to 31 Jul 2026</td></tr>
+      <tr><td class="lbl">52-week range</td><td class="num">$4.55 – $30.14</td><td><span class="tag">Market</span> intraday, 251 sessions to the 3 Aug 2026 close, unchanged from the 31 July measurement</td></tr>
       <tr><td class="lbl">Shares outstanding</td><td class="num">409,049,197</td><td><span class="tag">Filed</span> 10-Q cover, as of 4 May 2026</td></tr>
       <tr><td class="lbl">Market capitalisation</td><td class="num">$9,130.0M</td><td><span class="tag">Estimate</span> 409,049,197 × $24.16. Share count is 4 May 2026, price 3 Aug 2026</td></tr>
       <tr><td class="lbl">Revenue (FY2025)</td><td class="num">$223.9M</td><td><span class="tag">Filed</span> 10-K, 24 Feb 2026. All bitcoin mining</td></tr>
@@ -475,7 +474,27 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
     <p>The per-megawatt figures use gross capacity because that is the basis the company reports for two of its three leased sites, and mixing gross with critical IT would understate the denominator by roughly 30%. On a critical IT basis the contracted figure would be higher per megawatt, by an amount this document does not impute. The pipeline measure spreads today's market capitalisation across 4.2 GW of which only 700 MW is contracted and 207 MW is operating, so it should be read as what the market implies about conversion, not as a valuation.</p>
   </div>
   <p>One disclosed figure is worth setting against the market capitalisation directly. The Stingray lease alone carries approximately $2.0 billion of contracted lease payments over its 15-year base term, on 100 gross MW, with an approximately 100% net operating income margin and an Amazon.com parent guarantee. That is 22% of the current market capitalisation from 14% of the contracted gross megawatts, which gives a rough sense of what the market is capitalising the other two sites at if Stingray's economics are representative.</p>
-  <p>No third-party price target or rating is reproduced in this document. None was located in a primary or dated published source during the work described in section 14.</p>
+  <h3>Third-party coverage</h3>
+  <p>Nineteen firms have published a rating or a target on this issuer, twelve of them acting in 2026. The 2026 actions are set out below, most recent first, each attributed and dated and reported as market data. This document adopts none of them, issues no rating and derives no target of its own, and no centre is computed from them.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Firm</th><th>Analyst</th><th class="when">Date</th><th>Rating</th><th class="num">Target</th><th class="num">Price at publication</th><th>Basis and disclosed conflict</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Keefe, Bruyette &amp; Woods</td><td>Stephen Glagola</td><td class="when">28 Jul 2026</td><td>Outperform</td><td class="num">$32, raised from $27</td><td class="num">$20.42</td><td><span class="tag">Market</span> Reported by an aggregator, not read from the note. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">Chardan Capital Markets</td><td>Bill Papanastasiou</td><td class="when">27 Jul 2026</td><td>Buy</td><td class="num">$32, on initiation</td><td class="num">$21.65</td><td><span class="tag">Market</span> Reported by an aggregator, not read from the note. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">Morgan Stanley</td><td>Stephen Byrd</td><td class="when">20 Jul 2026</td><td>Overweight</td><td class="num">$47, cut from $48.50</td><td class="num">$20.54</td><td><span class="tag">Market</span> Reported by an aggregator, not read from the note. The highest target in the set. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">Rosenblatt Securities</td><td>Chris Brendler</td><td class="when">25 Jun 2026</td><td>Buy</td><td class="num">$30</td><td class="num">$25.68</td><td><span class="tag">Market</span> Reported by an aggregator, not read from the note. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">BTIG</td><td>Gregory Lewis</td><td class="when">24 Jun 2026</td><td>Buy</td><td class="num">$35, raised from $25</td><td class="num">$26.22</td><td><span class="tag">Market</span> Reported by an aggregator, not read from the note. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">Weiss Ratings</td><td>n/a</td><td class="when">24 Jun 2026</td><td>Sell, D&minus;</td><td class="num">none</td><td class="num">$26.22</td><td><span class="tag">Market</span> A quantitative ratings service rather than broker research: model-derived, no target, no named analyst.</td></tr>
+      <tr><td class="lbl">Sanford C. Bernstein</td><td>Not established</td><td class="when">3 Jun 2026</td><td>Outperform</td><td class="num">$32, on initiation</td><td class="num">$26.24</td><td><span class="tag">Market</span> Reported by an aggregator, not read from the note. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">Needham &amp; Company</td><td>John Todaro</td><td class="when">15 May 2026</td><td>Buy</td><td class="num">$25, raised from $22</td><td class="num">$20.33</td><td><span class="tag">Market</span> Reported by an aggregator, not read from the note. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">Jefferies</td><td>Jonathan Petersen</td><td class="when">14 May 2026</td><td>Buy</td><td class="num">$32, on initiation</td><td class="num">$22.29</td><td><span class="tag">Market</span> Reported by an aggregator, not read from the note. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">H.C. Wainwright</td><td>Mike Colonnese</td><td class="when">6 May 2026</td><td>Buy</td><td class="num">$30, raised from $25</td><td class="num">$21.91</td><td><span class="tag">Market</span> Reported by an aggregator, not read from the note. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">Cantor Fitzgerald</td><td>Brett Knoblauch</td><td class="when">9 Apr 2026</td><td>Overweight</td><td class="num">$22, cut from $24</td><td class="num">$16.36</td><td><span class="tag">Market</span> Reported by an aggregator, not read from the note. The lowest target in the set. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">Zacks Research</td><td>n/a</td><td class="when">25 Mar 2026</td><td>Hold, raised from Strong Sell</td><td class="num">none</td><td class="num">$15.88</td><td><span class="tag">Market</span> A quantitative ratings service rather than broker research: model-derived, no target, no named analyst.</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>The shape of the coverage says more than any single figure.</b> Ten of the twelve 2026 actions are broker research and two are quantitative services, which are marked as such rather than counted alongside analysts. Targets among the broker actions run from $22 to $47, and the extremes are three months apart on the same asset base: Cantor cut to $22 on 9 April, Morgan Stanley trimmed to $47 on 20 July. That spread is more than two to one and it is the finding, not any point within it. A service separately publishes an aggregate over seventeen analysts at an average target of $32.79, reported here as a figure that service publishes, not as a centre struck in this document.</p>
+  <p><b>What is not established.</b> No note was read, so what any of these firms discloses about this issuer specifically is unknown, and none is offered. A book-wide base rate for any of these firms would not answer the question. Every target here is cited to the service that reports it rather than to the firm, and several are initiations, which is where a distribution relationship most often sits.</p>
 </section>
 
 <!-- ===================== 9. GROWTH DRIVERS ===================== -->
@@ -570,7 +589,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
       <tr><td class="lbl">Share buybacks</td><td class="status">None</td><td>No repurchase programme is disclosed in the FY2025 Form 10-K or the first quarter Form 10-Q. Treasury stock of 7,111,468 shares arises from earlier transactions, and capped call transactions exist over the 2031 convertible notes but offset conversion dilution rather than authorise repurchase.</td></tr>
       <tr><td class="lbl">Preferred stock</td><td class="status">None</td><td>None issued or outstanding at 31 March 2026. 10,000,000 shares authorised.</td></tr>
       <tr><td class="lbl">HPC lease revenue</td><td class="status">None</td><td>No lease has commenced. The first rent is targeted for the fourth quarter of 2026 at Black Pearl.</td></tr>
-      <tr><td class="lbl">Analyst price targets</td><td class="status">None</td><td>No attributed, dated third-party target or rating was located in a primary or published source during the sweep described in section 14.</td></tr>
+      <tr><td class="lbl">Analyst price targets</td><td class="status">Covered above</td><td>Twelve dated 2026 actions from named firms are carried in section 08, with the analyst, the date and the close on that date. The earlier reading that none was located was wrong, and the correction leads the document log.</td></tr>
       <tr><td class="lbl">Late filings</td><td class="status">None</td><td>No NT 10-K or NT 10-Q appears across the 606 filings on this issuer's EDGAR index, which runs from August 2020 under three successive registrant names.</td></tr>
       <tr><td class="lbl">Going concern qualification</td><td class="status">None</td><td>The FY2025 audit report, by CBIZ CPAs P.C., contains no going concern paragraph.</td></tr>
       <tr><td class="lbl">Capped call terms</td><td class="status caution-t">Not established</td><td>The company states it funded capped call transactions from the 2031 note proceeds, but the strike and cap prices were not located in the filings read. The dilution offset is therefore not quantified. Also named in what was not checked.</td></tr>
@@ -647,6 +666,11 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
     <div class="logentry current">
       <div class="when">3 August 2026 <span class="latest">Latest</span></div>
       <div class="basis">Original build · priced off 3 Aug 2026 close · $24.16 · $9.88bn cap</div>
+      <div class="correction">
+        <span class="lbl">Correction</span>
+        <p><b>An absence was asserted that is not there.</b> The null table read that no attributed, dated third-party target or rating had been located, and the valuation section said the same. Nineteen firms have published a rating or a target on this issuer and twelve acted in 2026, the most recent of them on 28 July 2026. The absence was a failure of the search rather than a fact about the company, which is the heavier of the two errors: a reader was told the coverage did not exist.</p>
+        <p>Section 08 now carries the twelve 2026 actions with the analyst, the date, the close on that date and the spread they describe. The null row reads Covered above. Nothing else in the valuation moves: no target is adopted and no figure elsewhere in this document derives from any of them.</p>
+      </div>
       <p><b>Repriced to the 3 August 2026 close, and the register read rather than counted.</b> The 3 August session closed while this file was being assembled, so the basis moves 31 July 2026 → 3 August 2026 and the price $22.32 → $24.16, up 8.24% on 35.22 million shares against a recent average of 25.26 million. Market capitalisation moves $9.13bn → $9.88bn on the unchanged 4 May 2026 share count; the 2030 notes convert at about $4.45 and remain deep in the money. The beneficial-ownership family had been swept and counted but not read. Reading it establishes that the founding sponsor Bitfury holds 7.0% and is being run down across twenty-three amendments, that Vanguard&#39;s apparent exit and re-entry is one holder changing which entity reports, and that <b>one of the fifty-four filings is this company&#39;s own statement about Canaan Inc.</b> rather than a statement about this register.</p>
       <p><b>Built from</b> the company's filings on EDGAR under Central Index Key 0001819989, swept across the complete index of 606 filings from August 2020 to 31 July 2026 and across all three registrant names on that record. The load-bearing documents are the FY2025 Form 10-K of 24 February 2026, the first quarter Form 10-Q of 5 May 2026, and the Current Reports of 24 February, 8 June and 15 June 2026 with their exhibits. Big Digital Energy's investor presentation of 3 June 2026 supplied the peer comparison in section 5.</p>
       <p><b>Pricing basis</b> is the close of 31 July 2026, the last completed session before the build date. The market capitalisation of $9.13 billion multiplies that price by the 409,049,197 shares reported on the 10-Q cover as of 4 May 2026; the two dates differ and the snapshot says so. Enterprise value is deliberately absent: $810.0 million of project debt closed after the most recent reported balance sheet.</p>

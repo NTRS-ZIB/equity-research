@@ -16,7 +16,7 @@
    ----------------------------------------------------------------------------
    Accent derived from the company wordmark. Raw brand gold #FFD700 at hue 51,
    the dominant chromatic colour in the mark. Normalised for paper to #72711D:
-   hue 59, saturation 60%, lightness 28%, 5.13:1 on white, which reads as a dark
+   hue 59, saturation 60%, lightness 28%, which reads as a dark
    olive. Rotated 8.4 degrees up from the raw hue because gold at hue 51 sits
    inside the caution band, and an identity colour there would read as a warning.
    ========================================================================= */
@@ -28,7 +28,7 @@
 }
 
 /* ============================================================================
-   SHARED STYLESHEET v1.50 : BEGIN
+   SHARED STYLESHEET v1.80 : BEGIN
    ========================================================================= */
 :root{
   color-scheme: light only;
@@ -262,7 +262,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   section{page-break-inside:avoid}
 }
 /* ============================================================================
-   SHARED STYLESHEET v1.50 : END
+   SHARED STYLESHEET v1.80 : END
    ========================================================================= */
 </style>
 </head>
@@ -592,9 +592,21 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
     <p>Treat the band as a sanity check rather than a figure. The company has not disclosed a total project budget, and the absence is itself worth noting.</p>
   </div>
 
-  <p>Sell-side coverage is thin and positive, as is normal at this capitalisation. <b>Alliance Global Partners</b>, analyst Brian Kinstlinger, raised its target to <b>$10 from $7 on 6 May 2026</b> immediately after the Cerebras announcement, then to <b>$12 from $10 on 15 May 2026</b> alongside the first quarter results, keeping a Buy rating and citing time-to-power as the sector bottleneck. <span class="tag">Market</span> 15 May 2026 <b>H.C. Wainwright</b>, analyst Kevin Dede, last published a target of <b>$5.00 on 17 November 2025</b>, which has not been revisited through any of the events since. <span class="tag">Market</span> 17 Nov 2025</p>
-
-  <p>Coverage therefore runs to two firms whose current published targets are $12 and $5.00, struck eight months apart and on entirely different facts, so an average of them would describe nothing. These are third party targets, reported as market data and attributed to the firms that issued them; this document adopts neither and issues none of its own.</p>
+  <h3>Third-party coverage</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Firm</th><th>Analyst</th><th class="when">Date</th><th>Rating</th><th class="num">Target</th><th class="num">Price at publication</th><th>Basis and disclosed conflict</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Weiss Ratings</td><td>n/a</td><td class="when">17 Jul 2026</td><td>Sell, D&minus;, reiterated</td><td class="num">none</td><td class="num">$3.77</td><td><span class="tag">Market</span> A quantitative ratings service rather than broker research: model-derived, no target, no named analyst. It is the most recent action on this issuer and the only negative one.</td></tr>
+      <tr><td class="lbl">Alliance Global Partners</td><td>Brian Kinstlinger</td><td class="when">15 May 2026</td><td>Buy</td><td class="num">$12, raised from $10</td><td class="num">$7.54</td><td><span class="tag">Market</span> Raised alongside the first quarter results, citing time-to-power as the sector bottleneck. The target was struck at a price roughly twice the current one. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">Alliance Global Partners</td><td>Brian Kinstlinger</td><td class="when">6 May 2026</td><td>Buy</td><td class="num">$10, raised from $7</td><td class="num">$6.24</td><td><span class="tag">Market</span> Raised immediately after the Cerebras announcement. Superseded nine days later by the row above, and kept because the pair shows how fast the target moved. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">H.C. Wainwright</td><td>Kevin Dede</td><td class="when">17 Nov 2025</td><td>Buy</td><td class="num">$5.00</td><td class="num">$3.70</td><td><span class="tag">Market</span> Not revisited through any of the events since, so its currency is not established. Disclosure about this issuer not established.</td></tr>
+      <tr><td class="lbl">iA Financial</td><td>Not established</td><td class="when">2 Sep 2025</td><td>Not established</td><td class="num">$3.50</td><td class="num">$2.37</td><td><span class="tag">Market</span> Reported by the service, which records a target without a rating. Eleven months old and predating the Cerebras agreement and the name change, so its currency is not established. Disclosure about this issuer not established.</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>Coverage runs to four firms and one ratings service, not two.</b> The three published targets that carry a number are $12, $5.00 and $3.50, struck across eleven months on entirely different facts: the $12 postdates the Cerebras agreement, the $5.00 predates it, and the $3.50 predates the change of name. An average of them would describe nothing, and none is struck here. The current price of $3.85 sits above two of the three and well below the most recent.</p>
+  <p><b>The most recent action is the negative one</b>, and it is not broker research: a quantitative service reiterated a Sell grade on 17 July 2026. It carries no target and names no analyst, and is reported for what it is rather than counted alongside the analysts.</p>
+  <p>A service separately publishes a consensus of $4.00 over three analysts with two Buy and one Sell. That is reported as a figure that service publishes, not as a centre struck in this document. This document adopts none of these targets and issues none of its own.</p>
+  <p><b>What is not established.</b> No note was read, so what any of these firms discloses about this issuer is unknown. The analyst at iA Financial is not named by the service, and no rating accompanies its target. Every target here is cited to the service reporting it rather than to the firm.</p>
 </section>
 
 <!-- ===================== 9. GROWTH DRIVERS ===================== -->
@@ -737,7 +749,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
       <tr><td class="lbl">Peter Lynch shareholding</td><td class="status caution-t">Not established</td><td>No such holding appears in any of the six beneficial-ownership filings on this issuer since 2025, which are by Michel Amar and affiliates, by Citadel Advisors and Kenneth Griffin, and by Eleven Ventures and Hartley Wasko. Those report holdings above the beneficial ownership threshold only, so a smaller position would not appear and absence cannot be established from them. Also named in what was not checked. 13G/A, 31 Dec 2025</td></tr>
       <tr><td class="lbl">Late filing notifications</td><td class="status">Covered above</td><td><b>Two Form NT 20-F notifications have been filed</b>, on 2 May 2023 and 1 May 2024, both under the Digihost Technology name. The 2024 notice states the annual report could not be filed on time because the auditor was still completing its audit of the 2023 statements, which places the delay on the accounts rather than on administration. Established against the complete filing index for this issuer, 241 filings, searched 3 August 2026. No NT 10-K, NT 10-Q or NT 40-F appears.</td></tr>
       <tr><td class="lbl">Schedule 13D positions</td><td class="status">None</td><td>No Schedule 13D of any kind appears across the complete filing index for this issuer, 241 filings, searched 3 August 2026, so no activist position is on record. The beneficial-ownership record consists of five Schedule 13G and 13G/A filings since 2025 and seven earlier ones under the previous form designation. The five are not all on the same footing: Citadel and Eleven Ventures file under the passive-investor exemption in Exchange Act Rule 13d-1(c), while both of the Amar statements are filed under Exchange Act Rule 13d-1(d), which is open to a holder whose position predates the registration of the class and rests on no certification of passivity.</td></tr>
-      <tr><td class="lbl">Analyst coverage</td><td class="status">Covered above</td><td>Not a null: coverage exists and is discussed in section 08, running to Alliance Global Partners and one other contributor. A consensus drawn from one or two contributors carries little averaging benefit.</td></tr>
+      <tr><td class="lbl">Analyst coverage</td><td class="status">Covered above</td><td>Coverage is tabled in section 08 and runs to four firms and one quantitative ratings service, three of them carrying a target. A consensus drawn from three contributors struck eleven months apart carries little averaging benefit, and none is computed here.</td></tr>
       <tr><td class="lbl">Price target issued here</td><td class="status">None</td><td>No target price is issued in this document. Third party targets are reported in section 08 for context only.</td></tr>
     </tbody>
   </table></div>
@@ -807,6 +819,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
     <div class="logentry current">
       <div class="when">3 August 2026 <span class="latest">Latest</span></div>
       <div class="basis">Priced off 3 Aug 2026 close &middot; $3.85 &middot; ~$382M cap</div>
+      <p><b>Third-party coverage moves from prose to a table, and the set is larger than the prose said.</b> The two firms already described keep their figures exactly: Alliance Global Partners at $12 from 15 May 2026 and H.C. Wainwright at $5.00 from 17 November 2025, with the intermediate raise to $10 on 6 May now shown as its own row. Added from a search on 3 August 2026: a $3.50 target from iA Financial dated 2 September 2025, and a Sell grade reiterated by a quantitative ratings service on 17 July 2026, which is the most recent action on this issuer and the only negative one. Each row now carries the close on its publication date, so the reader can see that the $12 was struck at $7.54 and the $3.50 at $2.37.</p>
       <div class="correction">
         <span class="lbl">Correction</span>
         <p><b>The account of who owns this company was wrong, not merely short.</b> This report described the ownership record as <i>&ldquo;Schedule 13G/A filings for Michel Amar and affiliates&rdquo;</i> and stated that <i>&ldquo;only Schedule 13G/A filings appear&rdquo;</i>. Both are false. Five beneficial-ownership filings have been made since 2025 by <b>three</b> unrelated filers, and two of them are original Schedule 13G filings rather than amendments. The largest outside holder, <b>Citadel Advisors and Kenneth Griffin at 3,550,691 shares and 4.9%</b> as at 5 May 2026, appeared nowhere in this file, nor did <b>Eleven Ventures</b>, whose 1,053,536-share position was disclosed in the same filing that recorded its reduction to nil on 7 July 2025. The register now sits in capital structure, with each holding restated against the current class.</p>
