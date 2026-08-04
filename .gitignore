@@ -46,3 +46,15 @@ TEMPLATE_*.html
 # OS noise
 .DS_Store
 Thumbs.db
+
+# Verification harness and the preserved baselines it works against. Both are
+# working apparatus, not published research: the harness encodes the checks and
+# their repairs, and the preserved directories hold each pass's source as it stood
+# before its first edit. Kept in the project so they survive a temp-directory
+# clearance, and excluded here so they never reach the published set.
+harness/
+preserved/
+*.ps1
+_preserved*/
+received*/
+as_received/
