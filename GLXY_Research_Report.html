@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>GLXY · Galaxy Digital Inc. · Equity Research Report · as of 5 August 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================================
+   PER-TICKER PALETTE
+   ========================================================================= */
+:root{
+  /* Galaxy's wordmark is set in white on near-black, so it carries no colour of
+     its own. The accent comes from the brand blue the company uses across its
+     own site chrome, #0000EE. That blue sits ten degrees from the violet this
+     palette reserves for analyst assumptions, so the hue is rotated from 240 to
+     230 to keep identity clear of meaning; saturation is brought to 72 percent
+     and lightness to 42 percent so it holds at 14px on white. */
+  --accent:      #1E38B8;
+  --accent-deep: #172A8C;
+  --accent-wash: rgba(30,56,184,0.06);
+  --accent-line: rgba(30,56,184,0.22);
+}
+
+/* ============================================================================
+   SHARED STYLESHEET v1.93 : BEGIN
+   ========================================================================= */
+:root{
+  color-scheme: light only;
+
+  --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
+  --line:#DEE6EC;   --line-hard:#C0CDD7;
+  --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
+
+  --pos:#0B7A50;      --pos-bg:#E7F4EE;
+  --neg:#B02A21;      --neg-bg:#FBECEA;
+  --caution:#90600A;  --caution-bg:#FBF2E0;
+  --assume:#4F3FA3;   --assume-bg:#EFEDFA;
+
+  --display:'Archivo',ui-sans-serif,system-ui,'Helvetica Neue',Arial,sans-serif;
+  --body:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+
+  --measure:78ch;
+  --col:760px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html,body{background:var(--canvas) !important;background-color:var(--canvas) !important}
+body{
+  margin:0;color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 22px 96px;background:var(--paper);
+      border-left:1px solid var(--line);border-right:1px solid var(--line)}
+p{max-width:var(--measure)}
+/* Boxed prose fills its container: the box supplies its own measure, so the
+   78ch cap applies to top-level running prose only. */
+.first li,.assume p,.note p,.cat p,.risk p,.logentry p,.oc p,.case p,
+.cat-meta,.logentry .basis{max-width:none}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:var(--accent-deep)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- masthead ---------- */
+.mast{padding:44px 0 26px;border-bottom:2px solid var(--line-hard);margin-bottom:8px;
+      position:relative;padding-left:20px}
+.mast::before{content:"";position:absolute;left:0;top:44px;bottom:26px;
+      width:4px;background:var(--accent)}
+.ticker{font-family:var(--mono);font-size:44px;font-weight:700;letter-spacing:-1px;
+      line-height:1;color:var(--accent);margin:0}
+.headline{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.22;
+      color:var(--ink);margin:16px 0 0}
+.functional{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--ink-faint);margin:18px 0 0}
+.mast-strip{display:flex;flex-wrap:wrap;gap:26px;margin-top:20px;padding-top:16px;
+      border-top:1px solid var(--line)}
+.mast-strip div{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint)}
+.mast-strip b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-top:3px}
+
+/* ---------- banner: framing ---------- */
+.first{background:var(--canvas);border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:20px 24px;margin:30px 0 12px}
+.first h2{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.04em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 12px}
+.first ol{margin:0;padding-left:20px}
+.first li{margin-bottom:9px}
+.first li:last-child{margin-bottom:0}
+
+/* ---------- sections ---------- */
+section{padding-top:38px}
+h2.sec{font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);
+      margin:0 0 4px;padding-bottom:10px;border-bottom:1px solid var(--line-hard);
+      display:flex;align-items:baseline;gap:12px}
+h2.sec .n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);
+      letter-spacing:.06em;flex:none}
+.sub{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);margin:10px 0 18px;
+      max-width:var(--measure)}
+h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink-dim);
+      margin:26px 0 8px}
+
+/* ---------- provenance tags (signature) ---------- */
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);
+      background:var(--panel-2);border:1px solid var(--line);
+      border-radius:2px;padding:1px 6px;vertical-align:1px;white-space:nowrap}
+
+/* ---------- assumption block ---------- */
+.assume{background:var(--assume-bg);border-left:4px solid var(--assume);
+      padding:16px 20px;margin:20px 0}
+.assume .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--assume);display:block;margin-bottom:7px}
+.assume p{margin:0}
+
+/* ---------- callouts ---------- */
+.note{border:1px solid var(--line);border-left:4px solid var(--ink-faint);
+      background:var(--canvas);padding:16px 20px;margin:20px 0}
+.note.pos{border-left-color:var(--pos);background:var(--pos-bg)}
+.note.neg{border-left-color:var(--neg);background:var(--neg-bg)}
+.note.caution{border-left-color:var(--caution);background:var(--caution-bg)}
+.note p{margin:0}
+.note p + p{margin-top:10px}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+thead th{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--ink-dim);text-align:left;
+      padding:9px 12px;border-bottom:2px solid var(--line-hard);white-space:nowrap}
+tbody td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--canvas)}
+td.num,th.num{font-family:var(--mono);text-align:right;white-space:nowrap}
+/* td.when marks a timing column. An unmarked cell counts as prose. */
+td.when{font-family:var(--mono);white-space:nowrap}
+td.lbl{font-weight:600}
+.pos-t{color:var(--pos);font-weight:600}
+.neg-t{color:var(--neg);font-weight:600}
+.caution-t{color:var(--caution);font-weight:600}
+
+/* ---------- cases ---------- */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.case{border:1px solid var(--line);border-top:3px solid var(--ink-faint);
+      background:var(--paper);padding:18px}
+.case.bull{border-top-color:var(--pos)}
+.case.bear{border-top-color:var(--neg)}
+.case h4{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 10px}
+.case.bull h4{color:var(--pos)} .case.bear h4{color:var(--neg)}
+.case p{font-size:15px;margin:0}
+.case .req{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+
+/* ---------- risks ---------- */
+.risk{border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:16px 20px;margin-bottom:12px}
+.risk.sev-high{border-left-color:var(--neg)}
+.risk.sev-med{border-left-color:var(--caution)}
+.risk.sev-low{border-left-color:var(--ink-faint)}
+.risk h4{font-family:var(--display);font-size:15.5px;font-weight:600;margin:0 0 6px;
+      display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.risk .sev{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase}
+.risk.sev-high .sev{color:var(--neg)}
+.risk.sev-med .sev{color:var(--caution)}
+.risk.sev-low .sev{color:var(--ink-faint)}
+.risk p{margin:0;font-size:15.5px}
+
+/* ---------- null categories ---------- */
+.nulls td.lbl{width:26%}
+.nulls .status{font-family:var(--mono);font-size:12px;white-space:nowrap}
+
+/* ---------- document log ---------- */
+.log{margin-top:14px}
+.logentry{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:12px}
+.logentry.current{border-left:4px solid var(--accent);background:var(--accent-wash)}
+.logentry .when{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);
+      display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.latest{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-line);
+      background:var(--paper);border-radius:2px;padding:1px 6px}
+.logentry .basis{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-bottom:12px}
+.logentry p{font-size:15.5px;margin:0 0 9px}
+.logentry p:last-child{margin-bottom:0}
+.correction{border:1px solid var(--neg);border-left:4px solid var(--neg);
+      background:var(--neg-bg);padding:12px 16px;margin-bottom:14px}
+.correction .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--neg);display:block;margin-bottom:5px}
+
+/* ---------- footer ---------- */
+footer{margin-top:44px;padding-top:22px;border-top:2px solid var(--line-hard)}
+footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width:none}
+.norec{border:1px solid var(--line-hard);background:var(--canvas);padding:16px 20px;
+      margin-top:20px;font-family:var(--mono);font-size:12.5px;color:var(--ink-dim)}
+
+/* ---------- catalyst cards (calendar) ---------- */
+.cat{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:14px;border-left:4px solid var(--line-hard)}
+.cat.up{border-left-color:var(--pos)}
+.cat.down{border-left-color:var(--neg)}
+.cat.two{border-left-color:var(--caution)}
+.cat.neutral{border-left-color:var(--ink-faint)}
+.cat-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.cid{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);flex:none}
+.cat-head h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink);
+      margin:0;flex:1 1 auto;min-width:200px}
+.dir{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;white-space:nowrap}
+.cat.up .dir{color:var(--pos)} .cat.down .dir{color:var(--neg)}
+.cat.two .dir{color:var(--caution)} .cat.neutral .dir{color:var(--ink-faint)}
+.cat-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:10px 0 12px;padding:9px 0;
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+      font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
+.cat-meta b{color:var(--ink);font-weight:600}
+.cat p{margin:0 0 9px;font-size:15.5px}
+.cat p:last-child{margin-bottom:0}
+.cat.resolved{background:var(--canvas);border-left-color:var(--ink-faint)}
+.cat.resolved .dir{color:var(--ink-faint)}
+
+/* ---------- horizon bands (calendar) ---------- */
+.band{display:flex;align-items:center;gap:14px;margin:30px 0 16px}
+.band-t{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--ink-dim);white-space:nowrap}
+.band-r{flex:1;height:1px;background:var(--line-hard)}
+.band-c{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);white-space:nowrap}
+
+/* ---------- upside / downside pair ---------- */
+.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0}
+.oc{border:1px solid var(--line);padding:11px 14px;background:var(--paper)}
+.oc.up-c{border-left:3px solid var(--pos)}
+.oc.down-c{border-left:3px solid var(--neg)}
+.oc .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.09em;
+      text-transform:uppercase;display:block;margin-bottom:5px}
+.oc.up-c .lbl{color:var(--pos)} .oc.down-c .lbl{color:var(--neg)}
+.oc p{margin:0;font-size:14.5px;line-height:1.5}
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  body{font-size:16px}
+  .wrap{padding:0 16px 70px;border-left:none;border-right:none}
+  .ticker{font-size:34px}
+  .headline{font-size:23px}
+  .cases{grid-template-columns:1fr}
+  .outcomes{grid-template-columns:1fr}
+  .mast-strip{gap:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none !important;transition:none !important}
+}
+@media print{
+  body{font-size:11pt}
+  .wrap{max-width:none;border:none}
+  section{page-break-inside:avoid}
+}
+/* ============================================================================
+   SHARED STYLESHEET v1.93 : END
+   ========================================================================= */
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ===================== MASTHEAD ===================== -->
+<header class="mast">
+  <p class="ticker">GLXY</p>
+  <h1 class="headline">A $3.5 billion note issue, 133 delivered megawatts, and a third consecutive quarterly loss</h1>
+  <p class="functional">GLXY · Galaxy Digital Inc. · Equity Research Report · as of 5 August 2026</p>
+  <div class="mast-strip">
+    <div>Price <b>$22.14</b> <span class="tag">Market</span></div>
+    <div>Market cap <b>$8,666M</b> <span class="tag">Estimate</span></div>
+    <div>Class A shares <b>194,798,949</b> <span class="tag">Filed</span></div>
+    <div>Class B shares <b>196,596,698</b> <span class="tag">Filed</span></div>
+    <div>Pricing basis <b>4 Aug 2026 close</b> <span class="tag">Market</span></div>
+  </div>
+</header>
+
+<!-- ===================== FRAMING ===================== -->
+<div class="first">
+  <h2>Framing</h2>
+  <ol>
+    <li>Galaxy reported a second-quarter net loss of $85.3M on 5 August 2026, its third consecutive quarterly loss, after $216.3M in the first quarter and $481.7M in the fourth quarter of 2025. Adjusted gross profit was $43.4M. <span class="tag">Filed</span></li>
+    <li>The Data Centers segment produced its first revenue in the quarter: $18.9M of leasing revenue and $5.8M of operating revenue, with all 133 MW of critical IT load under the CoreWeave Phase I lease in service at 30 June. <span class="tag">Filed</span></li>
+    <li>On 28 July a wholly owned subsidiary closed $3.5B of senior secured notes due 2031 to fund Helios Phase II. Total equity at 30 June was $2.72B, so the single financing exceeds the equity base behind it. <span class="tag">Filed</span></li>
+  </ol>
+</div>
+
+<!-- ===================== 1. SNAPSHOT ===================== -->
+<section id="s1">
+  <h2 class="sec"><span class="n">01</span>Snapshot</h2>
+  <p class="sub">Key figures, each tagged by provenance.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Metric</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Revenues and gains from operations (Q2 2026)</td><td class="num">$8,710.5M</td><td><span class="tag">Filed</span> 8-K, 5 Aug 2026. Gross of transaction expenses of $8,485.8M.</td></tr>
+      <tr><td class="lbl">Adjusted gross profit (Q2 2026)</td><td class="num">$43.4M</td><td><span class="tag">Filed</span> 8-K, 5 Aug 2026. Company-defined non-GAAP measure.</td></tr>
+      <tr><td class="lbl">Net loss (Q2 2026)</td><td class="num neg-t">($85.3M)</td><td><span class="tag">Filed</span> 8-K, 5 Aug 2026</td></tr>
+      <tr><td class="lbl">Net loss (FY2025)</td><td class="num neg-t">($241.3M)</td><td><span class="tag">Filed</span> 8-K financial supplement, 5 Aug 2026</td></tr>
+      <tr><td class="lbl">Total assets (30 Jun 2026)</td><td class="num">$10,844.0M</td><td><span class="tag">Filed</span> 8-K, 5 Aug 2026</td></tr>
+      <tr><td class="lbl">Total equity (30 Jun 2026)</td><td class="num">$2,720.1M</td><td><span class="tag">Filed</span> 8-K, 5 Aug 2026. Of which $896.7M is noncontrolling interest.</td></tr>
+      <tr><td class="lbl">Cash and stablecoins (30 Jun 2026)</td><td class="num">$2,459M</td><td><span class="tag">Filed</span> 8-K, 5 Aug 2026. $896M cash, $1,563M stablecoins.</td></tr>
+      <tr><td class="lbl">Notes payable (30 Jun 2026)</td><td class="num">$3,262.8M</td><td><span class="tag">Filed</span> 8-K, 5 Aug 2026. $437.0M current, $2,825.8M non-current. Excludes the July notes.</td></tr>
+      <tr><td class="lbl">Delivered critical IT load</td><td class="num">133 MW</td><td><span class="tag">Filed</span> 8-K, 5 Aug 2026</td></tr>
+      <tr><td class="lbl">Market capitalisation</td><td class="num">$8,666M</td><td><span class="tag">Estimate</span> 391,395,647 shares (Class A and Class B, 30 June 2026, <span class="tag">Filed</span>) &times; $22.14 (4 Aug 2026 close, <span class="tag">Market</span>). Share count and price carry different dates.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 2. BUSINESS MODEL ===================== -->
+<section id="s2">
+  <h2 class="sec"><span class="n">02</span>Business model</h2>
+  <p>Galaxy Digital Inc. runs two businesses that share a balance sheet and very
+  little else. The first is an institutional digital-asset platform: trading, lending,
+  investment banking, asset management, staking and tokenisation infrastructure, sold to
+  institutions and reported in two segments, Global Markets and Asset Management &amp;
+  Infrastructure Solutions. The second is a data centre developer that leases power and
+  critical IT capacity to computing tenants under long-term contracts. A third segment,
+  Treasury &amp; Corporate, holds the firm's own digital asset and investment positions.</p>
+
+  <p>The company is the surviving structure of a reorganisation completed on 13 May 2025,
+  which moved the group from Galaxy Digital Holdings Ltd, a Cayman company quoted in Toronto,
+  into a Delaware corporation listed on Nasdaq. Economic ownership below the corporation still
+  sits partly in Galaxy Digital Holdings LP, and the Class B shares track that interest.</p>
+
+  <p>How each side is paid differs sharply, and this is the single most important
+  structural fact about the company. Digital Assets earns spreads, fees and net interest
+  that move with market activity and with the price of the assets themselves. Data Centers
+  earns contracted rent under a 15-year lease, indifferent to those prices once capacity is
+  in service. In the second quarter of 2026 the first produced $66M of adjusted gross profit
+  and the second $20M. <span class="tag">Filed</span> 8-K, 5 Aug 2026.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The two businesses are treated here as separately valuable rather than as one
+    enterprise, because their cash flows have different drivers, different counterparties
+    and different financing. Galaxy reports segment equity allocation, roughly 36% Digital
+    Assets, 36% Data Centers and 28% Treasury &amp; Corporate at 30 June 2026, which supports
+    that reading but does not compel it. The company files one set of consolidated
+    statements and does not present the segments as separable entities.</p>
+  </div>
+</section>
+
+<!-- ===================== 3. REVENUE STREAMS ===================== -->
+<section id="s3">
+  <h2 class="sec"><span class="n">03</span>Revenue streams</h2>
+  <p class="sub">Reported revenue and the profit that survives transaction expenses are two
+  very different figures at this company, and the gap is the point.</p>
+
+  <p>Galaxy's headline revenue is a gross number. Of the $8,557.3M of revenues booked in the
+  second quarter of 2026, $8,483.0M was digital asset sales, matched by $8,439.5M of digital
+  asset sales costs. The turnover is real but almost none of it is margin. A reader who takes
+  revenue as a measure of the business will overstate it by two orders of magnitude, which is
+  why the company reports adjusted gross profit alongside it. <span class="tag">Filed</span>
+  8-K financial supplement, 5 Aug 2026.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Stream</th><th class="num">Q2 2026</th><th class="num">Q1 2026</th><th>What it is, and how durable</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Global Markets</td><td class="num">$49M</td><td class="num">$31M</td><td>Trading, lending and investment banking fees. Adjusted gross profit rose 58% on the quarter while trading volumes fell 7%. Cyclical. <span class="tag">Filed</span> 8-K, 5 Aug 2026</td></tr>
+      <tr><td class="lbl">Asset Management &amp; Infrastructure Solutions</td><td class="num">$17M</td><td class="num">$18M</td><td>Fees on $7.1B of combined assets under management and under stake, itself down 12% on the quarter with digital asset prices. <span class="tag">Filed</span> 8-K, 5 Aug 2026</td></tr>
+      <tr><td class="lbl">Data Centers</td><td class="num">$20M</td><td class="num">$3M</td><td>Contracted lease revenue. First full revenue quarter; $18.9M leasing plus $5.8M operating revenue. Fifteen-year term. <span class="tag">Filed</span> 8-K, 5 Aug 2026</td></tr>
+      <tr><td class="lbl">Treasury &amp; Corporate</td><td class="num neg-t">($42M)</td><td class="num neg-t">($140M)</td><td>Not a stream but a position: unrealised gains and losses on the firm's own digital assets and investments. Directionally a market bet. <span class="tag">Filed</span> 8-K, 5 Aug 2026</td></tr>
+      <tr><td class="lbl">Total adjusted gross profit</td><td class="num">$43M</td><td class="num neg-t">($88M)</td><td><span class="tag">Filed</span> 8-K, 5 Aug 2026</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>The durability ranking follows from the contracts rather than from the figures. Data
+  Centers revenue is the only stream with a stated term and a named counterparty. Global
+  Markets and Asset Management depend on activity levels and asset prices. Treasury &amp;
+  Corporate has no contractual claim on anything and swung $98M between the two quarters
+  shown.</p>
+</section>
+
+<!-- ===================== 4. INDUSTRY & MARKET BACKDROP ===================== -->
+<section id="s4">
+  <h2 class="sec"><span class="n">04</span>Industry &amp; market backdrop</h2>
+  <p>Galaxy sits at the junction of two markets that have very little to do with each other,
+  and its results now depend on both.</p>
+
+  <h3>Digital assets</h3>
+  <p>The second quarter of 2026 was a falling market. Galaxy attributes its loss primarily to
+  the depreciation of digital asset prices in the period, records $181.3M of impairment of
+  digital assets in the quarter and $465.8M in the half, and reports its own assets under
+  management and under stake down 12% on price movement. It also states that industry-wide
+  trading volumes fell by more than a double-digit percentage sequentially, citing The Block,
+  while its own volumes fell 7%. <span class="tag">Filed</span> 8-K, 5 Aug 2026.</p>
+
+  <h3>AI and high-performance computing infrastructure</h3>
+  <p>The data centre side is a power-constrained market rather than a demand-constrained one.
+  Galaxy's own disclosure describes capacity moving through the ERCOT interconnection process
+  in Texas, with two further one-gigawatt load requests under study at Helios and additional
+  sites acquired subject to that process. The binding constraint on the segment is the pace at
+  which approved power is delivered, not the availability of tenants: the company states that
+  830 MW of approved capacity at Helios is not yet under lease and that discussions with
+  prospective tenants continue. <span class="tag">Filed</span> 8-K, 5 Aug 2026.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The two backdrops are treated as uncorrelated here. A digital asset drawdown of the
+    kind seen in the second quarter does not mechanically affect a signed 15-year lease with a
+    computing tenant. The link that does exist runs through financing: both businesses are
+    funded from one balance sheet, and a sustained drawdown in the first reduces the equity
+    available to support the second. That channel is real but slower than the price moves that
+    drive quarterly results.</p>
+  </div>
+</section>
+
+<!-- ===================== 5. COMPETITIVE POSITION ===================== -->
+<section id="s5">
+  <h2 class="sec"><span class="n">05</span>Competitive position</h2>
+  <p class="sub">Named peers on comparable metrics. Galaxy competes in two different peer
+  sets and is unusual in belonging to both.</p>
+
+  <p>On the data centre side the comparable set is the group of operators converting or
+  building large power positions in the United States for computing tenants. On the digital
+  asset side it is institutional trading and asset management platforms. Very few companies
+  appear in both lists, which is the competitive fact worth stating: Galaxy's peers on one
+  side are not its peers on the other, and no single multiple describes it.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Company</th><th>Comparable on</th><th>Where it differs</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Applied Digital (APLD)</td><td>Contracted AI data centre capacity under long-term take-or-pay leases</td><td>1.4 GW contracted critical IT load against Galaxy's 526 MW under the CoreWeave leases; no digital asset trading business. <span class="tag">Filed</span> APLD 8-K, 27 Jul 2026</td></tr>
+      <tr><td class="lbl">IREN Limited (IREN)</td><td>Owned power, self-build, mixed mining and AI capacity</td><td>Retains a substantial self-mining business; Galaxy has exited proprietary mining to near nothing, $2.6M of revenue in the quarter</td></tr>
+      <tr><td class="lbl">TeraWulf (WULF)</td><td>Single large campus leased to a computing tenant, financed with project-level secured notes</td><td>Comparable financing structure at smaller scale; no asset management arm</td></tr>
+      <tr><td class="lbl">Cipher Mining (CIFR)</td><td>Texas interconnection queue positions converted to HPC leases</td><td>Similar ERCOT exposure; no balance-sheet digital asset trading</td></tr>
+      <tr><td class="lbl">Hut 8 (HUT)</td><td>Power portfolio plus a digital asset treasury</td><td>The nearest structural analogue on the two-businesses point, at roughly a quarter of Galaxy's total assets</td></tr>
+      <tr><td class="lbl">Bitdeer (BTDR)</td><td>Long-term AI/HPC colocation leasing</td><td>Contracted a 121 MW lease in Norway rather than Texas; manufactures its own mining hardware</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>Against the digital asset platforms, the comparison that matters is scale of the loan
+  book and counterparty count, and Galaxy discloses both: an average loan book of $1,438M and
+  1,741 total trading counterparties at the end of the second quarter, up 1% and 3%
+  respectively on the quarter. <span class="tag">Filed</span> 8-K, 5 Aug 2026. Competitors on
+  that side are largely private or are subsidiaries of larger institutions, and comparable
+  figures are not published, so a like-for-like table cannot be built and is not attempted
+  here.</p>
+</section>
+
+<!-- ===================== 6. FINANCIAL PERFORMANCE ===================== -->
+<section id="s6">
+  <h2 class="sec"><span class="n">06</span>Financial performance</h2>
+  <p class="sub">Multi-period. Figures in US$ thousands unless stated.</p>
+
+  <p>The trend is stated first: Galaxy earned money in 2023 and 2024, lost money in 2025, and
+  has now lost money in three consecutive quarters. The losses are driven by the Treasury
+  &amp; Corporate position rather than by the operating businesses, which is why the quarterly
+  swing is so wide.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Measure</th><th class="num">FY2023</th><th class="num">FY2024</th><th class="num">FY2025</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Revenues and gains from operations</td><td class="num">$52,209,639</td><td class="num">$43,757,790</td><td class="num">$61,355,667</td><td><span class="tag">Filed</span> 8-K financial supplement, 5 Aug 2026</td></tr>
+      <tr><td class="lbl">Adjusted gross profit</td><td class="num">$617,216</td><td class="num">$1,016,014</td><td class="num">$426,134</td><td><span class="tag">Filed</span> 8-K financial supplement, 5 Aug 2026</td></tr>
+      <tr><td class="lbl">Net income / (loss)</td><td class="num pos-t">$228,514</td><td class="num pos-t">$346,722</td><td class="num neg-t">($241,349)</td><td><span class="tag">Filed</span> 8-K financial supplement, 5 Aug 2026</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>Revenue rose 40% between 2024 and 2025 while adjusted gross profit fell 58%. That is not
+  a contradiction: the revenue line is gross digital asset sales, and it grows with turnover
+  regardless of whether the turnover is profitable. Adjusted gross profit is the figure that
+  moved with the business.</p>
+
+  <h3>The last five quarters</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Quarter</th><th class="num">Adj. gross profit</th><th class="num">Net income / (loss)</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Q2 2025</td><td class="num">$299,232</td><td class="num pos-t">$30,691</td></tr>
+      <tr><td class="lbl">Q3 2025</td><td class="num">$728,641</td><td class="num pos-t">$505,057</td></tr>
+      <tr><td class="lbl">Q4 2025</td><td class="num neg-t">($398,175)</td><td class="num neg-t">($481,666)</td></tr>
+      <tr><td class="lbl">Q1 2026</td><td class="num neg-t">($87,922)</td><td class="num neg-t">($216,311)</td></tr>
+      <tr><td class="lbl">Q2 2026</td><td class="num">$43,364</td><td class="num neg-t">($85,316)</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub"><span class="tag">Filed</span> 8-K financial supplement, 5 Aug 2026.</p>
+
+  <p>Three things are visible in that sequence. The swing between the best and worst quarter
+  shown is $986.8M of net income on a company whose total equity is $2,720.1M. The direction of
+  the swing follows digital asset prices. And the second quarter of 2026 is the first in which
+  adjusted gross profit returned to positive while the net line stayed negative, because the
+  impairment and the operating cost base sit below that measure.</p>
+
+  <p>Operating costs excluding transaction expenses rose year on year: compensation and
+  benefits $84.0M against $65.0M, technology $16.3M against $11.6M, and notes interest expense
+  $25.1M against $14.2M, the last reflecting the debt raised to build data centres. Impairment
+  of digital assets was $181.3M against $127.5M. <span class="tag">Filed</span> 8-K, 5 Aug 2026.</p>
+</section>
+
+<!-- ===================== 7. CAPITAL STRUCTURE & DILUTION ===================== -->
+<section id="s7">
+  <h2 class="sec"><span class="n">07</span>Capital structure &amp; dilution</h2>
+  <p class="sub">Two share classes, a large and recently enlarged secured debt stack, and an
+  automatic shelf.</p>
+
+  <h3>Equity</h3>
+  <p>Two classes were outstanding at 30 June 2026: 194,798,949 shares of Class A common stock
+  and 196,596,698 shares of convertible Class B common stock. Class B carries a par value of
+  $0.0000000001 and no book value; it tracks the limited partnership interests in Galaxy
+  Digital Holdings LP held by the noncontrolling interest, and is exchangeable into Class A.
+  <span class="tag">Filed</span> 8-K, 5 Aug 2026.</p>
+
+  <p>The two classes are close to equal in number, so the distinction changes the share count
+  by a factor of two depending on which question is asked. On a Class A basis the market
+  capitalisation at the 4 August close is $4,313M; on a fully exchanged basis it is $8,666M.
+  This document uses the fully exchanged figure throughout, because the Class B interests are
+  exchangeable into the listed class and the consolidated financial statements already
+  consolidate the partnership.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The fully exchanged count is the right denominator for a market capitalisation here,
+    but it is a choice rather than a filed figure. Galaxy's own diluted earnings per share
+    calculation used 192,869,271 weighted average shares for the second quarter, a Class A
+    basis, because the loss made the exchange anti-dilutive; for the six months it used
+    390,465,556. The company therefore presents both bases itself depending on the period,
+    which is the clearest evidence that neither is uniquely correct.</p>
+  </div>
+
+  <h3>Debt</h3>
+  <p>Notes payable at 30 June 2026 stood at $3,262.8M, being $437.0M current and $2,825.8M
+  non-current. That figure predates the largest financing in the company's history: on 28 July
+  2026 Galaxy Helios Data Centers II LLC, a wholly owned subsidiary, completed a private
+  offering of $3.5B of senior secured notes due 2031, with proceeds to fund construction of
+  Helios I Phase II. <span class="tag">Filed</span> 8-K, 28 Jul 2026 and 8-K, 5 Aug 2026.</p>
+
+  <p>Pro forma for that issue, secured and unsecured borrowings approach $6.8B against total
+  equity of $2.72B. The notes sit at a project subsidiary rather than at the parent, which is
+  the standard structure for this kind of build and which matters for where the recourse runs.
+  This document does not have the indenture terms and does not characterise the recourse.</p>
+
+  <h3>Shelf and resale capacity</h3>
+  <p>Galaxy filed an automatic shelf registration statement on Form S-3ASR on 8 May 2026,
+  together with a resale registration statement on Form S-3. A well-known seasoned issuer's
+  automatic shelf carries no stated ceiling, so no dollar capacity figure can be given.
+  Twenty-one prospectuses under Rule 424 have been filed since May 2025, the most recent on
+  21 May 2026. <span class="tag">Filed</span> SEC filing index for CIK 0001859392, searched
+  5 Aug 2026.</p>
+
+  <h3>Dilution already taken</h3>
+  <p>The May 2025 capital raise sold 31,600,000 shares of Class A common stock, with an option
+  over a further 4,740,000 shares from the founder rather than from the company. Thirteen
+  underwriters took the offering. <span class="tag">Filed</span> 424B4, 30 May 2025. That
+  syndicate matters again in section 8, because most of it now publishes research on the
+  company.</p>
+</section>
+
+<!-- ===================== 8. VALUATION ===================== -->
+<section id="s8">
+  <h2 class="sec"><span class="n">08</span>Valuation</h2>
+  <p class="sub">Multiples shown with their basis and pricing date. No target price.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Measure</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Price to book</td><td class="num">3.19&times;</td><td><span class="tag">Estimate</span> $8,666M market capitalisation &divide; $2,720.1M total equity at 30 Jun 2026. Price 4 Aug 2026, equity 30 Jun 2026.</td></tr>
+      <tr><td class="lbl">Price to equity attributable to the company, mixed basis</td><td class="num">4.75&times;</td><td><span class="tag">Estimate</span> $8,666M &divide; $1,823.4M stockholders' equity excluding the $896.7M noncontrolling interest. The numerator is the fully exchanged capitalisation and the denominator excludes the interest the Class B shares track, so the two are struck on different bases. This ratio brackets nothing and measures nothing on its own; it is shown because a reader comparing sources will meet it.</td></tr>
+      <tr><td class="lbl">Price to equity attributable to the company, consistent basis</td><td class="num">2.37&times;</td><td><span class="tag">Estimate</span> $4,313M &divide; $1,823.4M. The numerator is 194,798,949 Class A shares (<span class="tag">Filed</span> 8-K, 5 Aug 2026) &times; $22.14 (4 Aug 2026 close, <span class="tag">Market</span>), and the denominator excludes the $896.7M noncontrolling interest the Class B shares track. Numerator and denominator are both parent-only. This and the 3.19&times; above are the two internally consistent readings, parent-only and whole-entity, and it is those two that bracket the answer.</td></tr>
+      <tr><td class="lbl">Market capitalisation to annualised Data Centers leasing revenue</td><td class="num">n/a</td><td>Not struck. Phase I reached full delivery only at quarter end, so the $18.9M booked in the quarter is a partial period and annualising it would misstate the run rate in both directions.</td></tr>
+      <tr><td class="lbl">Enterprise value multiples</td><td class="num">n/a</td><td>Not struck. See methodology: an enterprise value is not derived here.</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>Galaxy gives one forward figure of its own that a reader can use without the file deriving
+  anything: it expects Phase I to generate quarterly leasing revenue of approximately $80M and
+  a project-level adjusted EBITDA margin above 90% beginning in the third quarter of 2026.
+  <span class="tag">Filed</span> 8-K, 5 Aug 2026. That is the company's expectation, not this
+  document's estimate, and it is stated here as such.</p>
+
+  <h3>Third-party coverage</h3>
+  <p class="sub">Every row is market data: attributed, dated, tagged, never adopted. Price at
+  publication is the close on the <b>last trading day before</b> the action, taken from the
+  exchange's own daily record for GLXY, and this convention governs every row in the table.
+  Galaxy's own investor relations page, read on 5 August 2026, names sixteen firms and their
+  analysts; it publishes no ratings or targets, and its Type and Rating columns are empty.
+  Rows carrying a rating and a target are cited to the note that published them.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Firm</th><th>Analyst</th><th class="when">Date</th><th>Rating</th><th class="num">Target</th><th class="num">Price at pub.</th><th>Disclosed conflict</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Rosenblatt Securities</td><td>Chris Brendler</td><td class="when">3 Aug 2026</td><td>Buy, reiterated</td><td class="num">$35.00 <span class="tag">Market</span></td><td class="num">$21.01</td><td>Underwriter, May 2025 offering (449,053 shares). <span class="tag">Filed</span> 424B4, 30 May 2025</td></tr>
+      <tr><td class="lbl">Compass Point</td><td>Ed Engel, Michael Donovan</td><td class="when">5 Aug 2026</td><td>Buy</td><td class="num">$40.00 <span class="tag">Market</span></td><td class="num">$22.14</td><td>Underwriter, May 2025 offering (449,053 shares). <span class="tag">Filed</span> 424B4, 30 May 2025</td></tr>
+      <tr><td class="lbl">Compass Point</td><td>Ed Engel, Michael Donovan</td><td class="when">28 Jul 2026</td><td>Buy</td><td class="num">$40.00 <span class="tag">Market</span></td><td class="num">$22.70</td><td>As above. Prior action, retained to show the target held across the quarter.</td></tr>
+      <tr><td class="lbl">Goldman Sachs</td><td>James Yaro</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Underwriter and representative, May 2025 offering (9,662,946 shares). <span class="tag">Filed</span> 424B4, 30 May 2025</td></tr>
+      <tr><td class="lbl">Jefferies</td><td>Jonathan Petersen</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Underwriter and representative, May 2025 offering (8,382,315 shares). <span class="tag">Filed</span> 424B4, 30 May 2025</td></tr>
+      <tr><td class="lbl">Morgan Stanley</td><td>James Faucette</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Underwriter and representative, May 2025 offering (5,471,789 shares). <span class="tag">Filed</span> 424B4, 30 May 2025</td></tr>
+      <tr><td class="lbl">Canaccord Genuity</td><td>Joseph Vafi</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Underwriter, May 2025 offering (1,347,158 shares). <span class="tag">Filed</span> 424B4, 30 May 2025</td></tr>
+      <tr><td class="lbl">Cantor Fitzgerald</td><td>Brett Knoblauch</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Underwriter, May 2025 offering (1,347,158 shares). <span class="tag">Filed</span> 424B4, 30 May 2025</td></tr>
+      <tr><td class="lbl">Piper Sandler</td><td>Patrick Moley</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Underwriter, May 2025 offering (1,347,158 shares). <span class="tag">Filed</span> 424B4, 30 May 2025</td></tr>
+      <tr><td class="lbl">BTIG</td><td>Gregory Lewis</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Underwriter, May 2025 offering (449,053 shares). <span class="tag">Filed</span> 424B4, 30 May 2025</td></tr>
+      <tr><td class="lbl">ATB Capital Markets</td><td>Martin Toner</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>ATB Securities Inc. was an underwriter, May 2025 offering (449,053 shares). <span class="tag">Filed</span> 424B4, 30 May 2025</td></tr>
+      <tr><td class="lbl">The Benchmark Company</td><td>Mark Palmer</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Underwriter, May 2025 offering (449,053 shares). <span class="tag">Filed</span> 424B4, 30 May 2025</td></tr>
+      <tr><td class="lbl">H.C. Wainwright &amp; Co.</td><td>Mike Colonnese</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Underwriter, May 2025 offering (449,053 shares). <span class="tag">Filed</span> 424B4, 30 May 2025</td></tr>
+      <tr><td class="lbl">Citi</td><td>Peter Christiansen</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Not established. Not among the May 2025 underwriters.</td></tr>
+      <tr><td class="lbl">Citizens JMP</td><td>Devin Ryan, Greg Miller</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Not established. Not among the May 2025 underwriters.</td></tr>
+      <tr><td class="lbl">Chardan</td><td>Bill Papanastasiou</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Not established. Not among the May 2025 underwriters.</td></tr>
+      <tr><td class="lbl">Maxim Group</td><td>Matthew Galinko</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Not established. Not among the May 2025 underwriters.</td></tr>
+    </tbody>
+  </table></div>
+  <h3>The shape of the coverage</h3>
+  <p>Sixteen firms follow Galaxy according to the company's own investor relations page, read
+  on 5 August 2026. Two ratings and targets are established here, both Buy: Rosenblatt at $35
+  on 3 August, reduced from $39, and Compass Point at $40 on 5 August, unchanged from its
+  28 July note. The spread between the two established targets is $5, or 14% of the lower. No
+  published consensus figure is reported here, because none was retrieved from a source that
+  attributes and dates it; the count used here is a floor rather than a current figure.</p>
+
+  <p>The relationship worth stating is between the covering set and the syndicate that took
+  the company public in the United States. Thirteen firms underwrote the May 2025 Class A
+  offering. Twelve of those thirteen appear on Galaxy's coverage list today, and twelve of the
+  sixteen covering firms were underwriters. The exception on each side is informative: Keefe,
+  Bruyette &amp; Woods underwrote and does not appear on the coverage list, while Citi,
+  Citizens JMP, Chardan and Maxim Group cover without having underwritten.</p>
+
+  <p>Both firms whose published actions are recorded above were underwriters, so the two
+  established targets in this table come from houses with a disclosed prior banking
+  relationship with the issuer. That is a statement about the two rows this document
+  established, not about the sixteen: what the other fourteen firms disclose about this issuer
+  has not been read, and the banking relationship recorded in the conflict column is taken from
+  the prospectus rather than from any firm's disclosure page. Whether a firm's own disclosures
+  say more than the prospectus does is not established here.</p>
+
+  <p>A reader should note what that pattern does and does not support. It does not show that
+  the underwriting relationship moved any rating, and no such inference is drawn. It does mean
+  that the coverage available on this company is concentrated in firms that sold its shares,
+  and that an independent check on the two targets recorded here is not available from within
+  this table.</p>
+</section>
+
+<!-- ===================== 9. GROWTH DRIVERS ===================== -->
+<section id="s9">
+  <h2 class="sec"><span class="n">09</span>Growth drivers</h2>
+  <p class="sub">Ranked by how much of the outcome each controls, and by how settleable each is.</p>
+
+  <h3>Helios Phase I reaching a full quarter of rent</h3>
+  <p>All 133 MW of critical IT load under the Phase I lease was in service at 30 June, but rent
+  commenced progressively through the quarter, so only $18.9M of leasing revenue was booked.
+  Galaxy states it expects approximately $80M of quarterly leasing revenue and a project-level
+  adjusted EBITDA margin above 90% from the third quarter. <span class="tag">Filed</span>
+  8-K, 5 Aug 2026. This is the nearest and most settleable driver in the file: the third
+  quarter results will show it or they will not.</p>
+
+  <h3>Helios Phase II and III delivery</h3>
+  <p>Phase II is a 260 MW critical IT expansion under construction, with HITT Contracting
+  mobilised since April 2026, earthwork complete and foundations underway. Data hall deliveries
+  are expected to begin in the second quarter of 2027. The CoreWeave leases across Phases I,
+  II and III total 800 MW of gross power and 526 MW of critical IT load over a 15-year base
+  term, which Galaxy states carries anticipated average annual revenue above $1.2B.
+  <span class="tag">Filed</span> 8-K, 5 Aug 2026.</p>
+
+  <h3>Converting the pipeline beyond Helios</h3>
+  <p>Galaxy's stated power pipeline exceeds 5.7 GW. The components are of very different
+  quality and the file separates them: 1.63 GW is approved capacity at Helios, of which 830 MW
+  is not yet leased; two further one-gigawatt requests, Helios III and IV, are in the ERCOT
+  interconnection process; and three recently acquired Texas sites, Merlin, Caspian and Selene,
+  carry potential capacity of roughly 74 MW initially rising to 500 MW, 700 MW and 900 MW
+  respectively, each subject to interconnection. <span class="tag">Filed</span> 8-K,
+  5 Aug 2026.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The gap between 1.63 GW approved and 5.7 GW pipeline is where most of the disagreement
+    about this company sits. Approved capacity at an existing campus and a load request in an
+    interconnection queue are not the same asset, and the company's own footnotes say so,
+    distinguishing contracted capacity, capacity that has cleared development milestones,
+    Batch Zero base load, Batch Zero studied load, and identified expansion opportunities. A
+    reader who treats 5.7 GW as a single number is not reading what was filed.</p>
+  </div>
+
+  <h3>Institutional digital asset infrastructure</h3>
+  <p>The multi-year agreement with BNY, which Galaxy states oversees more than $60 trillion in
+  assets under custody, covers staking support on BNY's digital asset custody platform, with
+  Galaxy also acting as a design partner. Galaxy also launched an OTC prediction markets
+  offering, the Galaxy Fintech Fund, and with State Street a tokenised private liquidity fund.
+  <span class="tag">Filed</span> 8-K, 5 Aug 2026. None of these carries a disclosed revenue
+  figure, and none is modelled here.</p>
+</section>
+
+<!-- ===================== 10. RISKS ===================== -->
+<section id="s10">
+  <h2 class="sec"><span class="n">10</span>Risks</h2>
+  <p class="sub">Severity-ranked, most severe first.</p>
+  <div class="risk sev-high">
+    <h4>Debt raised against capacity not yet built or leased <span class="sev">Severe</span></h4>
+    <p>The $3.5B of senior secured notes closed on 28 July fund Helios I Phase II, whose data
+    hall deliveries are not expected to begin until the second quarter of 2027. Interest accrues
+    from now; the revenue it is meant to service arrives in roughly seven quarters. Notes
+    payable were already $3,262.8M at 30 June against total equity of $2,720.1M. If Phase II
+    slips, or if a tenant's obligations change, the company carries the financing cost through
+    the gap. Notes interest expense has already risen to $25.1M in the quarter from $14.2M a
+    year earlier. <span class="tag">Filed</span> 8-K, 5 Aug 2026 and 8-K, 28 Jul 2026.</p>
+  </div>
+  <div class="risk sev-high">
+    <h4>Concentration in a single data centre tenant <span class="sev">Severe</span></h4>
+    <p>Every megawatt of leased critical IT load disclosed by Galaxy is contracted to
+    CoreWeave: 526 MW across Phases I, II and III on a 15-year base term. The Data Centers
+    segment has one customer. Galaxy's own risk disclosure lists risks associated with the
+    leasing business including those associated with counterparties. The 830 MW of approved
+    Helios capacity not yet under lease is the diversification that has not yet happened.
+    <span class="tag">Filed</span> 8-K, 5 Aug 2026.</p>
+  </div>
+  <div class="risk sev-high">
+    <h4>Earnings driven by the firm's own digital asset positions <span class="sev">Severe</span></h4>
+    <p>Treasury &amp; Corporate produced an adjusted gross loss of $42M and adjusted EBITDA of
+    $(78)M in the second quarter, and $(140)M and $(167)M in the first. Between the third
+    quarter of 2025 and the fourth, net income swung from $505.1M to $(481.7)M. This is a
+    directional position in digital assets carried on the balance sheet of a company whose
+    other businesses are fee and rent based, and it has determined the sign of reported earnings
+    in each of the last four quarters. <span class="tag">Filed</span> 8-K financial supplement,
+    5 Aug 2026.</p>
+  </div>
+  <div class="risk sev-med">
+    <h4>Power approvals outside the company's control <span class="sev">Moderate</span></h4>
+    <p>Helios III and IV, together 2 GW of the stated pipeline, are load requests progressing
+    through the ERCOT interconnection process. Caspian and Selene, a further 1.6 GW, are
+    expressly subject to that process. Galaxy lists any delay in obtaining, or failure to
+    obtain, necessary ERCOT power approvals among its own risk factors. Roughly two thirds of
+    the headline 5.7 GW pipeline depends on a decision the company does not make.
+    <span class="tag">Filed</span> 8-K, 5 Aug 2026.</p>
+  </div>
+  <div class="risk sev-med">
+    <h4>The share count can double on exchange <span class="sev">Moderate</span></h4>
+    <p>196,596,698 Class B shares are exchangeable into Class A, against 194,798,949 Class A
+    shares outstanding. Nothing about that is hidden, and it is not new dilution: the interest
+    already exists and is already consolidated. But a reader comparing a per-share figure across
+    sources will meet both denominators, and Galaxy itself uses the Class A basis for quarterly
+    diluted earnings per share when the exchange is anti-dilutive and the full basis for the
+    six-month figure. <span class="tag">Filed</span> 8-K, 5 Aug 2026.</p>
+  </div>
+  <div class="risk sev-med">
+    <h4>Coverage concentrated in the firms that sold the stock <span class="sev">Moderate</span></h4>
+    <p>Twelve of the sixteen firms on Galaxy's own coverage list underwrote the May 2025 Class A
+    offering, and both firms whose targets are recorded in section 8 are among them. This is not
+    an allegation about any rating; it is a statement about how much independent external
+    scrutiny is available. What each firm discloses about this issuer has not been read here.
+    <span class="tag">Filed</span> 424B4, 30 May 2025.</p>
+  </div>
+  <div class="risk sev-low">
+    <h4>A short filing history under the current registrant <span class="sev">Lower</span></h4>
+    <p>Galaxy Digital Inc. has filed one annual report on Form 10-K, on 26 February 2026, and
+    four quarterly reports. The predecessor, Galaxy Digital Holdings Ltd, filed no periodic
+    reports with the Commission at all: its index holds 62 filings, all transaction-related.
+    A United States reader looking for five years of comparable audited filings under this
+    registrant will not find them. <span class="tag">Filed</span> SEC filing indexes for
+    CIK 0001859392 and CIK 0001405064, searched 5 Aug 2026.</p>
+  </div>
+</section>
+
+<!-- ===================== 11. BULL / BASE / BEAR ===================== -->
+<section id="s11">
+  <h2 class="sec"><span class="n">11</span>Bull / base / bear</h2>
+  <p class="sub">Each case with its preconditions: what must be true, not what might be.</p>
+  <div class="cases">
+    <div class="case bear"><h4>Bear</h4><p>Phase II slips past the second quarter of 2027
+      while $3.5B of notes accrue interest, the 830 MW of unleased Helios capacity finds no
+      second tenant, and the Treasury book keeps setting the sign of reported earnings. Equity
+      of $2.7B absorbs the carry until it cannot, and the company issues into a falling
+      market.</p>
+      <p class="req">Requires: a construction or interconnection delay at Helios II, no new
+      lease on the unleased capacity, and digital asset prices at or below the second quarter's
+      level.</p></div>
+    <div class="case"><h4>Base</h4><p>Phase I delivers roughly $80M of quarterly leasing
+      revenue from the third quarter at the margin Galaxy states, Phase II lands broadly on
+      schedule, and the Digital Assets segment continues to produce $60M to $90M of adjusted
+      gross profit a quarter. Reported net income stays volatile because the Treasury position
+      stays open, but adjusted gross profit turns consistently positive.</p>
+      <p class="req">Requires: Phase I rent at the stated run rate, no interconnection setback
+      at Helios II, and digital asset markets no worse than the second quarter.</p></div>
+    <div class="case bull"><h4>Bull</h4><p>The unleased 830 MW at Helios is contracted to a
+      second tenant, Helios III or IV clears ERCOT, and the data centre business is valued on
+      contracted rent rather than on the digital asset cycle. The 5.7 GW pipeline starts being
+      read as capacity rather than as ambition, and the two businesses are priced separately.</p>
+      <p class="req">Requires: a second named data centre tenant, at least one of the two
+      one-gigawatt requests approved, and Phase I economics confirmed in reported results.</p></div>
+  </div>
+</section>
+
+<!-- ===================== 12. RESEARCH SUMMARY ===================== -->
+<section id="s12">
+  <h2 class="sec"><span class="n">12</span>Research summary</h2>
+  <p>Galaxy is two businesses in one registrant, and the second quarter of 2026 is the first
+  period in which that is visible in the numbers rather than in the narrative. Data Centers
+  produced $20M of adjusted gross profit and $11M of adjusted EBITDA on 133 MW delivered to a
+  single tenant. Digital Assets produced $66M and $(11)M. Treasury &amp; Corporate lost $42M
+  and $78M respectively and determined the sign of the reported result, as it has in each of
+  the last four quarters.</p>
+
+  <p>The financing is now ahead of the asset. $3.5B of senior secured notes closed on 28 July
+  against a build whose first deliveries are expected in the second quarter of 2027, on top of
+  $3.26B of notes payable already outstanding at 30 June and total equity of $2.72B. Whether
+  that is aggressive or merely early is the question the file cannot settle, and it is the
+  question a reader should hold.</p>
+
+  <p>Three things would change the reading materially and each is settleable from a document:
+  the third-quarter leasing revenue against Galaxy's own approximately $80M expectation; a
+  second data centre tenant for the 830 MW of approved but unleased Helios capacity; and an
+  ERCOT determination on Helios III or IV. None requires an opinion to observe.</p>
+
+  <p>What this document could not establish is set out in section 14 and is not small: no
+  enterprise value is struck, fourteen of the sixteen covering firms have no established rating
+  or target here, and what those firms disclose about this issuer has not been read.</p>
+</section>
+
+<!-- ===================== 13. NULL CATEGORIES ===================== -->
+<section id="s13">
+  <h2 class="sec"><span class="n">13</span>Null categories</h2>
+  <p class="sub">Requested categories with nothing to report. Status reads Covered above, None where a
+  named source was checked and found empty, or Not established where the category was not examined.
+  A category nobody looked at is a gap, not an absence.</p>
+  <div class="tw"><table class="nulls">
+    <thead><tr><th>Category</th><th>Status</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Dividends</td><td class="status">None</td><td>No common dividend has been declared or paid. No dividend appears in the 8-K of 5 Aug 2026 or across the 258 filings in the index for CIK 0001859392, searched 5 Aug 2026.</td></tr>
+      <tr><td class="lbl">Share buybacks</td><td class="status">None</td><td>No repurchase programme is disclosed. A self-tender on Form SC TO-I and its amendment appear in the index, relating to the reorganisation rather than to an open-market programme. Index for CIK 0001859392, searched 5 Aug 2026.</td></tr>
+      <tr><td class="lbl">Analyst coverage</td><td class="status">Covered above</td><td>Sixteen firms named in section 8, from the issuer's own coverage page read 5 Aug 2026, with two established ratings and targets.</td></tr>
+      <tr><td class="lbl">Securities class action</td><td class="status caution-t">Not established</td><td>Court dockets were not searched. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Delinquent filings (Form NT)</td><td class="status">None</td><td>No NT 10-K, NT 10-Q or other notification of late filing appears anywhere in the 258 filings the index holds for CIK 0001859392, searched 5 Aug 2026. The index reports no overflow file, so this covers the whole record under this CIK.</td></tr>
+      <tr><td class="lbl">Register filings the issuer made about others</td><td class="status">None</td><td>All eleven Schedule 13D and 13G filings indexed under CIK 0001859392 name Galaxy as the subject. None runs outbound. Established by reading the subject and filer of each. Searched 5 Aug 2026.</td></tr>
+      <tr><td class="lbl">Credit rating actions</td><td class="status caution-t">Not established</td><td>No rating agency action was sought or read, though the July 2026 notes are rated instruments by their nature. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Index membership</td><td class="status caution-t">Not established</td><td>Index provider announcements were not checked. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Short interest</td><td class="status caution-t">Not established</td><td>No exchange short interest report was retrieved. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Predecessor entity filings</td><td class="status">None</td><td>Galaxy Digital Holdings Ltd, CIK 0001405064, holds 62 filings, all registration and communication material under Rule 425 and Form S-4 connected to the reorganisation, plus four Form D notices. It filed no periodic report and no Form 15 with the Commission. Searched 5 Aug 2026.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 14. METHODOLOGY & SOURCES ===================== -->
+<section id="s14">
+  <h2 class="sec"><span class="n">14</span>Methodology &amp; sources</h2>
+  <p class="sub">Pricing basis, the tagging scheme, and, importantly, what was not checked.</p>
+
+  <h3>Provenance tags</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Tag</th><th>What it asserts</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl"><span class="tag">Filed</span></td><td>Stated in an SEC filing or company release, cited by form and date. Also covers a dated official publication by a named non-SEC issuer, with the issuer named in the source line.</td></tr>
+      <tr><td class="lbl"><span class="tag">Estimate</span></td><td>Derived or inferred here. The arithmetic is shown.</td></tr>
+      <tr><td class="lbl"><span class="tag">Open</span></td><td>Expected but unconfirmed. Nothing filed either way.</td></tr>
+      <tr><td class="lbl"><span class="tag">Market</span></td><td>Price, volume, float, published targets and ratings, stamped with the close or publication date. A third party's target or rating is market data, attributed to the firm that issued it and never adopted here.</td></tr>
+      <tr><td class="lbl"><span class="tag">Press</span></td><td>Reported by a named publication that is neither the issuer nor an analyst, cited by outlet and date. Corroborates; never the sole basis for a material claim.</td></tr>
+      <tr><td class="lbl"><span class="tag">Social</span></td><td>Publicly posted by a named account, cited by handle and date. Asserts that the statement was made, never that it is true.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Pricing basis</h3>
+  <p>Every market figure in this document is struck on the close of 4 August 2026, at which
+  GLXY closed at $22.14 on volume of 7,067,286 shares. The document is stamped 5 August 2026.
+  The two dates differ because the 5 August session had not settled when the figures were
+  taken: Nasdaq reported the market in its pre-open state with 4 August as the previous trading
+  date. The trading calendar used for the coverage table is derived from the exchange's own
+  daily record for GLXY over 253 sessions from 1 August 2025 to 4 August 2026, so a date absent
+  from that record is a date on which nothing traded.</p>
+
+  <h3>Sources</h3>
+  <p>Primary sources are the filings indexed under Central Index Key 0001859392, swept on
+  5 August 2026. The index holds 258 filings dated 5 May 2021 to 5 August 2026 and reports no
+  overflow file, so the whole record under this CIK was available to the sweep. Every form
+  family was enumerated before filtering, and register filings were matched on both the current
+  and legacy spellings of the Schedule 13D and 13G form strings. The predecessor entity, Galaxy
+  Digital Holdings Ltd, CIK 0001405064, was swept separately; its 62 filings do not join this
+  index and are described in section 13. Galaxy's investor relations coverage page was read on
+  5 August 2026. Two research notes, from Rosenblatt Securities dated 3 August 2026 and Compass
+  Point dated 28 July and 5 August 2026, are the source of the ratings, targets and dates in
+  section 8 and of nothing else in this document.</p>
+
+  <h3>What was not checked</h3>
+  <p>An unexamined area is a gap, not a clean bill. The following were not reached.</p>
+  <ul>
+    <li>No enterprise value is derived. Galaxy's balance sheet carries $1,933.1M of collateral
+    payable, $1,486.9M of digital assets borrowed and $80.7M payable to customers, none of which
+    behaves like corporate debt in an enterprise value, and the July 2026 notes postdate the
+    balance sheet entirely. A figure assembled from these inputs would be a guess wearing a
+    number, so the masthead field is omitted rather than filled.</li>
+    <li>Court dockets were not searched, on CourtListener, PACER or any state portal. No
+    statement is made here about litigation.</li>
+    <li>The indenture for the $3.5B senior secured notes due 2031 was not read. The exhibit is
+    filed with the 8-K of 28 July 2026. Nothing is asserted here about recourse, covenants or
+    security.</li>
+    <li>ERCOT interconnection queue records were not queried directly. Every capacity and
+    approval figure in this document is the company's own statement of its position.</li>
+    <li>The second-quarter Form 10-Q had not been filed when this document was assembled. The
+    figures here come from the 8-K of 5 August 2026 and its exhibits, which are unaudited and
+    which the company states are subject to its periodic reports in the event of conflict.</li>
+    <li>Fourteen of the sixteen covering firms have no established rating, target or date here,
+    and no firm's own disclosure page was read. The conflict column in section 8 reports what
+    the May 2025 prospectus establishes, which is a filing rather than a firm's disclosure.</li>
+    <li>Canadian filings were not swept. Galaxy's own press release refers to forward-looking
+    information under Canadian securities laws, which indicates a continuing obligation of some
+    kind following the reorganisation from a Toronto-quoted predecessor, but SEDAR+ was not
+    queried and the nature and extent of any such obligation is not established here.</li>
+    <li>Credit rating actions, index membership and short interest were not checked, as recorded
+    in section 13.</li>
+  </ul>
+</section>
+
+<!-- ===================== 15. DOCUMENT LOG ===================== -->
+<section id="s15">
+  <h2 class="sec"><span class="n">15</span>Document log</h2>
+  <p class="sub">Newest first. The original build entry is never removed or rewritten.</p>
+  <div class="log">
+    <div class="logentry current">
+      <div class="when">5 August 2026 <span class="latest">Latest</span></div>
+      <div class="basis">Priced off 4 Aug 2026 close · $22.14 · $8,666M cap</div>
+      <div class="correction">
+        <span class="lbl">Correction</span>
+        <p><b>Two ratios in section 8 were said to bracket the answer, and they are struck on different bases.</b> The pair given was 3.19&times;, a fully exchanged capitalisation over consolidated equity, and 4.75&times;, the same fully exchanged capitalisation over equity that excludes the noncontrolling interest. The second mixes a whole-entity numerator with a parent-only denominator, so it is not an end of a bracket. The basis-consistent parent-only ratio is now shown beside it at 2.37&times;, being the $4,313M Class A capitalisation this document already states in section 7 divided by the same $1,823.4M. The claim that the original pair brackets the answer is withdrawn: the pair that brackets is 2.37&times; and 3.19&times;.</p>
+      </div>
+      <p><b>Original build.</b> Built from Galaxy's second-quarter 2026 results, released on
+      the morning of 5 August 2026 as a Form 8-K under Items 2.02, 7.01 and 9.01 with the press
+      release, a quarterly update presentation and a financial supplement as exhibits; from the
+      8-K of 28 July 2026 reporting the $3.5B senior secured notes; from the complete filing
+      index for Central Index Key 0001859392, 258 filings from 5 May 2021 to 5 August 2026, with
+      each register filing read to establish whether it runs inbound or outbound; from the
+      separate index of the predecessor entity Galaxy Digital Holdings Ltd, CIK 0001405064; from
+      the 424B4 of 30 May 2025 for the underwriting syndicate; and from Galaxy's own investor
+      relations coverage page read on 5 August 2026.</p>
+      <p>Pricing basis fixed at the 4 August 2026 close of $22.14. The document is stamped
+      5 August because the 5 August session had not settled: Nasdaq reported the market
+      pre-open with 4 August as the previous trading date, so the previous close remains the
+      basis and no figure is struck on an unfinished session. The trading calendar behind the
+      coverage table is derived from the exchange's own daily record rather than from a rule
+      about weekdays.</p>
+      <p>Conventions fixed at construction: market capitalisation is computed on the fully
+      exchanged share count of 391,395,647, being both classes at 30 June 2026, with the Class A
+      figure of $4,313M given in section 7 so the two are not confused; price at publication in
+      the coverage table is the close on the last trading day before each action, stated once
+      above the table; and revenue is shown gross with transaction expenses beside it, because
+      the gross figure exceeds adjusted gross profit by more than two hundred times.</p>
+      <p>Known gaps at this version: no enterprise value is derived, and the masthead field is
+      omitted rather than filled; the second-quarter Form 10-Q was not yet filed, so all figures
+      come from the unaudited 8-K and its exhibits; the indenture for the July notes was not
+      read; court dockets, ERCOT queue records, SEDAR+, credit rating actions, index membership
+      and short interest were not reached; and fourteen of the sixteen covering firms carry no
+      established rating or target, with no firm's own disclosure page read.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="norec">
+    No buy, sell, or hold recommendation is issued and no price target is derived.
+    Third-party targets and ratings, where shown, are the published views of the
+    firms named and are reported as market data. This document is for research and
+    educational purposes and is not investment advice. Verify all figures against
+    primary filings on sec.gov before acting.
+  </div>
+  <p style="margin-top:16px">GLXY · Galaxy Digital Inc. · Equity Research Report · as of 5 August 2026</p>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>BTDR · Bitdeer Technologies Group · Equity Research Report · as of 5 August 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================================
+   PER-TICKER PALETTE
+   ========================================================================= */
+:root{
+  /* Bitdeer's wordmark is drawn in a green-to-teal gradient over an amber
+     secondary. The green is the dominant colour of the mark and averages to
+     #3FD89F. That green falls within two degrees of the green this palette
+     reserves for favourable figures, so the hue is rotated from 158 to 177,
+     toward the teal the mark already leans to, keeping identity clear of
+     meaning. Saturation is held at 66 percent and lightness brought from 55 to
+     30 percent so the colour holds at 14px on white. */
+  --accent:      #1A7F7A;
+  --accent-deep: #115551;
+  --accent-wash: rgba(26,127,122,0.06);
+  --accent-line: rgba(26,127,122,0.22);
+}
+
+/* ============================================================================
+   SHARED STYLESHEET v1.93 : BEGIN
+   ========================================================================= */
+:root{
+  color-scheme: light only;
+
+  --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
+  --line:#DEE6EC;   --line-hard:#C0CDD7;
+  --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
+
+  --pos:#0B7A50;      --pos-bg:#E7F4EE;
+  --neg:#B02A21;      --neg-bg:#FBECEA;
+  --caution:#90600A;  --caution-bg:#FBF2E0;
+  --assume:#4F3FA3;   --assume-bg:#EFEDFA;
+
+  --display:'Archivo',ui-sans-serif,system-ui,'Helvetica Neue',Arial,sans-serif;
+  --body:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+
+  --measure:78ch;
+  --col:760px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html,body{background:var(--canvas) !important;background-color:var(--canvas) !important}
+body{
+  margin:0;color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 22px 96px;background:var(--paper);
+      border-left:1px solid var(--line);border-right:1px solid var(--line)}
+p{max-width:var(--measure)}
+/* Boxed prose fills its container: the box supplies its own measure, so the
+   78ch cap applies to top-level running prose only. */
+.first li,.assume p,.note p,.cat p,.risk p,.logentry p,.oc p,.case p,
+.cat-meta,.logentry .basis{max-width:none}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:var(--accent-deep)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- masthead ---------- */
+.mast{padding:44px 0 26px;border-bottom:2px solid var(--line-hard);margin-bottom:8px;
+      position:relative;padding-left:20px}
+.mast::before{content:"";position:absolute;left:0;top:44px;bottom:26px;
+      width:4px;background:var(--accent)}
+.ticker{font-family:var(--mono);font-size:44px;font-weight:700;letter-spacing:-1px;
+      line-height:1;color:var(--accent);margin:0}
+.headline{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.22;
+      color:var(--ink);margin:16px 0 0}
+.functional{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--ink-faint);margin:18px 0 0}
+.mast-strip{display:flex;flex-wrap:wrap;gap:26px;margin-top:20px;padding-top:16px;
+      border-top:1px solid var(--line)}
+.mast-strip div{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint)}
+.mast-strip b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-top:3px}
+
+/* ---------- banner: framing ---------- */
+.first{background:var(--canvas);border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:20px 24px;margin:30px 0 12px}
+.first h2{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.04em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 12px}
+.first ol{margin:0;padding-left:20px}
+.first li{margin-bottom:9px}
+.first li:last-child{margin-bottom:0}
+
+/* ---------- sections ---------- */
+section{padding-top:38px}
+h2.sec{font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);
+      margin:0 0 4px;padding-bottom:10px;border-bottom:1px solid var(--line-hard);
+      display:flex;align-items:baseline;gap:12px}
+h2.sec .n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);
+      letter-spacing:.06em;flex:none}
+.sub{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);margin:10px 0 18px;
+      max-width:var(--measure)}
+h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink-dim);
+      margin:26px 0 8px}
+
+/* ---------- provenance tags (signature) ---------- */
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);
+      background:var(--panel-2);border:1px solid var(--line);
+      border-radius:2px;padding:1px 6px;vertical-align:1px;white-space:nowrap}
+
+/* ---------- assumption block ---------- */
+.assume{background:var(--assume-bg);border-left:4px solid var(--assume);
+      padding:16px 20px;margin:20px 0}
+.assume .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--assume);display:block;margin-bottom:7px}
+.assume p{margin:0}
+
+/* ---------- callouts ---------- */
+.note{border:1px solid var(--line);border-left:4px solid var(--ink-faint);
+      background:var(--canvas);padding:16px 20px;margin:20px 0}
+.note.pos{border-left-color:var(--pos);background:var(--pos-bg)}
+.note.neg{border-left-color:var(--neg);background:var(--neg-bg)}
+.note.caution{border-left-color:var(--caution);background:var(--caution-bg)}
+.note p{margin:0}
+.note p + p{margin-top:10px}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+thead th{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--ink-dim);text-align:left;
+      padding:9px 12px;border-bottom:2px solid var(--line-hard);white-space:nowrap}
+tbody td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--canvas)}
+td.num,th.num{font-family:var(--mono);text-align:right;white-space:nowrap}
+/* td.when marks a timing column. An unmarked cell counts as prose. */
+td.when{font-family:var(--mono);white-space:nowrap}
+td.lbl{font-weight:600}
+.pos-t{color:var(--pos);font-weight:600}
+.neg-t{color:var(--neg);font-weight:600}
+.caution-t{color:var(--caution);font-weight:600}
+
+/* ---------- cases ---------- */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.case{border:1px solid var(--line);border-top:3px solid var(--ink-faint);
+      background:var(--paper);padding:18px}
+.case.bull{border-top-color:var(--pos)}
+.case.bear{border-top-color:var(--neg)}
+.case h4{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 10px}
+.case.bull h4{color:var(--pos)} .case.bear h4{color:var(--neg)}
+.case p{font-size:15px;margin:0}
+.case .req{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+
+/* ---------- risks ---------- */
+.risk{border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:16px 20px;margin-bottom:12px}
+.risk.sev-high{border-left-color:var(--neg)}
+.risk.sev-med{border-left-color:var(--caution)}
+.risk.sev-low{border-left-color:var(--ink-faint)}
+.risk h4{font-family:var(--display);font-size:15.5px;font-weight:600;margin:0 0 6px;
+      display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.risk .sev{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase}
+.risk.sev-high .sev{color:var(--neg)}
+.risk.sev-med .sev{color:var(--caution)}
+.risk.sev-low .sev{color:var(--ink-faint)}
+.risk p{margin:0;font-size:15.5px}
+
+/* ---------- null categories ---------- */
+.nulls td.lbl{width:26%}
+.nulls .status{font-family:var(--mono);font-size:12px;white-space:nowrap}
+
+/* ---------- document log ---------- */
+.log{margin-top:14px}
+.logentry{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:12px}
+.logentry.current{border-left:4px solid var(--accent);background:var(--accent-wash)}
+.logentry .when{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);
+      display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.latest{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-line);
+      background:var(--paper);border-radius:2px;padding:1px 6px}
+.logentry .basis{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-bottom:12px}
+.logentry p{font-size:15.5px;margin:0 0 9px}
+.logentry p:last-child{margin-bottom:0}
+.correction{border:1px solid var(--neg);border-left:4px solid var(--neg);
+      background:var(--neg-bg);padding:12px 16px;margin-bottom:14px}
+.correction .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--neg);display:block;margin-bottom:5px}
+
+/* ---------- footer ---------- */
+footer{margin-top:44px;padding-top:22px;border-top:2px solid var(--line-hard)}
+footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width:none}
+.norec{border:1px solid var(--line-hard);background:var(--canvas);padding:16px 20px;
+      margin-top:20px;font-family:var(--mono);font-size:12.5px;color:var(--ink-dim)}
+
+/* ---------- catalyst cards (calendar) ---------- */
+.cat{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:14px;border-left:4px solid var(--line-hard)}
+.cat.up{border-left-color:var(--pos)}
+.cat.down{border-left-color:var(--neg)}
+.cat.two{border-left-color:var(--caution)}
+.cat.neutral{border-left-color:var(--ink-faint)}
+.cat-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.cid{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);flex:none}
+.cat-head h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink);
+      margin:0;flex:1 1 auto;min-width:200px}
+.dir{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;white-space:nowrap}
+.cat.up .dir{color:var(--pos)} .cat.down .dir{color:var(--neg)}
+.cat.two .dir{color:var(--caution)} .cat.neutral .dir{color:var(--ink-faint)}
+.cat-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:10px 0 12px;padding:9px 0;
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+      font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
+.cat-meta b{color:var(--ink);font-weight:600}
+.cat p{margin:0 0 9px;font-size:15.5px}
+.cat p:last-child{margin-bottom:0}
+.cat.resolved{background:var(--canvas);border-left-color:var(--ink-faint)}
+.cat.resolved .dir{color:var(--ink-faint)}
+
+/* ---------- horizon bands (calendar) ---------- */
+.band{display:flex;align-items:center;gap:14px;margin:30px 0 16px}
+.band-t{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--ink-dim);white-space:nowrap}
+.band-r{flex:1;height:1px;background:var(--line-hard)}
+.band-c{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);white-space:nowrap}
+
+/* ---------- upside / downside pair ---------- */
+.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0}
+.oc{border:1px solid var(--line);padding:11px 14px;background:var(--paper)}
+.oc.up-c{border-left:3px solid var(--pos)}
+.oc.down-c{border-left:3px solid var(--neg)}
+.oc .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.09em;
+      text-transform:uppercase;display:block;margin-bottom:5px}
+.oc.up-c .lbl{color:var(--pos)} .oc.down-c .lbl{color:var(--neg)}
+.oc p{margin:0;font-size:14.5px;line-height:1.5}
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  body{font-size:16px}
+  .wrap{padding:0 16px 70px;border-left:none;border-right:none}
+  .ticker{font-size:34px}
+  .headline{font-size:23px}
+  .cases{grid-template-columns:1fr}
+  .outcomes{grid-template-columns:1fr}
+  .mast-strip{gap:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none !important;transition:none !important}
+}
+@media print{
+  body{font-size:11pt}
+  .wrap{max-width:none;border:none}
+  section{page-break-inside:avoid}
+}
+/* ============================================================================
+   SHARED STYLESHEET v1.93 : END
+   ========================================================================= */
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ===================== MASTHEAD ===================== -->
+<header class="mast">
+  <p class="ticker">BTDR</p>
+  <h1 class="headline">A $4.7 billion lease signed the day after the auditor changed, five days before results</h1>
+  <p class="functional">BTDR · Bitdeer Technologies Group · Equity Research Report · as of 5 August 2026</p>
+  <div class="mast-strip">
+    <div>Price <b>$11.38</b> <span class="tag">Market</span></div>
+    <div>Market cap <b>$2,681M</b> <span class="tag">Estimate</span></div>
+    <div>Shares out <b>235,552,084</b> <span class="tag">Filed</span></div>
+    <div>Filing status <b>Foreign private issuer</b> <span class="tag">Filed</span></div>
+    <div>Pricing basis <b>4 Aug 2026 close</b> <span class="tag">Market</span></div>
+  </div>
+</header>
+
+<!-- ===================== FRAMING ===================== -->
+<div class="first">
+  <h2>Framing</h2>
+  <ol>
+    <li>On 4 August 2026 Bitdeer announced a 16-year colocation lease at its Tydal campus in Norway: 121 IT megawatts, approximately $4.7B of contracted revenue over the base term, and approximately $8.0B over 24 years if the extension option is taken. The tenant is Volta Tydal AS, a subsidiary of Volta; the end customer is described only as a leading AI lab. <span class="tag">Filed</span> Company release, 4 Aug 2026</li>
+    <li>On 3 August 2026 the audit committee dismissed MaloneBailey, LLP and appointed Deloitte &amp; Touche LLP, Singapore, effective the same day. The 6-K reporting it names as a reportable event the material weaknesses management reported under Item 15 of the annual report for the year ended 31 December 2024. <span class="tag">Filed</span> Form 6-K, 3 Aug 2026</li>
+    <li>Second-quarter 2026 results are scheduled for 10 August 2026, five days after this document. The company returned to profit in the year ended 31 December 2025 with net income of $65.6M on revenue of $620.3M, after losses of $56.7M and $599.2M in the two preceding years. <span class="tag">Filed</span> Company release, 1 Aug 2026, and Form 20-F, 30 Apr 2026</li>
+  </ol>
+</div>
+
+<!-- ===================== 1. SNAPSHOT ===================== -->
+<section id="s1">
+  <h2 class="sec"><span class="n">01</span>Snapshot</h2>
+  <p class="sub">Key figures, each tagged by provenance.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Metric</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Revenue (FY2025)</td><td class="num">$620.3M</td><td><span class="tag">Filed</span> 20-F, 30 Apr 2026. Up 77% on FY2024.</td></tr>
+      <tr><td class="lbl">Net income (FY2025)</td><td class="num pos-t">$65.6M</td><td><span class="tag">Filed</span> 20-F, 30 Apr 2026. First profitable year in the three reported.</td></tr>
+      <tr><td class="lbl">Net loss (FY2024)</td><td class="num neg-t">($56.7M)</td><td><span class="tag">Filed</span> 20-F, 30 Apr 2026</td></tr>
+      <tr><td class="lbl">Net loss (FY2023)</td><td class="num neg-t">($599.2M)</td><td><span class="tag">Filed</span> 20-F, 30 Apr 2026</td></tr>
+      <tr><td class="lbl">Class A ordinary shares (31 Dec 2025)</td><td class="num">191,152,162</td><td><span class="tag">Filed</span> 20-F, 30 Apr 2026. Excludes 3,364,711 repurchased but not cancelled.</td></tr>
+      <tr><td class="lbl">Class V ordinary shares (31 Dec 2025)</td><td class="num">44,399,922</td><td><span class="tag">Filed</span> 20-F, 30 Apr 2026</td></tr>
+      <tr><td class="lbl">Tydal contracted revenue, base term</td><td class="num">~$4.7B</td><td><span class="tag">Filed</span> Company release, 4 Aug 2026. 16 years, 121 IT MW.</td></tr>
+      <tr><td class="lbl">Tydal contracted revenue with extension</td><td class="num">~$8.0B</td><td><span class="tag">Filed</span> Company release, 4 Aug 2026. 24 years, if the 8-year option is exercised.</td></tr>
+      <tr><td class="lbl">Tydal average lease rate</td><td class="num">~$202/kW/month</td><td><span class="tag">Filed</span> Company release, 4 Aug 2026. Modified gross, electricity reimbursed by the tenant.</td></tr>
+      <tr><td class="lbl">Market capitalisation</td><td class="num">$2,681M</td><td><span class="tag">Estimate</span> 235,552,084 shares (31 Dec 2025, <span class="tag">Filed</span>) &times; $11.38 (4 Aug 2026 close, <span class="tag">Market</span>). This is a floor: the share count is seven months old and at least 7.4 million further Class A shares were issued by February 2026. See section 7.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 2. BUSINESS MODEL ===================== -->
+<section id="s2">
+  <h2 class="sec"><span class="n">02</span>Business model</h2>
+  <p>Bitdeer Technologies Group is a Cayman Islands company headquartered in Singapore, listed
+  on Nasdaq and reporting to the Commission as a foreign private issuer. It builds and operates
+  computing infrastructure, and it sells that capacity in four different ways, which is unusual
+  in this sector and is the main thing to understand about the business.</p>
+
+  <p><b>It mines bitcoin for its own account.</b> Self-mining converts electricity into bitcoin
+  and takes the price risk directly.</p>
+
+  <p><b>It sells mining hardware it designs itself.</b> The SEALMINER line of
+  application-specific integrated circuits is Bitdeer's own, which puts the company upstream of
+  every operator that buys rigs rather than making them. This is the feature that most clearly
+  separates it from the North American operators it is otherwise compared with.</p>
+
+  <p><b>It sells hosting and cloud capacity to third parties.</b> Customers buy hashrate or
+  computing time rather than owning the machines.</p>
+
+  <p><b>It leases AI and high-performance computing capacity under long-term contracts.</b> This
+  is the newest business and, on the evidence of 4 August 2026, the largest. Bitdeer AI is
+  described as an NVIDIA Cloud Partner, and the Tydal lease commits 121 IT megawatts to a single
+  tenant for sixteen years. <span class="tag">Filed</span> Company release, 4 Aug 2026, and
+  Form 20-F, 30 Apr 2026.</p>
+
+  <h3>Filing status, and why it changes what a reader can expect</h3>
+  <p>Bitdeer files on Form 20-F annually and Form 6-K for interim and current events. It has
+  never filed a Form 10-K, 10-Q or 8-K, and it has never filed a proxy statement on Schedule
+  14A: across the 267 filings indexed under Central Index Key 0001899123, there are five annual
+  reports on Form 20-F and ninety-nine reports on Form 6-K, and none of the domestic forms.
+  Foreign private issuers are exempt from the proxy rules under Exchange Act Section 14(a) by
+  Rule 3a12-3(b), so the absence of a proxy statement is the regime rather than an omission.</p>
+
+  <p>The practical consequences for a reader are three. Quarterly reporting is not mandatory and
+  arrives by 6-K on the company's own timetable rather than to a statutory deadline. Insider
+  transaction reporting under Exchange Act Section 16 does not apply in the same way, and only
+  five Forms 4 appear in the whole index. And the accounts are prepared under International
+  Financial Reporting Standards rather than United States generally accepted accounting
+  principles, so line items are not directly comparable with the domestic filers in this
+  sector.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The four businesses are treated here as one operating group rather than as separable
+    units, because Bitdeer's disclosure does not give segment profitability that would let them
+    be valued apart. The hardware business is the most likely candidate to be worth separating,
+    since it sells to the company's own competitors and its economics need not follow the
+    bitcoin price in the way self-mining does, but nothing in the filings read for this document
+    establishes its margin.</p>
+  </div>
+</section>
+
+<!-- ===================== 3. REVENUE STREAMS ===================== -->
+<section id="s3">
+  <h2 class="sec"><span class="n">03</span>Revenue streams</h2>
+  <p class="sub">The reported total, and the contracted book that does not appear in revenue at
+  all yet.</p>
+
+  <p>Bitdeer reported total revenue of $620.3M for the year ended 31 December 2025, against
+  $349.8M in 2024 and $368.6M in 2023. Revenue therefore fell between 2023 and 2024 and then
+  rose 77% in 2025. <span class="tag">Filed</span> Form 20-F, 30 Apr 2026.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Stream</th><th>How it is paid</th><th>Durability</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Self-mining</td><td>Block rewards and fees, in bitcoin</td><td>Lowest. Revenue moves with the bitcoin price and with network difficulty, neither of which the company controls. Its own risk disclosure states that a decline in bitcoin prices would directly reduce profitability while costs such as electricity continue.</td></tr>
+      <tr><td class="lbl">Mining hardware (SEALMINER)</td><td>Unit sales of self-designed ASICs</td><td>Cyclical but not directly price-linked. Demand follows the capital cycle of other miners rather than the spot price, and the company captures manufacturing margin its customers do not.</td></tr>
+      <tr><td class="lbl">Hosting and cloud</td><td>Fees for hashrate or computing capacity</td><td>Middling. Contracted, but on shorter terms than the AI leases and to a more fragmented customer base.</td></tr>
+      <tr><td class="lbl">AI and HPC colocation leasing</td><td>Contracted rent per kilowatt per month</td><td>Highest, once delivered. The Tydal lease runs 16 years at approximately $202 per kW per month on a modified gross basis, with electricity costs reimbursed by the tenant as a pass-through.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>The Tydal lease</h3>
+  <p>Announced on 4 August 2026, the day before this document, and the largest single commercial
+  commitment in the company's record. The terms Bitdeer discloses are these.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Term</th><th>As disclosed</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Capacity</td><td>121 IT megawatts, supported by an estimated 133 gross megawatts, at the Tydal campus in Norway, delivered through the subsidiary Tydal Data Center AS</td></tr>
+      <tr><td class="lbl">Term</td><td>16-year base term, with a one-time 8-year renewal option taking the potential total to 24 years</td></tr>
+      <tr><td class="lbl">Contracted revenue</td><td>Approximately $4.7B over the base term; approximately $8.0B if the extension is exercised</td></tr>
+      <tr><td class="lbl">Rate and structure</td><td>Approximately $202 per kW per month averaged over the first 16 years, modified gross, with electricity reimbursed by the tenant on a pass-through basis</td></tr>
+      <tr><td class="lbl">Tenant</td><td>Volta Tydal AS, a subsidiary of Volta, itself an NVIDIA Cloud Partner. The end customer is described as a leading AI lab and is not named. Dell Technologies is the technology provider.</td></tr>
+      <tr><td class="lbl">Credit support</td><td>Letters of credit totalling approximately $1.3B, anticipated to be arranged by affiliates of J.P. Morgan and another top-tier global financial institution, subject to customary conditions</td></tr>
+      <tr><td class="lbl">Site</td><td>Stated power usage effectiveness of approximately 1.1, running on 100% renewable energy</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub"><span class="tag">Filed</span> Company release, 4 Aug 2026.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Three features of this lease are weaker than the headline figure suggests, and a reader
+    should hold all three. The credit support is <i>anticipated</i> rather than in place, and is
+    stated to be subject to customary conditions. The tenant is a subsidiary of Volta rather than
+    Volta itself, so the recourse depends on guarantees this document has not seen. And the end
+    customer, whose demand ultimately supports the rent, is not named. None of that makes the
+    lease unsound; it means the $4.7B is a contracted amount whose credit backing is not yet
+    established, and this document does not treat it as secured revenue.</p>
+  </div>
+
+  <p>No revenue from Tydal appears in any reported period. The 121 megawatts must be built and
+  delivered first, and the release states no delivery date.</p>
+</section>
+
+<!-- ===================== 4. INDUSTRY & MARKET BACKDROP ===================== -->
+<section id="s4">
+  <h2 class="sec"><span class="n">04</span>Industry &amp; market backdrop</h2>
+  <p>Bitdeer sits in two markets that most of its peers touch only one of, and it is exposed to
+  a third that they are not.</p>
+
+  <h3>Bitcoin mining</h3>
+  <p>The self-mining economics are the sector's: revenue in bitcoin, costs in electricity, and
+  margin determined by the price, by network difficulty and by the efficiency of the fleet. What
+  differentiates Bitdeer is that it makes its own machines. A miner that designs its own ASICs
+  captures the manufacturing margin that its competitors pay away, and it controls its own
+  upgrade timing rather than queuing behind other buyers.</p>
+
+  <h3>AI and HPC infrastructure</h3>
+  <p>The Tydal lease places Bitdeer in the same business as the North American developers, but
+  on different ground. Norway offers cheap hydroelectric power, a cold climate that supports the
+  stated power usage effectiveness of approximately 1.1, and a European location for customers
+  who want capacity inside Europe. It also puts the asset in a different regulatory and currency
+  environment from the company's Singapore headquarters and its Cayman incorporation.</p>
+
+  <h3>Being a foreign private issuer in a sector of domestic filers</h3>
+  <p>Almost every comparable company in this coverage set reports on Forms 10-K, 10-Q and 8-K
+  under United States generally accepted accounting principles, files proxy statements, and has
+  officers and directors reporting transactions on Forms 3, 4 and 5. Bitdeer does none of these.
+  It reports annually on Form 20-F under International Financial Reporting Standards and
+  furnishes interim information on Form 6-K at its own cadence. This is a legitimate and common
+  regime, and it is not a deficiency; but it means a reader comparing Bitdeer with its peers is
+  comparing different disclosure frequencies and different accounting bases at the same time.
+  <span class="tag">Filed</span> SEC filing index for CIK 0001899123, searched 5 Aug 2026.</p>
+</section>
+
+<!-- ===================== 5. COMPETITIVE POSITION ===================== -->
+<section id="s5">
+  <h2 class="sec"><span class="n">05</span>Competitive position</h2>
+  <p class="sub">Named peers on comparable metrics. Bitdeer is the only company in this set
+  that manufactures the hardware the others buy.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Company</th><th>Comparable on</th><th>Where it differs</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Applied Digital (APLD)</td><td>Long-term contracted AI colocation leasing</td><td>1.4 GW contracted against Bitdeer's 121 MW at Tydal; no self-mining, no hardware manufacturing; files as a domestic issuer. <span class="tag">Filed</span> APLD 8-K, 27 Jul 2026</td></tr>
+      <tr><td class="lbl">Galaxy Digital (GLXY)</td><td>Single large AI lease financed against a campus</td><td>526 MW contracted to one tenant, with a digital asset trading business alongside; no mining hardware. <span class="tag">Filed</span> GLXY 8-K, 5 Aug 2026</td></tr>
+      <tr><td class="lbl">IREN Limited (IREN)</td><td>Self-mining plus AI capacity, and a non-United States operating base</td><td>Also incorporated outside the United States, but reports as a domestic filer; buys its machines rather than making them</td></tr>
+      <tr><td class="lbl">MARA Holdings (MARA)</td><td>Scale self-mining</td><td>Larger self-mining fleet, no hardware manufacturing, no European AI colocation</td></tr>
+      <tr><td class="lbl">Cipher Mining (CIFR)</td><td>Converting power positions into HPC leases</td><td>Texas-weighted; Bitdeer's new capacity is Norwegian</td></tr>
+      <tr><td class="lbl">Hut 8 (HUT)</td><td>Mixed mining and computing infrastructure</td><td>Holds a digital asset treasury; no manufacturing</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>Against this set Bitdeer's distinguishing assets are the SEALMINER hardware line and a
+  European site with hydroelectric power. Its distinguishing weakness, from a reader's point of
+  view rather than the business's, is disclosure frequency: where the domestic filers publish a
+  quarterly report to a statutory deadline, Bitdeer publishes when it chooses. A comparison of
+  quarterly trends across this table will always have Bitdeer's data arriving later and in less
+  detail.</p>
+</section>
+
+<!-- ===================== 6. FINANCIAL PERFORMANCE ===================== -->
+<section id="s6">
+  <h2 class="sec"><span class="n">06</span>Financial performance</h2>
+  <p class="sub">Three reported years under International Financial Reporting Standards. The
+  most recent quarterly figures are not yet published; results for the second quarter of 2026
+  are scheduled for 10 August 2026.</p>
+
+  <p>The trend is stated first: revenue fell, then rose sharply, and the company moved from a
+  very large loss to a small profit over three years.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Measure</th><th class="num">FY2023</th><th class="num">FY2024</th><th class="num">FY2025</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Total revenue</td><td class="num">$368.6M</td><td class="num">$349.8M</td><td class="num">$620.3M</td><td><span class="tag">Filed</span> Form 20-F, 30 Apr 2026</td></tr>
+      <tr><td class="lbl">Net income / (loss)</td><td class="num neg-t">($599.2M)</td><td class="num neg-t">($56.7M)</td><td class="num pos-t">$65.6M</td><td><span class="tag">Filed</span> Form 20-F, 30 Apr 2026</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>Two observations follow. Revenue declined 5% between 2023 and 2024 while the loss narrowed
+  from $599.2M to $56.7M, so almost all of the 2023 loss was something other than trading: a
+  loss of that size on revenue of $368.6M is not an operating result. And the 2025 recovery is
+  both a revenue and a margin event, with revenue up 77% and the result swinging $122.3M to a
+  profit.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The 2023 loss is treated here as dominated by non-operating items, most plausibly listing
+    expenses and share-based payment charges connected to the 2023 business combination, and by
+    impairment. The company's own adjusted EBITDA definition excludes listing expenses and
+    share-based payment under IFRS 2, which is consistent with that reading. The specific
+    composition was not established from the financial statements for this document, and no
+    figure is attributed to any component.</p>
+  </div>
+
+  <h3>What is not established</h3>
+  <p>This document does not carry a balance sheet, a cash flow statement, a hashrate figure or a
+  cost per bitcoin mined. The most recent audited statements are for the year ended 31 December
+  2025, published 30 April 2026, and no interim balance sheet has been read. A reader should
+  treat the financial picture here as seven months old and about to be updated on 10 August
+  2026.</p>
+</section>
+
+<!-- ===================== 7. CAPITAL STRUCTURE & DILUTION ===================== -->
+<section id="s7">
+  <h2 class="sec"><span class="n">07</span>Capital structure &amp; dilution</h2>
+  <p class="sub">Two share classes, four convertible note issues in two years, a twelve-agent
+  at-the-market programme, and a share count that is seven months old.</p>
+
+  <h3>Ordinary shares</h3>
+  <p>235,552,084 ordinary shares were outstanding at 31 December 2025: 191,152,162 Class A and
+  44,399,922 Class V. That figure excludes 3,364,711 Class A shares repurchased but not
+  cancelled, and 7,258,176 Class A shares reserved for issuance under the share incentive plans.
+  A further 3,404,713 were reserved and unissued under the 2023 plan. <span class="tag">Filed</span>
+  Form 20-F, 30 Apr 2026.</p>
+
+  <p><b>The count is stale, and the direction of the error is known.</b> The most recent share
+  count in a filed document is that of 31 December 2025, seven months before this document's
+  pricing date. Two subsequent issues are disclosed. Bitdeer sold 1,936,064 Class A shares under
+  the at-the-market sales agreement between 1 January 2026 and 23 February 2026 for gross
+  proceeds of $28.2M. And in February 2026 it completed a registered direct offering of
+  5,503,030 Class A shares at $7.94 per share, a count the annual report states rather than
+  leaves to be derived, which is $43,694,058 of stock.
+  Together that is at least 7,439,094 additional Class A shares before the end of February, with
+  five further months unaccounted for.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The market capitalisation of $2,681M in section 1 uses the 31 December 2025 count because
+    that is the most recent figure any filing states, and it is therefore a floor rather than a
+    current figure. On the two disclosed issues alone the count reaches at least 242,991,178
+    shares, which at the 4 August close is approximately $2,765M. The true figure is higher
+    still if the at-the-market programme continued after February, which the filings read here do
+    not establish either way. No single current share count is available, and this document does
+    not construct one.</p>
+  </div>
+
+  <h3>Convertible notes</h3>
+  <p>Four issues in roughly two years, disclosed in the annual report:</p>
+  <div class="tw"><table>
+    <thead><tr><th>Issue</th><th class="num">Principal</th><th class="when">Priced</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Convertible senior notes due 2029</td><td class="num">Not established</td><td class="when">November 2024</td></tr>
+      <tr><td class="lbl">4.875% convertible senior notes due 2031</td><td class="num">$375.0M</td><td class="when">June 2025</td></tr>
+      <tr><td class="lbl">4.00% convertible senior notes due 2031</td><td class="num">$400.0M</td><td class="when">November 2025</td></tr>
+      <tr><td class="lbl">5.00% convertible senior notes due 2032</td><td class="num">$375.0M</td><td class="when">Not established</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub"><span class="tag">Filed</span> Form 20-F, 30 Apr 2026. The principal of the
+  2029 issue and the pricing date of the 2032 issue were not read and are recorded as not
+  established rather than inferred.</p>
+
+  <p>At least $1.15B of convertible principal is therefore outstanding across the three issues
+  whose amounts are established, against a market capitalisation of roughly $2.7B. Conversion of
+  any of it adds to a Class A count that this document already cannot state currently.</p>
+
+  <h3>The at-the-market programme and its agents</h3>
+  <p>An At Market Issuance Sales Agreement dated 3 January 2025 names twelve sales agents:
+  Barclays Capital Inc., Cantor Fitzgerald &amp; Co., A.G.P./Alliance Global Partners, The
+  Benchmark Company, LLC, B. Riley Securities, Inc., BTIG, LLC, Keefe, Bruyette &amp; Woods,
+  Inc., Needham &amp; Company, LLC, Northland Securities, Inc., Rosenblatt Securities Inc., Roth
+  Capital Partners, LLC and StockBlock Securities LLC. <span class="tag">Filed</span> 424B5,
+  23 Feb 2026. Ten of those twelve firms also publish research on Bitdeer, which is taken up in
+  section 8.</p>
+
+  <h3>Other financing</h3>
+  <p>A BIT Assets Collateralized Loan was entered in April 2025 with BIT Group, a facility of up
+  to $200.0M. <span class="tag">Filed</span> Form 20-F, 30 Apr 2026. The February 2026
+  registered direct offering raised $43.7M at $7.94 per share, with Barclays Capital Inc. acting
+  as exclusive placement agent. <span class="tag">Filed</span> 424B5, 23 Feb 2026.</p>
+</section>
+
+<!-- ===================== 8. VALUATION ===================== -->
+<section id="s8">
+  <h2 class="sec"><span class="n">08</span>Valuation</h2>
+  <p class="sub">Multiples shown with their basis and pricing date. No target price. Every
+  multiple below inherits the share-count uncertainty described in section 7, so each is a
+  floor on the true ratio rather than a point estimate. The count understates the shares
+  outstanding, so the capitalisation understates the market's valuation and every multiple
+  struck on it understates the true ratio.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Measure</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Price to FY2025 revenue</td><td class="num">4.32&times;</td><td><span class="tag">Estimate</span> $2,681M market capitalisation &divide; $620.3M FY2025 revenue. Price 4 Aug 2026, revenue for the year ended 31 Dec 2025.</td></tr>
+      <tr><td class="lbl">Price to FY2025 earnings</td><td class="num">40.9&times;</td><td><span class="tag">Estimate</span> $2,681M &divide; $65.6M net income. The denominator is the first profit in three reported years, so this multiple rests on a single period.</td></tr>
+      <tr><td class="lbl">Market capitalisation to Tydal base-term contracted revenue</td><td class="num">0.57&times;</td><td><span class="tag">Estimate</span> $2,681M &divide; approximately $4.7B. The denominator runs 16 years, is undiscounted, and its credit support is anticipated rather than in place, so this is a scale comparison and not a valuation multiple.</td></tr>
+      <tr><td class="lbl">Price to book</td><td class="num">n/a</td><td>Not struck. No balance sheet was read for this document; the most recent audited equity figure is not carried here.</td></tr>
+      <tr><td class="lbl">Enterprise value multiples</td><td class="num">n/a</td><td>Not struck. See methodology: an enterprise value is not derived here.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Third-party coverage</h3>
+  <p class="sub">Every row is market data: attributed, dated, tagged, never adopted. Price at
+  publication is the close on the <b>last trading day before</b> the action, taken from the
+  exchange's own daily record for BTDR, and this convention governs every row in the table.
+  Bitdeer's own investor relations page, read on 5 August 2026, names twelve firms and their
+  analysts; it publishes no ratings or targets. The row carrying a rating and a target is cited
+  to the note that published it.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Firm</th><th>Analyst</th><th class="when">Date</th><th>Rating</th><th class="num">Target</th><th class="num">Price at pub.</th><th>Disclosed conflict</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">H.C. Wainwright &amp; Co.</td><td>Mike Colonnese, with Dylan Scales and Leon Zhou</td><td class="when">4 Aug 2026</td><td>Buy</td><td class="num">$25.00 <span class="tag">Market</span></td><td class="num">$11.37</td><td>Not a sales agent under the January 2025 at-the-market agreement. The firm's own disclosure page was not read, so what it discloses about this issuer is Not established.</td></tr>
+      <tr><td class="lbl">Alliance Global Partners</td><td>Brian Kinstlinger</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>A.G.P./Alliance Global Partners is a sales agent under the at-the-market sales agreement dated 3 Jan 2025. <span class="tag">Filed</span> 424B5, 23 Feb 2026</td></tr>
+      <tr><td class="lbl">B. Riley Securities</td><td>Nick Giles</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Sales agent under the at-the-market sales agreement dated 3 Jan 2025. <span class="tag">Filed</span> 424B5, 23 Feb 2026</td></tr>
+      <tr><td class="lbl">BTIG</td><td>Gregory Lewis</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Sales agent under the at-the-market sales agreement dated 3 Jan 2025. <span class="tag">Filed</span> 424B5, 23 Feb 2026</td></tr>
+      <tr><td class="lbl">Cantor Fitzgerald</td><td>Brett Knoblauch</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Sales agent under the at-the-market sales agreement dated 3 Jan 2025. <span class="tag">Filed</span> 424B5, 23 Feb 2026</td></tr>
+      <tr><td class="lbl">KBW</td><td>Stephen Glagola</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Keefe, Bruyette &amp; Woods, Inc. is a sales agent under the at-the-market sales agreement dated 3 Jan 2025. <span class="tag">Filed</span> 424B5, 23 Feb 2026</td></tr>
+      <tr><td class="lbl">Needham &amp; Company</td><td>John Todaro</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Sales agent under the at-the-market sales agreement dated 3 Jan 2025. <span class="tag">Filed</span> 424B5, 23 Feb 2026</td></tr>
+      <tr><td class="lbl">Northland Capital Markets</td><td>Mike Grondahl</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Northland Securities, Inc. is a sales agent under the at-the-market sales agreement dated 3 Jan 2025. <span class="tag">Filed</span> 424B5, 23 Feb 2026</td></tr>
+      <tr><td class="lbl">Rosenblatt Securities</td><td>Kevin Cassidy</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Sales agent under the at-the-market sales agreement dated 3 Jan 2025. <span class="tag">Filed</span> 424B5, 23 Feb 2026</td></tr>
+      <tr><td class="lbl">Roth Capital Partners</td><td>Darren Aftahi</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Sales agent under the at-the-market sales agreement dated 3 Jan 2025. <span class="tag">Filed</span> 424B5, 23 Feb 2026</td></tr>
+      <tr><td class="lbl">The Benchmark Company</td><td>Mark Palmer</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Sales agent under the at-the-market sales agreement dated 3 Jan 2025. <span class="tag">Filed</span> 424B5, 23 Feb 2026</td></tr>
+      <tr><td class="lbl">China Renaissance Securities</td><td>Cindy Wang</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Not a sales agent under the January 2025 at-the-market agreement. Not established.</td></tr>
+    </tbody>
+  </table></div>
+  <h3>The shape of the coverage</h3>
+  <p>Twelve firms follow Bitdeer according to the company's own investor relations page, read on
+  5 August 2026. One published action is established here: H.C. Wainwright, Buy with a $25.00
+  target, dated 4 August 2026, the same day the Tydal lease was announced. There is no spread to
+  report, because a single established target has none, and no published consensus figure is
+  reported here because none was retrieved from a source that attributes and dates it. The count
+  used here is a floor rather than a current figure.</p>
+
+  <p>The relationship between the covering set and the selling syndicate is the finding, and it
+  runs in an unusual direction. Ten of the twelve covering firms are sales agents under
+  Bitdeer's at-the-market sales agreement of 3 January 2025, an ongoing selling relationship
+  under which the company issues stock into the market. Only two are not: China Renaissance
+  Securities, and H.C. Wainwright, which is the one firm whose published rating and target this
+  document establishes.</p>
+
+  <p>That is worth stating precisely, because the obvious inference is the wrong way round. The
+  single target recorded above comes from one of the two covering houses with no selling
+  relationship disclosed in the issuer's own prospectus. Two of the twelve firms' relationships
+  are established as absent and ten as present; what any of them discloses about this issuer on
+  its own disclosure page has not been read, including H.C. Wainwright's, so those cells read
+  Not established rather than being inferred from the prospectus.</p>
+
+  <p>Two firms with selling relationships do not cover the stock at all: Barclays Capital Inc.,
+  which is both a sales agent and was exclusive placement agent on the February 2026 registered
+  direct offering, and StockBlock Securities LLC. The absence of research from the placement
+  agent on the company's most recent equity raise is itself a feature of this coverage set.</p>
+</section>
+
+<!-- ===================== 9. GROWTH DRIVERS ===================== -->
+<section id="s9">
+  <h2 class="sec"><span class="n">09</span>Growth drivers</h2>
+  <p class="sub">Ranked by size and by how settleable each is from a document.</p>
+
+  <h3>Delivering Tydal</h3>
+  <p>121 IT megawatts against approximately $4.7B of base-term contracted revenue, or
+  approximately $8.0B over 24 years if the option is exercised. The lease is signed; the
+  capacity is not built, no delivery date is disclosed, and the approximately $1.3B of letters
+  of credit supporting the tenant's obligations is anticipated rather than in place. This is by
+  a wide margin the largest driver and also the one with the most conditions still attached.
+  <span class="tag">Filed</span> Company release, 4 Aug 2026.</p>
+
+  <h3>The SEALMINER hardware line</h3>
+  <p>Bitdeer designs and sells its own application-specific integrated circuits. This is the
+  business that differentiates it structurally from every peer in section 5, because it earns
+  manufacturing margin from the same capital cycle that raises its competitors' costs. Bitdeer
+  publishes no segment profitability for it, so its contribution cannot be sized here.
+  <span class="tag">Filed</span> Form 20-F, 30 Apr 2026.</p>
+
+  <h3>Operating leverage from the 2025 recovery</h3>
+  <p>Revenue rose 77% in 2025 and the result swung $122.3M into a $65.6M profit. If that
+  operating leverage persists, the second-quarter figures due on 10 August 2026 will show it.
+  That is the nearest testable driver on the file. <span class="tag">Filed</span> Form 20-F,
+  30 Apr 2026, and company release, 1 Aug 2026.</p>
+
+  <h3>European AI capacity as a position rather than a project</h3>
+  <p>The Tydal campus is stated to run on 100% renewable energy at a power usage effectiveness
+  of approximately 1.1, in a jurisdiction with cheap hydroelectric power and a cold climate. If
+  the first lease delivers, the site is a platform for further capacity in a market where the
+  United States operators in section 5 have no presence. No further European capacity is
+  contracted or disclosed. <span class="tag">Filed</span> Company release, 4 Aug 2026.</p>
+</section>
+
+<!-- ===================== 10. RISKS ===================== -->
+<section id="s10">
+  <h2 class="sec"><span class="n">10</span>Risks</h2>
+  <p class="sub">Severity-ranked, most severe first.</p>
+  <div class="risk sev-high">
+    <h4>A change of auditor with material weaknesses on the record <span class="sev">Severe</span></h4>
+    <p>On 3 August 2026 the audit committee dismissed MaloneBailey, LLP and appointed Deloitte
+    &amp; Touche LLP, Singapore, both effective the same day, seven days before second-quarter
+    results and seven months and three days into the financial year the new firm will audit, with
+    about 4.9 months of it left to run. The 6-K states there
+    were no disagreements, and that MaloneBailey's reports on the 2024 and 2025 statements were
+    unqualified. It also states there were no reportable events <i>other than</i> the material
+    weaknesses management reported under Item 15 of the annual report for the year ended
+    31 December 2024. A change of auditor is ordinary; a change of auditor with unremediated
+    material weaknesses named in the same filing is a combination that warrants attention, and
+    this document has not established whether those weaknesses were subsequently remediated.
+    <span class="tag">Filed</span> Form 6-K, 3 Aug 2026.</p>
+  </div>
+  <div class="risk sev-high">
+    <h4>The Tydal credit support is anticipated, not in place <span class="sev">Severe</span></h4>
+    <p>The approximately $1.3B of letters of credit backing Volta's obligations is described as
+    anticipated to be arranged by affiliates of J.P. Morgan and another top-tier global financial
+    institution, and as subject to customary conditions. The tenant is a subsidiary of Volta
+    rather than Volta itself, and the end customer whose demand supports the rent is described
+    only as a leading AI lab. Approximately $4.7B of contracted revenue therefore rests on a
+    credit structure that is not yet established and a counterparty chain that is not fully
+    disclosed. <span class="tag">Filed</span> Company release, 4 Aug 2026.</p>
+  </div>
+  <div class="risk sev-high">
+    <h4>No current share count exists in any filed document <span class="sev">Severe</span></h4>
+    <p>The most recent share count in a filing is 235,552,084 at 31 December 2025, seven months
+    before this document's pricing date. At least 7,439,094 further Class A shares were issued by
+    late February 2026 through the at-the-market programme and the registered direct offering,
+    with five months unaccounted for after that, and at least $1.15B of convertible notes could
+    add more. Every per-share and market-capitalisation figure in this document is therefore a
+    floor rather than a point estimate, and the direction of the error is known but its size is
+    not. <span class="tag">Filed</span> Form 20-F, 30 Apr 2026, and 424B5, 23 Feb 2026.</p>
+  </div>
+  <div class="risk sev-med">
+    <h4>Bitcoin price exposure through self-mining <span class="sev">Moderate</span></h4>
+    <p>Bitdeer's own risk disclosure states that a decline in bitcoin prices would directly
+    reduce the profitability of its mining operations, since rewards would be worth less while
+    operating costs such as electricity continue. The 2025 return to profit came in a period the
+    company does not attribute to price alone, but the exposure is unhedged in the filings read
+    here and it is what separates this business from a pure colocation lessor.
+    <span class="tag">Filed</span> Form 20-F, 30 Apr 2026.</p>
+  </div>
+  <div class="risk sev-med">
+    <h4>Interim disclosure is voluntary in timing and content <span class="sev">Moderate</span></h4>
+    <p>As a foreign private issuer Bitdeer files no Form 10-Q and is not subject to a statutory
+    quarterly deadline. Interim information arrives on Form 6-K when the company chooses to
+    furnish it. Ninety-nine such reports appear in the index, so the practice is regular, but it
+    is not an obligation, and a reader comparing Bitdeer with the domestic filers in section 5 is
+    comparing different disclosure regimes. There is also no proxy statement, because foreign
+    private issuers are exempt from the proxy rules under Exchange Act Section 14(a).
+    <span class="tag">Filed</span> SEC filing index for CIK 0001899123, searched 5 Aug 2026.</p>
+  </div>
+  <div class="risk sev-med">
+    <h4>Coverage concentrated in the firms that sell the stock <span class="sev">Moderate</span></h4>
+    <p>Ten of the twelve firms on Bitdeer's own coverage list are sales agents under its
+    at-the-market programme, a standing rather than one-off selling relationship. Unlike a
+    completed underwriting, an at-the-market agency continues to generate fees as long as the
+    company issues. This is not an allegation about any rating, and the one target established
+    here comes from a firm outside that group; it is a statement about how much of the available
+    research comes from houses with an ongoing commercial interest in the shares.
+    <span class="tag">Filed</span> 424B5, 23 Feb 2026.</p>
+  </div>
+  <div class="risk sev-low">
+    <h4>Concentrated register with a large strategic holder <span class="sev">Lower</span></h4>
+    <p>All thirty Schedule 13D and 13G filings indexed under this issuer name Bitdeer as the
+    subject. The register is dominated by Tether entities, which account for eleven of the
+    filings including a Schedule 13D/A as recently as 30 June 2026, alongside Shinning Stone,
+    Golden Navigate, Mega Galaxy and Victory Courage from the founding group, and more recently
+    BlackRock, Citadel Securities, Jane Street and Paloma Partners. A Schedule 13D reports a
+    position held with a purpose that is not passive. Positions are as last reported, not as
+    currently held. <span class="tag">Filed</span> SEC filing index for CIK 0001899123, searched
+    5 Aug 2026.</p>
+  </div>
+</section>
+
+<!-- ===================== 11. BULL / BASE / BEAR ===================== -->
+<section id="s11">
+  <h2 class="sec"><span class="n">11</span>Bull / base / bear</h2>
+  <p class="sub">Each case with its preconditions: what must be true, not what might be.</p>
+  <div class="cases">
+    <div class="case bear"><h4>Bear</h4><p>The Tydal letters of credit are not arranged on the
+      terms described, the lease is renegotiated or delayed, and the $4.7B headline is not
+      converted. The new auditor's first close surfaces issues connected to the material
+      weaknesses named in the 2024 annual report. Bitcoin weakness returns the self-mining
+      business to loss while the share count keeps rising through the at-the-market programme.</p>
+      <p class="req">Requires: any disclosed change to the Tydal terms or credit support, an
+      adverse control finding from the incoming auditor, or a sustained fall in the bitcoin
+      price.</p></div>
+    <div class="case"><h4>Base</h4><p>The second-quarter results on 10 August confirm the 2025
+      operating leverage, Tydal proceeds toward construction with the credit support arranged
+      broadly as described, and the hardware and hosting businesses continue to carry the group
+      while the AI capacity is built. The equity keeps being issued in modest amounts through the
+      at-the-market programme.</p>
+      <p class="req">Requires: results consistent with the FY2025 trend, confirmation that the
+      Tydal letters of credit are in place, and no adverse finding from the auditor
+      transition.</p></div>
+    <div class="case bull"><h4>Bull</h4><p>Tydal is delivered and the $202 per kW per month rent
+      begins, establishing Bitdeer as a European AI landlord as well as a miner and a hardware
+      maker. The extension option is taken, the SEALMINER line proves to be a durable margin
+      source through the capital cycle, and a second European lease follows on the strength of
+      the first.</p>
+      <p class="req">Requires: Tydal delivered with credit support in place, the extension
+      exercised or a second lease signed, and disclosed segment economics for the hardware
+      business.</p></div>
+  </div>
+</section>
+
+<!-- ===================== 12. RESEARCH SUMMARY ===================== -->
+<section id="s12">
+  <h2 class="sec"><span class="n">12</span>Research summary</h2>
+  <p>Three things happened to Bitdeer in the three days before this document was written, and
+  they point in different directions. On 3 August the auditor was replaced, in a filing that
+  names unremediated material weaknesses from the 2024 annual report as the only reportable
+  event. On 4 August the company announced the largest commercial commitment in its history, a
+  16-year lease at Tydal worth approximately $4.7B. And on 10 August, five days from now, it
+  reports second-quarter results.</p>
+
+  <p>The underlying business had already turned. Revenue rose 77% to $620.3M in 2025 and the
+  result moved from a $56.7M loss to a $65.6M profit, after a $599.2M loss in 2023 that was
+  plainly not an operating result. Bitdeer is also the only company in this coverage set that
+  designs and sells the mining hardware its competitors buy, which is a structural advantage the
+  filings do not size.</p>
+
+  <p>What a reader cannot do with this company is as important as what they can. There is no
+  current share count in any filed document: the most recent is seven months old, at least
+  7.4 million further shares were issued by February, and at least $1.15B of convertibles could
+  add more. There is no quarterly report to a statutory deadline, no proxy statement, and no
+  balance sheet more recent than 31 December 2025. Every per-share figure here is a floor.</p>
+
+  <p>Three things would move the reading and each is settleable from a document: whether the
+  approximately $1.3B of Tydal letters of credit is confirmed as arranged; what the 10 August
+  results show against the 2025 trend; and whether the incoming auditor's first annual report
+  reports the 2024 material weaknesses as remediated. What this document could not establish is
+  set out in section 14.</p>
+</section>
+
+<!-- ===================== 13. NULL CATEGORIES ===================== -->
+<section id="s13">
+  <h2 class="sec"><span class="n">13</span>Null categories</h2>
+  <p class="sub">Requested categories with nothing to report. Status reads Covered above, None where a
+  named source was checked and found empty, or Not established where the category was not examined.
+  A category nobody looked at is a gap, not an absence.</p>
+  <div class="tw"><table class="nulls">
+    <thead><tr><th>Category</th><th>Status</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Dividends</td><td class="status">None</td><td>The annual report states the company has not paid any dividend in the past and that investors may be dependent entirely on price appreciation for return. <span class="tag">Filed</span> Form 20-F, 30 Apr 2026.</td></tr>
+      <tr><td class="lbl">Share buybacks</td><td class="status">Covered above</td><td>3,364,711 Class A shares had been repurchased but not cancelled at 31 December 2025, recorded in section 7. No current repurchase programme or authority is established here.</td></tr>
+      <tr><td class="lbl">Analyst coverage</td><td class="status">Covered above</td><td>Twelve firms named in section 8, from the issuer's own coverage page read 5 Aug 2026, with one established rating and target.</td></tr>
+      <tr><td class="lbl">Securities class action</td><td class="status caution-t">Not established</td><td>Court dockets were not searched. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Delinquent filings (Form NT)</td><td class="status">None</td><td>No NT 20-F or other notification of late filing appears anywhere in the 267 filings the index holds for CIK 0001899123, searched 5 Aug 2026. The index reports no overflow file, so this covers the whole record under this CIK.</td></tr>
+      <tr><td class="lbl">Proxy statements</td><td class="status">None</td><td>No Schedule 14A filing of any kind appears in the index. Foreign private issuers are exempt from the proxy rules under Exchange Act Section 14(a) by Rule 3a12-3(b), so this is the regime rather than an omission. Searched 5 Aug 2026.</td></tr>
+      <tr><td class="lbl">Domestic periodic reports</td><td class="status">None</td><td>No Form 10-K, 10-Q or 8-K appears in the index. The company files five annual reports on Form 20-F and ninety-nine reports on Form 6-K. Searched 5 Aug 2026.</td></tr>
+      <tr><td class="lbl">Register filings the issuer made about others</td><td class="status">None</td><td>All thirty Schedule 13D and 13G filings indexed under CIK 0001899123 name Bitdeer as the subject. None runs outbound. Established by reading the subject and filer of each. Searched 5 Aug 2026.</td></tr>
+      <tr><td class="lbl">Non-SEC regulatory filings</td><td class="status caution-t">Not established</td><td>Bitdeer is incorporated in the Cayman Islands and headquartered in Singapore, and its annual report identifies Nasdaq as the only exchange on which its shares are listed. Whether any home-jurisdiction filing obligation exists on the company-law side was not established: no Cayman registry and no Singapore registry was queried. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Credit rating actions</td><td class="status caution-t">Not established</td><td>No rating agency action was sought or read. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Index membership</td><td class="status caution-t">Not established</td><td>Index provider announcements were not checked. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Short interest</td><td class="status caution-t">Not established</td><td>No exchange short interest report was retrieved. Also named in what was not checked.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 14. METHODOLOGY & SOURCES ===================== -->
+<section id="s14">
+  <h2 class="sec"><span class="n">14</span>Methodology &amp; sources</h2>
+  <p class="sub">Pricing basis, the tagging scheme, and, importantly, what was not checked.</p>
+
+  <h3>Provenance tags</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Tag</th><th>What it asserts</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl"><span class="tag">Filed</span></td><td>Stated in an SEC filing or company release, cited by form and date. Also covers a dated official publication by a named non-SEC issuer, with the issuer named in the source line.</td></tr>
+      <tr><td class="lbl"><span class="tag">Estimate</span></td><td>Derived or inferred here. The arithmetic is shown.</td></tr>
+      <tr><td class="lbl"><span class="tag">Open</span></td><td>Expected but unconfirmed. Nothing filed either way.</td></tr>
+      <tr><td class="lbl"><span class="tag">Market</span></td><td>Price, volume, float, published targets and ratings, stamped with the close or publication date. A third party's target or rating is market data, attributed to the firm that issued it and never adopted here.</td></tr>
+      <tr><td class="lbl"><span class="tag">Press</span></td><td>Reported by a named publication that is neither the issuer nor an analyst, cited by outlet and date. Corroborates; never the sole basis for a material claim.</td></tr>
+      <tr><td class="lbl"><span class="tag">Social</span></td><td>Publicly posted by a named account, cited by handle and date. Asserts that the statement was made, never that it is true.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Pricing basis and filing status</h3>
+  <p>Every market figure in this document is struck on the close of 4 August 2026, at which
+  BTDR closed at $11.38 on volume of 27,181,590 shares. The document is stamped 5 August 2026.
+  The two differ because the 5 August session had not settled when the figures were taken:
+  Nasdaq reported the market in its pre-open state with 4 August as the previous trading date.
+  The trading calendar behind the coverage table is derived from the exchange's own daily record
+  for BTDR over 253 sessions from 1 August 2025 to 4 August 2026, so a date absent from that
+  record is a date on which nothing traded.</p>
+
+  <p>Bitdeer's status as a foreign private issuer is established from the forms it actually
+  files rather than assumed from where it is incorporated: the index holds five annual reports
+  on Form 20-F and ninety-nine reports on Form 6-K, together with registration statements on
+  Forms F-1, F-3 and F-4, and no Form 10-K, 10-Q, 8-K or Schedule 14A of any kind. Traced to the
+  earliest document that states it, the claim originates in the draft registration statement on
+  Form F-4 confidentially submitted on 15 December 2021, which states that the company would
+  qualify as a foreign private issuer as defined in Rule 3b-4 under the Exchange Act on
+  completion of the business combination, and that it was incorporated in the Cayman Islands on
+  8 December 2021 for that purpose. The status has therefore been in place since the company
+  existed, and the first filing made under it was the shell company report on Form 20-F of
+  19 April 2023.</p>
+
+  <h3>Sources</h3>
+  <p>Primary sources are the filings indexed under Central Index Key 0001899123, swept on
+  5 August 2026. The index holds 267 filings dated 15 December 2021 to 3 August 2026 and reports
+  no overflow file, so the whole record under this CIK was available to the sweep. Every form
+  family was enumerated before filtering, and register filings were matched on both the current
+  and legacy spellings of the Schedule 13D and 13G form strings, which took the register count
+  from 12 to 30. Each register filing was read to establish its direction. The principal
+  documents are the annual report on Form 20-F for the year ended 31 December 2025, filed
+  30 April 2026; the 6-K of 3 August 2026 reporting the change of auditor, with the letter from
+  MaloneBailey as Exhibit 16.1; the prospectus supplement on Form 424B5 of 23 February 2026 for
+  the at-the-market agents and the registered direct offering; and the company's own releases of
+  1 and 4 August 2026 for the results date and the Tydal lease. Bitdeer's investor relations
+  coverage page was read on 5 August 2026. One research note, from H.C. Wainwright dated
+  4 August 2026, is the source of the rating, target and date in section 8 and of nothing else in
+  this document.</p>
+
+  <div class="assume">
+    <span class="lbl">Open review</span>
+    <p><b>Whether the end customer's characterisation is a filed fact or market data is not decided in this revision.</b> The Tydal lease is carried on the basis that the tenant is a subsidiary of Volta and that the end customer whose demand supports the rent is described only as a leading AI lab, and that description is carried as filed. Two readings of the tagging scheme are available and this document does not choose between them. The description is made in a company release, and a company release is a filed source; it is also the issuer's characterisation of an unnamed third party, and a characterisation of someone else's facts is market data.</p>
+    <p>What is recorded so the next revision can decide rather than inherit: the surfaces are a Framing item, a data table Basis column and a risk entry, each of which requires a tag; the tag now carried is filed; the competing tag is market; the end customer is not named in any filing read, so no counterparty can be cited either way; and the question is the same wherever the description appears. Nothing is retagged in this revision.</p>
+  </div>
+  <h3>What was not checked</h3>
+  <p>An unexamined area is a gap, not a clean bill. The following were not reached.</p>
+  <ul>
+    <li>No enterprise value is derived, and no balance sheet is carried. The most recent audited
+    statements are seven months old, at least $1.15B of convertible principal is outstanding with
+    one issue's amount unestablished, and second-quarter results are five days away. A netted
+    figure struck now would be superseded almost immediately, so the masthead field is omitted
+    rather than filled.</li>
+    <li>The financial statements in the annual report were not read line by line. Revenue and net
+    result are taken from the report's own narrative disclosure. No balance sheet, cash flow
+    statement, segment note, hashrate figure or cost per bitcoin mined is carried here.</li>
+    <li>The principal of the convertible notes due 2029 and the pricing date of the 5.00% notes
+    due 2032 were not established and are recorded as such rather than inferred.</li>
+    <li>Whether the material weaknesses reported under Item 15 of the 2024 annual report have
+    since been remediated was not established. The 6-K of 3 August 2026 refers to them without
+    stating their current status, and Item 15 of the 2025 annual report was not read.</li>
+    <li>The Tydal lease and services agreement itself was not read; the terms here are from the
+    company's release. No 6-K reporting the lease had been filed when this document was
+    assembled, the most recent 6-K in the index being that of 3 August 2026.</li>
+    <li>Court dockets were not searched, on CourtListener, PACER or any other portal, in the
+    United States, Singapore or Norway.</li>
+    <li>Norwegian permitting, grid connection and municipal records for the Tydal campus were not
+    queried. Every capacity, efficiency and energy figure is the company's own statement.</li>
+    <li>No non-SEC registry was queried: not the Cayman Islands registrar, not the Singapore
+    registry, and no European exchange or regulator. Whether any home-jurisdiction filing
+    obligation exists on the company-law side is not established.</li>
+    <li>Eleven of the twelve covering firms have no established rating, target or date here, and
+    no firm's own disclosure page was read, including H.C. Wainwright's. The conflict column in
+    section 8 reports what the February 2026 prospectus supplement establishes about selling
+    agency, which is a filing rather than a firm's disclosure.</li>
+    <li>Credit rating actions, index membership and short interest were not checked, as recorded
+    in section 13.</li>
+  </ul>
+</section>
+
+<!-- ===================== 15. DOCUMENT LOG ===================== -->
+<section id="s15">
+  <h2 class="sec"><span class="n">15</span>Document log</h2>
+  <p class="sub">Newest first. The original build entry is never removed or rewritten.</p>
+  <div class="log">
+    <div class="logentry current">
+      <div class="when">5 August 2026 <span class="latest">Latest</span></div>
+      <div class="basis">Priced off 4 Aug 2026 close · $11.38 · $2,681M cap, on a share count seven months old</div>
+      <div class="correction">
+        <span class="lbl">Correction</span>
+        <p><b>The February 2026 share count was derived when the annual report states it, and the derivation was wrong.</b> The offering was given as approximately $43,694,058 of stock at $7.94, roughly 5,502,400 shares. The Form 20-F for the year ended 31 December 2025 states the count directly, in four places: 5,503,030 Class A ordinary shares at US$7.94 per share. 5,502,400 &rarr; 5,503,030, and the aggregate is the derived figure rather than the count. The subtotal of additional shares moves 7,438,464 &rarr; 7,439,094 and the floor on the count moves 242,990,548 &rarr; 242,991,178. The capitalisation those produce is approximately $2,765M before and after, so no figure in section 1 or section 8 moves.</p>
+        <p><b>Section 8 described its multiples as ceilings, and they are floors.</b> The share count is understated, so the capitalisation is understated, so every multiple struck on it is understated. The assumption block in section 7 had this right and said floor throughout; the section 8 lead-in contradicted it.</p>
+        <p><b>The auditor change was described as four months into the audit year, and it is seven.</b> Deloitte was appointed for the year ending 31 December 2026 and the change took effect on 3 August 2026, which is seven months and three days elapsed with about 4.9 months remaining. The adjacent statement that the change came seven days before second-quarter results is correct against the 10 August 2026 results date and is unchanged.</p>
+      </div>
+      <p><b>Original build.</b> Built from Bitdeer's annual report on Form 20-F for the year
+      ended 31 December 2025, filed 30 April 2026; from the Form 6-K of 3 August 2026 reporting
+      the change of auditor, with the letter from MaloneBailey as Exhibit 16.1; from the
+      prospectus supplement on Form 424B5 of 23 February 2026, which names the twelve
+      at-the-market sales agents and the exclusive placement agent on the registered direct
+      offering; from the company's releases of 1 August 2026 announcing the results date and
+      4 August 2026 announcing the Tydal lease; from the draft registration statement on Form F-4
+      of 15 December 2021, which is the earliest document stating the company's foreign private
+      issuer status; from the complete filing index for Central Index Key 0001899123, 267 filings
+      from 15 December 2021 to 3 August 2026 with no overflow file, with each of the thirty
+      register filings read to establish whether it runs inbound or outbound; and from Bitdeer's
+      own investor relations coverage page read on 5 August 2026.</p>
+      <p>Pricing basis fixed at the 4 August 2026 close of $11.38. The document is stamped
+      5 August because the 5 August session had not settled: Nasdaq reported the market pre-open
+      with 4 August as the previous trading date, so the previous close remains the basis. The
+      one established coverage row corroborates the convention independently: H.C. Wainwright's
+      note of 4 August states a price of $11.37 and labels it the 3 August close, which is the
+      close on the last trading day before the action and is what the exchange record gives for
+      that session.</p>
+      <p>Conventions fixed at construction: filing status is established from the forms actually
+      filed rather than from the place of incorporation, and traced to the earliest document
+      stating it rather than the most recent read; the market capitalisation is described as a
+      floor throughout, because the most recent share count in any filing is that of 31 December
+      2025 and at least 7,438,464 further Class A shares were issued by late February 2026; and
+      price at publication in the coverage table is the close on the last trading day before each
+      action, stated once above the table.</p>
+      <p>Known gaps at this version: no enterprise value is derived and no balance sheet is
+      carried, so the masthead field is omitted rather than filled; the financial statements were
+      not read line by line, and revenue and net result come from the annual report's narrative;
+      the principal of one convertible issue and the pricing date of another were not
+      established; whether the material weaknesses named in the 2024 annual report have been
+      remediated was not established; the Tydal lease document itself was not read and no 6-K
+      reporting it had been filed; court dockets, Norwegian permitting records, and every
+      non-SEC registry including the Cayman and Singapore registries were not reached; and eleven
+      of the twelve covering firms carry no established rating or target, with no firm's own
+      disclosure page read.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="norec">
+    No buy, sell, or hold recommendation is issued and no price target is derived.
+    Third-party targets and ratings, where shown, are the published views of the
+    firms named and are reported as market data. This document is for research and
+    educational purposes and is not investment advice. Verify all figures against
+    primary filings on sec.gov before acting.
+  </div>
+  <p style="margin-top:16px">BTDR · Bitdeer Technologies Group · Equity Research Report · as of 5 August 2026</p>
+</footer>
+
+</div>
+</body>
+</html>

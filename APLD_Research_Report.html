@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>APLD · Applied Digital Corporation · Equity Research Report · as of 5 August 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================================
+   PER-TICKER PALETTE
+   ========================================================================= */
+:root{
+  /* Applied Digital's wordmark is drawn in white for use on dark ground, so it
+     carries no colour of its own. The accent comes from the brand blue the
+     company uses across its own site chrome, #3A6DA7. It clears every hue this
+     palette reserves for meaning, so no rotation was needed; lightness is
+     brought from 44 to 42 percent so it holds at 14px on white. */
+  --accent:      #37689F;
+  --accent-deep: #2A4F79;
+  --accent-wash: rgba(55,104,159,0.06);
+  --accent-line: rgba(55,104,159,0.22);
+}
+
+/* ============================================================================
+   SHARED STYLESHEET v1.93 : BEGIN
+   ========================================================================= */
+:root{
+  color-scheme: light only;
+
+  --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
+  --line:#DEE6EC;   --line-hard:#C0CDD7;
+  --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
+
+  --pos:#0B7A50;      --pos-bg:#E7F4EE;
+  --neg:#B02A21;      --neg-bg:#FBECEA;
+  --caution:#90600A;  --caution-bg:#FBF2E0;
+  --assume:#4F3FA3;   --assume-bg:#EFEDFA;
+
+  --display:'Archivo',ui-sans-serif,system-ui,'Helvetica Neue',Arial,sans-serif;
+  --body:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+
+  --measure:78ch;
+  --col:760px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html,body{background:var(--canvas) !important;background-color:var(--canvas) !important}
+body{
+  margin:0;color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 22px 96px;background:var(--paper);
+      border-left:1px solid var(--line);border-right:1px solid var(--line)}
+p{max-width:var(--measure)}
+/* Boxed prose fills its container: the box supplies its own measure, so the
+   78ch cap applies to top-level running prose only. */
+.first li,.assume p,.note p,.cat p,.risk p,.logentry p,.oc p,.case p,
+.cat-meta,.logentry .basis{max-width:none}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:var(--accent-deep)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- masthead ---------- */
+.mast{padding:44px 0 26px;border-bottom:2px solid var(--line-hard);margin-bottom:8px;
+      position:relative;padding-left:20px}
+.mast::before{content:"";position:absolute;left:0;top:44px;bottom:26px;
+      width:4px;background:var(--accent)}
+.ticker{font-family:var(--mono);font-size:44px;font-weight:700;letter-spacing:-1px;
+      line-height:1;color:var(--accent);margin:0}
+.headline{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.22;
+      color:var(--ink);margin:16px 0 0}
+.functional{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--ink-faint);margin:18px 0 0}
+.mast-strip{display:flex;flex-wrap:wrap;gap:26px;margin-top:20px;padding-top:16px;
+      border-top:1px solid var(--line)}
+.mast-strip div{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint)}
+.mast-strip b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-top:3px}
+
+/* ---------- banner: framing ---------- */
+.first{background:var(--canvas);border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:20px 24px;margin:30px 0 12px}
+.first h2{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.04em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 12px}
+.first ol{margin:0;padding-left:20px}
+.first li{margin-bottom:9px}
+.first li:last-child{margin-bottom:0}
+
+/* ---------- sections ---------- */
+section{padding-top:38px}
+h2.sec{font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);
+      margin:0 0 4px;padding-bottom:10px;border-bottom:1px solid var(--line-hard);
+      display:flex;align-items:baseline;gap:12px}
+h2.sec .n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);
+      letter-spacing:.06em;flex:none}
+.sub{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);margin:10px 0 18px;
+      max-width:var(--measure)}
+h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink-dim);
+      margin:26px 0 8px}
+
+/* ---------- provenance tags (signature) ---------- */
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);
+      background:var(--panel-2);border:1px solid var(--line);
+      border-radius:2px;padding:1px 6px;vertical-align:1px;white-space:nowrap}
+
+/* ---------- assumption block ---------- */
+.assume{background:var(--assume-bg);border-left:4px solid var(--assume);
+      padding:16px 20px;margin:20px 0}
+.assume .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--assume);display:block;margin-bottom:7px}
+.assume p{margin:0}
+
+/* ---------- callouts ---------- */
+.note{border:1px solid var(--line);border-left:4px solid var(--ink-faint);
+      background:var(--canvas);padding:16px 20px;margin:20px 0}
+.note.pos{border-left-color:var(--pos);background:var(--pos-bg)}
+.note.neg{border-left-color:var(--neg);background:var(--neg-bg)}
+.note.caution{border-left-color:var(--caution);background:var(--caution-bg)}
+.note p{margin:0}
+.note p + p{margin-top:10px}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+thead th{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--ink-dim);text-align:left;
+      padding:9px 12px;border-bottom:2px solid var(--line-hard);white-space:nowrap}
+tbody td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--canvas)}
+td.num,th.num{font-family:var(--mono);text-align:right;white-space:nowrap}
+/* td.when marks a timing column. An unmarked cell counts as prose. */
+td.when{font-family:var(--mono);white-space:nowrap}
+td.lbl{font-weight:600}
+.pos-t{color:var(--pos);font-weight:600}
+.neg-t{color:var(--neg);font-weight:600}
+.caution-t{color:var(--caution);font-weight:600}
+
+/* ---------- cases ---------- */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.case{border:1px solid var(--line);border-top:3px solid var(--ink-faint);
+      background:var(--paper);padding:18px}
+.case.bull{border-top-color:var(--pos)}
+.case.bear{border-top-color:var(--neg)}
+.case h4{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 10px}
+.case.bull h4{color:var(--pos)} .case.bear h4{color:var(--neg)}
+.case p{font-size:15px;margin:0}
+.case .req{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+
+/* ---------- risks ---------- */
+.risk{border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:16px 20px;margin-bottom:12px}
+.risk.sev-high{border-left-color:var(--neg)}
+.risk.sev-med{border-left-color:var(--caution)}
+.risk.sev-low{border-left-color:var(--ink-faint)}
+.risk h4{font-family:var(--display);font-size:15.5px;font-weight:600;margin:0 0 6px;
+      display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.risk .sev{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase}
+.risk.sev-high .sev{color:var(--neg)}
+.risk.sev-med .sev{color:var(--caution)}
+.risk.sev-low .sev{color:var(--ink-faint)}
+.risk p{margin:0;font-size:15.5px}
+
+/* ---------- null categories ---------- */
+.nulls td.lbl{width:26%}
+.nulls .status{font-family:var(--mono);font-size:12px;white-space:nowrap}
+
+/* ---------- document log ---------- */
+.log{margin-top:14px}
+.logentry{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:12px}
+.logentry.current{border-left:4px solid var(--accent);background:var(--accent-wash)}
+.logentry .when{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);
+      display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.latest{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-line);
+      background:var(--paper);border-radius:2px;padding:1px 6px}
+.logentry .basis{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-bottom:12px}
+.logentry p{font-size:15.5px;margin:0 0 9px}
+.logentry p:last-child{margin-bottom:0}
+.correction{border:1px solid var(--neg);border-left:4px solid var(--neg);
+      background:var(--neg-bg);padding:12px 16px;margin-bottom:14px}
+.correction .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--neg);display:block;margin-bottom:5px}
+
+/* ---------- footer ---------- */
+footer{margin-top:44px;padding-top:22px;border-top:2px solid var(--line-hard)}
+footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width:none}
+.norec{border:1px solid var(--line-hard);background:var(--canvas);padding:16px 20px;
+      margin-top:20px;font-family:var(--mono);font-size:12.5px;color:var(--ink-dim)}
+
+/* ---------- catalyst cards (calendar) ---------- */
+.cat{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:14px;border-left:4px solid var(--line-hard)}
+.cat.up{border-left-color:var(--pos)}
+.cat.down{border-left-color:var(--neg)}
+.cat.two{border-left-color:var(--caution)}
+.cat.neutral{border-left-color:var(--ink-faint)}
+.cat-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.cid{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);flex:none}
+.cat-head h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink);
+      margin:0;flex:1 1 auto;min-width:200px}
+.dir{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;white-space:nowrap}
+.cat.up .dir{color:var(--pos)} .cat.down .dir{color:var(--neg)}
+.cat.two .dir{color:var(--caution)} .cat.neutral .dir{color:var(--ink-faint)}
+.cat-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:10px 0 12px;padding:9px 0;
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+      font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
+.cat-meta b{color:var(--ink);font-weight:600}
+.cat p{margin:0 0 9px;font-size:15.5px}
+.cat p:last-child{margin-bottom:0}
+.cat.resolved{background:var(--canvas);border-left-color:var(--ink-faint)}
+.cat.resolved .dir{color:var(--ink-faint)}
+
+/* ---------- horizon bands (calendar) ---------- */
+.band{display:flex;align-items:center;gap:14px;margin:30px 0 16px}
+.band-t{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--ink-dim);white-space:nowrap}
+.band-r{flex:1;height:1px;background:var(--line-hard)}
+.band-c{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);white-space:nowrap}
+
+/* ---------- upside / downside pair ---------- */
+.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0}
+.oc{border:1px solid var(--line);padding:11px 14px;background:var(--paper)}
+.oc.up-c{border-left:3px solid var(--pos)}
+.oc.down-c{border-left:3px solid var(--neg)}
+.oc .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.09em;
+      text-transform:uppercase;display:block;margin-bottom:5px}
+.oc.up-c .lbl{color:var(--pos)} .oc.down-c .lbl{color:var(--neg)}
+.oc p{margin:0;font-size:14.5px;line-height:1.5}
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  body{font-size:16px}
+  .wrap{padding:0 16px 70px;border-left:none;border-right:none}
+  .ticker{font-size:34px}
+  .headline{font-size:23px}
+  .cases{grid-template-columns:1fr}
+  .outcomes{grid-template-columns:1fr}
+  .mast-strip{gap:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none !important;transition:none !important}
+}
+@media print{
+  body{font-size:11pt}
+  .wrap{max-width:none;border:none}
+  section{page-break-inside:avoid}
+}
+/* ============================================================================
+   SHARED STYLESHEET v1.93 : END
+   ========================================================================= */
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ===================== MASTHEAD ===================== -->
+<header class="mast">
+  <p class="ticker">APLD</p>
+  <h1 class="headline">$36 billion of contracted revenue, one unnamed tenant behind half of it, and a $249 million year</h1>
+  <p class="functional">APLD · Applied Digital Corporation · Equity Research Report · as of 5 August 2026</p>
+  <div class="mast-strip">
+    <div>Price <b>$31.27</b> <span class="tag">Market</span></div>
+    <div>Market cap <b>$9,113M</b> <span class="tag">Estimate</span></div>
+    <div>Shares out <b>291,469,112</b> <span class="tag">Filed</span></div>
+    <div>Fiscal year end <b>31 May</b> <span class="tag">Filed</span></div>
+    <div>Pricing basis <b>4 Aug 2026 close</b> <span class="tag">Market</span></div>
+  </div>
+</header>
+
+<!-- ===================== FRAMING ===================== -->
+<div class="first">
+  <h2>Framing</h2>
+  <ol>
+    <li>Applied Digital has 1.4 GW of contracted critical IT load representing approximately $36B of total contracted lease revenue, or approximately $86B if all renewal options are exercised. Three of the five campus leases, 810 MW and roughly $20B of that total, are with a single customer the company describes only as a high investment-grade hyperscaler and does not name. <span class="tag">Filed</span> 8-K, 27 Jul 2026</li>
+    <li>The fiscal year ended 31 May 2026 produced revenue of $611.3M, up 167%, and a net loss attributable to common stockholders of $249.2M, or $(0.91) per share. Adjusted EBITDA, which excludes the separated cloud business, was $107.2M. <span class="tag">Filed</span> 8-K, 27 Jul 2026 and 10-K, 29 Jul 2026</li>
+    <li>Total liabilities rose to $6,185.7M at 31 May 2026 from $1,236.4M a year earlier, against total equity of $1,724.5M. Restricted cash of $2,381.0M sits beside $1,592.0M of unrestricted cash, so most of the liquidity on the balance sheet is committed. <span class="tag">Filed</span> 8-K, 27 Jul 2026</li>
+  </ol>
+</div>
+
+<!-- ===================== 1. SNAPSHOT ===================== -->
+<section id="s1">
+  <h2 class="sec"><span class="n">01</span>Snapshot</h2>
+  <p class="sub">Key figures, each tagged by provenance.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Metric</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Revenue (FY2026, ended 31 May 2026)</td><td class="num">$611.3M</td><td><span class="tag">Filed</span> 8-K, 27 Jul 2026. Up 167% on FY2025.</td></tr>
+      <tr><td class="lbl">Revenue (FY4Q26, Mar to May 2026)</td><td class="num">$258.7M</td><td><span class="tag">Filed</span> 8-K, 27 Jul 2026. Up 407% on the prior year quarter.</td></tr>
+      <tr><td class="lbl">Net loss to common (FY2026)</td><td class="num neg-t">($249.2M)</td><td><span class="tag">Filed</span> 8-K, 27 Jul 2026. $(0.91) per basic and diluted share.</td></tr>
+      <tr><td class="lbl">Adjusted EBITDA (FY2026)</td><td class="num">$107.2M</td><td><span class="tag">Filed</span> 8-K, 27 Jul 2026. Company-defined non-GAAP measure; excludes ChronoScale.</td></tr>
+      <tr><td class="lbl">Cash and cash equivalents (31 May 2026)</td><td class="num">$1,592.0M</td><td><span class="tag">Filed</span> 8-K, 27 Jul 2026</td></tr>
+      <tr><td class="lbl">Restricted cash (31 May 2026)</td><td class="num">$2,381.0M</td><td><span class="tag">Filed</span> 8-K, 27 Jul 2026</td></tr>
+      <tr><td class="lbl">Property and equipment, net (31 May 2026)</td><td class="num">$4,236.3M</td><td><span class="tag">Filed</span> 8-K, 27 Jul 2026. Was $1,252.3M a year earlier.</td></tr>
+      <tr><td class="lbl">Total assets (31 May 2026)</td><td class="num">$9,929.3M</td><td><span class="tag">Filed</span> 8-K, 27 Jul 2026</td></tr>
+      <tr><td class="lbl">Total liabilities (31 May 2026)</td><td class="num">$6,185.7M</td><td><span class="tag">Filed</span> 8-K, 27 Jul 2026. Was $1,236.4M a year earlier.</td></tr>
+      <tr><td class="lbl">Total equity (31 May 2026)</td><td class="num">$1,724.5M</td><td><span class="tag">Filed</span> 8-K, 27 Jul 2026. Includes $7.0M noncontrolling interest.</td></tr>
+      <tr><td class="lbl">Contracted critical IT load</td><td class="num">1.4 GW</td><td><span class="tag">Filed</span> 8-K, 27 Jul 2026</td></tr>
+      <tr><td class="lbl">Live capacity, Polaris Forge 1</td><td class="num">175 MW</td><td><span class="tag">Filed</span> 8-K, 27 Jul 2026</td></tr>
+      <tr><td class="lbl">Bitcoin hosting capacity</td><td class="num">286 MW</td><td><span class="tag">Filed</span> 8-K, 27 Jul 2026. Two North Dakota sites.</td></tr>
+      <tr><td class="lbl">Market capitalisation</td><td class="num">$9,113M</td><td><span class="tag">Estimate</span> 291,469,112 shares (28 Jul 2026, <span class="tag">Filed</span> 10-K cover) &times; $31.27 (4 Aug 2026 close, <span class="tag">Market</span>). Share count and price carry different dates, seven days apart.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 2. BUSINESS MODEL ===================== -->
+<section id="s2">
+  <h2 class="sec"><span class="n">02</span>Business model</h2>
+  <p>Applied Digital designs, builds, owns and operates large-scale data centres for
+  high-performance computing, and leases them whole to a small number of very large tenants.
+  It calls the buildings AI Factories. The company describes a franchise model: a core team of
+  design, construction and operations professionals replicated across every campus, running on
+  a common supply chain and on design approvals from the major hyperscalers.</p>
+
+  <p>There are two revenue-earning businesses and they are paid on quite different terms.</p>
+
+  <p><b>AI data centre leasing</b> is the strategic business. Capacity is contracted under
+  15-year take-or-pay leases before it is built, then delivered in phases. Take-or-pay means
+  the tenant owes the rent whether or not it uses the capacity, which is what makes the
+  contracted revenue figure meaningful and what allows the build to be financed with secured
+  notes at the project subsidiary. Five campuses are under way: Polaris Forge 1, 2 and 3,
+  and Delta Forge 1 and 2, for two hyperscalers and CoreWeave.</p>
+
+  <p><b>Data centre hosting</b> is the legacy business and the more profitable one per dollar
+  of assets. Applied Digital operates 286 MW across two North Dakota sites for a bitcoin mining
+  customer. The chief executive states plainly that the company is paid for the data centre
+  capacity provided rather than for the mining output, so revenue does not move with the
+  bitcoin price as long as the customer keeps mining. <span class="tag">Filed</span> 8-K,
+  27 Jul 2026.</p>
+
+  <p>A third business left during the year. The cloud services operation was separated and
+  combined with Ekso Bionics Holdings to form ChronoScale, listed on Nasdaq as CHRN. Applied
+  Digital retains roughly 96% of the equity, so ChronoScale is still consolidated into these
+  financial statements while being excluded from every non-GAAP measure the company presents.
+  <span class="tag">Filed</span> 8-K, 27 Jul 2026.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The ChronoScale arrangement is treated here as a disposal in substance that has not yet
+    happened in form. Ninety-six percent ownership is not a separation in any economic sense,
+    and the consolidated statements say so by consolidating it. The company's own non-GAAP
+    presentation excludes it, which means the GAAP and adjusted figures in this document
+    describe different groups of assets. Where a figure excludes ChronoScale, this document says
+    so rather than letting the two bases sit side by side unlabelled.</p>
+  </div>
+</section>
+
+<!-- ===================== 3. REVENUE STREAMS ===================== -->
+<section id="s3">
+  <h2 class="sec"><span class="n">03</span>Revenue streams</h2>
+  <p class="sub">The reported streams and, separately, the contracted book that does not appear
+  in revenue yet.</p>
+
+  <p>Applied Digital's revenue nearly tripled in the fourth quarter, to $258.7M from a base 407%
+  lower a year earlier. Almost all of that growth is the AI data centre business beginning to
+  earn rent as Polaris Forge 1 came into service. The hosting business is roughly flat and is
+  the smaller number.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Measure</th><th class="num">FY4Q26</th><th class="num">FY2026</th><th>Basis and durability</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Revenue, as reported</td><td class="num">$258.7M</td><td class="num">$611.3M</td><td><span class="tag">Filed</span> 8-K, 27 Jul 2026. Includes ChronoScale.</td></tr>
+      <tr><td class="lbl">Adjusted revenue</td><td class="num">$240.4M</td><td class="num">$539.7M</td><td><span class="tag">Filed</span> 8-K, 27 Jul 2026. Excludes ChronoScale. The $71.6M full-year gap is the separated cloud business.</td></tr>
+      <tr><td class="lbl">Adjusted EBITDA</td><td class="num">$42.4M</td><td class="num">$107.2M</td><td><span class="tag">Filed</span> 8-K, 27 Jul 2026</td></tr>
+      <tr><td class="lbl">Net operating income</td><td class="num">$39.9M</td><td class="num">$90.4M</td><td><span class="tag">Filed</span> 8-K, 27 Jul 2026</td></tr>
+      <tr><td class="lbl">Adjusted net income</td><td class="num">$12.9M</td><td class="num">$36.1M</td><td><span class="tag">Filed</span> 8-K, 27 Jul 2026. $0.04 and $0.11 per diluted share.</td></tr>
+      <tr><td class="lbl">Net loss to common, as reported</td><td class="num neg-t">($110.6M)</td><td class="num neg-t">($249.2M)</td><td><span class="tag">Filed</span> 8-K, 27 Jul 2026</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>The distance between adjusted net income of $36.1M and a reported net loss of $249.2M is
+  the single largest interpretive question in this company's accounts, and a reader should hold
+  both figures rather than choosing one. The adjustments exclude ChronoScale entirely and remove
+  items the company treats as non-recurring; the reported figure carries the financing cost of a
+  build that is mostly not yet earning.</p>
+
+  <h3>The contracted book</h3>
+  <p>None of the following is in revenue yet, and the timing is stated by the company rather
+  than estimated here.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Campus</th><th class="num">Critical IT load</th><th class="num">Base-term revenue</th><th>Tenant and first operations</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Delta Forge 1, Boyce, Louisiana</td><td class="num">300 MW</td><td class="num">~$7.5B</td><td>High investment-grade hyperscaler, not named. Calendar year 2027.</td></tr>
+      <tr><td class="lbl">Polaris Forge 3</td><td class="num">300 MW</td><td class="num">~$7.5B</td><td>Same hyperscaler. Calendar year 2027.</td></tr>
+      <tr><td class="lbl">Delta Forge 2, southern state not named</td><td class="num">210 MW</td><td class="num">~$5.2B</td><td>Same hyperscaler, third consecutive. First half of calendar 2028.</td></tr>
+      <tr><td class="lbl">Polaris Forge 1 and 2, and the balance</td><td class="num">~590 MW</td><td class="num">~$15.8B</td><td>CoreWeave and a second hyperscaler. Polaris Forge 1 partly in service.</td></tr>
+      <tr><td class="lbl">Total contracted</td><td class="num">1.4 GW</td><td class="num">~$36B</td><td>~$86B if all renewal options are exercised. <span class="tag">Filed</span> 8-K, 27 Jul 2026</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The 590 MW and $15.8B in the fourth row are the residual after subtracting the three
+    named leases from the company's stated 1.4 GW and $36B totals. Applied Digital states the
+    totals and the three individual leases; it does not publish this breakdown, and the residual
+    covers more than one campus and more than one tenant. It is arithmetic on filed figures, not
+    a disclosed number, and it should not be read as the terms of any single lease.</p>
+  </div>
+
+  <p>Beyond the contracted portfolio and the roughly 1.4 GW under construction, the company
+  states it is marketing a further 1.7 GW of capacity across multiple states. That is a
+  marketing position rather than a contract and carries no revenue figure.</p>
+</section>
+
+<!-- ===================== 4. INDUSTRY & MARKET BACKDROP ===================== -->
+<section id="s4">
+  <h2 class="sec"><span class="n">04</span>Industry &amp; market backdrop</h2>
+  <p>Applied Digital operates in the part of the AI build-out where the scarce input is
+  interconnected power rather than land, capital or demand. Its own commercial record is the
+  clearest evidence of the demand side: three 15-year take-or-pay leases signed with one
+  investment-grade hyperscaler within a few months, each in a different state, plus the earlier
+  CoreWeave arrangements.</p>
+
+  <p>Two features of the market shape how the company is financed. First, tenants of this
+  credit quality will contract capacity years before it exists, which lets a developer raise
+  secured debt against a signed lease rather than against a completed building. Applied Digital
+  has done exactly that: $2.15B of 6.750% senior secured notes due 2031 at APLD ComputeCo 2 for
+  Polaris Forge 2, and $1.59B of 7.000% senior secured notes due 2031 at APLD ComputeCo 3 for
+  the fourth building at Polaris Forge 1. Second, the tenant's own credit is part of the
+  financing: the company enhanced credit quality on the existing CoreWeave leases through a
+  restructured special purpose subsidiary, unconditional springing guarantees from CoreWeave and
+  a $50M letter of credit, following what it describes as CoreWeave's investment-grade A3-rated
+  refinancing. <span class="tag">Filed</span> 8-K, 27 Jul 2026.</p>
+
+  <h3>Power</h3>
+  <p>The company is pursuing generation rather than waiting on the grid. It is working with
+  Base Electron Corp., an independent power producer that has engaged Babcock &amp; Wilcox, to
+  develop approximately 1.2 GW of front-of-the-meter natural gas-fired generation in the
+  Dakotas in collaboration with regional utilities. Applied Digital states its shareholders own
+  approximately 10% of Base Electron through the company's investment.
+  <span class="tag">Filed</span> 8-K, 27 Jul 2026.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The phrase used in the release is that Applied Digital shareholders own approximately 10%
+    of Base Electron through the company's investment in Base Electron. Read literally that is
+    an indirect interest held by the company itself. This document treats it as a corporate
+    minority investment rather than as a direct shareholder holding, because a company cannot
+    ordinarily place an asset in its shareholders' hands without distributing it. The 10-K's
+    treatment of the investment would settle it and was not read to that level of detail here.</p>
+  </div>
+</section>
+
+<!-- ===================== 5. COMPETITIVE POSITION ===================== -->
+<section id="s5">
+  <h2 class="sec"><span class="n">05</span>Competitive position</h2>
+  <p class="sub">Named peers on comparable metrics. The relevant comparison is contracted
+  capacity and the credit behind it, not installed megawatts.</p>
+
+  <p>Applied Digital's competitive position rests on one claim it can evidence and one it
+  cannot yet. The evidenced claim is delivery: Polaris Forge 1's first 100 MW came online on
+  schedule and live capacity at the campus has since reached 175 MW, following Ready for
+  Service on the 75 MW first phase of Building 2. The unevidenced claim is that the franchise
+  model replicates, which will be tested at Delta Forge 1 and Polaris Forge 3 in calendar 2027.
+  <span class="tag">Filed</span> 8-K, 27 Jul 2026.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Company</th><th>Comparable on</th><th>Where it differs</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Galaxy Digital (GLXY)</td><td>Long-term leases to a computing tenant, financed with project-level secured notes</td><td>526 MW of contracted critical IT load against Applied Digital's 1.4 GW, all with one tenant; Galaxy also runs a digital asset trading business. <span class="tag">Filed</span> GLXY 8-K, 5 Aug 2026</td></tr>
+      <tr><td class="lbl">IREN Limited (IREN)</td><td>Owned power and self-build across multiple sites</td><td>Retains a large self-mining business; Applied Digital hosts for a miner rather than mining itself</td></tr>
+      <tr><td class="lbl">Cipher Mining (CIFR)</td><td>Converting queue positions into HPC leases</td><td>Texas-weighted; Applied Digital is in North Dakota and Louisiana with different interconnection dynamics</td></tr>
+      <tr><td class="lbl">TeraWulf (WULF)</td><td>Single-campus leasing financed with secured notes</td><td>Smaller contracted book; no equivalent multi-campus franchise claim</td></tr>
+      <tr><td class="lbl">Bitdeer (BTDR)</td><td>Long-term AI/HPC colocation leasing</td><td>121 MW contracted in Norway; manufactures its own mining hardware, which Applied Digital does not</td></tr>
+      <tr><td class="lbl">Hut 8 (HUT)</td><td>Power portfolio serving both mining and computing</td><td>Retains a digital asset treasury; Applied Digital holds none</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>Against this set Applied Digital has the largest disclosed contracted book, and it is the
+  only one in the group whose leases are described as take-or-pay with a stated
+  investment-grade counterparty. The offsetting position is that the same counterparty stands
+  behind three of the five campuses and is not named, so the credit cannot be independently
+  assessed by a reader of this document.</p>
+</section>
+
+<!-- ===================== 6. FINANCIAL PERFORMANCE ===================== -->
+<section id="s6">
+  <h2 class="sec"><span class="n">06</span>Financial performance</h2>
+  <p class="sub">The fiscal year ends 31 May, so FY2026 covers June 2025 to May 2026. Every
+  comparative below is a full twelve months against a full twelve months.</p>
+
+  <p>The trend is stated first: revenue is growing very fast, the reported loss is roughly flat,
+  and the balance sheet has changed shape entirely. Total liabilities grew fivefold in one year
+  while equity grew threefold, and property and equipment more than tripled.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Measure</th><th class="num">FY2025</th><th class="num">FY2026</th><th>Change</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Revenue</td><td class="num">$228.6M</td><td class="num">$611.3M</td><td>Up 167%, as stated by the company</td></tr>
+      <tr><td class="lbl">Net loss to common stockholders</td><td class="num neg-t">($232.9M)</td><td class="num neg-t">($249.2M)</td><td>Company states the loss deepened 7%</td></tr>
+      <tr><td class="lbl">Loss per basic and diluted share</td><td class="num neg-t">($1.17)</td><td class="num neg-t">($0.91)</td><td>Company states the per-share loss narrowed 22% on a larger share count</td></tr>
+      <tr><td class="lbl">Cash and cash equivalents</td><td class="num">$44.0M</td><td class="num">$1,592.0M</td><td>Up $1,548.0M</td></tr>
+      <tr><td class="lbl">Restricted cash</td><td class="num">$72.4M</td><td class="num">$2,381.0M</td><td>Up $2,308.7M</td></tr>
+      <tr><td class="lbl">Property and equipment, net</td><td class="num">$1,252.3M</td><td class="num">$4,236.3M</td><td>Up 238%</td></tr>
+      <tr><td class="lbl">Total assets</td><td class="num">$1,870.1M</td><td class="num">$9,929.3M</td><td>Up 431%</td></tr>
+      <tr><td class="lbl">Total liabilities</td><td class="num">$1,236.4M</td><td class="num">$6,185.7M</td><td>Up 400%</td></tr>
+      <tr><td class="lbl">Total equity</td><td class="num">$497.7M</td><td class="num">$1,724.5M</td><td>Up 247%</td></tr>
+      <tr><td class="lbl">Accumulated deficit</td><td class="num neg-t">($481.1M)</td><td class="num neg-t">($662.3M)</td><td>Deepened $181.3M</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub"><span class="tag">Filed</span> 8-K, 27 Jul 2026, and 10-K for the year ended
+  31 May 2026, filed 29 Jul 2026. FY2025 revenue and loss per share are derived from the
+  company's stated percentage changes against FY2026 and are marked below.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The FY2025 revenue of $228.6M and net loss to common of $232.9M in the first two rows are
+    computed from the company's own stated changes, $611.3M at up 167% and $249.2M at up 7%,
+    rather than read directly from a FY2025 column. The balance sheet rows are read directly
+    from the comparative column at 31 May 2025. Where a growth rate and a base disagree with the
+    prior-year statements as filed, the filed statements govern.</p>
+  </div>
+
+  <h3>What the balance sheet change means</h3>
+  <p>Two figures deserve attention together. Restricted cash of $2,381.0M exceeds unrestricted
+  cash of $1,592.0M. That is the signature of construction financing: proceeds from the secured
+  note issues sit in controlled accounts and are released against certified construction
+  spending. It is committed money, and a liquidity read that adds the two together will
+  overstate the company's freedom by more than $2.3B.</p>
+
+  <p>Against that, the loss is being carried while the assets are built. Interest on $3.74B of
+  senior secured notes at 6.750% and 7.000%, plus the 9.250% notes due 2030, accrues now
+  against capacity that mostly begins operating in calendar 2027 and 2028.</p>
+</section>
+
+<!-- ===================== 7. CAPITAL STRUCTURE & DILUTION ===================== -->
+<section id="s7">
+  <h2 class="sec"><span class="n">07</span>Capital structure &amp; dilution</h2>
+  <p class="sub">A common equity that grew 28% in a year, two preferred series outstanding, a
+  $2B preferred purchase facility, an at-the-market programme substantially used, and $3.74B of
+  new project-level secured notes.</p>
+
+  <h3>Common equity</h3>
+  <p>295,048,903 shares were issued and 287,883,603 outstanding at 31 May 2026, against
+  234,200,868 issued and 224,909,669 outstanding a year earlier: an increase of 62,973,934
+  outstanding shares, or 28%, in one year. Treasury stock stood at 7,165,300 shares. The 10-K
+  cover reports 291,469,112 shares outstanding as of 28 July 2026, a further 3,585,509 since the
+  year end. <span class="tag">Filed</span> 8-K, 27 Jul 2026, and 10-K, 29 Jul 2026.</p>
+
+  <h3>Preferred stock</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Series</th><th class="num">Outstanding, 31 May 2026</th><th class="num">Carrying value</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Series E</td><td class="num">276,673</td><td class="num">$6.3M</td><td>301,673 issued; classified as temporary equity</td></tr>
+      <tr><td class="lbl">Series E-1</td><td class="num">61,909</td><td class="num">$56.5M</td><td>62,500 authorised and issued; temporary equity</td></tr>
+      <tr><td class="lbl">Series G</td><td class="num">None</td><td class="num">n/a</td><td>1,030,000 authorised, none issued or outstanding at the year end</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub"><span class="tag">Filed</span> 8-K, 27 Jul 2026. Common stock issuable to
+  holders of Series E and E-1 on redemption is capped at 19.99% of the outstanding shares.</p>
+
+  <h3>The preferred equity purchase agreement</h3>
+  <p>Under a preferred equity purchase agreement entered on 30 April 2025, Applied Digital may
+  issue up to $2B of Series G convertible preferred stock at its option, through the earlier of
+  27 August 2029 and the investors' full funding. None was outstanding at the year end, so the
+  entire $2B remains available. Measured against a market capitalisation of $9,113M, that is
+  authority equal to 22% of the current equity value, exercisable at the company's election and
+  convertible into common stock. <span class="tag">Filed</span> 10-K, 29 Jul 2026, and 8-K,
+  26 Jun 2026.</p>
+
+  <h3>At-the-market programme</h3>
+  <p>A sales agreement dated 2 June 2025 with Northland Securities, Inc. and Wells Fargo
+  Securities, LLC allows up to $200,000,000 of common stock to be sold. As of 31 May 2026 the
+  company had sold approximately 15.3 million shares under it for gross proceeds of
+  approximately $196.4M, so the programme is substantially exhausted.
+  <span class="tag">Filed</span> 10-K, 29 Jul 2026. Northland Securities is also one of the
+  twelve firms on Applied Digital's own analyst coverage list, which is taken up in section 8.</p>
+
+  <h3>Debt</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Instrument</th><th class="num">Principal</th><th>Issuer and purpose</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">6.750% senior secured notes due 2031</td><td class="num">$2.15B</td><td>APLD ComputeCo 2 LLC, issued at 98% of par. Funds 200 MW at Polaris Forge 2, Harwood, North Dakota.</td></tr>
+      <tr><td class="lbl">7.000% senior secured notes due 2031</td><td class="num">$1.59B</td><td>APLD ComputeCo 3 LLC, issued at par. Repaid the $300M bridge and funds the 150 MW fourth building at Polaris Forge 1.</td></tr>
+      <tr><td class="lbl">9.250% senior secured notes due 2030</td><td class="num">Not established</td><td>Secured on the CoreWeave leases. Credit enhanced through a restructured special purpose subsidiary, springing guarantees from CoreWeave and a $50M letter of credit. Principal not read for this document.</td></tr>
+      <tr><td class="lbl">Revolving credit facility</td><td class="num">$430M committed</td><td>Credit agreement dated 29 May 2026 with First National Bank of Omaha and Goldman Sachs Lending Partners LLC, arranged by Goldman Sachs, maturing May 2029. Originally $350M committed with a $200M accordion; upsized subsequent to the year end, with $120M of accordion remaining.</td></tr>
+      <tr><td class="lbl">First National Bank of Omaha revolver</td><td class="num">$65M</td><td>Loan and security agreement dated 10 November 2025 for revolving loans and letters of credit.</td></tr>
+      <tr><td class="lbl">$300M senior secured bridge</td><td class="num">Repaid</td><td>Led by Goldman Sachs for the fourth building at Polaris Forge 1; repaid from the 7.000% notes.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub"><span class="tag">Filed</span> 8-K, 27 Jul 2026; 10-K, 29 Jul 2026; 8-K,
+  26 Jun 2026; 8-K, 16 Jun 2026.</p>
+
+  <p>Two features of this stack matter more than the coupons. The notes are issued at
+  ring-fenced project subsidiaries rather than at the parent, which is standard for this kind of
+  build and which determines where the recourse runs; the indentures were not read for this
+  document, so nothing is asserted about that. And Goldman Sachs appears three times, as
+  arranger of the revolver, as a lender under the credit agreement and as lead of the repaid
+  bridge, without appearing on the company's analyst coverage list.</p>
+</section>
+
+<!-- ===================== 8. VALUATION ===================== -->
+<section id="s8">
+  <h2 class="sec"><span class="n">08</span>Valuation</h2>
+  <p class="sub">Multiples shown with their basis and pricing date. No target price.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Measure</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Price to FY2026 revenue</td><td class="num">14.9&times;</td><td><span class="tag">Estimate</span> $9,113M market capitalisation &divide; $611.3M FY2026 revenue. Price 4 Aug 2026, revenue for the year ended 31 May 2026.</td></tr>
+      <tr><td class="lbl">Price to FY2026 adjusted revenue</td><td class="num">16.9&times;</td><td><span class="tag">Estimate</span> $9,113M &divide; $539.7M, the company's adjusted revenue excluding ChronoScale. Shown beside the row above because the two denominators describe different groups of assets.</td></tr>
+      <tr><td class="lbl">Price to book</td><td class="num">5.28&times;</td><td><span class="tag">Estimate</span> $9,113M &divide; $1,724.5M total equity at 31 May 2026.</td></tr>
+      <tr><td class="lbl">Market capitalisation to FY2026 adjusted EBITDA</td><td class="num">85.0&times;</td><td><span class="tag">Estimate</span> $9,113M &divide; $107.2M. On a business where most contracted capacity is not yet operating, this multiple describes the past rather than the asset.</td></tr>
+      <tr><td class="lbl">Market capitalisation to contracted base-term revenue</td><td class="num">0.25&times;</td><td><span class="tag">Estimate</span> $9,113M &divide; approximately $36B of total contracted lease revenue. The denominator runs 15 years and is undiscounted, so this is a scale comparison rather than a valuation multiple, and it is shown because the company leads with the $36B figure.</td></tr>
+      <tr><td class="lbl">Enterprise value multiples</td><td class="num">n/a</td><td>Not struck. See methodology: an enterprise value is not derived here.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Third-party coverage</h3>
+  <p class="sub">Every row is market data: attributed, dated, tagged, never adopted. Price at
+  publication is the close on the <b>last trading day before</b> the action, taken from the
+  exchange's own daily record for APLD, and this convention governs every row in the table.
+  Applied Digital's own investor relations page, read on 5 August 2026, names twelve firms and
+  their analysts; it publishes no ratings or targets. Rows carrying a rating and a target are
+  cited to the note that published them.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Firm</th><th>Analyst</th><th class="when">Date</th><th>Rating</th><th class="num">Target</th><th class="num">Price at pub.</th><th>Disclosed conflict</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Texas Capital Securities</td><td>Derrick Whitfield, with Nate Pendleton, John Annis and Nick Armato</td><td class="when">27 Jul 2026</td><td>Buy</td><td class="num">$74.00 <span class="tag">Market</span></td><td class="num">$27.19</td><td>States it has received investment banking compensation from Applied Digital in the last twelve months and expects to seek more within three. Disclosed by the firm.</td></tr>
+      <tr><td class="lbl">Compass Point Research</td><td>Michael Donovan, Ed Engel</td><td class="when">28 Jul 2026</td><td>Buy</td><td class="num">$70.00 <span class="tag">Market</span></td><td class="num">$26.38</td><td>Not established. The firm's disclosure page was not read.</td></tr>
+      <tr><td class="lbl">Northland Securities</td><td>Mike Grondahl</td><td class="when">27 Jul 2026</td><td>Not established</td><td class="num">Not established</td><td class="num">$27.19</td><td>Sales agent under the June 2025 at-the-market sales agreement, alongside Wells Fargo Securities. <span class="tag">Filed</span> 10-K, 29 Jul 2026</td></tr>
+      <tr><td class="lbl">B. Riley Securities</td><td>Nick Giles</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Not established</td></tr>
+      <tr><td class="lbl">Citizens JMP</td><td>Greg Miller</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Not established</td></tr>
+      <tr><td class="lbl">Craig Hallum Capital Group</td><td>George Sutton</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Not established</td></tr>
+      <tr><td class="lbl">Freedom Capital Markets</td><td>Paul Meeks</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Not established</td></tr>
+      <tr><td class="lbl">H.C. Wainwright</td><td>Kevin Dede</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Not established</td></tr>
+      <tr><td class="lbl">Lake Street Capital Markets</td><td>Robert Brown</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Not established</td></tr>
+      <tr><td class="lbl">Lucid Capital Markets</td><td>Darren Aftahi</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Not established</td></tr>
+      <tr><td class="lbl">Morgan Stanley</td><td>Stephen C. Byrd</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Not established</td></tr>
+      <tr><td class="lbl">Needham &amp; Company</td><td>John Todaro</td><td class="when">Not established</td><td>Not established</td><td class="num">Not established</td><td class="num">n/a</td><td>Not established</td></tr>
+    </tbody>
+  </table></div>
+  <h3>The shape of the coverage</h3>
+  <p>Twelve firms follow Applied Digital according to the company's own investor relations
+  page, read on 5 August 2026. Three published actions are established here, all dated within
+  two days of the fiscal year results on 27 July. Two carry targets, Texas Capital at $74 and
+  Compass Point at $70, both Buy; the spread between them is $4, or 6% of the lower. The
+  Northland action of 27 July is established as to firm, analyst and date but not as to rating
+  or target. No published consensus figure is reported here, because none was retrieved from a
+  source that attributes and dates it; the count used here is a floor rather than a current
+  figure.</p>
+
+  <p>Two selling relationships are established from documents rather than assumed. Northland
+  Securities, which covers the company, is also one of the two sales agents under the June 2025
+  at-the-market programme through which roughly $196.4M of stock has been sold. Texas Capital
+  Securities discloses on its own note that it has received investment banking compensation
+  from Applied Digital in the last twelve months and expects to seek more within three. Those
+  are different kinds of relationship: one is a standing selling agency disclosed in the
+  issuer's annual report, the other a banking relationship disclosed by the firm.</p>
+
+  <p>The distribution is worth stating rather than any single point in it. Of the two
+  established targets, the higher comes from the firm with the disclosed banking relationship
+  and the lower from a firm whose disclosures were not read; the covering firm with the
+  standing selling agency published no target this document could establish. A banking or
+  selling relationship therefore appears at the top of the established range and at the
+  abstention, and on this evidence it does not sort the views. That characterisation rests on
+  three of twelve firms, and completing the other nine could withdraw it.</p>
+
+  <p>The other selling relationship in this company's financings does not appear in the
+  coverage set at all. Goldman Sachs arranged the revolving credit facility, is a lender under
+  the 29 May 2026 credit agreement and led the repaid $300M bridge, and does not cover the
+  stock. Wells Fargo Securities is the other at-the-market sales agent and does not cover it
+  either. What each of the nine unexamined firms discloses about this issuer is not
+  established here.</p>
+</section>
+
+<!-- ===================== 9. GROWTH DRIVERS ===================== -->
+<section id="s9">
+  <h2 class="sec"><span class="n">09</span>Growth drivers</h2>
+  <p class="sub">Ranked by size and by how settleable each is from a document.</p>
+
+  <h3>Delivering the contracted 1.4 GW</h3>
+  <p>Almost the whole investment case is the conversion of approximately $36B of contracted
+  base-term lease revenue into operating capacity. The schedule the company states is:
+  Delta Forge 1 and Polaris Forge 3 beginning operations in calendar 2027, and Delta Forge 2 in
+  the first half of calendar 2028. Polaris Forge 1 is already partly in service at 175 MW.
+  <span class="tag">Filed</span> 8-K, 27 Jul 2026.</p>
+
+  <h3>The fourth building at Polaris Forge 1, and the CoreWeave assignment</h3>
+  <p>The 150 MW fourth building is funded by the $1.59B of 7.000% notes. Separately, Applied
+  Digital has entered a memorandum of understanding with CoreWeave to assign the Building 4
+  lease to a CoreWeave subsidiary upon that subsidiary achieving an investment-grade credit
+  rating. That is a conditional improvement in counterparty quality with an observable trigger.
+  <span class="tag">Filed</span> 8-K, 27 Jul 2026.</p>
+
+  <h3>Marketing the further 1.7 GW</h3>
+  <p>The company states it is actively marketing an additional 1.7 GW across multiple states,
+  beyond the contracted portfolio and the roughly 1.4 GW under construction. No lease, tenant or
+  revenue figure attaches to it. On the record of the last year, in which three leases with one
+  hyperscaler were signed in a few months, this is the driver with the widest range of outcomes.
+  <span class="tag">Filed</span> 8-K, 27 Jul 2026.</p>
+
+  <h3>Owned generation through Base Electron</h3>
+  <p>Approximately 1.2 GW of front-of-the-meter natural gas-fired generation in the Dakotas is
+  being developed by Base Electron Corp., which has engaged Babcock &amp; Wilcox, in
+  collaboration with regional utilities. If it is delivered it converts a queue dependency into
+  a supply the company has an interest in. No commissioning date is disclosed.
+  <span class="tag">Filed</span> 8-K, 27 Jul 2026.</p>
+
+  <h3>The hosting business as a cash contributor</h3>
+  <p>The chief executive describes the 286 MW data centre hosting business as the highest
+  return-on-assets business in the company, paid on capacity provided rather than on mining
+  output. It is not a growth driver in size but it is a source of cash that does not depend on
+  the AI build completing. <span class="tag">Filed</span> 8-K, 27 Jul 2026.</p>
+</section>
+
+<!-- ===================== 10. RISKS ===================== -->
+<section id="s10">
+  <h2 class="sec"><span class="n">10</span>Risks</h2>
+  <p class="sub">Severity-ranked, most severe first.</p>
+  <div class="risk sev-high">
+    <h4>An unnamed counterparty behind $20 billion of contracted revenue <span class="sev">Severe</span></h4>
+    <p>Three of the five campus leases, 810 MW and roughly $20B of base-term revenue, are with a
+    single customer Applied Digital describes only as a high investment-grade hyperscaler. The
+    company states the credit quality; it does not name the entity, and a reader cannot assess
+    the credit independently, check its capital commitments elsewhere, or judge the concentration
+    that customer itself carries. Take-or-pay protects against non-use, not against
+    non-performance. <span class="tag">Filed</span> 8-K, 27 Jul 2026.</p>
+  </div>
+  <div class="risk sev-high">
+    <h4>$3.74 billion of new secured notes against capacity operating in 2027 and 2028 <span class="sev">Severe</span></h4>
+    <p>The 6.750% notes of $2.15B and the 7.000% notes of $1.59B were issued to fund builds whose
+    first operations are stated for calendar 2027, with Delta Forge 2 in the first half of 2028.
+    Interest accrues now. Total liabilities reached $6,185.7M at 31 May 2026 from $1,236.4M a
+    year earlier, against equity of $1,724.5M. A construction or interconnection delay lengthens
+    the period over which the coupon is paid from capital rather than from rent.
+    <span class="tag">Filed</span> 8-K, 27 Jul 2026 and 10-K, 29 Jul 2026.</p>
+  </div>
+  <div class="risk sev-high">
+    <h4>Most of the balance-sheet cash is not available <span class="sev">Severe</span></h4>
+    <p>Restricted cash of $2,381.0M exceeds unrestricted cash of $1,592.0M at 31 May 2026. The
+    restricted balance is construction proceeds held in controlled accounts. A liquidity
+    assessment that sums the two overstates the company's flexibility by more than $2.3B, and
+    the restricted balance is committed to the very builds whose delay would create the need for
+    liquidity. <span class="tag">Filed</span> 8-K, 27 Jul 2026.</p>
+  </div>
+  <div class="risk sev-med">
+    <h4>$2 billion of preferred authority available at the company's election <span class="sev">Moderate</span></h4>
+    <p>The preferred equity purchase agreement of 30 April 2025 permits issuance of up to $2B of
+    Series G convertible preferred stock through 27 August 2029, and none was outstanding at the
+    year end, so the whole facility is available. That is authority equal to 22% of the current
+    market capitalisation, convertible into common stock, drawable without a further shareholder
+    vote. The at-the-market programme, by contrast, is substantially exhausted at roughly $196.4M
+    of $200M. <span class="tag">Filed</span> 10-K, 29 Jul 2026.</p>
+  </div>
+  <div class="risk sev-med">
+    <h4>Two accounting bases for one company <span class="sev">Moderate</span></h4>
+    <p>ChronoScale is 96% owned and consolidated, and excluded from every non-GAAP measure the
+    company presents. FY2026 reported revenue is $611.3M and adjusted revenue $539.7M; reported
+    net loss to common is $249.2M and adjusted net income is $36.1M. Both sets are properly
+    labelled by the company, but a reader who mixes them will reach a figure that describes no
+    entity. <span class="tag">Filed</span> 8-K, 27 Jul 2026.</p>
+  </div>
+  <div class="risk sev-med">
+    <h4>Twenty-eight percent share growth in one year <span class="sev">Moderate</span></h4>
+    <p>Shares outstanding rose from 224,909,669 to 287,883,603 during FY2026, and to 291,469,112
+    by 28 July 2026. The per-share loss narrowed 22% while the absolute loss deepened 7%, which
+    is arithmetic rather than improvement. <span class="tag">Filed</span> 8-K, 27 Jul 2026 and
+    10-K, 29 Jul 2026.</p>
+  </div>
+  <div class="risk sev-low">
+    <h4>Three notifications of late annual filing in the company's record <span class="sev">Lower</span></h4>
+    <p>Seven notifications of late filing appear across the 811 filings indexed under this CIK,
+    three on Form NT 10-K and four on Form NT 10-Q. The most recent is an NT 10-K filed
+    30 August 2024 for the year ended 31 May 2024, and the 10-K itself was filed the same day,
+    so the report arrived within the grace period. Four of the seven date from the predecessor
+    Flight Safety Technologies era before 2009. The record is not clean but the recent instance
+    resolved immediately. <span class="tag">Filed</span> SEC filing index for CIK 0001144879,
+    searched 5 Aug 2026.</p>
+  </div>
+</section>
+
+<!-- ===================== 11. BULL / BASE / BEAR ===================== -->
+<section id="s11">
+  <h2 class="sec"><span class="n">11</span>Bull / base / bear</h2>
+  <p class="sub">Each case with its preconditions: what must be true, not what might be.</p>
+  <div class="cases">
+    <div class="case bear"><h4>Bear</h4><p>A campus slips, the coupon on $3.74B of notes is paid
+      from capital for longer than planned, and the $2B preferred facility is drawn to bridge it.
+      The unnamed hyperscaler reduces or reschedules commitments and take-or-pay is tested rather
+      than relied on. Reported losses deepen while the share count keeps rising.</p>
+      <p class="req">Requires: a delivery delay at Delta Forge 1 or Polaris Forge 3, a drawdown
+      under the preferred facility, or any disclosed change to the hyperscaler leases.</p></div>
+    <div class="case"><h4>Base</h4><p>Polaris Forge 1 continues to scale past 175 MW, Delta Forge 1
+      and Polaris Forge 3 begin operations in calendar 2027 broadly on schedule, and the hosting
+      business keeps contributing cash. Revenue grows steeply as capacity energises, the reported
+      loss persists while interest runs ahead of rent, and adjusted EBITDA keeps climbing from
+      $107.2M.</p>
+      <p class="req">Requires: no material construction or interconnection delay, no drawdown that
+      changes the capital structure, and the hyperscaler leases performing as written.</p></div>
+    <div class="case bull"><h4>Bull</h4><p>The franchise model proves repeatable across five
+      campuses, part of the additional 1.7 GW under marketing is contracted on similar terms, the
+      CoreWeave Building 4 assignment completes on an investment-grade rating, and Base Electron
+      delivers generation that removes the grid dependency. Contracted revenue is re-read as an
+      annuity rather than as a construction risk.</p>
+      <p class="req">Requires: at least one new lease from the 1.7 GW marketed, the Building 4
+      assignment completing, and Delta Forge 1 delivering on time.</p></div>
+  </div>
+</section>
+
+<!-- ===================== 12. RESEARCH SUMMARY ===================== -->
+<section id="s12">
+  <h2 class="sec"><span class="n">12</span>Research summary</h2>
+  <p>Applied Digital has contracted more AI data centre capacity than any company in this
+  coverage set: 1.4 GW of critical IT load, approximately $36B of base-term lease revenue, and
+  approximately $86B if every renewal is exercised. It has also, in one fiscal year, taken total
+  liabilities from $1,236.4M to $6,185.7M, raised $3.74B of project-level secured notes, and
+  reported a net loss to common stockholders of $249.2M.</p>
+
+  <p>The company is therefore a construction risk wearing a contracted-revenue coat, and both
+  halves of that description are accurate. The contracts are real, long, take-or-pay and with
+  stated investment-grade counterparties. The revenue from them mostly begins in calendar 2027.
+  Between now and then the interest is paid and the buildings are built, and the only completed
+  evidence that the company can do this is Polaris Forge 1, where the first 100 MW came online
+  on schedule and live capacity has reached 175 MW.</p>
+
+  <p>Two disclosure features shape how much a reader can check. The customer behind roughly $20B
+  of the contracted book is not named, so its credit cannot be independently assessed. And the
+  company presents two accounting bases, one including the 96%-owned ChronoScale and one
+  excluding it, which produce a $249.2M loss and $36.1M of adjusted net income for the same
+  year.</p>
+
+  <p>Three things would move the reading and each is settleable from a document: whether
+  Delta Forge 1 or Polaris Forge 3 begins operations within calendar 2027; whether any part of
+  the marketed 1.7 GW is contracted; and whether the Series G preferred facility is drawn. What
+  this document could not establish is set out in section 14, and includes the terms of the
+  indentures, the identity of the hyperscaler, and nine of the twelve covering firms' published
+  views.</p>
+</section>
+
+<!-- ===================== 13. NULL CATEGORIES ===================== -->
+<section id="s13">
+  <h2 class="sec"><span class="n">13</span>Null categories</h2>
+  <p class="sub">Requested categories with nothing to report. Status reads Covered above, None where a
+  named source was checked and found empty, or Not established where the category was not examined.
+  A category nobody looked at is a gap, not an absence.</p>
+  <div class="tw"><table class="nulls">
+    <thead><tr><th>Category</th><th>Status</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Dividends</td><td class="status">None</td><td>No common dividend has been declared or paid. None appears across the 811 filings the index holds for CIK 0001144879, searched 5 Aug 2026.</td></tr>
+      <tr><td class="lbl">Share buybacks</td><td class="status">None</td><td>No repurchase programme is disclosed. Treasury stock of 7,165,300 shares at 31 May 2026 fell from 9,291,199 a year earlier, so shares left treasury during the year rather than entering it. <span class="tag">Filed</span> 8-K, 27 Jul 2026.</td></tr>
+      <tr><td class="lbl">Analyst coverage</td><td class="status">Covered above</td><td>Twelve firms named in section 8, from the issuer's own coverage page read 5 Aug 2026, with three established actions and two established targets.</td></tr>
+      <tr><td class="lbl">Securities class action</td><td class="status caution-t">Not established</td><td>Court dockets were not searched. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Delinquent filings (Form NT)</td><td class="status">Covered above</td><td>Seven exist and are described in section 10: three on Form NT 10-K and four on Form NT 10-Q across the 811 filings indexed under CIK 0001144879, most recently 30 Aug 2024. Searched 5 Aug 2026.</td></tr>
+      <tr><td class="lbl">Transition period reporting</td><td class="status">None</td><td>No Form 10-KT appears in the index. Every annual report since the year ended 31 May 2003 covers a 31 May year end, so no comparative column in the current filings is a stub period. Searched 5 Aug 2026.</td></tr>
+      <tr><td class="lbl">Register filings the issuer made about others</td><td class="status">Covered above</td><td>Two of the 56 Schedule 13D and 13G filings indexed under this CIK run outbound: a Schedule 13D of 12 May 2026 and an amendment of 26 June 2026, both filed by Applied Digital about ChronoScale Corp, CIK 0001549084. The remaining 54 name Applied Digital as the subject. Established by reading the subject and filer of each. Searched 5 Aug 2026.</td></tr>
+      <tr><td class="lbl">Credit rating actions</td><td class="status caution-t">Not established</td><td>No rating agency action was sought or read, though the secured notes are rated instruments by their nature and the company refers to CoreWeave's A3 rating. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Index membership</td><td class="status caution-t">Not established</td><td>Index provider announcements were not checked. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Short interest</td><td class="status caution-t">Not established</td><td>No exchange short interest report was retrieved. Also named in what was not checked.</td></tr>
+      <tr><td class="lbl">Predecessor entity filings</td><td class="status">Covered above</td><td>The CIK is continuous through four former names, most recently Applied Blockchain, Inc. and before that Flight Safety Technologies, Inc. A Form 25-NSE of 12 Nov 2008 and a Form 15-12G of 29 Jul 2009 record the delisting and deregistration of the predecessor's common stock. Searched 5 Aug 2026.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 14. METHODOLOGY & SOURCES ===================== -->
+<section id="s14">
+  <h2 class="sec"><span class="n">14</span>Methodology &amp; sources</h2>
+  <p class="sub">Pricing basis, the tagging scheme, and, importantly, what was not checked.</p>
+
+  <h3>Provenance tags</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Tag</th><th>What it asserts</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl"><span class="tag">Filed</span></td><td>Stated in an SEC filing or company release, cited by form and date. Also covers a dated official publication by a named non-SEC issuer, with the issuer named in the source line.</td></tr>
+      <tr><td class="lbl"><span class="tag">Estimate</span></td><td>Derived or inferred here. The arithmetic is shown.</td></tr>
+      <tr><td class="lbl"><span class="tag">Open</span></td><td>Expected but unconfirmed. Nothing filed either way.</td></tr>
+      <tr><td class="lbl"><span class="tag">Market</span></td><td>Price, volume, float, published targets and ratings, stamped with the close or publication date. A third party's target or rating is market data, attributed to the firm that issued it and never adopted here.</td></tr>
+      <tr><td class="lbl"><span class="tag">Press</span></td><td>Reported by a named publication that is neither the issuer nor an analyst, cited by outlet and date. Corroborates; never the sole basis for a material claim.</td></tr>
+      <tr><td class="lbl"><span class="tag">Social</span></td><td>Publicly posted by a named account, cited by handle and date. Asserts that the statement was made, never that it is true.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Pricing basis and the fiscal year</h3>
+  <p>Every market figure in this document is struck on the close of 4 August 2026, at which
+  APLD closed at $31.27 on volume of 20,826,520 shares. The document is stamped 5 August 2026.
+  The two differ because the 5 August session had not settled when the figures were taken:
+  Nasdaq reported the market in its pre-open state with 4 August as the previous trading date.
+  The trading calendar behind the coverage table is derived from the exchange's own daily record
+  for APLD over 253 sessions from 1 August 2025 to 4 August 2026.</p>
+
+  <p>Applied Digital's fiscal year ends on 31 May, established from the filings rather than
+  assumed: the annual report for the year ended 31 May 2026 was filed on 29 July 2026, and every
+  annual report indexed under this CIK since the year ended 31 May 2003 carries a 31 May period
+  end. No transition report on Form 10-KT appears in the index, so no comparative column in the
+  current filings covers a stub period. References here to FY4Q26 mean the three months from
+  March to May 2026.</p>
+
+  <h3>Sources</h3>
+  <p>Primary sources are the filings indexed under Central Index Key 0001144879, swept on
+  5 August 2026. The index holds 811 filings dated 9 August 2001 to 4 August 2026 and reports no
+  overflow file, so the whole record under this CIK was available to the sweep. Every form family
+  was enumerated before filtering, and register filings were matched on both the current and
+  legacy spellings of the Schedule 13D and 13G form strings, which is what took the register
+  count from 23 to 56. Each register filing was read to establish its direction. The principal
+  documents are the 8-K of 27 July 2026 with the fiscal fourth quarter and full year results as
+  Exhibit 99.1, the 10-K for the year ended 31 May 2026 filed 29 July 2026, and the 8-Ks of
+  16 and 26 June 2026 on the financings. Applied Digital's investor relations coverage page was
+  read on 5 August 2026. Three research notes, from Texas Capital Securities and Northland
+  Securities dated 27 July 2026 and Compass Point dated 28 July 2026, are the source of the
+  ratings, targets, dates and the one disclosed conflict in section 8 and of nothing else in
+  this document.</p>
+
+  <div class="assume">
+    <span class="lbl">Open review</span>
+    <p><b>Whether the credit-quality characterisations carried here are filed facts or market data is not decided in this revision.</b> Two items are affected. Applied Digital describes the customer behind three of the five campus leases as a high investment-grade hyperscaler and does not name it, and it describes the CoreWeave refinancing that supports the enhanced credit terms as investment-grade and A3-rated. Both are carried as filed. Two readings of the tagging scheme are available and this document does not choose between them. Each statement is made in a company filing, and a company filing is a filed source; each is also an unnamed agency's characterisation of a third party restated by the issuer, and a third party's characterisation of someone else's facts is market data.</p>
+    <p>What is recorded so the next revision can decide rather than inherit: the surfaces are a Framing item, a data table Basis column and a risk entry, each of which requires a tag; the tag now carried is filed; the competing tag is market; no rating agency is named in any filing read, so no rating body can be cited either way; and the same question governs the hyperscaler characterisation wherever it appears. Nothing is retagged in this revision.</p>
+  </div>
+  <h3>What was not checked</h3>
+  <p>An unexamined area is a gap, not a clean bill. The following were not reached.</p>
+  <ul>
+    <li>No enterprise value is derived. The debt sits at ring-fenced project subsidiaries, the
+    principal of the 9.250% notes due 2030 was not read, $2,381.0M of the cash is restricted to
+    construction draws, and two preferred series sit in temporary equity. A single netted figure
+    would obscure more than it shows, so the masthead field is omitted rather than filled.</li>
+    <li>The indentures for the 6.750%, 7.000% and 9.250% senior secured notes were not read.
+    Nothing is asserted here about recourse, covenants, security or the parent's obligations.</li>
+    <li>The identity of the high investment-grade hyperscaler behind three leases is not
+    disclosed by the company and was not established by any other route.</li>
+    <li>Court dockets were not searched, on CourtListener, PACER or any state portal. No
+    statement is made here about litigation.</li>
+    <li>Interconnection and permitting records were not queried: no grid operator queue, no state
+    utility commission docket in North Dakota or Louisiana, and no county or municipal planning
+    record. Every capacity and timing figure here is the company's own statement.</li>
+    <li>ChronoScale Holdings Corporation, Nasdaq CHRN, was not examined as an issuer in its own
+    right, and its separate filings were not read. It is consolidated in these statements at
+    roughly 96%.</li>
+    <li>Nine of the twelve covering firms have no established rating, target or date here. Only
+    Texas Capital's disclosure was read; Compass Point's and the others' were not, and those
+    cells read Not established rather than being inferred.</li>
+    <li>Credit rating actions, index membership and short interest were not checked, as recorded
+    in section 13.</li>
+  </ul>
+</section>
+
+<!-- ===================== 15. DOCUMENT LOG ===================== -->
+<section id="s15">
+  <h2 class="sec"><span class="n">15</span>Document log</h2>
+  <p class="sub">Newest first. The original build entry is never removed or rewritten.</p>
+  <div class="log">
+    <div class="logentry current">
+      <div class="when">5 August 2026 <span class="latest">Latest</span></div>
+      <div class="basis">Priced off 4 Aug 2026 close · $31.27 · $9,113M cap</div>
+      <p><b>Original build.</b> Built from Applied Digital's fiscal fourth quarter and full year
+      2026 results, released 27 July 2026 as a Form 8-K under Items 2.02 and 9.01 with the
+      earnings release as Exhibit 99.1; from the annual report on Form 10-K for the year ended
+      31 May 2026, filed 29 July 2026; from the 8-Ks of 16 June 2026 and 26 June 2026 covering
+      the notes offering, the credit agreement of 29 May 2026 and the Series G preferred
+      arrangements; from the complete filing index for Central Index Key 0001144879, 811 filings
+      from 9 August 2001 to 4 August 2026 with no overflow file, with each of the 56 register
+      filings read to establish whether it runs inbound or outbound; and from Applied Digital's
+      own investor relations coverage page read on 5 August 2026.</p>
+      <p>Pricing basis fixed at the 4 August 2026 close of $31.27. The document is stamped
+      5 August because the 5 August session had not settled: Nasdaq reported the market pre-open
+      with 4 August as the previous trading date, so the previous close remains the basis.</p>
+      <p>Conventions fixed at construction: the fiscal year ends 31 May, established from the
+      filings rather than from the calendar, so FY2026 covers June 2025 to May 2026 and FY4Q26
+      covers March to May 2026; reported and adjusted figures are always labelled, because the
+      adjusted set excludes the 96%-owned ChronoScale and the two therefore describe different
+      groups of assets; and price at publication in the coverage table is the close on the last
+      trading day before each action, stated once above the table.</p>
+      <p>One divergence is recorded rather than smoothed. Texas Capital's note of 27 July states
+      a price of $26.38, which is the 27 July close itself rather than the close on the last
+      trading day before it. Under the convention this table uses, the price at publication for
+      that action is the 24 July close of $27.19, and that is the figure shown. Compass Point's
+      note of 28 July also states $26.38, which on that date is the prior-session close and is
+      consistent with the convention used here. The same number therefore appears on two notes
+      describing two different sessions, and the table resolves it by deriving every row from the
+      exchange record rather than from the note headers.</p>
+      <p>Known gaps at this version: no enterprise value is derived, and the masthead field is
+      omitted rather than filled; the note indentures were not read; the hyperscaler behind three
+      leases is not named by the company and was not established; court dockets, interconnection
+      and permitting records, credit rating actions, index membership and short interest were not
+      reached; ChronoScale was not examined as an issuer in its own right; and nine of the twelve
+      covering firms carry no established rating or target, with only Texas Capital's disclosure
+      read.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="norec">
+    No buy, sell, or hold recommendation is issued and no price target is derived.
+    Third-party targets and ratings, where shown, are the published views of the
+    firms named and are reported as market data. This document is for research and
+    educational purposes and is not investment advice. Verify all figures against
+    primary filings on sec.gov before acting.
+  </div>
+  <p style="margin-top:16px">APLD · Applied Digital Corporation · Equity Research Report · as of 5 August 2026</p>
+</footer>
+
+</div>
+</body>
+</html>
