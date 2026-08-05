@@ -28,7 +28,7 @@
 }
 
 /* ============================================================================
-   SHARED STYLESHEET v1.80 : BEGIN
+   SHARED STYLESHEET v1.90 : BEGIN
    ========================================================================= */
 :root{
   color-scheme: light only;
@@ -262,7 +262,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   section{page-break-inside:avoid}
 }
 /* ============================================================================
-   SHARED STYLESHEET v1.80 : END
+   SHARED STYLESHEET v1.90 : END
    ========================================================================= */
 </style>
 </head>
@@ -803,10 +803,12 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   <p>The filing record was swept to 3 August 2026, covering the annual, quarterly, current, registration, prospectus, ownership and insider transaction families in both the domestic and foreign private issuer forms. It returned nothing after the shelf registration of 17 July 2026, which is a finding rather than a gap, and it was run against the issuer central index key rather than the ticker, which matters for a company that renamed in March 2025. Two corrections came out of it. The ownership family had been read as a single founder position; it holds five filings since 2025 by three unrelated parties, two of them original Schedule 13G filings rather than amendments. And two Form NT 20-F late-filing notifications exist, on 2 May 2023 and 1 May 2024, against the statement carried here that none had ever been made. Both were established against the complete index of 241 filings. Market data was not repriced because the last close remains 31 July 2026. Specifically not reached: any Q2 2026 filing, which is not yet due; any Canadian continuous disclosure lodged on SEDAR+ that does not have a U.S. counterpart; and any register of beneficial ownership below the threshold at which a Schedule 13G becomes reportable, which is why the shareholding named in section 13 reads Not established rather than None. An unexamined area is a gap rather than a clean bill.</p>
 
   <h3>Known limitations carried forward</h3>
-  <p>Two defects are identified and not resolved in this version. Three carried at the previous revision have been closed: the figures owed to the source are restored to the body, the proportionate voting share count is now cited to a filing, and the third party target is attributed and dated.</p>
+  <p>Three defects are identified and not resolved in this version. Three carried at the previous revision have been closed: the figures owed to the source are restored to the body, the proportionate voting share count is now cited to a filing, and the third party target is attributed and dated.</p>
   <div class="note caution">
     <p><b>Remaining programme capacity is a band, not a figure.</b> The text at issue reads: "anywhere from roughly $37M to $70M undrawn under the $175M programme." The Q1 quarterly report and the 8 May prospectus supplement do not reconcile, and resolving them requires the Q2 quarterly report, which has not been filed. Until then the band stands.</p>
     <p><b>The Columbiana cost band is an analyst estimate with no company figure behind it.</b> The text at issue reads: "in the region of $7&ndash;12M per MW for powered shell, electrical plant and cooling, implying roughly $280&ndash;480M for the full campus." No project budget has been disclosed. No disclosed figure exists to replace the band.</p>
+
+    <p><b>The price beside each third-party target is struck on the wrong session.</b> The price shown against a published target should be the close on the last trading day before the action, which is what the author of a note could see when it was written; a close struck on the action date itself is set after the note is out and sometimes moves because of it. The coverage table states no basis for its price column, and the log records that <i>&ldquo;Each row now carries the close on its publication date&rdquo;</i>, which is the wrong session. Every price in that column is affected, and the closes of the sessions preceding those actions are not established here.</p>
   </div>
 </section>
 
