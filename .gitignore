@@ -40,6 +40,13 @@ CHECKSUMS.txt
 HOUSE_STYLE.md
 TEMPLATE_*.html
 
+# Snapshots of the governing document. The text is excluded for the same reason
+# HOUSE_STYLE.md itself is, two rules above: it is the working reference and not
+# part of the published set, and a tracked copy would defeat that exclusion. The
+# hash-only record in SPEC_VERSIONS.md is tracked instead, which is what lets a
+# later pass detect that the specification moved without publishing its prose.
+spec_snapshots/
+
 # Local tooling config, not project content.
 .claude/
 
@@ -58,3 +65,15 @@ preserved/
 _preserved*/
 received*/
 as_received/
+
+# Pass documentation. Every findings, results, conformance, update, register and
+# build document a pass writes about its own work, gathered in one folder so the
+# main folder holds the deliverables and the little the site needs.
+#
+# The name rules at the top of this file already catch these one at a time, but
+# they catch them by name and only because this checkout matches ignore patterns
+# without regard to case: FINDINGS_2026-08-05_HUT_Correction_Pass.md meets
+# *Findings*.md here and would not on a case-sensitive checkout. Binding the
+# folder excludes a document by where it was written rather than by what it
+# happened to be called, so a note named nothing in particular is still excluded.
+pass_documentation/
