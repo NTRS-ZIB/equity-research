@@ -54,13 +54,17 @@ spec_snapshots/
 .DS_Store
 Thumbs.db
 
-# Verification harness and the preserved baselines it works against. Both are
-# working apparatus, not published research: the harness encodes the checks and
-# their repairs, and the preserved directories hold each pass's source as it stood
-# before its first edit. Kept in the project so they survive a temp-directory
+# Verification harness, the baseline directories it works against, and scratch
+# working material. All are working apparatus, not published research: the
+# harness encodes the checks and their repairs, preserved/ and preserve/ hold
+# each pass's source as it stood before its first edit under the older and the
+# current naming respectively, and scratch/ holds spec-derived working material
+# for passes in progress. Kept in the project so they survive a temp-directory
 # clearance, and excluded here so they never reach the published set.
 harness/
 preserved/
+preserve/
+scratch/
 *.ps1
 _preserved*/
 received*/
