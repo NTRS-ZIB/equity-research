@@ -13,6 +13,10 @@ set. A later pass diffs against the snapshot named below.
 
 | Version stated in the file | Snapshot taken | Bytes | Lines | sha256 | Snapshot file |
 |---|---|---|---|---|---|
+| **Version 1.97 · Effective 6 August 2026** | 2026-08-06T00:50Z | 148,936 | 2,432 | `4fcb37bfac3ed90d96b3d04fbf0e517dfb2422f680e57b2282020ad55f4f6d67` | `HOUSE_STYLE.v1.97.2026-08-06T0050Z.4fcb37bf.md` |
+| **Version 1.96 · Effective 6 August 2026** | 2026-08-06T00:10Z | 148,065 | 2,419 | `7a358a912d7d953aef5b4a4ef037ba007fc7b6e66b4efda7661e56bd169396e4` | `HOUSE_STYLE.v1.96.2026-08-06T0010Z.7a358a91.md` |
+| **Version 1.95 · Effective 5 August 2026** | 2026-08-05T23:20Z | 146,364 | 2,396 | `eb48205e1a2bc3faa0b4a1effe5a96f374f3958429b9d279a6d53075dcae3249` | `HOUSE_STYLE.v1.95.2026-08-05T2320Z.eb48205e.md` |
+| **Version 1.94 · Effective 5 August 2026** | 2026-08-05T22:30Z | 144,352 | 2,363 | `2c4b5d643577441a9c49c0f742eb0234676a42eb8e1bb6e4e2bd352671fbe341` | `HOUSE_STYLE.v1.94.2026-08-05T2230Z.2c4b5d64.md` |
 | **Version 1.93 · Effective 5 August 2026** | 2026-08-05T21:30Z | 135,393 | 2,222 | `73afd03a617e831edf7c0eff77a2e6ad383b931612fb852d984d9aff4921bd6e` | `HOUSE_STYLE.v1.93.2026-08-05T2130Z.73afd03a.md` |
 | **Version 1.92 · Effective 4 August 2026** | 2026-08-05T15:00Z | 129,462 | 2,137 | `ae769bc54e24509e5f8906c6acce5dae18d6d07d65565428aa020bb3d1145650` | `HOUSE_STYLE.v1.92.2026-08-05T1500Z.ae769bc5.md` |
 

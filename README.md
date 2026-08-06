@@ -14,8 +14,10 @@ infrastructure businesses.
 | **Research report** | What is this company and what is it worth? |
 | **Catalyst calendar** | What could move it, and when? |
 
-Each is a single self-contained HTML file. No build step, no JavaScript, no external
-dependencies beyond a webfont that degrades to a system stack. Open one in any browser.
+Each is a single self-contained HTML file. No build step and no external dependencies
+beyond a webfont that degrades to a system stack, plus about twenty lines of inline
+JavaScript for the light and dark control. No framework and no bundler. Open one in any
+browser.
 
 The two are separate because they are read differently: a report start to finish, a
 calendar scanned and jumped into.

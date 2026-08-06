@@ -3,13 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light only">
-<meta name="supported-color-schemes" content="light">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141C24" media="(prefers-color-scheme: dark)">
 <title>ANY &middot; Sphere 3D Corp. &middot; Catalyst Calendar &middot; as of 3 August 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+<script>
+(function(){
+  var t=null;
+  try{ t=localStorage.getItem('theme'); }catch(e){}
+  if(t==='light'||t==='dark') document.documentElement.dataset.theme=t;
+})();
+</script>
 <style>
 /* ============================================================================
    PER-TICKER PALETTE
@@ -21,17 +29,28 @@
      paper it becomes H202 S72 L37, which is #1B71A3. No rotation
      was needed: the hue sits 45 degrees from the positive band, 48 from the
      assumption band, and further still from the negative and caution bands. */
-  --accent:      #1B71A3;
-  --accent-deep: #135378;
-  --accent-wash: rgba(27,113,163,0.06);
-  --accent-line: rgba(27,113,163,0.22);
+  /*
+     Dark mode holds the hue and saturation and lifts lightness until the
+     accent clears the paper it sits on, landing on #228FCF. The hover
+     colour deepens away from that paper at #44A7E0, and the wash and
+     line tints carry the same colour at six and twenty two percent.
+  */
+  --accent-light:      #1B71A3;
+  --accent-deep-light: #135378;
+  --accent-wash-light: rgba(27,113,163,0.06);
+  --accent-line-light: rgba(27,113,163,0.22);
+
+  --accent-dark:       #228FCF;
+  --accent-deep-dark:  #44A7E0;
+  --accent-wash-dark:  rgba(34,143,207,0.06);
+  --accent-line-dark:  rgba(34,143,207,0.22);
 }
 
 /* ============================================================================
-   SHARED STYLESHEET v1.93 : BEGIN
+   SHARED STYLESHEET v1.97 : BEGIN
    ========================================================================= */
 :root{
-  color-scheme: light only;
+  color-scheme: light dark;
 
   --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
   --line:#DEE6EC;   --line-hard:#C0CDD7;
@@ -48,6 +67,59 @@
 
   --measure:78ch;
   --col:760px;
+  --accent:var(--accent-light);
+  --accent-deep:var(--accent-deep-light);
+  --accent-wash:var(--accent-wash-light);
+  --accent-line:var(--accent-line-light);
+}
+
+/* ---------- dark tokens, device following ---------- */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#141C24;
+    --canvas:#10161D;
+    --panel-2:#0D1218;
+    --line:#2E3A45;
+    --line-hard:#455360;
+    --ink:#E8EEF3;
+    --ink-dim:#AFBECB;
+    --ink-faint:#93A3B2;
+    --pos:#11B274;
+    --pos-bg:#113B2B;
+    --neg:#E06058;
+    --neg-bg:#3B1411;
+    --caution:#D38C0F;
+    --caution-bg:#3B2C11;
+    --assume:#897CCC;
+    --assume-bg:#1B1537;
+    --accent:var(--accent-dark);
+    --accent-deep:var(--accent-deep-dark);
+    --accent-wash:var(--accent-wash-dark);
+    --accent-line:var(--accent-line-dark);
+  }
+}
+/* ---------- dark tokens, explicit choice ---------- */
+:root[data-theme="dark"]{
+    --paper:#141C24;
+    --canvas:#10161D;
+    --panel-2:#0D1218;
+    --line:#2E3A45;
+    --line-hard:#455360;
+    --ink:#E8EEF3;
+    --ink-dim:#AFBECB;
+    --ink-faint:#93A3B2;
+    --pos:#11B274;
+    --pos-bg:#113B2B;
+    --neg:#E06058;
+    --neg-bg:#3B1411;
+    --caution:#D38C0F;
+    --caution-bg:#3B2C11;
+    --assume:#897CCC;
+    --assume-bg:#1B1537;
+    --accent:var(--accent-dark);
+    --accent-deep:var(--accent-deep-dark);
+    --accent-wash:var(--accent-wash-dark);
+    --accent-line:var(--accent-line-dark);
 }
 
 *{box-sizing:border-box}
@@ -84,6 +156,20 @@ a:hover{color:var(--accent-deep)}
       border-top:1px solid var(--line)}
 .mast-strip div{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint)}
 .mast-strip b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-top:3px}
+
+/* ---------- colour scheme toggle ---------- */
+.themetoggle{position:absolute;top:44px;right:0;display:flex;
+      border:1px solid var(--line-hard);border-radius:2px;overflow:hidden}
+.themetoggle button{font-family:var(--mono);font-size:10.5px;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);
+      background:var(--paper);border:0;border-left:1px solid var(--line);
+      padding:4px 9px;cursor:pointer;transition:color .15s,background .15s}
+.themetoggle button:first-child{border-left:0}
+.themetoggle button:hover{color:var(--ink)}
+.themetoggle button[aria-pressed="true"]{color:var(--paper);background:var(--ink-dim)}
+html,body,.wrap,.cat,.note,.assume,.first,.oc,.tag,.logentry{
+      transition:background-color .18s,color .18s,border-color .18s}
+@media (max-width:720px){ .themetoggle{position:static;margin-bottom:18px;align-self:flex-start} }
 
 /* ---------- banner: framing ---------- */
 .first{background:var(--canvas);border:1px solid var(--line);border-left:4px solid var(--line-hard);
@@ -257,12 +343,36 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   *{animation:none !important;transition:none !important}
 }
 @media print{
+  :root,:root:not([data-theme="light"]),:root[data-theme="dark"],:root[data-theme="light"]{
+    --paper:#FFFFFF;
+    --canvas:#F4F7F9;
+    --panel-2:#EDF2F6;
+    --line:#DEE6EC;
+    --line-hard:#C0CDD7;
+    --ink:#0F1E2B;
+    --ink-dim:#46596A;
+    --ink-faint:#5C6E80;
+    --pos:#0B7A50;
+    --pos-bg:#E7F4EE;
+    --neg:#B02A21;
+    --neg-bg:#FBECEA;
+    --caution:#90600A;
+    --caution-bg:#FBF2E0;
+    --assume:#4F3FA3;
+    --assume-bg:#EFEDFA;
+    --accent:var(--accent-light);
+    --accent-deep:var(--accent-deep-light);
+    --accent-wash:var(--accent-wash-light);
+    --accent-line:var(--accent-line-light);
+    color-scheme: light;
+  }
+  .themetoggle{display:none}
   body{font-size:11pt}
   .wrap{max-width:none;border:none}
   section{page-break-inside:avoid}
 }
 /* ============================================================================
-   SHARED STYLESHEET v1.93 : END
+   SHARED STYLESHEET v1.97 : END
    ========================================================================= */
 </style>
 </head>
@@ -272,6 +382,11 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
 
 <!-- ===================== MASTHEAD ===================== -->
 <header class="mast">
+  <div class="themetoggle" role="group" aria-label="Colour scheme">
+    <button type="button" data-set="system">System</button>
+    <button type="button" data-set="light">Light</button>
+    <button type="button" data-set="dark">Dark</button>
+  </div>
   <p class="ticker">ANY</p>
   <h1 class="headline">A 53 megawatt platform, a shelf ceiling that shrinks as the shares fall, and an activist now on the register</h1>
   <p class="functional">ANY &middot; Sphere 3D Corp. &middot; Catalyst Calendar &middot; as of 3 August 2026</p>
@@ -1537,5 +1652,23 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
 
 </div>
 
+<script>
+(function(){
+  var g=document.querySelector('.themetoggle'); if(!g) return;
+  var bs=g.querySelectorAll('button[data-set]');
+  function sync(){
+    var t=document.documentElement.dataset.theme||'system';
+    for(var i=0;i<bs.length;i++) bs[i].setAttribute('aria-pressed',String(bs[i].getAttribute('data-set')===t));
+  }
+  g.addEventListener('click',function(e){
+    var b=e.target.closest('button[data-set]'); if(!b) return;
+    var v=b.getAttribute('data-set');
+    if(v==='system'){ delete document.documentElement.dataset.theme; try{ localStorage.removeItem('theme'); }catch(err){} }
+    else { document.documentElement.dataset.theme=v; try{ localStorage.setItem('theme',v); }catch(err){} }
+    sync();
+  });
+  sync();
+})();
+</script>
 </body>
 </html>

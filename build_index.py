@@ -180,14 +180,23 @@ TEMPLATE = """<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light only">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141C24" media="(prefers-color-scheme: dark)">
 <title>Equity research &middot; index</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+(function(){{
+  var t=null;
+  try{{ t=localStorage.getItem('theme'); }}catch(e){{}}
+  if(t==='light'||t==='dark') document.documentElement.dataset.theme=t;
+}})();
+</script>
 <style>
 :root{{
-  color-scheme: light only;
+  color-scheme: light dark;
   --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
   --line:#DEE6EC;   --line-hard:#C0CDD7;
   --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
@@ -195,6 +204,18 @@ TEMPLATE = """<!DOCTYPE html>
   --body:'Source Serif 4',Georgia,'Times New Roman',serif;
   --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
   --col:760px;
+}}
+@media (prefers-color-scheme:dark){{
+  :root:not([data-theme="light"]){{
+    --paper:#141C24;    --canvas:#10161D;    --panel-2:#0D1218;
+    --line:#2E3A45;     --line-hard:#455360;
+    --ink:#E8EEF3;        --ink-dim:#AFBECB; --ink-faint:#93A3B2;
+  }}
+}}
+:root[data-theme="dark"]{{
+  --paper:#141C24;  --canvas:#10161D;  --panel-2:#0D1218;
+  --line:#2E3A45;   --line-hard:#455360;
+  --ink:#E8EEF3;    --ink-dim:#AFBECB; --ink-faint:#93A3B2;
 }}
 *{{box-sizing:border-box}}
 html{{-webkit-text-size-adjust:100%}}
@@ -237,13 +258,37 @@ footer p{{font-family:var(--mono);font-size:12px;color:var(--ink-faint);margin:0
   h1{{font-size:23px}}
   .docs{{grid-template-columns:1fr}}
 }}
-@media print{{ body{{font-size:11pt}} .wrap{{max-width:none;border:none}} }}
+.themetoggle{{position:absolute;top:44px;right:0;display:flex;
+      border:1px solid var(--line-hard);border-radius:2px;overflow:hidden}}
+.themetoggle button{{font-family:var(--mono);font-size:10.5px;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);
+      background:var(--paper);border:0;border-left:1px solid var(--line);
+      padding:4px 9px;cursor:pointer}}
+.themetoggle button:first-child{{border-left:0}}
+.themetoggle button:hover{{color:var(--ink)}}
+.themetoggle button[aria-pressed="true"]{{color:var(--paper);background:var(--ink-dim)}}
+@media (max-width:720px){{ .themetoggle{{position:static;margin-bottom:18px}} }}
+@media print{{
+  :root,:root:not([data-theme="light"]),
+  :root[data-theme="dark"],:root[data-theme="light"]{{
+    --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
+    --line:#DEE6EC;   --line-hard:#C0CDD7;
+    --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
+    color-scheme: light;
+  }}
+  .themetoggle{{display:none}}
+  body{{font-size:11pt}} .wrap{{max-width:none;border:none}} }}
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <header>
+  <div class="themetoggle" role="group" aria-label="Colour scheme">
+    <button type="button" data-set="system">System</button>
+    <button type="button" data-set="light">Light</button>
+    <button type="button" data-set="dark">Dark</button>
+  </div>
   <h1>Equity research</h1>
   <p class="functional">{count} companies &middot; index &middot; rebuilt {built}</p>
 </header>
@@ -265,6 +310,24 @@ stamped with its own as-of date, shown below, because they are revised on differ
 </footer>
 
 </div>
+<script>
+(function(){{
+  var g=document.querySelector('.themetoggle'); if(!g) return;
+  var bs=g.querySelectorAll('button[data-set]');
+  function sync(){{
+    var t=document.documentElement.dataset.theme||'system';
+    for(var i=0;i<bs.length;i++) bs[i].setAttribute('aria-pressed',String(bs[i].getAttribute('data-set')===t));
+  }}
+  g.addEventListener('click',function(e){{
+    var b=e.target.closest('button[data-set]'); if(!b) return;
+    var v=b.getAttribute('data-set');
+    if(v==='system'){{ delete document.documentElement.dataset.theme; try{{ localStorage.removeItem('theme'); }}catch(err){{}} }}
+    else {{ document.documentElement.dataset.theme=v; try{{ localStorage.setItem('theme',v); }}catch(err){{}} }}
+    sync();
+  }});
+  sync();
+}})();
+</script>
 </body>
 </html>
 """
