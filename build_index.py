@@ -96,12 +96,15 @@ def sort_key(asof, source):
     optional: a warning that a date will not parse, without saying which
     document holds it, reports that something is wrong without saying where.
     """
-    m = re.match(r'(\d{1,2})\s+(\w+)\s+(\d{4})', asof or "")
+    # Section 12.9 sets the date form as month, day, year. Bound to that rule alone:
+    # a parser accepting the old day-first form as well would sort a document that had
+    # never been converted, and say nothing about it.
+    m = re.match(r'(\w+)\s+(\d{1,2}),\s*(\d{4})', asof or "")
     if not m:
-        warn("%s: date %r does not parse as 'D Month YYYY', sorting last"
+        warn("%s: date %r does not parse as 'Month D, YYYY', sorting last"
              % (source, asof))
         return datetime.date.min
-    day, month_name, year = m.group(1), m.group(2), m.group(3)
+    month_name, day, year = m.group(1), m.group(2), m.group(3)
     month = MONTH_LOOKUP.get(month_name.lower())
     if month is None:
         warn("%s: unrecognised month %r in date %r, sorting last"

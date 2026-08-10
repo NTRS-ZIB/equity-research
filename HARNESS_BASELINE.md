@@ -193,3 +193,154 @@ each was edited deliberately by the instrument repair pass of 5 August 2026:
 
 **None of the nine rows above moved.** The shared check chain is untouched.
 
+
+---
+
+## The allowlist record, so a fourth pass does not halt here
+
+**`HARNESS_BASELINE.md` is the single legitimate tracked path matching an unanchored search for
+`harness`.** `git ls-tree -r HEAD --name-only | grep -i harness` returns this file and nothing
+else, because `harness/` itself is excluded by `.gitignore` and holds no tracked file at all:
+`git ls-files harness/` returns zero.
+
+Three passes have halted on that match, each concluding that the ignore rule had failed. It had
+not. **Anchor the directory test as `^harness/`, and allow exactly this one line for the name
+test.** A second match is a real finding and means an apparatus file has become tracked.
+
+This note is here rather than in the ledger because a reader who clones the repository has no
+`harness/` directory and no ledger, so this file is the only place the exception can be found.
+
+---
+
+## Movement recorded on 10 August 2026, the v1.98 language pass and the state verifier
+
+### Removed
+
+| File | Why |
+|---|---|
+| `Q1_push_preconditions.py` | **Declared spent.** It pinned `EXP_DIGEST`, `EXP_SENTINEL` and `EXP_LOGS` as literals across ten references. When the specification moved to v1.98 it reported all 36 carrier files as defective while every one of them was correct, because it compared them to the value of its own day rather than to any rule. Its function is absorbed into `R1_pass_state.ps1`. Preserved at `preserve/2026-08-10-R1/Q1_push_preconditions.py`, sha256 `2b1defd617573d886efc501c7227569e546235517e7a5523fcbaa4a3fe966087` |
+
+**What replaced it, and how the replacement differs.** `Test-PushPreconditions` enforces as rules,
+needing no stored value: one BEGIN and one END sentinel per carrier, one sentinel version across
+the tree matching the specification, and exactly one distinct shared-block digest. It compares
+`Head`, `GroupHash`, `TrackedCount`, `SpecVersion`, `LogEntryTotal` and `SharedBlockDigest` only
+when a caller supplies them, and stores none of them.
+
+### Added
+
+| File | What it holds | Bytes | sha256 |
+|---|---|---|---|
+| `R1_pass_state.ps1` | repository and roster state, the three assertions, publish preconditions. Carries no expected value | 21,294 | `b42015e526f8d4bf9368d24294609698e39f2c7275437d418a5c5e676c0e1aea` |
+| `R1_roster.py` | ticker roster as JSON, from `build_index.collect()`. Computes nothing itself | 1,442 | `a30555e617ec3aa2ed7060b4b5bcc2d45e4e452093179f3437d1649056da4e47` |
+| `R1_tests.ps1` | the arm suite for the above | 13,194 | `1257519288c21cdb8cd519aab5fc157e6aec469a7e41937096d07663d04fc2b3` |
+| `V1_language_convert.py` | the v1.98 British to American conversion, with three controls | 7,999 | `0f4d3dc4260559dd7807365ef467c4f4b1ed0b83f0cb3c50c3eb40e2bfbe6f8e` |
+| `V2_run_after_language.ps1` | read-only run of the full chain after that conversion | 2,015 | `3f29c4b933c619e847ea33104890bb9c20c684e75ac0e4e9a1ea72c2e049a81d` |
+
+### Edited, for the v1.98 date rule
+
+Section 12.9 sets the date form as month, day, year. **Eight date bindings were rebound**, one more
+than the seven predicted. The eighth was `A24`, which already carried the month-first form beside
+the day-first one and so would have kept passing either way. It was found by a grep control, not by
+a failing test, and removed because an arm no conforming file can satisfy is an arm that accepts a
+file nobody converted.
+
+| File | Bytes | sha256 |
+|---|---|---|
+| `20_checks.ps1` | 46,338 | `0e4d4059dc86ffb05f3963c15c4676ca02e2d2c61033f91d444282b7023eed9e` |
+| `D1_checks_v176.ps1` | 5,377 | `3049ebf55eeffec7b53bb88852ccd43d6ff7858677950e4595815950f97654ed` |
+| `build_index.py`, tracked, not in `harness/` | 14,953 | `b2908c24a51594fc55ea27f5a2aa000b30ecc7306736d5500b7e6c99026eb24a` |
+
+### A caution for the next pass that adds an instrument
+
+**`R1_`, `V1_` and `V2_` were not free prefixes.** `R1_clsk_agents.py`, `V1_closes.py` and
+`V2_sweep.py` already existed. Nothing was overwritten because the full names differ, but the
+prefix scheme is not a namespace and should not be treated as one. Check the directory before
+choosing a name.
+
+**The instrument count is not 468.** `harness/` holds **593** files, and most of the growth is
+preserved evidence rather than instruments: a single EDGAR sweep contributed 65. Any figure quoted
+for "the harness" needs to say whether it counts evidence, and the older 467 and 468 figures in the
+ledger do not.
+
+### Corrected 10 August 2026, after the final review fix wave
+
+**The three digests recorded above describe no file that exists.** The fix wave that closed the
+final whole-branch review rewrote all of them, and this table was not updated with it. It is
+corrected here rather than edited in place, so a reader can see that a tracked record went stale
+against an untracked directory and how long it took to notice.
+
+**That is worth more than the correction.** `harness/` is gitignored, so this table is the only
+tracked record of what the harness holds. Nothing verifies it programmatically. It is structurally
+the same exposure as the specification being gitignored, which is what the review's first Critical
+was about, and it went stale in the same session that fixed the other one.
+
+| File | Bytes | sha256 |
+|---|---|---|
+| `R1_pass_state.ps1` | 42,693 | `48740487bb21a0cc08adff94c84ce1634373b2b4896216ecbed18fe10d661021` |
+| `R1_tests.ps1` | 46,463 | `3cb317e72cfcb75d3334e60dbaad051d2230b7dca8f8e8e376180da281a5ab7a` |
+| `R1_roster.py` | 3,572 | `0530cf6e8b265df4a6455b1cfff24f0d3cbccd2fb76a6eb97933064037786a29` |
+| `R1_halt_test.ps1` | 9,322 | `4cf91263f5c9901ef72c8bd9fe54f91498cf9777f32d76c96317afce6c3e68c7` |
+
+`R1_halt_test.ps1` was not in the earlier table at all and is recorded here for the first time.
+
+### Added 10 August 2026, after the final review: the protocol-arm check
+
+`W2_protocol_arms.py` requires every call `SKILL.md` shows an operator to be made by at least one
+arm, with the same named parameters. It fails in both directions: change the protocol and the
+suite goes red, change the suite and the protocol is exposed as stale.
+
+**On its first real run it found the gap a human reviewer had parked as an observation**, that
+`Get-PassState -ClaimedPaths -Stamp` is the call the protocol document shows and no arm made it.
+An arm was added and the seam now carries the argument.
+
+**Its own control exists because the first, casual version of this check failed exactly the way it
+was built to catch.** That version anchored a closing fence at column zero. Two of `SKILL.md`'s
+three code blocks are indented inside a numbered list, so it found one block instead of three and
+reported "none missing" while reading none of the calls it existed to verify. The control now
+proves the extractor sees indented blocks and that the comparison discriminates, before any other
+figure is printed.
+
+### Added 10 August 2026: the mutation harness for R1
+
+`W3_mutate_R1.ps1` mutates the module source and requires the arm suite to fail. It follows
+`82_mutate.ps1`'s shape and adds what the source-mutation form needs: a restore point written by
+the run itself, a hash-verified restore after every mutation, and a cosmetic mutation that must
+SURVIVE, which is the control in the awkward direction. A harness that kills a comment change is
+measuring its own noise.
+
+**On its first run it found three arms that could not fail**, including the sharpest one available:
+`Test-GroupHashControl` could be stubbed to `return $true` and nothing noticed. The positive
+control that proves the group-hash reader can see was itself unguarded.
+
+Two were closed by new arms. The deliverable list is now asserted to be ascending, and the group
+hash is checked against an **independent recomputation of the recipe**, which stores no value and
+is a second statement of the rule.
+
+The third is declared **EQUIVALENT** rather than hidden: no reachable input makes the digest of the
+whole list equal the digest of the list with one file withheld, so that expression is always true
+and no arm can distinguish it. The harness prints the justification on every run and **fails if a
+declared-equivalent mutation is ever killed**, because that means the justification has gone stale.
+
+| File | Bytes | sha256 |
+|---|---|---|
+| `W2_protocol_arms.py` | 7,774 | `7e89cbcc71666caa09d0bc1ffefcc643f152acba15880a069dd5c9e689626321` |
+
+### Added 10 August 2026: the two-hop test, and what running it found
+
+`W8_two_hop.ps1` exercises spec section 9.2's case, which had never run: hop 2 opening on a tree
+hop 1 left dirty, proceeding past what hop 1 declared and halting on what nobody did. It passes,
+and it also proves the class follows the claim rather than the path, by swapping the claim and
+requiring the classes to swap with it.
+
+**Its first version could not work, and the reason is a property nothing had stated.** It wrote
+marker files into `scratch/` and neither ever appeared in the dirty list, because `scratch/`,
+`harness/`, `preserve/` and `pass_documentation/` are all gitignored and `git status` never
+reports an ignored file.
+
+> **The claim mechanism only engages for TRACKED paths.**
+
+A hop writing only into ignored apparatus produces no dirty path and has nothing to declare.
+Declaring those directories looks careful and accomplishes nothing. `SKILL.md`'s own example did
+exactly that, naming `harness`, `scratch` and `pass_documentation`, and has been corrected to name
+a tracked path instead. The paths the mechanism can ever see today are `HARNESS_BASELINE.md`,
+`build_index.py` and `index.html`.
