@@ -451,7 +451,13 @@ Every case before this pass bound the root to an absolute path literal, which is
 T1 always handled; the computed root was never exercised, which is how the blindness survived a
 mutation harness.
 
-### Open, and a decision rather than a fix: five violations T1 can now see
+### Settled 11 August 2026: T1 narrowed to what section 11.1 actually says
+
+> The section below framed this as an open decision. It was taken: script-driven spec
+> rollout is legitimate, so the rule's premise was the thing that was wrong. What follows
+> is left standing because it states the question the narrowing answers.
+
+### The question it answered: five violations T1 could suddenly see
 
 All five sit in gitignored `scratch/darkmode-stage2b/`, are spent one-shot scripts from 5 and 6
 August, and re-running any of them would corrupt what it wrote. Four write `HOUSE_STYLE.md`
@@ -468,3 +474,40 @@ v1.98 were landed **by script**. So the choice is not about five files:
 
 Widening an exclusion, or moving the five into `preserved/` where T1 does not look, would settle
 neither question and would put the tree back to reporting clean. Left open deliberately.
+
+### What changed, and what did not
+
+**The specification did not change, and there is no v1.99.** Section 11.1 already binds
+*"every document a pass writes about its own work, whatever it is called"*. The specification
+and its version register are not documents about a pass's work and never fell under it. It was
+T1 that had drifted: the sentence *"are maintained by hand and no script writes any of them"*
+was the check's own invention, appears nowhere in the specification, and had been false since
+5 August. **The check moved to the rule, not the rule to the check.**
+
+**The exemption is four FILES, not a class of document**, and the asymmetry is the whole point.
+T1 exists because every previous attempt at this was a name list that grew one entry per
+document type; `.gitignore` still carries six such patterns. The forbidden side stays
+open-ended, so a document type nobody has thought of is caught on the day it is first written.
+Only the exempt side is enumerated, and it is four names the specification already fixes.
+
+Three cases hold that line, because an exemption like this usually leaks by name:
+
+| Case | Verdict |
+|---|---|
+| `SPEC_VERSIONS_DRAFT.md`, bare | violation — the match is on the exact filename, not a prefix |
+| `HOUSE_STYLE_NOTES.md`, joined to the root | violation — a working note about the spec is still about the work |
+| one statement naming `HOUSE_STYLE.md` *and* a findings document | violation — every name must be sanctioned, not any |
+
+M11 changed its declared verdict in this pass, which is worth stating plainly rather than
+burying: it was written against `HOUSE_STYLE.md`, so under the narrowed rule its old answer was
+wrong. It kept its subject, the computed-root resolution, and gave up the filename. **M11 and
+M17 are now the same case character for character except for the destination**, which is the
+narrowing reduced to a single pair.
+
+G2 stands at 20 cases: 12 killed, 0 missed, 8 clean, 0 false positives. T1 reports PASS on the
+live tree under both a relative and an absolute root, and the full chain now runs with tree-scope
+checks live rather than skipped: T1 and T2 both pass, 40 checks, 1,120 rows.
+
+**That PASS is only worth the table behind it.** T1 reported a clean tree for its whole existence
+while blind to four live violations, and the reason a zero is now believable is that twelve
+things still make it fire.
