@@ -541,3 +541,51 @@ The same standard applies to the two tree-scope zeros: G2's 20 cases and G4's 6 
 they rest on. T1 reported a clean tree over this same repository while blind to four live
 violations, and T2 did not exist while the front page contradicted all 34 documents below
 it, so neither zero would have been worth anything this morning.
+
+### Added 11 August 2026: the open state outlives the shell
+
+Ledger 4.13. The protocol told a pass to keep `$zzOpen.FileHashes` in a variable for the close.
+**Every tool invocation is a fresh shell**, so the variable was gone and the assertion received
+nothing. It refused, correctly, but the instruction it enforced was not executable: every pass
+following the protocol literally halted at step 5.
+
+An open stamp now persists itself to `harness/R1_open_state.json`, and
+`Assert-PublishedSetUnchanged` with no `-IgnoredHashes` reads that baseline. Persisting inside a
+read function is normally a smell and is deliberate: the alternative is an instruction the
+operator must carry across a shell boundary, and a step that can be forgotten will be.
+
+**Creating a bare form is only safe if it cannot silently degrade**, which was the whole reason
+the old design forbade one. `Restore-PassState` throws on a baseline that is missing, partial, or
+saved at a different `HEAD`. An empty map is still refused and is still a different thing from an
+absent one. An explicit map still overrides the file. A narrowed `-HashPaths` capture is not saved
+at all, with a warning, because a partial baseline would let the close certify what it never
+watched. `ConvertFrom-Json` returns a `PSCustomObject` whose map indexing yields `$null` SILENTLY,
+so the map is rebuilt as a real `Hashtable` and an arm asserts the restored type.
+
+`R4_open_state_arms.ps1` carries nine arms. Arm 6 is the one that separates a real mechanism from
+theatre: it corrupts one saved hash and requires the close to halt naming that file. Arm 1 is the
+negative control. The end-to-end proof is two separate shells, the second confirming `$zzOpen` is
+null and then completing the bare close from disk.
+
+**Two existing arms failed on the first run and were updated, which is recorded rather than done
+quietly.** `R1_tests.ps1` and `R1_halt_test.ps1` both matched on the old refusal message for an
+absent map. The reason for the refusal changed; the property did not, and the empty-map arm was
+not touched because `@{}` is not `$null`. Both were strengthened at the same time, because neither
+had checked that the bare form can SUCCEED, and an arm that only ever sees a refusal would be
+satisfied by a call that could never work. `-OpenStatePath` was added so those arms point at a
+location they control rather than depending on whether an earlier pass left a state file on disk.
+
+Two further defects surfaced from running rather than reading. **The restored state was a
+lookalike, not a drop-in**: it carried `Head` at the top level and no `Repo`, and
+`Compare-PassState` reported "no Repo property, so nothing was read", which was that instrument
+refusing to certify an object it could not read. `TrackedCount` and the repo error now travel with
+the saved state, and arm 5b checks both directions, since an arm that only observes silence proves
+nothing. **And three arms depended on ambient state**, which is this pass's own defect one layer
+out: `R4`'s claimed nothing and failed once the tree was dirty, and `R1_tests.ps1`'s absent-map arm
+read whatever baseline a real pass had left on disk, so it refused on a clean machine and was
+ACCEPTED mid-pass. All three now use paths and claims they control, and all three suites pass with
+the baseline present, absent, and with a dirty tracked path.
+
+That last one was nearly missed. An earlier check of `R1_tests.ps1` reported a blank final line
+that reads like success; it was caught only by asserting on the exit code rather than on the last
+line of output.
