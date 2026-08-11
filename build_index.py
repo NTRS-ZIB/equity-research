@@ -172,8 +172,14 @@ def build(rows):
             '  </article>'.format(t=html.escape(ticker), c=company, h=headline,
                                   d="".join(links)))
 
+    # Section 12.9 sets the date form as month, day, year. This line WRITES a date; the
+    # sort_key above READS one. The v1.98 conversion rebound eight readers across the
+    # check chain and this builder and missed this single writer, so the index carried
+    # "rebuilt 11 August 2026" above 34 documents reading "as of August 4, 2026". The
+    # grep control run afterwards searched for old PARSING patterns and could not have
+    # found a formatter. Counting readers is not the same as counting encoders.
     today = datetime.date.today()
-    built = "%d %s %d" % (today.day, today.strftime("%B"), today.year)
+    built = "%s %d, %d" % (today.strftime("%B"), today.day, today.year)
 
     return TEMPLATE.format(entries="\n".join(cells), count=len(ordered), built=built)
 
