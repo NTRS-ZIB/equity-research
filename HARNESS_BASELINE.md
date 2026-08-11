@@ -383,6 +383,12 @@ passing the other four.
 
 ### Open, not fixed: T1 fails on this tree, and the rule it states is not the rule it enforces
 
+> **FALSE AS WRITTEN, corrected 11 August 2026.** The rule does state this case: it names
+> SPEC_VERSIONS.md among the four root files and says *no script writes any of them*. There
+> was no rule/enforcement gap here. The section below is left standing rather than deleted
+> because the reasoning it records led to the real gap, which is the opposite defect and
+> worse. See the next section.
+
 `scratch/darkmode-stage2b/_rollout7.py:26` writes `SPEC_VERSIONS.md` with a bare filename
 and T1 flags it [V3]. But `SPEC_VERSIONS.md` is a **tracked file that belongs at the
 repository root**, it is not pass documentation, and the script is a spent one-shot rollout
@@ -401,3 +407,64 @@ move this file exists to catch.**
 Note also that `T2_run_conform.ps1`'s `-SkipTreeChecks` is a `[switch]`, so tree-scope checks
 run by default and T1 has therefore been aborting that runner on this tree. Any recent clean
 per-file table from it was produced with the switch set.
+
+### Corrected 11 August 2026: T1 was blind, and had been since it was written
+
+Reading T1 to repair a supposed over-fire found an under-fire instead. **T1 missed four live
+violations** and had reported a clean tree over all four for its whole existence.
+
+```python
+ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
+P = os.path.join(ROOT, 'HOUSE_STYLE.md')
+open(P, 'w', encoding='utf-8', newline='').write(s)
+```
+
+`_rollout6.py`, `_rollout6b.py`, `_spec195.py` and `_spec196.py` each do exactly that. It is
+V1's textbook shape. T1's docstring claimed a root base was recognised *"by resolution, not by
+being called ROOT"*, but resolution was **four hand-written expression shapes**, and this was
+not one of them: the pattern required a bare `os.path.dirname(__file__)` and exactly one `'..'`.
+
+**The repair could not be more patterns**, and G2 now carries the proof as M13 and M14: an
+expression one character different from a root binding that resolves somewhere else, which a
+spelling-matched check fires on and must not. Matching harder makes the false positive worse at
+the same time as the miss. So T1 now **resolves** the expression — it evaluates the arithmetic
+against the scanned file's own location and compares the answer to the root. An identifier that
+resolves elsewhere now *suppresses* a finding rather than merely failing to raise one.
+
+Two more defects surfaced while proving it, both found by reading why a case passed rather than
+by its passing:
+
+**The write detector could not see past a nested paren.** `PY_WRITE_OPEN_RE`'s character class
+stops at the first `)`, so in `open(os.path.join(ROOT, 'X.md'), 'w')` it never reached the mode
+argument and did not count the line as a write at all. The plainest possible violation, on one
+line. Python writes are now read from the syntax tree. G2 carries it as M16.
+
+**The verdict depended on how the argument was spelled.** The resolver answers in absolute paths,
+so a root passed as `.` compared equal to nothing and every resolved finding was discarded
+silently. Run as `.` it reported 2 violations; run against the same tree spelled absolutely, 6.
+`scan_tree` now takes `os.path.abspath` of its argument. **This was shipped and run for a full
+pass before it was caught** — the fix that closed the blindness had a blindness of its own, and
+only comparing two spellings of the same tree exposed it.
+
+G2 grew from 10 cases to 16 and now stands at 9 killed, 0 missed, 7 clean, 0 false positives.
+Every case before this pass bound the root to an absolute path literal, which is the one form
+T1 always handled; the computed root was never exercised, which is how the blindness survived a
+mutation harness.
+
+### Open, and a decision rather than a fix: five violations T1 can now see
+
+All five sit in gitignored `scratch/darkmode-stage2b/`, are spent one-shot scripts from 5 and 6
+August, and re-running any of them would corrupt what it wrote. Four write `HOUSE_STYLE.md`
+through a computed root; `_rollout7.py` writes `SPEC_VERSIONS.md` by bare filename.
+
+They are real violations of the rule **as stated**, and that is the problem worth raising: the
+rule asserts the four root markdown files *"are maintained by hand and no script writes any of
+them"*, and that assertion has been false since at least 5 August. Spec versions v1.94 through
+v1.98 were landed **by script**. So the choice is not about five files:
+
+- if script-driven spec rollout is legitimate, the rule's premise is wrong and 12.x should say
+  so, with T1 narrowed to pass documents;
+- if it is not, the workflow that produced the last five spec versions needs replacing.
+
+Widening an exclusion, or moving the five into `preserved/` where T1 does not look, would settle
+neither question and would put the tree back to reporting clean. Left open deliberately.
