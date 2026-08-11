@@ -344,3 +344,60 @@ Declaring those directories looks careful and accomplishes nothing. `SKILL.md`'s
 exactly that, naming `harness`, `scratch` and `pass_documentation`, and has been corrected to name
 a tracked path instead. The paths the mechanism can ever see today are `HARNESS_BASELINE.md`,
 `build_index.py` and `index.html`.
+
+### Added 11 August 2026: the index check joins the chain as tree-scope check T2
+
+The v1.98 date conversion rebound eight date **readers** and missed the one **writer**.
+`build_index.py` stamped the front page day-first, so `index.html` carried
+"rebuilt 11 August 2026" above 34 documents reading "as of August 4, 2026", and every one
+of the per-file rows passed while it did. No check in the chain reads `index.html`.
+
+`G3_index_date_guard.py` closes that. It is registered as **T2**, beside T1, in the
+tree-scope block rather than as check 41. `AE_runner_shared.ps1` already recorded the
+reasoning for T1 and it applies unchanged: the subject is one artefact, not each
+deliverable, so as check 41 it would run once per file on the same evidence and inflate
+the row count while proving nothing extra. **The count is still exactly 40**, measured
+rather than assumed: the conform runner wrote 1,120 rows over 28 files, and 1,120 / 28 = 40.
+
+It binds two things, because either can be wrong alone. `index.html` must carry no
+day-first date **and at least one month-first date**, so a zero is a reading rather than an
+empty search. `build_index.py`'s formatter is asserted separately, because a reverted
+formatter with no rebuild leaves the generated file passing until the next push rebuilds it.
+
+`G4_index_date_mutate.py` is its mutation table: six cases, five faults plus the clean
+negative control, all behaving as required.
+
+### The same day: what registering a second tree-scope check exposed in the runner
+
+`Invoke-TreeScopeChecks` threw on the **first** failing check. With one check registered
+that was invisible. With two it means a tree carrying two faults reports one, and worse,
+**a newly added check tells you nothing until every check registered before it is already
+green** — T2 could not be observed on the live tree at all, because T1 fails there.
+
+The loop now runs every registered check and throws once, listing all of them. Two branches
+were added on the same principle: a registered check whose script is absent is reported as
+DID NOT RUN rather than passed, and an empty table throws instead of printing a clean
+header and falling through. `G5_treescope_arms.ps1` holds five arms over the runner itself,
+including the negative control that stops a runner which throws unconditionally from
+passing the other four.
+
+### Open, not fixed: T1 fails on this tree, and the rule it states is not the rule it enforces
+
+`scratch/darkmode-stage2b/_rollout7.py:26` writes `SPEC_VERSIONS.md` with a bare filename
+and T1 flags it [V3]. But `SPEC_VERSIONS.md` is a **tracked file that belongs at the
+repository root**, it is not pass documentation, and the script is a spent one-shot rollout
+from 5 August 2026 sitting in gitignored `scratch/`.
+
+So T1 states "pass documentation comes from the resolver" and enforces "no bare-filename
+markdown write". Those are different rules, and the gap is the project's own recurring
+defect pointing the other way: an instrument firing on something its stated rule does not
+forbid.
+
+It is left open deliberately. The repair is a judgment call between narrowing [V3] to
+pass-document names, excluding `scratch/`, and deleting the spent script, and those have
+different consequences. **Widening an exclusion so that a pass just added goes green is the
+move this file exists to catch.**
+
+Note also that `T2_run_conform.ps1`'s `-SkipTreeChecks` is a `[switch]`, so tree-scope checks
+run by default and T1 has therefore been aborting that runner on this tree. Any recent clean
+per-file table from it was produced with the switch set.
