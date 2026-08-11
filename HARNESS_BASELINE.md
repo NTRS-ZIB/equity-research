@@ -511,3 +511,33 @@ checks live rather than skipped: T1 and T2 both pass, 40 checks, 1,120 rows.
 **That PASS is only worth the table behind it.** T1 reported a clean tree for its whole existence
 while blind to four live violations, and the reason a zero is now believable is that twelve
 things still make it fire.
+
+### Full chain, 11 August 2026: the first run with tree-scope checks live
+
+Run over the whole published set, 17 tickers, with the roster taken from
+`build_index.collect()` rather than the runner's 14-ticker default. Both other runners
+default to a subset, and a chain run that silently covers 28 of 34 files is the kind of
+partial reading this file exists to record.
+
+```
+T1-passdoc-not-at-root     RESULT : PASS, 0 violations
+T2-index-date-form         RESULT : PASS, 0 violations
+2 of 2 tree-scope checks ran, 0 failing
+
+control 1: C37 on a mutated sentinel -> Pass=False (must be False); as built -> Pass=True
+control 2: A10 on an em dash         -> Pass=False (must be False); as built -> Pass=True
+control 3: fired on 17 of 34 files
+
+results: 1360 = 1047 on evidence + 24 vacuous + 289 out of scope + 0 failed
+```
+
+40 checks over 34 deliverables is 1,360, and 1,047 + 24 + 289 accounts for every row. No
+exceptions, exit 0. Control 3 fired on all 17 research reports and on none of the 17
+calendars, which carry no computed-figure row.
+
+**The three controls are why the 1,360 passing rows are readings.** Each fails on a mutated
+file and passes the file as built, so the chain is discriminating rather than reporting.
+The same standard applies to the two tree-scope zeros: G2's 20 cases and G4's 6 are what
+they rest on. T1 reported a clean tree over this same repository while blind to four live
+violations, and T2 did not exist while the front page contradicted all 34 documents below
+it, so neither zero would have been worth anything this morning.
