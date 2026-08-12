@@ -347,8 +347,25 @@ if __name__ == "__main__":
     if not rows:
         raise SystemExit("No ticker files found. Nothing written.")
     out = ROOT / "index.html"
-    out.write_text(build(rows), encoding="utf-8")
-    print("Wrote %s with %d companies:" % (out.name, len(rows)))
+    # LEDGER 4.44's sweep, and this is the site with the most at stake: index.html is a
+    # PUBLISHED artefact that gets committed and pushed. A write that returns success without
+    # landing leaves the previous index in place, and because git reads the same filesystem it
+    # reports the tree clean, so the stale page is published by being silently left alone.
+    # Nothing else in the chain would notice: T2 checks the index's date FORM, never whether
+    # its content is current.
+    #
+    # On this OneDrive-synced tree a successful write is not yet a file another reader gets,
+    # so the page is read back and compared before anything is announced.
+    text = build(rows)
+    out.write_text(text, encoding="utf-8")
+    back = out.read_text(encoding="utf-8")
+    if back != text:
+        raise SystemExit(
+            "INDEX WRITE FAILED: %s read back as %d character(s) against the %d written. The "
+            "write returned success and the file on disk is not what was built. Do not commit: "
+            "git compares against this same file and would report the tree clean while the "
+            "published page stayed stale." % (out.name, len(back), len(text)))
+    print("Wrote and READ BACK %s with %d companies:" % (out.name, len(rows)))
     for ticker in sorted(rows):
         have = "+".join(sorted(rows[ticker]))
         print("  %-6s %s" % (ticker, have))
