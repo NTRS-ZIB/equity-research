@@ -926,3 +926,92 @@ threshold in A30 rests on it.
 standard accent without reading it from the specification. **The first thing it caught was
 `WD_tint_arms.ps1`**, written this pass, whose arm 7 hardcoded `#1F5993`. Fixed to read the
 resolver.
+
+## Movement recorded on 16 August 2026: the first-build declaration, and the templates are stuck at v1.99
+
+**The write scope was revision-only and nothing could add a 35th deliverable.** `-RevisedPaths`
+refuses a path that does not exist, and an undeclared deliverable lands in `published` and halts.
+Both are correct for the files that exist, and together they refused every new ticker by mechanism
+rather than by rule.
+
+### `-BuiltPaths`, the mirror of `-RevisedPaths`
+
+```
+  -RevisedPaths    the path MUST exist at the open      and may change by the close
+  -BuiltPaths      the path MUST NOT exist at the open  and MUST exist by the close
+```
+
+Loosening `-RevisedPaths` to accept an absent path was the obvious alternative and is worse: that
+same refusal is what catches a typo'd filename, which is the error it was written for.
+
+Seventeen arms in `WK_build_mode_arms.ps1`, most of them on what must still be refused, because a
+widening that errs on the permissive side does not fail loudly. It accepts work it should have
+stopped and every downstream check reports what it always reports.
+
+| Refused | |
+|---|---|
+| a built path that already exists | use `-RevisedPaths`, which bounds it against its own prior bytes |
+| a revised path that does not exist | unchanged |
+| a path declared in BOTH modes | opposite preconditions, so declaring both states no scope |
+| an untouchable name | the specification and both templates stay unreachable |
+| a non-deliverable filename | a typo is a refusal, not a silent non-declaration |
+| a declared build absent at the close | `BUILD DECLARATION UNFULFILLED` |
+
+**Classification is tested through `Get-DirtyClass` directly**, not only through `Get-PassState`,
+because a guard that holds only at the API boundary is one direct call away from not holding.
+A template declared as a build still classifies `published`, and a path declared in both modes
+yields `revised`, the class with the stricter precondition.
+
+`R4_open_state_arms.ps1` and `RE_revision_arms.ps1`, which guard this same mechanism, both still
+pass.
+
+### THE FINDING: both templates carry v1.99 sentinels
+
+```
+  34 deliverables   v2.01
+  2 templates       v1.99
+  specification     v2.01
+```
+
+**Section 11 step 2 builds a new ticker by copying the templates**, so the first build this pass
+just enabled would produce v1.99 sentinels and `C37` would fail the new pair on sight.
+
+**`C37` cannot see this**, because it runs over the 34 deliverables and the templates are not
+among them. `R1_tests.ps1` does see it, and has been failing on it since v2.00 landed. The
+failure is pre-existing and was surfaced here only because a change to the write scope is worth
+a full regression run.
+
+The templates are untouchable by every mode, build included, so moving them needs the same
+authorisation the specification does.
+
+`W2_protocol_arms.py` also fails, pre-existing, naming three calls the protocol document shows an
+operator that no arm makes. None involves the new parameter.
+
+### The regression sweep destroyed this pass's own open state
+
+The close refused with `OPEN STATE FAILED: no saved open state`. **`R1_tests.ps1` and
+`W8_two_hop.ps1` open and close their own passes against the same
+`harness/R1_open_state.json`**, so running the protocol arm suites as a regression, which is the
+careful thing to do after changing the write scope, is what removed the live baseline.
+
+`WK_build_mode_arms.ps1` anticipated this for itself and backs the file up before arm 4 and
+restores it after, and its own arm confirms the restore. **The older suites do not**, and there
+is no reason they would have: they predate any convention about it.
+
+**Verified independently instead**, against values recorded before this pass began:
+
+```
+  group hash        f2bcf472...  matches the value at the v2.01 close
+  HOUSE_STYLE.md    5fc7a5f2...  matches
+  both templates                 match
+  deliverables      34
+  dirty             HARNESS_BASELINE.md only
+```
+
+That proves no deliverable, no template and no specification moved. **It is weaker than a close
+in one specific way**: it compares against figures a human copied forward rather than a baseline
+the mechanism saved, so it rests on those figures being right.
+
+**Owed: the arm suites should save and restore the open state, as `WK` does.** Until they do, a
+pass that runs them as a regression loses its own baseline, and the more careful the pass, the
+more likely it is to hit this.
