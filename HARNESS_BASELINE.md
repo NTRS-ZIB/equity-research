@@ -589,3 +589,109 @@ the baseline present, absent, and with a dirty tracked path.
 That last one was nearly missed. An earlier check of `R1_tests.ps1` reported a blank final line
 that reads like success; it was caught only by asserting on the exit code rather than on the last
 line of output.
+
+## Movement recorded on 16 August 2026: the v2.00 accent rebind, and a check that forbade compliance
+
+**HOUSE_STYLE reached v2.00 and retired the per-ticker accent.** This pass moved the instruments
+to match, and the standing order was kept: specification, then instruments, then files. The 34
+deliverables are untouched and are the next pass.
+
+### A14 had inverted, and it was wrong on the day the spec changed rather than at some later drift
+
+`A14` asserted `accent != #1F5993`, because that literal was the template PLACEHOLDER. Section
+3.3 now makes the same literal **the standard and the only conformant value**, so the check did
+not merely go stale, **it forbade compliance**. Both templates already carry the standard, so the
+next original build would have been the first casualty, and the failure would have looked like a
+defective build rather than a defective check.
+
+**The check now reads the standard from the specification rather than holding a copy.** The old
+form hardcoded the hex, which is exactly what `20_checks.ps1` forbids in its opening line: bind to
+a rule, never to a current value.
+
+| | Before | After |
+|---|---|---|
+| `A14` rule | accent must NOT be `#1F5993` | accent MUST equal the standard read from §3.3 |
+| where the value lives | written into the check body | `Get-StandardAccent`, read from the spec |
+| `A14` mutation | sets accent TO `#1F5993` | sets accent to `#1F5994`, one unit off |
+| `A14` inverse control | none | supplies the standard, verdict must flip |
+| in-scope fails | 0 | **34, being the unmigrated set** |
+
+**The 34 in-scope fails are the honest state and not a regression.** Every delivered file carries
+an accent derived under the retired rule. `C37` was already reporting the same thing out of scope.
+
+### One definition of where the specification is
+
+`C37` read `HOUSE_STYLE.md` through an **absolute path written into the check body**, which bound
+the whole chain to one machine's directory layout. `A14` needed the same document. Two copies of a
+location is the shape of ledger 4.62: the fault there was never holding the wrong header policy,
+it was holding a second copy of it that nothing compared. Both now read `Get-SpecText`, resolved
+from `20_checks.ps1`'s own directory, and an arm asserts no check body carries such a path.
+
+### A17 had never been tested, on any file, and this pass found it by accident
+
+The mutation for `A17-stamp-vs-close` looked for `3 Aug 2026`. The check and all 34 documents use
+`Aug 3, 2026`. **It therefore never matched and was scored `N/A` rather than `NO-OP`**, so it did
+not appear in the no-op report either; it was visible only as `A17` sitting in the
+`NEVER-EXERCISED` list. A mutation that cannot find its anchor is indistinguishable from a rule
+that does not apply to the document.
+
+**Repaired by giving the mutation the check's own pattern, character for character.**
+
+```
+mutation suite    before          after
+  KILLED          1316            1350      +34, exactly A17
+  N/A              282             248      -34
+  INVERSE-OK        68              68      A14 34, C37 34
+  SURVIVED           0               0
+  NEVER-EXERCISED  A17 (N/A=34)    none
+```
+
+**Every registered check now has a working mutation or inverse control.** That has not previously
+been true.
+
+### The aggregate digest, recomputed, and it cannot serve as the gate it is called
+
+`VV_harness_aggregate.py` implements the recipe this file states. Recomputed today:
+
+| | Files | Aggregate sha256 |
+|---|---|---|
+| Instruments, by the recorded recipe | 838 | `1c1a7d3c96dd5125bf25d4d2953c032c7f2c31540ff1fb2ea4d2a32529b3bf9c` |
+| Whole directory, `__pycache__` excluded | 862 | `ce1de2025387e1e4d5300402f8104fa2e2f033dd2d8357aeb0846f66e312a9f9` |
+
+**It does not reproduce the 5 August figure of 467 files and `70ae6c42`, and could not.** Many
+passes have added instruments since without updating this file, so the recorded figure is stale
+rather than contradicted, and **this implementation is therefore unvalidated by reproduction.**
+
+**The larger finding is that the recipe cannot do the job the file assigns it.** It excludes
+`__pycache__` and the results artefacts and nothing else, so every document fetched from EDGAR or
+an issuer newsroom counts as an instrument. Measured today, **580 of the 838, being 69%, are not
+authored code.** Those arrive by the hundred and change on every research pass, so the figure
+called "the figure a pass gates on" moves for reasons unconnected to any instrument changing, and
+a gate that always moves cannot report that something moved.
+
+**Authored code alone**, being `.ps1` and `.py`, is **258 files** at
+`619be651e16419997a31f402b16111190129a376cb99854183c8dd6c56c61f6a`. That is offered as the figure
+a corrected recipe would use and **is not comparable with anything above it**. Correcting the
+recipe is a discontinuity of the kind this file records under "Recipe change" and is left for a
+pass that decides it deliberately.
+
+Note also that the digest includes the script that computes it, so it moves when that script is
+edited. That is correct, and it means a figure recorded here is only meaningful alongside the
+state of `VV_harness_aggregate.py`.
+
+### Instruments added
+
+| File | Purpose |
+|---|---|
+| `VT_accent_state.py` | the control: what A14 and A16 say about all 34 files, under both rules |
+| `VU_accent_rebind_arms.ps1` | 16 arms over the rebind, arm 1 the negative control |
+| `VV_harness_aggregate.py` | the aggregate recipe, made executable |
+
+### What the arms caught, in themselves
+
+`VU` was first written with the standard colour in `$STD` and the standard-carrying document in
+`$std`. **PowerShell variable names are case-insensitive, so those are one variable**: arm 1
+overwrote the colour with a 137KB HTML document. Arms 1, 4 and 6 stayed correct only because the
+right-hand side of an assignment is evaluated before the assignment lands. The one arm that read
+the colour afterwards failed, **and reported it as the spec resolver failing to restore**, which
+it had not. An arm can lie about the thing it is testing. Distinct names, not distinct casing.
