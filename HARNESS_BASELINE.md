@@ -840,3 +840,89 @@ built, and they are already incompatible with the eight-token template.
   CHECKS RUN 1394   IN-SCOPE FAILS 0   group C 0
   WB arms 11/11     VU arms 18/18     VQ engine arms 5/5
 ```
+
+## Movement recorded on 16 August 2026: section 3.4 gets an instrument, and the dark accent gets measured
+
+**Two colour rules the specification states and nothing tested.** Section 3.4 was enforced by
+nothing before or after it was rescued from the retired derivation procedure, which is how it came
+so close to being deleted without any instrument objecting. `--accent-dark` was stated by section
+3.3 and read by no check.
+
+```
+  CHECKS RUN 1428   files 34   per file 42   IN-SCOPE FAILS 0   group C 0
+  mutations  KILLED 1452, SURVIVED 0, NEVER-EXERCISED none
+  WD arms 17/17   WB arms 11/11   VU arms 18/18
+```
+
+### The measurement came before the check, deliberately
+
+4.117a left "run the chain against proposed output before writing" owed. The mirror of that
+applies to a new check: **if A30 had gone straight into the chain and failed on 34 files, the
+result could not distinguish wrong files from a wrong check.** `WC_tint_probe.py` measured the set
+first:
+
+```
+  1360 comparisons, being 34 files x 40   0 below the floor
+```
+
+**The set already satisfied section 3.4.** The check was then written to agree with a known
+answer, and the two arrived at the same number independently.
+
+### `A30-semantic-tints`
+
+Per mode: four foregrounds against paper, canvas, panel-2 and their own tint, plus `--ink` against
+the four semantic tints. Twenty comparisons per mode, forty per file.
+
+**Both modes, and the specification says why the dark half is the half that matters**: in light
+mode every tint sits within a few percent of white, so clearing paper clears the tint as a
+by-product; in dark mode the tints are materially darker and that no longer follows.
+
+**Tokens are located by selector, never by position.** Five blocks declare them: the bare `:root`,
+two dark variants, and a print block that forces the light values back. A positional reader would
+take whichever the author happened to put first.
+
+### THE FINDING: the standard dark accent clears its floor by 0.086
+
+A16 now measures `--accent-dark` against dark paper, using the pair form rather than
+`Get-Contrast`, which measures against white and would have reported the dark accent's contrast
+against a ground no reader in dark mode ever sees.
+
+```
+  #3987D5 on #141C24 = 4.586:1     floor 4.5     margin 0.086
+```
+
+**Section 3.3 states 7.22:1 on paper and 6.71:1 on canvas and states no dark figure at all**,
+because when the standard was chosen at v2.00 nothing measured the dark half. It passes, and it
+passes by less than a tenth. That is worth knowing before anyone adjusts the dark palette.
+
+### The first mutation was not isolating, and the arm caught it
+
+`#1A4636` was chosen because it sits near the dark `--pos-bg`. **In dark mode a foreground must be
+LIGHT to clear anything**, so it failed all four grounds at once: paper 1.62, canvas 1.71,
+panel-2 1.77, own tint 1.17. It killed A30, so the mutation report looked correct, **while proving
+nothing about the limb section 3.4 actually adds** and only re-testing the general contrast limb
+A16 already covers.
+
+**An isolating window exists, and the reason is measurable**: the dark `--pos-bg` is LIGHTER than
+dark paper, luminance 0.03422 against 0.01107. So a foreground can clear the three surfaces and
+still fail its own tint, which is precisely the case the rule was written for.
+
+```
+  #36986D   paper 4.81   canvas 5.08   panel-2 5.26   own tint 3.48
+```
+
+Arm 4 asserts that isolation rather than trusting the comment.
+
+### The arithmetic is checked against figures nobody here wrote
+
+The specification states `--ink` at 16.9:1 on paper and `--ink-dim` at 7.25:1, derived without
+reference to this harness. `Get-ContrastPair` reproduces both, at 16.92 and 7.25. **That is the
+one place the contrast arithmetic can be validated against an independent source**, and every
+threshold in A30 rests on it.
+
+### The population arm caught the next file written
+
+`WB_live_instrument_arms.ps1` was built one pass earlier to find live instruments holding the
+standard accent without reading it from the specification. **The first thing it caught was
+`WD_tint_arms.ps1`**, written this pass, whose arm 7 hardcoded `#1F5993`. Fixed to read the
+resolver.
