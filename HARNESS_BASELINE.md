@@ -695,3 +695,66 @@ overwrote the colour with a 137KB HTML document. Arms 1, 4 and 6 stayed correct 
 right-hand side of an assignment is evaluated before the assignment lands. The one arm that read
 the colour afterwards failed, **and reported it as the spec resolver failing to restore**, which
 it had not. An arm can lie about the thing it is testing. Distinct names, not distinct casing.
+
+## Movement recorded on 16 August 2026: the A14 rename, and a runner that could not start
+
+**`A14-accent-not-placeholder` is now `A14-accent-is-standard`.** The old name did not merely go
+stale with the v2.00 amendment, it became **backwards**: it named a check that requires the value
+the name says is forbidden.
+
+### The rename found a fifth table, and the fifth one was broken
+
+The rebind pass at 4.116 named three tables the key joins. **Searching for the key found five**,
+and the two extra were the ones that mattered.
+
+| File | What it holds |
+|---|---|
+| `20_checks.ps1` | the check itself |
+| `82_mutate.ps1` | the mutation and the inverse control |
+| `AE_runner_shared.ps1` | the applicability table, which decides in-scope |
+| **`AC_run_original.ps1`** | **a startup control, and it was dead** |
+| `VU_accent_rebind_arms.ps1` | the arms |
+
+**`AC_run_original.ps1` has been unable to start since the rebind.** It runs a startup control
+that mutates the accent **to** `#1F5993` and throws unless A14 fails it. Section 3.3 makes that
+the standard, so A14 passed the mutated file and the runner threw
+`CONTROL FAILED: A14 passed a file whose accent was mutated to the placeholder` **before doing any
+work on any ticker**.
+
+**Its own no-op guard did not catch it, and the reason is worth keeping.** The old replacement
+wrote `--accent-light: #1F5993` with single spacing while the files carry aligned spacing, so the
+text **did** change, the guard was satisfied, and the control failed on the following line
+instead. **A guard that only asks whether anything changed cannot tell a meaningful change from a
+whitespace one.**
+
+Repaired to mutate to `#1F5994`, one unit off the standard in the blue channel, matching the
+mutation in `82_mutate.ps1`. Verified directly: `ctlDirty.Pass=False`, `ctlClean.Pass=True`.
+
+**Why the rebind pass missed it.** Arm 8 asserted that no check body carries an absolute path to
+the specification, and it was given three files to look at. **The runners were not among them**,
+and no arm asked the broader question: which live instruments hold an accent literal at all.
+
+### Done as one operation, because the property is all-or-nothing
+
+`WA_rename_a14.py` rewrites all five files in one run with one read-back. 4.116a recorded why:
+a rename landing in some tables and not others **drops the check out of scope silently**, because
+the runner would report 40 checks and nothing enumerates which one is missing.
+
+Verified after: **41 checks per file, 1394 rows, A14 present as `in-scope` on all 34, 18 arms
+passing, 1418 mutants killed, none survived, nothing unexercised.**
+
+### Two of the applier's own assertions were wrong, and both accused correct work
+
+- **`length plausible`** read `len(back) >= len(s) - 5` and failed on three files. The new key is
+  **four characters shorter** than the old, so a file with twelve occurrences legitimately loses
+  forty eight bytes. Replaced with an exact expected delta. A loose bound that does not know what
+  the delta should be cannot tell a correct shrink from a truncation.
+- **The straggler sweep** walked the whole tree and reported thirteen files still holding the old
+  key. **Every one of them must keep it**: results files in `pass_documentation/`, the ledger in
+  `scratch/`, and the frozen snapshots under `preserve/` and `preserved/`. Those record what was
+  true when they were written, and renaming inside them would falsify the record. The sweep is now
+  over live instruments in `harness/` only.
+
+**That is twice in two passes that an assertion of mine failed against work that was correct**,
+after 4.117d recorded the same shape in an arm. The pattern is specific: an assertion written
+against an expected state rather than against the rule.
