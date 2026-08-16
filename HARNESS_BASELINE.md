@@ -758,3 +758,85 @@ passing, 1418 mutants killed, none survived, nothing unexercised.**
 **That is twice in two passes that an assertion of mine failed against work that was correct**,
 after 4.117d recorded the same shape in an arm. The pattern is specific: an assertion written
 against an expected state rather than against the rule.
+
+## Movement recorded on 16 August 2026: the population arm, which derives its own population
+
+**4.118b left one item owed: an arm that enumerates what it should check rather than being handed
+a list.** `VU` arm 8 was given three filenames, the runners were not among them, and a dead
+runner sat undetected for two passes. `WB_live_instrument_arms.ps1` removes that.
+
+### The population is computed from the dot-source and import graph
+
+```
+  instruments in harness/   264
+  LIVE, in the graph        104    at either end of an edge: loads something, or is loaded
+  one-shot, in no edge      160    reported, never failed
+```
+
+**A hand-written list of "the files that matter" is the same defect wearing a different hat**:
+correct the day it is written, silently incomplete afterwards. A new shared instrument now joins
+the population **by being loaded**, with nobody remembering to add it.
+
+The distinction is not a judgement about importance. It is a property of the tree.
+
+### The six arms
+
+| Arm | What it asserts |
+|---|---|
+| 1 | negative control: each detector fires on a violation and stays silent on a clean form |
+| 2 | no live instrument names a check key the table does not define |
+| 3 | no live instrument holds an absolute path to the specification |
+| 4 | a live instrument holding the standard accent also reads it from the specification |
+| 4b | the comment stripper keeps operative literals and removes commented ones |
+| 4c | every exemption still applies |
+| 5 | the census scanned a non-empty population and the counts add up |
+| 6 | the graph reaches the known shared apparatus |
+
+**Arm 2 is the general form of the A14 near-miss.** A rename landing in some tables and not others
+leaves a reference to a key nothing defines, and the only symptom is a check quietly not running.
+130 key references checked against 41 registered checks, 0 dangling.
+
+**Arm 6 is a floor under the edge parser.** If the parser silently matched nothing, every file
+would be classified one-shot and arms 2 to 4 would scan an empty set while reporting success.
+
+### Two defects in the arms, both caught by the arms
+
+**Arm 3 found its own negative control.** The violating sample was written as a literal absolute
+path, this file is live, so the file violated the rule it tests. Excluding the file from its own
+scan would have fixed the symptom by creating a blind spot in the very instrument meant to remove
+one. The sample is now assembled at runtime from fragments.
+
+**The comment stripper deleted every hex literal in the tree.** A hex colour begins with the same
+character as a comment, and the first version cut from the first `#` on every line. Arm 4 then
+reported **`holders=0`**, a perfectly clean result produced by an instrument that had deleted its
+own evidence. **Arm 4b caught it, which is the entire reason arm 4b exists.** The comment now
+starts at the first `#` that is not the start of a six-digit hex token.
+
+### What arm 4 found
+
+```
+  holders=7   exempt=6   offenders=0
+```
+
+**`AB_engine.py` held the eight standard literals as a hardcoded tuple**, and every builder
+imports it, so it was the most widely shared duplicate of the standard in the tree. It now reads
+them from section 3.3. The values are deduped, because wash and line share one `rgba` prefix and
+the old tuple held six for that reason.
+
+**Six per-ticker builders are exempted, named, with the reason recorded**, and arm 4c fails if an
+exemption stops applying. They hold the standard as the **before** text of a palette edit whose
+after is a derived accent.
+
+**The risk is smaller than it looks, and it is measured rather than assumed.**
+`VP_engine_anchor_dryrun.py` reports those six builders' `palette` anchors as
+`declared 1, live template has 0`: **111 of 117 anchors match the live templates and the 6 that do
+not are all `palette`.** A re-run would therefore **abort on the anchor** rather than quietly
+write a derived accent over the standard. The builders are records of how APLD, BTDR and GLXY were
+built, and they are already incompatible with the eight-token template.
+
+### State after
+
+```
+  CHECKS RUN 1394   IN-SCOPE FAILS 0   group C 0
+  WB arms 11/11     VU arms 18/18     VQ engine arms 5/5
+```
