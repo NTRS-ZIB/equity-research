@@ -1015,3 +1015,55 @@ the mechanism saved, so it rests on those figures being right.
 **Owed: the arm suites should save and restore the open state, as `WK` does.** Until they do, a
 pass that runs them as a regression loses its own baseline, and the more careful the pass, the
 more likely it is to hit this.
+
+## Movement recorded on 16 August 2026: both templates moved to v2.01, and the engine repointed
+
+**Written under explicit user authorisation**, on the same footing as the specification edits. The
+templates are untouchable by every mode, build included, so the close halted on their hashes and
+that is the guard working rather than a defect.
+
+```
+  before   34 deliverables v2.01   2 templates v1.99   spec v2.01
+  after    36 files at v2.01
+```
+
+**Why it became urgent rather than staying inert.** Section 11 builds a new ticker by copying the
+templates. Until `-BuiltPaths` landed, nothing could add a ticker at all, so a stale template
+sentinel could not reach a delivered file. It was the first thing a first build would have
+carried, and `C37` would have failed the new pair on sight.
+
+### Four parts, and the third is the one that was easy to miss
+
+| | |
+|---|---|
+| 1 | the two live templates, two sentinel tags each |
+| 2 | a new preserved snapshot at `templates_v201` |
+| 3 | **`AB_engine.py` repointed to it, checksums moved** |
+| 4 | `templates_v199` left frozen |
+
+**The engine does not build from the live templates.** It loads preserved copies and verifies them
+by checksum, deliberately, so a build cannot drift under a template edit. **Updating only the live
+files would have left every future build still emitting v1.99**, and the checksum guard would have
+kept passing, because the preserved copies would have been untouched and self-consistent with
+their own recorded hashes.
+
+`templates_v199` is not superseded and was not deleted. It is the record of the shape the 34
+existing deliverables were built from, and a snapshot that changes is not a record.
+
+The script deliberately does **not** edit `AB_engine.py`. It prints the new checksums and stops,
+so the guard is moved by a hand that has seen the values rather than by the same run that
+produced them.
+
+### R1_tests.ps1 now passes
+
+It had been failing on sentinel uniformity since v2.00, and was the only instrument that could
+see the divergence: `C37` runs over the 34 deliverables and the templates are not among them.
+
+### A CORRECTION to the entry above this one
+
+That entry says `R1_tests.ps1` and `W8_two_hop.ps1` both destroy the live open state. **`R1_tests.ps1`
+does not.** It was run again in this pass and the open state survived intact, still carrying the
+pre-edit template hash. On that evidence the earlier destruction was `W8_two_hop.ps1` alone.
+
+The correction is made because a wrong entry about which instrument is unsafe is worse than no
+entry: it would send a later pass to harden the wrong file and leave the real one alone.
