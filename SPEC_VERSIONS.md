@@ -13,6 +13,7 @@ set. A later pass diffs against the snapshot named below.
 
 | Version stated in the file | Snapshot taken | Bytes | Lines | sha256 | Snapshot file |
 |---|---|---|---|---|---|
+| **Version 2.01 · Effective August 16, 2026** | 2026-08-16T2340Z | 146,028 | 2,407 | 5fc7a5f2b037ce9e424a18ee8790485d4ad22368069e4ba4f719f6b4f9159ebc | HOUSE_STYLE.v2.01.2026-08-16T2340Z.5fc7a5f2.md |
 | **Version 2.00 · Effective August 16, 2026** | 2026-08-16T2200Z | 144,921 | 2,393 | `d868664332f249b65fd266e844998bcc708650d0c3b2040188b9ae42161c7a0e` | `HOUSE_STYLE.v2.00.2026-08-16T2200Z.d8686643.md` |
 | **Version 1.99 · Effective August 12, 2026** | 2026-08-12T2149Z | 153,120 | 2,508 | `2ec6041212e2438f0bc887c08a8d36199426da9537a82caca18a2d73f44191bf` | `HOUSE_STYLE.v1.99.2026-08-12T2149Z.2ec60412.md` |
 | **Version 1.98 · Effective August 10, 2026** | 2026-08-12T2149Z | 150,388 | 2,459 | `8a245ec485bc394d03f0114815cfacda50d2bdcf5b734204c4a4678aaf771169` | `HOUSE_STYLE.v1.98.2026-08-12T2149Z.8a245ec4.md` |
