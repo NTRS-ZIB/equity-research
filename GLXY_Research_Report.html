@@ -23,31 +23,23 @@
    PER-TICKER PALETTE
    ========================================================================= */
 :root{
-  /* Galaxy's wordmark is set in white on near-black, so it carries no color of
-     its own. The accent comes from the brand blue the company uses across its
-     own site chrome, #0000EE. That blue sits ten degrees from the violet this
-     palette reserves for analyst assumptions, so the hue is rotated from 240 to
-     230 to keep identity clear of meaning; saturation is brought to 72 percent
-     and lightness to 42 percent so it holds at 14px on white. */
-  /*
-     Dark mode holds the hue and saturation and lifts lightness until the
-     accent clears the paper it sits on, landing on #6A7FE7. The hover
-     color deepens away from that paper at #96A4EE, and the wash and
-     line tints carry the same color at six and twenty two percent.
-  */
-  --accent-light:      #1E38B8;
-  --accent-deep-light: #172A8C;
-  --accent-wash-light: rgba(30,56,184,0.06);
-  --accent-line-light: rgba(30,56,184,0.22);
+  /* The accent is STANDARD across every ticker and identical in every file.
+     These are the values themselves and not a placeholder, and no file derives
+     its own. The derivation note that stood here was retired together with the
+     rule that required it, when the palette was standardised. */
+  --accent-light:      #1F5993;
+  --accent-deep-light: #164069;
+  --accent-wash-light: rgba(31,89,147,0.06);
+  --accent-line-light: rgba(31,89,147,0.22);
 
-  --accent-dark:       #6A7FE7;
-  --accent-deep-dark:  #96A4EE;
-  --accent-wash-dark:  rgba(106,127,231,0.06);
-  --accent-line-dark:  rgba(106,127,231,0.22);
+  --accent-dark:       #3987D5;
+  --accent-deep-dark:  #63A0DE;
+  --accent-wash-dark:  rgba(57,135,213,0.06);
+  --accent-line-dark:  rgba(57,135,213,0.22);
 }
 
 /* ============================================================================
-   SHARED STYLESHEET v1.99 : BEGIN
+   SHARED STYLESHEET v2.00 : BEGIN
    ========================================================================= */
 :root{
   color-scheme: light dark;
@@ -372,7 +364,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   section{page-break-inside:avoid}
 }
 /* ============================================================================
-   SHARED STYLESHEET v1.99 : END
+   SHARED STYLESHEET v2.00 : END
    ========================================================================= */
 </style>
 </head>

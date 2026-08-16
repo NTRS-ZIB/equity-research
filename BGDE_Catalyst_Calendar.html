@@ -23,32 +23,23 @@
    PER-TICKER PALETTE
    ========================================================================= */
 :root{
-  /* Accent derived from the Big Digital Energy mark. The logo carries two
-     colors: a chartreuse symbol #B3F513 and an off-white wordmark #EAEAE5.
-     The wordmark is achromatic, so the chartreuse is the brand color.
-     #B3F513 is H78 S92% L52%: too light and too saturated to hold at 14px on
-     white. Normalized to H78 S72% L28%, giving #5D7B14.
-     Hue 78 sits clear of every semantic hue by more than 20 degrees, so the
-     color is carried unrotated. */
-  /*
-     Dark mode holds the hue and saturation and lifts lightness until the
-     accent clears the paper it sits on, landing on #719518. The hover
-     color deepens away from that paper at #92C11F, and the wash and
-     line tints carry the same color at six and twenty two percent.
-  */
-  --accent-light:      #5D7B14;
-  --accent-deep-light: #3C4F0D;
-  --accent-wash-light: rgba(93,123,20,0.06);
-  --accent-line-light: rgba(93,123,20,0.22);
+  /* The accent is STANDARD across every ticker and identical in every file.
+     These are the values themselves and not a placeholder, and no file derives
+     its own. The derivation note that stood here was retired together with the
+     rule that required it, when the palette was standardised. */
+  --accent-light:      #1F5993;
+  --accent-deep-light: #164069;
+  --accent-wash-light: rgba(31,89,147,0.06);
+  --accent-line-light: rgba(31,89,147,0.22);
 
-  --accent-dark:       #719518;
-  --accent-deep-dark:  #92C11F;
-  --accent-wash-dark:  rgba(113,149,24,0.06);
-  --accent-line-dark:  rgba(113,149,24,0.22);
+  --accent-dark:       #3987D5;
+  --accent-deep-dark:  #63A0DE;
+  --accent-wash-dark:  rgba(57,135,213,0.06);
+  --accent-line-dark:  rgba(57,135,213,0.22);
 }
 
 /* ============================================================================
-   SHARED STYLESHEET v1.99 : BEGIN
+   SHARED STYLESHEET v2.00 : BEGIN
    ========================================================================= */
 :root{
   color-scheme: light dark;
@@ -373,7 +364,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   section{page-break-inside:avoid}
 }
 /* ============================================================================
-   SHARED STYLESHEET v1.99 : END
+   SHARED STYLESHEET v2.00 : END
    ========================================================================= */
 </style>
 </head>

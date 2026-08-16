@@ -23,31 +23,23 @@
    PER-TICKER PALETTE
    ========================================================================= */
 :root{
-  /* CleanSpark's brand blue, #1935A9, taken from the company's own site chrome,
-     where it is published as the theme color and as the mask-icon color. The
-     mark carries the same blue as a deep field behind a white spark glyph. It is
-     a strongly saturated blue at hue 228. Held at that hue and eased to a 72%
-     saturation so it holds on white at small sizes, it becomes #1B36A7. The hue sits clear of every meaning-bearing
-     color in this document, so no rotation was needed. */
-  /*
-     Dark mode holds the hue and saturation and lifts lightness until the
-     accent clears the paper it sits on, landing on #6A82E7. The hover
-     color deepens away from that paper at #96A7EE, and the wash and
-     line tints carry the same color at six and twenty two percent.
-  */
-  --accent-light:      #1B36A7;
-  --accent-deep-light: #14287B;
-  --accent-wash-light: rgba(27,54,167,0.06);
-  --accent-line-light: rgba(27,54,167,0.22);
+  /* The accent is STANDARD across every ticker and identical in every file.
+     These are the values themselves and not a placeholder, and no file derives
+     its own. The derivation note that stood here was retired together with the
+     rule that required it, when the palette was standardised. */
+  --accent-light:      #1F5993;
+  --accent-deep-light: #164069;
+  --accent-wash-light: rgba(31,89,147,0.06);
+  --accent-line-light: rgba(31,89,147,0.22);
 
-  --accent-dark:       #6A82E7;
-  --accent-deep-dark:  #96A7EE;
-  --accent-wash-dark:  rgba(106,130,231,0.06);
-  --accent-line-dark:  rgba(106,130,231,0.22);
+  --accent-dark:       #3987D5;
+  --accent-deep-dark:  #63A0DE;
+  --accent-wash-dark:  rgba(57,135,213,0.06);
+  --accent-line-dark:  rgba(57,135,213,0.22);
 }
 
 /* ============================================================================
-   SHARED STYLESHEET v1.99 : BEGIN
+   SHARED STYLESHEET v2.00 : BEGIN
    ========================================================================= */
 :root{
   color-scheme: light dark;
@@ -372,7 +364,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   section{page-break-inside:avoid}
 }
 /* ============================================================================
-   SHARED STYLESHEET v1.99 : END
+   SHARED STYLESHEET v2.00 : END
    ========================================================================= */
 </style>
 </head>

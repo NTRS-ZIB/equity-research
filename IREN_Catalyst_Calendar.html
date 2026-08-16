@@ -23,30 +23,23 @@
    PER-TICKER PALETTE
    ========================================================================= */
 :root{
-  /* The company mark is a green field carrying the letterforms in dark navy.
-     The green is the brand color: #71DA80 as published, the dominant color of the
-     mark. Darkened for white paper to #21822F, which holds its
-     hue. No rotation was needed; the green
-     sits well clear of the bands reserved for meaning. */
-  /*
-     Dark mode holds the hue and saturation and lifts lightness until the
-     accent clears the paper it sits on, landing on #279A38. The hover
-     color deepens away from that paper at #32C347, and the wash and
-     line tints carry the same color at six and twenty two percent.
-  */
-  --accent-light:      #21822F;
-  --accent-deep-light: #175920;
-  --accent-wash-light: rgba(33,130,47,0.06);
-  --accent-line-light: rgba(33,130,47,0.22);
+  /* The accent is STANDARD across every ticker and identical in every file.
+     These are the values themselves and not a placeholder, and no file derives
+     its own. The derivation note that stood here was retired together with the
+     rule that required it, when the palette was standardised. */
+  --accent-light:      #1F5993;
+  --accent-deep-light: #164069;
+  --accent-wash-light: rgba(31,89,147,0.06);
+  --accent-line-light: rgba(31,89,147,0.22);
 
-  --accent-dark:       #279A38;
-  --accent-deep-dark:  #32C347;
-  --accent-wash-dark:  rgba(39,154,56,0.06);
-  --accent-line-dark:  rgba(39,154,56,0.22);
+  --accent-dark:       #3987D5;
+  --accent-deep-dark:  #63A0DE;
+  --accent-wash-dark:  rgba(57,135,213,0.06);
+  --accent-line-dark:  rgba(57,135,213,0.22);
 }
 
 /* ============================================================================
-   SHARED STYLESHEET v1.99 : BEGIN
+   SHARED STYLESHEET v2.00 : BEGIN
    ========================================================================= */
 :root{
   color-scheme: light dark;
@@ -371,7 +364,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   section{page-break-inside:avoid}
 }
 /* ============================================================================
-   SHARED STYLESHEET v1.99 : END
+   SHARED STYLESHEET v2.00 : END
    ========================================================================= */
 </style>
 </head>

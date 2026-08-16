@@ -23,30 +23,23 @@
    PER-TICKER PALETTE
    ========================================================================= */
 :root{
-  /* Teal, taken from the WhiteFiber mark. The published brand color is #122F36, and
-     normalized for paper it becomes #245D6B. No rotation away from the green, red,
-     amber and violet that carry meaning in this document was needed. The accent is
-     identity only: it marks the wordmark, the section numbers, the masthead spine and
-     links, and never whether a figure is good or bad. */
-  /*
-     Dark mode holds the hue and saturation and lifts lightness until the
-     accent clears the paper it sits on, landing on #3992A8. The hover
-     color deepens away from that paper at #50ADC4, and the wash and
-     line tints carry the same color at six and twenty two percent.
-  */
-  --accent-light:      #245D6B;
-  --accent-deep-light: #173C45;
-  --accent-wash-light: rgba(36,93,107,0.06);
-  --accent-line-light: rgba(36,93,107,0.22);
+  /* The accent is STANDARD across every ticker and identical in every file.
+     These are the values themselves and not a placeholder, and no file derives
+     its own. The derivation note that stood here was retired together with the
+     rule that required it, when the palette was standardised. */
+  --accent-light:      #1F5993;
+  --accent-deep-light: #164069;
+  --accent-wash-light: rgba(31,89,147,0.06);
+  --accent-line-light: rgba(31,89,147,0.22);
 
-  --accent-dark:       #3992A8;
-  --accent-deep-dark:  #50ADC4;
-  --accent-wash-dark:  rgba(57,146,168,0.06);
-  --accent-line-dark:  rgba(57,146,168,0.22);
+  --accent-dark:       #3987D5;
+  --accent-deep-dark:  #63A0DE;
+  --accent-wash-dark:  rgba(57,135,213,0.06);
+  --accent-line-dark:  rgba(57,135,213,0.22);
 }
 
 /* ============================================================================
-   SHARED STYLESHEET v1.99 : BEGIN
+   SHARED STYLESHEET v2.00 : BEGIN
    ========================================================================= */
 :root{
   color-scheme: light dark;
@@ -371,7 +364,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   section{page-break-inside:avoid}
 }
 /* ============================================================================
-   SHARED STYLESHEET v1.99 : END
+   SHARED STYLESHEET v2.00 : END
    ========================================================================= */
 </style>
 </head>

@@ -23,31 +23,23 @@
    PER-TICKER PALETTE
    ========================================================================= */
 :root{
-  /* Sampled from the New Era Energy & Digital wordmark, whose lettering is white
-     on a deep navy field; the navy is the mark's only chromatic color.
-     Raw #162A35 (H201 S41 L15) is too dark and too weak to hold
-     at small sizes on white, so saturation lifts to 45% and lightness to 28%,
-     giving #275168. Hue is unchanged from the mark: at 201
-     it clears every semantic hue by more than 40 degrees, so no rotation applies. */
-  /*
-     Dark mode holds the hue and saturation and lifts lightness until the
-     accent clears the paper it sits on, landing on #438BB2. The hover
-     color deepens away from that paper at #63A2C5, and the wash and
-     line tints carry the same color at six and twenty two percent.
-  */
-  --accent-light:      #275168;
-  --accent-deep-light: #193443;
-  --accent-wash-light: rgba(39,81,104,0.06);
-  --accent-line-light: rgba(39,81,104,0.22);
+  /* The accent is STANDARD across every ticker and identical in every file.
+     These are the values themselves and not a placeholder, and no file derives
+     its own. The derivation note that stood here was retired together with the
+     rule that required it, when the palette was standardised. */
+  --accent-light:      #1F5993;
+  --accent-deep-light: #164069;
+  --accent-wash-light: rgba(31,89,147,0.06);
+  --accent-line-light: rgba(31,89,147,0.22);
 
-  --accent-dark:       #438BB2;
-  --accent-deep-dark:  #63A2C5;
-  --accent-wash-dark:  rgba(67,139,178,0.06);
-  --accent-line-dark:  rgba(67,139,178,0.22);
+  --accent-dark:       #3987D5;
+  --accent-deep-dark:  #63A0DE;
+  --accent-wash-dark:  rgba(57,135,213,0.06);
+  --accent-line-dark:  rgba(57,135,213,0.22);
 }
 
 /* ============================================================================
-   SHARED STYLESHEET v1.99 : BEGIN
+   SHARED STYLESHEET v2.00 : BEGIN
    ========================================================================= */
 :root{
   color-scheme: light dark;
@@ -372,7 +364,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   section{page-break-inside:avoid}
 }
 /* ============================================================================
-   SHARED STYLESHEET v1.99 : END
+   SHARED STYLESHEET v2.00 : END
    ========================================================================= */
 </style>
 </head>

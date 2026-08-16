@@ -23,32 +23,23 @@
    PER-TICKER PALETTE
    ========================================================================= */
 :root{
-  /* TeraWulf's mark is a wolf-head shield in a single blue-gray family. The
-     dominant color is the shield's outer gradient, #D9E4EF to
-     #B8C9D6, whose midpoint is #C8D6E2 (hue 207.7, saturation 31%, lightness
-     84%). Normalized for white paper the saturation rises to 45% and the
-     lightness falls to 42%, giving #3B6F9B. The hue
-     is carried through unchanged: it sits 42 degrees clear of the nearest
-     meaning-bearing color, so no rotation was needed. */
-  /*
-     Dark mode holds the hue and saturation and lifts lightness until the
-     accent clears the paper it sits on, landing on #4E89BB. The hover
-     color deepens away from that paper at #72A2CA, and the wash and
-     line tints carry the same color at six and twenty two percent.
-  */
-  --accent-light:      #3B6F9B;
-  --accent-deep-light: #2D5476;
-  --accent-wash-light: rgba(59,111,155,0.06);
-  --accent-line-light: rgba(59,111,155,0.22);
+  /* The accent is STANDARD across every ticker and identical in every file.
+     These are the values themselves and not a placeholder, and no file derives
+     its own. The derivation note that stood here was retired together with the
+     rule that required it, when the palette was standardised. */
+  --accent-light:      #1F5993;
+  --accent-deep-light: #164069;
+  --accent-wash-light: rgba(31,89,147,0.06);
+  --accent-line-light: rgba(31,89,147,0.22);
 
-  --accent-dark:       #4E89BB;
-  --accent-deep-dark:  #72A2CA;
-  --accent-wash-dark:  rgba(78,137,187,0.06);
-  --accent-line-dark:  rgba(78,137,187,0.22);
+  --accent-dark:       #3987D5;
+  --accent-deep-dark:  #63A0DE;
+  --accent-wash-dark:  rgba(57,135,213,0.06);
+  --accent-line-dark:  rgba(57,135,213,0.22);
 }
 
 /* ============================================================================
-   SHARED STYLESHEET v1.99 : BEGIN
+   SHARED STYLESHEET v2.00 : BEGIN
    ========================================================================= */
 :root{
   color-scheme: light dark;
@@ -373,7 +364,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   section{page-break-inside:avoid}
 }
 /* ============================================================================
-   SHARED STYLESHEET v1.99 : END
+   SHARED STYLESHEET v2.00 : END
    ========================================================================= */
 </style>
 </head>

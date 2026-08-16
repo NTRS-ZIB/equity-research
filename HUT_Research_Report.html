@@ -23,33 +23,23 @@
    PER-TICKER PALETTE
    ========================================================================= */
 :root{
-  /* Hut 8's wordmark and icon are achromatic, so the mark carries no
-     color to take. The accent therefore comes
-     from the brand color in the site chrome, which Hut 8 declares as its own
-     token: #B3FF00, a chartreuse at hue 77.9, saturation 100%, lightness 50%.
-     Normalized for white paper the saturation falls to 72% and the lightness to
-     28%, giving #5C7B14. The hue is carried through
-     unchanged: it sits 38.9 degrees clear of the nearest meaning-bearing color,
-     so no rotation was needed. */
-  /*
-     Dark mode holds the hue and saturation and lifts lightness until the
-     accent clears the paper it sits on, landing on #709518. The hover
-     color deepens away from that paper at #90C11F, and the wash and
-     line tints carry the same color at six and twenty two percent.
-  */
-  --accent-light:      #5C7B14;
-  --accent-deep-light: #3B4F0D;
-  --accent-wash-light: rgba(92,123,20,0.06);
-  --accent-line-light: rgba(92,123,20,0.22);
+  /* The accent is STANDARD across every ticker and identical in every file.
+     These are the values themselves and not a placeholder, and no file derives
+     its own. The derivation note that stood here was retired together with the
+     rule that required it, when the palette was standardised. */
+  --accent-light:      #1F5993;
+  --accent-deep-light: #164069;
+  --accent-wash-light: rgba(31,89,147,0.06);
+  --accent-line-light: rgba(31,89,147,0.22);
 
-  --accent-dark:       #709518;
-  --accent-deep-dark:  #90C11F;
-  --accent-wash-dark:  rgba(112,149,24,0.06);
-  --accent-line-dark:  rgba(112,149,24,0.22);
+  --accent-dark:       #3987D5;
+  --accent-deep-dark:  #63A0DE;
+  --accent-wash-dark:  rgba(57,135,213,0.06);
+  --accent-line-dark:  rgba(57,135,213,0.22);
 }
 
 /* ============================================================================
-   SHARED STYLESHEET v1.99 : BEGIN
+   SHARED STYLESHEET v2.00 : BEGIN
    ========================================================================= */
 :root{
   color-scheme: light dark;
@@ -374,7 +364,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   section{page-break-inside:avoid}
 }
 /* ============================================================================
-   SHARED STYLESHEET v1.99 : END
+   SHARED STYLESHEET v2.00 : END
    ========================================================================= */
 </style>
 </head>

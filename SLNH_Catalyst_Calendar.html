@@ -23,32 +23,23 @@
    PER-TICKER PALETTE
    ========================================================================= */
 :root{
-  /* Soluna wordmark blue, the brand color of record. The mark carries two
-     chromatic colors over a black wordmark: this blue on the triangular "A" and
-     an orange, #CB5828, on the "O". The orange normalizes to hue 18 and sits 13.7
-     degrees from the red used for negative figures, so it is not available as an
-     accent. Raw #2B76BC is H209 S63 L45. Saturation is unchanged and lightness is
-     pulled to 42 for paper. The hue is unrotated: 209 sits
-     41 degrees off the nearest semantic hue. */
-  /*
-     Dark mode holds the hue and saturation and lifts lightness until the
-     accent clears the paper it sits on, landing on #3887D1. The hover
-     color deepens away from that paper at #61A0DB, and the wash and
-     line tints carry the same color at six and twenty two percent.
-  */
-  --accent-light:      #286DAE;
-  --accent-deep-light: #1E5385;
-  --accent-wash-light: rgba(40,109,174,0.06);
-  --accent-line-light: rgba(40,109,174,0.22);
+  /* The accent is STANDARD across every ticker and identical in every file.
+     These are the values themselves and not a placeholder, and no file derives
+     its own. The derivation note that stood here was retired together with the
+     rule that required it, when the palette was standardised. */
+  --accent-light:      #1F5993;
+  --accent-deep-light: #164069;
+  --accent-wash-light: rgba(31,89,147,0.06);
+  --accent-line-light: rgba(31,89,147,0.22);
 
-  --accent-dark:       #3887D1;
-  --accent-deep-dark:  #61A0DB;
-  --accent-wash-dark:  rgba(56,135,209,0.06);
-  --accent-line-dark:  rgba(56,135,209,0.22);
+  --accent-dark:       #3987D5;
+  --accent-deep-dark:  #63A0DE;
+  --accent-wash-dark:  rgba(57,135,213,0.06);
+  --accent-line-dark:  rgba(57,135,213,0.22);
 }
 
 /* ============================================================================
-   SHARED STYLESHEET v1.99 : BEGIN
+   SHARED STYLESHEET v2.00 : BEGIN
    ========================================================================= */
 :root{
   color-scheme: light dark;
@@ -373,7 +364,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   section{page-break-inside:avoid}
 }
 /* ============================================================================
-   SHARED STYLESHEET v1.99 : END
+   SHARED STYLESHEET v2.00 : END
    ========================================================================= */
 </style>
 </head>

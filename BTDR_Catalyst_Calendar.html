@@ -23,36 +23,23 @@
    PER-TICKER PALETTE
    ========================================================================= */
 :root{
-  /* Superseded August 5, 2026. The revision note below this block carries the value that ships. */
-  /* Bitdeer's wordmark is drawn in a green-to-teal gradient over an amber
-     secondary. The green is the dominant color of the mark and averages to
-     #3FD89F. That green falls within two degrees of the green this palette
-     reserves for favorable figures, so the hue is rotated from 158 to 177,
-     toward the teal the mark already leans to, keeping identity clear of
-     meaning. Saturation is held at 66 percent and lightness brought from 55 to
-     30 percent so the color holds at 14px on white. */
-  /*
-     On the tinted panels the previous teal sat a little too close to the
-     paper to stay legible, so the identity color is now #176E6A, the same hue
-     and saturation carried to a darker value.
-     Dark mode holds the hue and saturation and lifts lightness until the
-     accent clears the paper it sits on, landing on #1F9892. The hover
-     color deepens away from that paper at #28C3BB, and the wash and
-     line tints carry the same color at six and twenty two percent.
-  */
-  --accent-light:      #176E6A;
-  --accent-deep-light: #0E4441;
-  --accent-wash-light: rgba(23,110,106,0.06);
-  --accent-line-light: rgba(23,110,106,0.22);
+  /* The accent is STANDARD across every ticker and identical in every file.
+     These are the values themselves and not a placeholder, and no file derives
+     its own. The derivation note that stood here was retired together with the
+     rule that required it, when the palette was standardised. */
+  --accent-light:      #1F5993;
+  --accent-deep-light: #164069;
+  --accent-wash-light: rgba(31,89,147,0.06);
+  --accent-line-light: rgba(31,89,147,0.22);
 
-  --accent-dark:       #1F9892;
-  --accent-deep-dark:  #28C3BB;
-  --accent-wash-dark:  rgba(31,152,146,0.06);
-  --accent-line-dark:  rgba(31,152,146,0.22);
+  --accent-dark:       #3987D5;
+  --accent-deep-dark:  #63A0DE;
+  --accent-wash-dark:  rgba(57,135,213,0.06);
+  --accent-line-dark:  rgba(57,135,213,0.22);
 }
 
 /* ============================================================================
-   SHARED STYLESHEET v1.99 : BEGIN
+   SHARED STYLESHEET v2.00 : BEGIN
    ========================================================================= */
 :root{
   color-scheme: light dark;
@@ -377,7 +364,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   section{page-break-inside:avoid}
 }
 /* ============================================================================
-   SHARED STYLESHEET v1.99 : END
+   SHARED STYLESHEET v2.00 : END
    ========================================================================= */
 </style>
 </head>

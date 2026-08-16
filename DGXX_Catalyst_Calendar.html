@@ -21,33 +21,25 @@
 <style>
 /* ============================================================================
    PER-TICKER PALETTE
-   ----------------------------------------------------------------------------
-   Accent derived from the company wordmark. Raw brand gold #FFD700 at hue 51,
-   the dominant chromatic color in the mark. Normalized for paper to #72711D:
-   hue 59, saturation 60%, lightness 28%, which reads as a dark
-   olive. Rotated 8.4 degrees up from the raw hue because gold at hue 51 sits
-   inside the caution band, and an identity color there would read as a warning.
    ========================================================================= */
 :root{
-  /*
-     Dark mode holds the hue and saturation and lifts lightness until the
-     accent clears the paper it sits on, landing on #8A8923. The hover
-     color deepens away from that paper at #B3B12E, and the wash and
-     line tints carry the same color at six and twenty two percent.
-  */
-  --accent-light:      #72711D;
-  --accent-deep-light: #494912;
-  --accent-wash-light: rgba(114,113,29,0.06);
-  --accent-line-light: rgba(114,113,29,0.22);
+  /* The accent is STANDARD across every ticker and identical in every file.
+     These are the values themselves and not a placeholder, and no file derives
+     its own. The derivation note that stood here was retired together with the
+     rule that required it, when the palette was standardised. */
+  --accent-light:      #1F5993;
+  --accent-deep-light: #164069;
+  --accent-wash-light: rgba(31,89,147,0.06);
+  --accent-line-light: rgba(31,89,147,0.22);
 
-  --accent-dark:       #8A8923;
-  --accent-deep-dark:  #B3B12E;
-  --accent-wash-dark:  rgba(138,137,35,0.06);
-  --accent-line-dark:  rgba(138,137,35,0.22);
+  --accent-dark:       #3987D5;
+  --accent-deep-dark:  #63A0DE;
+  --accent-wash-dark:  rgba(57,135,213,0.06);
+  --accent-line-dark:  rgba(57,135,213,0.22);
 }
 
 /* ============================================================================
-   SHARED STYLESHEET v1.99 : BEGIN
+   SHARED STYLESHEET v2.00 : BEGIN
    ========================================================================= */
 :root{
   color-scheme: light dark;
@@ -372,7 +364,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   section{page-break-inside:avoid}
 }
 /* ============================================================================
-   SHARED STYLESHEET v1.99 : END
+   SHARED STYLESHEET v2.00 : END
    ========================================================================= */
 </style>
 </head>
