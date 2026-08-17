@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141C24" media="(prefers-color-scheme: dark)">
+<title>RIOT · Riot Platforms, Inc. · Equity Research Report · as of August 16, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script>
+(function(){
+  var t=null;
+  try{ t=localStorage.getItem('theme'); }catch(e){}
+  if(t==='light'||t==='dark') document.documentElement.dataset.theme=t;
+})();
+</script>
+<style>
+/* ============================================================================
+   PER-TICKER PALETTE
+   ========================================================================= */
+:root{
+  /* The accent is STANDARD across every ticker and identical in every file.
+     These are the values themselves and not a placeholder, and no file derives
+     its own. The derivation note that stood here was retired together with the
+     rule that required it, when the palette was standardized. */
+  --accent-light:      #1F5993;
+  --accent-deep-light: #164069;
+  --accent-wash-light: rgba(31,89,147,0.06);
+  --accent-line-light: rgba(31,89,147,0.22);
+
+  --accent-dark:       #3987D5;
+  --accent-deep-dark:  #63A0DE;
+  --accent-wash-dark:  rgba(57,135,213,0.06);
+  --accent-line-dark:  rgba(57,135,213,0.22);
+}
+
+/* ============================================================================
+   SHARED STYLESHEET v2.01 : BEGIN
+   ========================================================================= */
+:root{
+  color-scheme: light dark;
+
+  --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
+  --line:#DEE6EC;   --line-hard:#C0CDD7;
+  --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
+
+  --pos:#0B7A50;      --pos-bg:#E7F4EE;
+  --neg:#B02A21;      --neg-bg:#FBECEA;
+  --caution:#90600A;  --caution-bg:#FBF2E0;
+  --assume:#4F3FA3;   --assume-bg:#EFEDFA;
+
+  --display:'Archivo',ui-sans-serif,system-ui,'Helvetica Neue',Arial,sans-serif;
+  --body:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+
+  --measure:78ch;
+  --col:760px;
+  --accent:var(--accent-light);
+  --accent-deep:var(--accent-deep-light);
+  --accent-wash:var(--accent-wash-light);
+  --accent-line:var(--accent-line-light);
+}
+
+/* ---------- dark tokens, device following ---------- */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#141C24;
+    --canvas:#10161D;
+    --panel-2:#0D1218;
+    --line:#2E3A45;
+    --line-hard:#455360;
+    --ink:#E8EEF3;
+    --ink-dim:#AFBECB;
+    --ink-faint:#93A3B2;
+    --pos:#11B274;
+    --pos-bg:#113B2B;
+    --neg:#E06058;
+    --neg-bg:#3B1411;
+    --caution:#D38C0F;
+    --caution-bg:#3B2C11;
+    --assume:#897CCC;
+    --assume-bg:#1B1537;
+    --accent:var(--accent-dark);
+    --accent-deep:var(--accent-deep-dark);
+    --accent-wash:var(--accent-wash-dark);
+    --accent-line:var(--accent-line-dark);
+  }
+}
+/* ---------- dark tokens, explicit choice ---------- */
+:root[data-theme="dark"]{
+    --paper:#141C24;
+    --canvas:#10161D;
+    --panel-2:#0D1218;
+    --line:#2E3A45;
+    --line-hard:#455360;
+    --ink:#E8EEF3;
+    --ink-dim:#AFBECB;
+    --ink-faint:#93A3B2;
+    --pos:#11B274;
+    --pos-bg:#113B2B;
+    --neg:#E06058;
+    --neg-bg:#3B1411;
+    --caution:#D38C0F;
+    --caution-bg:#3B2C11;
+    --assume:#897CCC;
+    --assume-bg:#1B1537;
+    --accent:var(--accent-dark);
+    --accent-deep:var(--accent-deep-dark);
+    --accent-wash:var(--accent-wash-dark);
+    --accent-line:var(--accent-line-dark);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html,body{background:var(--canvas) !important;background-color:var(--canvas) !important}
+body{
+  margin:0;color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 22px 96px;background:var(--paper);
+      border-left:1px solid var(--line);border-right:1px solid var(--line)}
+p{max-width:var(--measure)}
+/* Boxed prose fills its container: the box supplies its own measure, so the
+   78ch cap applies to top-level running prose only. */
+.first li,.assume p,.note p,.cat p,.risk p,.logentry p,.oc p,.case p,
+.cat-meta,.logentry .basis{max-width:none}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:var(--accent-deep)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- masthead ---------- */
+.mast{padding:44px 0 26px;border-bottom:2px solid var(--line-hard);margin-bottom:8px;
+      position:relative;padding-left:20px}
+.mast::before{content:"";position:absolute;left:0;top:44px;bottom:26px;
+      width:4px;background:var(--accent)}
+.ticker{font-family:var(--mono);font-size:44px;font-weight:700;letter-spacing:-1px;
+      line-height:1;color:var(--accent);margin:0}
+.headline{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.22;
+      color:var(--ink);margin:16px 0 0}
+.functional{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--ink-faint);margin:18px 0 0}
+.mast-strip{display:flex;flex-wrap:wrap;gap:26px;margin-top:20px;padding-top:16px;
+      border-top:1px solid var(--line)}
+.mast-strip div{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint)}
+.mast-strip b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-top:3px}
+
+/* ---------- color scheme toggle ---------- */
+.themetoggle{position:absolute;top:44px;right:0;display:flex;
+      border:1px solid var(--line-hard);border-radius:2px;overflow:hidden}
+.themetoggle button{font-family:var(--mono);font-size:10.5px;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);
+      background:var(--paper);border:0;border-left:1px solid var(--line);
+      padding:4px 9px;cursor:pointer;transition:color .15s,background .15s}
+.themetoggle button:first-child{border-left:0}
+.themetoggle button:hover{color:var(--ink)}
+.themetoggle button[aria-pressed="true"]{color:var(--paper);background:var(--ink-dim)}
+html,body,.wrap,.cat,.note,.assume,.first,.oc,.tag,.logentry{
+      transition:background-color .18s,color .18s,border-color .18s}
+@media (max-width:720px){ .themetoggle{position:static;margin-bottom:18px;align-self:flex-start} }
+
+/* ---------- banner: framing ---------- */
+.first{background:var(--canvas);border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:20px 24px;margin:30px 0 12px}
+.first h2{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.04em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 12px}
+.first ol{margin:0;padding-left:20px}
+.first li{margin-bottom:9px}
+.first li:last-child{margin-bottom:0}
+
+/* ---------- sections ---------- */
+section{padding-top:38px}
+h2.sec{font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);
+      margin:0 0 4px;padding-bottom:10px;border-bottom:1px solid var(--line-hard);
+      display:flex;align-items:baseline;gap:12px}
+h2.sec .n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);
+      letter-spacing:.06em;flex:none}
+.sub{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);margin:10px 0 18px;
+      max-width:var(--measure)}
+h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink-dim);
+      margin:26px 0 8px}
+
+/* ---------- provenance tags (signature) ---------- */
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);
+      background:var(--panel-2);border:1px solid var(--line);
+      border-radius:2px;padding:1px 6px;vertical-align:1px;white-space:nowrap}
+
+/* ---------- assumption block ---------- */
+.assume{background:var(--assume-bg);border-left:4px solid var(--assume);
+      padding:16px 20px;margin:20px 0}
+.assume .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--assume);display:block;margin-bottom:7px}
+.assume p{margin:0}
+
+/* ---------- callouts ---------- */
+.note{border:1px solid var(--line);border-left:4px solid var(--ink-faint);
+      background:var(--canvas);padding:16px 20px;margin:20px 0}
+.note.pos{border-left-color:var(--pos);background:var(--pos-bg)}
+.note.neg{border-left-color:var(--neg);background:var(--neg-bg)}
+.note.caution{border-left-color:var(--caution);background:var(--caution-bg)}
+.note p{margin:0}
+.note p + p{margin-top:10px}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+thead th{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--ink-dim);text-align:left;
+      padding:9px 12px;border-bottom:2px solid var(--line-hard);white-space:nowrap}
+tbody td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--canvas)}
+td.num,th.num{font-family:var(--mono);text-align:right;white-space:nowrap}
+/* td.when marks a timing column. An unmarked cell counts as prose. */
+td.when{font-family:var(--mono);white-space:nowrap}
+td.lbl{font-weight:600}
+.pos-t{color:var(--pos);font-weight:600}
+.neg-t{color:var(--neg);font-weight:600}
+.caution-t{color:var(--caution);font-weight:600}
+
+/* ---------- cases ---------- */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.case{border:1px solid var(--line);border-top:3px solid var(--ink-faint);
+      background:var(--paper);padding:18px}
+.case.bull{border-top-color:var(--pos)}
+.case.bear{border-top-color:var(--neg)}
+.case h4{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 10px}
+.case.bull h4{color:var(--pos)} .case.bear h4{color:var(--neg)}
+.case p{font-size:15px;margin:0}
+.case .req{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+
+/* ---------- risks ---------- */
+.risk{border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:16px 20px;margin-bottom:12px}
+.risk.sev-high{border-left-color:var(--neg)}
+.risk.sev-med{border-left-color:var(--caution)}
+.risk.sev-low{border-left-color:var(--ink-faint)}
+.risk h4{font-family:var(--display);font-size:15.5px;font-weight:600;margin:0 0 6px;
+      display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.risk .sev{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase}
+.risk.sev-high .sev{color:var(--neg)}
+.risk.sev-med .sev{color:var(--caution)}
+.risk.sev-low .sev{color:var(--ink-faint)}
+.risk p{margin:0;font-size:15.5px}
+
+/* ---------- null categories ---------- */
+.nulls td.lbl{width:26%}
+.nulls .status{font-family:var(--mono);font-size:12px;white-space:nowrap}
+
+/* ---------- document log ---------- */
+.log{margin-top:14px}
+.logentry{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:12px}
+.logentry.current{border-left:4px solid var(--accent);background:var(--accent-wash)}
+.logentry .when{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);
+      display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.latest{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-line);
+      background:var(--paper);border-radius:2px;padding:1px 6px}
+.logentry .basis{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-bottom:12px}
+.logentry p{font-size:15.5px;margin:0 0 9px}
+.logentry p:last-child{margin-bottom:0}
+.correction{border:1px solid var(--neg);border-left:4px solid var(--neg);
+      background:var(--neg-bg);padding:12px 16px;margin-bottom:14px}
+.correction .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--neg);display:block;margin-bottom:5px}
+
+/* ---------- footer ---------- */
+footer{margin-top:44px;padding-top:22px;border-top:2px solid var(--line-hard)}
+footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width:none}
+.norec{border:1px solid var(--line-hard);background:var(--canvas);padding:16px 20px;
+      margin-top:20px;font-family:var(--mono);font-size:12.5px;color:var(--ink-dim)}
+
+/* ---------- catalyst cards (calendar) ---------- */
+.cat{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:14px;border-left:4px solid var(--line-hard)}
+.cat.up{border-left-color:var(--pos)}
+.cat.down{border-left-color:var(--neg)}
+.cat.two{border-left-color:var(--caution)}
+.cat.neutral{border-left-color:var(--ink-faint)}
+.cat-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.cid{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);flex:none}
+.cat-head h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink);
+      margin:0;flex:1 1 auto;min-width:200px}
+.dir{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;white-space:nowrap}
+.cat.up .dir{color:var(--pos)} .cat.down .dir{color:var(--neg)}
+.cat.two .dir{color:var(--caution)} .cat.neutral .dir{color:var(--ink-faint)}
+.cat-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:10px 0 12px;padding:9px 0;
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+      font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
+.cat-meta b{color:var(--ink);font-weight:600}
+.cat p{margin:0 0 9px;font-size:15.5px}
+.cat p:last-child{margin-bottom:0}
+.cat.resolved{background:var(--canvas);border-left-color:var(--ink-faint)}
+.cat.resolved .dir{color:var(--ink-faint)}
+
+/* ---------- horizon bands (calendar) ---------- */
+.band{display:flex;align-items:center;gap:14px;margin:30px 0 16px}
+.band-t{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--ink-dim);white-space:nowrap}
+.band-r{flex:1;height:1px;background:var(--line-hard)}
+.band-c{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);white-space:nowrap}
+
+/* ---------- upside / downside pair ---------- */
+.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0}
+.oc{border:1px solid var(--line);padding:11px 14px;background:var(--paper)}
+.oc.up-c{border-left:3px solid var(--pos)}
+.oc.down-c{border-left:3px solid var(--neg)}
+.oc .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.09em;
+      text-transform:uppercase;display:block;margin-bottom:5px}
+.oc.up-c .lbl{color:var(--pos)} .oc.down-c .lbl{color:var(--neg)}
+.oc p{margin:0;font-size:14.5px;line-height:1.5}
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  body{font-size:16px}
+  .wrap{padding:0 16px 70px;border-left:none;border-right:none}
+  .ticker{font-size:34px}
+  .headline{font-size:23px}
+  .cases{grid-template-columns:1fr}
+  .outcomes{grid-template-columns:1fr}
+  .mast-strip{gap:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none !important;transition:none !important}
+}
+@media print{
+  :root,:root:not([data-theme="light"]),:root[data-theme="dark"],:root[data-theme="light"]{
+    --paper:#FFFFFF;
+    --canvas:#F4F7F9;
+    --panel-2:#EDF2F6;
+    --line:#DEE6EC;
+    --line-hard:#C0CDD7;
+    --ink:#0F1E2B;
+    --ink-dim:#46596A;
+    --ink-faint:#5C6E80;
+    --pos:#0B7A50;
+    --pos-bg:#E7F4EE;
+    --neg:#B02A21;
+    --neg-bg:#FBECEA;
+    --caution:#90600A;
+    --caution-bg:#FBF2E0;
+    --assume:#4F3FA3;
+    --assume-bg:#EFEDFA;
+    --accent:var(--accent-light);
+    --accent-deep:var(--accent-deep-light);
+    --accent-wash:var(--accent-wash-light);
+    --accent-line:var(--accent-line-light);
+    color-scheme: light;
+  }
+  .themetoggle{display:none}
+  body{font-size:11pt}
+  .wrap{max-width:none;border:none}
+  section{page-break-inside:avoid}
+}
+/* ============================================================================
+   SHARED STYLESHEET v2.01 : END
+   ========================================================================= */
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ===================== MASTHEAD ===================== -->
+<header class="mast">
+  <div class="themetoggle" role="group" aria-label="Color scheme">
+    <button type="button" data-set="system">System</button>
+    <button type="button" data-set="light">Light</button>
+    <button type="button" data-set="dark">Dark</button>
+  </div>
+  <p class="ticker">RIOT</p>
+  <h1 class="headline">An enterprise value of $7.5 billion resting on a lease whose first rent is due in 2028</h1>
+  <p class="functional">RIOT · Riot Platforms, Inc. · Equity Research Report · as of August 16, 2026</p>
+  <div class="mast-strip">
+    <div>Price <b>$19.015</b> <span class="tag">Market</span></div>
+    <div>Market cap <b>$7,135.5M</b> <span class="tag">Estimate</span></div>
+    <div>Enterprise value <b>$7,507.1M</b> <span class="tag">Estimate</span></div>
+    <div>Shares out <b>375,258,935</b> <span class="tag">Filed</span></div>
+    <div>Pricing basis <b>Aug 14, 2026 close</b> <span class="tag">Market</span></div>
+  </div>
+</header>
+
+<!-- ===================== FRAMING ===================== -->
+<div class="first">
+  <h2>Framing</h2>
+  <ol>
+    <li>In August 2026 Riot leased 191 MW of critical IT load capacity at Rockdale to an unnamed counterparty for an initial term of twenty years, expected to generate approximately $9.1 billion of base rent. Total revenue for the whole of 2025 was $647.4 million, and none of the lease revenue is earned before full deployment in June 2028. <span class="tag">Filed</span></li>
+    <li>The only committed funding for that project in any filing is a $573.0 million interim facility at a subsidiary, non-recourse to the parent, which the quarterly report dates to October 15, 2026 and the current report filed four days later dates to December 31, 2026. <span class="tag">Filed</span></li>
+    <li>The bitcoin treasury fell from 18,005 coins to 11,380 in six months, a fall of 37%, and 5,821 of those remaining were pledged to a lender at June 30, 2026, leaving 5,559 free. <span class="tag">Filed</span></li>
+  </ol>
+</div>
+
+<!-- ===================== 1. SNAPSHOT ===================== -->
+<section id="s1">
+  <h2 class="sec"><span class="n">01</span>Snapshot</h2>
+  <p class="sub">Key figures, each tagged by provenance. Where a figure is computed here, the first chip in the row is its own tag and the arithmetic follows in the basis.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Metric</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Price</td><td class="num">$19.015</td><td><span class="tag">Market</span> Nasdaq daily record, close of August 14, 2026, the last completed session before this stamp. Corroborated to six decimal places by a second provider over fifteen overlapping sessions</td></tr>
+      <tr><td class="lbl">Shares outstanding</td><td class="num">375,258,935</td><td><span class="tag">Filed</span> 10-Q cover, August 10, 2026, stated as of August 7, 2026</td></tr>
+      <tr><td class="lbl">Market capitalization</td><td class="num">$7,135.5M</td><td><span class="tag">Estimate</span> 375,258,935 shares at August 7, 2026 multiplied by the $19.015 close of August 14, 2026. Struck on the unrounded close: at $19.02 the answer is $7,137.4M and at $19.01 it is $7,133.7M, a spread of $3.75M. The two inputs are seven days apart and the count is the closest available</td></tr>
+      <tr><td class="lbl">Enterprise value</td><td class="num">$7,507.1M</td><td><span class="tag">Estimate</span> $7,135.5M capitalization plus $843.0M total debt less $471.4M cash and equivalents. Debt and cash are at June 30, 2026 and the price is at August 14, 2026, so the figure mixes dates and understates any change in either since the quarter end. The $666.0M bitcoin holding is not netted, because over half of it is pledged</td></tr>
+      <tr><td class="lbl">Revenue (TTM)</td><td class="num">$674.5M</td><td><span class="tag">Estimate</span> $647.4M for 2025, less $314.4M for the six months to June 30, 2025, plus $341.5M for the six months to June 30, 2026</td></tr>
+      <tr><td class="lbl">Net loss (six months to June 30, 2026)</td><td class="num neg-t">($737.6M)</td><td><span class="tag">Filed</span> 10-Q, August 10, 2026. Basic and diluted loss per share $(2.12) on 347,660,313 weighted average shares</td></tr>
+      <tr><td class="lbl">Net loss (FY2025)</td><td class="num neg-t">($663.2M)</td><td><span class="tag">Filed</span> 10-K, March 2, 2026. Basic loss per share $(1.95) on 340,719,298 weighted average shares</td></tr>
+      <tr><td class="lbl">Cash and equivalents</td><td class="num">$471.4M</td><td><span class="tag">Filed</span> 10-Q, August 10, 2026, at June 30, 2026, against $233.5M at December 31, 2025. Restricted cash a further $77.5M</td></tr>
+      <tr><td class="lbl">Total debt</td><td class="num">$843.0M</td><td><span class="tag">Filed</span> 10-Q, August 10, 2026. $254.6M current and $588.4M non-current at June 30, 2026</td></tr>
+      <tr><td class="lbl">Bitcoin held</td><td class="num">11,380</td><td><span class="tag">Filed</span> 10-Q, August 10, 2026, at a fair value of $666.0M at June 30, 2026, of which 5,821 coins are pledged and 5,559 are free</td></tr>
+      <tr><td class="lbl">Deployed hash rate</td><td class="num">44.4 EH/s</td><td><span class="tag">Filed</span> 10-Q, August 10, 2026, at June 30, 2026, against 35.4 EH/s a year earlier</td></tr>
+      <tr><td class="lbl">Developed power capacity</td><td class="num">1,292 MW</td><td><span class="tag">Filed</span> 10-Q, August 10, 2026: Rockdale 700 MW, Corsicana 400 MW, Kentucky 192 MW</td></tr>
+      <tr><td class="lbl">Contracted base rent, Rockdale tenant lease</td><td class="num">~$9,100M</td><td><span class="tag">Filed</span> 10-Q, August 10, 2026, over an initial term of twenty years commencing on full deployment anticipated June 2028</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 2. BUSINESS MODEL ===================== -->
+<section id="s2">
+  <h2 class="sec"><span class="n">02</span>Business model</h2>
+  <p>Riot Platforms owns and operates large-scale power infrastructure in Texas and Kentucky and
+  monetizes it three ways. It mines bitcoin for its own account, taking the coin as revenue. It
+  leases developed data center capacity to third parties under long-term contracts. And it sells
+  electrical engineering, switchgear and power distribution equipment through two acquired
+  businesses, ESS Metron and E4A Solutions. The company reports these as three segments: Bitcoin
+  Mining, Data Center and Engineering.</p>
+
+  <p>The unifying asset is interconnected power with the approvals already in hand. Developed
+  power capacity was 1,292 MW at June 30, 2026, across Rockdale at 700 MW, Corsicana at 400 MW and
+  Kentucky at 192 MW. What has changed in 2026 is not the asset but the customer: capacity that
+  used to be consumed internally by miners is now being let to tenants under contracts measured in
+  decades rather than in blocks.</p>
+
+  <p>The payment mechanics differ sharply between the three. Mining revenue is received in bitcoin
+  at the moment it is earned, so it is non-cash on receipt and its value moves before it can be
+  realized. Data center revenue is contractual rent, billed and paid in dollars, and it does not
+  begin until capacity is delivered. Engineering revenue is project work recognized over time, and
+  it carries contract assets of $19.9 million at June 30, 2026, of which $12.5 million is
+  engineering and $7.4 million tenant fit-out.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The characterization of Riot as a power business with three monetization routes rather than
+    as a bitcoin miner that also leases space is a reading, not a company statement. It is taken
+    from the segment note and the capacity disclosures: the same 700 MW at Rockdale supports the
+    mining fleet, the AMD lease and the 191 MW tenant lease, and the company's own stated aim is to
+    reduce direct exposure to cryptocurrency price movements by broadening into digital
+    infrastructure.</p>
+  </div>
+</section>
+
+<!-- ===================== 3. REVENUE STREAMS ===================== -->
+<section id="s3">
+  <h2 class="sec"><span class="n">03</span>Revenue streams</h2>
+  <p class="sub">Each stream, with its share of the total and its durability. The three-month
+  columns are the clearest view: the second quarter of 2026 is the first full quarter in which all
+  three segments produced revenue.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Segment</th><th class="num">Q2 2026</th><th class="num">Q2 2025</th><th class="num">Share of Q2 2026</th><th>Durability</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Bitcoin Mining</td><td class="num">$113.7M</td><td class="num">$140.9M</td><td class="num">65.3%</td><td>Lowest. Revenue is a function of network difficulty, block subsidy and the bitcoin price, none of which the company controls, and it is received in a volatile asset</td></tr>
+      <tr><td class="lbl">Data Center</td><td class="num">$23.2M</td><td class="num">n/a</td><td class="num">13.3%</td><td>Highest. Contracted rent under long-term leases. The segment did not exist a year ago</td></tr>
+      <tr><td class="lbl">Engineering</td><td class="num">$37.3M</td><td class="num">$10.6M</td><td class="num">21.4%</td><td>Middle. Project backlog rather than recurring revenue, but dollar-denominated and contracted</td></tr>
+      <tr><td class="lbl">Other</td><td class="num">nil</td><td class="num">$1.5M</td><td class="num">nil</td><td>Residual activity from the discontinued data center hosting operations. Nothing in 2026</td></tr>
+      <tr><td class="lbl">Total</td><td class="num">$174.2M</td><td class="num">$153.0M</td><td class="num">100%</td><td><span class="tag">Filed</span> 10-Q, August 10, 2026. Shares are computed from the same table</td></tr>
+    </tbody>
+  </table></div>
+
+  <p><b>Total revenue rose 13.9% while the largest stream fell 19%.</b> That is the whole of the
+  business story in one line. Bitcoin Mining lost $27.2 million of quarterly revenue year on year
+  and the two other segments added $48.4 million between them. On a six-month basis the same
+  pattern holds: mining fell from $283.7 million to $225.6 million, Data Center contributed
+  $56.4 million from nothing, and Engineering more than doubled from $24.5 million to
+  $59.5 million.</p>
+
+  <p>The mining decline is not a volume failure. Quantity of bitcoin mined rose to 1,587 coins in
+  the quarter from 1,426, and deployed hash rate rose to 44.4 EH/s from 35.4 EH/s. What fell was
+  the value of each coin produced: $71,667 against $98,800. The company mined more and was paid
+  less for it, which is the network economics rather than an operating problem.</p>
+
+  <p>Data Center revenue at $23.2 million in the quarter comes entirely from the AMD lease, since
+  the 191 MW tenant lease was signed after the quarter ended and delivers nothing before December
+  2027. The forward step from $23.2 million a quarter to a lease expected to yield approximately
+  $9.1 billion over twenty years is therefore not a growth rate to extrapolate; it is a different
+  contract that starts in 2028.</p>
+</section>
+
+<!-- ===================== 4. INDUSTRY & MARKET BACKDROP ===================== -->
+<section id="s4">
+  <h2 class="sec"><span class="n">04</span>Industry &amp; market backdrop</h2>
+  <p class="sub">Two markets bear on this company and they are moving in opposite directions.</p>
+
+  <p><b>Bitcoin mining economics compressed over the year to June 2026.</b> The production value of
+  one bitcoin mined fell 27.5%, from $98,800 to $71,667, while the cost of power for self-mining
+  rose from $62.2 million to $73.5 million in the quarter. Riot's combined all-in power cost was
+  3.6 cents per kilowatt hour in the quarter against 3.5 a year earlier. A miner with a low power
+  cost stays profitable across a wider band of bitcoin prices, and Riot's position on that curve
+  is what has allowed it to keep expanding hash rate while the value of each coin produced fell.</p>
+
+  <p><b>Demand for large blocks of near-term interconnected power is the opposite story.</b> The
+  scarce input is not land or capital but energized capacity with grid approvals already granted,
+  because a project still in an interconnection queue cannot commit to a delivery date. Riot has
+  leased 241 MW of critical IT load at Rockdale inside roughly seven months, 50 MW to Advanced
+  Micro Devices, Inc. with an option to expand to 200 MW, and 191 MW to an unnamed counterparty.
+  That is the market repricing capacity that already exists.</p>
+
+  <p><b>Texas is the venue for both, and its rules are being rewritten.</b> The company's own risk
+  disclosure states that Senate Bill 6 requires the Public Utility Commission of Texas to amend
+  wholesale transmission cost-allocation rules by December 31, 2026, and that the Commission is
+  considering measures requiring large loads to bear a greater share of transmission upgrade
+  costs, to pay minimum demand charges on contracted peak demand for twenty years, and to move
+  away from the four coincident peak allocation method. It also states these actions could delay
+  or prevent interconnection of projects still advancing through the ERCOT process.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>Increased scrutiny of new large loads plausibly raises the value of capacity that is already
+    approved and energized, which would favor an incumbent like Riot over a developer still in the
+    queue. That is an inference from the direction of the rulemaking rather than anything the
+    Commission has decided, and it cuts the other way on cost: the same rules that slow a
+    competitor's project also raise what Riot pays for transmission on the load it already has.
+    Power curtailment credits of $31.1 million in the half are the specific figure at risk if the
+    four coincident peak method changes.</p>
+  </div>
+</section>
+
+<!-- ===================== 5. COMPETITIVE POSITION ===================== -->
+<section id="s5">
+  <h2 class="sec"><span class="n">05</span>Competitive position</h2>
+  <p class="sub">Named peers on comparable metrics. The metrics below are Riot's own filed figures;
+  where a peer figure is not carried here, it is because no peer filing was read for this document
+  and the gap is named in the methodology rather than filled from memory.</p>
+
+  <p>Riot competes on two fronts that have different competitor sets, and conflating them is the
+  usual error. In bitcoin mining it competes against every other operator for the same fixed block
+  subsidy, so a rival adding hash rate reduces Riot's share of a total that does not grow. In data
+  center leasing it competes for tenants against operators of interconnected capacity, where a
+  rival's new site does not take revenue Riot already has under contract.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Measure</th><th class="num">Value</th><th>What it establishes</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Deployed hash rate</td><td class="num">44.4 EH/s</td><td><span class="tag">Filed</span> 10-Q, August 10, 2026. Up from 35.4 EH/s a year earlier, and from 38.5 EH/s at December 31, 2025</td></tr>
+      <tr><td class="lbl">Combined all-in power cost</td><td class="num">3.6 c/kWh</td><td><span class="tag">Filed</span> 10-Q, August 10, 2026, for the quarter, net of curtailment credits. Rockdale and Corsicana sit below the Kentucky site at 5.2 cents</td></tr>
+      <tr><td class="lbl">Developed power capacity</td><td class="num">1,292 MW</td><td><span class="tag">Filed</span> 10-Q, August 10, 2026. The asset that supports both businesses</td></tr>
+      <tr><td class="lbl">Enterprise value per deployed EH/s</td><td class="num">$169.1M</td><td><span class="tag">Estimate</span> $7,507.1M enterprise value divided by 44.4 EH/s. A mixed-date ratio: the numerator is struck at August 14, 2026 and the denominator at June 30, 2026</td></tr>
+      <tr><td class="lbl">Enterprise value per developed MW</td><td class="num">$5.81M</td><td><span class="tag">Estimate</span> $7,507.1M divided by 1,292 MW. Attributes the whole enterprise value to power capacity and none to the mining fleet or the engineering business, so it is a ceiling on what the market pays per megawatt rather than a valuation of one</td></tr>
+      <tr><td class="lbl">In-house engineering</td><td class="num">n/a</td><td><span class="tag">Filed</span> 10-Q, August 10, 2026. ESS Metron and E4A Solutions give switchgear, power distribution and substation commissioning inside the group, which most competitors buy in</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>The vertical integration is the differentiator most likely to be underweighted. An operator
+  building 191 MW of critical IT load on a two-year schedule is exposed to switchgear and
+  transformer lead times, and Riot owns two businesses that make that equipment. The interim
+  facility exists specifically to fund long-lead equipment procurement, which is the same
+  constraint seen from the financing side.</p>
+
+  <p>Against that, the balance sheet is a competitive variable and not a favorable one here.
+  $843.0 million of debt, of which $254.6 million is current, and a treasury half pledged, is a
+  weaker position from which to bid for the next tenant than an unlevered balance sheet would be.</p>
+</section>
+
+<!-- ===================== 6. FINANCIAL PERFORMANCE ===================== -->
+<section id="s6">
+  <h2 class="sec"><span class="n">06</span>Financial performance</h2>
+  <p class="sub">Multi-period, in thousands of dollars, with the trend stated. Years ended
+  December 31.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Line</th><th class="num">FY2025</th><th class="num">FY2024</th><th class="num">FY2023</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Bitcoin Mining</td><td class="num">576,276</td><td class="num">321,002</td><td class="num">188,996</td></tr>
+      <tr><td class="lbl">Engineering</td><td class="num">64,688</td><td class="num">38,491</td><td class="num">64,303</td></tr>
+      <tr><td class="lbl">Other</td><td class="num">6,471</td><td class="num">17,165</td><td class="num">27,379</td></tr>
+      <tr><td class="lbl">Total revenue</td><td class="num">647,435</td><td class="num">376,658</td><td class="num">280,678</td></tr>
+      <tr><td class="lbl">Total costs and expenses</td><td class="num">1,269,601</td><td class="num">223,068</td><td class="num">343,725</td></tr>
+      <tr><td class="lbl">Operating income (loss)</td><td class="num neg-t">(622,166)</td><td class="num pos-t">153,590</td><td class="num neg-t">(63,047)</td></tr>
+      <tr><td class="lbl">Net income (loss)</td><td class="num neg-t">(663,181)</td><td class="num pos-t">109,401</td><td class="num neg-t">(49,472)</td></tr>
+      <tr><td class="lbl">Basic earnings (loss) per share</td><td class="num neg-t">(1.95)</td><td class="num pos-t">0.40</td><td class="num neg-t">(0.28)</td></tr>
+      <tr><td class="lbl">Weighted average shares</td><td class="num">340,719,298</td><td class="num">275,980,010</td><td class="num">175,026,051</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub"><span class="tag">Filed</span> 10-K for the year ended December 31, 2025, filed
+  March 2, 2026. There is no Data Center line in any of the three years: the segment first appears
+  in 2026.</p>
+
+  <h3>The 2026 half year</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Line</th><th class="num">Q2 2026</th><th class="num">Q2 2025</th><th class="num">6M 2026</th><th class="num">6M 2025</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Total revenue</td><td class="num">174,235</td><td class="num">152,988</td><td class="num">341,454</td><td class="num">314,375</td></tr>
+      <tr><td class="lbl">Total costs and expenses</td><td class="num">413,667</td><td class="num">(63,158)</td><td class="num">1,080,755</td><td class="num">332,103</td></tr>
+      <tr><td class="lbl">Operating income (loss)</td><td class="num neg-t">(239,432)</td><td class="num pos-t">216,146</td><td class="num neg-t">(739,301)</td><td class="num neg-t">(17,728)</td></tr>
+      <tr><td class="lbl">Net income (loss)</td><td class="num neg-t">(237,170)</td><td class="num pos-t">219,454</td><td class="num neg-t">(737,647)</td><td class="num neg-t">(76,913)</td></tr>
+      <tr><td class="lbl">Basic and diluted per share</td><td class="num neg-t">(0.68)</td><td class="num pos-t">0.65</td><td class="num neg-t">(2.12)</td><td class="num neg-t">(0.23)</td></tr>
+      <tr><td class="lbl">Adjusted EBITDA</td><td class="num neg-t">(69,729)</td><td class="num pos-t">495,268</td><td class="num neg-t">(380,846)</td><td class="num pos-t">318,955</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub"><span class="tag">Filed</span> 10-Q for the quarter ended June 30, 2026, filed
+  August 10, 2026. Diluted per-share figures for Q2 2025 were $0.58 on 382,677,364 shares; the
+  2026 periods are loss-making so basic and diluted counts are equal.</p>
+
+  <div class="note caution">
+    <p><b>Total costs and expenses were negative $63.2 million in the second quarter of 2025.</b>
+    That is not a misprint and it is the single most misleading number in this company's accounts.
+    Bitcoin fair-value movement runs through costs, so a quarter in which the price rises can
+    produce a negative cost line and an operating profit without a single operational change.</p>
+    <p>The consequence is that the swing from $216.1 million of operating income to a
+    $239.4 million operating loss is largely a mark rather than a deterioration in trading. Read as
+    a collapse in the business it is wrong; read as unimportant it is also wrong, because the same
+    mechanism sets the carrying value of the treasury that secures the Coinbase facility. The
+    figure to watch instead is gross revenue by segment and the cost of power, neither of which
+    contains a mark.</p>
+  </div>
+
+  <p><b>The cash statements say something the income statement does not.</b> In the six months to
+  June 30, 2026 operating activities used $272.8 million, investing activities provided
+  $514.8 million, and financing activities used $2.9 million. The investing inflow is principally
+  $131.8 million from selling bitcoin and $14.7 million from marketable securities, against
+  $93.2 million spent on property and equipment and $86.4 million on miners. Cash and restricted
+  cash rose to $548.9 million from $309.8 million.</p>
+
+  <p>So the company funded a $272.8 million operating outflow and roughly $180 million of capital
+  spending by selling assets, not by raising money. No cash was raised through the issuance of
+  common stock or debt in the period. Whether that is prudence or necessity is not settled by the
+  filings; what is settled is that the treasury is the funding source and it is finite.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The trailing twelve month revenue figure of $674.5 million used in the valuation section is
+    computed here as FY2025 of $647.4 million less the six months to June 30, 2025 of
+    $314.4 million plus the six months to June 30, 2026 of $341.5 million. It is arithmetic on
+    filed figures and not a company-reported number, and it blends a period before the Data Center
+    segment existed with one after, so it understates the current revenue run rate.</p>
+  </div>
+</section>
+
+<!-- ===================== 7. CAPITAL STRUCTURE & DILUTION ===================== -->
+<section id="s7">
+  <h2 class="sec"><span class="n">07</span>Capital structure &amp; dilution</h2>
+  <p class="sub">Shares, preferreds, capacity, warrants and convertibles, at June 30, 2026 unless
+  stated.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Instrument</th><th class="num">Amount</th><th>State</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Common stock, issued and outstanding</td><td class="num">378,022,964</td><td><span class="tag">Filed</span> 10-Q, August 10, 2026, at June 30, 2026. 680,000,000 shares authorized, no par value. 371,575,652 at December 31, 2025</td></tr>
+      <tr><td class="lbl">Common stock, cover count</td><td class="num">375,258,935</td><td><span class="tag">Filed</span> 10-Q cover, at August 7, 2026. Lower than the balance sheet count five weeks earlier</td></tr>
+      <tr><td class="lbl">Series A convertible preferred</td><td class="num">nil</td><td><span class="tag">Filed</span> 2,000,000 authorized at 2%, none issued or outstanding</td></tr>
+      <tr><td class="lbl">Series B convertible preferred</td><td class="num">nil</td><td><span class="tag">Filed</span> 1,750,001 authorized at 0%, none issued or outstanding</td></tr>
+      <tr><td class="lbl">2030 Notes</td><td class="num">$594.4M</td><td><span class="tag">Filed</span> 0.75% convertible senior notes due 2030, carried at $583.7M net of $10.6M unamortized issuance costs, fair value approximately $1.2B. Convertible at holders' option in the third quarter of 2026</td></tr>
+      <tr><td class="lbl">Coinbase facility</td><td class="num">$200.0M</td><td><span class="tag">Filed</span> Fully drawn, fixed rate 6.15%, maturing April 20, 2027, secured on 5,821 pledged bitcoin</td></tr>
+      <tr><td class="lbl">$573 Million Credit Facility</td><td class="num">$573.0M</td><td><span class="tag">Filed</span> Delayed-draw term loan at the project subsidiary, available from August 10, 2026, SOFR plus 2.75%, non-recourse to the parent</td></tr>
+      <tr><td class="lbl">2025 ATM Program</td><td class="num">$500.0M</td><td><span class="tag">Filed</span> Registered and wholly unused. No shares sold under it in the six months to June 30, 2026</td></tr>
+      <tr><td class="lbl">Warrants</td><td class="num">63,000</td><td><span class="tag">Filed</span> Shares issuable on exercise</td></tr>
+      <tr><td class="lbl">Unvested restricted stock awards</td><td class="num">30,282,686</td><td><span class="tag">Filed</span> Included in shares outstanding, excluded from basic earnings per share</td></tr>
+      <tr><td class="lbl">Unvested restricted stock units</td><td class="num">2,171,155</td><td><span class="tag">Filed</span> 10-Q, August 10, 2026</td></tr>
+      <tr><td class="lbl">Total potentially dilutive</td><td class="num">72,504,968</td><td><span class="tag">Filed</span> 10-Q, August 10, 2026. Excluded from diluted loss per share as anti-dilutive in a loss period</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>The share count fell, and the reason is not what it looks like</h3>
+  <p>Three counts appear in the same document and they are all correct: 378,022,964 issued and
+  outstanding at June 30, 2026, 375,258,935 on the cover at August 7, 2026, and 347,695,985 as the
+  weighted average for the quarter. The first two are point-in-time counts five weeks apart and
+  the third is an average over three months, which is why it is the smallest.</p>
+
+  <p>The fall of 2,764,029 between the quarter end and the cover date is the ordinary mechanism
+  rather than an event. The equity rollforward shows the same movement inside the quarter:
+  378,978,341 shares at April 1, 2026, less 955,377 for issuance of restricted stock net of
+  forfeitures and delivery of shares underlying awards net of tax withholding, giving 378,022,964
+  at June 30. The count falls when forfeitures plus shares repurchased to satisfy employee tax
+  withholding exceed new awards, and the cash flow statement records $2.5 million of such
+  repurchases in the half. There is no buyback authority and no reverse split anywhere in the
+  filings, and the specific post-quarter movement is not itemized because it falls outside the
+  period the report covers.</p>
+
+  <h3>The direction of travel over three years</h3>
+  <p>Weighted average shares went 175,026,051 in 2023, 275,980,010 in 2024 and 340,719,298 in
+  2025, an increase of 95% in two years. Set against that, no cash at all was raised from stock or
+  debt in the first half of 2026 and the $500.0 million program stands untouched. The recent
+  restraint is real and it is six months old; the three-year record is the base rate.</p>
+
+  <div class="assume">
+    <span class="lbl">Analyst assumption</span>
+    <p>The $500.0 million program is roughly 7.0% of the $7,135.5 million capitalization computed
+    in the snapshot. That ratio is the arithmetic of two figures struck a week apart and is
+    offered as a scale, not as a forecast that the capacity will be used. The company has given no
+    indication either way.</p>
+  </div>
+</section>
+
+<!-- ===================== 8. VALUATION ===================== -->
+<section id="s8">
+  <h2 class="sec"><span class="n">08</span>Valuation</h2>
+  <p class="sub">Multiples shown with their basis and pricing date. This document derives no
+  target price and issues no rating.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Multiple</th><th class="num">Value</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Market capitalization / TTM revenue</td><td class="num">10.6x</td><td><span class="tag">Estimate</span> $7,135.5M divided by $674.5M. The denominator blends two quarters before the Data Center segment existed with two after</td></tr>
+      <tr><td class="lbl">Enterprise value / TTM revenue</td><td class="num">11.1x</td><td><span class="tag">Estimate</span> $7,507.1M divided by $674.5M</td></tr>
+      <tr><td class="lbl">Price / book</td><td class="num">3.3x</td><td><span class="tag">Estimate</span> $7,135.5M divided by total stockholders' equity of $2,192.6M at June 30, 2026. Book value fell from $2,858.4M at December 31, 2025</td></tr>
+      <tr><td class="lbl">Enterprise value / contracted base rent</td><td class="num">0.82x</td><td><span class="tag">Estimate</span> $7,507.1M divided by approximately $9,100M of base rent on the tenant lease. An undiscounted twenty-year total set against a present enterprise value, so it is a scale comparison and not a valuation. It also excludes the AMD lease, whose contracted value the filings do not state</td></tr>
+      <tr><td class="lbl">Earnings multiple</td><td class="num">n/a</td><td>The company is loss-making in the trailing period on every measure, so no earnings multiple exists</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>The last row of that table is the valuation question in one figure. The whole enterprise is
+  priced at roughly four fifths of the undiscounted base rent from a single lease that has not
+  started, before any value is attributed to 44.4 EH/s of mining, an engineering business running
+  at $37.3 million a quarter, the AMD lease, or the 1,051 MW of developed capacity not committed
+  to the tenant lease. Whether that is cheap depends entirely on two things the filings do not
+  settle: whether the lease is delivered on schedule, and whether the counterparty pays.</p>
+
+  <h3>Third-party coverage</h3>
+  <p class="sub">Every row is market data: attributed, dated, tagged, never adopted. Price at
+  publication is the close on the <b>last trading day before</b> the action, which governs every
+  row in this table. That convention is used because it is what the author could see when the
+  target was struck: a same-day close is set after the note is out and can move because of it.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Firm</th><th>Analyst</th><th class="when">Date</th><th>Rating</th><th class="num">Target</th><th class="num">Price at pub.</th><th>Disclosed conflict</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Compass Point Research &amp; Trading, LLC</td><td>Michael Donovan and Ed Engel</td><td class="when">Aug 11, 2026</td><td>Buy</td><td class="num">$29.00 <span class="tag">Market</span></td><td class="num">$19.40</td><td>Not established</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub">The price at publication of $19.40 is the Nasdaq close of August 10, 2026, the
+  last trading day before the note. The firm's own stock data box shows $19.37, which is neither
+  the August 10 close nor the August 11 close of $20.24, so it is an intraday print rather than a
+  session close and is not used here.</p>
+
+  <h3>The shape of the coverage</h3>
+  <p><b>One firm is established, and that figure is a floor rather than a count of the coverage
+  set.</b> Riot's investor relations coverage page was not read and no aggregator was queried, so
+  how many houses follow this stock is not established. With one observation there is no spread to
+  report and no consensus to attribute, and none is struck here: an average of one number is that
+  number wearing a different label.</p>
+
+  <p><b>What the firm discloses about this issuer is not established.</b> Its disclosure page
+  carries a coverage-universe base rate, that 34 of its 82 Buy-rated names are investment banking
+  clients, or 41%. That says nothing about whether this issuer is one of them, and the only use a
+  reader could make of it is an inference this document declines to draw. The cell reads Not
+  established rather than being filled from the base rate.</p>
+
+  <p>Two further facts about the row are worth stating because they change how it should be read.
+  The $29.00 target is not new: the firm's own rating and target history shows it set on
+  October 13, 2025 and carried since, so the August 11, 2026 note reiterates rather than revises
+  it. And the target implies a return of roughly 50% against the price at publication, which is a
+  claim by that firm and is reported here as market data and adopted in no part of this analysis.</p>
+</section>
+
+<!-- ===================== 9. GROWTH DRIVERS ===================== -->
+<section id="s9">
+  <h2 class="sec"><span class="n">09</span>Growth drivers</h2>
+  <p class="sub">Ranked by how much of the current enterprise value each would have to justify.</p>
+
+  <p><b>1. Delivery of the 191 MW tenant lease.</b> Approximately $9.1 billion of base rent over
+  twenty years from full deployment in June 2028, with two five-year renewals at the lessee's
+  option. Phased delivery of 96 MW in December 2027 and the balance in June 2028. This is the
+  driver: nothing else on this list is of comparable size, and nothing of it reaches revenue for
+  almost two years.</p>
+
+  <p><b>2. Expansion of the AMD lease.</b> The existing agreement covers 50 MW of critical IT load
+  with the potential for expansion up to a total of 200 MW at Rockdale. The expansion is an option
+  and not a commitment, and the filings state no contracted value for either the base lease or the
+  expansion. What it has already demonstrated is that the capacity is lettable to a named,
+  investment-grade counterparty, which is a fact the unnamed tenant lease does not supply.</p>
+
+  <p><b>3. The remaining uncommitted capacity.</b> Developed power capacity is 1,292 MW; the two
+  Rockdale leases account for 241 MW of critical IT load. Critical IT load and developed power are
+  not the same measure, since the second includes the overhead the first consumes, so the residual
+  cannot be computed from these two figures alone. What can be said is that a substantial majority
+  of developed capacity is not under a data center lease and is currently used for mining or is
+  undeployed.</p>
+
+  <p><b>4. The engineering business.</b> Revenue rose from $10.6 million to $37.3 million in the
+  quarter and from $24.5 million to $59.5 million in the half. It is the fastest-growing segment
+  in percentage terms and the one least discussed, and it has a strategic function beyond its
+  revenue: ESS Metron and E4A Solutions supply the switchgear and power distribution that the
+  Rockdale build needs, at a moment when equipment lead times are the binding constraint on
+  delivery.</p>
+
+  <p><b>5. Mining efficiency.</b> Hash rate rose to 44.4 EH/s from 35.4 EH/s year on year and
+  Kentucky's developed capacity nearly tripled to 192 MW from 65 MW. This grows the smallest
+  multiple rather than the largest: mining is 65.3% of current revenue and the segment whose
+  revenue per unit of output fell 27.5% over the year.</p>
+</section>
+
+<!-- ===================== 10. RISKS ===================== -->
+<section id="s10">
+  <h2 class="sec"><span class="n">10</span>Risks</h2>
+  <p class="sub">Severity-ranked, most severe first.</p>
+  <div class="risk sev-high">
+    <h4>The interim facility falls due before permanent financing exists <span class="sev">Severe</span></h4>
+    <p>The $573.0 million facility matures on October 15, 2026 per the quarterly report or
+    December 31, 2026 per the current report, and no permanent facility, commitment letter,
+    backstop or equity issue appears in any filing. It is non-recourse to Riot Platforms, Inc.
+    beyond customary carve-outs, so a failure lands on the project subsidiary and its collateral
+    rather than on the parent's balance sheet. The cost is not a parent default; it is the loss of
+    the equipment and the delivery schedule that the $9.1 billion lease depends on.</p>
+  </div>
+  <div class="risk sev-high">
+    <h4>The tenant is not identified and its credit cannot be assessed <span class="sev">Severe</span></h4>
+    <p>The lease counterparty is described only as a leading frontier AI lab. No rating, guarantee,
+    letter of credit, deposit or prepayment is disclosed. A twenty-year obligation of approximately
+    $9.1 billion is the largest single item in the investment case and no public document allows a
+    reader to judge whether it will be paid. The trigger would be a termination or renegotiation
+    disclosure; the cost would be most of the reason the shares are priced where they are.</p>
+  </div>
+  <div class="risk sev-high">
+    <h4>The treasury is being consumed and over half of what remains is pledged <span class="sev">Severe</span></h4>
+    <p>Holdings fell from 18,005 bitcoin to 11,380 in six months, and 5,821 of those are pledged to
+    Coinbase Credit, Inc., leaving 5,559 free at a fair value of $325.4 million. Asset sales funded
+    a $272.8 million operating outflow and roughly $180 million of capital spending in the half.
+    The reserve is finite and the encumbered portion cannot be sold. If the build consumes the free
+    block before lease revenue starts in 2028, the remaining sources are the untouched
+    $500.0 million equity program or new debt.</p>
+  </div>
+  <div class="risk sev-med">
+    <h4>Bitcoin price moves both the revenue line and the balance sheet at once <span class="sev">Moderate</span></h4>
+    <p>Fair-value movement runs through costs, so the reported operating result swings by hundreds
+    of millions on the mark: total costs were negative $63.2 million in the second quarter of 2025
+    and positive $413.7 million in the same quarter of 2026. The same price sets the value of the
+    collateral behind the Coinbase facility and the value of each coin mined, which fell from
+    $98,800 to $71,667 year on year. Graded moderate rather than severe because the data center
+    business is contracted in dollars and is the part of the company the valuation now rests on.</p>
+  </div>
+  <div class="risk sev-med">
+    <h4>Texas may reprice what a large load pays for transmission <span class="sev">Moderate</span></h4>
+    <p>The company discloses that Senate Bill 6 requires the Public Utility Commission of Texas to
+    amend wholesale transmission cost-allocation rules by December 31, 2026, and that measures
+    under consideration would make large loads bear more of the transmission upgrade cost, pay
+    minimum demand charges on contracted peak for twenty years, and lose the four coincident peak
+    method. Power curtailment credits were $31.1 million in the half and are the specific figure at
+    risk. It also discloses that these actions could delay or prevent interconnection of projects
+    still in the ERCOT queue.</p>
+  </div>
+  <div class="risk sev-med">
+    <h4>Dilution capacity is large, registered and immediately available <span class="sev">Moderate</span></h4>
+    <p>72,504,968 shares were potentially dilutive at June 30, 2026, of which 39,988,127 sit under
+    the 2030 Notes, which became convertible at holders' option in the third quarter and which the
+    company states it can and intends to settle in stock. A further $500.0 million of registered
+    equity capacity, roughly 7% of the capitalization, can be sold without advance notice. Weighted
+    average shares rose 95% over the two years to 2025. Graded moderate because none of it was used
+    in the first half of 2026.</p>
+  </div>
+  <div class="risk sev-low">
+    <h4>Governance and audit tenure <span class="sev">Low</span></h4>
+    <p>The board remains classified until the 2029 annual meeting under the phased declassification
+    adopted in March 2026, nine months after the advisory vote that prompted it, so directors
+    elected in 2026 and 2027 sit for three years. Deloitte &amp; Touche LLP has served as auditor
+    since 2023, a short tenure over a business that has changed shape twice in that period. Neither
+    is a live problem in the filed record; both lengthen the interval before one would surface.</p>
+  </div>
+</section>
+
+<!-- ===================== 11. BULL / BASE / BEAR ===================== -->
+<section id="s11">
+  <h2 class="sec"><span class="n">11</span>Bull / base / bear</h2>
+  <p class="sub">Each case with its preconditions: what must be true, not what might be.</p>
+  <div class="cases">
+    <div class="case bear"><h4>Bear</h4><p>The bridge does not term out on acceptable terms. Financing the build then falls to the treasury and the equity program, at which point the free 5,559 bitcoin and $500.0 million of registered stock are consumed against a lease that pays nothing before June 2028. Mining keeps shrinking, the value per coin mined keeps falling, and the enterprise value proves to have been an option on a counterparty nobody could assess.</p>
+      <p class="req">Requires: no permanent facility by either stated maturity; continued treasury drawdown; and either an ATM drawdown or a delivery slip past June 2028.</p></div>
+    <div class="case"><h4>Base</h4><p>The interim facility is refinanced, the phased delivery holds to December 2027 and June 2028, and the Data Center segment grows from $23.2 million a quarter on the AMD lease while mining declines gradually. Nothing of the $9.1 billion reaches revenue inside the coverage window, so the shares trade on delivery milestones and financing news rather than on reported results.</p>
+      <p class="req">Requires: a refinancing filed before December 31, 2026; both delivery dates held; and no ATM issuance beyond what the build needs.</p></div>
+    <div class="case bull"><h4>Bull</h4><p>Permanent financing closes ring-fenced at the project, the tenant is named or credit support is filed, and the AMD option is exercised toward its 200 MW ceiling. Riot is then an operator of interconnected Texas capacity with two decades of dollar-denominated contracted rent, holding the residual of 1,292 MW of developed power plus an in-house equipment supplier at exactly the moment lead times bind.</p>
+      <p class="req">Requires: a non-recourse takeout; identification or credit support for the tenant; and evidence that uncommitted capacity can be let on comparable terms.</p></div>
+  </div>
+</section>
+
+<!-- ===================== 12. RESEARCH SUMMARY ===================== -->
+<section id="s12">
+  <h2 class="sec"><span class="n">12</span>Research summary</h2>
+
+  <p><b>Riot has converted power into contracted revenue faster than any figure in its accounts
+  yet shows.</b> Inside roughly seven months it let 241 MW of critical IT load at Rockdale across
+  two counterparties, and the larger of the two leases carries approximately $9.1 billion of base
+  rent over twenty years against total 2025 revenue of $647.4 million. The Data Center segment did
+  not exist a year ago and produced $23.2 million in the second quarter.</p>
+
+  <p><b>None of that is in the reported numbers, and will not be until 2028.</b> The lease term
+  begins on full deployment anticipated in June 2028, with the first 96 MW in December 2027. Until
+  then the company reports a shrinking mining business, a fast-growing engineering business, one
+  small lease, and a loss driven substantially by the bitcoin mark: $737.6 million for the first
+  half, of which most is the fair-value mechanism rather than trading.</p>
+
+  <p><b>The gap between those two facts is a financing problem, and it is the whole of the near
+  term.</b> The only committed money is a $573.0 million interim facility at a project subsidiary
+  which the company itself dates two ways, October 15 or December 31 of this year. Everything
+  beyond it is absent from the record: no permanent facility, no backstop, no commitment. Meanwhile
+  the treasury that has been funding operations fell 37% in six months and over half of what
+  remains is pledged.</p>
+
+  <p><b>Two things a reader should not take from this document.</b> The first is a view on the
+  counterparty: the filings say a leading frontier AI lab and name nobody, so no assessment of that
+  credit is possible from the public record and none is offered. The second is a conclusion about
+  value: the enterprise is priced at roughly four fifths of the undiscounted base rent from one
+  lease that has not started, and whether that is cheap turns on delivery and payment, neither of
+  which any filed document settles.</p>
+
+  <p>The tests that would settle the reading are stated in the catalyst calendar for this ticker
+  as falsification tests, each with a threshold that can be read off a filing.</p>
+</section>
+
+<!-- ===================== 13. NULL CATEGORIES ===================== -->
+<section id="s13">
+  <h2 class="sec"><span class="n">13</span>Null categories</h2>
+  <p class="sub">Requested categories with nothing to report. Status reads Covered above, None where a
+  named source was checked and found empty, or Not established where the category was not examined.
+  A category nobody looked at is a gap, not an absence.</p>
+  <div class="tw"><table class="nulls">
+    <thead><tr><th>Category</th><th>Status</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Analyst coverage</td><td class="status">Covered above</td><td>One firm is named in section 8 with its analysts, date, rating and target. The size of the coverage set is not established and is recorded there as a floor.</td></tr>
+      <tr><td class="lbl">Dividends</td><td class="status">None</td><td>No dividend is declared or paid in either six-month period of the cash flow statement in the Form 10-Q filed August 10, 2026, and none appears in the Form 10-K for 2025 filed March 2, 2026.</td></tr>
+      <tr><td class="lbl">Share buybacks</td><td class="status">None</td><td>No repurchase program is disclosed. The $2.5 million of common shares repurchased in the half was to satisfy employee tax withholding obligations, which is a settlement mechanic rather than an authority to buy stock.</td></tr>
+      <tr><td class="lbl">Preferred stock outstanding</td><td class="status">None</td><td>Both classes are authorized and neither is issued: 2,000,000 Series A and 1,750,001 Series B, none outstanding at June 30, 2026 or December 31, 2025.</td></tr>
+      <tr><td class="lbl">Going concern</td><td class="status">None</td><td>No going concern statement appears in the Form 10-Q filed August 10, 2026, and the audit report in the Form 10-K filed March 2, 2026 carries none.</td></tr>
+      <tr><td class="lbl">Material weakness or control deficiency</td><td class="status">None</td><td>Item 4 of the Form 10-Q filed August 10, 2026 concludes disclosure controls are effective at the reasonable assurance level and reports no change in internal control over financial reporting during the quarter.</td></tr>
+      <tr><td class="lbl">Securities class action</td><td class="status caution-t">Not established</td><td>Not examined. The contingencies note was read and names no individually material proceeding; no court docket was searched.</td></tr>
+      <tr><td class="lbl">Short interest</td><td class="status caution-t">Not established</td><td>No exchange short interest report was read.</td></tr>
+      <tr><td class="lbl">Credit ratings</td><td class="status caution-t">Not established</td><td>No rating agency was checked, and the filings read do not state whether the 2030 Notes or either facility is rated.</td></tr>
+      <tr><td class="lbl">Beneficial ownership register</td><td class="status caution-t">Not established</td><td>The filing index carries 133 filings on Schedule 13D and 13G and their amendments across both index pages, the most recent on August 6, 2026. None was read, so no holder is identified and no position is stated.</td></tr>
+      <tr><td class="lbl">Insider transactions</td><td class="status caution-t">Not established</td><td>The index carries Forms 4 through August 14, 2026. None was read.</td></tr>
+      <tr><td class="lbl">Peer comparative figures</td><td class="status caution-t">Not established</td><td>No competitor filing was read. Section 5 carries Riot's own measures and states that the peer side is absent rather than supplying it from memory.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 14. METHODOLOGY & SOURCES ===================== -->
+<section id="s14">
+  <h2 class="sec"><span class="n">14</span>Methodology &amp; sources</h2>
+  <p class="sub">Pricing basis, the tagging scheme, and, importantly, what was not checked.</p>
+
+  <h3>Pricing basis</h3>
+  <p>Every price-dependent figure is struck on the <b>August 14, 2026 close of $19.015</b>, which
+  was the last completed session: August 15 and 16 fall on a Saturday and a Sunday, so no later
+  close exists. The trading calendar is taken from the exchange's own daily record rather than from
+  a weekday rule, over the fifteen sessions from July 27 to August 14, 2026, with no weekday absent
+  from the series.</p>
+  <p>The half cent is load-bearing and is stated rather than rounded. On 375,258,935 shares the
+  capitalization is $7,135.5 million at $19.015, $7,137.4 million at $19.02 and $7,133.7 million at
+  $19.01, a spread of $3.75 million. A reader given a rounded price could not reproduce the figure.
+  The close was corroborated against a second, unrelated provider: fifteen of fifteen overlapping
+  sessions agree, and August 14 agrees to six decimal places.</p>
+  <p>The share count is the cover figure of the quarterly report, 375,258,935 as of August 7, 2026,
+  which is seven days before the price. That is the closest count available and the gap is stated
+  rather than smoothed.</p>
+
+  <h3>Provenance tags</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Tag</th><th>What it asserts</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl"><span class="tag">Filed</span></td><td>Stated in an SEC filing or company release, cited by form and date. Also covers a dated official publication by a named non-SEC issuer, with the issuer named in the source line.</td></tr>
+      <tr><td class="lbl"><span class="tag">Estimate</span></td><td>Derived or inferred here. The arithmetic is shown.</td></tr>
+      <tr><td class="lbl"><span class="tag">Open</span></td><td>Expected but unconfirmed. Nothing filed either way.</td></tr>
+      <tr><td class="lbl"><span class="tag">Market</span></td><td>Price, volume, float, published targets and ratings, stamped with the close or publication date. A third party's target or rating is market data, attributed to the firm that issued it and never adopted here.</td></tr>
+      <tr><td class="lbl"><span class="tag">Press</span></td><td>Reported by a named publication that is neither the issuer nor an analyst, cited by outlet and date. Corroborates; never the sole basis for a material claim.</td></tr>
+      <tr><td class="lbl"><span class="tag">Social</span></td><td>Publicly posted by a named account, cited by handle and date. Asserts that the statement was made, never that it is true.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Sources</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Source</th><th class="when">Date</th><th>What it supports here</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Form 10-Q for the quarter ended June 30, 2026</td><td class="when">Aug 10, 2026</td><td>The balance sheet, the income statement, segment revenue, the cash flow summary, the capital structure table, the treasury and its pledge, operating metrics, and the risk disclosure on Texas transmission</td></tr>
+      <tr><td class="lbl">Form 10-K for the year ended December 31, 2025</td><td class="when">Mar 2, 2026</td><td>The three-year revenue and result history, weighted average share counts, the treasury at the year end, the auditor and its tenure, and the incorporation history</td></tr>
+      <tr><td class="lbl">Form 8-K reporting the credit agreement of August 10, 2026</td><td class="when">Aug 14, 2026</td><td>The interim facility's size, agent, pricing, guarantors, security, non-recourse structure and its December 31, 2026 maturity</td></tr>
+      <tr><td class="lbl">Form 8-K reporting the second amended and restated Coinbase credit agreement</td><td class="when">Apr 27, 2026</td><td>The facility's history, the change to a fixed rate, and the custody arrangement</td></tr>
+      <tr><td class="lbl">Form 8-K reporting the amended and restated bylaws of March 26, 2026</td><td class="when">Apr 1, 2026</td><td>The phased declassification and its schedule to 2029</td></tr>
+      <tr><td class="lbl">SEC filing index for Central Index Key 0001167419, both index pages enumerated</td><td class="when">searched Aug 16, 2026</td><td>1,592 filings from February 7, 2002 to August 14, 2026. The form mix, the register count, the late-filing record, and the filing cadence</td></tr>
+      <tr><td class="lbl">Compass Point Research &amp; Trading, LLC, research note on Riot Platforms</td><td class="when">Aug 11, 2026</td><td>The single coverage row in section 8: the firm, its analysts, its rating, its target, and its own disclosure page. Cited for that firm's published view alone; every company fact in this document comes from the filings</td></tr>
+      <tr><td class="lbl">Nasdaq daily record for RIOT, 15 sessions, corroborated against a second provider</td><td class="when">Jul 27 to Aug 14, 2026</td><td>The pricing basis, the trading calendar, and the price at publication behind the coverage row</td></tr>
+      <tr><td class="lbl">Riot Platforms corporate site</td><td class="when">read Aug 16, 2026</td><td>Retrieved and not relied on. Its capacity and pipeline figures are the company's own marketing statements; the filed figures are used instead</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>What was not checked</h3>
+  <p>An unexamined area is a gap, not a clean bill. The following were not reached.</p>
+  <ul>
+    <li>The credit agreement filed as an exhibit to the current report of August 14, 2026. It is the document that would settle whether the interim facility matures on October 15 or December 31, 2026, and both dates are reported here because it was not read.</li>
+    <li>The tenant lease and the AMD lease. Their terms are as described in the quarterly report, and neither agreement was read. No contracted value for the AMD lease is stated in any filing read.</li>
+    <li>The identity of the Rockdale tenant and any credit support behind its obligations. Nothing in the filings names or rates the counterparty.</li>
+    <li>Peer filings. No competitor's report was read, so section 5 carries no peer figures.</li>
+    <li>Riot's investor relations coverage page and any market data aggregator, so the size of the analyst coverage set is not established and the single row in section 8 is a floor.</li>
+    <li>The 133 beneficial ownership filings on Schedule 13D and 13G and their amendments, the most recent dated August 6, 2026, and every Form 4. No holder and no insider transaction is identified.</li>
+    <li>Three current reports carrying Item 5.02 in 2026, filed January 2, January 5 and June 15, so no management change is established. The June 15 report also carries the 2026 annual meeting voting results.</li>
+    <li>What this registrant did between 2002 and 2017, when it was a diagnostics business under earlier names. None of those filings was read, and nothing here describes that period.</li>
+    <li>Court dockets, ERCOT interconnection queue records, Public Utility Commission of Texas docket filings, and county and municipal permitting records for Rockdale, Corsicana and the Kentucky site. Every megawatt figure here is the company's own statement in a filing.</li>
+    <li>Exchange short interest reports, credit rating agency actions and index provider announcements, each recorded in the null table above.</li>
+  </ul>
+
+  <h3>Filing status</h3>
+  <p>Riot Platforms has filed <b>fifteen</b> late-filing notifications across the 1,592 filings on
+  its index: eight on Form NT 10-K and seven on Form NT 10-Q, the earliest on November 15, 2002 and
+  the most recent on March 2, 2023. Nine fall after October 19, 2017 and six belong to the earlier
+  company. None has been filed in the three years and five months since. The
+  whole index was searched on August 16, 2026 across both of its pages, the recent page holding
+  1,005 filings back to January 25, 2013 and an overflow page holding 587 more back to
+  February 7, 2002.</p>
+  <p>That pagination is why the count is stated with the index size behind it. A search of the
+  recent page alone would have covered 63% of the record, missed six of the fifteen notifications,
+  and produced a figure that looked complete.</p>
+
+  <h3>An earlier identity, and the date it ended</h3>
+  <p>The Central Index Key long predates the business. Filings begin on February 7, 2002, more than
+  a decade before any bitcoin operation, because the registrant was incorporated in Colorado on
+  July 24, 2000 under the name AspenBio, Inc. The company states the transition in terms:
+  <em>"Effective October 19, 2017, we adopted the corporate name Riot Blockchain, Inc., and changed
+  our state of incorporation to Nevada."</em> It adopted its current name on December 30, 2022 and
+  remains a Nevada corporation.</p>
+  <p>Two things follow that a reader would otherwise get wrong. An eighteen-filing history of
+  annual reports is not eighteen years of this company: it is roughly nine years of this one and
+  fifteen of a diagnostics business that happened to keep the same registration. And the state of
+  incorporation changed with the identity rather than separately from it, so every filing before
+  October 19, 2017 was made by a Colorado corporation and every one after it by a Nevada one.</p>
+</section>
+
+<!-- ===================== 15. DOCUMENT LOG ===================== -->
+<section id="s15">
+  <h2 class="sec"><span class="n">15</span>Document log</h2>
+  <p class="sub">Newest first. The original build entry is never removed or rewritten.</p>
+  <div class="log">
+    <div class="logentry current">
+      <div class="when">August 16, 2026 (original build) <span class="latest">Latest</span></div>
+      <div class="basis">Priced off Aug 14, 2026 close · $19.015 · $7,135.5M cap</div>
+      <p><b>Original build.</b> Built from the Form 10-Q for the quarter ended June 30, 2026, filed
+      August 10, 2026; the Form 10-K for the year ended December 31, 2025, filed March 2, 2026; the
+      current reports of August 14, 2026, April 27, 2026 and April 1, 2026; the complete filing
+      index for Central Index Key 0001167419, 1,592 filings from February 7, 2002 to August 14,
+      2026 across both of its pages; and one third-party research note dated August 11, 2026 used
+      solely for the coverage row in section 8.</p>
+      <p>Pricing basis fixed at the August 14, 2026 close of $19.015, stated unrounded because the
+      half cent moves the capitalization by $3.75 million. The document is stamped August 16
+      because August 14 was the last completed session, August 15 and 16 being a weekend.</p>
+      <p><b>The company states one maturity two ways, and both are recorded here rather than one
+      being preferred.</b> The quarterly report filed August 10, 2026 dates the $573.0 million interim
+      facility to October 15, 2026, and the current report filed August 14, 2026 dates it to
+      December 31, 2026. The credit agreement that would settle it was not read, and both dates
+      appear wherever the facility is discussed.</p>
+      <p>Conventions fixed at construction: price at publication in the coverage table is the close
+      on the last trading day before the action, stated once above the table where it governs every
+      row; computed figures are tagged as estimates with their arithmetic and the dates of their
+      inputs shown, including where those inputs are struck days apart; the trading calendar comes
+      from the exchange's daily record rather than from a weekday rule; and no consensus is struck
+      from published targets, there being one.</p>
+      <p>Known gaps at this version: the credit agreement, the tenant lease and the AMD lease were
+      not read; the tenant is not identified and no credit support for it is established; no peer
+      filing was read, so the competitive section carries no peer figures; the size of the analyst
+      coverage set is not established and the single row is a floor; none of the 133 beneficial
+      ownership filings or any Form 4 was read; and the three current reports carrying Item 5.02 in
+      2026 were not read.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="norec">
+    No buy, sell, or hold recommendation is issued and no price target is derived.
+    Third-party targets and ratings, where shown, are the published views of the
+    firms named and are reported as market data. This document is for research and
+    educational purposes and is not investment advice. Verify all figures against
+    primary filings on sec.gov before acting.
+  </div>
+  <p style="margin-top:16px">RIOT · Riot Platforms, Inc. · Equity Research Report · as of August 16, 2026</p>
+</footer>
+
+</div>
+<script>
+(function(){
+  var g=document.querySelector('.themetoggle'); if(!g) return;
+  var bs=g.querySelectorAll('button[data-set]');
+  function sync(){
+    var t=document.documentElement.dataset.theme||'system';
+    for(var i=0;i<bs.length;i++) bs[i].setAttribute('aria-pressed',String(bs[i].getAttribute('data-set')===t));
+  }
+  g.addEventListener('click',function(e){
+    var b=e.target.closest('button[data-set]'); if(!b) return;
+    var v=b.getAttribute('data-set');
+    if(v==='system'){ delete document.documentElement.dataset.theme; try{ localStorage.removeItem('theme'); }catch(err){} }
+    else { document.documentElement.dataset.theme=v; try{ localStorage.setItem('theme',v); }catch(err){} }
+    sync();
+  });
+  sync();
+})();
+</script>
+</body>
+</html>

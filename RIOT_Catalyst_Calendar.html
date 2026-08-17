@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141C24" media="(prefers-color-scheme: dark)">
+<title>RIOT &middot; Riot Platforms, Inc. &middot; Catalyst Calendar &middot; as of August 16, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script>
+(function(){
+  var t=null;
+  try{ t=localStorage.getItem('theme'); }catch(e){}
+  if(t==='light'||t==='dark') document.documentElement.dataset.theme=t;
+})();
+</script>
+<style>
+/* ============================================================================
+   PER-TICKER PALETTE
+   ========================================================================= */
+:root{
+  /* The accent is STANDARD across every ticker and identical in every file.
+     These are the values themselves and not a placeholder, and no file derives
+     its own. The derivation note that stood here was retired together with the
+     rule that required it, when the palette was standardized. */
+  --accent-light:      #1F5993;
+  --accent-deep-light: #164069;
+  --accent-wash-light: rgba(31,89,147,0.06);
+  --accent-line-light: rgba(31,89,147,0.22);
+
+  --accent-dark:       #3987D5;
+  --accent-deep-dark:  #63A0DE;
+  --accent-wash-dark:  rgba(57,135,213,0.06);
+  --accent-line-dark:  rgba(57,135,213,0.22);
+}
+
+/* ============================================================================
+   SHARED STYLESHEET v2.01 : BEGIN
+   ========================================================================= */
+:root{
+  color-scheme: light dark;
+
+  --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
+  --line:#DEE6EC;   --line-hard:#C0CDD7;
+  --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
+
+  --pos:#0B7A50;      --pos-bg:#E7F4EE;
+  --neg:#B02A21;      --neg-bg:#FBECEA;
+  --caution:#90600A;  --caution-bg:#FBF2E0;
+  --assume:#4F3FA3;   --assume-bg:#EFEDFA;
+
+  --display:'Archivo',ui-sans-serif,system-ui,'Helvetica Neue',Arial,sans-serif;
+  --body:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+
+  --measure:78ch;
+  --col:760px;
+  --accent:var(--accent-light);
+  --accent-deep:var(--accent-deep-light);
+  --accent-wash:var(--accent-wash-light);
+  --accent-line:var(--accent-line-light);
+}
+
+/* ---------- dark tokens, device following ---------- */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#141C24;
+    --canvas:#10161D;
+    --panel-2:#0D1218;
+    --line:#2E3A45;
+    --line-hard:#455360;
+    --ink:#E8EEF3;
+    --ink-dim:#AFBECB;
+    --ink-faint:#93A3B2;
+    --pos:#11B274;
+    --pos-bg:#113B2B;
+    --neg:#E06058;
+    --neg-bg:#3B1411;
+    --caution:#D38C0F;
+    --caution-bg:#3B2C11;
+    --assume:#897CCC;
+    --assume-bg:#1B1537;
+    --accent:var(--accent-dark);
+    --accent-deep:var(--accent-deep-dark);
+    --accent-wash:var(--accent-wash-dark);
+    --accent-line:var(--accent-line-dark);
+  }
+}
+/* ---------- dark tokens, explicit choice ---------- */
+:root[data-theme="dark"]{
+    --paper:#141C24;
+    --canvas:#10161D;
+    --panel-2:#0D1218;
+    --line:#2E3A45;
+    --line-hard:#455360;
+    --ink:#E8EEF3;
+    --ink-dim:#AFBECB;
+    --ink-faint:#93A3B2;
+    --pos:#11B274;
+    --pos-bg:#113B2B;
+    --neg:#E06058;
+    --neg-bg:#3B1411;
+    --caution:#D38C0F;
+    --caution-bg:#3B2C11;
+    --assume:#897CCC;
+    --assume-bg:#1B1537;
+    --accent:var(--accent-dark);
+    --accent-deep:var(--accent-deep-dark);
+    --accent-wash:var(--accent-wash-dark);
+    --accent-line:var(--accent-line-dark);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html,body{background:var(--canvas) !important;background-color:var(--canvas) !important}
+body{
+  margin:0;color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 22px 96px;background:var(--paper);
+      border-left:1px solid var(--line);border-right:1px solid var(--line)}
+p{max-width:var(--measure)}
+/* Boxed prose fills its container: the box supplies its own measure, so the
+   78ch cap applies to top-level running prose only. */
+.first li,.assume p,.note p,.cat p,.risk p,.logentry p,.oc p,.case p,
+.cat-meta,.logentry .basis{max-width:none}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:var(--accent-deep)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- masthead ---------- */
+.mast{padding:44px 0 26px;border-bottom:2px solid var(--line-hard);margin-bottom:8px;
+      position:relative;padding-left:20px}
+.mast::before{content:"";position:absolute;left:0;top:44px;bottom:26px;
+      width:4px;background:var(--accent)}
+.ticker{font-family:var(--mono);font-size:44px;font-weight:700;letter-spacing:-1px;
+      line-height:1;color:var(--accent);margin:0}
+.headline{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.22;
+      color:var(--ink);margin:16px 0 0}
+.functional{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--ink-faint);margin:18px 0 0}
+.mast-strip{display:flex;flex-wrap:wrap;gap:26px;margin-top:20px;padding-top:16px;
+      border-top:1px solid var(--line)}
+.mast-strip div{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint)}
+.mast-strip b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-top:3px}
+
+/* ---------- color scheme toggle ---------- */
+.themetoggle{position:absolute;top:44px;right:0;display:flex;
+      border:1px solid var(--line-hard);border-radius:2px;overflow:hidden}
+.themetoggle button{font-family:var(--mono);font-size:10.5px;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);
+      background:var(--paper);border:0;border-left:1px solid var(--line);
+      padding:4px 9px;cursor:pointer;transition:color .15s,background .15s}
+.themetoggle button:first-child{border-left:0}
+.themetoggle button:hover{color:var(--ink)}
+.themetoggle button[aria-pressed="true"]{color:var(--paper);background:var(--ink-dim)}
+html,body,.wrap,.cat,.note,.assume,.first,.oc,.tag,.logentry{
+      transition:background-color .18s,color .18s,border-color .18s}
+@media (max-width:720px){ .themetoggle{position:static;margin-bottom:18px;align-self:flex-start} }
+
+/* ---------- banner: framing ---------- */
+.first{background:var(--canvas);border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:20px 24px;margin:30px 0 12px}
+.first h2{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.04em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 12px}
+.first ol{margin:0;padding-left:20px}
+.first li{margin-bottom:9px}
+.first li:last-child{margin-bottom:0}
+
+/* ---------- sections ---------- */
+section{padding-top:38px}
+h2.sec{font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);
+      margin:0 0 4px;padding-bottom:10px;border-bottom:1px solid var(--line-hard);
+      display:flex;align-items:baseline;gap:12px}
+h2.sec .n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);
+      letter-spacing:.06em;flex:none}
+.sub{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);margin:10px 0 18px;
+      max-width:var(--measure)}
+h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink-dim);
+      margin:26px 0 8px}
+
+/* ---------- provenance tags (signature) ---------- */
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);
+      background:var(--panel-2);border:1px solid var(--line);
+      border-radius:2px;padding:1px 6px;vertical-align:1px;white-space:nowrap}
+
+/* ---------- assumption block ---------- */
+.assume{background:var(--assume-bg);border-left:4px solid var(--assume);
+      padding:16px 20px;margin:20px 0}
+.assume .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--assume);display:block;margin-bottom:7px}
+.assume p{margin:0}
+
+/* ---------- callouts ---------- */
+.note{border:1px solid var(--line);border-left:4px solid var(--ink-faint);
+      background:var(--canvas);padding:16px 20px;margin:20px 0}
+.note.pos{border-left-color:var(--pos);background:var(--pos-bg)}
+.note.neg{border-left-color:var(--neg);background:var(--neg-bg)}
+.note.caution{border-left-color:var(--caution);background:var(--caution-bg)}
+.note p{margin:0}
+.note p + p{margin-top:10px}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+thead th{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--ink-dim);text-align:left;
+      padding:9px 12px;border-bottom:2px solid var(--line-hard);white-space:nowrap}
+tbody td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--canvas)}
+td.num,th.num{font-family:var(--mono);text-align:right;white-space:nowrap}
+/* td.when marks a timing column. An unmarked cell counts as prose. */
+td.when{font-family:var(--mono);white-space:nowrap}
+td.lbl{font-weight:600}
+.pos-t{color:var(--pos);font-weight:600}
+.neg-t{color:var(--neg);font-weight:600}
+.caution-t{color:var(--caution);font-weight:600}
+
+/* ---------- cases ---------- */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.case{border:1px solid var(--line);border-top:3px solid var(--ink-faint);
+      background:var(--paper);padding:18px}
+.case.bull{border-top-color:var(--pos)}
+.case.bear{border-top-color:var(--neg)}
+.case h4{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--ink-dim);margin:0 0 10px}
+.case.bull h4{color:var(--pos)} .case.bear h4{color:var(--neg)}
+.case p{font-size:15px;margin:0}
+.case .req{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+
+/* ---------- risks ---------- */
+.risk{border:1px solid var(--line);border-left:4px solid var(--line-hard);
+      padding:16px 20px;margin-bottom:12px}
+.risk.sev-high{border-left-color:var(--neg)}
+.risk.sev-med{border-left-color:var(--caution)}
+.risk.sev-low{border-left-color:var(--ink-faint)}
+.risk h4{font-family:var(--display);font-size:15.5px;font-weight:600;margin:0 0 6px;
+      display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.risk .sev{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase}
+.risk.sev-high .sev{color:var(--neg)}
+.risk.sev-med .sev{color:var(--caution)}
+.risk.sev-low .sev{color:var(--ink-faint)}
+.risk p{margin:0;font-size:15.5px}
+
+/* ---------- null categories ---------- */
+.nulls td.lbl{width:26%}
+.nulls .status{font-family:var(--mono);font-size:12px;white-space:nowrap}
+
+/* ---------- document log ---------- */
+.log{margin-top:14px}
+.logentry{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:12px}
+.logentry.current{border-left:4px solid var(--accent);background:var(--accent-wash)}
+.logentry .when{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);
+      display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.latest{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-line);
+      background:var(--paper);border-radius:2px;padding:1px 6px}
+.logentry .basis{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+      margin-bottom:12px}
+.logentry p{font-size:15.5px;margin:0 0 9px}
+.logentry p:last-child{margin-bottom:0}
+.correction{border:1px solid var(--neg);border-left:4px solid var(--neg);
+      background:var(--neg-bg);padding:12px 16px;margin-bottom:14px}
+.correction .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--neg);display:block;margin-bottom:5px}
+
+/* ---------- footer ---------- */
+footer{margin-top:44px;padding-top:22px;border-top:2px solid var(--line-hard)}
+footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width:none}
+.norec{border:1px solid var(--line-hard);background:var(--canvas);padding:16px 20px;
+      margin-top:20px;font-family:var(--mono);font-size:12.5px;color:var(--ink-dim)}
+
+/* ---------- catalyst cards (calendar) ---------- */
+.cat{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
+      margin-bottom:14px;border-left:4px solid var(--line-hard)}
+.cat.up{border-left-color:var(--pos)}
+.cat.down{border-left-color:var(--neg)}
+.cat.two{border-left-color:var(--caution)}
+.cat.neutral{border-left-color:var(--ink-faint)}
+.cat-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.cid{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);flex:none}
+.cat-head h3{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink);
+      margin:0;flex:1 1 auto;min-width:200px}
+.dir{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;white-space:nowrap}
+.cat.up .dir{color:var(--pos)} .cat.down .dir{color:var(--neg)}
+.cat.two .dir{color:var(--caution)} .cat.neutral .dir{color:var(--ink-faint)}
+.cat-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:10px 0 12px;padding:9px 0;
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+      font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
+.cat-meta b{color:var(--ink);font-weight:600}
+.cat p{margin:0 0 9px;font-size:15.5px}
+.cat p:last-child{margin-bottom:0}
+.cat.resolved{background:var(--canvas);border-left-color:var(--ink-faint)}
+.cat.resolved .dir{color:var(--ink-faint)}
+
+/* ---------- horizon bands (calendar) ---------- */
+.band{display:flex;align-items:center;gap:14px;margin:30px 0 16px}
+.band-t{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--ink-dim);white-space:nowrap}
+.band-r{flex:1;height:1px;background:var(--line-hard)}
+.band-c{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);white-space:nowrap}
+
+/* ---------- upside / downside pair ---------- */
+.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0}
+.oc{border:1px solid var(--line);padding:11px 14px;background:var(--paper)}
+.oc.up-c{border-left:3px solid var(--pos)}
+.oc.down-c{border-left:3px solid var(--neg)}
+.oc .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.09em;
+      text-transform:uppercase;display:block;margin-bottom:5px}
+.oc.up-c .lbl{color:var(--pos)} .oc.down-c .lbl{color:var(--neg)}
+.oc p{margin:0;font-size:14.5px;line-height:1.5}
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  body{font-size:16px}
+  .wrap{padding:0 16px 70px;border-left:none;border-right:none}
+  .ticker{font-size:34px}
+  .headline{font-size:23px}
+  .cases{grid-template-columns:1fr}
+  .outcomes{grid-template-columns:1fr}
+  .mast-strip{gap:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none !important;transition:none !important}
+}
+@media print{
+  :root,:root:not([data-theme="light"]),:root[data-theme="dark"],:root[data-theme="light"]{
+    --paper:#FFFFFF;
+    --canvas:#F4F7F9;
+    --panel-2:#EDF2F6;
+    --line:#DEE6EC;
+    --line-hard:#C0CDD7;
+    --ink:#0F1E2B;
+    --ink-dim:#46596A;
+    --ink-faint:#5C6E80;
+    --pos:#0B7A50;
+    --pos-bg:#E7F4EE;
+    --neg:#B02A21;
+    --neg-bg:#FBECEA;
+    --caution:#90600A;
+    --caution-bg:#FBF2E0;
+    --assume:#4F3FA3;
+    --assume-bg:#EFEDFA;
+    --accent:var(--accent-light);
+    --accent-deep:var(--accent-deep-light);
+    --accent-wash:var(--accent-wash-light);
+    --accent-line:var(--accent-line-light);
+    color-scheme: light;
+  }
+  .themetoggle{display:none}
+  body{font-size:11pt}
+  .wrap{max-width:none;border:none}
+  section{page-break-inside:avoid}
+}
+/* ============================================================================
+   SHARED STYLESHEET v2.01 : END
+   ========================================================================= */
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<!-- ===================== MASTHEAD ===================== -->
+<header class="mast">
+  <div class="themetoggle" role="group" aria-label="Color scheme">
+    <button type="button" data-set="system">System</button>
+    <button type="button" data-set="light">Light</button>
+    <button type="button" data-set="dark">Dark</button>
+  </div>
+  <p class="ticker">RIOT</p>
+  <h1 class="headline">A twenty-year lease worth $9.1 billion, funded so far by a bridge that matures this year</h1>
+  <p class="functional">RIOT &middot; Riot Platforms, Inc. &middot; Catalyst Calendar &middot; as of August 16, 2026</p>
+  <div class="mast-strip">
+    <div>Dated catalysts <b>8</b></div>
+    <div>Standing conditions <b>6</b></div>
+    <div>Resolved <b>7</b></div>
+    <div>Horizon <b>12 months</b></div>
+    <div>Pricing basis <b>Aug 14, 2026 close</b> <span class="tag">Market</span></div>
+  </div>
+</header>
+
+<!-- ===================== BASIS ===================== -->
+<div class="first">
+  <h2>Basis</h2>
+  <ol>
+    <li>Which items are genuinely <em>scheduled</em>, and which are event-driven and could land any day. Riot's reporting dates and its two facility maturities are scheduled; the delivery of the Rockdale data center capacity and the permanent financing behind it are not.</li>
+    <li>Timing confidence rates the <em>date</em>, never the outcome. A High-confidence catalyst can still be a coin flip.</li>
+    <li>Estimated dates are cadence-based until the company announces. Treat them as approximate.</li>
+    <li>One maturity is stated two ways by the company itself. The Form 10-Q filed August 10, 2026 dates the $573.0 million interim facility to October 15, 2026 and the Form 8-K filed August 14, 2026 dates it to December 31, 2026. The item is banded on the earlier date and the conflict is stated on the card rather than resolved here.</li>
+  </ol>
+</div>
+
+<!-- ===================== 1. DATED CATALYSTS ===================== -->
+<section id="s1">
+  <h2 class="sec"><span class="n">01</span>Dated catalysts</h2>
+  <p class="sub">Banded 0&ndash;3 / 3&ndash;6 / 6&ndash;12 months, earliest first. Numbering is gapless and runs straight through the bands, so a boundary never resets the count. An ID marks position in the current ordering and changes between revisions, so catalysts are named by title.</p>
+
+  <div class="band"><span class="band-t">0&ndash;3 months</span><span class="band-r"></span><span class="band-c">D1&ndash;D3</span></div>
+
+  <div class="cat two" id="cat-2030-notes-conversion-test">
+    <div class="cat-head">
+      <span class="cid">D1</span>
+      <h3>The 2030 Notes conversion test for the fourth quarter</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>September 30, 2026</b></div>
+      <div>Kind <b>Threshold</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Confidence <b>High</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The 0.75% Convertible Senior Notes due 2030 became convertible at the option of holders
+    during the third quarter of 2026, because the closing price of the common stock exceeded 130%
+    of the applicable conversion price for at least 20 trading days in the 30 consecutive trading
+    days ended June 30, 2026. The same test runs again on the last trading day of the third
+    quarter and decides whether the right carries into the fourth. $594.4 million of principal is
+    outstanding, carried at $583.7 million net of $10.6 million of unamortized issuance costs,
+    against an estimated fair value of approximately $1.2 billion at June 30, 2026, and
+    39,988,127 shares underlie the notes. The company states it has the ability and the intent to
+    settle any conversion in stock at its election.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>The test fails, the conversion right lapses for the quarter, and the notes read as ordinary long-term debt again without a share being issued.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>The test passes again and 39,988,127 shares stay live and settleable in stock, at the moment when the equity is the least expensive currency available for the Rockdale build.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-Q for the quarter ended June 30, 2026, filed August 10, 2026, Note 11. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-interim-facility-maturity">
+    <div class="cat-head">
+      <span class="cid">D2</span>
+      <h3>The $573.0 million interim facility matures</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>October 15, 2026, or December 31, 2026</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>This is the hardest date in this calendar and the company states it two ways. The Form 10-Q
+    filed August 10, 2026 says the facility <em>matures on October 15, 2026, subject to extension in
+    certain circumstances in connection with the Company's re-financing</em>. The Form 8-K filed
+    August 14, 2026, which reports the credit agreement itself and files it as an exhibit, says
+    <em>loans under the Facility mature on December 31, 2026</em>. Both are filings by this issuer about
+    this facility, four days apart. The item is banded on the earlier of the two.</p>
+    <p>The facility is a senior secured delayed-draw term loan of up to $573.0 million to Riot DC
+    Logistics, LLC, a wholly owned subsidiary, with Morgan Stanley Senior Funding, Inc. as
+    administrative agent, available from August 10, 2026, priced at Adjusted Term SOFR plus 2.75%
+    or Base Rate plus 1.75% at the borrower's election. It funds long-lead equipment for the 191
+    critical IT MW project at Rockdale. It is guaranteed by the borrower's subsidiaries and by
+    RPI AUS01-0H DC LLC, secured by a lien on substantially all the assets of those Credit
+    Parties, and non-recourse to Riot Platforms, Inc. beyond customary carve-outs for fraud,
+    willful misrepresentation and misappropriation of collateral proceeds.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>The facility is repaid or termed out into permanent financing before the earlier date, and the funding of the largest project this company has undertaken stops being a quarterly question.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Neither date is met and the lenders look solely to the Credit Parties and their collateral. The non-recourse structure confines that to the project rather than the parent, which limits the damage without removing it: the collateral is the equipment for Rockdale.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K filed August 14, 2026 reporting an event of August 10, 2026, and Form 10-Q for the quarter ended June 30, 2026, filed August 10, 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-third-quarter-2026-results">
+    <div class="cat-head">
+      <span class="cid">D3</span>
+      <h3>Third-quarter 2026 results and Form 10-Q</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>~late October 2026</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>The first report to cover the Rockdale tenant lease and the interim facility as part of the
+    period rather than as subsequent events. It is also the first opportunity to see whether the
+    Data Center segment, which did not exist a year ago and produced $23.2 million in the second
+    quarter and $56.4 million in the half, keeps growing while Bitcoin Mining revenue falls; the
+    mining line was $113.7 million in the second quarter against $140.9 million a year earlier.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Data Center and Engineering together cover more of the fixed cost base, the interim facility is shown repaid or refinanced, and the share count is flat.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>The mining line falls again, the treasury is drawn down further to fund the build, or the 2025 ATM Program is used for the first time.</p></div>
+    </div>
+    <div class="assume">
+      <span class="lbl">Analyst assumption</span>
+      <p>The date is taken from this company's own filing cadence and not from an announcement.
+      The third-quarter report for 2025 was filed October 30, 2025, the first quarter of 2026 on
+      April 30, 2026 and the second on August 10, 2026. Riot has not announced a date.</p>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> SEC filing index for Central Index Key 0001167419, searched August 16, 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="band"><span class="band-t">3&ndash;6 months</span><span class="band-r"></span><span class="band-c">n/a</span></div>
+  <p class="sub">Deliberately empty. The only item that could sit here is the interim facility maturity, and only on the later of the two dates the company gives it; it is banded once, on the earlier, rather than twice.</p>
+
+  <div class="band"><span class="band-t">6&ndash;12 months</span><span class="band-r"></span><span class="band-c">D4&ndash;D6</span></div>
+
+  <div class="cat two" id="cat-fy2026-results-and-form-10-k">
+    <div class="cat-head">
+      <span class="cid">D4</span>
+      <h3>Full-year 2026 results and Form 10-K</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>~late February to early March 2027</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>The first audited statements to carry the Data Center segment for a full year, and the
+    first to be struck after the interim facility falls due on either of its stated dates. It also
+    carries the audit report: Deloitte &amp; Touche LLP has served since 2023, which is a short
+    tenure to have absorbed a business that changed shape twice in that time.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>A clean audit opinion over a year in which contracted lease revenue replaced part of the mining line, with the permanent financing disclosed as closed.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A going concern paragraph, a control deficiency, or an impairment beyond the $28.0 million already taken on property and equipment in the second quarter.</p></div>
+    </div>
+    <div class="assume">
+      <span class="lbl">Analyst assumption</span>
+      <p>Cadence, not announcement. This company's last three annual reports were filed March 2,
+      2026, February 28, 2025 and February 23, 2024.</p>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> SEC filing index for Central Index Key 0001167419, searched August 16, 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-coinbase-facility-maturity">
+    <div class="cat-head">
+      <span class="cid">D5</span>
+      <h3>The $200.0 million Coinbase facility matures</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>April 20, 2027</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>High</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>Fully drawn, and secured by 5,821 of the company's bitcoin as of June 30, 2026. The
+    extension option is the part with the earlier deadline: the company may request a further 364
+    days no later than ninety days before maturity, which falls around January 20, 2027, and the
+    extension needs the lender's consent. A facility secured on the treasury is the one borrowing
+    whose collateral moves with the same price that drives the revenue it is meant to bridge.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Extended, repaid from lease revenue, or refinanced unsecured, and 5,821 coins come back unencumbered.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Consent is withheld and the loan falls due against pledged collateral, in a market where the price that would make repayment easy is the same one that would make the collateral sufficient.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K filed April 27, 2026 reporting an event of April 21, 2026, and Form 10-Q for the quarter ended June 30, 2026, filed August 10, 2026, which states the date the 8-K defines only by reference. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat neutral" id="cat-2027-annual-meeting">
+    <div class="cat-head">
+      <span class="cid">D6</span>
+      <h3>The 2027 annual meeting and the Class III election</h3>
+      <span class="dir">Neutral</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>~June 2027</b></div>
+      <div>Impact <b>Low</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Estimate</span></div>
+    </div>
+    <p>The second step of the phased declassification adopted in March 2026. Class III directors
+    elected in 2027 serve terms expiring at the 2029 annual meeting, at which the board ceases to
+    be classified and all directors stand annually.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>The schedule holds and the board reaches annual election on time, which shortens the interval between a shareholder view and a board consequence.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>A contested slate or a further bylaw amendment lengthens the phase-in. Three years of staggered terms remain in place either way.</p></div>
+    </div>
+    <div class="assume">
+      <span class="lbl">Analyst assumption</span>
+      <p>The month is inferred from the two most recent meetings, held June 9, 2026 and June 10,
+      2025. The year and the class are stated in the bylaws amendment; the date is not.</p>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K filed April 1, 2026 reporting an event of March 26, 2026, and the proxy statements filed April 30, 2026 and April 17, 2025. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="band"><span class="band-t">Beyond 12 months, context only</span><span class="band-r"></span><span class="band-c">D7&ndash;D8</span></div>
+  <p class="sub">Structural items that shape the backdrop but do not trade in the window. Both are the delivery schedule of the lease that the near-dated financing exists to build.</p>
+
+  <div class="cat two" id="cat-rockdale-first-96-mw-delivery">
+    <div class="cat-head">
+      <span class="cid">D7</span>
+      <h3>The first 96 MW of the Rockdale tenant lease is delivered</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>December 2027</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The lease is phased: 96 MW of critical IT load capacity anticipated in December 2027 and the
+    balance of the 191 MW in June 2028. This is the first date on which the capacity the interim
+    facility is buying equipment for has to physically exist.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>The first phase energizes on schedule and roughly half the contracted capacity becomes deliverable, sixteen months after the equipment was ordered.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Interconnection, equipment lead times or construction slip the date. The lease term runs from full deployment, so a delay moves the start of $9.1 billion of base rent rather than reducing it.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-Q for the quarter ended June 30, 2026, filed August 10, 2026, Note 3. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-rockdale-full-deployment">
+    <div class="cat-head">
+      <span class="cid">D8</span>
+      <h3>Full 191 MW deployment, and the twenty-year term begins</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>June 2028</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Confidence <b>Medium</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <p>The initial term of twenty years commences on full deployment, anticipated June 2028, and
+    the lease carries two successive five-year renewal terms at the lessee's option. Approximately
+    $9.1 billion of base rent is expected over the initial term. Nothing of that reaches revenue
+    before this date.</p>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Full deployment starts a twenty-year contracted stream that is larger than the whole of this company's revenue in any year it has reported.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Almost two years of capital expenditure and financing cost stand between today and the first dollar of that rent, and the counterparty is described in the filings only as a leading frontier AI lab.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-Q for the quarter ended June 30, 2026, filed August 10, 2026, Note 3. <span class="tag">Filed</span></p>
+  </div>
+</section>
+
+<!-- ===================== 2. STANDING CONDITIONS ===================== -->
+<section id="s2">
+  <h2 class="sec"><span class="n">02</span>Standing conditions</h2>
+  <p class="sub">Ongoing and undated, most material first. These take &ldquo;Why undated&rdquo; in place of timing confidence.</p>
+
+  <div class="cat two" id="cat-permanent-financing-not-established">
+    <div class="cat-head">
+      <span class="cid">S1</span>
+      <h3>The permanent financing for Rockdale is not established</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>No facility, commitment or backstop is filed, so there is nothing to date</b></div>
+      <div>Provenance <span class="tag">Open</span></div>
+    </div>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>A permanent facility is filed on terms that leave the project ring-fenced, and the largest uncertainty on this calendar closes without touching the parent.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>The takeout arrives with recourse to Riot Platforms, Inc., or with equity attached, or does not arrive. The interim facility is a bridge and the far bank is not in the filed record.</p></div>
+    </div>
+    <p>The only committed funding for the 191 MW project that appears in any filing is the
+    $573.0 million interim facility, which matures inside this calendar's near band. The project
+    is not sized in the filings; what is stated is that the facility funds long-lead equipment
+    procurement and related project and development costs, which is by construction less than the
+    whole. Every other component of the capital plan is absent from the record: no permanent
+    facility, no commitment letter, no backstop and no equity issue has been filed.</p>
+    <p>This is the condition that governs the interim facility maturity (D2), the first phase
+    delivery (D7) and full deployment (D8), and it is the reason the near band carries a financing
+    item rather than an operating one.</p>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K filed August 14, 2026, Form 10-Q for the quarter ended June 30, 2026, filed August 10, 2026, and the SEC filing index for Central Index Key 0001167419, searched August 16, 2026, which carries no financing filing after August 14, 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-bitcoin-price-drives-both-sides">
+    <div class="cat-head">
+      <span class="cid">S2</span>
+      <h3>Bitcoin price sets both the revenue line and the balance sheet</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>Continuous market variable with no scheduled trigger</b></div>
+      <div>Provenance <span class="tag">Market</span></div>
+    </div>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>A rising price lifts mining revenue and the treasury mark together, and can turn total costs negative as it did in the second quarter of 2025.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>It works in reverse with the same leverage, and the reported operating result swings by hundreds of millions on a mark rather than on operations.</p></div>
+    </div>
+    <p>The mechanism is visible in the filed numbers rather than inferred. Total costs and expenses
+    were <em>negative</em> $63.2 million in the second quarter of 2025 and positive $413.7 million in
+    the second quarter of 2026, because bitcoin fair-value movement runs through costs. The
+    operating result moved from income of $216.1 million to a loss of $239.4 million on that
+    basis. Reading the swing as a collapse in trading would be wrong, and reading it as
+    unimportant would be wrong too: the same mechanism sets the carrying value of the treasury
+    that secures the Coinbase facility (D5).</p>
+    <p>Production economics moved in the same direction and are separable from the mark. The
+    production value of one bitcoin mined was $71,667 in the second quarter of 2026 against
+    $98,800 a year earlier, while quantity mined rose to 1,587 coins from 1,426.</p>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-Q for the quarter ended June 30, 2026, filed August 10, 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat down" id="cat-treasury-drawdown-and-pledge">
+    <div class="cat-head">
+      <span class="cid">S3</span>
+      <h3>The treasury has fallen 37% and over half of what remains is pledged</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>Disposals and pledges are disclosed at each report, not on a schedule</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Lease revenue replaces the treasury as the funding source, the drawdown stops, and the pledged block is released as the Coinbase facility is repaid.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>The build is funded by continuing to sell the treasury, and the encumbered share rises toward the whole of it.</p></div>
+    </div>
+    <p>The holding fell from 18,005 bitcoin at December 31, 2025 to 11,380 at June 30, 2026, a fall
+    of 6,625 coins or 37% in six months. Of what remains, 5,821 coins were pledged to Coinbase
+    Credit, Inc. at June 30, 2026, leaving 5,559 free. The balance sheet's two bitcoin lines are
+    that split: at the disclosed total fair value of $666.0 million across 11,380 coins, or
+    $58.53 thousand per coin, the 5,821 pledged coins are $340.7 million and the 5,559 free coins
+    are $325.4 million, which are the reported Restricted bitcoin and Bitcoin lines to the tenth
+    of a million.</p>
+    <p>A reading that reports the holding as 11,380 coins without the pledge overstates the liquid
+    position by roughly a factor of two. Against the drawdown, cash and equivalents roughly
+    doubled over the same six months, from $233.5 million to $471.4 million, and the two facts
+    belong together: this is a treasury being converted, not simply lost.</p>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-Q for the quarter ended June 30, 2026, filed August 10, 2026, and Form 10-K for the year ended December 31, 2025, filed March 2, 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat down" id="cat-dilution-capacity-standing">
+    <div class="cat-head">
+      <span class="cid">S4</span>
+      <h3>Seventy-two million potentially dilutive shares, and an untouched $500.0 million program</h3>
+      <span class="dir">Down</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>Issuance is at the company's discretion and needs no filing in advance</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>The program stays unused, as it did through the first half of 2026, and the build is funded with project debt that does not touch the share count.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>$500.0 million of registered capacity is roughly 7% of the current capitalization and can be sold without notice, into a build whose permanent financing is not established (S1).</p></div>
+    </div>
+    <p>Weighted average shares rose from 175,026,051 in 2023 to 275,980,010 in 2024 and
+    340,719,298 in 2025, an increase of 95% over two years. At June 30, 2026, 72,504,968 shares
+    were potentially dilutive: 39,988,127 under the 2030 Notes, 30,282,686 unvested restricted
+    stock awards, 2,171,155 unvested restricted stock units and 63,000 under warrants. All
+    $500.0 million of the 2025 ATM Program remained available and no shares had been sold under
+    it. No cash was raised through the issuance of common stock or debt in the six months to
+    June 30, 2026.</p>
+    <p>The count moved the other way in the same period, which is the detail most likely to be
+    misread. Shares issued and outstanding were 378,022,964 at June 30, 2026 and 375,258,935 on
+    the cover of the same report at August 7, 2026, a fall of 2,764,029. The equity rollforward
+    shows the mechanism inside the quarter: forfeitures and shares repurchased to satisfy employee
+    tax withholding exceeded new awards, at $2.5 million of such repurchases in the half. It is
+    not a buyback and it is not a reverse split, neither of which appears anywhere in the filings.</p>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-Q for the quarter ended June 30, 2026, filed August 10, 2026, and Form 10-K for the year ended December 31, 2025, filed March 2, 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-texas-transmission-cost-allocation">
+    <div class="cat-head">
+      <span class="cid">S5</span>
+      <h3>Texas is rewriting what a large load pays for transmission</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>Medium</b></div>
+      <div>Why undated <b>A rulemaking with a statutory deadline but no scheduled decision date</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Riot's sites are energized and interconnected, so scrutiny that slows speculative projects still in the queue raises the scarcity value of capacity that already exists.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Large loads bear a greater share of transmission upgrade costs, pay minimum demand charges on contracted peak for twenty years, and lose the four coincident peak method that makes curtailment valuable. Power curtailment credits were $31.1 million in the half.</p></div>
+    </div>
+    <p>The company's own risk disclosure states that Texas Senate Bill 6 requires the Public Utility
+    Commission of Texas to amend its wholesale transmission cost-allocation rules by December 31,
+    2026, and that the Commission is considering measures that would require large loads such as
+    its facilities to bear a greater share of transmission system upgrade costs, to pay minimum
+    demand charges based on contracted peak demand for twenty years, and to move away from the
+    current four coincident peak allocation method. It also states that these actions could delay
+    or prevent interconnection of projects advancing through the ERCOT process.</p>
+    <p>This bears on the economics of both segments at once. Curtailment credits are credited
+    against power invoices for pausing operations in ERCOT demand response programs, and they were
+    $10.1 million in the quarter and $31.1 million in the half, against $8.3 million and
+    $16.1 million a year earlier. A rule change that reprices peak demand changes the value of
+    that flexibility and the cost of the load the Rockdale lease is built to serve.</p>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-Q for the quarter ended June 30, 2026, filed August 10, 2026, Part II Item 1A. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat two" id="cat-tenant-not-identified">
+    <div class="cat-head">
+      <span class="cid">S6</span>
+      <h3>The tenant is not identified, so its credit cannot be assessed from the record</h3>
+      <span class="dir">Two-sided</span>
+    </div>
+    <div class="cat-meta">
+      <div>Timing <b>Ongoing</b></div>
+      <div>Impact <b>High</b></div>
+      <div>Why undated <b>Disclosure is at the company's discretion and no filing obliges it</b></div>
+      <div>Provenance <span class="tag">Open</span></div>
+    </div>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>The counterparty is named, or credit support is filed, and $9.1 billion of contracted rent acquires an assessable payer.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>It stays unnamed. The largest asset in the investment case is then a twenty-year obligation of a party whose ability to meet it cannot be examined from any public document.</p></div>
+    </div>
+    <p>The Form 10-Q describes the counterparty as <em>a leading frontier AI lab</em> and names no party.
+    Nothing in the filings read gives a credit rating, a parent guarantee, a letter of credit, a
+    security deposit or a prepayment. The same is true of the $573.0 million facility's takeout,
+    where no backstop provider is named either.</p>
+    <p>This document names no tenant. An identification that rests on inference rather than on a
+    filing would put a private third party's name against a twenty-year obligation on no evidence
+    a reader could check, and the distance between what is contracted and who is contracted to pay
+    it is itself the finding.</p>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-Q for the quarter ended June 30, 2026, filed August 10, 2026, Note 3, and Form 8-K filed August 14, 2026. <span class="tag">Filed</span></p>
+  </div>
+</section>
+
+<!-- ===================== 3. RESOLVED ===================== -->
+<section id="s3">
+  <h2 class="sec"><span class="n">03</span>Resolved</h2>
+  <p class="sub">Closed items, kept for the record, ordered by resolution date. A resolved catalyst takes the next free R number; it does not carry its old D number over.</p>
+
+  <div class="cat resolved" id="cat-board-declassification-adopted">
+    <div class="cat-head">
+      <span class="cid">R1</span>
+      <h3>The board adopted a phased declassification</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>March 26, 2026</b></div>
+      <div>Outcome <b>Adopted, effective immediately, and phased to 2029</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>The board acted on an advisory vote it had itself recommended in favor of, and set a definite end to the staggered structure.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>It took nine months to respond, and the phase-in runs three more years, so directors elected in 2026 and 2027 sit until 2029 regardless.</p></div>
+    </div>
+    <p>The amended and restated bylaws keep the board divided into three classes until the 2029
+    annual meeting. Class II directors elected in 2026, Class III in 2027 and Class I in 2028 all
+    serve terms expiring at the 2029 meeting, from which all directors stand annually. It follows
+    a non-binding advisory proposal approved at the 2025 annual meeting on June 10, 2025.</p>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K filed April 1, 2026 reporting an event of March 26, 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat resolved" id="cat-coinbase-facility-amended">
+    <div class="cat-head">
+      <span class="cid">R2</span>
+      <h3>The Coinbase facility was amended, extended and fixed</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>April 21, 2026</b></div>
+      <div>Outcome <b>Second amended and restated; rate fixed and maturity extended</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>A floating rate became fixed and the maturity moved out, which removes rate risk from a facility whose collateral is already volatile.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>It remains fully drawn and secured on the treasury, and the new date is now the second of the two facility maturities on this calendar (D5).</p></div>
+    </div>
+    <p>The facility began at $100.0 million on April 22, 2025, was upsized to $200.0 million on
+    May 20, 2025, and was replaced in its entirety on April 21, 2026. The obligations continue to
+    be secured by a pledge of the company's financial assets, including bitcoin, USDC and cash,
+    held in the custody of Coinbase Custody Trust Company, LLC.</p>
+    <p>The 8-K alone could not date the new maturity. It defines it as 364 days after the Original
+    Maturity Date, a term defined in an agreement not filed with it, and the quarterly report
+    filed four months later states April 20, 2027 outright. A date taken from the current report
+    alone would have been a guess wearing a number.</p>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K filed April 27, 2026 reporting an event of April 21, 2026, and Form 10-Q for the quarter ended June 30, 2026, filed August 10, 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat resolved" id="cat-2026-annual-meeting-held">
+    <div class="cat-head">
+      <span class="cid">R3</span>
+      <h3>The 2026 annual meeting was held</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>June 9, 2026</b></div>
+      <div>Outcome <b>Held; Class II directors elected to terms expiring in 2029</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>The meeting ran to the schedule the bylaws amendment assumed, so the declassification timetable is on its stated track.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>The directors elected at it sit for three years, which is the phase-in working exactly as adopted rather than a departure from it.</p></div>
+    </div>
+    <p>The proxy statement was filed April 30, 2026 for a meeting date of June 9, 2026, and the
+    results were reported by current report on June 15, 2026. The voting outcomes themselves were
+    not read for this document and are named in what was not checked.</p>
+    <p style="margin-top:12px"><b>Source:</b> Definitive proxy statement filed April 30, 2026, and the SEC filing index for Central Index Key 0001167419, searched August 16, 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat resolved" id="cat-second-quarter-2026-results">
+    <div class="cat-head">
+      <span class="cid">R4</span>
+      <h3>Second-quarter 2026 results and Form 10-Q</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>August 10, 2026</b></div>
+      <div>Outcome <b>Revenue up 13.9%, operating loss of $239.4 million</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Total revenue rose to $174.2 million from $153.0 million while the mining line fell 19%, which is the pivot showing up in the segment note rather than only in the narrative.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>The accumulated deficit widened to $2,091.2 million from $1,353.6 million in six months, and adjusted EBITDA was negative $69.7 million against positive $495.3 million a year earlier.</p></div>
+    </div>
+    <p>Bitcoin Mining revenue was $113.7 million against $140.9 million, Data Center $23.2 million
+    against nothing a year earlier, and Engineering $37.3 million against $10.6 million. Deployed
+    hash rate reached 44.4 EH/s from 35.4 EH/s and total developed power capacity 1,292 MW from
+    1,165 MW, the increase coming from Kentucky at 192 MW against 65 MW.</p>
+    <p>The year-on-year swing in the operating result is largely the bitcoin mark rather than
+    operations, for the reason set out under the price condition (S2).</p>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-Q for the quarter ended June 30, 2026, filed August 10, 2026, and the results release on Form 8-K of the same date. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat resolved" id="cat-interim-facility-signed">
+    <div class="cat-head">
+      <span class="cid">R5</span>
+      <h3>The $573.0 million interim credit facility was signed</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>August 10, 2026</b></div>
+      <div>Outcome <b>Signed and available; non-recourse to the parent</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Long-lead equipment for the 191 MW project is funded without recourse to Riot Platforms, Inc. and without issuing a share.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>It resolved by creating the near-dated maturity that now leads this calendar (D2), on a date the company states two ways.</p></div>
+    </div>
+    <p>What the signing settled and what it did not are worth separating. It settled that the
+    equipment is funded, at Adjusted Term SOFR plus 2.75%, from a syndicate with Morgan Stanley
+    Senior Funding, Inc. as administrative agent. It did not settle how the project is financed to
+    completion, which remains open (S1).</p>
+    <p>One disclosure difference is verifiable from the filing alone. The 8-K states that the
+    facility is secured by a lien on substantially all of the assets of the Credit Parties,
+    pursuant to a pledge and security agreement. Any characterization of the security as resting
+    on the tenant rather than on the borrower's assets does not come from this document.</p>
+    <p style="margin-top:12px"><b>Source:</b> Form 8-K filed August 14, 2026 reporting an event of August 10, 2026. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat resolved" id="cat-amd-lease-at-rockdale">
+    <div class="cat-head">
+      <span class="cid">R6</span>
+      <h3>The AMD lease and its amendment at Rockdale</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>In the six months to June 30, 2026; the day is not stated</b></div>
+      <div>Outcome <b>50 MW leased, expandable to 200 MW</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>It established that this power can be leased to a named investment-grade counterparty, and it produced the Data Center segment's first revenue: $23.2 million in the quarter and $56.4 million in the half.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>The expansion to 200 MW is an option and not a commitment, and the 191 MW subsequently leased to another party uses capacity at the same site.</p></div>
+    </div>
+    <p>Advanced Micro Devices, Inc. entered a long-term data center lease and an amendment to it at
+    the Rockdale facility for 50 MW of critical IT load capacity, with the potential for expansion
+    up to a total of 200 MW. This is the only lease at Rockdale whose counterparty the filings
+    name.</p>
+    <p>It sorts last with the tenant lease (R7) because no completion date is stated for either.
+    Placing them by the period in which they fall keeps the rest of the sequence honest and makes
+    the gap visible, and inventing a day to sort them would be research this document has not
+    done.</p>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-Q for the quarter ended June 30, 2026, filed August 10, 2026, Notes 1 and 3. <span class="tag">Filed</span></p>
+  </div>
+
+  <div class="cat resolved" id="cat-191-mw-tenant-lease-signed">
+    <div class="cat-head">
+      <span class="cid">R7</span>
+      <h3>The 191 MW tenant lease at Rockdale</h3>
+      <span class="dir">Resolved</span>
+    </div>
+    <div class="cat-meta">
+      <div>Resolved <b>August 2026; the day is not stated</b></div>
+      <div>Outcome <b>191 MW for twenty years, approximately $9.1 billion of base rent</b></div>
+      <div>Provenance <span class="tag">Filed</span></div>
+    </div>
+    <div class="outcomes">
+      <div class="oc up-c"><span class="lbl">Upside</span><p>Contracted base rent of approximately $9.1 billion over the initial term, against total revenue of $647.4 million in the whole of 2025, with two five-year renewals at the lessee's option beyond it.</p></div>
+      <div class="oc down-c"><span class="lbl">Downside</span><p>Nothing is earned before June 2028, the counterparty is unnamed (S6), and the financing that builds it matures within months (D2).</p></div>
+    </div>
+    <p>The initial term of twenty years commences on full deployment, anticipated in June 2028,
+    with 96 MW anticipated in December 2027. Both are carried in the beyond-twelve-month band, as
+    the first 96 MW delivery (D7) and as full deployment (D8).</p>
+    <p>Its scale is the reason this calendar exists in the shape it does: the contracted rent is an
+    order of magnitude larger than annual revenue, and every near-dated item on the calendar is
+    either the financing that builds it or a condition that could interrupt it.</p>
+    <p style="margin-top:12px"><b>Source:</b> Form 10-Q for the quarter ended June 30, 2026, filed August 10, 2026, Notes 1 and 3. <span class="tag">Filed</span></p>
+  </div>
+</section>
+
+<!-- ===================== 4. NULL CATEGORIES ===================== -->
+<section id="s4">
+  <h2 class="sec"><span class="n">04</span>Null categories</h2>
+  <p class="sub">Every category reviewed appears as a row, including those that produced catalysts, which read across by title and ID. A category checked and found empty is recorded rather than omitted.</p>
+  <div class="tw"><table class="nulls">
+    <thead><tr><th>Category</th><th>Status</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Earnings</td><td class="status">Covered above</td><td>Third-quarter 2026 results (D3), full-year 2026 results (D4), and second-quarter 2026 results as resolved (R4).</td></tr>
+      <tr><td class="lbl">Major contracts</td><td class="status">Covered above</td><td>The 191 MW tenant lease (R7) and the AMD lease (R6), with the first 96 MW delivery (D7) and full deployment (D8).</td></tr>
+      <tr><td class="lbl">Regulatory decisions</td><td class="status">Covered above</td><td>The Public Utility Commission of Texas transmission cost-allocation rulemaking (S5).</td></tr>
+      <tr><td class="lbl">Financings and capital structure</td><td class="status">Covered above</td><td>The interim facility maturity (D2) and its signing (R5), the Coinbase facility maturity (D5) and its amendment (R2), the 2030 Notes conversion test (D1), and the overlay in section 5.</td></tr>
+      <tr><td class="lbl">Dividends</td><td class="status">None</td><td>No dividend is declared or paid in either six-month period of the cash flow statement in the Form 10-Q filed August 10, 2026, and none appears in the Form 10-K for 2025 filed March 2, 2026.</td></tr>
+      <tr><td class="lbl">Share buybacks</td><td class="status">None</td><td>No repurchase program is disclosed. The $2.5 million of shares repurchased in the half was to satisfy employee tax withholding obligations, which is a settlement mechanic and not an authority to buy stock.</td></tr>
+      <tr><td class="lbl">Product launches</td><td class="status">None</td><td>Riot sells services rather than a product line: mining, data center leasing, and electrical engineering through ESS Metron and E4A Solutions. No product launch appears in the Form 10-Q filed August 10, 2026 or in any 2026 current report on the filing index.</td></tr>
+      <tr><td class="lbl">Lawsuits</td><td class="status">None</td><td>Note 16 to the Form 10-Q filed August 10, 2026 records ordinary-course claims and names no individually material proceeding. The $20.0 million legal settlement accrued at December 31, 2025 was nil at June 30, 2026. Court dockets themselves were not read, and are named in what was not checked.</td></tr>
+      <tr><td class="lbl">Mergers and acquisitions</td><td class="status">None</td><td>No pending transaction is disclosed in the Form 10-Q filed August 10, 2026. The E4A Solutions earn-out, measurable on adjusted EBITDA over the two years ending December 31, 2026, is carried at $2.0 million against $2.6 million at acquisition.</td></tr>
+      <tr><td class="lbl">Segment reporting</td><td class="status">None</td><td>Three reportable segments are established in Note 18 to the Form 10-Q filed August 10, 2026: Bitcoin Mining, Data Center and Engineering. No further segment change is announced.</td></tr>
+      <tr><td class="lbl">Management changes</td><td class="status caution-t">Not established</td><td>The filing index carries three current reports with Item 5.02 in 2026, filed January 2, January 5 and June 15. None was read, so what changed is not established.</td></tr>
+      <tr><td class="lbl">Macro events</td><td class="status caution-t">Not established</td><td>No central bank, macroeconomic or bitcoin halving calendar was consulted. The bitcoin price exposure that would transmit such an event is carried as a standing condition (S2).</td></tr>
+      <tr><td class="lbl">Investor days</td><td class="status caution-t">Not established</td><td>Riot's corporate site was retrieved on August 16, 2026, but its investor relations events page was not, so no scheduled investor day is established either way.</td></tr>
+      <tr><td class="lbl">Industry conferences</td><td class="status caution-t">Not established</td><td>Not examined. No conference organizer's schedule was checked.</td></tr>
+      <tr><td class="lbl">Analyst coverage and short interest</td><td class="status caution-t">Not established</td><td>Coverage is reported in the research report for this ticker. No short interest figure was read for this document, and no exchange short interest report was checked.</td></tr>
+      <tr><td class="lbl">Credit rating actions</td><td class="status caution-t">Not established</td><td>No rating agency was checked, and the filings read do not state whether the 2030 Notes or either facility carries a rating.</td></tr>
+      <tr><td class="lbl">Index membership</td><td class="status caution-t">Not established</td><td>No index provider announcement was checked. Membership is decided by a provider rather than by the company, so nothing in the filings would settle it.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 5. DILUTION & CAPITAL OVERLAY ===================== -->
+<section id="s5">
+  <h2 class="sec"><span class="n">05</span>Dilution &amp; capital overlay</h2>
+  <p class="sub">Sits across every other catalyst rather than beside them. Three sources of capital are available to this company and each one changes a different item above.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Source</th><th class="num">Capacity</th><th>State at June 30, 2026</th><th>What it would move</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">2025 ATM Program</td><td class="num">$500.0M</td><td>Registered, wholly unused</td><td>Roughly 7% of the capitalization, issuable without notice. Funds the build without a lender, at the cost of the share count</td></tr>
+      <tr><td class="lbl">2030 Notes</td><td class="num">$594.4M principal</td><td>Outstanding; convertible in the third quarter</td><td>39,988,127 shares if converted and settled in stock, which the company states it can and intends to do</td></tr>
+      <tr><td class="lbl">Coinbase facility</td><td class="num">$200.0M</td><td>Fully drawn; 5,821 bitcoin pledged</td><td>No further capacity. Repayment or extension is a dated item (D5)</td></tr>
+      <tr><td class="lbl">$573 Million Credit Facility</td><td class="num">$573.0M</td><td>Available from August 10, 2026, at the project subsidiary</td><td>Project equipment only, non-recourse, and due on the near band's hardest date (D2)</td></tr>
+      <tr><td class="lbl">Bitcoin treasury</td><td class="num">$666.0M</td><td>11,380 coins, of which 5,821 pledged</td><td>$325.4M of unpledged holdings is the discretionary reserve, and selling it is what funded the first half</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>The overlay's point is that these are not independent. The treasury secures the Coinbase
+  facility, so drawing it down to fund the build reduces the collateral behind the borrowing;
+  repaying that borrowing releases the collateral but consumes the cash the build needs. The
+  equity program is the only source that touches none of the others, and it is the one that
+  touches the shareholder.</p>
+
+  <p>Total debt was $843.0 million at June 30, 2026, being $254.6 million current and
+  $588.4 million long term, against cash and equivalents of $471.4 million and total
+  stockholders' equity of $2,192.6 million. Nothing was raised from stock or debt in the first
+  half of 2026: net cash used in financing activities was $2.9 million, and the $514.8 million
+  provided by investing activities came principally from selling bitcoin and marketable
+  securities. That is the shape of a company funding itself from its treasury while its
+  registered equity capacity sits untouched.</p>
+</section>
+
+<!-- ===================== 6. FALSIFICATION TESTS ===================== -->
+<section id="s6">
+  <h2 class="sec"><span class="n">06</span>Falsification tests</h2>
+  <p class="sub">What would prove this read wrong, stated in advance. Each trigger is settleable from a document; an unquantified threshold is not a test.</p>
+  <div class="tw"><table>
+    <thead><tr><th>#</th><th>If this happens&hellip;</th><th>&hellip;this was wrong</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>Neither October 15, 2026 nor December 31, 2026 passes with the $573.0 million facility repaid, refinanced, or extended by an amendment reported in a filing.</td><td>That the interim facility is a bridge to permanent financing, which is the reading behind the near band leading on it (D2).</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">2</td><td>A current report or periodic report discloses that the Rockdale tenant lease has been terminated, reduced below 191 MW of critical IT load capacity, or that either delivery date has moved beyond June 2028.</td><td>That approximately $9.1 billion of base rent is contracted and firm, which is the reading behind the tenant lease (R7) and its two delivery items, the first 96 MW (D7) and full deployment (D8).</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">3</td><td>The Form 10-Q for the third quarter of 2026 reports shares issued and outstanding above 400,000,000, or discloses any sale under the 2025 ATM Program.</td><td>That the build is being funded without recourse to the equity, which the first half supported and the second need not (S4).</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">4</td><td>The Form 10-Q for the third quarter of 2026 reports restricted bitcoin above the 5,821 coins pledged at June 30, 2026.</td><td>That the encumbered share of the treasury has stopped rising, which the free block of 5,559 coins is being read as (S3).</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">5</td><td>Bitcoin Mining segment revenue for the third quarter of 2026 is below $100.0 million, against $113.7 million in the second quarter and $140.9 million a year earlier.</td><td>That the mining line is declining gradually while the data center line grows into it, rather than falling away faster than it can be replaced (R4).</td><td class="status">Untriggered</td></tr>
+      <tr><td class="num">6</td><td>A filing discloses permanent financing or a credit backstop for the Rockdale project on terms that include recourse to Riot Platforms, Inc. beyond the customary carve-outs.</td><td>That the project's financing is ring-fenced from the parent, which is what limits the downside on the permanent financing condition (S1) and on the interim facility maturity (D2).</td><td class="status">Untriggered</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 7. CATALYST SUMMARY ===================== -->
+<section id="s7">
+  <h2 class="sec"><span class="n">07</span>Catalyst summary</h2>
+  <p class="sub">Every ID in one table, gapless within each class. Must match the cards above exactly: same IDs, same count, same order. Links point at title slugs so they survive renumbering.</p>
+  <div class="tw"><table>
+    <thead><tr><th>ID</th><th>Catalyst</th><th>Timing</th><th>Impact</th><th>Confidence</th><th>Direction</th></tr></thead>
+    <tbody>
+      <tr><td class="num">D1</td><td><a href="#cat-2030-notes-conversion-test">The 2030 Notes conversion test for the fourth quarter</a></td><td class="when">Sep 30, 2026</td><td>Medium</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D2</td><td><a href="#cat-interim-facility-maturity">The $573.0 million interim facility matures</a></td><td class="when">Oct 15 or Dec 31, 2026</td><td>High</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D3</td><td><a href="#cat-third-quarter-2026-results">Third-quarter 2026 results and Form 10-Q</a></td><td class="when">~late Oct 2026</td><td>High</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D4</td><td><a href="#cat-fy2026-results-and-form-10-k">Full-year 2026 results and Form 10-K</a></td><td class="when">~Feb to Mar 2027</td><td>High</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D5</td><td><a href="#cat-coinbase-facility-maturity">The $200.0 million Coinbase facility matures</a></td><td class="when">Apr 20, 2027</td><td>High</td><td>High</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D6</td><td><a href="#cat-2027-annual-meeting">The 2027 annual meeting and the Class III election</a></td><td class="when">~Jun 2027</td><td>Low</td><td>Medium</td><td>Neutral</td></tr>
+      <tr><td class="num">D7</td><td><a href="#cat-rockdale-first-96-mw-delivery">The first 96 MW of the Rockdale tenant lease is delivered</a></td><td class="when">Dec 2027</td><td>High</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">D8</td><td><a href="#cat-rockdale-full-deployment">Full 191 MW deployment, and the twenty-year term begins</a></td><td class="when">Jun 2028</td><td>High</td><td>Medium</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S1</td><td><a href="#cat-permanent-financing-not-established">The permanent financing for Rockdale is not established</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S2</td><td><a href="#cat-bitcoin-price-drives-both-sides">Bitcoin price sets both the revenue line and the balance sheet</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S3</td><td><a href="#cat-treasury-drawdown-and-pledge">The treasury has fallen 37% and over half of what remains is pledged</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">S4</td><td><a href="#cat-dilution-capacity-standing">Seventy-two million potentially dilutive shares, and an untouched $500.0 million program</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="neg-t">Down</td></tr>
+      <tr><td class="num">S5</td><td><a href="#cat-texas-transmission-cost-allocation">Texas is rewriting what a large load pays for transmission</a></td><td class="when">Ongoing</td><td>Medium</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">S6</td><td><a href="#cat-tenant-not-identified">The tenant is not identified, so its credit cannot be assessed from the record</a></td><td class="when">Ongoing</td><td>High</td><td>n/a</td><td class="caution-t">Two-sided</td></tr>
+      <tr><td class="num">R1</td><td><a href="#cat-board-declassification-adopted">The board adopted a phased declassification</a></td><td class="when">Mar 26, 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R2</td><td><a href="#cat-coinbase-facility-amended">The Coinbase facility was amended, extended and fixed</a></td><td class="when">Apr 21, 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R3</td><td><a href="#cat-2026-annual-meeting-held">The 2026 annual meeting was held</a></td><td class="when">Jun 9, 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R4</td><td><a href="#cat-second-quarter-2026-results">Second-quarter 2026 results and Form 10-Q</a></td><td class="when">Aug 10, 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R5</td><td><a href="#cat-interim-facility-signed">The $573.0 million interim credit facility was signed</a></td><td class="when">Aug 10, 2026</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R6</td><td><a href="#cat-amd-lease-at-rockdale">The AMD lease and its amendment at Rockdale</a></td><td class="when">Not stated</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+      <tr><td class="num">R7</td><td><a href="#cat-191-mw-tenant-lease-signed">The 191 MW tenant lease at Rockdale</a></td><td class="when">Not stated</td><td>n/a</td><td>n/a</td><td>Resolved</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===================== 8. METHODOLOGY & CONFIDENCE SCALE ===================== -->
+<section id="s8">
+  <h2 class="sec"><span class="n">08</span>Methodology &amp; confidence scale</h2>
+  <h3>Provenance tags</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Tag</th><th>What it asserts</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl"><span class="tag">Filed</span></td><td>Stated in an SEC filing or company release, cited by form and date. Also covers a dated official publication by a named non-SEC issuer, with the issuer named in the Source line.</td></tr>
+      <tr><td class="lbl"><span class="tag">Estimate</span></td><td>Derived or inferred here. The arithmetic is shown.</td></tr>
+      <tr><td class="lbl"><span class="tag">Open</span></td><td>Expected but unconfirmed. Nothing filed either way.</td></tr>
+      <tr><td class="lbl"><span class="tag">Market</span></td><td>Price, volume, float, published targets and ratings. Stamped with the close or publication date.</td></tr>
+      <tr><td class="lbl"><span class="tag">Press</span></td><td>Reported by a named publication that is neither the issuer nor an analyst, cited by outlet and date. Corroborates; never the sole basis for a material claim.</td></tr>
+      <tr><td class="lbl"><span class="tag">Social</span></td><td>Publicly posted by a named account, cited by handle and date. Asserts that the statement was made, never that it is true.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Timing confidence</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Level</th><th>Means</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">High</td><td>Date is company-announced, protocol-defined, or statutorily fixed.</td></tr>
+      <tr><td class="lbl">Medium</td><td>Date inferred from filing cadence or a stated deadline window.</td></tr>
+      <tr><td class="lbl">Low</td><td>Date is a judgment call. Could move by a quarter or more.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note caution">
+    <p>Confidence rates <b>timing</b>, never outcome. A High-confidence catalyst can be a coin flip; a Low-confidence one can be near-certain in direction.</p>
+    <p><b>Impact is independent of confidence.</b> A High-impact, Low-confidence item is the most important kind here: it matters enormously and could land any time.</p>
+  </div>
+</section>
+
+<!-- ===================== 9. SOURCES ===================== -->
+<section id="s9">
+  <h2 class="sec"><span class="n">09</span>Sources</h2>
+  <p class="sub">Primary filings first, with form type and date. Every figure on this calendar traces to one of these.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Source</th><th class="when">Date</th><th>What it supports here</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Form 10-Q for the quarter ended June 30, 2026</td><td class="when">Aug 10, 2026</td><td>The segment revenues, the treasury and its pledge, the 2030 Notes and the dilution count, the two lease descriptions and their delivery dates, the Coinbase maturity date, the transmission rulemaking, and the October 15, 2026 maturity</td></tr>
+      <tr><td class="lbl">Form 8-K reporting the credit agreement of August 10, 2026, with the credit agreement as an exhibit</td><td class="when">Aug 14, 2026</td><td>The facility's size, agent, pricing, guarantors, security, non-recourse structure, and the December 31, 2026 maturity</td></tr>
+      <tr><td class="lbl">Form 8-K reporting the second amended and restated Coinbase credit agreement of April 21, 2026</td><td class="when">Apr 27, 2026</td><td>The facility's history, the change from floating to fixed rate, the extension mechanic, and the custody arrangement</td></tr>
+      <tr><td class="lbl">Form 8-K reporting the amended and restated bylaws of March 26, 2026</td><td class="when">Apr 1, 2026</td><td>The phased declassification, the class-by-class schedule to 2029, and the 2025 advisory vote behind it</td></tr>
+      <tr><td class="lbl">Form 10-K for the year ended December 31, 2025</td><td class="when">Mar 2, 2026</td><td>The three-year revenue and result history, the weighted average share counts, the treasury at the year end, the auditor and its tenure, and the incorporation history</td></tr>
+      <tr><td class="lbl">Definitive proxy statement for the 2026 annual meeting</td><td class="when">Apr 30, 2026</td><td>The June 9, 2026 meeting date</td></tr>
+      <tr><td class="lbl">SEC filing index for Central Index Key 0001167419, both index pages enumerated</td><td class="when">searched Aug 16, 2026</td><td>1,592 filings from February 7, 2002 to August 14, 2026. The filing cadence behind every estimated date, the Item 5.02 count, the fifteen late-filing notifications, and the absence of any financing filed after August 14, 2026</td></tr>
+      <tr><td class="lbl">Riot Platforms corporate site</td><td class="when">read Aug 16, 2026</td><td>Retrieved and not relied on. Its capacity and pipeline figures are the company's own marketing statements and are not carried here; the filed figures are used instead</td></tr>
+      <tr><td class="lbl">Nasdaq daily record for RIOT, 15 sessions, corroborated against a second provider</td><td class="when">Jul 27 to Aug 14, 2026</td><td>The pricing basis stated in the masthead</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>What was not checked</h3>
+  <p>An unexamined area is a gap, not a clean bill. The following were not reached.</p>
+  <ul>
+    <li>The credit agreement itself, filed as an exhibit to the current report of August 14, 2026. The conflict between the two stated maturities (D2) is therefore recorded and not resolved: the document that would settle it was not read.</li>
+    <li>The tenant lease and the AMD lease. Their terms here are as described in the quarterly report, and neither agreement was read.</li>
+    <li>The identity of the Rockdale tenant, and whether any guarantee, letter of credit, deposit or prepayment supports its obligations. Nothing in the filings read names or rates the counterparty.</li>
+    <li>Three current reports carrying Item 5.02 in 2026, filed January 2, January 5 and June 15, so no management change is established. The June 15 report also carries the 2026 annual meeting voting results, which were not read.</li>
+    <li>What the company did between 2002 and 2017 as a diagnostics business under its earlier names. The filings of that period were not read, and nothing here describes the business this registrant was before October 2017.</li>
+    <li>The beneficial ownership register. The index carries 133 filings on Schedule 13D and 13G and their amendments across both pages, the most recent on August 6, 2026. None was read, so no holder is identified and no position is stated.</li>
+    <li>Court dockets, in Texas, Colorado, Nevada or federally. The contingencies note was read; the underlying proceedings were not.</li>
+    <li>ERCOT interconnection queue records, Public Utility Commission of Texas docket filings, and county or municipal permitting records for Rockdale, Corsicana and the Kentucky site. Every megawatt figure here is the company's own statement in a filing.</li>
+    <li>Macro, central bank and halving calendars; industry conference schedules; index provider announcements; credit rating agency actions; and exchange short interest reports. Each is recorded in the null table above.</li>
+    <li>Riot's investor relations events and coverage pages. The corporate site was retrieved on August 16, 2026 and does not carry either.</li>
+  </ul>
+
+  <h3>Filing status</h3>
+  <p>Riot Platforms has filed <b>fifteen</b> late-filing notifications over the 1,592 filings on
+  its index: eight on Form NT 10-K and seven on Form NT 10-Q, the earliest on November 15, 2002
+  and the most recent on March 2, 2023. Nine of the fifteen fall after October 19, 2017 and six
+  belong to the earlier company. No late-filing notification has been filed in the three years and
+  five months since. The whole index was searched on August 16, 2026 across both of its pages.</p>
+  <p>That date is the dividing line and the company states it plainly: <em>"Effective October 19,
+  2017, we adopted the corporate name Riot Blockchain, Inc., and changed our state of
+  incorporation to Nevada."</em> The registrant was incorporated in Colorado on July 24, 2000 under
+  the name AspenBio, Inc., and adopted its current name on December 30, 2022, remaining a Nevada
+  corporation. So the filing index reaches back to 2002 and this business does not.</p>
+  <p>The count matters because the index paginates. The recent page holds 1,005 filings back to
+  January 25, 2013 and an overflow page holds 587 more back to February 7, 2002; a search of the
+  first alone would have reported a complete-looking figure that was 26% short, and would have
+  missed six of the fifteen notifications.</p>
+</section>
+
+<!-- ===================== 10. DOCUMENT LOG ===================== -->
+<section id="s10">
+  <h2 class="sec"><span class="n">10</span>Document log</h2>
+  <p class="sub">Newest first. The original build entry is never removed or rewritten.</p>
+  <div class="log">
+    <div class="logentry current">
+      <div class="when">August 16, 2026 (original build) <span class="latest">Latest</span></div>
+      <div class="basis">8 dated &middot; 6 standing &middot; 7 resolved &middot; priced off Aug 14, 2026 close</div>
+      <p><b>Original build.</b> Built from the Form 10-Q for the quarter ended June 30, 2026, filed
+      August 10, 2026; the Form 10-K for the year ended December 31, 2025, filed March 2, 2026; the
+      current reports of August 14, 2026 on the interim credit facility, April 27, 2026 on the
+      Coinbase facility and April 1, 2026 on the bylaws; the definitive proxy statement of
+      April 30, 2026; and the complete filing index for Central Index Key 0001167419, 1,592
+      filings from February 7, 2002 to August 14, 2026 across both of its pages.</p>
+      <p>Pricing basis fixed at the August 14, 2026 close of $19.015. The document is stamped
+      August 16 because August 14 was the last completed session: August 15 and 16 are a Saturday
+      and a Sunday, so no later close exists.</p>
+      <p><b>The company states one maturity two ways, and both are recorded here rather than one
+      being preferred.</b> The quarterly report filed August 10, 2026 dates the $573.0 million interim
+      facility to October 15, 2026 and the current report filed August 14, 2026 dates it to
+      December 31, 2026. The facility maturity is banded on the earlier date, its card carries
+      both, and the credit agreement that would settle the difference was not read.</p>
+      <p>Conventions fixed at construction: dated catalysts are banded 0 to 3, 3 to 6 and 6 to 12
+      months from the as-of date, with a fourth band beyond twelve months for the two lease
+      delivery dates, and those boundaries are a choice about where this document divides near
+      from far rather than a measurement; the 3 to 6 month band is left deliberately empty with a
+      note saying why, rather than filled by moving an item into it; resolved items are ordered by
+      the date they completed, earliest first, with the two whose day is not stated placed last;
+      and every catalyst is named by title in prose with its identifier in parentheses.</p>
+      <p>The null table carries seventeen rows rather than eleven. Six were added because this
+      issuer is larger than the standard categories assume: financings and capital structure,
+      mergers and acquisitions, segment reporting, analyst coverage and short interest, credit
+      rating actions, and index membership. Product launches was read as a checked absence rather
+      than an inapplicable category, because the engineering segment does manufacture electrical
+      equipment through ESS Metron and E4A Solutions.</p>
+      <p>Known gaps at this version: the credit agreement, the tenant lease and the AMD lease were
+      not read; the tenant is not identified and no credit support for it is established; the three
+      current reports carrying Item 5.02 in 2026 were not read, so no management change is
+      established; and none of the 133 beneficial ownership filings on the index was read, so no
+      holder is identified.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="norec">
+    No buy, sell, or hold recommendation is issued and no price target is derived.
+    Third-party targets and ratings, where shown, are the published views of the
+    firms named. This document is for research and educational purposes and is not
+    investment advice. Estimated dates are not company announcements. Verify
+    against primary filings on sec.gov before acting.
+  </div>
+  <p style="margin-top:16px">RIOT &middot; Riot Platforms, Inc. &middot; Catalyst Calendar &middot; as of August 16, 2026</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var g=document.querySelector('.themetoggle'); if(!g) return;
+  var bs=g.querySelectorAll('button[data-set]');
+  function sync(){
+    var t=document.documentElement.dataset.theme||'system';
+    for(var i=0;i<bs.length;i++) bs[i].setAttribute('aria-pressed',String(bs[i].getAttribute('data-set')===t));
+  }
+  g.addEventListener('click',function(e){
+    var b=e.target.closest('button[data-set]'); if(!b) return;
+    var v=b.getAttribute('data-set');
+    if(v==='system'){ delete document.documentElement.dataset.theme; try{ localStorage.removeItem('theme'); }catch(err){} }
+    else { document.documentElement.dataset.theme=v; try{ localStorage.setItem('theme',v); }catch(err){} }
+    sync();
+  });
+  sync();
+})();
+</script>
+</body>
+</html>
