@@ -81,3 +81,10 @@ as_received/
 # folder excludes a document by where it was written rather than by what it
 # happened to be called, so a note named nothing in particular is still excluded.
 pass_documentation/
+
+# Inbound third-party research. Reports arrive here and are read as context for a
+# pass, never republished: the licensed recipient is never named, only the issuing
+# firm's own view is attributed to it, and every fact that matters is sourced to the
+# filings instead. Excluded by folder rather than by name because what arrives is
+# named by whoever sent it, so a rule bound to a filename would miss the next one.
+reports/
