@@ -1401,3 +1401,75 @@ taken to close the ceremony, and it **reproduced the first stamp's group hash
 `7c988a8f67c655b5...` and all three gitignored hashes**, which corroborates the independent
 reading rather than replacing it. **No deliverable was written by this pass at any point**, and
 the only tracked path it touched is this file.
+
+
+### Added 20 August 2026: the family that had a registry and nothing watching it
+
+**The specification was amended first, and that ordering is the mechanism rather than good
+manners.** `HOUSE_STYLE.md` is gitignored and its hash is carried in the pass baseline, so
+amending it mid-pass halts the close on a changed ignored file. It moved **`1c21e0cc` to
+`0b14d70f`** before this pass opened, the open stamp recorded the new hash, and the close verified
+against it. Ledger 4.176(e).
+
+**Three approved changes, and the second is why the first could not ship alone.**
+
+1. §12.2's registry table gains a row for **Company material outside EDGAR**, naming the issuer's
+   events-and-presentations page for decks and webcasts and its news page for operational updates
+   and transcripts, requiring the page and the date read, and stating that **a page returning a
+   script shell is a recorded gap, not an empty result**. That last clause is not decoration:
+   CLSK hit exactly that on 3 August 2026.
+2. §5's `FILED` row widened. It read "Stated in an SEC filing or company press release. Cite form
+   and date." **A deck posted to an IR site is neither, and has no form**, so even a pass that
+   read one had no compliant way to cite it. Naming a registry without this would have sent
+   passes to a source they could not then quote.
+3. A caution: issuer material is the issuer's own selection, dating it is not optional, and
+   comparables and per-megawatt economics the issuer chose for itself are `ESTIMATE` rather than
+   `FILED`. **Both halves have already cost this project once each**, in VIP's capital-structure
+   slide and SLNH's withdrawn 159 MW.
+
+**The family stays CONDITIONAL**, matching every other family in §12.2. That decision was taken
+deliberately and it is what keeps `ZH2_ir_material.py` out of the tree-scope table: a conditional
+family cannot fail a build, and registering it would turn the chain red on a set that breaks no
+rule.
+
+**Why this is NOT an extension of `ZK_reports_inbox.py`, which is where the work was expected to
+go.** ZK's load-bearing sentence is *"Location is the record of what was read, not a date
+comparison. A file that has been used is MOVED, deliberately, by the pass that used it."* That
+principle is correct and it is why ZK works. **It also does not transfer**: this family has no
+files and no inbox, and the question is whether a web page was visited, which can only be an
+assertion with a date. Putting a date-comparison model inside ZK would make one instrument assert
+two contradictory things about what counts as evidence.
+
+**It ships with a recording verb, and would not have shipped without one.** A tracker nobody can
+satisfy reports the same red forever and trains its reader to skip it. `--record` requires the
+ticker, the page and the result, and refuses each omission by name; the page is mandatory because
+the amendment says "Name the page and the date it was read", and a record without it is the
+unverifiable form §12.2 calls a gesture.
+
+**Four states, and each is a different claim.** `NEVER` is no record at all and is **not**
+"clean". `STALE` means the ticker has been assessed since the check without it being repeated.
+`GAP` means reached and unreadable, counted apart from `CURRENT` because §12.2 says an unavailable
+source is a recorded gap and never a completed check. `CURRENT` is checked on or after the last
+assessment.
+
+**Measured on the shipped set: `NEVER 18, STALE 0, GAP 0, CURRENT 0`.** That is the true state and
+no record was fabricated to soften it. A demonstration record was written to prove the verb works
+and then removed, because nothing has actually been checked.
+
+**Arm 1 is the one that matters** and the other ten defend it: an unrecorded ticker must read
+`NEVER` and never `CURRENT`, because the failure this instrument exists to catch is a family
+nobody checked being reported as though it had been. Arm 5 requires a `GAP` recorded **today**
+to stay `GAP` rather than becoming `CURRENT` on recency alone.
+
+| File | Bytes | sha256 |
+|---|---|---|
+| `ZH2_ir_material.py` | 8,683 | `394c629e829e7c5a...` |
+| `ZI2_ir_material_arms.py` | 5,412 | `6a46a69f864f7de3...` |
+| `HOUSE_STYLE.md`, amended | 150,072 | `0b14d70fdd12624e...` |
+
+Prior specification at `preserve/2026-08-20_spec_ir_registry/`.
+
+**What this does not do.** It does not sweep anything. Nine tickers have never had a deck opened
+and all eighteen now read `NEVER`; closing that is a separate decision and a separate pass. It
+does not make the check mandatory. It adds no check to the chain, which is unchanged at
+`5 of 5` tree-scope and `CHECKS RUN: 1512   files: 36   per file: 42`.
