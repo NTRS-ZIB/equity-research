@@ -1215,3 +1215,80 @@ file was untouched. Both prior copies are at `preserve/2026-08-19_zz_into_chain/
 section sign from passes predating the no-em-dash rule. They are untouched: this pass rewrites
 checksum rows, and quietly rewording historical prose is the same falsification that kept the
 rewrite scoped to this section in the first place. A sweep is its own pass.
+
+
+### Added 20 August 2026: T6, the first check that reads a citation back against the registry
+
+**Of the 46 checks this project shipped, 42 per-file and 4 tree-scope, not one was a
+source-coverage check.** `HOUSE_STYLE.md` L250 has required "Cite form and date" throughout, and
+nothing had ever read a citation back against the filing index. The first instrument that did
+found **five citations, in three files, to filings that were never made**:
+
+- **WYFI, both files, the same sentence in each.** "Forms 8-K dated August 8, 2025, December 18,
+  2025, **March 26, 2026, May 14, 2026**, May 21, 2026, May 27, 2026 and June 10, 2026".
+  WhiteFiber's index holds thirteen 8-Ks and none on either of those dates, on the filing date or
+  the date of report. **Those two dates are the days it filed its 10-K and its 10-Q**, both cited
+  correctly a few clauses earlier in the same sentence, and both also carrying a press release
+  named in that same sentence. The likeliest mechanism is that a results date was assumed to
+  carry an earnings 8-K. WhiteFiber does not file one.
+- **DGXX's calendar.** "Form 10-K/A, April 27, 2026, Part III". Digi Power X filed **nothing at
+  all** on 27 April 2026 and holds exactly one 10-K/A, filed 30 April.
+
+`ZF2_citation_exists.py` is registered as **T6**, and the number is not a typo. `T5` is held by
+`harness/T5_stamp_collateral.py`, which the ledger names in roughly fourteen places; 4.154e
+records it dead and 4.154h carries it as owed, which makes the name **more** spoken for rather
+than less. A reader meeting two T5s cannot tell which the record means. Same decision, same
+reason, as ZZ keeping its name.
+
+**Four rules, each bought with a measured false positive.** The first version of this scan
+returned **228 hits across all 18 tickers**, which measured the extractor and not the set.
+
+| Rule | The false positive that produced it |
+|---|---|
+| Read **both** dates | An 8-K carries a date of report distinct from its filing date. BGDE's "27 April" resolves only on `reportDate`. Judged on `filingDate` alone it was written up as a phantom filing **in this project's own findings file, wrongly, on the morning of the day this was built** |
+| **Attribute** before testing | **5 of 14** candidates were correct citations of a counterparty's filing: CIFR, HUT and WULF citing BGDE's 3 June 8-K, IREN citing **Bakkt's** 8-K, CLSK citing **BGDE's** 10-Q. A check that tests every citation against the covered ticker's index calls all five defects |
+| Exclude **period ends** | "Form 10-Q for the quarter ended March 31, 2026" names a period, not a filing. This class alone produced most of the original 228 |
+| Match the **form** | Where the entire real yield was. All five confirmed faults are dates on which a filing **does** exist, of a different form or on a neighbouring day |
+
+**The document log is not scanned, and that is a rule rather than an exemption.** §9.2 *requires*
+a correction to quote what it corrected. The first run of T6 after its own corrections were
+applied reported five faults, and **all five were the log entries recording those very
+corrections**. That is ledger 4.176's note that "T5 read its own answer back as a defect",
+recurring. The exclusion is **counted and reported**, 63 citations on the shipped set, because a
+check that quietly stops reading part of a file is how reach falls unnoticed.
+
+**Measured, not assumed.** 430 citations in filing-date position, **429 adjudicated against a
+registry, 1 not**, across 23 cached issuer indexes holding 13,008 filings. G5 passes **12 of 12**.
+All three runners exit 0 at `5 of 5 tree-scope checks ran, 0 failing`, and
+`CHECKS RUN: 1512   files: 36   per file: 42` is unchanged, since this adds no per-file check.
+
+**Arm 5 had to be widened again, which is the third time and is now a documented cost.** It
+matches guard scripts against a hand-kept list, so a newly added guard is not required to be
+registered until someone adds it. ZZ sat in that gap until 19 August; ZF2 sat in it for the
+length of one pass. The list is explicit rather than a wildcard because "every .py in harness"
+would sweep in appliers and probes.
+
+**Arms 11 and 12** put T6 on the T4 pattern: it must fire through the runner on `WYFI`'s report
+**exactly as it stood before the correction**, taken from `preserve/2026-08-20_citation_exists/`
+rather than from a synthetic string, and it must **pass** the corrected file while adjudicating
+at least one citation in it, because a check that read nothing also does not throw.
+
+| File | Bytes | sha256 |
+|---|---|---|
+| `ZF2_citation_exists.py` | 13,873 | `a2747d1e4ccb61b2...` |
+| `ZG2_citation_repair.py` | 13,185 | `aec2634add51835c...` |
+| `AE_runner_shared.ps1` | 24,612 | `ef8832c429882c5d...` |
+| `G5_treescope_arms.ps1` | 24,844 | `afb9633c1267ec69...` |
+
+**One carried ledger item was discharged as a side effect, and it is named rather than left to be
+found.** `WYFI_Catalyst_Calendar.html` carried **one bare LF among 1,850 CRLF**, which is 4.151e.
+`ZS_revision_runner` refuses a mixed source outright rather than guessing, and no plan can repair
+it through the runner because the refusal is computed from the source before any edit is
+considered. So the terminator was repaired first, as its own asserted act, on the bytes, with the
+context checked before the write so a stray LF elsewhere could never be silently normalised. It
+is **apparatus** and earns no log entry in the file. The file is now uniform CRLF at 1,851.
+
+**What T6 cannot see.** It decides **existence and nothing else**: that a filing of the cited form,
+by the cited issuer, exists on the cited date. **A citation can pass T6 and still be the wrong
+document for the claim beside it.** It also cannot adjudicate a citation whose issuer it cannot
+establish, and it says how many of those there were rather than counting them as clean.
