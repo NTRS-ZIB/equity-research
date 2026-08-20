@@ -1535,3 +1535,68 @@ contents have entered any deliverable**, and nine tickers have still never had o
 `CURRENT` here means the page was checked on 20 August, not that the deck's information is in the
 files. **ANY's only deck is dated 30 January 2023**, three years stale and predating its pivot, and
 is `CURRENT` in exactly that limited sense.
+
+
+#### Added 20 August 2026: Get-PassState gains the -OpenStatePath its neighbours already had
+
+**The root cause behind 4.179, closed.** `Assert-PublishedSetUnchanged` has carried
+`-OpenStatePath` for some time, and its own comment says why: *"it exists so an arm can point at a
+location it controls. Without it the absent-map arms would pass or fail according to whether a
+real pass had left one on disk, which is ambient state a test must never depend on."* **That
+reasoning applied to the assertion and not to `Get-PassState`, which is the other half of the same
+mechanism.**
+
+**The cost of not having it was measured, not theoretical.** `RE_revision_arms.ps1` arm 10 must
+prove a close INHERITS the open declaration, and `Get-PassState -Stamp 'close'` read
+`Get-OpenStatePath` with no override, so the only way to exercise it was to write the LIVE
+baseline. Its first version then deleted it, and running that suite during an open pass destroyed
+that pass's baseline, which is exactly what happened to the pass correcting
+`Test-PushPreconditions`. **Three suites carried a backup-and-restore idiom for want of one
+parameter.**
+
+**It weakens nothing, and that was established before it was added rather than assumed.** Three
+tests, all from the brief:
+
+- **`Restore-PassState` refuses on four grounds regardless of the path handed to it**: absent,
+  unparseable, partial (covering fewer than every gitignored published name), or **taken at a
+  different `HEAD`**. The refusals live in the function, not in the path.
+- **The default is unchanged**, so no existing caller moved. Arm 13 requires exactly that.
+- **A caller able to write a scratch file could already have overwritten the live one.** The
+  parameter removes the need to mutate global state; it grants no new capability.
+
+**Threaded to every call site, and a guard in the patch refused to write until that was true.**
+`Get-PassState` called `Restore-PassState` twice on the close-inheritance paths and
+`Save-PassState` once on the open persist. All three now pass `-Path $OpenStatePath`. (The guard's
+first version flagged its own explanatory comment as an unthreaded call site, which is the same
+class of error as a check reading its own answer back as a defect.)
+
+**Three arms, and all three fail on the pre-parameter instrument.** Proved by swapping the
+preserved copy in and running the suite: arms **10, 13 and 14 all fail**, and the instrument was
+restored hash-identical.
+
+- **Arm 10** now uses the scratch path the rest of that file already used, so it no longer touches
+  the live open state at all.
+- **Arm 13** requires the bare call to still read the live baseline **and** an override to produce
+  a different answer through the same call, so the parameter is an addition rather than a silent
+  behaviour change.
+- **Arm 14 closes 4.179's carried item** that nothing required a suite to leave the live pass
+  state as it found it. It plants a sentinel, takes an open stamp aimed at a scratch path, and
+  requires the sentinel byte-identical afterwards **and** the scratch path written.
+
+**Deliberately not done.** `R4_open_state_arms.ps1` and `WK_build_mode_arms.ps1` still back up and
+restore the live path. Both work unchanged, and `R4` is the open-state suite where exercising the
+live path is arguably its job. **Simplifying them is carried**: a change that is merely tidier is
+the kind this protocol says to leave alone.
+
+| File | Bytes | sha256 |
+|---|---|---|
+| `R1_pass_state.ps1` | 93,654 | `35bfc27f6cfa3bac...` |
+| `RE_revision_arms.ps1` | 23,106 | `cf19627bc1cf9620...` |
+
+Prior copies at `preserve/2026-08-20_openstatepath/`.
+
+**Measured after.** `RE_revision_arms` **14 of 14**, `R4_open_state_arms` 12 of 12,
+`RV_stamp_basis_arms` 8 of 8, `WK_build_mode_arms` 17 of 17, `G5_treescope_arms` 12 of 12,
+`ZI2_ir_material_arms` 11 of 11, `R1_tests` PASS, `R1_halt_test` PASSED. Chain `5 of 5` tree-scope
+and `CHECKS RUN: 1512   files: 36   per file: 42`, unchanged. **This pass's own baseline survived
+its own suite run**, which is the property arm 14 now holds shut.
