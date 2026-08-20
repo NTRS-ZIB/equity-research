@@ -1067,3 +1067,151 @@ pre-edit template hash. On that evidence the earlier destruction was `W8_two_hop
 
 The correction is made because a wrong entry about which instrument is unsafe is worse than no
 entry: it would send a later pass to harden the wrong file and leave the real one alone.
+
+### Added 19 August 2026: the table-order check joins the chain as tree-scope check T4
+
+Three separate passes on 19 August 2026 each left a dated table holding a row against the order
+that table itself keeps. WULF's coverage row was restruck from 6 July to 9 July and left where it
+sat; NUAI's calendar took three actions of 17 August at position 3 while its own companion report
+appended them correctly; IREN's fourth catalyst band ran December, July, May against a rule the
+file states about itself twice. **Every one of those passes cleared every control its applier
+runs**: the anchor matched once, the replay was byte-identical, the tag balance was derived from
+the plan, the line terminator held by count, and thirty read-backs came back from disk. **None of
+those can see an ordering.** The first was found by rendering a table and reading the dates down
+the column, on the following ticker, after the file had already been written.
+
+`ZZ_table_order_check.py` closes that. It is registered as **T4** in the tree-scope block rather
+than as check 43, for the reason recorded there for T1 and T2, and for one more that is specific
+to it: **the per-file table holds PowerShell scriptblocks**, and reimplementing the ordering logic
+in PowerShell beside the Python that already holds it would be a second copy of one rule that
+nothing reconciles, which is the defect ledger 4.62 records. One reading, run once, over the set.
+
+**The per-file arithmetic is unchanged and that was measured, not assumed.** The chain reports
+`CHECKS RUN: 1512   files: 36   per file: 42` after the change exactly as before it, and the
+tree-scope line moves from `3 of 3` to `4 of 4`.
+
+It keys on markup rather than on a heading. Its first version looked for a heading reading
+"Third-party coverage" and found ten tables; measured across the set that heading is one of at
+least fourteen wordings, and **it would have missed the very table that produced the next
+defect**. The rule is now `td class="when"`, which is 1,057 cells across 73 tables in all 36
+deliverables, and it segments on the catalyst identifier so a calendar's D, S and R sequences are
+three orderings rather than one.
+
+| File | What it holds | Bytes | sha256 |
+|---|---|---|---|
+| `ZZ_table_order_check.py` | tree-scope check T4: every dated table holds its own ordering, with its reach reported and pinned | 16,049 | `09ee9c3c7978694f89525668f25862f2984a7aa10798f14c2d8c134bf0d7f7f5` |
+| `AE_runner_shared.ps1` | as before, plus the T4 row, the printed check roster and the stderr guard | 23,555 | `8391d073f0d8c1ab49d142a3142164d4bbd12a70a802c222833826d6767e7f7b` |
+| `G5_treescope_arms.ps1` | as before, plus arms 6 to 10, arm 5 widened and arm 7 strengthened | 21,239 | `a0244b3155d899222e95595d32214325caefc0665a7a4ef6e2e7c3fb3722a497` |
+
+`AE_runner_shared.ps1` was `9d208d4c04a18789...` before this pass and `G5_treescope_arms.ps1` was
+`60dc548cfc0917c1...`. Both prior copies are at `preserve/2026-08-19_zz_into_chain/`.
+
+**ONE GAP IN THAT PRESERVATION, STATED RATHER THAN LEFT TO BE INFERRED.** `ZZ_table_order_check.py`
+carries the same hash before and after in that directory, because it was taught the directory
+calling convention **before** the pass opened and was preserved afterwards. So no copy of its
+pre-wiring state exists. Nothing depends on recovering one: the instrument was written the same
+day, the change is described above and in the results file, and the convention it adopted is G4's.
+But the checksum row would otherwise read as a file that did not change, and it did.
+
+**What the wiring is protected by, because a row in a table nothing reads is not a check.** That
+sentence is `AE_runner_shared.ps1`'s own, written after T2 was registered in a table the delivery
+runner was not reading. Three arms in `G5_treescope_arms.ps1` now stand against the same thing:
+
+- **arm 5** requires every tree-scope guard present on disk to be registered. It had to be
+  widened: it matched `G<n>_` names against a list of three, and `ZZ_table_order_check.py` is not
+  a G-file, so nothing would have required it to be registered. Verified load-bearing by removing
+  the T4 row from a copy of the table, at which point the arm names ZZ as unregistered.
+- **arm 6** requires T4 to fire **through the runner**, on the real WULF file exactly as it stood
+  between the two appliers of 19 August, and requires its id to reach the thrown message.
+- **arm 7** requires T4 to **pass** the same file once corrected, so the guard discriminates
+  rather than refuses.
+
+`ZZ` keeps its name rather than being renamed into the `G` convention. Three results files and
+three ledger entries written the same day name it, and the record is worth more than a tidy
+prefix; the standing hazard says an instrument prefix is not a namespace.
+
+**What T4 cannot see, stated so a later pass does not assume otherwise.** It reads an ordering and
+nothing else. A table below its 80% threshold is reported `unordered` and passed, because a
+grouped table is not a defect and this instrument does not get to impose a sort on one. A row
+whose date will not parse is excluded and counted as `unread`. Neither is a fault; both are limits.
+
+
+#### The same day, one layer out: T4 was registered in a chain of three runners and reached one
+
+Registering the row above was not wiring the check, and this file said so about a different check
+three weeks earlier: **a row in a table nothing reads is not a check.** The question never asked
+was which runners read it. Three runners score the 36 deliverables against the per-file table. The
+answer, with every arm green and the delivery runner reporting `4 of 4 tree-scope checks ran`, was:
+
+| Runner | Calls the tree-scope block | Declared `ExpectChecks` | Live table |
+|---|---|---|---|
+| `D2_run_v176.ps1` | yes | 42 | 42 |
+| `T2_run_conform.ps1` | yes, 21 lines past a throw it could not survive | **40** | 42 |
+| `AC_run_original.ps1` | **no, not once** | **40** | 42 |
+
+T4 ran in one runner of three, and **T3, registered on 12 August 2026, had never run in the other
+two either.** `AC_run_original.ps1` could score 1,512 file-check pairs, print a complete looking
+green result, and have executed none of T1 to T4.
+
+**One defect was concealing the other, and that is the part worth keeping.** A stale
+`ExpectChecks` fails CLOSED, which reads as safe. But it throws on guard 1, twenty lines above
+where the tree-scope call sits, so the runner never reaches the call and the missing call cannot
+be observed to be missing. Correcting the count alone would have converted an accident that failed
+loudly into a gap that passed quietly. Both were corrected together, in that knowledge.
+
+**What now holds it shut.** Arms 1 to 8 all prove the *block* behaves. Not one of them could see
+whether anything *calls* it, which is precisely the layer the recorded defect has now lived at
+twice.
+
+- **arm 9** reads every `*_run_*.ps1` declaring `$ExpectChecks`, requires at least three, and
+  requires each both to contain the call and to declare a count equal to `$CHECKS.Keys.Count` as
+  loaded from `D1_checks_v176.ps1`. Proved load-bearing against a copy of the harness carrying the
+  pre-correction `AC_run_original.ps1`, where it names that file and lists the four checks it
+  would have skipped.
+- **arm 8** holds the stderr hazard shut. All three runners set `$ErrorActionPreference = 'Stop'`,
+  and PowerShell 5.1 wraps every stderr line from a native executable in a `NativeCommandError`
+  when `2>&1` merges it into the success stream. Under `Stop` that record **terminates the loop**:
+  checks after it never run, and the operator sees a `NativeCommandError` instead of the `OnFail`
+  sentence written for the defect. `ZZ_table_order_check.py` is the only check in the table that
+  writes to stderr, and it does so on exactly one path, `REFUSED`, the moment its own
+  preconditions fail. The newest check could therefore silence the block that runs it, precisely
+  when it had something to say. The preference is now lowered for the invocation alone and
+  restored on the next line. **This is not theoretical: arm 10 was first written calling `python`
+  directly and died on the refusal it had deliberately provoked, within the hour, from outside
+  the block.**
+
+**The reach floor, because a clean result on part of the set is not a clean result on the set.**
+T4 passes any sequence it did not adjudicate: one with fewer than three dated rows cannot show an
+order, and one below the 80% threshold is grouped rather than sorted. Measured on the shipped set
+that is **63 of 109 sequences, and 162 of 531 dated rows, passed without being read**, and the
+verdict line could not tell them from sequences read and found clean. Reach can therefore fall
+silently, and **an in-place restrike, the exact edit T4 exists to catch, is one of the things that
+makes it fall.** `EXPECT_ADJUDICATED = 46` pins it the way `$ExpectChecks` pins the check table: a
+fall is a refusal, and raising or lowering the number is a deliberate hand edit with a reason.
+It binds only on a run that read the full set of 36, and a shorter run says so in its own output
+rather than standing the control down in silence. **arm 10** runs a copy of T4 with the floor
+raised by one and requires the refusal, then runs the shipped copy and requires the floor to be
+reported as applied.
+
+**The registered Id now prints on a green run.** Each check prints its own banner, so a passing
+transcript read `ZZ-table-order-check` and never the word `T4`. You could not answer "did T4 run?"
+from a green result without knowing which script T4 is, which is the question this block exists to
+answer, and the question nobody could answer about T3 for a week. The block now prints its roster
+before it starts, then `[Id] -> script` as each one goes.
+
+**Measured after, not assumed.** All three runners exit 0. Each reports `4 of 4 tree-scope checks
+ran, 0 failing`, and `CHECKS RUN: 1512   files: 36   per file: 42` is unchanged. G5 passes 10 of 10.
+
+| File | Bytes | sha256 | Was |
+|---|---|---|---|
+| `AC_run_original.ps1` | 13,877 | `87ced4e8c929b205...` | 12,645 `63a33cf8443f22cc...` |
+| `T2_run_conform.ps1` | 9,839 | `48df89b4cdd91140...` | 9,839 `b34792d24e3d5931...` |
+
+`T2_run_conform.ps1` is **the same size before and after**, because `40` and `42` are both two
+characters. The row is here so a later reader comparing byte counts alone does not conclude the
+file was untouched. Both prior copies are at `preserve/2026-08-19_zz_into_chain/`.
+
+**Not swept, and named rather than left to be found.** This file carries six em dashes and one
+section sign from passes predating the no-em-dash rule. They are untouched: this pass rewrites
+checksum rows, and quietly rewording historical prose is the same falsification that kept the
+rewrite scoped to this section in the first place. A sweep is its own pass.
