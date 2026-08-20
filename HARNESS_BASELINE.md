@@ -1650,3 +1650,50 @@ advance, and which of the eighteen files a deck changes cannot be known before t
 Declaring all eighteen to be safe would have made the close's "33 of 33 undeclared proved
 byte-identical" say almost nothing. **148 findings would change a deliverable and none has been
 applied.**
+
+
+#### Applied 20 August 2026: batch one of the deck revisions, and two errors the instruments caught
+
+Six deliverables revised, all six declared at the open: the RIOT, BTDR and APLD pairs. **No
+restamp, no reprice, no index rebuild.** The reason is a fact established before the open and worth
+keeping: **all three decks predate their own file's build date**, 10 August against 17 for RIOT,
+10 against 18 for BTDR, June against 19 August for APLD. **These were not newer sources; they were
+available when the files were written and were not read.** So the as-of does not move.
+
+**THE TWO ERRORS ARE THE PART WORTH RECORDING, and both were caught by instruments rather than by
+the person making them.**
+
+**A29 failed all three calendars because the revision wrote bare catalyst IDs into prose.** §9.2
+states the rule plainly, and it had been read the same day: *"Name catalysts by title, not by ID.
+IDs renumber (§7.1); the log does not."* The prose said "S2 now carries it", "D2 and D3 already
+carry", "R4's outcome", "S4 now records it". **The check was right and the files were wrong**,
+which is the only direction this project permits; nothing about A29 was touched. A second
+correction was needed because `(D2, D3)` pairs two IDs in one parenthesis where the rule wants each
+after its own title. **The rule earns its place exactly here**: a calendar renumbers under §7.1 and
+"S2 now carries it" silently becomes a sentence about a different catalyst.
+
+**Four read-back counts were guessed and all four were wrong**, caught by
+`AB_engine.independent()` or by the runner. After the fourth the counts were **computed from the
+plan's own replacement text** rather than asserted. The needles stay hand-written, because what to
+assert is judgement and only how many is arithmetic. This is the project's own standing lesson,
+recorded at 4.176(h) among others: **a count in a read-back is a transcription unless it is
+measured.** It was re-learned four times in one pass.
+
+**What the six files gained.** RIOT: a recorded disagreement about whether rent commences December
+2027 or June 2028, worth six months of revenue on a $9.1B lease; a corrected durability column,
+where $18.3M of a $23.2M segment is fit-out at a 13% margin and the file had called it "Highest";
+and a cost to mine of $49,912, or **$90,631 including miner depreciation, which the deck prints as
+126.5% of the production value of one bitcoin mined**. BTDR: a **tenant right to terminate at ten
+years without a fee**, stated twice in the deck and absent from both files, against a term row
+describing sixteen years; and a stated absence that was no longer true. APLD: an **entire Macquarie
+financing**, 15% common equity, 12.75% PIK stepping to a 16.75% cap, a 1.8x MOIC floor and
+force-redemption from year seven, where **the word "Macquarie" appeared nowhere in either file**.
+
+**Terminators held and differ across the six**: LF for both RIOT files and the BTDR report, CRLF
+for the BTDR calendar and both APLD files. Counted rather than sniffed, and not normalised toward
+each other.
+
+**Measured after.** Every file replayed byte-identical. Chain `IN-SCOPE FAILS: 0`, `5 of 5`
+tree-scope, `CHECKS RUN: 1512   files: 36   per file: 42`. **T6 green**: all 429 adjudicated
+citations name a filing that exists, so nothing added here cites a filing that does not. Close:
+**30 of 30 undeclared deliverables proved byte-identical.**
