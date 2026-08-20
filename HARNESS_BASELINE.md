@@ -1473,3 +1473,65 @@ Prior specification at `preserve/2026-08-20_spec_ir_registry/`.
 and all eighteen now read `NEVER`; closing that is a separate decision and a separate pass. It
 does not make the check mandatory. It adds no check to the chain, which is unchanged at
 `5 of 5` tree-scope and `CHECKS RUN: 1512   files: 36   per file: 42`.
+
+
+#### Swept 20 August 2026: the family goes from NEVER 18 to CURRENT 18
+
+The registry row landed in the morning and swept nothing. This is the sweep. **Every covered
+ticker now carries a dated, evidenced record naming the page that was read**, and 18 of 18 issuers
+turn out to publish decks, ten of them dated within 21 days.
+
+**The hypothesis this pass carried was wrong, and it is recorded as wrong.** The brief said that a
+set where most pages turned out to be `gap` would be worth more than a thin set of greens, because
+it would mean the registry names a source this project cannot reach. That did not happen: 17 of 18
+pages were retrieved and read. **The source is reachable.** What the sweep found instead is
+narrower and sharper.
+
+**REACHABLE IS NOT REACHABLE BY PLAIN RETRIEVAL. Seven of eighteen hosts defeat a plain fetch, and
+three of those fail silently rather than honestly.**
+
+| Failure mode | Tickers |
+|---|---|
+| Needs a JavaScript-rendering browser | CLSK, NUAI, RIOT, GLXY |
+| Needs a desktop User-Agent or another client | BGDE, BKKT, VIP |
+| Plain fetch sufficient | ANY, APLD, BTDR, CIFR, DGXX, HUT, IREN, MARA, SLNH, WULF, WYFI |
+
+**CLSK is the one to remember, and it is a false NEGATIVE rather than a false positive.** A plain
+fetch returns **HTTP 200 with a 168 KB body containing the literal string "No presentations
+available"**, served from an empty-state template. A plain-fetch sweep does not gap there; it
+**manufactures a false `none` on a ticker that had posted a deck on 10 August 2026.** That is
+exactly what §12.2's last clause was written for. **It is the same host that failed this way on 3
+August 2026**, recorded in `CLSK_Build_Findings.md`: the same trap, the same issuer, three weeks
+apart.
+
+NUAI returns 200 with 143,973 bytes of headings and `Loading...` placeholders; RIOT returns 200
+with a 177,579-byte body whose content region is empty. **A status-or-size heuristic scores all
+three as content.** Two further traps return 200 with the wrong content entirely: one issuer's
+`/investor-relations/investor-presentations` serves a **27 KB 404 body**, and a superseded
+`ciphermining.com` path redirects to a homepage and returns 200 with 55 KB.
+
+**Three structural facts a URL-only registry cannot carry.** The canonical path the row's wording
+implies, `/events-and-presentations`, **404s on at least five hosts** (BTDR, GLXY, MARA, RIOT,
+DGXX), so the page is discovered per issuer and never guessed. The function is **split across two
+URLs on ten issuers**, decks on one page and events on another. And **a URL alone does not
+reproduce the read on seven of eighteen**, so the retrieval method is part of the record. It is
+carried in the note here because a structured field is a change to `ZH2_ir_material.py` that this
+pass's brief did not claim.
+
+**One override of the sweep's own synthesis, and it rests on an independently verified fact.** The
+synthesis reclassified DGXX from `none` to `gap`. It is recorded **`read`**. DGXX has no
+events-and-presentations page at all: its `sitemap.xml` enumerates every route and contains none,
+and four direct probes 404. Its own "Events & Presentations" card is **mis-wired** to a governance
+vault holding seven charters and no deck. **But the deck exists**, at a single overwriteable slug,
+verified here by its headers: **HTTP 200, `application/pdf`, 57,305,280 bytes**, PDF CreationDate
+12 June 2026. `gap` asserts we could not see, and we saw a great deal. `none` asserts there are no
+decks, which is false. `read` is the only one of the three that is true.
+
+**Recorded serially in one process**, because nine agents produced the findings concurrently and
+`R1_ir_checked.json` is a single file that nine writers would race on.
+
+**What this does NOT establish.** Nothing has been **read** yet, only located. **No deck's
+contents have entered any deliverable**, and nine tickers have still never had one opened. A
+`CURRENT` here means the page was checked on 20 August, not that the deck's information is in the
+files. **ANY's only deck is dated 30 January 2023**, three years stale and predating its pivot, and
+is `CURRENT` in exactly that limited sense.
