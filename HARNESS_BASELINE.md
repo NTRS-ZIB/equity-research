@@ -1600,3 +1600,53 @@ Prior copies at `preserve/2026-08-20_openstatepath/`.
 `ZI2_ir_material_arms` 11 of 11, `R1_tests` PASS, `R1_halt_test` PASSED. Chain `5 of 5` tree-scope
 and `CHECKS RUN: 1512   files: 36   per file: 42`, unchanged. **This pass's own baseline survived
 its own suite run**, which is the property arm 14 now holds shut.
+
+
+#### Read 20 August 2026: nine decks, and 43 places a shipped file disagrees with the issuer
+
+The sweep located decks and read none. This read nine, the ones no pass had ever opened.
+**192 findings, 148 of which would change a deliverable.** The breakdown is the point:
+
+| Relationship | Count |
+|---|---|
+| DELIVERABLE-SILENT | 110 |
+| **CONFLICTS** | **43** |
+| AGREES | 24 |
+| DECK-STALE | 15 |
+
+**43 conflicts means 43 places where a shipped deliverable disagrees with the issuer's own current
+statement.** The audit's base rate of four for four now reads **thirteen for thirteen**: every deck
+this project has ever opened has changed a deliverable.
+
+**THE TAGGING SPLIT VINDICATES THE AMENDMENT MADE THE SAME MORNING.** 112 findings tag `ESTIMATE`
+against 80 `FILED`. The majority of what these decks carry is the issuer's own selection,
+projection or chosen comparable rather than a statement of fact. The §12.2 caution added at 4.180,
+*"comparables and per-megawatt economics the issuer chose for itself are `ESTIMATE`, not `FILED`,
+however official the document"*, is therefore **doing real work on the majority of the material**.
+Without it the default would have been to tag issuer statements `FILED` because they arrive in an
+official document, which on this evidence would have mis-tagged **58% of everything extracted**.
+
+**THE RETRIEVAL-METHOD FIELD EARNED ITS PLACE ON ITS FIRST USE.** 4.181 recorded it as a note and
+carried a structured field as an improvement. Discovering the PDF URLs, **seven of nine pages gave
+up their links to a plain fetch and the two that gave nothing were exactly CLSK and RIOT**, the two
+the sweep had marked `browser`. Without that field the conclusion would have been that those two
+host no deck, which is the same false negative 4.181(c) warned about. Both needed a real browser.
+
+**The largest single gap.** APLD's deck devotes pages 55 to 58 to a Macquarie Asset Management
+financing with a named issuer, a 15% common equity interest, at least $225M funded at closing,
+$2.25M of availability per contracted MW, perpetual preferred at 12.75% PIK stepping to a 16.75%
+cap, a 1.8x MOIC liquidation floor and force-redemption after year 7. **Grep returns zero hits for
+"Macquarie" across both APLD files**, and both purport to describe how the build is funded.
+
+**The most interesting negative is ANY**, whose deck is from January 2023 and changes almost
+nothing as current fact. What it is instead is the only dated record anywhere of that issuer's
+forward-number track record: a downside case of $30.4M for 2023 against **$21.9M actually
+delivered**, a "~50 MW Total Capacity" headline on a page whose own site table sums to 21.6 MW, and
+a published **20% per-provider counterparty ceiling now abandoned at roughly 57%**. None of it is
+on EDGAR.
+
+**Stage one by design, and stage two has not run.** A revision declares its deliverables in
+advance, and which of the eighteen files a deck changes cannot be known before the deck is read.
+Declaring all eighteen to be safe would have made the close's "33 of 33 undeclared proved
+byte-identical" say almost nothing. **148 findings would change a deliverable and none has been
+applied.**
