@@ -1292,3 +1292,112 @@ is **apparatus** and earns no log entry in the file. The file is now uniform CRL
 by the cited issuer, exists on the cited date. **A citation can pass T6 and still be the wrong
 document for the claim beside it.** It also cannot adjudicate a citation whose issuer it cannot
 establish, and it says how many of those there were rather than counting them as clean.
+
+
+### Corrected 20 August 2026: the push guard rejected the class the close accepts
+
+`Test-PushPreconditions` **could not pass after any declared revision, and had not been able to
+since ledger 4.29 introduced the mode.** It was found at the push gate of the T6 pass, refusing a
+tree `Assert-PublishedSetUnchanged` had certified one command earlier.
+
+The two answered the same question through different accessors:
+
+| | Accessor | Returns |
+|---|---|---|
+| `Assert-PublishedSetUnchanged`, L619 | `Get-ProceedableDirtyClasses` | `apparatus, revised, built` |
+| `Test-PushPreconditions`, L1581 | `Get-ProceedableDirtyClass` | `apparatus` |
+
+**The comment directly above the defect is the finding.** It says the block goes through
+`Get-DirtyList` "so there is one derivation of which dirty paths stop a push and not two". It took
+the **classification** from there and then re-implemented the **acceptance** rule inline against
+the singular. **That was the second derivation, in the sentence claiming there was not one.**
+
+**It was latent, and latent in the worst way.** A clean tree carries nothing classified `revised`,
+so the guard passed on every ordinary day and failed only during a revision, which is the one
+moment it was being asked to do its job.
+
+**Adjudicated before being changed, because "the guard is deliberately stricter" was a live
+answer.** Three tests: nothing in the instruments or the ledger states that a push is stricter
+than a close; the plural accessor exists precisely to carry `revised` and `built`, added with them
+at 4.29; and accepting `revised` grants **no permission the close has not already granted**, since
+`Assert-PublishedSetUnchanged` proves every **undeclared** deliverable byte-identical by hash and
+only paths declared at the open stamp can ever classify `revised`. The third is decisive.
+
+**Four stale sites, not one, and the fourth is why the others could not be left.** The singular has
+six call sites. Two are correct: `R1_pass_state.ps1:61` builds the plural from the three singulars,
+and `R1_halt_test.ps1:86` asserts a claimed path is `apparatus` **specifically**. The other four all
+ask "which dirty paths stop a hop" and all read the singular: the guard itself,
+`R1_halt_test.ps1:60`, and `R1_tests.ps1:518` and `:592`.
+
+**`R1_tests.ps1:518` is coupled to the guard.** It computes the bad-path set with the singular and
+then requires `Test-PushPreconditions` to have reported. Correcting the guard alone would make that
+test compute a fault the guard no longer reports and **throw a false failure during any revision**.
+Fixing one and not the others is the partial sweep this project's protocol warns about, in an
+instrument rather than a document.
+
+**Arm 12 in `RE_revision_arms.ps1`, and it is the arm the other eleven could not stand in for.**
+They all prove the close-out assertion behaves. **Not one had ever called
+`Test-PushPreconditions`**, which is why a guard broken for the length of the revision mode's
+existence was found by a person at a push gate rather than by the suite.
+
+It asserts both halves: the guard must **accept** a declared revision, and must still **stop** an
+undeclared dirty deliverable, because a guard that accepts everything passes the first half
+perfectly. **Proved load-bearing rather than asserted:** run against the preserved pre-correction
+`R1_pass_state.ps1`, it fails with `ANY_Catalyst_Calendar.html [revised] against an expectation of:
+every dirty path in the apparatus class`, and the instrument was restored hash-identical.
+
+**What is synthetic in that arm and what is not, stated because `Get-DirtyList`'s own comment
+records a gate proved only against a fixture shaped to fit.** A clean tree carries nothing
+classified `revised`, so the dirty **row** is fabricated. Its **class** is not: it comes from the
+real `Get-DirtyClass` against a real declaration. The **state** is a real `Get-PassState` result,
+so `Repo.Dirty` sits exactly where the guard looks, which is the difference that produced that
+comment.
+
+| File | Bytes | sha256 | Was |
+|---|---|---|---|
+| `R1_pass_state.ps1` | 92,098 | `8c22c77a1cf326df...` | 90,904 `f225991e333fac24...` |
+| `R1_tests.ps1` | 80,914 | `74aa28bd6fc980d8...` | 80,890 `06c0c49d8ab4243c...` |
+| `R1_halt_test.ps1` | 12,025 | `1af128dc84fd83cd...` | 12,013 `0ffd0384a1b42fae...` |
+| `RE_revision_arms.ps1` | 20,235 | `bf6a8e4f06fa6f99...` | 16,182 `76f491b79d26419e...` |
+
+Prior copies at `preserve/2026-08-20_push_precondition_class/`.
+
+**Measured after.** `RE_revision_arms` **12 of 12**, `R4_open_state_arms` **12 of 12**,
+`RV_stamp_basis_arms` **8 of 8**, `G5_treescope_arms` **12 of 12**, `R1_tests` PASS,
+`R1_halt_test` PASSED. Chain `5 of 5` tree-scope and
+`CHECKS RUN: 1512   files: 36   per file: 42`, unchanged.
+
+
+#### And the suite destroyed the very baseline this pass was closing against
+
+**`RE_revision_arms.ps1` arm 10 wrote to the LIVE open state path and then deleted it
+unconditionally.** So running the revision arms during an open pass destroyed that pass's
+baseline. It did exactly that here: the arms were run to prove arm 12 load-bearing, and the close
+then refused with `OPEN STATE FAILED: no saved open state`. **The refusal was correct.**
+`Restore-PassState` fails safe on a missing baseline, which is the one property that made this
+recoverable rather than silent.
+
+**The file's own header already claimed the opposite**, in terms: the arms "drive a SCRATCH
+baseline path so they never touch the live session's open state, and so their verdicts do not
+depend on whether a real pass happens to have left one." **Arm 10 was the exception, and nothing
+compared the claim against the code.**
+
+Arm 10 genuinely needs the live path, which is why it is the outlier: it tests that a close
+inherits the open declaration, and `Get-PassState -Stamp 'close'` reads `Get-OpenStatePath` and
+**takes no override**. So the correct fix is not a scratch path but **backup and restore**, and
+that idiom already existed twice in this harness. `R4_open_state_arms.ps1` keeps a `.armbak`;
+`WK_build_mode_arms.ps1` reads the file into `$zzBackup` and writes it back in a `finally`. **Two
+of the three suites that touch the live path did it right and the third was never compared with
+them.**
+
+**Proved rather than asserted.** A sentinel open state was planted, the suite run, and the file
+required to survive: 12 of 12 arms pass **and** the sentinel is byte-identical afterwards.
+
+**How this pass closed, stated plainly rather than papered over.** The first open stamp was gone
+before the close, so the published set was established **independently and more strongly**: 0 of
+36 tracked deliverables differ from the committed tree at `e99d276`, and the three gitignored
+names hash exactly to the values the destroyed stamp had printed. A second stamp pair was then
+taken to close the ceremony, and it **reproduced the first stamp's group hash
+`7c988a8f67c655b5...` and all three gitignored hashes**, which corroborates the independent
+reading rather than replacing it. **No deliverable was written by this pass at any point**, and
+the only tracked path it touched is this file.
