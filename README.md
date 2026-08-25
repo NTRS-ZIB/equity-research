@@ -94,3 +94,20 @@ of them. The style guide itself is not published; the documents are the product.
 
 `index.html` is generated automatically from the files it lists and is not maintained by
 hand.
+
+---
+
+## Backups
+
+The working material behind these documents is backed up automatically once a day to
+a second drive in the same machine: the pre-edit baselines, the pass records, the
+house style guide, the source presentations that cannot be downloaded again, and the
+reports and calendars themselves including edits not yet committed. Every file is
+re-read and compared after copying, so a bad copy cannot pass as a good one.
+
+Publishing is deliberately not automated. Commits reach this repository only when
+pushed by hand, which keeps the decision to make something public a deliberate one.
+
+The backup is local, so it protects against a failed drive, a deleted file or a bad
+edit, and not against fire or theft. `backup/README.txt` in the working copy records
+what is covered, what is deliberately excluded, and how to check it is still running.

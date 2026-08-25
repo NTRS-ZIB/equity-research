@@ -49,6 +49,7 @@ spec_snapshots/
 
 # Local tooling config, not project content.
 .claude/
+CLAUDE.md
 
 # OS noise
 .DS_Store
@@ -88,3 +89,6 @@ pass_documentation/
 # filings instead. Excluded by folder rather than by name because what arrives is
 # named by whoever sent it, so a rule bound to a filename would miss the next one.
 reports/
+
+# Local backups. May contain PII and secrets, never commit.
+/backup/
