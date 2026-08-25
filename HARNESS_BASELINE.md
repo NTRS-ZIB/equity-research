@@ -1697,3 +1697,64 @@ each other.
 tree-scope, `CHECKS RUN: 1512   files: 36   per file: 42`. **T6 green**: all 429 adjudicated
 citations name a filing that exists, so nothing added here cites a filing that does not. Close:
 **30 of 30 undeclared deliverables proved byte-identical.**
+
+
+#### Read 20 August 2026: BGDE's warrant terms, from the exhibit rather than the 8-K summary
+
+A direct question neither BGDE file could answer: **when can YA II exercise their warrants?** The
+word "exercisable" appeared **zero times** in both, and the calendar's dilution table gave the
+warrant a Timing cell reading "Issued Jun 30, 2026" where the Series D row beside it carried a
+real timing.
+
+**THE SOURCE IS THE EXHIBIT, AND THAT IS THE TRANSFERABLE LESSON.** `EX-4.1` to the Form 8-K of
+6 July 2026. **The 8-K body summarises the warrant and does not state its exercise mechanics.**
+This is 4.176's finding in a new place: a form-type sweep logs the 8-K and misses what the exhibit
+carries. The same sweep that reads only form types would have marked this filing read.
+
+**What the instrument says.** The holder is **YA II PN, LTD.**, named as such; both files had it
+"transferred to the lenders" with YA II PN named only as collateral agent **on the preferred**.
+**Cash exercise runs from the day after issuance with no lock-up.** **Cashless exercise commences
+60 days** after issuance for warrant shares up to 19.99% of outstanding as of closing and 180 days
+for the balance, **and only if the shares are not subject to an effective registration statement**
+or an event of default has occurred. Expiry 30 June 2031.
+
+**THE INVERSION IS THE FINDING.** Sixty days from 30 June is **29 August 2026**, which is the date
+this calendar already carried as the **S-3 effectiveness deadline**. Cashless exercise is
+available only where the shares are **not** covered by an effective registration. The two are a
+switch: effective on time and the route stays shut, slipped and it opens that week. **Neither file
+connected them**, because neither carried the warrant's terms at all.
+
+**A DERIVED FIGURE IS LABELLED AS DERIVED, WHICH IS THE POINT OF THE FILED AND ESTIMATE SPLIT.**
+The instrument states a **formula, not a number**, for the first tranche. The only 19.99% figure
+in it is an exchange cap of 1,129,185 anchored to a **different date**, the shares outstanding
+immediately before the purchase agreement was executed. 926,748 is below that, so the whole
+warrant sits in the first tranche. **What makes that safe is the margin, not the assumption that
+the two dates coincide:** a balance tranche exists only if outstanding at closing were under
+**4,636,058**, against 5,521,252 at 7 May and 5,664,339 at 7 August. The arithmetic and the
+ambiguity are both written into the file rather than a derived number being presented as a stated
+one.
+
+**THE EXCHANGE CAP IS SHARED, NOT THE WARRANT'S OWN HEADROOM.** It aggregates this warrant, the
+preferred conversion shares and "the Other Warrants", so absent the stockholder vote the warrant
+competes for the same 1,129,185 against a preferred that converts into millions.
+
+**"THE OTHER WARRANTS" IS RECORDED AS CHECKED AND NOT ESTABLISHED, and the search is named so it
+is neither re-chased nor assumed ignored.** The term is undefined: it appears twice in the warrant,
+both inside the exchange cap clause, and twice in the purchase agreement inside the attached form
+of that same warrant. **No other warrant instrument appears in any BGDE 2026 8-K exhibit**, and the
+only other Exhibit 4 of that year is Amendment No. 1 to the Rights Agreement, which contains the
+word "Warrant" **zero times**. The concern was raised by this project, chased by it, and **retired
+smaller than feared** rather than left hanging.
+
+**No restamp.** The warrant is dated 30 June 2026 and both files are as of 18 August. The source
+predates them.
+
+**A fifth guessed read-back count was caught**, the fifth in two passes, and positive counts are
+now computed from the plan throughout; only absence assertions stay hand-set, because those are
+claims about what the plan does **not** write. **A29 passed cleanly this time**, after failing
+three calendars in the previous pass for bare catalyst IDs in prose.
+
+**Measured after.** Both files replayed byte-identical, terminators CRLF held by count. **T6 green
+at 431 adjudicated citations**, up from 429: the two citations added here name filings that exist.
+Chain `IN-SCOPE FAILS: 0`, `5 of 5` tree-scope, `1512 / 36 / 42`. Close: **34 of 34 undeclared
+deliverables proved byte-identical.**
