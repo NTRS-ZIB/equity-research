@@ -1820,3 +1820,89 @@ undeclared deliverables byte-identical**.
 computed from the plan, after five guesses across the previous two passes were each caught by the
 instruments. **A29 passed first time**, after failing three calendars at 4.184 for bare catalyst
 IDs in prose.
+
+
+#### Applied 26 August 2026: batch three of the deck revisions, IREN, DGXX and ANY
+
+Six deliverables revised, all six declared at the open. **No restamp, no reprice, no index
+rebuild.** This finishes the nine decks swept on 20 August.
+
+**THREE DECKS, THREE DIFFERENT DATING PROBLEMS, AND NONE OF THEM BATCH TWO'S.**
+
+| Deck | As printed | The problem |
+|---|---|---|
+| IREN | "MAY 7, 2026" | dates cleanly and is **three months OLDER than the files** |
+| **DGXX** | **no date on any of 21 pages** | and published at **a single address overwritten in place** |
+| ANY | "January 2023" | dates cleanly and is **three and a half years stale** |
+
+**IREN's risk is the reverse of batch two's**: not citing an undatable document, but writing a May
+figure into an August file as though current. Nothing was taken unless definitional, structural or
+a live disagreement, and every figure carries the deck's date in the sentence.
+
+**DGXX IS THE HARDEST CASE THE AMENDMENT HAS MET.** The deck prints no date anywhere. It sits at
+`/digipowerx%20deck.pdf`, overwritten when the next version ships, with no archive and no version
+history; the company has no events-and-presentations page at all. The only vintage marker is a PDF
+CreationDate, which is file metadata, not a published date. Section 12.2 says **"An undated page is
+not a source at all"**, and its cited precedent is a file that carried roughly 159 MW from an
+undated investor relations summary before it was withdrawn. **The same section also says, of
+company material outside EDGAR, "Name the page and the date it was read."** Those resolve together:
+what is barred is citing an undated page as though dated. So every DGXX citation names the page and
+the retrieval date, **says in the file that the document is undated and the address is
+overwriteable**, and is ESTIMATE and recorded rather than used.
+
+**THAT CONSTRAINT MADE THE DGXX FINDING STRONGER.** The report's caution note has Columbiana at
+55 MW filed against a 40 MW contract and says "The company has not addressed the gap." The deck
+says the company is converting **a wholly-owned 70 MW**. **That widens the gap to three figures**,
+and because the deck cannot be dated it cannot even be placed in sequence with the shelf. The
+original sentence survives, qualified: the gap is unaddressed in anything datable.
+
+**ANY IS THE MIRROR IMAGE: too stale to be a source, exactly right as a track record.** Staleness
+cannot damage a dated record of what management published.
+
+- **A published concentration ceiling the business no longer meets.** The deck states a **maximum
+  of 20% per provider**. Bitdeer is one counterparty on 30 MW of a 53 MW estate, about **57%**.
+  **Not written as a breach**: the policy is three and a half years old and unrestated. Written as
+  a standard the issuer set and no longer meets, which neither file recorded had existed.
+- **A forecast with a known outcome, where the report cited no guidance track record at all.** The
+  2023 **downside** case was **$30.4M**; FY2023 revenue was **$21.9M**, 28% below it, and the
+  1,666 PH/s fleet the forecast assumed never arrived.
+- **A precedent for a judgement already made.** The report holds a 100 MW pipeline out of the
+  valuation metrics as potential rather than contracted. The deck headlined **~50 MW total
+  capacity** against its own site table summing to **21.6 MW**.
+
+**WHAT IREN GAINED, AND THE FIRST IS A MEASUREMENT DEFECT.** One sentence read "Horizon 1 to 4 ...
+carrying roughly 200MW of critical IT load, and Horizons 5 and 6 add a further 150MW": **two bases
+in one sentence with nothing marking the change**. The deck heads Horizon 1-4 "+300MW" and splits
+Childress into 100MW IT load plus a 250MW retrofit. The 300 and 200 are one estate on two bases and
+agree; **the 150 conflicts**, because it follows an IT-load figure and the issuer's IT-load figure
+for those facilities is 100MW. Recorded unreconciled, the deck being three months older. Also: the
+**5GW gap the report declared open is closed by Spain at 490MW**, and 4,510 + 490 = 5,000 exactly.
+And **customer concentration was measured against a flattering denominator**: Microsoft is 43% of
+the $4.4bn construct and about **61% of the $3.1bn actually under contract**.
+
+**TWO FINDINGS CAME FROM VERIFYING PREMISES AND THE RE-READ, NOT FROM THE FINDINGS FILE.** IREN's
+investor-days row asserted that the events and presentations page "lists results webcasts only,
+checked August 2, 2026"; **the 20 August sweep took a May 7 results presentation off that page**,
+already published when the August 2 check was made. Status unchanged, supporting sentence
+corrected. And ANY's investor-days row declared that no investor day had been searched for; the
+presentations page has now been read, so **the gap is narrowed and explicitly not closed**, since
+releases and filings still were not searched for that purpose.
+
+**Measured after.** All six replayed byte-identical, read-backs re-run from disk, **all six LF and
+terminators held**. Chain **`1512 = 1152 evidence + 36 vacuous + 324 out of scope + 0 failed`**,
+**`5 of 5` tree-scope**, **T6 PASS at 431** adjudicated, **T4 46 of 46**. Close: **30 of 30
+undeclared deliverables byte-identical**.
+
+**A20 FIRED, AND THE FILES WERE CHANGED RATHER THAN THE CHECK.** Two log entries explained a
+provenance decision with the words "this pass". A20 bans exactly that. The reasoning was sound and
+the vocabulary was wrong: a reader of a research report does not know what a pass is. Both restated
+in document voice. Batch one needed the same class of repair for A29 at 4.184.
+
+**A DATING DEFECT IN WORK ALREADY SHIPPED, FOUND WHILE VERIFYING PREMISES.** **Eight deliverables
+carry a log entry dated 20 August for a revision made on 25 or 26 August**: the BGDE pair and the
+batch-two six. Batch one is correctly dated; the passes after it carried the date forward once the
+calendar moved. It is a log-entry date and not an as-of, so no company fact is misstated and no
+valuation is affected, but it is a document asserting it was revised on a day it was not. **Batch
+three stamps the day it ran, checked against the clock rather than copied from the batch-two
+appliers.** The eight are reported and left alone. **Nothing in the harness compares a log entry's
+date against the date it was written**, which is why this survived two passes and a commit.
