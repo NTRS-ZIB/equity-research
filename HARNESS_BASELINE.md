@@ -1758,3 +1758,65 @@ three calendars in the previous pass for bare catalyst IDs in prose.
 at 431 adjudicated citations**, up from 429: the two citations added here name filings that exist.
 Chain `IN-SCOPE FAILS: 0`, `5 of 5` tree-scope, `1512 / 36 / 42`. Close: **34 of 34 undeclared
 deliverables proved byte-identical.**
+
+
+#### Applied 20 August 2026: batch two of the deck revisions, SLNH, CLSK and BKKT
+
+Six deliverables revised, all six declared at the open. **No restamp, no reprice, no index
+rebuild.** Every deck predates every file it touches, so none of it is newer information.
+
+**THE DATING PROBLEM BATCH ONE DID NOT HAVE, and it is why §12.2's amendment earned its keep a
+second time.** Batch one's decks carried explicit cover dates. These three do not.
+
+| Deck | As printed | Datable how |
+|---|---|---|
+| **SLNH** | **no date on the cover at all** | internally: page 9, "as of August 1, 2026" |
+| CLSK | "AUGUST 2026", no day | path `/2026/Aug/10/`, IR listing |
+| BKKT | "AUGUST 2026", no day | IR listing, 10 August |
+
+The amendment says **"An undated page is not a source at all."** SLNH's deck is usable only
+because it dates itself inside, and every SLNH citation names that internal stamp rather than
+implying a cover date the document does not carry. **CLSK and BKKT are dated from outside the
+document**, by a filename path and an IR listing, which is weaker; both are cited by the month
+they print with the day the source located them, asserting no precision the document lacks.
+
+**What the six files gained.**
+
+**SLNH: a range that was being read as a point figure.** The report carried "Dorothy 3 at 300 MW"
+on a line it calls the capacity the equity story rests on. The deck prints **"150-300 MW TARGET
+CAPACITY"**, so the file was carrying the top of the issuer's own range as the number, and the
+bottom of it is half the top. Kati 2 is carried at 350 MW against a deck headed "300MW+" with
+roughly 100 MW in 2027 and "at least 200 MW more" in 2028. Both recorded as disagreements, because
+the deck's Kati 2 wording is open-ended and does not exclude 350.
+
+**SLNH's calendar asserted an absence the issuer contradicts.** It read "No target date has been
+published"; the deck targets approximately 100 MW for service in 2027. **The sentence was narrowed
+rather than deleted**, because the date that item turns on is a **binding lease** and no lease date
+has been published. A target for energising capacity is not a commitment to a signed tenant, so
+the item stays open and stays undated.
+
+**CLSK: the deck that was nearly missed.** Its events page answers a plain fetch with a 168 KB body
+reading "No presentations available", a false negative rather than an honest gap, on the same host
+that failed the same way on 3 August. It took a rendering browser. The deck states **2,110 MW
+contracted** where the files stopped at March's 1,809 MW and June's 1.8 GW; that is **a series, not
+a contradiction**, and what is carried is the issuer's own definition of what the number counts.
+The sharper one: the report's opportunity table has a **620 MW Georgia retrofit platform** while
+the deck classes **only 340 MW as AI-suitable**, spread across Georgia, Tennessee and Wyoming.
+
+**BKKT: a product the report calls unlaunched and the deck marks available.** The report has Bakkt
+Agent as "an unlaunched software layer ... guided to a Q3 2026 launch"; page 9 marks one of three
+paths **"01 AVAILABLE NOW"** and the other two **"TARGETED Q4 2026"**. Recorded as a disagreement:
+available-now on a slide is not revenue recognised in a filing. And **a target the report said did
+not exist**: its KPI list read "reporting to begin only after the product launches" against a deck
+printing a **25k year-end target**, carried with its definition because a user metric without its
+qualifying test is not checkable.
+
+**Measured after.** All six replayed byte-identical. **Terminators differ across the six and were
+not normalised**: SLNH report LF, SLNH calendar CRLF, CLSK both LF, BKKT both CRLF. **T6 green at
+431**, chain `IN-SCOPE FAILS: 0`, `5 of 5` tree-scope, `1512 / 36 / 42`. Close: **30 of 30
+undeclared deliverables byte-identical**.
+
+**Two process notes, both improvements on batch one.** **No read-back count was guessed**: all were
+computed from the plan, after five guesses across the previous two passes were each caught by the
+instruments. **A29 passed first time**, after failing three calendars at 4.184 for bare catalyst
+IDs in prose.
