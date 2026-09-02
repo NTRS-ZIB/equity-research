@@ -1906,3 +1906,58 @@ valuation is affected, but it is a document asserting it was revised on a day it
 three stamps the day it ran, checked against the clock rather than copied from the batch-two
 appliers.** The eight are reported and left alone. **Nothing in the harness compares a log entry's
 date against the date it was written**, which is why this survived two passes and a commit.
+
+#### Added 2 September 2026: T7-log-entry-date, and the push guard's third instance
+
+**Apparatus only. No deliverable written and none declared.** Ledger 4.188.
+
+**THE CHECK THE PREVIOUS ENTRY ASKED FOR NOW EXISTS.** The paragraph directly above ends
+"nothing in the harness compares a log entry's date against the date it was written".
+`harness/ZG4_log_entry_date.py` does, registered as the sixth tree-scope row,
+**T7-log-entry-date**. It is bound to section 9.2, "one entry per revision day", and to no
+current date.
+
+**It reads two states because there are two.** A committed entry is dated against the commit
+that introduced it, which audits what has already shipped. An uncommitted entry is dated
+against today, which fires inside the pass that is writing it. A history-only check would have
+found the eight and could not have stopped the ninth.
+
+**Measured before adoption, across all 36 deliverables: 8 mismatches, 28 correct files
+passing, ZERO false positives.** It named the same eight the previous entry named, and named
+them from git rather than from that entry, deriving their true dates: BGDE's pair 25 August,
+the BKKT, CLSK and SLNH pairs 26 August. **No tolerance was adopted.** A pass can cross
+midnight, but the faults are +5 and +6 days, and a one-day window would accept an entry copied
+forward from yesterday, which is exactly how these eight were made.
+
+**THE PUSH GUARD, THIRD INSTANCE OF ONE FAMILY IN ONE FUNCTION.** `Test-PushPreconditions`
+read its own state with no `-Stamp`, so it took the default and inherited no declaration:
+declared deliverables classified `published` rather than `revised` and the guard refused a
+tree the close had just certified. It now reads through **the same path the close uses**,
+`-Stamp 'close'`, so one derivation carries which declaration is in force. It gains
+`-OpenStatePath` for the reason 4.182 gave one to its neighbours.
+
+**THE ARM THAT CLAIMED THIS GROUND DID NOT HOLD IT, AND THE FIRST REPLACEMENT REPEATED THE
+FAULT.** `RE_revision_arms` arm 12, titled "the PUSH guard accepts the revised class the CLOSE
+accepts", **passes against the broken guard**: on a clean tree nothing classifies `revised`,
+so both answers are empty and agree for free. The first arm 16 written here had the identical
+shape and also passed against the pre-fix module. It was replaced rather than kept as a green
+light. The replacement proves the stamp through the **build mirror**, observable on any tree:
+pre-fix guard NO THROW, fixed guard THREW. **Arm 15 pins the gate itself**, and when the gate
+was widened experimentally arms 1 to 14 all still passed and only arm 15 failed.
+
+**A STANDING HAZARD, RECORDED AND NOT REPAIRED.** This file defines **43 functions and uses
+`[CmdletBinding()]` zero times**. A simple PowerShell function accepts an unknown named
+argument into `$args` and carries on, so **a misspelled parameter anywhere in
+`R1_pass_state.ps1` is a silent no-op**. It surfaced because the pre-fix guard accepted
+`-OpenStatePath` and ignored it. Carried at 4.188(g).
+
+**Verification.** `RE_revision_arms` 16 of 16 (14 before), `R4_open_state_arms` 12 of 12,
+`WK_build_mode_arms` 17 of 17, `RV_stamp_basis_arms` 8 of 8, `G5_treescope_arms` 12 of 12, and
+`ZG5_log_entry_date_arms` 7 of 7, new. The T7 arms were mutation tested: with the comparison
+replaced by `if False:`, arms 2 and 5 fail and five still pass.
+
+**T7 FAILS THIS TREE ON PURPOSE.** The eight files are not corrected here, and any runner
+executing the tree-scope table will fail until they are. That is the check working, not a
+defect this pass introduced. Correct the entry header and **not** the as-of: the as-of was
+read through `build_index.read()`, sits at 13 to 18 August, and was never moved by the
+revisions that misdated the entries.
