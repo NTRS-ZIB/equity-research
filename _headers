@@ -1,29 +1,30 @@
-# Response headers for the static assets, parsed by Workers and never served itself.
+# Response headers for the static assets. Workers parses this file and never serves it.
 #
-# TWO HEADERS, EACH WITH A REASON. The other four commonly recommended ones were considered
-# and rejected on 4 September 2026: X-Content-Type-Options guards MIME sniffing on a set where
-# every file is html, css or js with a correct type; Strict-Transport-Security closes only the
-# very first request a browser ever makes, since Cloudflare already upgrades http; and
-# Permissions-Policy disables camera, microphone and geolocation that nothing here requests.
-# A full Content-Security-Policy was rejected for a stronger reason, below.
+# COMMENTS LIVE HERE, ABOVE THE RULE, NOT INSIDE IT. The documented form shows comments on
+# their own lines outside a block; an indented "#" line under a URL pattern is not a header
+# and was silently ignored along with the rest of the block when first written this way.
+#
+# WHY FRAMING IS THE ONE THAT MATTERS, AND IT IS NOT A SECURITY POINT. This site's product is
+# the claim that a figure came from a named filing on a stated date. Without frame-ancestors,
+# anyone may embed a research document in an iframe inside their own page, with their branding
+# around it, and pass sourced work off as theirs. That is misattribution rather than attack.
+#
+# frame-ancestors ALONE RESTRICTS NOTHING ELSE. CSP directives are independent and there is no
+# default-src here, so scripts, styles and fonts stay unrestricted. That is deliberate: the
+# deliverables carry inline scripts for the light and dark toggle and load Google Fonts, and a
+# stricter policy would silently break the toggle across all 36 documents.
+#
+# X-Frame-Options is superseded by frame-ancestors in current browsers and is kept for older
+# agents that honour only it. Referrer-Policy is here because the documents link out to
+# sec.gov, and without one the full URL of the page the reader was on travels with them.
+#
+# FOUR OTHERS WERE CONSIDERED AND REJECTED on 4 September 2026, so they are not re-proposed:
+# X-Content-Type-Options guards MIME sniffing where every file already carries a correct type;
+# Strict-Transport-Security closes only a browser's very first request, since Cloudflare
+# already upgrades http; Permissions-Policy disables camera, microphone and geolocation that
+# nothing here requests; and a full Content-Security-Policy is the one that breaks the toggle.
 
 /*
-  # WHY FRAMING IS THE ONE THAT MATTERS HERE, AND IT IS NOT A SECURITY POINT.
-  # This site's product is the claim that a figure came from a named filing on a stated date.
-  # Without this, anyone may embed a research document in an iframe inside their own page,
-  # with their branding around it, and pass sourced work off as theirs. That is a
-  # misattribution risk rather than an attack, and it is the specific thing worth preventing
-  # for a research publication.
-  #
-  # frame-ancestors ALONE restricts nothing else. CSP directives are independent and there is
-  # no default-src here, so scripts, styles and fonts stay unrestricted. That matters: the
-  # deliverables carry inline scripts for the light and dark toggle and load Google Fonts, and
-  # a stricter policy would silently break the toggle across all 36 documents. This is the
-  # narrow form deliberately.
   Content-Security-Policy: frame-ancestors 'self'
-  # Superseded by frame-ancestors in current browsers, kept for older agents that honour only
-  # this one. Harmless where both are understood.
   X-Frame-Options: SAMEORIGIN
-  # The documents link out to sec.gov. Without a policy the full URL of the page the reader
-  # was on travels with them. This sends the origin across sites and the full path within it.
   Referrer-Policy: strict-origin-when-cross-origin
