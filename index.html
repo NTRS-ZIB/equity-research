@@ -4,241 +4,240 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#141C24" media="(prefers-color-scheme: dark)">
-<title>Equity research &middot; index</title>
+<meta name="theme-color" content="#0B1C2C" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B1117" media="(prefers-color-scheme: dark)">
+<title>NTRS_ZIB Research &middot; Coverage Universe</title>
+<meta name="description" content="Independent equity research on power, datacentre and digital-asset infrastructure. Two documents per issuer. Every material claim is sourced. No ratings.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script>
-(function(){
-  var t=null;
-  try{ t=localStorage.getItem('theme'); }catch(e){}
-  if(t==='light'||t==='dark') document.documentElement.dataset.theme=t;
-})();
-</script>
-<style>
-:root{
-  color-scheme: light dark;
-  --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
-  --line:#DEE6EC;   --line-hard:#C0CDD7;
-  --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
-  --display:'Archivo',ui-sans-serif,system-ui,'Helvetica Neue',Arial,sans-serif;
-  --body:'Source Serif 4',Georgia,'Times New Roman',serif;
-  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
-  --col:760px;
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --paper:#141C24;    --canvas:#10161D;    --panel-2:#0D1218;
-    --line:#2E3A45;     --line-hard:#455360;
-    --ink:#E8EEF3;        --ink-dim:#AFBECB; --ink-faint:#93A3B2;
-  }
-}
-:root[data-theme="dark"]{
-  --paper:#141C24;  --canvas:#10161D;  --panel-2:#0D1218;
-  --line:#2E3A45;   --line-hard:#455360;
-  --ink:#E8EEF3;    --ink-dim:#AFBECB; --ink-faint:#93A3B2;
-}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-html,body{background:var(--canvas) !important}
-body{margin:0;color:var(--ink);font-family:var(--body);font-size:16.5px;line-height:1.62;
-     -webkit-font-smoothing:antialiased}
-.wrap{max-width:var(--col);margin:0 auto;padding:0 22px 96px;background:var(--paper);
-      border-left:1px solid var(--line);border-right:1px solid var(--line)}
-header{padding:44px 0 26px;border-bottom:2px solid var(--line-hard);margin-bottom:8px;
-      position:relative;padding-left:20px}
-header::before{content:"";position:absolute;left:0;top:44px;bottom:26px;width:4px;
-      background:var(--ink-dim)}
-h1{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.22;margin:0}
-.functional{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.14em;
-      text-transform:uppercase;color:var(--ink-faint);margin:18px 0 0}
-.lede{margin:22px 0 0;max-width:68ch}
-.entry{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
-      margin-top:14px;border-left:4px solid var(--line-hard)}
-.head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-.tkr{font-family:var(--mono);font-size:19px;font-weight:700;letter-spacing:-.5px;
-      color:var(--ink)}
-.co{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;
-      color:var(--ink-faint)}
-.tension{margin:10px 0 0;font-size:16px}
-.docs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;padding-top:12px;
-      border-top:1px solid var(--line)}
-.doc{display:flex;flex-direction:column;gap:3px}
-.doc a{font-family:var(--display);font-size:14.5px;font-weight:600;color:var(--ink);
-      text-decoration:none;border-bottom:1px solid var(--line-hard);align-self:flex-start;
-      padding-bottom:1px}
-.doc a:hover{border-bottom-color:var(--ink)}
-.doc .none{font-family:var(--display);font-size:14.5px;font-weight:600;color:var(--ink-faint)}
-.asof{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
-footer{margin-top:44px;padding-top:22px;border-top:2px solid var(--line-hard)}
-footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);margin:0 0 8px}
-.norec{border:1px solid var(--line-hard);background:var(--canvas);padding:16px 20px;
-      font-family:var(--mono);font-size:12.5px;color:var(--ink-dim);line-height:1.55}
-@media (max-width:720px){
-  .wrap{padding:0 16px 70px;border-left:none;border-right:none}
-  h1{font-size:23px}
-  .docs{grid-template-columns:1fr}
-}
-.themetoggle{position:absolute;top:44px;right:0;display:flex;
-      border:1px solid var(--line-hard);border-radius:2px;overflow:hidden}
-.themetoggle button{font-family:var(--mono);font-size:10.5px;font-weight:600;
-      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);
-      background:var(--paper);border:0;border-left:1px solid var(--line);
-      padding:4px 9px;cursor:pointer}
-.themetoggle button:first-child{border-left:0}
-.themetoggle button:hover{color:var(--ink)}
-.themetoggle button[aria-pressed="true"]{color:var(--paper);background:var(--ink-dim)}
-@media (max-width:720px){ .themetoggle{position:static;margin-bottom:18px} }
-@media print{
-  :root,:root:not([data-theme="light"]),
-  :root[data-theme="dark"],:root[data-theme="light"]{
-    --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
-    --line:#DEE6EC;   --line-hard:#C0CDD7;
-    --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
-    color-scheme: light;
-  }
-  .themetoggle{display:none}
-  body{font-size:11pt} .wrap{max-width:none;border:none} }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="wrap">
+<a class="skip" href="#coverage">Skip to coverage</a>
 
-<header>
-  <div class="themetoggle" role="group" aria-label="Colour scheme">
-    <button type="button" data-set="system">System</button>
-    <button type="button" data-set="light">Light</button>
-    <button type="button" data-set="dark">Dark</button>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="mark" href="index.html">
+      <div class="mark-box">NTRS_ZIB</div>
+      <div class="mark-name">NTRS_ZIB Research<span>Independent coverage</span></div>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html" aria-current="page">Coverage</a>
+      <a href="method.html">Method</a>
+      <a href="about.html">About</a>
+      <a href="https://github.com/NTRS-ZIB/equity-research">Source</a>
+    </nav>
+    <div class="theme" role="group" aria-label="Colour theme">
+      <button type="button" data-theme="system" aria-pressed="true">Sys</button>
+      <button type="button" data-theme="light" aria-pressed="false">Light</button>
+      <button type="button" data-theme="dark" aria-pressed="false">Dark</button>
+    </div>
   </div>
-  <h1>Equity research</h1>
-  <p class="functional">18 companies &middot; index &middot; rebuilt September 3, 2026</p>
 </header>
 
-<p class="lede">Each company carries two documents. The research report asks what the company
-is and what it is worth; the catalyst calendar asks what could move it and when. Each is
-stamped with its own as-of date, shown below, because they are revised on different days.</p>
+<section class="hero">
+  <div class="hero-inner">
+    <p class="kicker">Power &middot; Datacentre &middot; Digital-asset infrastructure</p>
+    <h1>Research, not a recommendation.</h1>
+    <p class="standfirst">18 issuers. Two documents each: a report that asks what the company is
+    and what it is worth, and a calendar that asks what could move it and when. Every material claim
+    carries a source tag. No buy, sell or hold is issued.</p>
+    <div class="stats">
+      <div class="stat"><b>18</b><span>Issuers covered</span></div>
+      <div class="stat"><b>36</b><span>Live documents</span></div>
+      <div class="stat"><b>6</b><span>Source classes</span></div>
+      <div class="stat date"><b>September 4, 2026</b><span>Index rebuilt</span></div>
+    </div>
+  </div>
+</section>
 
-  <article class="entry">
-    <div class="head"><span class="tkr">CIFR</span><span class="co">Cipher Digital Inc.</span></div>
-    <p class="tension">Every dollar of revenue is still bitcoin, and the mining is being switched off</p>
-    <div class="docs"><div class="doc"><a href="CIFR_Research_Report.html">Research report</a><span class="asof">as of September 2, 2026</span></div><div class="doc"><a href="CIFR_Catalyst_Calendar.html">Catalyst calendar</a><span class="asof">as of September 2, 2026</span></div></div>
-  </article>
-  <article class="entry">
-    <div class="head"><span class="tkr">APLD</span><span class="co">Applied Digital Corporation</span></div>
-    <p class="tension">$36 billion of contracted revenue, one unnamed tenant behind half of it, and a $249 million year</p>
-    <div class="docs"><div class="doc"><a href="APLD_Research_Report.html">Research report</a><span class="asof">as of August 19, 2026</span></div><div class="doc"><a href="APLD_Catalyst_Calendar.html">Catalyst calendar</a><span class="asof">as of August 19, 2026</span></div></div>
-  </article>
-  <article class="entry">
-    <div class="head"><span class="tkr">MARA</span><span class="co">MARA Holdings, Inc.</span></div>
-    <p class="tension">4.8 gigawatts of potential capacity, no signed tenant, and a bitcoin treasury now pledged against the build</p>
-    <div class="docs"><div class="doc"><a href="MARA_Research_Report.html">Research report</a><span class="asof">as of August 19, 2026</span></div><div class="doc"><a href="MARA_Catalyst_Calendar.html">Catalyst calendar</a><span class="asof">as of August 19, 2026</span></div></div>
-  </article>
-  <article class="entry">
-    <div class="head"><span class="tkr">NUAI</span><span class="co">New Era Energy &amp; Digital, Inc.</span></div>
-    <p class="tension">Two operating power plants at the fence line, and no signed tenant behind them</p>
-    <div class="docs"><div class="doc"><a href="NUAI_Research_Report.html">Research report</a><span class="asof">as of August 19, 2026</span></div><div class="doc"><a href="NUAI_Catalyst_Calendar.html">Catalyst calendar</a><span class="asof">as of August 19, 2026</span></div></div>
-  </article>
-  <article class="entry">
-    <div class="head"><span class="tkr">WULF</span><span class="co">TeraWulf Inc.</span></div>
-    <p class="tension">A nineteen billion dollar lease book signed against sixty megawatts that actually run</p>
-    <div class="docs"><div class="doc"><a href="WULF_Research_Report.html">Research report</a><span class="asof">as of August 19, 2026</span></div><div class="doc"><a href="WULF_Catalyst_Calendar.html">Catalyst calendar</a><span class="asof">as of August 19, 2026</span></div></div>
-  </article>
-  <article class="entry">
-    <div class="head"><span class="tkr">BGDE</span><span class="co">Big Digital Energy, Inc.</span></div>
-    <p class="tension">A landlord with roughly 129 energized megawatts, no anchor tenant, and a judgment it agreed to</p>
-    <div class="docs"><div class="doc"><a href="BGDE_Research_Report.html">Research report</a><span class="asof">as of August 18, 2026</span></div><div class="doc"><a href="BGDE_Catalyst_Calendar.html">Catalyst calendar</a><span class="asof">as of August 18, 2026</span></div></div>
-  </article>
-  <article class="entry">
-    <div class="head"><span class="tkr">BTDR</span><span class="co">Bitdeer Technologies Group</span></div>
-    <p class="tension">A $4.7 billion lease signed the day after the auditor changed, and a gross-loss quarter six days later</p>
-    <div class="docs"><div class="doc"><a href="BTDR_Research_Report.html">Research report</a><span class="asof">as of August 18, 2026</span></div><div class="doc"><a href="BTDR_Catalyst_Calendar.html">Catalyst calendar</a><span class="asof">as of August 18, 2026</span></div></div>
-  </article>
-  <article class="entry">
-    <div class="head"><span class="tkr">CLSK</span><span class="co">CleanSpark, Inc.</span></div>
-    <p class="tension">A $6.6 billion lease that pays nothing until late 2027, and an equity base that halved in the six months before it was signed</p>
-    <div class="docs"><div class="doc"><a href="CLSK_Research_Report.html">Research report</a><span class="asof">as of August 18, 2026</span></div><div class="doc"><a href="CLSK_Catalyst_Calendar.html">Catalyst calendar</a><span class="asof">as of August 13, 2026</span></div></div>
-  </article>
-  <article class="entry">
-    <div class="head"><span class="tkr">DGXX</span><span class="co">Digi Power X Inc.</span></div>
-    <p class="tension">$1.1 billion contracted, $1.08 million earned, and the legacy business has all but stopped</p>
-    <div class="docs"><div class="doc"><a href="DGXX_Research_Report.html">Research report</a><span class="asof">as of August 18, 2026</span></div><div class="doc"><a href="DGXX_Catalyst_Calendar.html">Catalyst calendar</a><span class="asof">as of August 18, 2026</span></div></div>
-  </article>
-  <article class="entry">
-    <div class="head"><span class="tkr">SLNH</span><span class="co">Soluna Holdings, Inc.</span></div>
-    <p class="tension">192 megawatts earning revenue, and 6.3 gigawatts earning the valuation</p>
-    <div class="docs"><div class="doc"><a href="SLNH_Research_Report.html">Research report</a><span class="asof">as of August 13, 2026</span></div><div class="doc"><a href="SLNH_Catalyst_Calendar.html">Catalyst calendar</a><span class="asof">as of August 18, 2026</span></div></div>
-  </article>
-  <article class="entry">
-    <div class="head"><span class="tkr">WYFI</span><span class="co">WhiteFiber, Inc.</span></div>
-    <p class="tension">A $923.7 million backlog resting on one site whose billing start remains unconfirmed</p>
-    <div class="docs"><div class="doc"><a href="WYFI_Research_Report.html">Research report</a><span class="asof">as of August 18, 2026</span></div><div class="doc"><a href="WYFI_Catalyst_Calendar.html">Catalyst calendar</a><span class="asof">as of August 18, 2026</span></div></div>
-  </article>
-  <article class="entry">
-    <div class="head"><span class="tkr">BKKT</span><span class="co">Bakkt, Inc.</span></div>
-    <p class="tension">Licenses a competitor cannot buy, and $0.8 million a quarter to show for them</p>
-    <div class="docs"><div class="doc"><a href="BKKT_Research_Report.html">Research report</a><span class="asof">as of August 17, 2026</span></div><div class="doc"><a href="BKKT_Catalyst_Calendar.html">Catalyst calendar</a><span class="asof">as of August 17, 2026</span></div></div>
-  </article>
-  <article class="entry">
-    <div class="head"><span class="tkr">RIOT</span><span class="co">Riot Platforms, Inc.</span></div>
-    <p class="tension">An enterprise value of $7.5 billion resting on a lease whose first rent is due in 2028</p>
-    <div class="docs"><div class="doc"><a href="RIOT_Research_Report.html">Research report</a><span class="asof">as of August 17, 2026</span></div><div class="doc"><a href="RIOT_Catalyst_Calendar.html">Catalyst calendar</a><span class="asof">as of August 17, 2026</span></div></div>
-  </article>
-  <article class="entry">
-    <div class="head"><span class="tkr">VIP</span><span class="co">Vulcan Infrastructure and Power Inc.</span></div>
-    <p class="tension">A $67 million enterprise value on 104 energized megawatts and no signed tenant</p>
-    <div class="docs"><div class="doc"><a href="VIP_Research_Report.html">Research report</a><span class="asof">as of August 17, 2026</span></div><div class="doc"><a href="VIP_Catalyst_Calendar.html">Catalyst calendar</a><span class="asof">as of August 17, 2026</span></div></div>
-  </article>
-  <article class="entry">
-    <div class="head"><span class="tkr">ANY</span><span class="co">Sphere 3D Corp.</span></div>
-    <p class="tension">A 53 megawatt platform whose financing capacity rises and falls with the share price it is meant to support</p>
-    <div class="docs"><div class="doc"><a href="ANY_Research_Report.html">Research report</a><span class="asof">as of August 15, 2026</span></div><div class="doc"><a href="ANY_Catalyst_Calendar.html">Catalyst calendar</a><span class="asof">as of August 15, 2026</span></div></div>
-  </article>
-  <article class="entry">
-    <div class="head"><span class="tkr">GLXY</span><span class="co">Galaxy Digital Inc.</span></div>
-    <p class="tension">A $3.5 billion note issue, 133 delivered megawatts, and a third consecutive quarterly loss</p>
-    <div class="docs"><div class="doc"><a href="GLXY_Research_Report.html">Research report</a><span class="asof">as of August 13, 2026</span></div><div class="doc"><a href="GLXY_Catalyst_Calendar.html">Catalyst calendar</a><span class="asof">as of August 13, 2026</span></div></div>
-  </article>
-  <article class="entry">
-    <div class="head"><span class="tkr">HUT</span><span class="co">Hut 8 Corp.</span></div>
-    <p class="tension">Twenty-six billion dollars of contracted rent, reported through the price of bitcoin</p>
-    <div class="docs"><div class="doc"><a href="HUT_Research_Report.html">Research report</a><span class="asof">as of August 13, 2026</span></div><div class="doc"><a href="HUT_Catalyst_Calendar.html">Catalyst calendar</a><span class="asof">as of August 13, 2026</span></div></div>
-  </article>
-  <article class="entry">
-    <div class="head"><span class="tkr">IREN</span><span class="co">IREN Limited</span></div>
-    <p class="tension">A $4 billion revenue target, $710 million of booked backlog, and $11.9 billion already committed</p>
-    <div class="docs"><div class="doc"><a href="IREN_Research_Report.html">Research report</a><span class="asof">as of August 13, 2026</span></div><div class="doc"><a href="IREN_Catalyst_Calendar.html">Catalyst calendar</a><span class="asof">as of August 13, 2026</span></div></div>
-  </article>
+<div class="tools">
+  <div class="search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.2-3.2"></path></svg>
+    <label class="visually-hidden" for="q">Search coverage</label>
+    <input id="q" type="search" placeholder="Search ticker, company or thesis line" autocomplete="off">
+  </div>
+  <label class="sort">Sort
+    <select id="sort">
+      <option value="fresh">Most recently updated</option>
+      <option value="ticker">Ticker A-Z</option>
+    </select>
+  </label>
+  <div class="count" id="count">18 names</div>
+</div>
+
+<main class="wrap" id="coverage">
+  <div class="universe" id="universe">
+
+      <article class="card" data-ticker="CIFR" data-name="cipher digital inc." data-sort="2026-09-02">
+        <div class="card-id"><div class="tkr">CIFR</div><div class="co">Cipher Digital Inc.</div></div>
+        <div class="card-body">
+          <p class="label">Working tension</p>
+          <p>Every dollar of revenue is still bitcoin, and the mining is being switched off</p>
+        </div>
+        <div class="card-docs"><a class="doc" href="CIFR_Research_Report.html"><strong>Research report</strong><em>As of September 2, 2026</em></a><a class="doc" href="CIFR_Catalyst_Calendar.html"><strong>Catalyst calendar</strong><em>As of September 2, 2026</em></a></div>
+      </article>
+      <article class="card" data-ticker="APLD" data-name="applied digital corporation" data-sort="2026-08-19">
+        <div class="card-id"><div class="tkr">APLD</div><div class="co">Applied Digital Corporation</div></div>
+        <div class="card-body">
+          <p class="label">Working tension</p>
+          <p>$36 billion of contracted revenue, one unnamed tenant behind half of it, and a $249 million year</p>
+        </div>
+        <div class="card-docs"><a class="doc" href="APLD_Research_Report.html"><strong>Research report</strong><em>As of August 19, 2026</em></a><a class="doc" href="APLD_Catalyst_Calendar.html"><strong>Catalyst calendar</strong><em>As of August 19, 2026</em></a></div>
+      </article>
+      <article class="card" data-ticker="MARA" data-name="mara holdings, inc." data-sort="2026-08-19">
+        <div class="card-id"><div class="tkr">MARA</div><div class="co">MARA Holdings, Inc.</div></div>
+        <div class="card-body">
+          <p class="label">Working tension</p>
+          <p>4.8 gigawatts of potential capacity, no signed tenant, and a bitcoin treasury now pledged against the build</p>
+        </div>
+        <div class="card-docs"><a class="doc" href="MARA_Research_Report.html"><strong>Research report</strong><em>As of August 19, 2026</em></a><a class="doc" href="MARA_Catalyst_Calendar.html"><strong>Catalyst calendar</strong><em>As of August 19, 2026</em></a></div>
+      </article>
+      <article class="card" data-ticker="NUAI" data-name="new era energy &amp; digital, inc." data-sort="2026-08-19">
+        <div class="card-id"><div class="tkr">NUAI</div><div class="co">New Era Energy &amp; Digital, Inc.</div></div>
+        <div class="card-body">
+          <p class="label">Working tension</p>
+          <p>Two operating power plants at the fence line, and no signed tenant behind them</p>
+        </div>
+        <div class="card-docs"><a class="doc" href="NUAI_Research_Report.html"><strong>Research report</strong><em>As of August 19, 2026</em></a><a class="doc" href="NUAI_Catalyst_Calendar.html"><strong>Catalyst calendar</strong><em>As of August 19, 2026</em></a></div>
+      </article>
+      <article class="card" data-ticker="WULF" data-name="terawulf inc." data-sort="2026-08-19">
+        <div class="card-id"><div class="tkr">WULF</div><div class="co">TeraWulf Inc.</div></div>
+        <div class="card-body">
+          <p class="label">Working tension</p>
+          <p>A nineteen billion dollar lease book signed against sixty megawatts that actually run</p>
+        </div>
+        <div class="card-docs"><a class="doc" href="WULF_Research_Report.html"><strong>Research report</strong><em>As of August 19, 2026</em></a><a class="doc" href="WULF_Catalyst_Calendar.html"><strong>Catalyst calendar</strong><em>As of August 19, 2026</em></a></div>
+      </article>
+      <article class="card" data-ticker="BGDE" data-name="big digital energy, inc." data-sort="2026-08-18">
+        <div class="card-id"><div class="tkr">BGDE</div><div class="co">Big Digital Energy, Inc.</div></div>
+        <div class="card-body">
+          <p class="label">Working tension</p>
+          <p>A landlord with roughly 129 energized megawatts, no anchor tenant, and a judgment it agreed to</p>
+        </div>
+        <div class="card-docs"><a class="doc" href="BGDE_Research_Report.html"><strong>Research report</strong><em>As of August 18, 2026</em></a><a class="doc" href="BGDE_Catalyst_Calendar.html"><strong>Catalyst calendar</strong><em>As of August 18, 2026</em></a></div>
+      </article>
+      <article class="card" data-ticker="BTDR" data-name="bitdeer technologies group" data-sort="2026-08-18">
+        <div class="card-id"><div class="tkr">BTDR</div><div class="co">Bitdeer Technologies Group</div></div>
+        <div class="card-body">
+          <p class="label">Working tension</p>
+          <p>A $4.7 billion lease signed the day after the auditor changed, and a gross-loss quarter six days later</p>
+        </div>
+        <div class="card-docs"><a class="doc" href="BTDR_Research_Report.html"><strong>Research report</strong><em>As of August 18, 2026</em></a><a class="doc" href="BTDR_Catalyst_Calendar.html"><strong>Catalyst calendar</strong><em>As of August 18, 2026</em></a></div>
+      </article>
+      <article class="card" data-ticker="CLSK" data-name="cleanspark, inc." data-sort="2026-08-18">
+        <div class="card-id"><div class="tkr">CLSK</div><div class="co">CleanSpark, Inc.</div></div>
+        <div class="card-body">
+          <p class="label">Working tension</p>
+          <p>A $6.6 billion lease that pays nothing until late 2027, and an equity base that halved in the six months before it was signed</p>
+        </div>
+        <div class="card-docs"><a class="doc" href="CLSK_Research_Report.html"><strong>Research report</strong><em>As of August 18, 2026</em></a><a class="doc" href="CLSK_Catalyst_Calendar.html"><strong>Catalyst calendar</strong><em>As of August 13, 2026</em></a></div>
+      </article>
+      <article class="card" data-ticker="DGXX" data-name="digi power x inc." data-sort="2026-08-18">
+        <div class="card-id"><div class="tkr">DGXX</div><div class="co">Digi Power X Inc.</div></div>
+        <div class="card-body">
+          <p class="label">Working tension</p>
+          <p>$1.1 billion contracted, $1.08 million earned, and the legacy business has all but stopped</p>
+        </div>
+        <div class="card-docs"><a class="doc" href="DGXX_Research_Report.html"><strong>Research report</strong><em>As of August 18, 2026</em></a><a class="doc" href="DGXX_Catalyst_Calendar.html"><strong>Catalyst calendar</strong><em>As of August 18, 2026</em></a></div>
+      </article>
+      <article class="card" data-ticker="SLNH" data-name="soluna holdings, inc." data-sort="2026-08-18">
+        <div class="card-id"><div class="tkr">SLNH</div><div class="co">Soluna Holdings, Inc.</div></div>
+        <div class="card-body">
+          <p class="label">Working tension</p>
+          <p>192 megawatts earning revenue, and 6.3 gigawatts earning the valuation</p>
+        </div>
+        <div class="card-docs"><a class="doc" href="SLNH_Research_Report.html"><strong>Research report</strong><em>As of August 13, 2026</em></a><a class="doc" href="SLNH_Catalyst_Calendar.html"><strong>Catalyst calendar</strong><em>As of August 18, 2026</em></a></div>
+      </article>
+      <article class="card" data-ticker="WYFI" data-name="whitefiber, inc." data-sort="2026-08-18">
+        <div class="card-id"><div class="tkr">WYFI</div><div class="co">WhiteFiber, Inc.</div></div>
+        <div class="card-body">
+          <p class="label">Working tension</p>
+          <p>A $923.7 million backlog resting on one site whose billing start remains unconfirmed</p>
+        </div>
+        <div class="card-docs"><a class="doc" href="WYFI_Research_Report.html"><strong>Research report</strong><em>As of August 18, 2026</em></a><a class="doc" href="WYFI_Catalyst_Calendar.html"><strong>Catalyst calendar</strong><em>As of August 18, 2026</em></a></div>
+      </article>
+      <article class="card" data-ticker="BKKT" data-name="bakkt, inc." data-sort="2026-08-17">
+        <div class="card-id"><div class="tkr">BKKT</div><div class="co">Bakkt, Inc.</div></div>
+        <div class="card-body">
+          <p class="label">Working tension</p>
+          <p>Licenses a competitor cannot buy, and $0.8 million a quarter to show for them</p>
+        </div>
+        <div class="card-docs"><a class="doc" href="BKKT_Research_Report.html"><strong>Research report</strong><em>As of August 17, 2026</em></a><a class="doc" href="BKKT_Catalyst_Calendar.html"><strong>Catalyst calendar</strong><em>As of August 17, 2026</em></a></div>
+      </article>
+      <article class="card" data-ticker="RIOT" data-name="riot platforms, inc." data-sort="2026-08-17">
+        <div class="card-id"><div class="tkr">RIOT</div><div class="co">Riot Platforms, Inc.</div></div>
+        <div class="card-body">
+          <p class="label">Working tension</p>
+          <p>An enterprise value of $7.5 billion resting on a lease whose first rent is due in 2028</p>
+        </div>
+        <div class="card-docs"><a class="doc" href="RIOT_Research_Report.html"><strong>Research report</strong><em>As of August 17, 2026</em></a><a class="doc" href="RIOT_Catalyst_Calendar.html"><strong>Catalyst calendar</strong><em>As of August 17, 2026</em></a></div>
+      </article>
+      <article class="card" data-ticker="VIP" data-name="vulcan infrastructure and power inc." data-sort="2026-08-17">
+        <div class="card-id"><div class="tkr">VIP</div><div class="co">Vulcan Infrastructure and Power Inc.</div></div>
+        <div class="card-body">
+          <p class="label">Working tension</p>
+          <p>A $67 million enterprise value on 104 energized megawatts and no signed tenant</p>
+        </div>
+        <div class="card-docs"><a class="doc" href="VIP_Research_Report.html"><strong>Research report</strong><em>As of August 17, 2026</em></a><a class="doc" href="VIP_Catalyst_Calendar.html"><strong>Catalyst calendar</strong><em>As of August 17, 2026</em></a></div>
+      </article>
+      <article class="card" data-ticker="ANY" data-name="sphere 3d corp." data-sort="2026-08-15">
+        <div class="card-id"><div class="tkr">ANY</div><div class="co">Sphere 3D Corp.</div></div>
+        <div class="card-body">
+          <p class="label">Working tension</p>
+          <p>A 53 megawatt platform whose financing capacity rises and falls with the share price it is meant to support</p>
+        </div>
+        <div class="card-docs"><a class="doc" href="ANY_Research_Report.html"><strong>Research report</strong><em>As of August 15, 2026</em></a><a class="doc" href="ANY_Catalyst_Calendar.html"><strong>Catalyst calendar</strong><em>As of August 15, 2026</em></a></div>
+      </article>
+      <article class="card" data-ticker="GLXY" data-name="galaxy digital inc." data-sort="2026-08-13">
+        <div class="card-id"><div class="tkr">GLXY</div><div class="co">Galaxy Digital Inc.</div></div>
+        <div class="card-body">
+          <p class="label">Working tension</p>
+          <p>A $3.5 billion note issue, 133 delivered megawatts, and a third consecutive quarterly loss</p>
+        </div>
+        <div class="card-docs"><a class="doc" href="GLXY_Research_Report.html"><strong>Research report</strong><em>As of August 13, 2026</em></a><a class="doc" href="GLXY_Catalyst_Calendar.html"><strong>Catalyst calendar</strong><em>As of August 13, 2026</em></a></div>
+      </article>
+      <article class="card" data-ticker="HUT" data-name="hut 8 corp." data-sort="2026-08-13">
+        <div class="card-id"><div class="tkr">HUT</div><div class="co">Hut 8 Corp.</div></div>
+        <div class="card-body">
+          <p class="label">Working tension</p>
+          <p>Twenty-six billion dollars of contracted rent, reported through the price of bitcoin</p>
+        </div>
+        <div class="card-docs"><a class="doc" href="HUT_Research_Report.html"><strong>Research report</strong><em>As of August 13, 2026</em></a><a class="doc" href="HUT_Catalyst_Calendar.html"><strong>Catalyst calendar</strong><em>As of August 13, 2026</em></a></div>
+      </article>
+      <article class="card" data-ticker="IREN" data-name="iren limited" data-sort="2026-08-13">
+        <div class="card-id"><div class="tkr">IREN</div><div class="co">IREN Limited</div></div>
+        <div class="card-body">
+          <p class="label">Working tension</p>
+          <p>A $4 billion revenue target, $710 million of booked backlog, and $11.9 billion already committed</p>
+        </div>
+        <div class="card-docs"><a class="doc" href="IREN_Research_Report.html"><strong>Research report</strong><em>As of August 13, 2026</em></a><a class="doc" href="IREN_Catalyst_Calendar.html"><strong>Catalyst calendar</strong><em>As of August 13, 2026</em></a></div>
+      </article>
+
+  </div>
+</main>
 
 <footer>
-  <div class="norec">
-    No buy, sell, or hold recommendation is issued and no price target is derived.
-    Third-party targets and ratings, where shown, are the published views of the firms
-    named. These documents are for research and educational purposes and are not
-    investment advice. Verify against primary filings on sec.gov before acting.
+  <div class="foot">
+    <div>
+      <h3>Important</h3>
+      <p>These documents are for research and educational purposes. They are not investment advice.
+      No buy, sell or hold recommendation is issued, and no price target is derived. Third-party
+      targets and ratings, where shown, are the published views of the firms named. Verify every
+      figure against primary filings on <a href="https://www.sec.gov">sec.gov</a> before acting on
+      anything here.</p>
+    </div>
+    <div>
+      <h3>Freshness</h3>
+      <p>Each file carries its own as-of date. The set is not uniformly current, and a document is
+      never restamped merely to make the universe look consistent. This page is generated from the
+      documents it lists, and was rebuilt September 4, 2026 from them. It is regenerated automatically on
+      every change, so it cannot describe a set that is not there.</p>
+      <p class="legal">&copy; 2026 NTRS_ZIB Research.</p>
+    </div>
   </div>
-  <p style="margin-top:16px">Index rebuilt automatically from the documents it lists.</p>
 </footer>
-
-</div>
-<script>
-(function(){
-  var g=document.querySelector('.themetoggle'); if(!g) return;
-  var bs=g.querySelectorAll('button[data-set]');
-  function sync(){
-    var t=document.documentElement.dataset.theme||'system';
-    for(var i=0;i<bs.length;i++) bs[i].setAttribute('aria-pressed',String(bs[i].getAttribute('data-set')===t));
-  }
-  g.addEventListener('click',function(e){
-    var b=e.target.closest('button[data-set]'); if(!b) return;
-    var v=b.getAttribute('data-set');
-    if(v==='system'){ delete document.documentElement.dataset.theme; try{ localStorage.removeItem('theme'); }catch(err){} }
-    else { document.documentElement.dataset.theme=v; try{ localStorage.setItem('theme',v); }catch(err){} }
-    sync();
-  });
-  sync();
-})();
-</script>
+<script src="site.js"></script>
 </body>
 </html>

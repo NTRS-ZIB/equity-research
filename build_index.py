@@ -154,23 +154,33 @@ def build(rows):
             d = entry.get(key)
             if d:
                 links.append(
-                    '<div class="doc"><a href="{f}">{l}</a>'
-                    '<span class="asof">as of {a}</span></div>'.format(
+                    '<a class="doc" href="{f}"><strong>{l}</strong>'
+                    '<em>As of {a}</em></a>'.format(
                         f=html.escape(urllib.parse.quote(d["file"])), l=label,
                         a=html.escape(d["asof"])))
             else:
+                # A missing document is SHOWN, never omitted. An index that silently drops
+                # a half-covered ticker reads exactly like one nobody has started.
                 links.append(
-                    '<div class="doc"><span class="none">{l}</span>'
-                    '<span class="asof">not published</span></div>'.format(l=label))
+                    '<span class="doc missing"><strong>{l}</strong>'
+                    '<em>Not published</em></span>'.format(l=label))
 
+        # data-name and data-sort serve the search and sort in site.js. Both are DERIVED
+        # here rather than written by hand, and the sort key is the same newest() the row
+        # ordering uses, so the two cannot disagree.
         cells.append(
-            '  <article class="entry">\n'
-            '    <div class="head"><span class="tkr">{t}</span>'
-            '<span class="co">{c}</span></div>\n'
-            '    <p class="tension">{h}</p>\n'
-            '    <div class="docs">{d}</div>\n'
-            '  </article>'.format(t=html.escape(ticker), c=company, h=headline,
-                                  d="".join(links)))
+            '      <article class="card" data-ticker="{t}" data-name="{n}" data-sort="{s}">\n'
+            '        <div class="card-id"><div class="tkr">{t}</div>'
+            '<div class="co">{c}</div></div>\n'
+            '        <div class="card-body">\n'
+            '          <p class="label">Working tension</p>\n'
+            '          <p>{h}</p>\n'
+            '        </div>\n'
+            '        <div class="card-docs">{d}</div>\n'
+            '      </article>'.format(
+                t=html.escape(ticker), n=html.escape(any_doc["company"].lower()),
+                s=newest(entry).isoformat(), c=company, h=headline,
+                d="".join(links)))
 
     # Section 12.9 sets the date form as month, day, year. This line WRITES a date; the
     # sort_key above READS one. The v1.98 conversion rebound eight readers across the
@@ -181,7 +191,8 @@ def build(rows):
     today = datetime.date.today()
     built = "%s %d, %d" % (today.strftime("%B"), today.day, today.year)
 
-    return TEMPLATE.format(entries="\n".join(cells), count=len(ordered), built=built)
+    return TEMPLATE.format(entries="\n".join(cells), count=len(ordered),
+                           docs=sum(len(e) for e in rows.values()), built=built)
 
 
 TEMPLATE = """<!DOCTYPE html>
@@ -190,153 +201,98 @@ TEMPLATE = """<!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#141C24" media="(prefers-color-scheme: dark)">
-<title>Equity research &middot; index</title>
+<meta name="theme-color" content="#0B1C2C" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B1117" media="(prefers-color-scheme: dark)">
+<title>NTRS_ZIB Research &middot; Coverage Universe</title>
+<meta name="description" content="Independent equity research on power, datacentre and digital-asset infrastructure. Two documents per issuer. Every material claim is sourced. No ratings.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script>
-(function(){{
-  var t=null;
-  try{{ t=localStorage.getItem('theme'); }}catch(e){{}}
-  if(t==='light'||t==='dark') document.documentElement.dataset.theme=t;
-}})();
-</script>
-<style>
-:root{{
-  color-scheme: light dark;
-  --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
-  --line:#DEE6EC;   --line-hard:#C0CDD7;
-  --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
-  --display:'Archivo',ui-sans-serif,system-ui,'Helvetica Neue',Arial,sans-serif;
-  --body:'Source Serif 4',Georgia,'Times New Roman',serif;
-  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
-  --col:760px;
-}}
-@media (prefers-color-scheme:dark){{
-  :root:not([data-theme="light"]){{
-    --paper:#141C24;    --canvas:#10161D;    --panel-2:#0D1218;
-    --line:#2E3A45;     --line-hard:#455360;
-    --ink:#E8EEF3;        --ink-dim:#AFBECB; --ink-faint:#93A3B2;
-  }}
-}}
-:root[data-theme="dark"]{{
-  --paper:#141C24;  --canvas:#10161D;  --panel-2:#0D1218;
-  --line:#2E3A45;   --line-hard:#455360;
-  --ink:#E8EEF3;    --ink-dim:#AFBECB; --ink-faint:#93A3B2;
-}}
-*{{box-sizing:border-box}}
-html{{-webkit-text-size-adjust:100%}}
-html,body{{background:var(--canvas) !important}}
-body{{margin:0;color:var(--ink);font-family:var(--body);font-size:16.5px;line-height:1.62;
-     -webkit-font-smoothing:antialiased}}
-.wrap{{max-width:var(--col);margin:0 auto;padding:0 22px 96px;background:var(--paper);
-      border-left:1px solid var(--line);border-right:1px solid var(--line)}}
-header{{padding:44px 0 26px;border-bottom:2px solid var(--line-hard);margin-bottom:8px;
-      position:relative;padding-left:20px}}
-header::before{{content:"";position:absolute;left:0;top:44px;bottom:26px;width:4px;
-      background:var(--ink-dim)}}
-h1{{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.22;margin:0}}
-.functional{{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.14em;
-      text-transform:uppercase;color:var(--ink-faint);margin:18px 0 0}}
-.lede{{margin:22px 0 0;max-width:68ch}}
-.entry{{border:1px solid var(--line);background:var(--paper);padding:18px 22px;
-      margin-top:14px;border-left:4px solid var(--line-hard)}}
-.head{{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}}
-.tkr{{font-family:var(--mono);font-size:19px;font-weight:700;letter-spacing:-.5px;
-      color:var(--ink)}}
-.co{{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;
-      color:var(--ink-faint)}}
-.tension{{margin:10px 0 0;font-size:16px}}
-.docs{{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;padding-top:12px;
-      border-top:1px solid var(--line)}}
-.doc{{display:flex;flex-direction:column;gap:3px}}
-.doc a{{font-family:var(--display);font-size:14.5px;font-weight:600;color:var(--ink);
-      text-decoration:none;border-bottom:1px solid var(--line-hard);align-self:flex-start;
-      padding-bottom:1px}}
-.doc a:hover{{border-bottom-color:var(--ink)}}
-.doc .none{{font-family:var(--display);font-size:14.5px;font-weight:600;color:var(--ink-faint)}}
-.asof{{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}}
-footer{{margin-top:44px;padding-top:22px;border-top:2px solid var(--line-hard)}}
-footer p{{font-family:var(--mono);font-size:12px;color:var(--ink-faint);margin:0 0 8px}}
-.norec{{border:1px solid var(--line-hard);background:var(--canvas);padding:16px 20px;
-      font-family:var(--mono);font-size:12.5px;color:var(--ink-dim);line-height:1.55}}
-@media (max-width:720px){{
-  .wrap{{padding:0 16px 70px;border-left:none;border-right:none}}
-  h1{{font-size:23px}}
-  .docs{{grid-template-columns:1fr}}
-}}
-.themetoggle{{position:absolute;top:44px;right:0;display:flex;
-      border:1px solid var(--line-hard);border-radius:2px;overflow:hidden}}
-.themetoggle button{{font-family:var(--mono);font-size:10.5px;font-weight:600;
-      letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);
-      background:var(--paper);border:0;border-left:1px solid var(--line);
-      padding:4px 9px;cursor:pointer}}
-.themetoggle button:first-child{{border-left:0}}
-.themetoggle button:hover{{color:var(--ink)}}
-.themetoggle button[aria-pressed="true"]{{color:var(--paper);background:var(--ink-dim)}}
-@media (max-width:720px){{ .themetoggle{{position:static;margin-bottom:18px}} }}
-@media print{{
-  :root,:root:not([data-theme="light"]),
-  :root[data-theme="dark"],:root[data-theme="light"]{{
-    --paper:#FFFFFF;  --canvas:#F4F7F9;  --panel-2:#EDF2F6;
-    --line:#DEE6EC;   --line-hard:#C0CDD7;
-    --ink:#0F1E2B;    --ink-dim:#46596A; --ink-faint:#5C6E80;
-    color-scheme: light;
-  }}
-  .themetoggle{{display:none}}
-  body{{font-size:11pt}} .wrap{{max-width:none;border:none}} }}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="wrap">
+<a class="skip" href="#coverage">Skip to coverage</a>
 
-<header>
-  <div class="themetoggle" role="group" aria-label="Colour scheme">
-    <button type="button" data-set="system">System</button>
-    <button type="button" data-set="light">Light</button>
-    <button type="button" data-set="dark">Dark</button>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="mark" href="index.html">
+      <div class="mark-box">NTRS_ZIB</div>
+      <div class="mark-name">NTRS_ZIB Research<span>Independent coverage</span></div>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html" aria-current="page">Coverage</a>
+      <a href="method.html">Method</a>
+      <a href="about.html">About</a>
+      <a href="https://github.com/NTRS-ZIB/equity-research">Source</a>
+    </nav>
+    <div class="theme" role="group" aria-label="Colour theme">
+      <button type="button" data-theme="system" aria-pressed="true">Sys</button>
+      <button type="button" data-theme="light" aria-pressed="false">Light</button>
+      <button type="button" data-theme="dark" aria-pressed="false">Dark</button>
+    </div>
   </div>
-  <h1>Equity research</h1>
-  <p class="functional">{count} companies &middot; index &middot; rebuilt {built}</p>
 </header>
 
-<p class="lede">Each company carries two documents. The research report asks what the company
-is and what it is worth; the catalyst calendar asks what could move it and when. Each is
-stamped with its own as-of date, shown below, because they are revised on different days.</p>
+<section class="hero">
+  <div class="hero-inner">
+    <p class="kicker">Power &middot; Datacentre &middot; Digital-asset infrastructure</p>
+    <h1>Research, not a recommendation.</h1>
+    <p class="standfirst">{count} issuers. Two documents each: a report that asks what the company is
+    and what it is worth, and a calendar that asks what could move it and when. Every material claim
+    carries a source tag. No buy, sell or hold is issued.</p>
+    <div class="stats">
+      <div class="stat"><b>{count}</b><span>Issuers covered</span></div>
+      <div class="stat"><b>{docs}</b><span>Live documents</span></div>
+      <div class="stat"><b>6</b><span>Source classes</span></div>
+      <div class="stat date"><b>{built}</b><span>Index rebuilt</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="tools">
+  <div class="search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.2-3.2"></path></svg>
+    <label class="visually-hidden" for="q">Search coverage</label>
+    <input id="q" type="search" placeholder="Search ticker, company or thesis line" autocomplete="off">
+  </div>
+  <label class="sort">Sort
+    <select id="sort">
+      <option value="fresh">Most recently updated</option>
+      <option value="ticker">Ticker A-Z</option>
+    </select>
+  </label>
+  <div class="count" id="count">{count} names</div>
+</div>
+
+<main class="wrap" id="coverage">
+  <div class="universe" id="universe">
 
 {entries}
 
-<footer>
-  <div class="norec">
-    No buy, sell, or hold recommendation is issued and no price target is derived.
-    Third-party targets and ratings, where shown, are the published views of the firms
-    named. These documents are for research and educational purposes and are not
-    investment advice. Verify against primary filings on sec.gov before acting.
   </div>
-  <p style="margin-top:16px">Index rebuilt automatically from the documents it lists.</p>
-</footer>
+</main>
 
-</div>
-<script>
-(function(){{
-  var g=document.querySelector('.themetoggle'); if(!g) return;
-  var bs=g.querySelectorAll('button[data-set]');
-  function sync(){{
-    var t=document.documentElement.dataset.theme||'system';
-    for(var i=0;i<bs.length;i++) bs[i].setAttribute('aria-pressed',String(bs[i].getAttribute('data-set')===t));
-  }}
-  g.addEventListener('click',function(e){{
-    var b=e.target.closest('button[data-set]'); if(!b) return;
-    var v=b.getAttribute('data-set');
-    if(v==='system'){{ delete document.documentElement.dataset.theme; try{{ localStorage.removeItem('theme'); }}catch(err){{}} }}
-    else {{ document.documentElement.dataset.theme=v; try{{ localStorage.setItem('theme',v); }}catch(err){{}} }}
-    sync();
-  }});
-  sync();
-}})();
-</script>
+<footer>
+  <div class="foot">
+    <div>
+      <h3>Important</h3>
+      <p>These documents are for research and educational purposes. They are not investment advice.
+      No buy, sell or hold recommendation is issued, and no price target is derived. Third-party
+      targets and ratings, where shown, are the published views of the firms named. Verify every
+      figure against primary filings on <a href="https://www.sec.gov">sec.gov</a> before acting on
+      anything here.</p>
+    </div>
+    <div>
+      <h3>Freshness</h3>
+      <p>Each file carries its own as-of date. The set is not uniformly current, and a document is
+      never restamped merely to make the universe look consistent. This page is generated from the
+      documents it lists, and was rebuilt {built} from them. It is regenerated automatically on
+      every change, so it cannot describe a set that is not there.</p>
+      <p class="legal">&copy; 2026 NTRS_ZIB Research.</p>
+    </div>
+  </div>
+</footer>
+<script src="site.js"></script>
 </body>
 </html>
 """

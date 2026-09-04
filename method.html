@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Method &middot; NTRS_ZIB Research</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="mark" href="index.html">
+        <div class="mark-box">NTRS_ZIB</div>
+        <div class="mark-name">NTRS_ZIB Research<span>Independent coverage</span></div>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Coverage</a>
+        <a href="method.html" aria-current="page">Method</a>
+        <a href="about.html">About</a>
+        <a href="https://github.com/NTRS-ZIB/equity-research">Source</a>
+      </nav>
+      <div class="theme" role="group" aria-label="Colour theme">
+        <button type="button" data-theme="system" aria-pressed="true">Sys</button>
+        <button type="button" data-theme="light" aria-pressed="false">Light</button>
+        <button type="button" data-theme="dark" aria-pressed="false">Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <p class="kicker">House standards</p>
+    <h1>How a document is built.</h1>
+    <p class="dek">A reader who has learned one report can read any of them. The product is the discipline, not the typography.</p>
+
+    <h2>Two documents, two jobs</h2>
+    <p>The research report is read start to finish. It answers what the company is and what it is worth. The catalyst calendar is scanned and jumped into. It answers what could move the name, and when. They are separate because they are used differently.</p>
+
+    <h2>Every material claim is tagged</h2>
+    <table>
+      <thead><tr><th>Tag</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag">FILED</span></td><td>Stated in an SEC filing or company release, cited by form and date.</td></tr>
+        <tr><td><span class="tag">ESTIMATE</span></td><td>Derived here, with the arithmetic shown.</td></tr>
+        <tr><td><span class="tag">OPEN</span></td><td>Expected but unconfirmed. Nothing filed either way.</td></tr>
+        <tr><td><span class="tag">MARKET</span></td><td>Price, volume, float, published targets and ratings, stamped with the close.</td></tr>
+        <tr><td><span class="tag">PRESS</span></td><td>Reported by a named publication, cited by outlet and date.</td></tr>
+        <tr><td><span class="tag">SOCIAL</span></td><td>Posted publicly by a named account, cited by handle and date.</td></tr>
+      </tbody>
+    </table>
+    <p><span class="tag">PRESS</span> and <span class="tag">SOCIAL</span> assert that something was said, never that it is true. Neither is ever the sole basis for a material claim.</p>
+
+    <h2>Inference is separated from evidence</h2>
+    <p>Where the analysis stops reporting filings and starts reasoning, a violet-bordered block says so. A reader can tell which parts would survive if the analyst turned out to be wrong.</p>
+
+    <h2>Colour has a fixed meaning</h2>
+    <p>Green is favourable, red adverse, amber unresolved, violet an analyst assumption. These mean the same thing in every document. A company accent taken from its logo is used only for identity: the ticker, the section numbers, the links. It never marks anything as good or bad.</p>
+
+    <h2>Absence is stated</h2>
+    <p>Every document carries a table of categories that were checked and found empty, so a reader can tell &ldquo;there is no dividend&rdquo; from &ldquo;nobody looked.&rdquo; A category nobody examined reads <em>Not established</em>, not <em>None</em>.</p>
+
+    <h2>Revision history is part of the document</h2>
+    <p>Each file ends with its own log, preserved across updates, including entries that record what an earlier version got wrong. Dates are not restamped to make the set look current.</p>
+  </main>
+
+  <footer>
+    <div class="foot">
+      <div>
+        <h3>Important</h3>
+        <p>These documents are for research and educational purposes. They are not investment advice. Verify every figure against primary filings on <a href="https://www.sec.gov">sec.gov</a>.</p>
+      </div>
+      <div>
+        <h3>Source</h3>
+        <p>Standards described here are taken from the published README of the research set. The unpublished house style guide is not the product; the documents are.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="site.js"></script>
+</body>
+</html>
