@@ -176,6 +176,11 @@ a { color: inherit; }
   color: var(--brass-dim);
   margin: 0 0 14px;
 }
+/* THE HERO MEASURE IS SET AGAINST THE STAT ROW, NOT CHOSEN ON ITS OWN. .stats directly
+   below always fills the content box, so any measure much narrower than it reads as text
+   that was cut off rather than text that was set. At 18ch the headline stopped 474px short
+   of the row beneath it. 24ch clears the headline's natural single-line width, so it sets
+   on one line at full size and breaks only once the clamp has already reduced the font. */
 .hero h1 {
   font-family: var(--display);
   font-weight: 500;
@@ -183,10 +188,13 @@ a { color: inherit; }
   line-height: 1.12;
   letter-spacing: -.02em;
   margin: 0 0 18px;
-  max-width: 18ch;
+  max-width: 24ch;
 }
+/* Widened with the headline for the same reason. It stays a bounded measure rather than
+   running to the full box: unconstrained this paragraph sets at about 114 characters a
+   line, which is past the point where the eye loses the return sweep. */
 .hero .standfirst {
-  max-width: 62ch;
+  max-width: 80ch;
   color: var(--ink-soft);
   font-size: 17.5px;
   line-height: 1.55;
