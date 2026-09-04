@@ -25,7 +25,10 @@ rm -rf "$OUT"
 mkdir -p "$OUT"
 
 # The site shell. Each is required: a missing one is a broken page, not a smaller one.
-SITE="index.html method.html about.html styles.css site.js"
+# _headers is parsed by Workers and is never served as an asset. It is required rather
+# than optional: losing it would silently drop the framing and referrer policies, and
+# nothing downstream would notice, because the site would still serve perfectly.
+SITE="index.html method.html about.html styles.css site.js _headers"
 for f in $SITE; do
   if [ ! -f "$f" ]; then
     echo "PUBLISH FAILED: required site file '$f' is not present" >&2
@@ -65,6 +68,8 @@ if ls "$OUT"/TEMPLATE_* >/dev/null 2>&1; then
 fi
 
 total=$(find "$OUT" -type f | wc -l)
-echo "publish: $OUT holds $total file(s): $copied deliverable(s) and 5 site file(s)"
+site_count=0
+for f in $SITE; do site_count=$((site_count + 1)); done
+echo "publish: $OUT holds $total file(s): $copied deliverable(s) and $site_count site file(s)"
 echo "publish: excluded from the deploy by design: the build log, the specification version"
 echo "publish: record, the index builder, the README and scripts/"
