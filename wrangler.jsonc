@@ -1,0 +1,23 @@
+{
+  // Static assets only. There is no Worker script and no "main" entrypoint, so there is also
+  // no "binding": "ASSETS" here: Cloudflare's migration guide is explicit that the binding is
+  // only valid alongside a "main" property.
+  //
+  // WHY dist AND NOT THE REPOSITORY ROOT. Deploying the root would publish the working record,
+  // which is what GitHub Pages does today: HARNESS_BASELINE.md, SPEC_VERSIONS.md,
+  // build_index.py, README.md and scripts/ are all reachable there. scripts/publish.sh
+  // assembles dist/ as the 36 deliverables plus index, method, about, styles and site.js, and
+  // nothing else. The deployable set is a decision, not a side effect of where files sit.
+  //
+  // NAME MUST MATCH THE WORKER THAT ALREADY EXISTS. wrangler deploy uses this field to choose
+  // what it is deploying. If it does not match the Worker created in the dashboard, the deploy
+  // creates a SECOND Worker under this name and the first one keeps serving the old build.
+  "name": "equity-research",
+
+  // Set to the day this configuration was written, per the migration guide.
+  "compatibility_date": "2026-09-04",
+
+  "assets": {
+    "directory": "./dist/"
+  }
+}

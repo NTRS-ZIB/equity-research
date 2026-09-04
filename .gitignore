@@ -98,3 +98,7 @@ reports/
 # rebuilt on every deploy and must never be committed, or the repository would carry a second
 # copy of every published document that nothing keeps in step with the first.
 /dist/
+
+# Wrangler local state. Created by any local wrangler invocation; it holds caches and
+# local simulation data, never anything the deploy needs.
+.wrangler/
