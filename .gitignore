@@ -92,3 +92,9 @@ reports/
 
 # Local backups. May contain PII and secrets, never commit.
 /backup/
+
+# Cloudflare Pages build output. scripts/publish.sh assembles the deployable set here: the
+# 36 deliverables plus index, method, about, styles and site.js, and nothing else. It is
+# rebuilt on every deploy and must never be committed, or the repository would carry a second
+# copy of every published document that nothing keeps in step with the first.
+/dist/
