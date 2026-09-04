@@ -17,6 +17,17 @@
   // Set to the day this configuration was written, per the migration guide.
   "compatibility_date": "2026-09-04",
 
+  // ONE SITE, ONE ADDRESS. Without this the Worker is also served at
+  // <name>.<account-subdomain>.workers.dev, which was a live second copy of the whole
+  // research set. The account subdomain is shared with this account's other Workers and
+  // must not be renamed to tidy this one.
+  //
+  // IT IS SET HERE AND NOT IN THE DASHBOARD BECAUSE THE DASHBOARD DOES NOT HOLD. The
+  // Workers docs state that disabling workers.dev in the dashboard without updating the
+  // configuration file means "the route will be re-enabled on your next deployment", so a
+  // toggle alone would come back the next time anything is pushed.
+  "workers_dev": false,
+
   "assets": {
     "directory": "./dist/"
   }
