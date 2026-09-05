@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="NTRS_ZIB Research">
+  <title>NTRS_ZIB Research</title>
+  <rect width="64" height="64" fill="#0B1C2C"/>
+  <rect x="5" y="12" width="8" height="40" fill="#B8954A"/>
+  <rect x="22" y="12" width="8" height="40" fill="#B8954A"/>
+  <polygon points="13,12 13,26 22,52 22,38" fill="#B8954A"/>
+  <rect x="34" y="12" width="25" height="8" fill="#B8954A"/>
+  <rect x="34" y="44" width="25" height="8" fill="#B8954A"/>
+  <polygon points="46,20 59,20 47,44 34,44" fill="#B8954A"/>
+</svg>

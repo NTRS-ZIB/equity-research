@@ -28,7 +28,12 @@ mkdir -p "$OUT"
 # _headers is parsed by Workers and is never served as an asset. It is required rather
 # than optional: losing it would silently drop the framing and referrer policies, and
 # nothing downstream would notice, because the site would still serve perfectly.
-SITE="index.html method.html about.html styles.css site.js _headers"
+#
+# favicon.ico and apple-touch-icon.png are requested by browsers AT THE ROOT for every
+# page on the domain, the 36 deliverables included, without any of them linking to one.
+# That is why adding an icon required no edit to a single research document, and it is
+# the reason these two must sit at the root of the deploy rather than in a subfolder.
+SITE="index.html method.html about.html styles.css site.js _headers favicon.ico icon.svg apple-touch-icon.png"
 for f in $SITE; do
   if [ ! -f "$f" ]; then
     echo "PUBLISH FAILED: required site file '$f' is not present" >&2
