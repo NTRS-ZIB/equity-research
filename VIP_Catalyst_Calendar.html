@@ -405,7 +405,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   <h2 class="sec"><span class="n">01</span>Dated catalysts</h2>
   <p class="sub">Banded 0&ndash;3 / 3&ndash;6 / 6&ndash;12 months, earliest first. Numbering is gapless and runs straight through the bands. The ID is a position, not a name; catalysts are referred to by title.</p>
 
-  <div class="band"><span class="band-t">0&ndash;3 months</span><span class="band-r"></span><span class="band-c">D1&ndash;D7</span></div>
+  <div class="band"><span class="band-t">0&ndash;3 months</span><span class="band-r"></span><span class="band-c">D1&ndash;D5</span></div>
 
   <div class="cat neutral" id="cat-jackson-hole-symposium">
     <div class="cat-head">
@@ -521,7 +521,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
     <p style="margin-top:12px"><b>Source:</b> Form 8-K, June 2026 (exchange agreements); Q1 2026 10-Q, Note 5, Debt; FY2025 10-K risk factors. <span class="tag">Filed</span></p>
   </div>
 
-  <div class="band"><span class="band-t">3&ndash;6 months</span><span class="band-r"></span><span class="band-c">D8&ndash;D13</span></div>
+  <div class="band"><span class="band-t">3&ndash;6 months</span><span class="band-r"></span><span class="band-c">D6&ndash;D8</span></div>
 
   <div class="cat two" id="cat-q3-2026-results">
     <div class="cat-head">
@@ -584,7 +584,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
     <p style="margin-top:12px"><b>Source:</b> Q1 2026 results; revenue composition per Form 10-Q. <span class="tag">Filed</span></p>
   </div>
 
-  <div class="band"><span class="band-t">6&ndash;12 months</span><span class="band-r"></span><span class="band-c">D14&ndash;D15</span></div>
+  <div class="band"><span class="band-t">6&ndash;12 months</span><span class="band-r"></span><span class="band-c">D9&ndash;D15</span></div>
 
   <div class="cat up" id="cat-mississippi-40mw-energization">
     <div class="cat-head">
@@ -1487,7 +1487,17 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   <p class="sub">Newest first. The original build entry is never removed or rewritten.</p>
   <div class="log">
     <div class="logentry current">
-      <div class="when">October 1, 2026 <span class="latest">Latest</span></div>
+      <div class="when">November 26, 2026 <span class="latest">Latest</span></div>
+      <div class="basis">horizon bands corrected &middot; three bands corrected &middot; <b>as-of unchanged at October 1, 2026</b> &middot; no catalyst changes state</div>
+      <div class="correction">
+        <span class="lbl">Correction</span>
+        <p>The 0 to 3 month band declared <b>D1 to D7</b> and holds <b>D1 to D5</b>; the 3 to 6 month band declared D8 to D13 and holds <b>D6 to D8</b>; the 6 to 12 month band declared D14 to D15 and holds <b>D9 to D15</b>. The beyond-twelve band correctly declared <b>n/a</b> and was left alone, which is the convention for a band with no members.</p>
+      </div>
+      <p><b>The as-of does not move and no record was re-read.</b> This entry records a correction to this document's own navigation, made by a pass that assessed no ticker. The catalysts, their dates, their content and their identifiers are untouched; what changed is that each horizon band's contents label now agrees with the cards that physically follow it. <b>Every other calendar's latest log entry carries the same date as its own as-of, and this one does not</b>, which is stated here so that a reader comparing the two does not read a later entry as a reassessment.</p>
+      <p><b>What found it, and what now prevents it.</b> `birio.band_check` compares each band's <b>declared</b> contents against the cards that <b>physically follow</b> it, which are separate facts: relabelling a divider does not move it and moving a card does not relabel one. The instrument existed and was wired into nothing, so it was run by hand in the passes that happened to call it. A census on 26 November 2026 found <b>seven</b> of eighteen calendars misdeclaring, and this is one of them. The check is now part of the close routine, so the next pass over this file cannot close while a band label disagrees with its own contents.</p>
+    </div>
+    <div class="logentry">
+      <div class="when">October 1, 2026</div>
       <div class="basis">15 dated &middot; 15 standing &middot; 13 resolved &middot; PIPE closed &middot; two catalysts resolved, four elapsed without resolving &middot; repriced to the Sep 30, 2026 close &middot; $1.62 &middot; newsroom READ</div>
       <p><b>The transaction this calendar was built around has closed.</b> The PIPE completed on <b>September 10, 2026</b>, a month inside its October 10 outside date. Issued: <b>17,146,190 Class A shares at $1.71</b> for $29.3M, a <b>$10,000,000 senior secured convertible note</b> to MIG accruing <b>10.0% PIK monthly</b> and maturing September 10, 2029, and a three-year warrant over <b>1,754,386 shares at $1.71</b>. <b>$39.32M in all</b>, against the $39.4M announced. Subscribers were MIG at $15.0M, Atlas at ~$5.0M, Conversant at ~$5.95M and other investors at ~$13.37M <b>including the chief executive, chief financial officer, president and a director</b>.</p>
       <p><b>Two catalysts resolve and four elapse without resolving, and the distinction is deliberate.</b> <b>D5 becomes R12</b>, the PIPE closing, and <b>D6 becomes R13</b>, the board reconstituted to ten directors, both on filed outcomes from the same 8-K. Dated catalysts move <b>17 to 15</b> and resolved <b>11 to 13</b>; R11 resolved August 17 so both appended and no R number moved, which was checked rather than assumed. <b>77 dated tokens were rewritten as one simultaneous substitution.</b></p>

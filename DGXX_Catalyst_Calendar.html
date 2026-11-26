@@ -412,7 +412,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   <h2 class="sec"><span class="n">01</span>Dated catalysts</h2>
   <p class="sub">Banded 0&ndash;3 / 3&ndash;6 / 6&ndash;12 months, earliest first. Numbering is gapless and runs straight through the bands, so a boundary never resets the count. An ID marks position in the current ordering and changes between revisions, so catalysts are named by title.</p>
 
-  <div class="band"><span class="band-t">0&ndash;3 months</span><span class="band-r"></span><span class="band-c">R7&ndash;D6</span></div>
+  <div class="band"><span class="band-t">0&ndash;3 months</span><span class="band-r"></span><span class="band-c">D1&ndash;D3</span></div>
 
   <div class="cat neutral" id="cat-silicon-valley-office-opening">
     <div class="cat-head">
@@ -474,7 +474,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
     <p style="margin-top:12px"><b>Source:</b> Company release, July 7, 2026; Form 8-K, May 8, 2026 for the Phase 2 financing condition. <span class="tag">Filed</span></p>
   </div>
 
-  <div class="band"><span class="band-t">3&ndash;6 months</span><span class="band-r"></span><span class="band-c">D7&ndash;D11</span></div>
+  <div class="band"><span class="band-t">3&ndash;6 months</span><span class="band-r"></span><span class="band-c">D4&ndash;D8</span></div>
 
   <div class="cat two" id="cat-q3-2026-results">
     <div class="cat-head">
@@ -580,7 +580,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
     <p style="margin-top:12px"><b>Source:</b> Company release, July 7, 2026 for the fiscal 2027 outlook; company news archive, January 7, 2026 for the letter of intent. <span class="tag">Open</span></p>
   </div>
 
-  <div class="band"><span class="band-t">6&ndash;12 months</span><span class="band-r"></span><span class="band-c">D12&ndash;D13</span></div>
+  <div class="band"><span class="band-t">6&ndash;12 months</span><span class="band-r"></span><span class="band-c">D9&ndash;D13</span></div>
 
   <div class="cat two" id="cat-q4-and-fy2026-results">
     <div class="cat-head">
@@ -1193,7 +1193,17 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   <p class="sub">Newest first. One entry per revision date, consolidated as net change since the previous entry. The original build entry is never removed or rewritten.</p>
   <div class="log">
     <div class="logentry current">
-      <div class="when">October 1, 2026 <span class="latest">Latest</span></div>
+      <div class="when">November 26, 2026 <span class="latest">Latest</span></div>
+      <div class="basis">horizon bands corrected &middot; all three bands corrected, one naming a resolved card &middot; <b>as-of unchanged at October 1, 2026</b> &middot; no catalyst changes state</div>
+      <div class="correction">
+        <span class="lbl">Correction</span>
+        <p>The 0 to 3 month band declared <b>R7 to D6</b>, which names a <b>resolved</b> card as the lower bound of a dated band: R7 left the dated set when it resolved and the band holds <b>D1 to D3</b>. The 3 to 6 month band declared D7 to D11 and holds <b>D4 to D8</b>; the 6 to 12 month band declared D12 to D13 and holds <b>D9 to D13</b>. The labels are what a previous renumber left behind, because relabelling a divider does not move it and moving a card does not relabel one.</p>
+      </div>
+      <p><b>The as-of does not move and no record was re-read.</b> This entry records a correction to this document's own navigation, made by a pass that assessed no ticker. The catalysts, their dates, their content and their identifiers are untouched; what changed is that each horizon band's contents label now agrees with the cards that physically follow it. <b>Every other calendar's latest log entry carries the same date as its own as-of, and this one does not</b>, which is stated here so that a reader comparing the two does not read a later entry as a reassessment.</p>
+      <p><b>What found it, and what now prevents it.</b> `birio.band_check` compares each band's <b>declared</b> contents against the cards that <b>physically follow</b> it, which are separate facts: relabelling a divider does not move it and moving a card does not relabel one. The instrument existed and was wired into nothing, so it was run by hand in the passes that happened to call it. A census on 26 November 2026 found <b>seven</b> of eighteen calendars misdeclaring, and this is one of them. The check is now part of the close routine, so the next pass over this file cannot close while a band label disagrees with its own contents.</p>
+    </div>
+    <div class="logentry">
+      <div class="when">October 1, 2026</div>
       <div class="basis">13 dated &middot; 6 standing &middot; 8 resolved &middot; assessed &middot; repriced to the Sep 30, 2026 close &middot; $4.10 &middot; insider signal reverses &middot; second source established</div>
       <p><b>No catalyst changes state.</b> Counts are unchanged at 13, 6 and 8. Nothing has been filed since August 21 except a registration amendment and its effectiveness, and nothing has been announced since August 14.</p>
       <p><b>A second source exists for this issuer after all, and the instrument was reporting its own gap.</b> This ticker sat at the head of the queue since August 17 on a recorded finding that <i>no second source exists and none can be built</i>. The instrument reports state <b>NONE</b>, which means <i>no feed recorded upstream</i> rather than <i>no source found</i>. Probed by hand: the issuer's own press-release page returns HTTP 200 and then <b>sits on "Loading" forever and never requests its own content</b>, verified in a real browser across reloads with no network call and no console error; the investor-relations page does the same. <b>But the exchange's press-release service for this symbol lists 20 releases and reads in a tenth of a second</b>, the newest dated <b>14 August 2026</b>, which is the Q2 results release this file already carries. <b>So nothing has been announced since 14 August.</b> That source is a secondary aggregator and is labelled one: it corroborates an absence over a defined window and carries no material claim alone. <b>The issuer's own newsroom still cannot be read, and that is now a measured fact about a broken page rather than an unknown.</b></p>

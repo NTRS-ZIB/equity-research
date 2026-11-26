@@ -407,7 +407,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   <h2 class="sec"><span class="n">01</span>Dated catalysts</h2>
   <p class="sub">Banded 0&ndash;3 / 3&ndash;6 / 6&ndash;12 months, earliest first. Numbering is gapless and runs straight through the bands, so a boundary never resets the count. An ID marks position in the current ordering and changes between revisions, so catalysts are named by title.</p>
 
-  <div class="band"><span class="band-t">0&ndash;3 months</span><span class="band-r"></span><span class="band-c">R18&ndash;D3</span></div>
+  <div class="band"><span class="band-t">0&ndash;3 months</span><span class="band-r"></span><span class="band-c">D1</span></div>
 
   <div class="cat two" id="cat-2026-proxy-statement-and-say-on-pay">
     <div class="cat-head">
@@ -430,7 +430,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
     <p style="margin-top:12px"><b>Source:</b> DEF 14A, October 6, 2025; DEFA14A, July 9, 2026; Form 8-K, July 1, 2026. <span class="tag">Filed</span></p>
   </div>
 
-  <div class="band"><span class="band-t">3&ndash;6 months</span><span class="band-r"></span><span class="band-c">D4&ndash;D7</span></div>
+  <div class="band"><span class="band-t">3&ndash;6 months</span><span class="band-r"></span><span class="band-c">D2&ndash;D5</span></div>
 
   <div class="cat two" id="cat-q1-fy2027-results">
     <div class="cat-head">
@@ -514,7 +514,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
     <p style="margin-top:12px"><b>Source:</b> Company releases of May 26, 2026 and July 20, 2026, assumptions and notes. <span class="tag">Filed</span></p>
   </div>
 
-  <div class="band"><span class="band-t">6&ndash;12 months</span><span class="band-r"></span><span class="band-c">D8&ndash;D9</span></div>
+  <div class="band"><span class="band-t">6&ndash;12 months</span><span class="band-r"></span><span class="band-c">D6&ndash;D9</span></div>
 
   <div class="cat two" id="cat-q2-fy2027-results">
     <div class="cat-head">
@@ -1446,7 +1446,17 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   <p class="sub">Newest first. The original build entry is never removed or rewritten.</p>
   <div class="log">
     <div class="logentry current">
-      <div class="when">September 18, 2026 <span class="latest">Latest</span></div>
+      <div class="when">November 26, 2026 <span class="latest">Latest</span></div>
+      <div class="basis">horizon bands corrected &middot; all three bands corrected, one naming a resolved card &middot; <b>as-of unchanged at September 18, 2026</b> &middot; no catalyst changes state</div>
+      <div class="correction">
+        <span class="lbl">Correction</span>
+        <p>The 0 to 3 month band declared <b>R18 to D3</b>, naming a <b>resolved</b> card as the lower bound of a dated band, where the band holds <b>D1</b> alone. The 3 to 6 month band declared D4 to D7 and holds <b>D2 to D5</b>; the 6 to 12 month band declared D8 to D9 and holds <b>D6 to D9</b>. Same cause as DGXX: labels left behind by a renumber.</p>
+      </div>
+      <p><b>The as-of does not move and no record was re-read.</b> This entry records a correction to this document's own navigation, made by a pass that assessed no ticker. The catalysts, their dates, their content and their identifiers are untouched; what changed is that each horizon band's contents label now agrees with the cards that physically follow it. <b>Every other calendar's latest log entry carries the same date as its own as-of, and this one does not</b>, which is stated here so that a reader comparing the two does not read a later entry as a reassessment.</p>
+      <p><b>What found it, and what now prevents it.</b> `birio.band_check` compares each band's <b>declared</b> contents against the cards that <b>physically follow</b> it, which are separate facts: relabelling a divider does not move it and moving a card does not relabel one. The instrument existed and was wired into nothing, so it was run by hand in the passes that happened to call it. A census on 26 November 2026 found <b>seven</b> of eighteen calendars misdeclaring, and this is one of them. The check is now part of the close routine, so the next pass over this file cannot close while a band label disagrees with its own contents.</p>
+    </div>
+    <div class="logentry">
+      <div class="when">September 18, 2026</div>
       <div class="basis">13 dated &middot; 12 standing &middot; 19 resolved &middot; Item 9A read and test 5 settled &middot; repriced to the Sep 17, 2026 close &middot; $43.48 &middot; newsroom READ</div>
       <p><b>Falsification test 5 is settled and untriggered.</b> Item 9A of the FY2026 Form 10-K, read in full for this revision, reports disclosure controls effective, internal control over financial reporting effective, and <b>an attestation by KPMG LLP</b>. No material weakness. The assessment <b>excludes Nostrum Group</b>, acquired June 12, 2026, as about 2% of total assets, and the card says so. <b>This test was carried as untriggered when nobody had looked, then as not established, and is now untriggered with the document behind it.</b> That closes the last item owed on ledger 4.215(l).</p>
       <p><b>No catalyst changes state.</b> Counts are unchanged at 13, 12 and 19.</p>

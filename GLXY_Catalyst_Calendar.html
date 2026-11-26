@@ -407,12 +407,14 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   <h2 class="sec"><span class="n">01</span>Dated catalysts</h2>
   <p class="sub">Banded 0&ndash;3 / 3&ndash;6 / 6&ndash;12 months, earliest first. Numbering is gapless and runs straight through the bands, so a boundary never resets the count. An ID marks position in the current ordering and changes between revisions, so catalysts are named by title.</p>
 
-  <div class="band"><span class="band-t">0&ndash;3 months</span><span class="band-r"></span><span class="band-c">D1&ndash;D1</span></div>
+  
 
   
-  <div class="band"><span class="band-t">3&ndash;6 months</span><span class="band-r"></span><span class="band-c">D2</span></div>
+  
 
     
+
+  <div class="band"><span class="band-t">0&ndash;3 months</span><span class="band-r"></span><span class="band-c">D1</span></div>
 
   <div class="cat two" id="cat-third-quarter-2026-results">
     <div class="cat-head">
@@ -445,7 +447,9 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
     <p style="margin-top:12px"><b>Source:</b> Form 8-K, August 5, 2026. <span class="tag">Filed</span></p>
   </div>
 
-  <div class="band"><span class="band-t">6&ndash;12 months</span><span class="band-r"></span><span class="band-c">D3</span></div>
+  
+
+  <div class="band"><span class="band-t">3&ndash;6 months</span><span class="band-r"></span><span class="band-c">D2</span></div>
 
   <div class="cat two" id="cat-fy2026-annual-report">
     <div class="cat-head">
@@ -475,6 +479,8 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
     <p style="margin-top:12px"><b>Source:</b> Filing index for CIK 0001859392, searched August 5, 2026. <span class="tag">Filed</span></p>
   </div>
 
+  <div class="band"><span class="band-t">6&ndash;12 months</span><span class="band-r"></span><span class="band-c">D3</span></div>
+
   <div class="cat up" id="cat-helios-phase-two-first-deliveries">
     <div class="cat-head">
       <span class="cid">D3</span>
@@ -500,6 +506,8 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   </div>
 
   <div class="band"><span class="band-t">Beyond 12 months, context only</span><span class="band-r"></span><span class="band-c">n/a</span></div>
+
+  
   <p class="sub">No structural item is carried in this band. The CoreWeave leases run 15 years
   from Phase I rent commencement in the second quarter of 2026, with two five-year extension
   options, but no dated decision point inside that term is disclosed.</p>
@@ -970,7 +978,17 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   <p class="sub">Newest first. The original build entry is never removed or rewritten.</p>
   <div class="log">
     <div class="logentry current">
-      <div class="when">September 8, 2026 <span class="latest">Latest</span></div>
+      <div class="when">November 26, 2026 <span class="latest">Latest</span></div>
+      <div class="basis">horizon bands corrected &middot; dividers repositioned, not relabelled &middot; <b>as-of unchanged at September 8, 2026</b> &middot; no catalyst changes state</div>
+      <div class="correction">
+        <span class="lbl">Correction</span>
+        <p><b>This file's dividers were in the wrong place, not merely mislabelled.</b> The 3 to 6 and 6 to 12 month dividers each sat one card too early, so the heading immediately above <b>D1</b> read <b>3 to 6 months</b> and every card displayed under the wrong horizon. The membership was therefore recomputed from each card's own stated timing against this document's as-of rather than taken from the labels: D1 at approximately early November 2026 is two months out and belongs in 0 to 3; D2 at approximately late February 2027 is five months out and belongs in 3 to 6; D3 at approximately the second quarter of 2027 is eight months out and belongs in 6 to 12. The beyond-twelve band has no members and declares <b>n/a</b>.</p>
+      </div>
+      <p><b>The as-of does not move and no record was re-read.</b> This entry records a correction to this document's own navigation, made by a pass that assessed no ticker. The catalysts, their dates, their content and their identifiers are untouched; what changed is that each horizon band's contents label now agrees with the cards that physically follow it. <b>Every other calendar's latest log entry carries the same date as its own as-of, and this one does not</b>, which is stated here so that a reader comparing the two does not read a later entry as a reassessment.</p>
+      <p><b>What found it, and what now prevents it.</b> `birio.band_check` compares each band's <b>declared</b> contents against the cards that <b>physically follow</b> it, which are separate facts: relabelling a divider does not move it and moving a card does not relabel one. The instrument existed and was wired into nothing, so it was run by hand in the passes that happened to call it. A census on 26 November 2026 found <b>seven</b> of eighteen calendars misdeclaring, and this is one of them. The check is now part of the close routine, so the next pass over this file cannot close while a band label disagrees with its own contents.</p>
+    </div>
+    <div class="logentry">
+      <div class="when">September 8, 2026</div>
       <div class="basis">3 dated &middot; 5 standing &middot; 7 resolved &middot; ERCOT audit resolved and corrected &middot; repriced to Sep 4, 2026 close &middot; $26.33</div>
       <div class="correction">
         <span class="lbl">Correction</span>

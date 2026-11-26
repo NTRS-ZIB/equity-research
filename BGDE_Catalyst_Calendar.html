@@ -406,7 +406,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   <h2 class="sec"><span class="n">01</span>Dated catalysts</h2>
   <p class="sub">Banded 0&ndash;3 / 3&ndash;6 / 6&ndash;12 months, earliest first. Numbering is gapless and runs straight through the bands. An ID marks position in the current ordering and changes between revisions, so catalysts are named by title.</p>
 
-  <div class="band"><span class="band-t">0&ndash;3 months</span><span class="band-r"></span><span class="band-c">D1&ndash;D6</span></div>
+  <div class="band"><span class="band-t">0&ndash;3 months</span><span class="band-r"></span><span class="band-c">D1&ndash;D4</span></div>
 
   <div class="cat neutral" id="cat-summer-conference-circuit">
     <div class="cat-head">
@@ -497,7 +497,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
     <p style="margin-top:12px"><b>Source:</b> Form 8-K, July 20, 2026. <span class="tag">Filed</span></p>
   </div>
 
-  <div class="band"><span class="band-t">3&ndash;6 months</span><span class="band-r"></span><span class="band-c">n/a</span></div>
+  <div class="band"><span class="band-t">3&ndash;6 months</span><span class="band-r"></span><span class="band-c">D5&ndash;D6</span></div>
 
   <div class="cat two" id="cat-q3-2026-earnings-release">
     <div class="cat-head">
@@ -1259,7 +1259,17 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--ink-faint);max-width
   <p class="sub">Newest first. The original build entry is never removed or rewritten.</p>
   <div class="log">
     <div class="logentry current">
-      <div class="when">September 18, 2026 <span class="latest">Latest</span></div>
+      <div class="when">November 26, 2026 <span class="latest">Latest</span></div>
+      <div class="basis">horizon bands corrected &middot; 0 to 3 and 3 to 6 corrected &middot; <b>as-of unchanged at September 18, 2026</b> &middot; no catalyst changes state</div>
+      <div class="correction">
+        <span class="lbl">Correction</span>
+        <p>The 0 to 3 month band declared <b>D1 to D6</b> and holds <b>D1 to D4</b>, and the 3 to 6 month band declared <b>n/a</b> while holding <b>D5 and D6</b>. So the first band invited a reader to look for two catalysts that are not in it, and the second said a band with two catalysts in it was empty.</p>
+      </div>
+      <p><b>The as-of does not move and no record was re-read.</b> This entry records a correction to this document's own navigation, made by a pass that assessed no ticker. The catalysts, their dates, their content and their identifiers are untouched; what changed is that each horizon band's contents label now agrees with the cards that physically follow it. <b>Every other calendar's latest log entry carries the same date as its own as-of, and this one does not</b>, which is stated here so that a reader comparing the two does not read a later entry as a reassessment.</p>
+      <p><b>What found it, and what now prevents it.</b> `birio.band_check` compares each band's <b>declared</b> contents against the cards that <b>physically follow</b> it, which are separate facts: relabelling a divider does not move it and moving a card does not relabel one. The instrument existed and was wired into nothing, so it was run by hand in the passes that happened to call it. A census on 26 November 2026 found <b>seven</b> of eighteen calendars misdeclaring, and this is one of them. The check is now part of the close routine, so the next pass over this file cannot close while a band label disagrees with its own contents.</p>
+    </div>
+    <div class="logentry">
+      <div class="when">September 18, 2026</div>
       <div class="basis">9 dated &middot; 12 standing &middot; 7 resolved &middot; figure sweep discharged &middot; repriced to the Sep 17, 2026 close &middot; $5.94</div>
       <p><b>No catalyst changes state and no date moves.</b> This is a reprice and a figure sweep, discharging the BGDE half of the debt recorded on 8 September. <b>Both sources were read</b>: the newsroom carries nothing newer than 8 September and EDGAR holds only Forms 4 since, so this calendar can say nothing was filed <b>and</b> nothing was announced.</p>
       <p><b>The reprice.</b> $6.87 to <b>$5.94</b>, down <b>13.54%</b>, capitalisation $38.9M to <b>$33.6M</b>. <b>The interval high is the previous stamp itself</b>, $7.03 on 8 September, so the file is 15.50% below the level it was last published at. Conversion of the $16.7M of Series D face value now implies roughly <b>3.0 million shares</b> at the current close, against 2.7 million at the 12 August close it previously cited.</p>
